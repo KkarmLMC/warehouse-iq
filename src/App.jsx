@@ -17,6 +17,7 @@ const AddEditPart    = lazy(() => import('./pages/AddEditPart'))
 const InventoryTransfer = lazy(() => import('./pages/InventoryTransfer'))
 const PartDetail     = lazy(() => import('./pages/PartDetail'))
 const PurchaseOrders = lazy(() => import('./pages/PurchaseOrders'))
+const Profile       = lazy(() => import('./pages/Profile'))
 const PODetail       = lazy(() => import('./pages/PODetail'))
 const PONew          = lazy(() => import('./pages/PONew'))
 

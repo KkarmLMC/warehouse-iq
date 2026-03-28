@@ -88,12 +88,14 @@ export default function Sidebar({ collapsed, onToggle }) {
         <div className="sidebar-footer-nav">
           {!collapsed && <div className="sidebar-section-label">ACCOUNT</div>}
           {profile && !collapsed && (
-            <div style={{ padding: 'var(--sp-2) var(--sp-3)', marginBottom: 'var(--sp-1)' }}>
-              <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.7)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <div onClick={() => navigate('/profile')}
+              className="sidebar-item"
+              style={{ padding: 'var(--sp-2) var(--sp-3)', marginBottom: 'var(--sp-1)', cursor: 'pointer', borderRadius: 'var(--r-lg)' }}>
+              <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.85)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {profile.full_name || profile.email}
               </div>
-              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', textTransform: 'capitalize', marginTop: 1 }}>
-                {profile.role} · {profile.division}
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', textTransform: 'capitalize', marginTop: 1 }}>
+                {profile.role} · Edit profile & PIN
               </div>
             </div>
           )}
