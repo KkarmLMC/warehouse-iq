@@ -95,9 +95,9 @@
 
   /* ── 2b. Surface & Text Colors ────────────────────────────────────────────── */
 
-  --bg:             #F4F5F7;
+  --bg:             #FFFFFF;
   --surface:        #FFFFFF;
-  --surface-raised: #FFFFFF;   /* Card backgrounds */
+  --surface-raised: #F7F8FA;   /* Card backgrounds */
   --card-header-bg: #EEF2F9;   /* Light navy tint — unused in flat design, kept for compat */
 
   --border:         transparent;   /* Flat design — cards have no border */
@@ -3169,4 +3169,28 @@ textarea { resize: vertical; }
   .bottom-nav__tab--active .bottom-nav__label {
     color: var(--red);
   }
+}
+
+/* ─── Login page — scoped variables, no app interior bleed ──────────────────── */
+.login-page {
+  --login-bg:      #F4F5F7;   /* Gray outer background */
+  --login-card-bg: #FFFFFF;   /* White floating card   */
+  --login-shadow:  0 2px 16px rgba(0,0,0,0.07);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--login-bg);
+  padding: var(--sp-5);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--login-card-bg);
+  border-radius: var(--r-2xl);
+  padding: var(--sp-6);
+  box-shadow: var(--login-shadow);
+  /* No border — card floats cleanly on gray bg */
 }

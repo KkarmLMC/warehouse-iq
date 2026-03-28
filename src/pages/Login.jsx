@@ -164,15 +164,7 @@ export default function Login() {
   const skipPin = () => navigate(from, { replace: true })
 
   return (
-    <div style={{
-      minHeight: '100dvh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: '#F4F5F7',
-      padding: 'var(--sp-5)',
-    }}>
+    <div className="login-page">
       {/* Logo */}
       <div style={{ marginBottom: 'var(--sp-8)', textAlign: 'center' }}>
         <div style={{ width: 56, height: 56, borderRadius: 'var(--r-xl)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--sp-4)' }}>
@@ -186,7 +178,7 @@ export default function Login() {
         </div>
       </div>
 
-      <div style={{ width: '100%', maxWidth: 380, background: 'var(--surface-raised)', borderRadius: 'var(--r-2xl)', padding: 'var(--sp-6)', border: '1px solid var(--border-l)', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+      <div className="login-card">
 
         {/* ── PIN setup mode ── */}
         {mode === 'setup-pin' && (
