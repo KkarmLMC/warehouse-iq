@@ -3194,3 +3194,17 @@ textarea { resize: vertical; }
   box-shadow: var(--login-shadow);
   /* No border — card floats cleanly on gray bg */
 }
+
+/* ─── Warehouse IQ Dashboard ────────────────────────────────────────────────── */
+.wiq-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+}
+
+/* On wider screens show all 5 in one row */
+@media (min-width: 900px) {
+  .wiq-stat-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
