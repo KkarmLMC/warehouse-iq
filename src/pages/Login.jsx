@@ -170,7 +170,7 @@ export default function Login() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'var(--bg)',
+      background: '#F4F5F7',
       padding: 'var(--sp-5)',
     }}>
       {/* Logo */}
