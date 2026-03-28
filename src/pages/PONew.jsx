@@ -6,6 +6,7 @@ import {
   ArrowRight, Warning,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import ProjectPicker from '../components/ProjectPicker.jsx'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Label({ children, required }) {
@@ -372,12 +373,25 @@ export default function PONew() {
   const [customerZip, setCustomerZip] = useState('')
   const [customerPhone, setCustomerPhone] = useState('')
   const [customerEmail, setCustomerEmail] = useState('')
+  const [selectedProject, setSelectedProject] = useState(null)
   const [projectName, setProjectName]   = useState('')
   const [projectRef, setProjectRef]     = useState('')
   const [quoteNumber, setQuoteNumber]   = useState('')
   const [poDate, setPoDate]             = useState(new Date().toISOString().slice(0, 10))
   const [notes, setNotes]               = useState('')
   const [defaultWarehouseId, setDefaultWarehouseId] = useState('')
+
+  // Auto-populate from selected project
+  const handleProjectSelect = (proj) => {
+    setSelectedProject(proj)
+    if (proj) {
+      setProjectName(proj.name)
+      setProjectRef(proj.job_number || '')
+    } else {
+      setProjectName('')
+      setProjectRef('')
+    }
+  }
 
   // Line items
   const [sections, setSections]   = useState([{ _key: Date.now(), title: '', items: [] }])
@@ -563,14 +577,26 @@ export default function PONew() {
         </div>
 
         <div style={{ marginBottom: 'var(--sp-3)' }}>
-          <Label>Project Name</Label>
-          <input value={projectName} onChange={e => setProjectName(e.target.value)} placeholder="e.g. TCCD NW WA2" style={{ width: '100%' }} />
+          <ProjectPicker
+            value={selectedProject}
+            onChange={handleProjectSelect}
+            label="Project / Job"
+            required
+          />
         </div>
 
-        <div style={{ marginBottom: 'var(--sp-3)' }}>
-          <Label>Project Reference / Job #</Label>
-          <input value={projectRef} onChange={e => setProjectRef(e.target.value)} placeholder="e.g. GNS TX 01623-61631" style={{ width: '100%' }} />
-        </div>
+        {selectedProject && (
+          <div style={{ marginBottom: 'var(--sp-3)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)' }}>
+            <div>
+              <Label>Project Name</Label>
+              <input value={projectName} onChange={e => setProjectName(e.target.value)} style={{ width: '100%' }} />
+            </div>
+            <div>
+              <Label>Job #</Label>
+              <input value={projectRef} onChange={e => setProjectRef(e.target.value)} style={{ width: '100%' }} />
+            </div>
+          </div>
+        )}
 
         <div>
           <Label>Default Warehouse</Label>
