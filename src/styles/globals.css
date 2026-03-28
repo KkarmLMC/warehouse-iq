@@ -95,9 +95,9 @@
 
   /* ── 2b. Surface & Text Colors ────────────────────────────────────────────── */
 
-  --bg:             #FFFFFF;
+  --bg:             #F4F5F7;
   --surface:        #FFFFFF;
-  --surface-raised: #F7F8FA;   /* Card backgrounds */
+  --surface-raised: #FFFFFF;   /* Card backgrounds */
   --card-header-bg: #EEF2F9;   /* Light navy tint — unused in flat design, kept for compat */
 
   --border:         transparent;   /* Flat design — cards have no border */
