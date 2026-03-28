@@ -1,0 +1,276 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import {
+  Plus, Receipt, Buildings, CalendarBlank, CaretRight,
+  MagnifyingGlass, X, CheckCircle, Clock, PaperPlaneTilt,
+  Package, Warning,
+} from '@phosphor-icons/react'
+import { db } from '../lib/supabase.js'
+
+const STATUS_META = {
+  draft:     { label: 'Draft',     color: '#64748B', bg: '#F1F5F9', icon: Clock },
+  submitted: { label: 'Submitted', color: '#D97706', bg: '#FEF3C7', icon: PaperPlaneTilt },
+  published: { label: 'Published', color: '#0369A1', bg: '#EFF6FF', icon: Receipt },
+  fulfilled: { label: 'Fulfilled', color: '#15803D', bg: '#F0FDF4', icon: CheckCircle },
+  cancelled: { label: 'Cancelled', color: '#B91C1C', bg: '#FEF2F2', icon: X },
+}
+
+const TABS = [
+  { key: 'all',       label: 'All'       },
+  { key: 'draft',     label: 'Drafts'    },
+  { key: 'submitted', label: 'Submitted' },
+  { key: 'published', label: 'Published' },
+  { key: 'fulfilled', label: 'Fulfilled' },
+]
+
+function StatusBadge({ status }) {
+  const meta = STATUS_META[status] || STATUS_META.draft
+  const Icon = meta.icon
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 4,
+      padding: '3px 10px', borderRadius: 'var(--r-full)',
+      fontSize: 'var(--fs-xs)', fontWeight: 700,
+      background: meta.bg, color: meta.color,
+    }}>
+      <Icon size={11} weight="fill" />
+      {meta.label}
+    </span>
+  )
+}
+
+function POCard({ po, totals, onPress }) {
+  const matTotal = totals?.materials || 0
+  const laborTotal = totals?.labor || 0
+  const grandTotal = matTotal + laborTotal
+
+  return (
+    <button onClick={onPress} style={{
+      display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
+      padding: 'var(--sp-4)', border: 'none', background: 'none',
+      width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
+      cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
+    }}>
+      {/* Icon */}
+      <div style={{
+        width: '2.75rem', height: '2.75rem', borderRadius: 'var(--r-lg)',
+        background: po.division === 'Bolt' ? '#FFF7ED' : '#EFF6FF',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+      }}>
+        <Receipt size={20} style={{ color: po.division === 'Bolt' ? '#C2410C' : 'var(--navy)' }} />
+      </div>
+
+      {/* Info */}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', marginBottom: 3, flexWrap: 'wrap' }}>
+          <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-1)' }}>
+            {po.po_number}
+          </span>
+          <StatusBadge status={po.status} />
+          <span style={{
+            fontSize: 10, fontWeight: 700, padding: '1px 6px',
+            borderRadius: 'var(--r-full)',
+            background: po.division === 'Bolt' ? '#FFF7ED' : '#EFF6FF',
+            color: po.division === 'Bolt' ? '#C2410C' : 'var(--navy)',
+          }}>
+            {po.division === 'Bolt' ? 'Bolt' : 'LM'}
+          </span>
+        </div>
+        <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {po.customer_name}
+        </div>
+        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--sp-2)' }}>
+          {po.project_name && <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{po.project_name}</span>}
+          {po.po_date && <span>· {new Date(po.po_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
+        </div>
+      </div>
+
+      {/* Total + chevron */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
+        {grandTotal > 0 && (
+          <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-1)' }}>
+            ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+          </span>
+        )}
+        <CaretRight size={13} style={{ color: 'var(--text-3)' }} />
+      </div>
+    </button>
+  )
+}
+
+export default function PurchaseOrders() {
+  const navigate = useNavigate()
+  const [pos, setPos] = useState([])
+  const [totals, setTotals] = useState({}) // keyed by po id
+  const [loading, setLoading] = useState(true)
+  const [activeTab, setActiveTab] = useState('all')
+  const [search, setSearch] = useState('')
+  const [divisionFilter, setDivisionFilter] = useState('all') // all | LM | Bolt
+
+  useEffect(() => {
+    Promise.all([
+      db.from('purchase_orders').select('*').order('created_at', { ascending: false }),
+      db.from('po_line_items').select('po_id, line_type, quantity, unit_cost'),
+    ]).then(([{ data: poData }, { data: lineData }]) => {
+      setPos(poData || [])
+      // Compute totals per PO
+      const t = {}
+      for (const li of lineData || []) {
+        if (!t[li.po_id]) t[li.po_id] = { materials: 0, labor: 0 }
+        const amt = (li.quantity || 0) * (li.unit_cost || 0)
+        if (li.line_type === 'labor') t[li.po_id].labor += amt
+        else t[li.po_id].materials += amt
+      }
+      setTotals(t)
+      setLoading(false)
+    })
+  }, [])
+
+  const filtered = pos.filter(po => {
+    if (activeTab !== 'all' && po.status !== activeTab) return false
+    if (divisionFilter !== 'all' && po.division !== divisionFilter) return false
+    if (search) {
+      const q = search.toLowerCase()
+      return (
+        po.po_number.toLowerCase().includes(q) ||
+        (po.customer_name || '').toLowerCase().includes(q) ||
+        (po.project_name || '').toLowerCase().includes(q) ||
+        (po.job_reference || '').toLowerCase().includes(q)
+      )
+    }
+    return true
+  })
+
+  // Counts per tab
+  const counts = {}
+  for (const tab of TABS) {
+    counts[tab.key] = tab.key === 'all' ? pos.length : pos.filter(p => p.status === tab.key).length
+  }
+
+  // Stats
+  const submittedCount = pos.filter(p => p.status === 'submitted').length
+  const totalPublishedValue = pos
+    .filter(p => p.status === 'published' || p.status === 'fulfilled')
+    .reduce((s, po) => {
+      const t = totals[po.id]
+      return s + (t ? t.materials + t.labor : 0)
+    }, 0)
+
+  return (
+    <div className="page-content fade-in">
+
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--sp-3)', marginBottom: 'var(--sp-5)', flexWrap: 'wrap' }}>
+        <div>
+          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>INVENTORY</div>
+          <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>Sales Orders</div>
+        </div>
+        <button onClick={() => navigate('/sales-orders/new')}
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-md)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--fs-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+          <Plus size={15} /> New PO
+        </button>
+      </div>
+
+      {/* Alert banner for submitted POs awaiting review */}
+      {submittedCount > 0 && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
+          padding: 'var(--sp-3) var(--sp-4)', background: '#FEF3C7',
+          borderRadius: 'var(--r-lg)', marginBottom: 'var(--sp-4)',
+          border: '1px solid #FDE68A', cursor: 'pointer',
+        }} onClick={() => setActiveTab('submitted')}>
+          <Warning size={18} weight="fill" style={{ color: '#D97706', flexShrink: 0 }} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#92400E' }}>
+              {submittedCount} PO{submittedCount !== 1 ? 's' : ''} awaiting review
+            </div>
+            <div style={{ fontSize: 'var(--fs-xs)', color: '#92400E' }}>
+              Tap to review and publish
+            </div>
+          </div>
+          <CaretRight size={14} style={{ color: '#D97706' }} />
+        </div>
+      )}
+
+      {/* Stats strip */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)' }}>
+        {[
+          { label: 'Total POs', value: pos.length },
+          { label: 'Pending Review', value: submittedCount, color: submittedCount > 0 ? '#D97706' : undefined },
+          { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: '#15803D' },
+        ].map(s => (
+          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-lg)', padding: 'var(--sp-3)', textAlign: 'center' }}>
+            <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 800, color: s.color || 'var(--text-1)' }}>{s.value}</div>
+            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Tabs */}
+      <div style={{ display: 'flex', gap: 2, marginBottom: 'var(--sp-3)', overflowX: 'auto', scrollbarWidth: 'none', borderBottom: '2px solid var(--border-l)', paddingBottom: 0 }}>
+        {TABS.map(tab => (
+          <button key={tab.key} onClick={() => setActiveTab(tab.key)}
+            style={{
+              flexShrink: 0, padding: 'var(--sp-2) var(--sp-3)', border: 'none',
+              background: 'none', cursor: 'pointer', fontSize: 'var(--fs-sm)',
+              fontWeight: activeTab === tab.key ? 700 : 500,
+              color: activeTab === tab.key ? 'var(--navy)' : 'var(--text-3)',
+              borderBottom: activeTab === tab.key ? '2px solid var(--navy)' : '2px solid transparent',
+              marginBottom: -2, whiteSpace: 'nowrap',
+            }}>
+            {tab.label}
+            {counts[tab.key] > 0 && (
+              <span style={{ marginLeft: 6, fontSize: 'var(--fs-xs)', background: activeTab === tab.key ? 'var(--navy)' : 'var(--hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-3)', borderRadius: 'var(--r-full)', padding: '1px 6px', fontWeight: 700 }}>
+                {counts[tab.key]}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Search + division filter */}
+      <div style={{ display: 'flex', gap: 'var(--sp-2)', marginBottom: 'var(--sp-4)', flexWrap: 'wrap' }}>
+        <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
+          <MagnifyingGlass size={15} style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+          <input value={search} onChange={e => setSearch(e.target.value)}
+            placeholder="Search PO, customer, project…"
+            style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
+          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}><X size={13} /></button>}
+        </div>
+        {['all', 'LM', 'Bolt'].map(d => (
+          <button key={d} onClick={() => setDivisionFilter(d)}
+            style={{
+              padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', fontSize: 'var(--fs-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+              border: `1px solid ${divisionFilter === d ? 'var(--navy)' : 'var(--border-l)'}`,
+              background: divisionFilter === d ? 'var(--navy)' : 'transparent',
+              color: divisionFilter === d ? '#fff' : 'var(--text-2)',
+            }}>
+            {d === 'all' ? 'All Divisions' : d === 'LM' ? 'Lightning Master' : 'Bolt Lightning'}
+          </button>
+        ))}
+      </div>
+
+      {/* PO list */}
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
+      ) : filtered.length === 0 ? (
+        <div className="empty">
+          <Receipt size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }} />
+          <div className="empty-title">{pos.length === 0 ? 'No sales orders yet' : 'No SOs match filters'}</div>
+          <div className="empty-desc">{pos.length === 0 ? 'Create your first PO to get started.' : 'Try adjusting your filters.'}</div>
+          {pos.length === 0 && (
+            <button className="btn btn-primary" style={{ marginTop: 'var(--sp-4)' }} onClick={() => navigate('/sales-orders/new')}>
+              Create First PO
+            </button>
+          )}
+        </div>
+      ) : (
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden' }}>
+          {filtered.map(po => (
+            <POCard key={po.id} po={po} totals={totals[po.id]} onPress={() => navigate(`/sales-orders/${po.id}`)} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}

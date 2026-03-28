@@ -1,0 +1,636 @@
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import {
+  Plus, Trash, MagnifyingGlass, X, CaretDown, CaretRight,
+  DotsSixVertical, Buildings, Package, Wrench, Check,
+  ArrowRight, Warning,
+} from '@phosphor-icons/react'
+import { db } from '../lib/supabase.js'
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function Label({ children, required }) {
+  return (
+    <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 'var(--sp-1)' }}>
+      {children}{required && <span style={{ color: 'var(--red)', marginLeft: 3 }}>*</span>}
+    </label>
+  )
+}
+
+function SectionDivider({ label }) {
+  return (
+    <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-4) 0', paddingTop: 'var(--sp-3)' }}>
+      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
+    </div>
+  )
+}
+
+// ─── Part search dropdown ─────────────────────────────────────────────────────
+function PartSearch({ onSelect, warehouseId }) {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const ref = useRef()
+
+  useEffect(() => {
+    const handler = (e) => { if (!ref.current?.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  useEffect(() => {
+    if (!query.trim()) { setResults([]); return }
+    setLoading(true)
+    const t = setTimeout(async () => {
+      const q = query.toLowerCase()
+      let req = db.from('parts').select('id, sku, name, unit_cost').eq('is_active', true)
+        .or(`name.ilike.%${q}%,sku.ilike.%${q}%`)
+        .limit(10)
+      const { data } = await req
+      // If warehouse selected, enrich with current stock
+      if (warehouseId && data?.length) {
+        const ids = data.map(p => p.id)
+        const { data: levels } = await db.from('inventory_levels')
+          .select('part_id, quantity_on_hand')
+          .eq('warehouse_id', warehouseId)
+          .in('part_id', ids)
+        const stockMap = {}
+        levels?.forEach(l => { stockMap[l.part_id] = l.quantity_on_hand })
+        setResults(data.map(p => ({ ...p, stock: stockMap[p.id] ?? null })))
+      } else {
+        setResults(data?.map(p => ({ ...p, stock: null })) || [])
+      }
+      setLoading(false)
+      setOpen(true)
+    }, 250)
+    return () => clearTimeout(t)
+  }, [query, warehouseId])
+
+  const handleSelect = (part) => {
+    onSelect(part)
+    setQuery('')
+    setResults([])
+    setOpen(false)
+  }
+
+  return (
+    <div ref={ref} style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }}>
+        <MagnifyingGlass size={14} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+        <input
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          onFocus={() => query && setOpen(true)}
+          placeholder="Search parts by name or SKU…"
+          style={{ width: '100%', paddingLeft: 30, paddingRight: 30 }}
+        />
+        {query && (
+          <button onClick={() => { setQuery(''); setResults([]); setOpen(false) }}
+            style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
+            <X size={13} />
+          </button>
+        )}
+      </div>
+      {open && results.length > 0 && (
+        <div style={{
+          position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200,
+          background: 'var(--surface)', borderRadius: 'var(--r-lg)', marginTop: 4,
+          border: '1px solid var(--border-l)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+          maxHeight: '16rem', overflowY: 'auto',
+        }}>
+          {loading ? (
+            <div style={{ padding: 'var(--sp-3)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>Searching…</div>
+          ) : results.map(part => (
+            <button key={part.id} onMouseDown={() => handleSelect(part)}
+              style={{
+                width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: 'var(--sp-2) var(--sp-3)', border: 'none', background: 'none',
+                cursor: 'pointer', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
+              }}
+            >
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600 }}>{part.name}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>{part.sku}</div>
+              </div>
+              <div style={{ flexShrink: 0, textAlign: 'right', marginLeft: 'var(--sp-3)' }}>
+                <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>
+                  ${part.unit_cost?.toFixed(2) || '—'}
+                </div>
+                {part.stock !== null && (
+                  <div style={{ fontSize: 10, color: part.stock > 0 ? '#15803D' : '#B91C1C', fontWeight: 600 }}>
+                    {part.stock} in stock
+                  </div>
+                )}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Single line item row ─────────────────────────────────────────────────────
+function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
+  const lineTotal = (parseFloat(item.quantity) || 0) * (parseFloat(item.unit_cost) || 0)
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--sp-2)', alignItems: 'center', padding: 'var(--sp-2) 0', borderBottom: '1px solid var(--border-l)' }}>
+      <div style={{ minWidth: 0 }}>
+        {item.sku && <div style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2 }}>{item.sku}</div>}
+        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.description}</div>
+        {warehouses.length > 1 && (
+          <select
+            value={item.warehouse_id || ''}
+            onChange={e => onUpdate({ ...item, warehouse_id: e.target.value })}
+            style={{ fontSize: 10, marginTop: 4, padding: '2px 4px', border: '1px solid var(--border-l)', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', width: '100%' }}
+          >
+            <option value="">No warehouse</option>
+            {warehouses.map(w => <option key={w.id} value={w.id}>{w.name.replace(' Warehouse','')}</option>)}
+          </select>
+        )}
+      </div>
+      <input
+        type="number" min="0" step="1"
+        value={item.quantity}
+        onChange={e => onUpdate({ ...item, quantity: e.target.value })}
+        style={{ width: '100%', textAlign: 'right', fontSize: 'var(--fs-xs)' }}
+      />
+      <input
+        type="number" min="0" step="0.01"
+        value={item.unit_cost}
+        onChange={e => onUpdate({ ...item, unit_cost: e.target.value })}
+        style={{ width: '100%', textAlign: 'right', fontSize: 'var(--fs-xs)' }}
+      />
+      <div style={{ textAlign: 'right', fontSize: 'var(--fs-xs)', fontWeight: 700, color: lineTotal > 0 ? 'var(--text-1)' : 'var(--text-3)' }}>
+        ${lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+      </div>
+      <button onClick={onRemove}
+        style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'var(--hover)', borderRadius: 'var(--r-md)', cursor: 'pointer', color: '#B91C1C' }}>
+        <Trash size={13} />
+      </button>
+    </div>
+  )
+}
+
+// ─── Scope section block ──────────────────────────────────────────────────────
+function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRemove }) {
+  const [expanded, setExpanded] = useState(true)
+  const subtotal = section.items.reduce((s, i) => s + ((parseFloat(i.quantity)||0) * (parseFloat(i.unit_cost)||0)), 0)
+
+  const addPart = (part) => {
+    const newItem = {
+      _key: Date.now(),
+      line_type: 'material',
+      part_id: part.id,
+      sku: part.sku,
+      description: part.name,
+      quantity: 1,
+      unit_cost: part.unit_cost || 0,
+      warehouse_id: defaultWarehouseId || '',
+    }
+    onUpdate({ ...section, items: [...section.items, newItem] })
+  }
+
+  const addManual = () => {
+    onUpdate({ ...section, items: [...section.items, {
+      _key: Date.now(), line_type: 'material', part_id: null,
+      sku: '', description: '', quantity: 1, unit_cost: 0,
+      warehouse_id: defaultWarehouseId || '',
+    }]})
+  }
+
+  const updateItem = (key, updated) => {
+    onUpdate({ ...section, items: section.items.map(i => i._key === key ? updated : i) })
+  }
+
+  const removeItem = (key) => {
+    onUpdate({ ...section, items: section.items.filter(i => i._key !== key) })
+  }
+
+  return (
+    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', border: '1px solid var(--border-l)', marginBottom: 'var(--sp-4)' }}>
+      {/* Section header */}
+      <div style={{ background: 'var(--navy)', padding: 'var(--sp-3) var(--sp-4)', display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+        <button onClick={() => setExpanded(e => !e)}
+          style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
+          <CaretDown size={14} style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
+        </button>
+        <input
+          value={section.title}
+          onChange={e => onUpdate({ ...section, title: e.target.value })}
+          placeholder="Section name (e.g. Green House Ground Ring)"
+          style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: '#fff', fontWeight: 700, fontSize: 'var(--fs-sm)', fontFamily: 'var(--font)' }}
+        />
+        {subtotal > 0 && (
+          <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.6)', whiteSpace: 'nowrap' }}>
+            ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </span>
+        )}
+        <button onClick={onRemove}
+          style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,0,0,0.5)', display: 'flex' }}>
+          <Trash size={13} />
+        </button>
+      </div>
+
+      {expanded && (
+        <div style={{ padding: 'var(--sp-3) var(--sp-4)' }}>
+          {/* Column headers */}
+          {section.items.length > 0 && (
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--sp-2)', marginBottom: 'var(--sp-2)' }}>
+              {['Item / SKU', 'Qty', 'Unit Cost', 'Amount', ''].map((h, i) => (
+                <div key={i} style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
+              ))}
+            </div>
+          )}
+
+          {/* Items */}
+          {section.items.map(item => (
+            <LineItemRow
+              key={item._key}
+              item={item}
+              warehouses={warehouses}
+              onUpdate={(updated) => updateItem(item._key, updated)}
+              onRemove={() => removeItem(item._key)}
+            />
+          ))}
+
+          {section.items.length === 0 && (
+            <div style={{ textAlign: 'center', padding: 'var(--sp-4)', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>
+              No items yet. Search for a part or add manually.
+            </div>
+          )}
+
+          {/* Part search */}
+          <div style={{ marginTop: 'var(--sp-3)' }}>
+            <PartSearch onSelect={addPart} warehouseId={defaultWarehouseId} />
+          </div>
+          <button onClick={addManual}
+            style={{ marginTop: 'var(--sp-2)', display: 'flex', alignItems: 'center', gap: 'var(--sp-1)', fontSize: 'var(--fs-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+            <Plus size={12} /> Add custom line item
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Labor section ────────────────────────────────────────────────────────────
+function LaborSection({ items, onUpdate }) {
+  const [expanded, setExpanded] = useState(true)
+  const total = items.reduce((s, i) => s + ((parseFloat(i.quantity)||0) * (parseFloat(i.unit_cost)||0)), 0)
+
+  const addLine = () => onUpdate([...items, { _key: Date.now(), description: 'Installation', quantity: 1, unit_cost: 0 }])
+  const updateItem = (key, updated) => onUpdate(items.map(i => i._key === key ? updated : i))
+  const removeItem = (key) => onUpdate(items.filter(i => i._key !== key))
+
+  return (
+    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', border: '1px solid var(--border-l)', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ background: 'var(--navy)', padding: 'var(--sp-3) var(--sp-4)', display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+        <button onClick={() => setExpanded(e => !e)}
+          style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
+          <CaretDown size={14} style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
+        </button>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+          <Wrench size={14} style={{ color: 'rgba(255,255,255,0.7)' }} />
+          <span style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', color: '#fff' }}>Installation / Labor</span>
+        </div>
+        {total > 0 && (
+          <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.6)' }}>
+            ${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </span>
+        )}
+      </div>
+      {expanded && (
+        <div style={{ padding: 'var(--sp-3) var(--sp-4)' }}>
+          {items.map(item => (
+            <div key={item._key} style={{ display: 'grid', gridTemplateColumns: '1fr 70px 100px 80px 36px', gap: 'var(--sp-2)', alignItems: 'center', marginBottom: 'var(--sp-2)' }}>
+              <input value={item.description} onChange={e => updateItem(item._key, { ...item, description: e.target.value })}
+                placeholder="Description (e.g. Bolt Install Crew)" style={{ width: '100%', fontSize: 'var(--fs-xs)' }} />
+              <input type="number" min="0" value={item.quantity} onChange={e => updateItem(item._key, { ...item, quantity: e.target.value })}
+                style={{ width: '100%', textAlign: 'right', fontSize: 'var(--fs-xs)' }} />
+              <input type="number" min="0" step="0.01" value={item.unit_cost} onChange={e => updateItem(item._key, { ...item, unit_cost: e.target.value })}
+                placeholder="0.00" style={{ width: '100%', textAlign: 'right', fontSize: 'var(--fs-xs)' }} />
+              <div style={{ textAlign: 'right', fontSize: 'var(--fs-xs)', fontWeight: 700 }}>
+                ${((parseFloat(item.quantity)||0)*(parseFloat(item.unit_cost)||0)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+              </div>
+              <button onClick={() => removeItem(item._key)}
+                style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'var(--hover)', borderRadius: 'var(--r-md)', cursor: 'pointer', color: '#B91C1C' }}>
+                <Trash size={13} />
+              </button>
+            </div>
+          ))}
+          <button onClick={addLine}
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-1)', fontSize: 'var(--fs-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginTop: 'var(--sp-2)' }}>
+            <Plus size={12} /> Add labor line
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Totals bar ───────────────────────────────────────────────────────────────
+function TotalsBar({ sections, laborItems }) {
+  const materialsTotal = sections.reduce((s, sec) =>
+    s + sec.items.reduce((ss, i) => ss + ((parseFloat(i.quantity)||0)*(parseFloat(i.unit_cost)||0)), 0), 0)
+  const laborTotal = laborItems.reduce((s, i) => s + ((parseFloat(i.quantity)||0)*(parseFloat(i.unit_cost)||0)), 0)
+  const grandTotal = materialsTotal + laborTotal
+
+  if (grandTotal === 0) return null
+
+  return (
+    <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4) var(--sp-5)', marginBottom: 'var(--sp-5)', color: '#fff' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--sp-2)' }}>
+        <span style={{ fontSize: 'var(--fs-sm)', color: 'rgba(255,255,255,0.6)' }}>Materials</span>
+        <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 600 }}>${materialsTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+      </div>
+      {laborTotal > 0 && (
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--sp-2)' }}>
+          <span style={{ fontSize: 'var(--fs-sm)', color: 'rgba(255,255,255,0.6)' }}>Installation</span>
+          <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 600 }}>${laborTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+        </div>
+      )}
+      <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: 'var(--sp-2)', marginTop: 'var(--sp-1)' }}>
+        <span style={{ fontSize: 'var(--fs-lg)', fontWeight: 800 }}>Total</span>
+        <span style={{ fontSize: 'var(--fs-lg)', fontWeight: 800 }}>${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+      </div>
+    </div>
+  )
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+export default function PONew() {
+  const navigate = useNavigate()
+
+  // Header fields
+  const [division, setDivision]       = useState('LM')
+  const [customerName, setCustomerName] = useState('')
+  const [customerAddress, setCustomerAddress] = useState('')
+  const [customerCity, setCustomerCity] = useState('')
+  const [customerState, setCustomerState] = useState('')
+  const [customerZip, setCustomerZip] = useState('')
+  const [customerPhone, setCustomerPhone] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [projectName, setProjectName]   = useState('')
+  const [projectRef, setProjectRef]     = useState('')
+  const [quoteNumber, setQuoteNumber]   = useState('')
+  const [poDate, setPoDate]             = useState(new Date().toISOString().slice(0, 10))
+  const [notes, setNotes]               = useState('')
+  const [defaultWarehouseId, setDefaultWarehouseId] = useState('')
+
+  // Line items
+  const [sections, setSections]   = useState([{ _key: Date.now(), title: '', items: [] }])
+  const [laborItems, setLaborItems] = useState([])
+
+  // Meta
+  const [warehouses, setWarehouses] = useState([])
+  const [saving, setSaving]         = useState(false)
+  const [error, setError]           = useState('')
+
+  useEffect(() => {
+    db.from('warehouses').select('id, name').eq('is_active', true).order('sort_order')
+      .then(({ data }) => {
+        setWarehouses(data || [])
+        if (data?.length) setDefaultWarehouseId(data[0].id)
+      })
+    // Generate next PO number
+    db.from('purchase_orders').select('po_number').order('created_at', { ascending: false }).limit(1)
+      .then(({ data }) => {
+        if (data?.[0]?.po_number) {
+          const match = data[0].po_number.match(/(\d+)$/)
+          if (match) {
+            const next = parseInt(match[1]) + 1
+            setQuoteNumber(`W-${new Date().getFullYear()}-${String(next).padStart(4,'0')}`)
+          }
+        } else {
+          setQuoteNumber(`W-${new Date().getFullYear()}-0001`)
+        }
+      })
+  }, [])
+
+  const addSection = () => {
+    setSections(s => [...s, { _key: Date.now(), title: '', items: [] }])
+  }
+
+  const updateSection = (key, updated) => {
+    setSections(s => s.map(sec => sec._key === key ? updated : sec))
+  }
+
+  const removeSection = (key) => {
+    setSections(s => s.filter(sec => sec._key !== key))
+  }
+
+  const handleSave = async (submitAfter = false) => {
+    if (!customerName.trim()) { setError('Customer name is required.'); return }
+    setError('')
+    setSaving(true)
+
+    const materialsTotal = sections.reduce((s, sec) =>
+      s + sec.items.reduce((ss, i) => ss + ((parseFloat(i.quantity)||0)*(parseFloat(i.unit_cost)||0)), 0), 0)
+    const installationTotal = laborItems.reduce((s, i) => s + ((parseFloat(i.quantity)||0)*(parseFloat(i.unit_cost)||0)), 0)
+
+    // Generate PO number
+    const year = new Date().getFullYear()
+    const { count } = await db.from('purchase_orders').select('*', { count: 'exact', head: true })
+    const poNumber = `PO-${year}-${String((count || 0) + 1).padStart(4, '0')}`
+
+    // Create PO
+    const { data: newPO, error: poErr } = await db.from('purchase_orders').insert({
+      po_number: poNumber,
+      quote_number: quoteNumber || null,
+      division,
+      status: submitAfter ? 'submitted' : 'draft',
+      customer_name: customerName.trim(),
+      customer_address: customerAddress || null,
+      customer_city: customerCity || null,
+      customer_state: customerState || null,
+      customer_zip: customerZip || null,
+      customer_phone: customerPhone || null,
+      customer_email: customerEmail || null,
+      project_name: projectName || null,
+      project_ref: projectRef || null,
+      po_date: poDate || null,
+      notes: notes || null,
+      materials_total: materialsTotal,
+      installation_total: installationTotal,
+      grand_total: materialsTotal + installationTotal,
+      submitted_at: submitAfter ? new Date().toISOString() : null,
+    }).select().single()
+
+    if (poErr || !newPO) { setError('Failed to save PO. Please try again.'); setSaving(false); return }
+
+    // Insert line items
+    let sortOrder = 0
+    for (const sec of sections) {
+      for (const item of sec.items) {
+        await db.from('po_line_items').insert({
+          po_id: newPO.id,
+          line_type: 'material',
+          section_label: sec.title || null,
+          part_id: item.part_id || null,
+          warehouse_id: item.warehouse_id || defaultWarehouseId || null,
+          sku: item.sku || null,
+          description: item.description,
+          quantity: parseFloat(item.quantity) || 1,
+          unit_cost: parseFloat(item.unit_cost) || 0,
+          sort_order: sortOrder++,
+        })
+      }
+    }
+
+    // Insert labor lines
+    for (const item of laborItems) {
+      await db.from('po_line_items').insert({
+        po_id: newPO.id,
+        line_type: 'labor',
+        description: item.description,
+        quantity: parseFloat(item.quantity) || 1,
+        unit_cost: parseFloat(item.unit_cost) || 0,
+        sort_order: sortOrder++,
+      })
+    }
+
+    setSaving(false)
+    navigate(`/sales-orders/${newPO.id}`)
+  }
+
+  return (
+    <div className="page-content fade-in">
+
+      {/* Page header */}
+      <div style={{ marginBottom: 'var(--sp-5)' }}>
+        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>PURCHASE ORDERS</div>
+        <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800 }}>New Sales Order</div>
+      </div>
+
+      {/* Division selector */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)', marginBottom: 'var(--sp-5)' }}>
+        {[['LM', 'Lightning Master'], ['Bolt', 'Bolt Lightning']].map(([val, lbl]) => (
+          <button key={val} onClick={() => setDivision(val)}
+            style={{
+              padding: 'var(--sp-3)', borderRadius: 'var(--r-xl)', cursor: 'pointer',
+              border: `2px solid ${division === val ? 'var(--navy)' : 'var(--border-l)'}`,
+              background: division === val ? 'var(--navy)' : 'var(--surface-raised)',
+              color: division === val ? '#fff' : 'var(--text-2)',
+              fontWeight: 700, fontSize: 'var(--fs-sm)',
+              transition: 'all 0.15s',
+            }}>
+            {lbl}
+          </button>
+        ))}
+      </div>
+
+      {/* Customer info */}
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
+        <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, marginBottom: 'var(--sp-3)' }}>Customer</div>
+
+        <div style={{ marginBottom: 'var(--sp-3)' }}>
+          <Label required>Customer Name</Label>
+          <input value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="e.g. GNS Electric Inc" style={{ width: '100%' }} />
+        </div>
+
+        <div style={{ marginBottom: 'var(--sp-3)' }}>
+          <Label>Street Address</Label>
+          <input value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} placeholder="123 Main St" style={{ width: '100%' }} />
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 64px 88px', gap: 'var(--sp-2)', marginBottom: 'var(--sp-3)' }}>
+          <div><Label>City</Label><input value={customerCity} onChange={e => setCustomerCity(e.target.value)} placeholder="Dallas" style={{ width: '100%' }} /></div>
+          <div><Label>State</Label><input value={customerState} onChange={e => setCustomerState(e.target.value)} placeholder="TX" style={{ width: '100%' }} /></div>
+          <div><Label>ZIP</Label><input value={customerZip} onChange={e => setCustomerZip(e.target.value)} placeholder="75001" style={{ width: '100%' }} /></div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-2)' }}>
+          <div><Label>Phone</Label><input value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} placeholder="(555) 000-0000" style={{ width: '100%' }} /></div>
+          <div><Label>Email</Label><input value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} placeholder="name@company.com" style={{ width: '100%' }} /></div>
+        </div>
+      </div>
+
+      {/* Project info */}
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
+        <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, marginBottom: 'var(--sp-3)' }}>Project Details</div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-2)', marginBottom: 'var(--sp-3)' }}>
+          <div>
+            <Label>Quote Number</Label>
+            <input value={quoteNumber} onChange={e => setQuoteNumber(e.target.value)} placeholder="W9-10-16699" style={{ width: '100%' }} />
+          </div>
+          <div>
+            <Label>Date</Label>
+            <input type="date" value={poDate} onChange={e => setPoDate(e.target.value)} style={{ width: '100%' }} />
+          </div>
+        </div>
+
+        <div style={{ marginBottom: 'var(--sp-3)' }}>
+          <Label>Project Name</Label>
+          <input value={projectName} onChange={e => setProjectName(e.target.value)} placeholder="e.g. TCCD NW WA2" style={{ width: '100%' }} />
+        </div>
+
+        <div style={{ marginBottom: 'var(--sp-3)' }}>
+          <Label>Project Reference / Job #</Label>
+          <input value={projectRef} onChange={e => setProjectRef(e.target.value)} placeholder="e.g. GNS TX 01623-61631" style={{ width: '100%' }} />
+        </div>
+
+        <div>
+          <Label>Default Warehouse</Label>
+          <select value={defaultWarehouseId} onChange={e => setDefaultWarehouseId(e.target.value)} style={{ width: '100%' }}>
+            {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
+          </select>
+          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 4 }}>New line items will default to this warehouse. You can change per line.</div>
+        </div>
+      </div>
+
+      {/* Scope sections */}
+      <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, marginBottom: 'var(--sp-3)' }}>Line Items</div>
+
+      {sections.map(sec => (
+        <ScopeSection
+          key={sec._key}
+          section={sec}
+          warehouses={warehouses}
+          defaultWarehouseId={defaultWarehouseId}
+          onUpdate={(updated) => updateSection(sec._key, updated)}
+          onRemove={() => removeSection(sec._key)}
+        />
+      ))}
+
+      <button onClick={addSection}
+        style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', width: '100%', padding: 'var(--sp-3)', borderRadius: 'var(--r-xl)', border: '2px dashed var(--border-l)', background: 'transparent', color: 'var(--text-3)', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer', justifyContent: 'center', marginBottom: 'var(--sp-4)' }}>
+        <Plus size={15} /> Add Scope Section
+      </button>
+
+      {/* Labor */}
+      <LaborSection items={laborItems} onUpdate={setLaborItems} />
+
+      {/* Notes */}
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', border: '1px solid var(--border-l)', marginBottom: 'var(--sp-4)' }}>
+        <Label>Notes</Label>
+        <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this PO…" rows={3} style={{ width: '100%', resize: 'vertical' }} />
+      </div>
+
+      {/* Running total */}
+      <TotalsBar sections={sections} laborItems={laborItems} />
+
+      {/* Error */}
+      {error && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', background: '#FEF2F2', borderRadius: 'var(--r-lg)', marginBottom: 'var(--sp-4)', color: '#B91C1C', fontSize: 'var(--fs-sm)' }}>
+          <Warning size={15} />
+          {error}
+        </div>
+      )}
+
+      {/* Save actions */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)', marginBottom: 'var(--sp-6)' }}>
+        <button onClick={() => handleSave(false)} disabled={saving}
+          style={{ padding: 'var(--sp-3)', borderRadius: 'var(--r-xl)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--text-2)', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
+          {saving ? 'Saving…' : 'Save as Draft'}
+        </button>
+        <button onClick={() => handleSave(true)} disabled={saving}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', borderRadius: 'var(--r-xl)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
+          {saving ? 'Saving…' : <><ArrowRight size={15} /> Save & Submit</>}
+        </button>
+      </div>
+    </div>
+  )
+}
