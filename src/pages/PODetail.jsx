@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   Receipt, Buildings, MapPin, Phone, Envelope,
   CalendarBlank, CheckCircle, PaperPlaneTilt,
-  Clock, CaretDown,
+  Clock, CaretDown, ArrowRight, Lightning, ClipboardText, Truck,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
