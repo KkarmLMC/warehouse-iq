@@ -476,12 +476,16 @@ textarea { resize: vertical; }
 /* ── Sidebar footer ──────────────────────────────────────────────────────────── */
 
 .sidebar-footer-nav {
+  border-top: 1px solid var(--border);
   padding: var(--sp-2) var(--sp-2) 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
   flex-shrink: 0;
 }
+
+/* Live clock animation */
+@keyframes livepulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.4 } }
 
 .sidebar-collapse-btn {
   margin-top: var(--sp-1);
