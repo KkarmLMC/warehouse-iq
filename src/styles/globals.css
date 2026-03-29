@@ -1050,13 +1050,28 @@ textarea { resize: vertical; }
   min-height: 7rem;
 }
 
+.stat-card__label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: var(--sp-2);
+  font-family: var(--font);
+}
+
+.stat-card__value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: var(--font);
+}
+
 .stat-label {
   font-size: var(--fs-xs);
-  font-weight: 500;
-  color: var(--text-3);
+  font-weight: 600;
+  color: var(--text-2);
   margin-bottom: var(--sp-2);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-family: var(--font);
 }
 
 .stat-value {

@@ -187,16 +187,16 @@ export default function Inventory() {
       {/* ── 5 Stat cards ── */}
       <div className="wiq-stat-grid" style={{ marginBottom: 'var(--sp-5)' }}>
         {[
-          { label: 'TOTAL INVENTORY VALUE', value: fmt(stats?.totalValue), color: 'var(--navy)', onClick: () => navigate('/warehouse-hq/inventory') },
-          { label: 'OPEN SALES ORDERS',     value: stats?.openSOs ?? '—',  color: 'var(--blue)', onClick: () => navigate('/sales-orders') },
-          { label: 'PENDING CHANGE ORDERS', value: stats?.pendingCOs ?? '—', color: stats?.pendingCOs > 0 ? 'var(--amber)' : 'var(--text-1)', onClick: () => navigate('/warehouse-hq/change-orders') },
-          { label: 'LOW / OUT OF STOCK',    value: `${stats?.outStock ?? 0} / ${stats?.lowStock ?? 0}`, color: (stats?.outStock > 0 || stats?.lowStock > 0) ? 'var(--error)' : 'var(--success-text)', onClick: () => navigate('/warehouse-hq/inventory') },
-          { label: 'RECENT SHIPMENTS',      value: stats?.shipments ?? '—', color: 'var(--text-1)', onClick: () => navigate('/warehouse-hq/transfer') },
+          { label: 'Total Inventory Value', value: fmt(stats?.totalValue), color: 'var(--navy)', onClick: () => navigate('/warehouse-hq/inventory') },
+          { label: 'Open Sales Orders',     value: stats?.openSOs ?? '—',  color: 'var(--blue)', onClick: () => navigate('/sales-orders') },
+          { label: 'Pending Change Orders', value: stats?.pendingCOs ?? '—', color: stats?.pendingCOs > 0 ? 'var(--amber)' : 'var(--text-1)', onClick: () => navigate('/warehouse-hq/change-orders') },
+          { label: 'Low / Out of Stock',    value: `${stats?.outStock ?? 0} / ${stats?.lowStock ?? 0}`, color: (stats?.outStock > 0 || stats?.lowStock > 0) ? 'var(--error)' : 'var(--success-text)', onClick: () => navigate('/warehouse-hq/inventory') },
+          { label: 'Recent Shipments',      value: stats?.shipments ?? '—', color: 'var(--text-1)', onClick: () => navigate('/warehouse-hq/transfer') },
         ].map(s => (
           <div key={s.label} className="stat-card" onClick={s.onClick}
             style={{ cursor: 'pointer' }}>
             <div className="stat-card__label">{s.label}</div>
-            <div className="stat-card__value" style={{ color: s.color, fontFamily: 'var(--mono)' }}>{s.value}</div>
+            <div className="stat-card__value" style={{ color: s.color }}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -219,8 +219,8 @@ export default function Inventory() {
               { label: 'Health',         value: <HealthBadge out={warehouseHealth[master.id]?.out || 0} low={warehouseHealth[master.id]?.low || 0} /> },
             ].map(f => (
               <div key={f.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-lg)', padding: 'var(--sp-3)' }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>{f.label}</div>
-                <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, fontFamily: typeof f.value === 'string' ? 'var(--mono)' : 'var(--font)' }}>{f.value}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: 'var(--text-2)', marginBottom: 4 }}>{f.label}</div>
+                <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, fontFamily: 'var(--font)' }}>{f.value}</div>
               </div>
             ))}
           </div>
