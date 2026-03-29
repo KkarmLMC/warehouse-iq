@@ -13,7 +13,7 @@ import { logActivity } from '../lib/logActivity.js'
 // ─── Shared label component ───────────────────────────────────────────────────
 function Label({ children }) {
   return (
-    <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 'var(--sp-1)' }}>
+    <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 'var(--sp-1)' }}>
       {children}
     </label>
   )
@@ -85,7 +85,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           </div>
 
           <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-3) 0', paddingTop: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-3)' }}>Location</div>
+            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 'var(--sp-3)' }}>Location</div>
           </div>
 
           <div style={{ marginBottom: 'var(--sp-3)' }}>
@@ -109,7 +109,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           </div>
 
           <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-3) 0', paddingTop: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-3)' }}>Contact</div>
+            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 'var(--sp-3)' }}>Contact</div>
           </div>
 
           <div style={{ marginBottom: 'var(--sp-3)' }}>

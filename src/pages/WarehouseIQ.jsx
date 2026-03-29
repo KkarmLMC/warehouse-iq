@@ -26,7 +26,7 @@ function SumCard({ label, value, sub, color = 'var(--text-1)', Icon }) {
     <div style={{ background:'var(--surface-raised)', borderRadius:'var(--r-xl)', padding:'var(--sp-4)', border:'1px solid var(--border-l)' }}>
       <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', marginBottom:'var(--sp-2)' }}>
         {Icon && <Icon size={14} style={{ color:'var(--text-3)' }} />}
-        <span style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'var(--text-2)', textTransform:'uppercase', letterSpacing:'0.05em' }}>{label}</span>
+        <span style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'var(--text-2)' }}>{label}</span>
       </div>
       <div style={{ fontSize:'var(--fs-2xl)', fontWeight:800, color, lineHeight:1 }}>{value}</div>
       {sub && <div style={{ fontSize:'var(--fs-xs)', color:'var(--text-3)', marginTop:4 }}>{sub}</div>}
@@ -188,7 +188,7 @@ export default function WarehouseIQ() {
       {/* Page header */}
       <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:'var(--sp-3)', marginBottom:'var(--sp-4)', flexWrap:'wrap' }}>
         <div>
-          <div style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'var(--text-2)', textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>WAREHOUSE IQ</div>
+          <div style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'var(--text-2)', marginBottom:4 }}>WAREHOUSE IQ</div>
           <div style={{ fontSize:'var(--fs-2xl)', fontWeight:800, lineHeight:1.1 }}>Inventory Dashboard</div>
         </div>
         <div style={{ display:'flex', gap:'var(--sp-2)', alignItems:'center', flexWrap:'wrap' }}>
@@ -303,7 +303,7 @@ export default function WarehouseIQ() {
         {/* Column headers */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-4)', background:'var(--navy)', position:'sticky', top:0, zIndex:10 }}>
           {['Part / SKU','Start','Added','Used','On Order','Stock','Value',''].map((h,i) => (
-            <div key={i} style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,0.6)', textTransform:'uppercase', letterSpacing:'0.05em', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
+            <div key={i} style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,0.6)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
           ))}
         </div>
 

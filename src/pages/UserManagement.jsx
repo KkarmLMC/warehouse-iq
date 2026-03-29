@@ -135,7 +135,7 @@ export default function UserManagement() {
 
       <div style={{ display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'var(--sp-5)' }}>
         <div>
-          <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4 }}>ADMIN</div>
+          <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',marginBottom:4 }}>ADMIN</div>
           <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800 }}>User Management</div>
           <div style={{ fontSize:'var(--fs-sm)',color:'var(--text-3)',marginTop:4 }}>
             Manage roles and pipeline assignments for all users
@@ -228,11 +228,11 @@ export default function UserManagement() {
                   </div>
                   <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'var(--sp-3)',marginBottom:'var(--sp-3)' }}>
                     <div>
-                      <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>Name</label>
+                      <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>Name</label>
                       <input value={editData.full_name||''} onChange={e=>setEditData(p=>({...p,full_name:e.target.value}))} placeholder="Full name" />
                     </div>
                     <div>
-                      <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>App Role</label>
+                      <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>App Role</label>
                       <select value={editData.role||''} onChange={e=>setEditData(p=>({...p,role:e.target.value}))}
                         style={{ width:'100%',height:40,borderRadius:'var(--r-lg)',border:'1px solid var(--border)',padding:'0 var(--sp-3)',background:'var(--bg)',fontSize:'var(--fs-sm)',fontFamily:'var(--font)' }}>
                         {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
@@ -240,7 +240,7 @@ export default function UserManagement() {
                     </div>
                   </div>
                   <div style={{ marginBottom:'var(--sp-4)' }}>
-                    <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>
+                    <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>
                       Pipeline Role <span style={{ fontWeight:400,color:'var(--text-3)',textTransform:'none' }}>(controls what this user sees on their tablet)</span>
                     </label>
                     <div style={{ display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'var(--sp-2)' }}>
@@ -289,22 +289,22 @@ export default function UserManagement() {
             </div>
             <div style={{ display:'flex',flexDirection:'column',gap:'var(--sp-3)' }}>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>Email *</label>
+                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>Email *</label>
                 <input type="email" value={inviteEmail} onChange={e=>setInviteEmail(e.target.value)} placeholder="worker@company.com" />
               </div>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>Full Name</label>
+                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>Full Name</label>
                 <input value={inviteName} onChange={e=>setInviteName(e.target.value)} placeholder="Optional" />
               </div>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>App Role</label>
+                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>App Role</label>
                 <select value={inviteRole} onChange={e=>setInviteRole(e.target.value)}
                   style={{ width:'100%',height:40,borderRadius:'var(--r-lg)',border:'1px solid var(--border)',padding:'0 var(--sp-3)',background:'var(--bg)',fontSize:'var(--fs-sm)',fontFamily:'var(--font)' }}>
                   {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
                 </select>
               </div>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:8,textTransform:'uppercase',letterSpacing:'0.05em' }}>Pipeline Role</label>
+                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:8 }}>Pipeline Role</label>
                 <div style={{ display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'var(--sp-2)' }}>
                   {PIPELINE_ROLES.map(pr => (
                     <button key={pr.value||'none'} onClick={() => setInvitePR(pr.value)}

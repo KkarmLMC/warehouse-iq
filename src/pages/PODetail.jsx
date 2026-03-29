@@ -31,7 +31,7 @@ function SectionGroup({ label, items }) {
         width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: 'var(--sp-2) var(--sp-4)', background: 'var(--navy)', border: 'none', cursor: 'pointer',
       }}>
-        <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</span>
+        <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#fff' }}>{label}</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)' }}>
           <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>
             ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -121,7 +121,7 @@ export default function PODetail() {
       <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-5)', marginBottom: 'var(--sp-4)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--sp-3)' }}>
           <div>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
               {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
             </div>
             <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
@@ -175,7 +175,7 @@ export default function PODetail() {
       {/* Inventory impact (when not yet published) */}
       {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
         <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-3)' }}>
+          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 'var(--sp-3)' }}>
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
           {Object.entries(warehouseImpact).map(([wName, impact]) => (
@@ -224,7 +224,7 @@ export default function PODetail() {
       {laborLines.length > 0 && (
         <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', maxWidth: '100%' }}>
           <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)' }}>
-            <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Installation / Labor</span>
+            <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#fff' }}>Installation / Labor</span>
           </div>
           {laborLines.map((line, idx) => (
             <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-l)' : 'none', alignItems: 'center', background: 'var(--surface-raised)' }}>
@@ -256,7 +256,7 @@ export default function PODetail() {
       {/* Notes */}
       {po.notes && (
         <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-2)' }}>Notes</div>
+          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 'var(--sp-2)' }}>Notes</div>
           <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-2)', lineHeight: 1.6 }}>{po.notes}</div>
         </div>
       )}

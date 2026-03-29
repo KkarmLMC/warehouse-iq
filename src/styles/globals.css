@@ -1411,8 +1411,6 @@ textarea { resize: vertical; }
 
 .branch-card-stat-label {
   font-size: var(--fs-2xs);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   margin-top: 1px;
 }
 
@@ -1489,8 +1487,6 @@ textarea { resize: vertical; }
 
 .dash-stat-label {
   font-size: var(--fs-2xs);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
   opacity: 0.5;
   margin-top: 0.1875rem;
 }
@@ -1879,7 +1875,7 @@ textarea { resize: vertical; }
 .dfl-card-body      { padding: 0.875rem var(--sp-5); }
 .dfl-card-detail    { display: flex; flex-direction: column; gap: var(--sp-2); }
 .dfl-detail-row     { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-1); }
-.dfl-detail-label   { font-size: var(--fs-xs); color: var(--text-3); min-width: 4.5rem; flex-shrink: 0; font-family: var(--mono); text-transform: uppercase; }
+.dfl-detail-label   { font-size: var(--fs-xs); color: var(--text-3); min-width: 4.5rem; flex-shrink: 0; }
 .dfl-card-safety    { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
 .dfl-safety-badge   { display: inline-flex; align-items: center; font-size: var(--fs-2xs); font-weight: 700; padding: 0.1875rem 0.5rem; border-radius: var(--r-xs); gap: var(--sp-1); }
 .dfl-safety-badge.ok      { background: var(--success-soft); color: var(--success-text); }

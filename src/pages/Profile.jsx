@@ -88,7 +88,7 @@ function Section({ icon: Icon, title, children, action }) {
 function Row({ label, children }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}>
-      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
+      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>{label}</div>
       <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text-1)', textAlign: 'right' }}>{children}</div>
     </div>
   )
@@ -326,7 +326,7 @@ export default function Profile() {
             {initials}
           </div>
           <div>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>ACCOUNT</div>
+            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 2 }}>ACCOUNT</div>
             <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
             <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{user?.email}</div>
           </div>
@@ -356,7 +356,7 @@ export default function Profile() {
 
         {editingName ? (
           <div style={{ marginBottom: 'var(--sp-3)' }}>
-            <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 6 }}>Full Name</label>
+            <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 6 }}>Full Name</label>
             <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
               <input value={nameVal} onChange={e => setNameVal(e.target.value)} autoFocus style={{ flex: 1 }} onKeyDown={e => e.key === 'Enter' && saveName()} />
               <button onClick={saveName} disabled={nameSaving}
@@ -385,7 +385,7 @@ export default function Profile() {
         )}
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-1)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Member Since</div>
+          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>Member Since</div>
           <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text-1)' }}>
             {profile?.created_at ? new Date(profile.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '—'}
           </div>
@@ -396,20 +396,20 @@ export default function Profile() {
       <Section icon={Shield} title="Access & Roles">
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>App Role</div>
+          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>App Role</div>
           <RoleBadge label={profile?.role || 'user'} color={roleStyle.color} bg={roleStyle.bg} />
         </div>
 
         {profile?.pipeline_role && pipelineStyle && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Pipeline Role</div>
+            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>Pipeline Role</div>
             <RoleBadge label={profile.pipeline_role.replace('_', ' ')} color={pipelineStyle.color} bg={pipelineStyle.bg} />
           </div>
         )}
 
         {profile?.app_access?.length > 0 && (
           <div style={{ marginBottom: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>App Access</div>
+            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 8 }}>App Access</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {profile.app_access.map(app => (
                 <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-full)', background: 'var(--hover)', color: 'var(--text-2)', fontSize: 'var(--fs-xs)', fontWeight: 600 }}>
@@ -486,11 +486,11 @@ export default function Profile() {
         {showPwForm ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
             <div>
-              <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 6 }}>New Email (optional)</label>
+              <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 6 }}>New Email (optional)</label>
               <input type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="Leave blank to keep current" />
             </div>
             <div>
-              <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 6 }}>New Password</label>
+              <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 6 }}>New Password</label>
               <div style={{ position: 'relative' }}>
                 <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 40 }} />
                 <button onClick={() => setShowPw(v => !v)}

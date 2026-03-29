@@ -382,7 +382,7 @@ export default function RunOrder() {
             {/* Column headers */}
             <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--sp-2) var(--sp-4)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
               {['Part','Req','Avail','Short'].map(h => (
-                <div key={h} style={{ fontSize:10,fontWeight:700,color:'var(--text-2)',textTransform:'uppercase' }}>{h}</div>
+                <div key={h} style={{ fontSize:10,fontWeight:700,color:'var(--text-2)' }}>{h}</div>
               ))}
             </div>
 
@@ -533,7 +533,7 @@ export default function RunOrder() {
                 <div style={{ fontSize:'var(--fs-lg)',fontWeight:800 }}>Kit Description Changed</div>
               </div>
 
-              <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4 }}>
+              <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',marginBottom:4 }}>
                 {line.sku} — {line._kitName}
               </div>
 

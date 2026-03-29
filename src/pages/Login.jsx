@@ -348,11 +348,11 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
             </div>
             <form onSubmit={handlePasswordLogin}>
               <div style={{ marginBottom: 'var(--sp-3)' }}>
-                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 'var(--sp-1)' }}>Email</label>
+                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 'var(--sp-1)' }}>Email</label>
                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.com" autoComplete="email" style={{ width: '100%' }} autoFocus />
               </div>
               <div style={{ marginBottom: 'var(--sp-5)' }}>
-                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 'var(--sp-1)' }}>Password</label>
+                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 'var(--sp-1)' }}>Password</label>
                 <div style={{ position: 'relative' }}>
                   <input type={showPw ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" autoComplete="current-password" style={{ width: '100%', paddingRight: 40 }} />
                   <button type="button" onClick={() => setShowPw(s => !s)}

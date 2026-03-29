@@ -84,7 +84,7 @@ export default function SOQueue() {
     <div className="page-content fade-in">
       {/* Header */}
       <div style={{ marginBottom: 'var(--sp-5)' }}>
-        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>WAREHOUSE IQ</div>
+        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 4 }}>WAREHOUSE IQ</div>
         <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800 }}>Sales Order Pipeline</div>
       </div>
 

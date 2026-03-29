@@ -13,7 +13,7 @@ import ProjectPicker from '../components/ProjectPicker.jsx'
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Label({ children, required }) {
   return (
-    <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 'var(--sp-1)' }}>
+    <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 'var(--sp-1)' }}>
       {children}{required && <span style={{ color: 'var(--red)', marginLeft: 3 }}>*</span>}
     </label>
   )
@@ -22,7 +22,7 @@ function Label({ children, required }) {
 function SectionDivider({ label }) {
   return (
     <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-4) 0', paddingTop: 'var(--sp-3)' }}>
-      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
+      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>{label}</div>
     </div>
   )
 }
@@ -242,7 +242,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           {section.items.length > 0 && (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--sp-2)', marginBottom: 'var(--sp-2)' }}>
               {['Item / SKU', 'Qty', 'Unit Cost', 'Amount', ''].map((h, i) => (
-                <div key={i} style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
+                <div key={i} style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-2)', textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
               ))}
             </div>
           )}
@@ -525,7 +525,7 @@ export default function PONew() {
 
       {/* Page header */}
       <div style={{ marginBottom: 'var(--sp-5)' }}>
-        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>SALES ORDERS</div>
+        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 4 }}>SALES ORDERS</div>
         <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800 }}>New Sales Order</div>
       </div>
 

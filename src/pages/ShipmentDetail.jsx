@@ -97,7 +97,7 @@ export default function ShipmentDetail() {
           <div style={{ marginTop:8,padding:'var(--sp-2) var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-lg)',display:'inline-flex',alignItems:'center',gap:6 }}>
             <MapPin size={14} style={{ color:'var(--navy)',flexShrink:0 }} />
             <div>
-              <div style={{ fontSize:10,fontWeight:700,color:'var(--text-2)',textTransform:'uppercase',letterSpacing:'0.05em' }}>SHIP TO</div>
+              <div style={{ fontSize:10,fontWeight:700,color:'var(--text-2)' }}>SHIP TO</div>
               <div style={{ fontSize:'var(--fs-sm)',fontWeight:700,color:'var(--navy)' }}>
                 {order?.customer_name}
               </div>
@@ -117,7 +117,7 @@ export default function ShipmentDetail() {
         </div>
         <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--sp-2) var(--sp-4)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
           {['Part','Qty','Source'].map(h => (
-            <div key={h} style={{ fontSize:10,fontWeight:700,color:'var(--text-2)',textTransform:'uppercase' }}>{h}</div>
+            <div key={h} style={{ fontSize:10,fontWeight:700,color:'var(--text-2)' }}>{h}</div>
           ))}
         </div>
         {lines.map((line, idx) => (
@@ -153,19 +153,19 @@ export default function ShipmentDetail() {
         </div>
         <div style={{ padding:'var(--sp-4)',display:'flex',flexDirection:'column',gap:'var(--sp-3)' }}>
           <div>
-            <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>
+            <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>
               Carrier <span style={{ color:'var(--error)' }}>*</span>
             </label>
             <input value={carrier} onChange={e=>setCarrier(e.target.value)} placeholder="e.g. FedEx, UPS, USPS, LTL" />
           </div>
           <div>
-            <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>
+            <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>
               Tracking Number
             </label>
             <input value={tracking} onChange={e=>setTracking(e.target.value)} placeholder="Optional" />
           </div>
           <div>
-            <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6,textTransform:'uppercase',letterSpacing:'0.05em' }}>
+            <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>
               Notes
             </label>
             <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Special instructions, partial shipment notes…"

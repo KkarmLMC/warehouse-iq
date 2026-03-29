@@ -183,7 +183,7 @@ export default function PartsCatalog() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)', flexWrap: 'wrap' }}>
         <div>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>INVENTORY</div>
+          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 4 }}>INVENTORY</div>
           <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>Parts Catalog</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', background: '#EFF6FF', fontSize: 'var(--fs-xs)', fontWeight: 600, color: '#1D4ED8' }}>
