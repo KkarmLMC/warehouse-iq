@@ -71,28 +71,6 @@ function SectionGroup({ label, items }) {
         </div>
       ))}
 
-      {/* ── Contextual Action Button ────────────────────────────────────────── */}
-      {ACTION_CFG[po.status] && (() => {
-        const cfg = ACTION_CFG[po.status]
-        return (
-          <button
-            onClick={() => navigate(cfg.path(po.id))}
-            style={{
-              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              padding: 'var(--sp-4) var(--sp-5)', borderRadius: 'var(--r-xl)',
-              background: cfg.color, border: 'none', cursor: 'pointer',
-              marginBottom: 'var(--sp-6)',
-            }}
-          >
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, color: '#fff' }}>{cfg.label}</div>
-              <div style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)', marginTop: 2 }}>{cfg.sub}</div>
-            </div>
-            <ArrowRight size={20} style={{ color: '#fff', flexShrink: 0 }} weight="bold" />
-          </button>
-        )
-      })()}
-
     </div>
   )
 }
