@@ -185,7 +185,7 @@ export default function PurchaseOrders() {
           padding: 'var(--sp-3) var(--sp-4)', background: '#FEF3C7',
           borderRadius: 'var(--r-lg)', marginBottom: 'var(--sp-4)',
           border: '1px solid #FDE68A', cursor: 'pointer',
-        }} onClick={() => setActiveTab('submitted')}>
+        }} onClick={() => setActiveTab('queued')}>
           <Warning size={18} weight="fill" style={{ color: '#D97706', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#92400E' }}>

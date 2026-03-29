@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
-  Receipt, Buildings, MapPin, Phone, Envelope, Package,
-  Wrench, CalendarBlank, CheckCircle, PaperPlaneTilt,
-  Clock, Warning, ArrowRight, Printer, CaretDown, Plus,
+  Receipt, Buildings, MapPin, Phone, Envelope,
+  CalendarBlank, CheckCircle, PaperPlaneTilt,
+  Clock, CaretDown,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
-const STATUS_FLOW = {
-  draft:     { next: 'submitted', nextLabel: 'Submit for Review', nextColor: '#D97706', nextBg: '#FEF3C7', icon: Clock,          color: '#64748B' },
-  submitted: { next: 'published', nextLabel: 'Publish & Deduct Inventory', nextColor: '#fff',   nextBg: 'var(--navy)', icon: PaperPlaneTilt, color: '#D97706' },
-  published: { next: 'fulfilled', nextLabel: 'Mark as Fulfilled', nextColor: '#fff',   nextBg: '#15803D', icon: Receipt,        color: '#0369A1' },
-  fulfilled: { next: null,        nextLabel: null,                 nextColor: null,    nextBg: null,      icon: CheckCircle,    color: '#15803D' },
+const STATUS_DISPLAY = {
+  draft:        { label: 'Draft',        icon: Clock,          color: '#64748B', bg: '#F1F5F9' },
+  queued:       { label: 'Queued',       icon: Clock,          color: '#6366F1', bg: '#EEF2FF' },
+  running:      { label: 'Running',      icon: PaperPlaneTilt, color: '#D97706', bg: '#FEF3C7' },
+  submitted:    { label: 'Submitted',    icon: PaperPlaneTilt, color: '#D97706', bg: '#FEF3C7' },
+  fulfillment:  { label: 'Fulfillment',  icon: Receipt,        color: '#0369A1', bg: '#EFF6FF' },
+  published:    { label: 'Published',    icon: Receipt,        color: '#0369A1', bg: '#EFF6FF' },
+  shipment:     { label: 'Shipment',     icon: Receipt,        color: '#0891B2', bg: '#ECFEFF' },
+  back_ordered: { label: 'Back Order',   icon: Clock,          color: '#0891B2', bg: '#ECFEFF' },
+  complete:     { label: 'Complete',     icon: CheckCircle,    color: '#15803D', bg: '#F0FDF4' },
+  fulfilled:    { label: 'Complete',     icon: CheckCircle,    color: '#15803D', bg: '#F0FDF4' },
+  cancelled:    { label: 'Cancelled',    icon: Clock,          color: '#9CA3AF', bg: '#F1F5F9' },
 }
 
 function SectionGroup({ label, items }) {
@@ -63,8 +70,6 @@ export default function PODetail() {
   const [po, setPo] = useState(null)
   const [lines, setLines] = useState([])
   const [loading, setLoading] = useState(true)
-  const [advancing, setAdvancing] = useState(false)
-  const [confirmPublish, setConfirmPublish] = useState(false)
 
   const load = () => Promise.all([
     db.from('sales_orders').select('*').eq('id', id).single(),
@@ -77,42 +82,12 @@ export default function PODetail() {
 
   useEffect(() => { load() }, [id])
 
-  const advanceStatus = async () => {
-    const flow = STATUS_FLOW[po.status]
-    if (!flow?.next) return
-    if (po.status === 'submitted' && !confirmPublish) {
-      setConfirmPublish(true)
-      return
-    }
-    setAdvancing(true)
-    setConfirmPublish(false)
-    const updates = { status: flow.next, updated_at: new Date().toISOString() }
-    if (flow.next === 'submitted') updates.submitted_at = new Date().toISOString()
-    if (flow.next === 'published') updates.published_at = new Date().toISOString()
-    if (flow.next === 'fulfilled') updates.fulfilled_at = new Date().toISOString()
-    await db.from('sales_orders').update(updates).eq('id', id)
 
-    // When publishing: deduct inventory
-    if (flow.next === 'published') {
-      for (const line of lines.filter(l => l.line_type === 'material' && l.part_id && l.warehouse_id)) {
-        await db.rpc('adjust_inventory', {
-          p_part_id: line.part_id,
-          p_warehouse_id: line.warehouse_id,
-          p_quantity_delta: -Math.abs(line.quantity),
-          p_transaction_type: 'job_checkout',
-          p_reason: `SO ${po.so_number} — ${po.customer_name}`,
-        })
-      }
-    }
-
-    await load()
-    setAdvancing(false)
-  }
 
   if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
   if (!po) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Sales Order not found</div></div></div>
 
-  const flow = STATUS_FLOW[po.status]
+  const statusDisplay = STATUS_DISPLAY[po.status] || STATUS_DISPLAY.draft
   const materialLines = lines.filter(l => l.line_type === 'material')
   const laborLines = lines.filter(l => l.line_type === 'labor')
 
@@ -137,7 +112,7 @@ export default function PODetail() {
     warehouseImpact[wName].qty += line.quantity
   }
 
-  const StatusIcon = flow?.icon || CheckCircle
+  const StatusIcon = statusDisplay.icon || CheckCircle
 
   return (
     <div className="page-content fade-in">
@@ -157,8 +132,8 @@ export default function PODetail() {
           <div style={{
             display: 'flex', alignItems: 'center', gap: 4,
             padding: '4px 12px', borderRadius: 'var(--r-full)',
-            background: po.status === 'submitted' ? '#FEF3C7' : po.status === 'published' ? '#EFF6FF' : po.status === 'fulfilled' ? '#F0FDF4' : 'rgba(255,255,255,0.12)',
-            color: po.status === 'submitted' ? '#D97706' : po.status === 'published' ? '#0369A1' : po.status === 'fulfilled' ? '#15803D' : 'rgba(255,255,255,0.7)',
+            background: statusDisplay.bg,
+            color: statusDisplay.color,
           }}>
             <StatusIcon size={12} weight="fill" />
             <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, textTransform: 'capitalize' }}>{po.status}</span>
@@ -198,10 +173,10 @@ export default function PODetail() {
       </div>
 
       {/* Inventory impact (when not yet published) */}
-      {po.status !== 'fulfilled' && Object.keys(warehouseImpact).length > 0 && (
+      {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
         <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--sp-3)' }}>
-            Inventory Impact {po.status === 'published' ? '(Applied)' : '(On Publish)'}
+            Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
           {Object.entries(warehouseImpact).map(([wName, impact]) => (
             <div key={wName} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--sp-2)' }}>
@@ -217,28 +192,7 @@ export default function PODetail() {
         </div>
       )}
 
-      {/* Confirm publish banner */}
-      {confirmPublish && (
-        <div style={{ background: '#FEF3C7', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid #FDE68A' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', marginBottom: 'var(--sp-3)' }}>
-            <Warning size={18} weight="fill" style={{ color: '#D97706' }} />
-            <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#92400E' }}>Confirm Publish</span>
-          </div>
-          <div style={{ fontSize: 'var(--fs-sm)', color: '#92400E', marginBottom: 'var(--sp-3)' }}>
-            Publishing this PO will deduct {materialLines.filter(l => l.warehouse_id).length} material line items from inventory across {Object.keys(warehouseImpact).length} warehouse(s). This cannot be undone.
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-2)' }}>
-            <button onClick={() => setConfirmPublish(false)}
-              style={{ padding: 'var(--sp-2)', borderRadius: 'var(--r-md)', border: '1px solid #FDE68A', background: 'transparent', color: '#92400E', fontWeight: 600, fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
-              Cancel
-            </button>
-            <button onClick={advanceStatus} disabled={advancing}
-              style={{ padding: 'var(--sp-2)', borderRadius: 'var(--r-md)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
-              {advancing ? 'Publishing…' : 'Confirm Publish'}
-            </button>
-          </div>
-        </div>
-      )}
+
 
       {/* Line items — materials by section */}
       {sections.length > 0 && (
@@ -307,19 +261,6 @@ export default function PODetail() {
         </div>
       )}
 
-      {/* Action button */}
-      {flow?.next && !confirmPublish && (
-        <button onClick={advanceStatus} disabled={advancing}
-          style={{
-            width: '100%', padding: 'var(--sp-4)', borderRadius: 'var(--r-xl)', border: 'none',
-            background: flow.nextBg, color: flow.nextColor,
-            fontWeight: 700, fontSize: 'var(--fs-md)', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)',
-            marginBottom: 'var(--sp-4)',
-          }}>
-          {advancing ? 'Processing…' : <><ArrowRight size={18} /> {flow.nextLabel}</>}
-        </button>
-      )}
     </div>
   )
 }

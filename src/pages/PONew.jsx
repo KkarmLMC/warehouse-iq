@@ -454,7 +454,7 @@ export default function PONew() {
       so_number: poNumber,
       quote_number: quoteNumber || null,
       division,
-      status: submitAfter ? 'submitted' : 'draft',
+      status: 'queued',
       customer_name: customerName.trim(),
       customer_address: customerAddress || null,
       customer_city: customerCity || null,
@@ -469,7 +469,7 @@ export default function PONew() {
       materials_total: materialsTotal,
       installation_total: installationTotal,
       grand_total: materialsTotal + installationTotal,
-      submitted_at: submitAfter ? new Date().toISOString() : null,
+      queued_at: new Date().toISOString(),
     }).select().single()
 
     if (poErr || !newPO) { setError('Failed to save Sales Order. Please try again.'); setSaving(false); return }

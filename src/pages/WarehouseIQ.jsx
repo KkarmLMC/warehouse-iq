@@ -94,7 +94,7 @@ export default function WarehouseIQ() {
       db.from('so_line_items')
         .select('so_id, part_id, quantity, sales_orders(so_number, customer_name, status, grand_total, division)')
         .eq('warehouse_id', activeWH)
-        .in('sales_orders.status', ['submitted','published','draft']),
+        .in('sales_orders.status', ['queued','running','fulfillment','shipment','back_ordered']),
     ])
 
     // Build snap map
@@ -268,7 +268,7 @@ export default function WarehouseIQ() {
               <div style={{ flex:1, minWidth:0 }}>
                 <div style={{ fontSize:'var(--fs-xs)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
               </div>
-              <span style={{ fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background: po.status==='submitted'?'#FEF3C7':po.status==='published'?'#EFF6FF':'#F1F5F9', color: po.status==='submitted'?'#D97706':po.status==='published'?'#1D4ED8':'#64748B', textTransform:'capitalize', flexShrink:0 }}>
+              <span style={{ fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background: po.status==='queued'?'#EEF2FF':po.status==='running'?'#FEF3C7':po.status==='fulfillment'?'#EFF6FF':po.status==='shipment'?'#ECFEFF':'#F0FDF4', color: po.status==='queued'?'#6366F1':po.status==='running'?'#D97706':po.status==='fulfillment'?'#1D4ED8':po.status==='shipment'?'#0891B2':'#15803D', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
               </span>
             </button>
