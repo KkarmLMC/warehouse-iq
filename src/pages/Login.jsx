@@ -183,7 +183,7 @@ export default function Login() {
   return (
     <div className="login-page">
       {/* Logo */}
-      <div style={{ marginBottom: 'var(--sp-8)', textAlign: 'center' }}>
+      <div style={{ marginBottom: 'var(--sp-8)', textAlign: 'center', minHeight: 148 }}>
         <div style={{ width: 56, height: 56, borderRadius: 'var(--r-xl)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--sp-4)' }}>
           <Lightning size={28} weight="fill" style={{ color: '#fff' }} />
         </div>
