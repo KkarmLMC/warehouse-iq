@@ -203,7 +203,7 @@ export default function Profile() {
   const initials = (profile?.full_name || profile?.email || '??').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
 
   return (
-    <div className="page fade-in">
+    <div className="page-content fade-in">
 
       {/* Header */}
       <div style={{ marginBottom: 'var(--sp-6)' }}>
