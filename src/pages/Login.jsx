@@ -96,7 +96,7 @@ function PinPad({ onPin, loading, error }) {
 }
 
 // ─── Main Login Page ──────────────────────────────────────────────────────────
-export default function Login() {
+export default function Login({ forcePinSetup = false, session: forcedSession = null }) {
   const navigate = useNavigate()
   const location = useLocation()
   const { signIn } = useAuth()
@@ -111,6 +111,16 @@ export default function Login() {
   const [pinStep, setPinStep] = useState('enter') // enter | confirm
   const [firstPin, setFirstPin] = useState('')
   const [pendingSession, setPendingSession] = useState(null) // user after password login, before PIN set
+
+  // ── Force PIN setup when app-level guard redirects here ─────────────────
+  useState(() => {
+    if (forcePinSetup && forcedSession) {
+      setPendingSession(forcedSession)
+      setPinStep('enter')
+      setFirstPin('')
+      setMode('setup-pin')
+    }
+  })
 
   // ── Password sign in ──────────────────────────────────────────────────────
   const handlePasswordLogin = async (e) => {
@@ -177,9 +187,6 @@ export default function Login() {
     navigate(from, { replace: true })
   }
 
-  // ── Skip PIN setup ─────────────────────────────────────────────────────────
-  const skipPin = () => navigate(from, { replace: true })
-
   return (
     <div className="login-page">
       {/* Logo */}
@@ -206,15 +213,12 @@ export default function Login() {
               </div>
               <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)' }}>
                 {pinStep === 'enter'
-                  ? 'Choose a 6-digit PIN for quick access'
+                  ? (forcePinSetup ? 'Create a PIN to continue' : 'A PIN is required to access this app')
                   : 'Enter your PIN again to confirm'}
               </div>
             </div>
             <PinPad onPin={handlePinSetup} loading={loading} error={error} />
-            <button onClick={skipPin}
-              style={{ width: '100%', marginTop: 'var(--sp-4)', padding: 'var(--sp-2)', border: 'none', background: 'none', color: 'var(--text-3)', fontSize: 'var(--fs-sm)', cursor: 'pointer', fontFamily: 'var(--font)' }}>
-              Skip for now
-            </button>
+
           </>
         )}
 

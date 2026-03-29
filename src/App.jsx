@@ -78,7 +78,7 @@ const Spinner = () => (
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const [collapsed, setCollapsed] = useState(false)
-  const { session, loading } = useAuth()
+  const { session, loading, profile } = useAuth()
 
   if (loading) return <Spinner />
 
@@ -86,6 +86,16 @@ export default function App() {
     <Suspense fallback={null}>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </Suspense>
+  )
+
+  // PIN guard — if authenticated but no PIN set, force PIN setup before app access
+  if (session && profile !== undefined && profile !== null && !profile?.pin_hash) return (
+    <Suspense fallback={null}>
+      <Routes>
+        <Route path="/login" element={<Login forcePinSetup session={session} />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Suspense>
