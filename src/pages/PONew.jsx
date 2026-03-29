@@ -8,7 +8,6 @@ import {
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
-import { logActivity } from '../lib/logActivity.js'
 import ProjectPicker from '../components/ProjectPicker.jsx'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
