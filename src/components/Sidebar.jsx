@@ -239,9 +239,9 @@ export default function Sidebar({ collapsed, onToggle }) {
           {!collapsed && <div className="sidebar-section-label">ACCOUNT</div>}
 
           {/* Profile */}
-          <button onClick={() => navigate('/profile')} className="sidebar-item" title={collapsed ? 'Profile' : undefined}>
+          <button onClick={() => navigate('/profile')} className="sidebar-item" title={collapsed ? 'View Profile' : undefined}>
             <User size={17} style={{ flexShrink: 0 }} />
-            {!collapsed && <span className="sidebar-item-label">Profile</span>}
+            {!collapsed && <span className="sidebar-item-label">View Profile</span>}
           </button>
 
           <button onClick={handleSignOut} className="sidebar-item"
