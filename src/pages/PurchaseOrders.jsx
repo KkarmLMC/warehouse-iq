@@ -179,7 +179,7 @@ export default function PurchaseOrders() {
       </div>
 
       {/* Alert banner for submitted POs awaiting review */}
-      {submittedCount > 0 && (
+      {queuedCount > 0 && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
           padding: 'var(--sp-3) var(--sp-4)', background: '#FEF3C7',
@@ -202,8 +202,8 @@ export default function PurchaseOrders() {
       {/* Stats strip */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)' }}>
         {[
-          { label: 'Total POs', value: pos.length },
-          { label: 'Pending Review', value: submittedCount, color: submittedCount > 0 ? '#D97706' : undefined },
+          { label: 'Total Orders', value: pos.length },
+          { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? '#D97706' : undefined },
           { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: '#15803D' },
         ].map(s => (
           <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-lg)', padding: 'var(--sp-3)', textAlign: 'center' }}>
