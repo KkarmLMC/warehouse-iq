@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Lightning, Eye, EyeSlash, Warning, ArrowLeft } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
@@ -113,14 +113,14 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
   const [pendingSession, setPendingSession] = useState(null) // user after password login, before PIN set
 
   // ── Force PIN setup when app-level guard redirects here ─────────────────
-  useState(() => {
+  useEffect(() => {
     if (forcePinSetup && forcedSession) {
       setPendingSession(forcedSession)
       setPinStep('enter')
       setFirstPin('')
       setMode('setup-pin')
     }
-  })
+  }, [forcePinSetup])
 
   // ── Password sign in ──────────────────────────────────────────────────────
   const handlePasswordLogin = async (e) => {
