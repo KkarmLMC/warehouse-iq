@@ -8,9 +8,16 @@ import {
 import { db } from '../lib/supabase.js'
 
 const STATUS_META = {
-  draft:     { label: 'Draft',     color: '#64748B', bg: '#F1F5F9', icon: Clock },
-  submitted: { label: 'Submitted', color: '#D97706', bg: '#FEF3C7', icon: PaperPlaneTilt },
-  published: { label: 'Published', color: '#0369A1', bg: '#EFF6FF', icon: Receipt },
+  draft:        { label: 'Draft',        color: '#64748B', bg: '#F1F5F9', icon: Clock },
+  queued:       { label: 'Queued',       color: '#6366F1', bg: '#EEF2FF', icon: Clock },
+  running:      { label: 'Running',      color: '#D97706', bg: '#FEF3C7', icon: PaperPlaneTilt },
+  submitted:    { label: 'Submitted',    color: '#D97706', bg: '#FEF3C7', icon: PaperPlaneTilt },
+  fulfillment:  { label: 'Fulfillment',  color: '#0369A1', bg: '#EFF6FF', icon: Receipt },
+  published:    { label: 'Published',    color: '#0369A1', bg: '#EFF6FF', icon: Receipt },
+  shipment:     { label: 'Shipment',     color: '#0891B2', bg: '#ECFEFF', icon: Receipt },
+  back_ordered: { label: 'Back Order',   color: '#0891B2', bg: '#ECFEFF', icon: Clock },
+  complete:     { label: 'Complete',     color: '#15803D', bg: '#F0FDF4', icon: CheckCircle },
+  fulfilled:    { label: 'Fulfilled',    color: '#15803D', bg: '#F0FDF4', icon: CheckCircle },
   fulfilled: { label: 'Fulfilled', color: '#15803D', bg: '#F0FDF4', icon: CheckCircle },
   cancelled: { label: 'Cancelled', color: '#B91C1C', bg: '#FEF2F2', icon: X },
 }
@@ -148,9 +155,9 @@ export default function PurchaseOrders() {
   }
 
   // Stats
-  const submittedCount = pos.filter(p => p.status === 'submitted').length
+  const queuedCount = pos.filter(p => ['queued','running'].includes(p.status)).length
   const totalPublishedValue = pos
-    .filter(p => p.status === 'published' || p.status === 'fulfilled')
+    .filter(p => ['complete','fulfilled','shipment','fulfillment'].includes(p.status))
     .reduce((s, po) => {
       const t = totals[po.id]
       return s + (t ? t.materials + t.labor : 0)
@@ -182,7 +189,7 @@ export default function PurchaseOrders() {
           <Warning size={18} weight="fill" style={{ color: '#D97706', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#92400E' }}>
-              {submittedCount} Sales Order{submittedCount !== 1 ? 's' : ''} awaiting review
+              {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
             </div>
             <div style={{ fontSize: 'var(--fs-xs)', color: '#92400E' }}>
               Tap to review and publish

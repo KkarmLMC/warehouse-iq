@@ -9,11 +9,17 @@ import { db } from '../lib/supabase.js'
 
 // ─── Stage colors ─────────────────────────────────────────────────────────────
 const STAGE_COLOR = {
-  draft:     '#64748B',
-  submitted: '#D97706',
-  published: '#1D4ED8',
-  fulfilled: '#10B981',
-  cancelled: '#9CA3AF',
+  draft:        '#64748B',
+  queued:       '#6366F1',
+  running:      '#D97706',
+  submitted:    '#D97706',
+  fulfillment:  '#1D4ED8',
+  published:    '#1D4ED8',
+  shipment:     '#0891B2',
+  back_ordered: '#0891B2',
+  fulfilled:    '#10B981',
+  complete:     '#10B981',
+  cancelled:    '#9CA3AF',
 }
 
 // ─── Warehouse health badge ───────────────────────────────────────────────────
@@ -66,7 +72,7 @@ export default function Inventory() {
       db.from('warehouses').select('*').eq('is_active', true).order('sort_order'),
       db.from('inventory_levels').select('*, parts(name, sku, unit_cost), warehouses(name)'),
       db.from('sales_orders').select('id, so_number, customer_name, project_name, status, grand_total, created_at, division')
-        .in('status', ['draft', 'submitted', 'published'])
+        .in('status', ['draft', 'queued', 'running', 'submitted', 'published', 'fulfillment', 'shipment', 'back_ordered'])
         .order('created_at', { ascending: false }).limit(6),
       db.from('change_orders').select('id, co_number, submitted_by, justification, status, created_at, warehouses(name)')
         .eq('status', 'pending').order('created_at', { ascending: false }).limit(5),
@@ -91,7 +97,7 @@ export default function Inventory() {
 
     setStats({
       totalValue,
-      openSOs:    sos?.filter(s => s.status !== 'fulfilled').length || 0,
+      openSOs:    sos?.filter(s => !['fulfilled','complete','cancelled'].includes(s.status)).length || 0,
       pendingCOs: cos?.length || 0,
       lowStock:   lowItems.length,
       outStock:   outItems.length,
