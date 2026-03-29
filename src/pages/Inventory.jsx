@@ -288,6 +288,9 @@ export default function Inventory() {
           <div key={so.id}
             onClick={() => navigate(`/sales-orders/${so.id}`)}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 'var(--r-lg)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <Receipt size={16} style={{ color: 'var(--navy)' }} />
+            </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                 <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
@@ -319,7 +322,9 @@ export default function Inventory() {
             return (
               <div key={item.id}
                 style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-                <div style={{ width: 6, height: 6, borderRadius: '50%', background: isOut ? 'var(--error)' : 'var(--amber)', flexShrink: 0 }} />
+                <div style={{ width: 36, height: 36, borderRadius: 'var(--r-lg)', background: isOut ? 'var(--error-soft)' : 'var(--warning-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Warning size={16} weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--amber)' }} />
+                </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.parts?.name || 'Unknown Part'}

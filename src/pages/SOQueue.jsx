@@ -130,6 +130,9 @@ export default function SOQueue() {
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
+              <div style={{ width: 36, height: 36, borderRadius: 'var(--r-lg)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <Receipt size={16} style={{ color: 'var(--navy)' }} />
+              </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
                   <span style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{o.so_number}</span>
