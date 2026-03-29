@@ -35,20 +35,20 @@ function SectionGroup({ label, items }) {
       {open && items.map((item, idx) => (
         <div key={item.id} style={{
           display: 'grid',
-          gridTemplateColumns: '1fr auto auto auto',
-          gap: 'var(--sp-3)',
-          padding: 'var(--sp-3) var(--sp-4)',
+          gridTemplateColumns: '1fr 40px 56px 64px',
+          gap: 6,
+          padding: 'var(--sp-2) var(--sp-3)',
           borderBottom: idx < items.length - 1 ? '1px solid var(--border-l)' : 'none',
-          alignItems: 'center',
+          alignItems: 'start',
           background: 'var(--surface-raised)',
         }}>
-          <div style={{ minWidth: 0 }}>
-            {item.sku && <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2 }}>{item.sku}</div>}
-            <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 500, color: 'var(--text-1)' }}>{item.description}</div>
+          <div style={{ minWidth: 0, overflow: 'hidden' }}>
+            {item.sku && <div style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
+            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 500, color: 'var(--text-1)', lineHeight: 1.4 }}>{item.description}</div>
           </div>
-          <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)', textAlign: 'right', whiteSpace: 'nowrap' }}>{item.quantity}</div>
-          <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)', textAlign: 'right', whiteSpace: 'nowrap' }}>${item.unit_cost.toFixed(2)}</div>
-          <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text-1)', textAlign: 'right', whiteSpace: 'nowrap' }}>
+          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', textAlign: 'right', paddingTop: 2 }}>{item.quantity}</div>
+          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', textAlign: 'right', paddingTop: 2 }}>${item.unit_cost.toFixed(2)}</div>
+          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: 'var(--text-1)', textAlign: 'right', paddingTop: 2 }}>
             ${(item.quantity * item.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
         </div>
@@ -242,11 +242,11 @@ export default function PODetail() {
 
       {/* Line items — materials by section */}
       {sections.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', maxWidth: '100%' }}>
           {/* Column headers */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--sp-3)', padding: 'var(--sp-2) var(--sp-4)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
-            {['Item / Description', 'Qty', 'Unit Cost', 'Amount'].map(h => (
-              <div key={h} style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textAlign: h !== 'Item / Description' ? 'right' : 'left' }}>{h}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--sp-2) var(--sp-3)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
+            {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
+              <div key={h} style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textAlign: h !== 'Item / Description' ? 'right' : 'left', whiteSpace: 'nowrap', overflow: 'hidden' }}>{h}</div>
             ))}
           </div>
           {sections.map(sec => (
@@ -268,7 +268,7 @@ export default function PODetail() {
 
       {/* Labor lines */}
       {laborLines.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', maxWidth: '100%' }}>
           <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)' }}>
             <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Installation / Labor</span>
           </div>

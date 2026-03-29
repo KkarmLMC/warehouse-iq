@@ -298,10 +298,25 @@ textarea { resize: vertical; }
     position: fixed;
     top: 0; left: 0; bottom: 0;
     transform: translateX(calc(-1 * var(--sidebar-w)));
+    z-index: 200;
   }
 
   .sidebar.sidebar-open {
     transform: translateX(0);
+  }
+
+  /* When sidebar is fixed/off-screen, main-area takes full viewport width */
+  .app-shell {
+    display: block;
+    width: 100vw;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .main-area {
+    width: 100vw;
+    max-width: 100vw;
+    overflow: hidden;
   }
 }
 
@@ -645,8 +660,12 @@ textarea { resize: vertical; }
 .page-content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   padding: var(--content-pad) var(--content-pad) var(--sp-8);
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 /* Standard vertical column layout for page content sections */
