@@ -125,7 +125,7 @@ export default function UserManagement() {
 
       <div style={{ display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'var(--sp-5)' }}>
         <div>
-          <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-3)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4 }}>ADMIN</div>
+          <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4 }}>ADMIN</div>
           <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800 }}>User Management</div>
           <div style={{ fontSize:'var(--fs-sm)',color:'var(--text-3)',marginTop:4 }}>
             Manage roles and pipeline assignments for all users

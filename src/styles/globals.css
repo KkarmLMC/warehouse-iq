@@ -106,8 +106,8 @@
 
   /* Text hierarchy */
   --text-1:    #000000;   /* Primary content */
-  --text-2:    #374151;   /* Labels, secondary descriptions */
-  --text-3:    #9CA3AF;   /* Timestamps, mono labels, tertiary */
+  --text-2:    #111111;   /* Labels, secondary descriptions */
+  --text-3:    #6B7280;   /* Timestamps, mono labels, tertiary */
   --text-4:    #D1D5DB;   /* Disabled / placeholder */
 
   /* ── 2c. Typography ───────────────────────────────────────────────────────── */

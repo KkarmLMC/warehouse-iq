@@ -144,7 +144,7 @@ export default function Inventory() {
 
       {/* ── Page header ── */}
       <div style={{ marginBottom: 'var(--sp-5)' }}>
-        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>WAREHOUSE IQ</div>
+        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>WAREHOUSE IQ</div>
         <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800 }}>Master Dashboard</div>
         <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)', marginTop: 4 }}>
           All Sales Orders, Change Orders, Inventory & Fulfillment
@@ -219,7 +219,7 @@ export default function Inventory() {
               { label: 'Health',         value: <HealthBadge out={warehouseHealth[master.id]?.out || 0} low={warehouseHealth[master.id]?.low || 0} /> },
             ].map(f => (
               <div key={f.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-lg)', padding: 'var(--sp-3)' }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>{f.label}</div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>{f.label}</div>
                 <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, fontFamily: typeof f.value === 'string' ? 'var(--mono)' : 'var(--font)' }}>{f.value}</div>
               </div>
             ))}

@@ -29,7 +29,7 @@ export default function ShipmentQueue() {
   return (
     <div className="page-content fade-in">
       <div style={{ marginBottom:'var(--sp-5)' }}>
-        <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-3)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4 }}>WAREHOUSE IQ</div>
+        <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4 }}>WAREHOUSE IQ</div>
         <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800 }}>Shipment Queue</div>
         <div style={{ fontSize:'var(--fs-sm)',color:'var(--text-3)',marginTop:4 }}>Orders packed and ready to ship</div>
       </div>
