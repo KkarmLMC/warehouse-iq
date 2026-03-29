@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   Receipt, Buildings, MapPin, Phone, Envelope,
   CalendarBlank, CheckCircle, PaperPlaneTilt,
-  Clock, CaretDown, ArrowRight, Lightning, ClipboardText, Truck,
+  Clock, CaretDown, ArrowRight, Lightning, ClipboardText, Truck, Rocket,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
@@ -19,6 +19,16 @@ const STATUS_DISPLAY = {
   complete:     { label: 'Complete',     icon: CheckCircle,    color: '#15803D', bg: '#F0FDF4' },
   fulfilled:    { label: 'Complete',     icon: CheckCircle,    color: '#15803D', bg: '#F0FDF4' },
   cancelled:    { label: 'Cancelled',    icon: Clock,          color: '#9CA3AF', bg: '#F1F5F9' },
+}
+
+
+// Action config — what the CTA button does per status
+const ACTION_CFG = {
+  queued:       { label: 'Run Order',             sub: 'Process parts & generate fulfillment sheet', color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
+  running:      { label: 'Continue Run Order',    sub: 'Order is being processed',                   color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
+  fulfillment:  { label: 'Process Fulfillment',   sub: 'Pick parts and confirm availability',        color: '#0369A1',       path: id => `/warehouse-hq/fulfillment/${id}` },
+  shipment:     { label: 'Process Shipment',      sub: 'Enter carrier details and mark shipped',     color: '#0891B2',       path: id => `/warehouse-hq/shipment/${id}` },
+  back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--amber)',  path: id => `/warehouse-hq/queue/${id}` },
 }
 
 function SectionGroup({ label, items }) {
@@ -60,6 +70,29 @@ function SectionGroup({ label, items }) {
           </div>
         </div>
       ))}
+
+      {/* ── Contextual Action Button ────────────────────────────────────────── */}
+      {ACTION_CFG[po.status] && (() => {
+        const cfg = ACTION_CFG[po.status]
+        return (
+          <button
+            onClick={() => navigate(cfg.path(po.id))}
+            style={{
+              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: 'var(--sp-4) var(--sp-5)', borderRadius: 'var(--r-xl)',
+              background: cfg.color, border: 'none', cursor: 'pointer',
+              marginBottom: 'var(--sp-6)',
+            }}
+          >
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, color: '#fff' }}>{cfg.label}</div>
+              <div style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)', marginTop: 2 }}>{cfg.sub}</div>
+            </div>
+            <ArrowRight size={20} style={{ color: '#fff', flexShrink: 0 }} weight="bold" />
+          </button>
+        )
+      })()}
+
     </div>
   )
 }
@@ -260,6 +293,29 @@ export default function PODetail() {
           <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-2)', lineHeight: 1.6 }}>{po.notes}</div>
         </div>
       )}
+
+
+      {/* ── Contextual Action Button ────────────────────────────────────────── */}
+      {ACTION_CFG[po.status] && (() => {
+        const cfg = ACTION_CFG[po.status]
+        return (
+          <button
+            onClick={() => navigate(cfg.path(po.id))}
+            style={{
+              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: 'var(--sp-4) var(--sp-5)', borderRadius: 'var(--r-xl)',
+              background: cfg.color, border: 'none', cursor: 'pointer',
+              marginBottom: 'var(--sp-6)',
+            }}
+          >
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, color: '#fff' }}>{cfg.label}</div>
+              <div style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)', marginTop: 2 }}>{cfg.sub}</div>
+            </div>
+            <ArrowRight size={20} style={{ color: '#fff', flexShrink: 0 }} weight="bold" />
+          </button>
+        )
+      })()}
 
     </div>
   )
