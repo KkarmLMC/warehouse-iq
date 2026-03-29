@@ -13,32 +13,84 @@ async function hashPin(pin) {
 }
 
 // ─── PIN Pad ──────────────────────────────────────────────────────────────────
-function PinPad({ onPin, loading, error }) {
+function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = false }) {
   const [digits, setDigits] = useState([])
 
+  // For confirm step: compare entered digits against confirmPin in real time
+  const getMatchState = (idx) => {
+    if (!confirmPin || idx >= digits.length) return 'empty'
+    return digits[idx] === confirmPin[idx] ? 'match' : 'mismatch'
+  }
+
   const press = (d) => {
-    if (digits.length >= 6) return
-    const next = [...digits, d]
-    setDigits(next)
-    if (next.length === 6) {
-      setTimeout(() => { onPin(next.join('')); setDigits([]) }, 120)
+    if (loading || digits.length >= 6) return
+    setDigits(prev => [...prev, d])
+  }
+
+  const del = () => {
+    if (loading) return
+    setDigits(prev => prev.slice(0, -1))
+  }
+
+  const submit = () => {
+    if (digits.length === 6 && !loading) {
+      onPin(digits.join(''))
+      setDigits([])
     }
   }
 
-  const del = () => setDigits(d => d.slice(0, -1))
+  const isFull = digits.length === 6
+
+  // Dot color: if confirmPin provided, show match/mismatch per digit position
+  const dotColor = (i) => {
+    if (i >= digits.length) return 'var(--border-l)'
+    if (!confirmPin) return 'var(--navy)'
+    return digits[i] === confirmPin[i] ? '#10B981' : '#EF4444'
+  }
+
+  const btnBase = {
+    height: 64, borderRadius: 'var(--r-xl)',
+    border: '1px solid var(--border-l)',
+    background: 'var(--surface-raised)',
+    fontSize: 'var(--fs-2xl)', fontWeight: 700,
+    cursor: 'pointer', fontFamily: 'var(--font)',
+    transition: 'all 0.12s',
+    WebkitTapHighlightColor: 'transparent',
+    opacity: loading ? 0.5 : 1,
+  }
+  const hoverOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' } }
+  const hoverOff = e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }
+  const pressOn  = e => { if (!loading) { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' } }
+  const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--sp-5)' }}>
-      {/* Dots */}
-      <div style={{ display: 'flex', gap: 'var(--sp-3)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--sp-4)' }}>
+
+      {/* Dots — green/red when confirming */}
+      <div style={{ display: 'flex', gap: 'var(--sp-3)', height: 20, alignItems: 'center' }}>
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} style={{
-            width: 14, height: 14, borderRadius: '50%',
-            background: i < digits.length ? 'var(--navy)' : 'var(--border-l)',
-            transition: 'background 0.1s',
+            width: i < digits.length ? 16 : 14,
+            height: i < digits.length ? 16 : 14,
+            borderRadius: '50%',
+            background: dotColor(i),
+            transition: 'all 0.12s',
+            boxShadow: confirmPin && i < digits.length
+              ? `0 0 0 3px ${digits[i] === confirmPin[i] ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`
+              : 'none',
           }} />
         ))}
       </div>
+
+      {/* Match hint when confirming */}
+      {confirmPin && isFull && (
+        <div style={{
+          fontSize: 'var(--fs-xs)', fontWeight: 700, textAlign: 'center',
+          color: digits.join('') === confirmPin ? '#10B981' : '#EF4444',
+        }}>
+          {digits.join('') === confirmPin ? '✓ PINs match' : '✗ PINs do not match'}
+        </div>
+      )}
 
       {error && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-2) var(--sp-3)', background: '#FEF2F2', borderRadius: 'var(--r-lg)', color: '#B91C1C', fontSize: 'var(--fs-sm)' }}>
@@ -50,47 +102,82 @@ function PinPad({ onPin, loading, error }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)', width: '100%', maxWidth: 260 }}>
         {[1,2,3,4,5,6,7,8,9].map(n => (
           <button key={n} onClick={() => press(String(n))} disabled={loading}
-            style={{
-              height: 64, borderRadius: 'var(--r-xl)',
-              border: '1px solid var(--border-l)',
-              background: 'var(--surface-raised)',
-              fontSize: 'var(--fs-2xl)', fontWeight: 700,
-              cursor: 'pointer', fontFamily: 'var(--font)',
-              transition: 'all 0.12s',
-              WebkitTapHighlightColor: 'transparent',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}
-            onMouseDown={e => { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' }}
-            onMouseUp={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }}
-            onTouchStart={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
-            onTouchEnd={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}
-          >
+            style={btnBase}
+            onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+            onMouseDown={pressOn} onMouseUp={pressOff}
+            onTouchStart={hoverOn} onTouchEnd={hoverOff}>
             {n}
           </button>
         ))}
-        <div /> {/* spacer */}
-        <button onClick={() => press('0')} disabled={loading}
-          style={{ height: 64, borderRadius: 'var(--r-xl)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', fontSize: 'var(--fs-2xl)', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font)', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent' }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}
-          onMouseDown={e => { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' }}
-          onMouseUp={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }}
-          onTouchStart={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
-          onTouchEnd={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}>
+        <div />
+        <button onClick={() => press('0')} disabled={loading} style={btnBase}
+          onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+          onMouseDown={pressOn} onMouseUp={pressOff}
+          onTouchStart={hoverOn} onTouchEnd={hoverOff}>
           0
         </button>
         <button onClick={del} disabled={loading}
-          style={{ height: 64, borderRadius: 'var(--r-xl)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', fontSize: 'var(--fs-lg)', cursor: 'pointer', color: 'var(--text-2)', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent' }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.borderColor = 'var(--border-l)' }}
-          onMouseDown={e => { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' }}
-          onMouseUp={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }}
-          onTouchStart={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
-          onTouchEnd={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.borderColor = 'var(--border-l)' }}>
+          style={{ ...btnBase, fontSize: 'var(--fs-lg)', color: 'var(--text-2)' }}
+          onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+          onMouseDown={pressOn} onMouseUp={pressOff}
+          onTouchStart={hoverOn} onTouchEnd={hoverOff}>
           ⌫
         </button>
       </div>
+
+      {/* Manual confirm button — shown when requireConfirm=true and 6 digits entered */}
+      {requireConfirm ? (
+        <button
+          onClick={submit}
+          disabled={!isFull || loading || (confirmPin && digits.join('') !== confirmPin)}
+          style={{
+            width: '100%', maxWidth: 260,
+            padding: 'var(--sp-3)',
+            borderRadius: 'var(--r-xl)',
+            border: 'none',
+            background: !isFull || loading
+              ? 'var(--border-l)'
+              : confirmPin && digits.join('') !== confirmPin
+                ? '#FEF2F2'
+                : 'var(--navy)',
+            color: !isFull || loading
+              ? 'var(--text-3)'
+              : confirmPin && digits.join('') !== confirmPin
+                ? '#B91C1C'
+                : '#fff',
+            fontWeight: 700,
+            fontSize: 'var(--fs-md)',
+            cursor: isFull && !loading && !(confirmPin && digits.join('') !== confirmPin) ? 'pointer' : 'not-allowed',
+            fontFamily: 'var(--font)',
+            transition: 'all 0.15s',
+          }}>
+          {loading ? 'Processing…'
+            : !isFull ? 'Enter 6 digits'
+            : confirmPin && digits.join('') !== confirmPin ? 'PINs do not match'
+            : 'Confirm PIN ✓'}
+        </button>
+      ) : (
+        // Normal mode — auto-submits but shows confirm button at 6 digits for PIN entry step
+        isFull && (
+          <button
+            onClick={submit}
+            disabled={loading}
+            style={{
+              width: '100%', maxWidth: 260,
+              padding: 'var(--sp-3)',
+              borderRadius: 'var(--r-xl)',
+              border: 'none',
+              background: loading ? 'var(--border-l)' : 'var(--navy)',
+              color: loading ? 'var(--text-3)' : '#fff',
+              fontWeight: 700, fontSize: 'var(--fs-md)',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontFamily: 'var(--font)',
+              transition: 'all 0.15s',
+            }}>
+            {loading ? 'Processing…' : 'Continue →'}
+          </button>
+        )
+      )}
     </div>
   )
 }
@@ -229,7 +316,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                   : 'Enter your PIN again to confirm'}
               </div>
             </div>
-            <PinPad onPin={handlePinSetup} loading={loading} error={error} />
+            <PinPad onPin={handlePinSetup} loading={loading} error={error} requireConfirm={true} confirmPin={pinStep === 'confirm' ? firstPin : null} />
 
           </>
         )}
@@ -241,7 +328,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
               <div style={{ fontSize: 'var(--fs-lg)', fontWeight: 700, marginBottom: 4 }}>Enter PIN</div>
               <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)' }}>Enter your 6-digit PIN</div>
             </div>
-            <PinPad onPin={handlePinLogin} loading={loading} error={error} />
+            <PinPad onPin={handlePinLogin} loading={loading} error={error} requireConfirm={true} />
             <button onClick={() => { setMode('password'); setError('') }}
               style={{ width: '100%', marginTop: 'var(--sp-4)', padding: 'var(--sp-2)', border: 'none', background: 'none', color: 'var(--navy)', fontSize: 'var(--fs-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
               Sign in with email instead
