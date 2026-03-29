@@ -10,8 +10,9 @@ import { db } from './supabase.js'
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [session, setSession]   = useState(undefined) // undefined = loading
-  const [profile, setProfile]   = useState(null)
+  const [session, setSession]     = useState(undefined) // undefined = loading
+  const [profile, setProfile]     = useState(null)
+  const [profileLoading, setProfileLoading] = useState(false)
 
   useEffect(() => {
     // Get initial session
@@ -25,15 +26,17 @@ export function AuthProvider({ children }) {
     const { data: { subscription } } = db.auth.onAuthStateChange((_event, session) => {
       setSession(session)
       if (session?.user) loadProfile(session.user.id)
-      else setProfile(null)
+      else { setProfile(null); setProfileLoading(false) }
     })
 
     return () => subscription.unsubscribe()
   }, [])
 
   const loadProfile = async (userId) => {
+    setProfileLoading(true)
     const { data } = await db.from('profiles').select('*').eq('id', userId).single()
     setProfile(data)
+    setProfileLoading(false)
   }
 
   const signIn = async (email, password) => {
@@ -56,7 +59,7 @@ export function AuthProvider({ children }) {
     isManagement: role === 'management' || role === 'admin',
     isWarehouse:  role === 'warehouse'  || role === 'admin',
     isField:      role === 'field'      || role === 'admin',
-    loading:      session === undefined,
+    loading:      session === undefined || profileLoading,
     signIn,
     signOut,
   }

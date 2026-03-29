@@ -91,8 +91,9 @@ export default function App() {
     </Suspense>
   )
 
-  // PIN guard — if authenticated but no PIN set, force PIN setup before app access
-  if (session && profile !== undefined && profile !== null && !profile?.pin_hash) return (
+  // PIN guard — loading covers both session + profile loading
+  // When we reach here, profile is fully loaded. If no pin_hash → force setup
+  if (session && !profile?.pin_hash) return (
     <Suspense fallback={null}>
       <Routes>
         <Route path="/login" element={<Login forcePinSetup session={session} />} />
