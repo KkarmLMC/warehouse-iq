@@ -110,7 +110,8 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
   const [error, setError] = useState('')
   const [pinStep, setPinStep] = useState('enter') // enter | confirm
   const [firstPin, setFirstPin] = useState('')
-  const [pendingSession, setPendingSession] = useState(null) // user after password login, before PIN set
+  const [pendingSession, setPendingSession] = useState(null)
+  const [pinSaved, setPinSaved] = useState(false)
 
   // ── Force PIN setup when app-level guard redirects here ─────────────────
   useEffect(() => {
@@ -185,8 +186,15 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
     const { error: saveErr } = await db.from('profiles')
       .update({ pin_hash: hashed, pin_set_at: new Date().toISOString() })
       .eq('id', pendingSession.user.id)
-    if (saveErr) { setPinError('Could not save PIN. Try again.'); setLoading(false); return }
-    // Refresh profile in useAuth so pin_hash is updated before guard re-evaluates
+    if (saveErr) {
+      setError('Could not save PIN. Try again.')
+      setLoading(false)
+      return
+    }
+    // Show success state immediately so user gets feedback
+    setPinSaved(true)
+    setLoading(false)
+    // Refresh profile then navigate — guard will now see pin_hash and let through
     await refreshProfile()
     navigate(from, { replace: true })
   }
