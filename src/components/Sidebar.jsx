@@ -4,7 +4,7 @@ import {
   Warehouse, ChartBar, Package, BookOpen,
   ArrowsLeftRight, Receipt, SignOut,
   ArrowLineLeft, ArrowLineRight,
-  ClipboardText, Truck, ListBullets, UserGear,
+  ClipboardText, Truck, ListBullets,
   DeviceMobileCamera, Desktop, User,
 } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
@@ -54,7 +54,7 @@ function getFloorItems(profile) {
 
 function getFullItems(profile) {
   if (profile?.role === 'admin') {
-    return [...NAV_ITEMS_FULL, { path: '/warehouse-hq/users', Icon: UserGear, label: 'Users' }]
+    return NAV_ITEMS_FULL
   }
   return NAV_ITEMS_FULL
 }
