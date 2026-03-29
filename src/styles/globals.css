@@ -438,13 +438,14 @@ textarea { resize: vertical; }
   transition: background var(--ease-fast), color var(--ease-fast);
 }
 
-.sidebar-item:hover { background: var(--hover); }
+.sidebar-item:hover:not(.sidebar-item--active) { background: rgba(255,255,255,0.08); }
 
-.sidebar-item-active {
-  background: #000000;
+.sidebar-item--active {
+  background: #000000 !important;
   color: #ffffff;
   font-weight: 600;
 }
+.sidebar-item--active:hover { background: #000000 !important; }
 
 .sidebar-item-label {
   overflow: hidden;
@@ -463,9 +464,9 @@ textarea { resize: vertical; }
   min-height: 2rem;
 }
 
-.sidebar-sub-item:hover { background: var(--hover); }
+.sidebar-sub-item:hover:not(.sidebar-item--active) { background: rgba(255,255,255,0.08); }
 
-.sidebar-sub-item.sidebar-item-active {
+.sidebar-sub-item.sidebar-item--active {
   background: #000000;
   color: #ffffff;
   font-weight: 600;
