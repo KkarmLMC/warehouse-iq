@@ -445,7 +445,7 @@ export default function WarehouseDetail() {
               return (
                 <button key={po.id} onClick={() => navigate(`/sales-orders/${po.id}`)}
                   style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left', borderBottom: idx < warehousePOs.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-                  <div style={{ fontSize: 9, fontWeight: 800, padding: '2px 6px', borderRadius: 4, flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : '#EFF6FF', color: po.division === 'Bolt' ? '#BE123C' : '#1D4ED8' }}>
+                  <div style={{ fontSize: 'var(--fs-2xs)', fontWeight: 800, padding: '2px 6px', borderRadius: 4, flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : '#EFF6FF', color: po.division === 'Bolt' ? '#BE123C' : '#1D4ED8' }}>
                     {po.division === 'Bolt' ? 'BOLT' : 'LM'}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -458,7 +458,7 @@ export default function WarehouseDetail() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--r-full)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
+                    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--r-full)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
                       {po.status}
                     </span>
                     {po.grand_total > 0 && (

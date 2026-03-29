@@ -50,7 +50,7 @@ function SectionGroup({ label, items }) {
           background: 'var(--surface-raised)',
         }}>
           <div style={{ minWidth: 0, overflow: 'hidden' }}>
-            {item.sku && <div style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
+            {item.sku && <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
             <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 500, color: 'var(--text-1)', lineHeight: 1.4 }}>{item.description}</div>
           </div>
           <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', textAlign: 'right', paddingTop: 2 }}>{item.quantity}</div>
@@ -200,7 +200,7 @@ export default function PODetail() {
           {/* Column headers */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--sp-2) var(--sp-3)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
             {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
-              <div key={h} style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-2)', textAlign: h !== 'Item / Description' ? 'right' : 'left', whiteSpace: 'nowrap', overflow: 'hidden' }}>{h}</div>
+              <div key={h} style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textAlign: h !== 'Item / Description' ? 'right' : 'left', whiteSpace: 'nowrap', overflow: 'hidden' }}>{h}</div>
             ))}
           </div>
           {sections.map(sec => (

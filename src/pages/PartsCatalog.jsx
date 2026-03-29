@@ -103,7 +103,7 @@ function CategorySection({ category, parts, onPartPress }) {
                     {part.name}
                   </div>
                   {part.tags?.includes('shared') && (
-                    <span style={{ fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-full)', background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-full)', background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0', whiteSpace: 'nowrap', flexShrink: 0 }}>
                       LM + Bolt
                     </span>
                   )}

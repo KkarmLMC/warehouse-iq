@@ -62,11 +62,11 @@ export default function ShipmentQueue() {
                 {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>
               {(o.job_city||o.customer_city) && (
-                <div style={{ fontSize:10,color:'var(--text-3)',marginTop:1 }}>
+                <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',marginTop:1 }}>
                   Ship to: {o.job_city||o.customer_city}, {o.job_state||o.customer_state}
                 </div>
               )}
-              <div style={{ fontSize:10,color:'var(--text-3)' }}>Ready {fmtDate(o.shipment_at)}</div>
+              <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)' }}>Ready {fmtDate(o.shipment_at)}</div>
             </div>
             <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--fs-sm)',color:'var(--text-2)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
             <CaretRight size={14} style={{ color:'var(--text-2)',flexShrink:0 }} />

@@ -74,7 +74,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
             <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {value.name}
             </div>
-            <div style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
+            <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
               {[value.job_number, value.city && `${value.city}, ${value.state}`].filter(Boolean).join(' · ')}
             </div>
           </div>
@@ -112,11 +112,11 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
                     <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {p.name}
                     </div>
-                    <div style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
+                    <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
                       {[p.job_number, p.customer_account, p.city && `${p.city}, ${p.state}`].filter(Boolean).join(' · ')}
                     </div>
                   </div>
-                  <span style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 600, padding: '1px 6px', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', flexShrink: 0 }}>
+                  <span style={{ marginLeft: 'auto', fontSize: 'var(--fs-xs)', fontWeight: 600, padding: '1px 6px', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', flexShrink: 0 }}>
                     {p.stage}
                   </span>
                 </button>

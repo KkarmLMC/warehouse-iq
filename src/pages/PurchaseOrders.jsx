@@ -75,7 +75,7 @@ function POCard({ po, totals, onPress }) {
           </span>
           <StatusBadge status={po.status} />
           <span style={{
-            fontSize: 10, fontWeight: 700, padding: '1px 6px',
+            fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '1px 6px',
             borderRadius: 'var(--r-full)',
             background: po.division === 'Bolt' ? '#FFF7ED' : '#EFF6FF',
             color: po.division === 'Bolt' ? '#C2410C' : 'var(--navy)',

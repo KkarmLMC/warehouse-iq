@@ -97,7 +97,7 @@ export default function ShipmentDetail() {
           <div style={{ marginTop:8,padding:'var(--sp-2) var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-lg)',display:'inline-flex',alignItems:'center',gap:6 }}>
             <MapPin size={14} style={{ color:'var(--navy)',flexShrink:0 }} />
             <div>
-              <div style={{ fontSize:10,fontWeight:700,color:'var(--text-2)' }}>SHIP TO</div>
+              <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)' }}>SHIP TO</div>
               <div style={{ fontSize:'var(--fs-sm)',fontWeight:700,color:'var(--navy)' }}>
                 {order?.customer_name}
               </div>
@@ -113,11 +113,11 @@ export default function ShipmentDetail() {
       <div className="card" style={{ marginBottom:'var(--sp-4)' }}>
         <div className="card-header">
           <span className="card-title"><Package size={15} style={{ marginRight:6 }} />Packing List</span>
-          <span style={{ fontSize:11,color:'rgba(255,255,255,0.55)' }}>{lines.length} items</span>
+          <span style={{ fontSize:'var(--fs-xs)',color:'rgba(255,255,255,0.55)' }}>{lines.length} items</span>
         </div>
         <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--sp-2) var(--sp-4)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
           {['Part','Qty','Source'].map(h => (
-            <div key={h} style={{ fontSize:10,fontWeight:700,color:'var(--text-2)' }}>{h}</div>
+            <div key={h} style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)' }}>{h}</div>
           ))}
         </div>
         {lines.map((line, idx) => (
@@ -125,8 +125,8 @@ export default function ShipmentDetail() {
             padding:'var(--sp-3) var(--sp-4)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
             <div>
               <div style={{ fontSize:'var(--fs-xs)',fontWeight:600 }}>{line.description}</div>
-              {line.sku && <div style={{ fontSize:10,color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
-              <div style={{ fontSize:10,color:'var(--text-3)',marginTop:1 }}>
+              {line.sku && <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
+              <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',marginTop:1 }}>
                 {line.warehouses?.name || '—'}
                 {line.split_warehouse_id && line.split_qty > 0 && (
                   <span style={{ marginLeft:6,color:'#D97706' }}>+ {line.split_qty} {line.split_warehouse?.name}</span>
@@ -138,7 +138,7 @@ export default function ShipmentDetail() {
             </div>
             <div>
               {line.is_shortage
-                ? <span style={{ fontSize:10,fontWeight:700,color:'#D97706',background:'#FFF7ED',padding:'1px 5px',borderRadius:4 }}>Split</span>
+                ? <span style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'#D97706',background:'#FFF7ED',padding:'1px 5px',borderRadius:4 }}>Split</span>
                 : <CheckCircle size={14} weight="fill" style={{ color:'var(--success-text)' }} />
               }
             </div>

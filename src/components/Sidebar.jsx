@@ -67,7 +67,7 @@ function Clock() {
     return () => clearInterval(i)
   }, [])
   return (
-    <span style={{ fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font)' }}>
+    <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontFamily: 'var(--font)' }}>
       {t.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
       {' · '}
       {t.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
@@ -196,12 +196,12 @@ export default function Sidebar({ collapsed, onToggle }) {
                 <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
                   Warehouse IQ
                   {floorMode && (
-                    <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, color: '#93C5FD' }}>
+                    <span style={{ marginLeft: 8, fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#93C5FD' }}>
                       Floor Mode
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: 10, fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}>
+                <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}>
                   LMC · Bolt LP
                 </div>
               </div>

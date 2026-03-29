@@ -17,7 +17,7 @@ function StockChip({ stock, min }) {
   return                             <span style={chip('#F0FDF4','#15803D')}>OK</span>
 }
 function chip(bg, color) {
-  return { padding:'2px 8px', borderRadius:'var(--r-full)', fontSize:10, fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
+  return { padding:'2px 8px', borderRadius:'var(--r-full)', fontSize:'var(--fs-xs)', fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
 }
 
 // ─── Summary card ─────────────────────────────────────────────────────────────
@@ -252,7 +252,7 @@ export default function WarehouseIQ() {
             <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)' }}>
               <Receipt size={15} style={{ color:'var(--navy)' }} />
               <span style={{ fontSize:'var(--fs-sm)', fontWeight:700 }}>Active Sales Orders</span>
-              <span style={{ fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
+              <span style={{ fontSize:'var(--fs-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
             </div>
             <button onClick={() => navigate('/sales-orders')}
               style={{ fontSize:'var(--fs-xs)', fontWeight:600, color:'var(--navy)', background:'none', border:'none', cursor:'pointer', padding:0 }}>
@@ -262,13 +262,13 @@ export default function WarehouseIQ() {
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
               style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--sp-3)', padding:'var(--sp-2) var(--sp-4)', border:'none', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-l)' : 'none' }}>
-              <div style={{ fontSize:9, fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'#EFF6FF', color: po.division==='Bolt'?'#BE123C':'#1D4ED8' }}>
+              <div style={{ fontSize:'var(--fs-2xs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'#EFF6FF', color: po.division==='Bolt'?'#BE123C':'#1D4ED8' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
               <div style={{ flex:1, minWidth:0 }}>
                 <div style={{ fontSize:'var(--fs-xs)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
               </div>
-              <span style={{ fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background: po.status==='queued'?'#EEF2FF':po.status==='running'?'#FEF3C7':po.status==='fulfillment'?'#EFF6FF':po.status==='shipment'?'#ECFEFF':'#F0FDF4', color: po.status==='queued'?'#6366F1':po.status==='running'?'#D97706':po.status==='fulfillment'?'#1D4ED8':po.status==='shipment'?'#0891B2':'#15803D', textTransform:'capitalize', flexShrink:0 }}>
+              <span style={{ fontSize:'var(--fs-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background: po.status==='queued'?'#EEF2FF':po.status==='running'?'#FEF3C7':po.status==='fulfillment'?'#EFF6FF':po.status==='shipment'?'#ECFEFF':'#F0FDF4', color: po.status==='queued'?'#6366F1':po.status==='running'?'#D97706':po.status==='fulfillment'?'#1D4ED8':po.status==='shipment'?'#0891B2':'#15803D', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
               </span>
             </button>
@@ -292,7 +292,7 @@ export default function WarehouseIQ() {
           <div style={{ display:'flex', gap:'var(--sp-1)' }}>
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding:'3px 10px', borderRadius:'var(--r-full)', border:`1px solid ${filter===val?'var(--navy)':'var(--border-l)'}`, background:filter===val?'var(--navy)':'transparent', color:filter===val?'#fff':'var(--text-2)', fontSize:10, fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+                style={{ padding:'3px 10px', borderRadius:'var(--r-full)', border:`1px solid ${filter===val?'var(--navy)':'var(--border-l)'}`, background:filter===val?'var(--navy)':'transparent', color:filter===val?'#fff':'var(--text-2)', fontSize:'var(--fs-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
                 {lbl}
               </button>
             ))}
@@ -303,7 +303,7 @@ export default function WarehouseIQ() {
         {/* Column headers */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-4)', background:'var(--navy)', position:'sticky', top:0, zIndex:10 }}>
           {['Part / SKU','Start','Added','Used','On Order','Stock','Value',''].map((h,i) => (
-            <div key={i} style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,0.6)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
+            <div key={i} style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'rgba(255,255,255,0.6)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
           ))}
         </div>
 
@@ -330,7 +330,7 @@ export default function WarehouseIQ() {
               {/* Part name + SKU */}
               <div style={{ minWidth:0 }}>
                 <div style={{ fontSize:'var(--fs-xs)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{r.part.name}</div>
-                {r.part.sku && <div style={{ fontSize:10, fontFamily:'var(--mono)', color:'var(--text-3)' }}>{r.part.sku}</div>}
+                {r.part.sku && <div style={{ fontSize:'var(--fs-xs)', fontFamily:'var(--mono)', color:'var(--text-3)' }}>{r.part.sku}</div>}
               </div>
               {/* Start */}
               <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', color:'var(--text-3)' }}>{r.startQty.toLocaleString()}</div>
@@ -352,7 +352,7 @@ export default function WarehouseIQ() {
                   {r.stock.toLocaleString()}
                 </span>
                 {delta !== 0 && (
-                  <span style={{ fontSize:9, fontWeight:700, color: delta > 0 ? '#15803D' : '#B91C1C' }}>
+                  <span style={{ fontSize:'var(--fs-2xs)', fontWeight:700, color: delta > 0 ? '#15803D' : '#B91C1C' }}>
                     {delta > 0 ? `+${delta}` : delta}
                   </span>
                 )}

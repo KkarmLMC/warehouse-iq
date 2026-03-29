@@ -25,17 +25,17 @@ const STAGE_COLOR = {
 // ─── Warehouse health badge ───────────────────────────────────────────────────
 function HealthBadge({ out, low }) {
   if (out > 0) return (
-    <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--error-soft)', color: 'var(--error-alt)' }}>
+    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--error-soft)', color: 'var(--error-alt)' }}>
       {out} Out
     </span>
   )
   if (low > 0) return (
-    <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--warning-soft)', color: 'var(--amber)' }}>
+    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--warning-soft)', color: 'var(--amber)' }}>
       {low} Low
     </span>
   )
   return (
-    <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--success-soft)', color: 'var(--success-text)' }}>
+    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--success-soft)', color: 'var(--success-text)' }}>
       OK
     </span>
   )
@@ -160,7 +160,7 @@ export default function Inventory() {
             <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#92400E' }}>
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
             </div>
-            <div style={{ fontSize: 11, color: '#B45309' }}>Field crew part requests waiting for approval</div>
+            <div style={{ fontSize: 'var(--fs-xs)', color: '#B45309' }}>Field crew part requests waiting for approval</div>
           </div>
           <CaretRight size={14} style={{ color: '#B45309', flexShrink: 0 }} />
         </div>
@@ -175,7 +175,7 @@ export default function Inventory() {
             <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#155E75' }}>
               {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
             </div>
-            <div style={{ fontSize: 11, color: '#0E7490' }}>
+            <div style={{ fontSize: 'var(--fs-xs)', color: '#0E7490' }}>
               {backOrders.slice(0, 2).map(o => o.so_number).join(', ')}
               {backOrders.length > 2 ? ` + ${backOrders.length - 2} more` : ''} — tap to view queue
             </div>
@@ -208,9 +208,9 @@ export default function Inventory() {
             <span className="card-title">
               <Lightning size={15} weight="fill" style={{ marginRight: 6, color: '#93C5FD' }} />
               {master.name}
-              <span style={{ fontSize: 10, fontWeight: 600, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px', marginLeft: 8 }}>MASTER</span>
+              <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px', marginLeft: 8 }}>MASTER</span>
             </span>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)' }}>{master.city}, {master.state}</span>
+            <span style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.55)' }}>{master.city}, {master.state}</span>
           </div>
           <div style={{ padding: 'var(--sp-4)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)' }}>
             {[
@@ -233,7 +233,7 @@ export default function Inventory() {
               ['IQ Dashboard', '/warehouse-hq/iq'],
             ].map(([label, path]) => (
               <button key={label} onClick={() => navigate(path)}
-                style={{ padding: '5px 12px', borderRadius: 'var(--r-lg)', border: '1px solid var(--border-l)', background: 'transparent', fontSize: 11, fontWeight: 600, cursor: 'pointer', color: 'var(--navy)' }}>
+                style={{ padding: '5px 12px', borderRadius: 'var(--r-lg)', border: '1px solid var(--border-l)', background: 'transparent', fontSize: 'var(--fs-xs)', fontWeight: 600, cursor: 'pointer', color: 'var(--navy)' }}>
                 {label}
               </button>
             ))}
@@ -259,7 +259,7 @@ export default function Inventory() {
               {/* Info */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{wh.name}</div>
-                <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 1 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 1 }}>
                   {wh.city}, {wh.state} · {h.parts || 0} parts · {fmt(h.total)}
                 </div>
               </div>
@@ -275,7 +275,7 @@ export default function Inventory() {
       <div className="card" style={{ marginBottom: 'var(--sp-4)' }}>
         <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/sales-orders')}>
           <span className="card-title"><Receipt size={15} style={{ marginRight: 6 }} />Active Sales Orders</span>
-          <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
             View all <ArrowRight size={12} />
           </span>
         </div>
@@ -290,8 +290,8 @@ export default function Inventory() {
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
-                <span style={{ fontSize: 10, fontWeight: 700, padding: '1px 5px', borderRadius: 3, background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
+                <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
+                <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '1px 5px', borderRadius: 3, background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
               </div>
               <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {so.customer_name} — {so.project_name || 'No project name'}
@@ -310,7 +310,7 @@ export default function Inventory() {
         <div className="card" style={{ marginBottom: 'var(--sp-4)' }}>
           <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
             <span className="card-title"><Warning size={15} weight="fill" style={{ marginRight: 6, color: '#FCA5A5' }} />Low & Out of Stock</span>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
               View inventory <ArrowRight size={12} />
             </span>
           </div>
@@ -324,9 +324,9 @@ export default function Inventory() {
                   <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.parts?.name || 'Unknown Part'}
                   </div>
-                  <div style={{ fontSize: 10, color: 'var(--text-3)' }}>{item.warehouses?.name}</div>
+                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{item.warehouses?.name}</div>
                 </div>
-                <span style={{ fontSize: 11, fontWeight: 700, color: isOut ? 'var(--error-alt)' : 'var(--amber)', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: isOut ? 'var(--error-alt)' : 'var(--amber)', whiteSpace: 'nowrap' }}>
                   {isOut ? 'Out of Stock' : `${item.quantity_on_hand} left`}
                 </span>
               </div>
@@ -339,7 +339,7 @@ export default function Inventory() {
       <div className="card" style={{ marginBottom: 'var(--sp-6)' }}>
         <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/transfer')}>
           <span className="card-title"><Truck size={15} style={{ marginRight: 6 }} />Recent Transfers</span>
-          <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
             New transfer <ArrowRight size={12} />
           </span>
         </div>
@@ -359,12 +359,12 @@ export default function Inventory() {
               <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600 }}>
                 {t.from_warehouse?.name?.replace(' Warehouse', '')} → {t.to_warehouse?.name?.replace(' Warehouse', '')}
               </div>
-              <div style={{ fontSize: 10, color: 'var(--text-3)' }}>
+              <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>
                 {new Date(t.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 {t.reason ? ` · ${t.reason}` : ''}
               </div>
             </div>
-            <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 3, background: 'var(--success-soft)', color: 'var(--success-text)', textTransform: 'capitalize' }}>
+            <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 3, background: 'var(--success-soft)', color: 'var(--success-text)', textTransform: 'capitalize' }}>
               {t.status}
             </span>
           </div>

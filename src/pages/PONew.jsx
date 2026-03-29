@@ -120,7 +120,7 @@ function PartSearch({ onSelect, warehouseId }) {
                   ${part.unit_cost?.toFixed(2) || '—'}
                 </div>
                 {part.stock !== null && (
-                  <div style={{ fontSize: 10, color: part.stock > 0 ? '#15803D' : '#B91C1C', fontWeight: 600 }}>
+                  <div style={{ fontSize: 'var(--fs-xs)', color: part.stock > 0 ? '#15803D' : '#B91C1C', fontWeight: 600 }}>
                     {part.stock} in stock
                   </div>
                 )}
@@ -140,13 +140,13 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--sp-2)', alignItems: 'center', padding: 'var(--sp-2) 0', borderBottom: '1px solid var(--border-l)' }}>
       <div style={{ minWidth: 0 }}>
-        {item.sku && <div style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2 }}>{item.sku}</div>}
+        {item.sku && <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2 }}>{item.sku}</div>}
         <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.description}</div>
         {warehouses.length > 1 && (
           <select
             value={item.warehouse_id || ''}
             onChange={e => onUpdate({ ...item, warehouse_id: e.target.value })}
-            style={{ fontSize: 10, marginTop: 4, padding: '2px 4px', border: '1px solid var(--border-l)', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', width: '100%' }}
+            style={{ fontSize: 'var(--fs-xs)', marginTop: 4, padding: '2px 4px', border: '1px solid var(--border-l)', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', width: '100%' }}
           >
             <option value="">No warehouse</option>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name.replace(' Warehouse','')}</option>)}
@@ -242,7 +242,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           {section.items.length > 0 && (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--sp-2)', marginBottom: 'var(--sp-2)' }}>
               {['Item / SKU', 'Qty', 'Unit Cost', 'Amount', ''].map((h, i) => (
-                <div key={i} style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-2)', textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
+                <div key={i} style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
               ))}
             </div>
           )}

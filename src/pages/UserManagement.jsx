@@ -170,7 +170,7 @@ export default function UserManagement() {
           ].map(item => (
             <div key={item.role || 'none'} style={{ padding:'var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-lg)' }}>
               <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--navy)',marginBottom:4 }}>{item.label}</div>
-              <div style={{ fontSize:11,color:'var(--text-3)',lineHeight:1.5 }}>{item.desc}</div>
+              <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',lineHeight:1.5 }}>{item.desc}</div>
             </div>
           ))}
         </div>
@@ -180,7 +180,7 @@ export default function UserManagement() {
       <div className="card" style={{ marginBottom:'var(--sp-4)' }}>
         <div className="card-header">
           <span className="card-title"><Users size={15} style={{ marginRight:6 }} />All Users</span>
-          <span style={{ fontSize:11,color:'rgba(255,255,255,0.55)' }}>{users.length} users</span>
+          <span style={{ fontSize:'var(--fs-xs)',color:'rgba(255,255,255,0.55)' }}>{users.length} users</span>
         </div>
 
         {loading ? (
@@ -204,10 +204,10 @@ export default function UserManagement() {
                   <div style={{ flex:1,minWidth:0 }}>
                     <div style={{ display:'flex',alignItems:'center',gap:'var(--sp-2)',flexWrap:'wrap' }}>
                       <span style={{ fontWeight:700,fontSize:'var(--fs-sm)' }}>{u.full_name || '—'}</span>
-                      {isSelf && <span style={{ fontSize:10,fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--surface-raised)',color:'var(--text-3)' }}>you</span>}
-                      <span style={{ fontSize:10,fontWeight:700,padding:'2px 6px',borderRadius:4,background:rc.bg,color:rc.color,textTransform:'capitalize' }}>{u.role}</span>
+                      {isSelf && <span style={{ fontSize:'var(--fs-xs)',fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--surface-raised)',color:'var(--text-3)' }}>you</span>}
+                      <span style={{ fontSize:'var(--fs-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:rc.bg,color:rc.color,textTransform:'capitalize' }}>{u.role}</span>
                       {u.pipeline_role && (
-                        <span style={{ fontSize:10,fontWeight:700,padding:'2px 6px',borderRadius:4,background:'#ECFEFF',color:'#0891B2' }}>
+                        <span style={{ fontSize:'var(--fs-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:'#ECFEFF',color:'#0891B2' }}>
                           {PIPELINE_LABELS[u.pipeline_role] || u.pipeline_role}
                         </span>
                       )}
