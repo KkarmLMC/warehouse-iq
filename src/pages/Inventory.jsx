@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   Package, Receipt, ClipboardText, Warning,
   Truck, ArrowRight, Buildings, CheckCircle,
-  ArrowUp, CaretRight, Lightning,
+  ArrowUp, CaretRight, Lightning, ClockCountdown,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
@@ -47,6 +47,7 @@ export default function Inventory() {
   const [recentShips, setRecentShips] = useState([])
   const [warehouseHealth, setWarehouseHealth] = useState({})
   const [loading,     setLoading]     = useState(true)
+  const [backOrders,  setBackOrders]  = useState([])
 
   useEffect(() => {
     loadAll()
@@ -60,6 +61,7 @@ export default function Inventory() {
       { data: sos },
       { data: cos },
       { data: transfers },
+      { data: bos },
     ] = await Promise.all([
       db.from('warehouses').select('*').eq('is_active', true).order('sort_order'),
       db.from('inventory_levels').select('*, parts(name, sku, unit_cost), warehouses(name)'),
@@ -70,12 +72,16 @@ export default function Inventory() {
         .eq('status', 'pending').order('created_at', { ascending: false }).limit(5),
       db.from('inventory_transfers').select('*, from_warehouse:warehouses!from_warehouse_id(name), to_warehouse:warehouses!to_warehouse_id(name)')
         .order('created_at', { ascending: false }).limit(5),
+      db.from('purchase_orders').select('id, po_number, customer_name, project_name, job_city, job_state, back_ordered_at')
+        .eq('status', 'back_ordered')
+        .order('back_ordered_at', { ascending: true }),
     ])
 
     setWarehouses(whs || [])
     setRecentSOs(sos || [])
     setPendingCOs(cos || [])
     setRecentShips(transfers || [])
+    setBackOrders(bos || [])
 
     // Calculate stats from levels
     const allLevels = levels || []
@@ -89,7 +95,8 @@ export default function Inventory() {
       pendingCOs: cos?.length || 0,
       lowStock:   lowItems.length,
       outStock:   outItems.length,
-      shipments:  transfers?.length || 0,
+      shipments:    transfers?.length || 0,
+      backOrders:   bos?.length || 0,
     })
 
     // Low stock list (top 8 most urgent)
@@ -150,6 +157,24 @@ export default function Inventory() {
             <div style={{ fontSize: 11, color: '#B45309' }}>Field crew part requests waiting for approval</div>
           </div>
           <CaretRight size={14} style={{ color: '#B45309', flexShrink: 0 }} />
+        </div>
+      )}
+
+      {/* ── Back order alert ── */}
+      {backOrders.length > 0 && (
+        <div onClick={() => navigate('/warehouse-hq/queue')}
+          style={{ background: '#ECFEFF', border: '1px solid #67E8F9', borderRadius: 'var(--r-xl)', padding: 'var(--sp-3) var(--sp-4)', marginBottom: 'var(--sp-4)', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', cursor: 'pointer' }}>
+          <ClockCountdown size={18} weight="fill" style={{ color: '#0891B2', flexShrink: 0 }} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#155E75' }}>
+              {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
+            </div>
+            <div style={{ fontSize: 11, color: '#0E7490' }}>
+              {backOrders.slice(0, 2).map(o => o.po_number).join(', ')}
+              {backOrders.length > 2 ? ` + ${backOrders.length - 2} more` : ''} — tap to view queue
+            </div>
+          </div>
+          <CaretRight size={14} style={{ color: '#0E7490', flexShrink: 0 }} />
         </div>
       )}
 

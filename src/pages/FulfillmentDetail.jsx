@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Package, CheckCircle, ArrowRight, Warning, Buildings } from '@phosphor-icons/react'
+import { ArrowLeft, Package, CheckCircle, ArrowRight, Warning, ClockCountdown } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
 export default function FulfillmentDetail() {
@@ -49,7 +49,9 @@ export default function FulfillmentDetail() {
     setFlags(p => { const n = {...p}; delete n[lineId]; return n })
   }
 
-  const allChecked = lines.length > 0 && lines.every(l => checked[l.id])
+  // Back-ordered lines don't need to be checked — only non-BO lines block proceed
+  const pullableLines = lines.filter(l => !l.is_back_ordered)
+  const allChecked = pullableLines.length > 0 && pullableLines.every(l => checked[l.id])
 
   const pushToShipment = async () => {
     setPushing(true)
@@ -109,9 +111,11 @@ export default function FulfillmentDetail() {
       status:   'pending',
     })
 
+    const hasBackOrders = lines.some(l => l.is_back_ordered)
     await db.from('purchase_orders').update({
-      status:     'shipment',
+      status:      hasBackOrders ? 'back_ordered' : 'shipment',
       shipment_at: new Date().toISOString(),
+      ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}),
     }).eq('id', id)
 
     setDone(true)
@@ -172,6 +176,7 @@ export default function FulfillmentDetail() {
 
         {lines.map((line, idx) => {
           const isOut = line.is_shortage
+          const isBO  = line.is_back_ordered
           const isPulled = checked[line.id]
           return (
             <div key={line.id}>
@@ -180,7 +185,8 @@ export default function FulfillmentDetail() {
               style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,alignItems:'center',
                 padding:'var(--sp-4) var(--sp-4)',cursor:'pointer',minHeight:64,
                 borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-l)' : 'none',
-                background: isOut ? '#FEF2F2' : isPulled ? '#F0FDF4' : 'transparent' }}>
+                background: isBO ? '#ECFEFF' : isOut ? '#FEF2F2' : isPulled ? '#F0FDF4' : 'transparent',
+                opacity: isBO ? 0.7 : 1 }}>
               {/* Checkbox */}
               <div style={{ width:36,height:36,borderRadius:8,border:`2px solid ${isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
                 background: isPulled ? 'var(--success-text)' : 'transparent',
@@ -189,9 +195,12 @@ export default function FulfillmentDetail() {
               </div>
               {/* Part info */}
               <div>
-                <div style={{ fontSize:'var(--fs-xs)',fontWeight:600,color: isOut ? '#991B1B' : isPulled ? 'var(--text-3)' : 'var(--text-1)',
-                  textDecoration: isPulled ? 'line-through' : 'none' }}>
-                  {line.description}
+                <div style={{ display:'flex',alignItems:'center',gap:6 }}>
+                  <span style={{ fontSize:'var(--fs-xs)',fontWeight:600,color: isBO ? '#0891B2' : isOut ? '#991B1B' : isPulled ? 'var(--text-3)' : 'var(--text-1)',
+                    textDecoration: isPulled && !isBO ? 'line-through' : 'none' }}>
+                    {line.description}
+                  </span>
+                  {isBO && <span style={{ fontSize:9,fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#ECFEFF',color:'#0891B2',flexShrink:0 }}>BACK ORDER</span>}
                 </div>
                 {line.sku && <div style={{ fontSize:10,color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                 <div style={{ fontSize:10,color:'var(--text-3)',marginTop:1 }}>
@@ -242,7 +251,7 @@ export default function FulfillmentDetail() {
         {done ? <><CheckCircle size={16} weight="fill" /> Pushed to Shipment</>
           : pushing ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
           : !allChecked ? `Check off all ${lines.length - Object.values(checked).filter(Boolean).length} remaining parts first`
-          : <>Push to Shipment — Deduct Inventory <ArrowRight size={16} /></>}
+          : <>{pullableLines.length < lines.length ? 'Push Available Items — Back Order Rest' : 'Push to Shipment — Deduct Inventory'} <ArrowRight size={16} /></>}
       </button>
     </div>
   )

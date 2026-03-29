@@ -9,6 +9,7 @@ const STAGE = {
   fulfillment: { label: 'Fulfillment', color: '#1D4ED8', bg: '#EFF6FF' },
   shipment:    { label: 'Shipment',    color: '#0891B2', bg: '#ECFEFF' },
   complete:    { label: 'Complete',    color: '#15803D', bg: '#F0FDF4' },
+  back_ordered:{ label: 'Back Order',  color: '#0891B2', bg: '#ECFEFF' },
   // legacy
   draft:       { label: 'Draft',       color: '#64748B', bg: '#F1F5F9' },
   submitted:   { label: 'Submitted',   color: '#D97706', bg: '#FFFBEB' },
@@ -21,6 +22,7 @@ const TABS = [
   { key: 'running',     label: 'Running' },
   { key: 'fulfillment', label: 'Fulfillment' },
   { key: 'shipment',    label: 'Shipment' },
+  { key: 'back_ordered', label: 'Back Orders' },
   { key: 'complete',    label: 'Complete' },
 ]
 
@@ -38,12 +40,13 @@ export default function SOQueue() {
     const { data } = await db
       .from('purchase_orders')
       .select('id, po_number, customer_name, project_name, job_city, job_state, status, grand_total, created_at, queued_at, run_at, division')
-      .in('status', ['queued','running','fulfillment','shipment','complete','draft','submitted','published','fulfilled'])
+      .in('status', ['queued','running','fulfillment','shipment','back_ordered','complete','draft','submitted','published','fulfilled'])
       .order('created_at', { ascending: false })
     const all = data || []
     // Normalise legacy statuses for counting
     const c = {}
     TABS.forEach(t => { c[t.key] = 0 })
+    c['back_ordered'] = 0
     all.forEach(o => {
       const s = o.status === 'fulfilled' ? 'complete'
               : o.status === 'published' ? 'fulfillment'
@@ -61,6 +64,7 @@ export default function SOQueue() {
     s === 'fulfilled' ? 'complete'
     : s === 'published' ? 'fulfillment'
     : s === 'submitted' || s === 'draft' ? 'queued'
+    : s === 'back_ordered' ? 'back_ordered'
     : s
 
   const visible = orders.filter(o => {
@@ -122,6 +126,7 @@ export default function SOQueue() {
                 if (ns === 'queued' || ns === 'running') navigate(`/warehouse-hq/queue/${o.id}`)
                 else if (ns === 'fulfillment') navigate(`/warehouse-hq/fulfillment/${o.id}`)
                 else if (ns === 'shipment') navigate(`/warehouse-hq/shipment/${o.id}`)
+                else if (ns === 'back_ordered') navigate(`/warehouse-hq/queue/${o.id}`)
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
