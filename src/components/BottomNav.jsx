@@ -19,7 +19,7 @@ export default function BottomNav() {
           <button key={path} className={`bottom-nav__tab ${active ? 'bottom-nav__tab--active' : ''}`}
             onClick={() => navigate(path)}>
             <Icon size={22} weight={active ? 'fill' : 'regular'}
-              style={{ color: active ? 'var(--red)' : 'var(--text-3)' }} />
+              style={{ color: active ? 'var(--red)' : 'var(--text-1)' }} />
             <span className="bottom-nav__label">{label}</span>
           </button>
         )
