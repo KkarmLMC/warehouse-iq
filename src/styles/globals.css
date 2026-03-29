@@ -3187,15 +3187,9 @@ textarea { resize: vertical; }
     padding-bottom: env(safe-area-inset-bottom);
   }
   .bottom-nav__tab {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex: 0 0 22%;
+    min-width: 4.5rem;
     gap: 3px;
-    border: none;
-    background: none;
-    cursor: pointer;
     padding: 8px 4px;
   }
   .bottom-nav__label {
