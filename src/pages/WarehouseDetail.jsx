@@ -7,6 +7,8 @@ import {
   CaretDown, MagnifyingGlass, X, Check, Receipt,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { useAuth } from '../lib/useAuth.jsx'
+import { logActivity } from '../lib/logActivity.js'
 
 // ─── Shared label component ───────────────────────────────────────────────────
 function Label({ children }) {
@@ -44,6 +46,13 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
       .eq('id', warehouse.id)
     setSaving(false)
     if (err) { setError('Save failed. Please try again.'); return }
+    await logActivity(db, user?.id, 'warehouse_iq', {
+      category:    'inventory',
+      action:      'updated_warehouse',
+      label:       `Updated warehouse: ${form.name || warehouse.name}`,
+      entity_type: 'warehouse',
+      entity_id:   warehouse.id,
+    })
     onSaved({ ...warehouse, ...form })
   }
 

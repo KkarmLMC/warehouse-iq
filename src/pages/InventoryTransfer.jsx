@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus, Trash, CheckCircle, SpinnerGap, MagnifyingGlass } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { useAuth } from '../lib/useAuth.jsx'
+import { logActivity } from '../lib/logActivity.js'
 
 export default function InventoryTransfer() {
   const navigate = useNavigate()
+  const { user } = useAuth()
   const [warehouses, setWarehouses] = useState([])
   const [fromId, setFromId] = useState('')
   const [toId, setToId] = useState('')
@@ -89,6 +92,16 @@ export default function InventoryTransfer() {
       })
     }
 
+    const fromName = warehouses.find(w => w.id === fromId)?.name || fromId
+    const toName   = warehouses.find(w => w.id === toId)?.name   || toId
+    await logActivity(db, user?.id, 'warehouse_iq', {
+      category:    'transfer',
+      action:      'completed',
+      label:       `Transferred ${items.length} part${items.length !== 1 ? 's' : ''} from ${fromName} → ${toName}`,
+      entity_type: 'inventory_transfer',
+      entity_id:   transfer?.id,
+      meta:        { from: fromName, to: toName, item_count: items.length, reason },
+    })
     setSaving(false)
     navigate('/warehouse-hq')
   }

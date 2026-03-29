@@ -6,6 +6,7 @@ import {
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
+import { logActivity } from '../lib/logActivity.js'
 
 const ROLES = ['admin', 'management', 'warehouse', 'field']
 const PIPELINE_ROLES = [
@@ -64,6 +65,15 @@ export default function UserManagement() {
     }).eq('id', userId)
     setSaving(false)
     if (error) { showFlash('Save failed: ' + error.message, true); return }
+    const edited = users.find(u => u.id === userId)
+    await logActivity(db, user?.id, 'warehouse_iq', {
+      category:    'profile',
+      action:      'updated_user_role',
+      label:       `Updated role for ${editData.full_name || edited?.email}`,
+      entity_type: 'profile',
+      entity_id:   userId,
+      meta:        { role: editData.role, pipeline_role: editData.pipeline_role },
+    })
     setEditId(null)
     showFlash('User updated.')
     loadUsers()
