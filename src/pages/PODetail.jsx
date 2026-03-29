@@ -181,7 +181,7 @@ export default function PODetail() {
           {Object.entries(warehouseImpact).map(([wName, impact]) => (
             <div key={wName} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--sp-2)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--fs-sm)' }}>
-                <Buildings size={14} style={{ color: 'var(--text-3)' }} />
+                <Buildings size={14} style={{ color: 'var(--text-2)' }} />
                 {wName}
               </div>
               <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#B91C1C', background: '#FEF2F2', padding: '2px 8px', borderRadius: 'var(--r-full)' }}>

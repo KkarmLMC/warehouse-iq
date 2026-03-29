@@ -143,7 +143,7 @@ export default function SOQueue() {
               <div style={{ textAlign: 'right', flexShrink: 0 }}>
                 <div style={{ fontWeight: 700, fontFamily: 'var(--mono)', fontSize: 'var(--fs-sm)', color: 'var(--text-1)' }}>{fmt(o.grand_total)}</div>
               </div>
-              <CaretRight size={14} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+              <CaretRight size={14} style={{ color: 'var(--text-2)', flexShrink: 0 }} />
             </div>
           )
         })}

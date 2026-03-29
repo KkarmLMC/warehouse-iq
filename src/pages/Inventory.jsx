@@ -265,7 +265,7 @@ export default function Inventory() {
               </div>
               {/* Health */}
               <HealthBadge out={h.out || 0} low={h.low || 0} />
-              <CaretRight size={14} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+              <CaretRight size={14} style={{ color: 'var(--text-2)', flexShrink: 0 }} />
             </div>
           )
         })}
@@ -300,7 +300,7 @@ export default function Inventory() {
             <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--text-2)', flexShrink: 0 }}>
               {fmt(so.grand_total)}
             </div>
-            <CaretRight size={13} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+            <CaretRight size={13} style={{ color: 'var(--text-2)', flexShrink: 0 }} />
           </div>
         ))}
       </div>

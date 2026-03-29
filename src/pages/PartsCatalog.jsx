@@ -113,7 +113,7 @@ function CategorySection({ category, parts, onPartPress }) {
                   {part.unit_cost && <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>${part.unit_cost}</span>}
                 </div>
               </div>
-              <CaretRight size={13} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+              <CaretRight size={13} style={{ color: 'var(--text-2)', flexShrink: 0 }} />
             </button>
           ))}
         </div>

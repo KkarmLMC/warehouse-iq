@@ -64,7 +64,7 @@ export default function FulfillmentQueue() {
               <div style={{ fontSize:10,color:'var(--text-3)',marginTop:2 }}>Received {fmtDate(o.fulfillment_at)}</div>
             </div>
             <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--fs-sm)',color:'var(--text-2)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
-            <CaretRight size={14} style={{ color:'var(--text-3)',flexShrink:0 }} />
+            <CaretRight size={14} style={{ color:'var(--text-2)',flexShrink:0 }} />
           </div>
         ))}
       </div>

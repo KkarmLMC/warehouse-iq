@@ -99,7 +99,7 @@ function POCard({ po, totals, onPress }) {
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           </span>
         )}
-        <CaretRight size={13} style={{ color: 'var(--text-3)' }} />
+        <CaretRight size={13} style={{ color: 'var(--text-2)' }} />
       </div>
     </button>
   )

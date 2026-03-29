@@ -182,7 +182,7 @@ function StockRow({ level, onPress }) {
         <span style={{ padding: '3px 10px', borderRadius: 'var(--r-full)', fontSize: 'var(--fs-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
-        <CaretRight size={13} style={{ color: 'var(--text-3)' }} />
+        <CaretRight size={<CaretRight size={13} style={{ color: 'var(--text-2)' }}} />
       </div>
     </button>
   )
@@ -457,7 +457,7 @@ export default function WarehouseDetail() {
                         ${po.grand_total.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     )}
-                    <CaretRight size={12} style={{ color: 'var(--text-3)' }} />
+                    <CaretRight size={<CaretRight size={12} style={{ color: 'var(--text-2)' }}} />
                   </div>
                 </button>
               )
@@ -471,10 +471,10 @@ export default function WarehouseDetail() {
         <button onClick={loadTransactions}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', border: 'none', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-            <ClipboardText size={16} style={{ color: 'var(--text-3)' }} />
+            <ClipboardText size={16} style={{ color: 'var(--text-2)' }} />
             <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-2)' }}>Transaction History</span>
           </div>
-          <CaretDown size={14} style={{ color: 'var(--text-3)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size={14} style={{ color: 'var(--text-2)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
         {showTx && (
           <div style={{ borderTop: '1px solid var(--border-l)' }}>

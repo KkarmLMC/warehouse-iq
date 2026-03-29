@@ -269,7 +269,7 @@ export default function Profile() {
         {profile?.division && (
           <Row label="Division">
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Buildings size={13} style={{ color: 'var(--text-3)' }} />
+              <Buildings size={13} style={{ color: 'var(--text-2)' }} />
               {profile.division}
             </span>
           </Row>

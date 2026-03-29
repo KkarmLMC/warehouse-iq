@@ -15,7 +15,7 @@ function WarehouseRow({ level, warehouseName }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-        <Buildings size={16} style={{ color: 'var(--text-3)' }} />
+        <Buildings size={16} style={{ color: 'var(--text-2)' }} />
         <div>
           <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600 }}>{warehouseName}</div>
           <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', display: 'flex', gap: 'var(--sp-2)', marginTop: 2 }}>
@@ -338,11 +338,11 @@ export default function PartDetail() {
           onClick={() => setShowTx(!showTx)}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', border: 'none', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-            <ClipboardText size={16} style={{ color: 'var(--text-3)' }} />
+            <ClipboardText size={16} style={{ color: 'var(--text-2)' }} />
             <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-2)' }}>Transaction History</span>
             <span style={{ padding: '1px 8px', borderRadius: 'var(--r-full)', background: 'var(--hover)', fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
           </div>
-          <CaretDown size={14} style={{ color: 'var(--text-3)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size={14} style={{ color: 'var(--text-2)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
         {showTx && transactions.map(tx => (
           <TransactionRow key={tx.id} tx={tx} warehouseName={whMap[tx.warehouse_id] || '—'} />

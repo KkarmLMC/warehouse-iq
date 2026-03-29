@@ -49,7 +49,7 @@ function PartRow({ part, levels, onPress }) {
       }}>
         {isLow
           ? <WarningCircle size={20} weight="fill" style={{ color: '#C2410C' }} />
-          : <Package size={20} style={{ color: 'var(--text-3)' }} />
+          : <Package size={20} style={{ color: 'var(--text-2)' }} />
         }
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -63,7 +63,7 @@ function PartRow({ part, levels, onPress }) {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
         <StockBadge qty={totalQty} minLevel={minLevel} onOrder={totalOnOrder} />
-        <CaretRight size={14} style={{ color: 'var(--text-3)' }} />
+        <CaretRight size={<CaretRight size={14} style={{ color: 'var(--text-2)' }}} />
       </div>
     </button>
   )
