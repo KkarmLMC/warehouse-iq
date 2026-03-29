@@ -242,10 +242,10 @@ export default function Sidebar({ collapsed, onToggle }) {
             <div onClick={() => navigate('/profile')}
               className="sidebar-item"
               style={{ padding: 'var(--sp-2) var(--sp-3)', marginBottom: 'var(--sp-1)', cursor: 'pointer', borderRadius: 'var(--r-lg)' }}>
-              <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.85)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {profile.full_name || profile.email}
               </div>
-              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', textTransform: 'capitalize', marginTop: 1 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-3)', textTransform: 'capitalize', marginTop: 1 }}>
                 {profile.pipeline_role
                   ? `${profile.pipeline_role.replace('_', ' ')} · ${floorMode ? 'Floor Mode' : 'App Mode'}`
                   : `${profile.role} · Edit profile & PIN`}
@@ -260,7 +260,7 @@ export default function Sidebar({ collapsed, onToggle }) {
 
           <button onClick={handleSignOut} className="sidebar-item"
             title={collapsed ? 'Sign Out' : undefined}
-            style={{ color: 'var(--text-3)' }}>
+            >
             <SignOut size={17} style={{ flexShrink: 0 }} />
             {!collapsed && <span className="sidebar-item-label">Sign Out</span>}
           </button>
