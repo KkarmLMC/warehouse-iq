@@ -21,6 +21,7 @@ const FulfillmentQueue  = lazy(() => import('./pages/FulfillmentQueue'))
 const FulfillmentDetail = lazy(() => import('./pages/FulfillmentDetail'))
 const ShipmentQueue     = lazy(() => import('./pages/ShipmentQueue'))
 const ShipmentDetail    = lazy(() => import('./pages/ShipmentDetail'))
+const UserManagement    = lazy(() => import('./pages/UserManagement'))
 const PartDetail     = lazy(() => import('./pages/PartDetail'))
 const PurchaseOrders = lazy(() => import('./pages/PurchaseOrders'))
 const Profile       = lazy(() => import('./pages/Profile'))
@@ -120,6 +121,7 @@ export default function App() {
               <Route path="/warehouse-hq/fulfillment/:id"       element={<FulfillmentDetail />} />
               <Route path="/warehouse-hq/shipment"              element={<ShipmentQueue />} />
               <Route path="/warehouse-hq/shipment/:id"          element={<ShipmentDetail />} />
+              <Route path="/warehouse-hq/users"             element={<UserManagement />} />
               <Route path="*"                                element={<Navigate to="/warehouse-hq" replace />} />
             </Routes>
           </Suspense>

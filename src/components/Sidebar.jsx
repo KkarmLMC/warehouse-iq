@@ -3,7 +3,7 @@ import {
   Warehouse, ChartBar, Package, BookOpen,
   ArrowsLeftRight, Receipt, SignOut,
   ArrowLineLeft, ArrowLineRight,
-  ClipboardText, Truck, ListBullets,
+  ClipboardText, Truck, ListBullets, UserGear,
 } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
 
@@ -27,6 +27,8 @@ const NAV_ITEMS_FULL = [
   },
 ]
 
+// Admin-only nav item appended dynamically in getNavItems
+
 // Warehouse manager: SO Queue + Run Order only
 const NAV_ITEMS_MANAGER = [
   { path: '/warehouse-hq',      Icon: Warehouse,    label: 'Dashboard'   },
@@ -49,6 +51,10 @@ function getNavItems(profile) {
   if (pr === 'fulfillment')       return NAV_ITEMS_FULFILLMENT
   if (pr === 'shipping')          return NAV_ITEMS_SHIPPING
   if (pr === 'warehouse_manager') return NAV_ITEMS_MANAGER
+  // Admin gets full nav + user management
+  if (profile?.role === 'admin') {
+    return [...NAV_ITEMS_FULL, { path: '/warehouse-hq/users', Icon: UserGear, label: 'Users' }]
+  }
   return NAV_ITEMS_FULL
 }
 
