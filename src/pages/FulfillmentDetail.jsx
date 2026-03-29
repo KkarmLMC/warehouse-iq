@@ -58,79 +58,73 @@ export default function FulfillmentDetail() {
 
   const pushToShipment = async () => {
     setPushing(true)
-
-    // 1. Deduct inventory — for each line, deduct qty_available from primary warehouse
-    //    and split_qty from split_warehouse
-    const deductions = []
-    for (const line of lines) {
-      if (line.warehouse_id && line.qty_available > 0) {
-        deductions.push({ part_id: line.part_id, warehouse_id: line.warehouse_id, delta: -line.qty_available })
+    try {
+      // 1. Build deduction list
+      const deductions = []
+      for (const line of lines) {
+        if (line.warehouse_id && line.qty_available > 0)
+          deductions.push({ part_id: line.part_id, warehouse_id: line.warehouse_id, delta: -line.qty_available })
+        if (line.split_warehouse_id && line.split_qty > 0)
+          deductions.push({ part_id: line.part_id, warehouse_id: line.split_warehouse_id, delta: -line.split_qty })
       }
-      if (line.split_warehouse_id && line.split_qty > 0) {
-        deductions.push({ part_id: line.part_id, warehouse_id: line.split_warehouse_id, delta: -line.split_qty })
-      }
-    }
 
-    // Apply deductions via inventory_transactions + update inventory_levels
-    for (const d of deductions) {
-      if (!d.part_id) continue
-      // Record transaction
-      await db.from('inventory_transactions').insert({
-        part_id:          d.part_id,
-        warehouse_id:     d.warehouse_id,
-        transaction_type: 'fulfillment',
-        quantity_delta:   d.delta,
-        reason:           `Fulfillment — SO ${order?.so_number}`,
-        related_job_id:   order?.project_id || null,
-        performed_by:     'warehouse',
+      // 2. Parallelize all inventory deductions
+      await Promise.all(deductions.filter(d => d.part_id).map(async d => {
+        await db.from('inventory_transactions').insert({
+          part_id:          d.part_id,
+          warehouse_id:     d.warehouse_id,
+          transaction_type: 'fulfillment',
+          quantity_delta:   d.delta,
+          reason:           `Fulfillment — SO ${order?.so_number}`,
+          related_job_id:   order?.project_id || null,
+          performed_by:     'warehouse',
+        })
+        const { data: lvl } = await db.from('inventory_levels')
+          .select('id, quantity_on_hand')
+          .eq('part_id', d.part_id).eq('warehouse_id', d.warehouse_id).single()
+        if (lvl) {
+          await db.from('inventory_levels').update({
+            quantity_on_hand: Math.max(0, lvl.quantity_on_hand + d.delta),
+            updated_at: new Date().toISOString(),
+          }).eq('id', lvl.id)
+        }
+      }))
+
+      // 3. Confirm sheet + lines in parallel
+      await Promise.all([
+        db.from('fulfillment_sheets').update({
+          confirmed_at: new Date().toISOString(),
+          confirmed_by: 'fulfillment',
+        }).eq('id', sheet.id),
+        db.from('fulfillment_lines').update({ is_confirmed: true }).eq('sheet_id', sheet.id),
+      ])
+
+      // 4. Create shipment + update SO in parallel
+      const hasBackOrders = lines.some(l => l.is_back_ordered)
+      await Promise.all([
+        db.from('shipments').insert({ so_id: id, sheet_id: sheet.id, status: 'pending' }),
+        db.from('sales_orders').update({
+          status:      hasBackOrders ? 'back_ordered' : 'shipment',
+          shipment_at: new Date().toISOString(),
+          ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}),
+        }).eq('id', id),
+      ])
+
+      logActivity(db, user?.id, 'warehouse_iq', {
+        category:    'fulfillment',
+        action:      'confirmed',
+        label:       `Confirmed Fulfillment for ${order?.so_number || id}`,
+        entity_type: 'fulfillment_sheet',
+        entity_id:   sheet?.id || id,
+        meta:        { so_id: id },
       })
-      // Update level
-      const { data: lvl } = await db.from('inventory_levels')
-        .select('id, quantity_on_hand')
-        .eq('part_id', d.part_id)
-        .eq('warehouse_id', d.warehouse_id)
-        .single()
-      if (lvl) {
-        await db.from('inventory_levels').update({
-          quantity_on_hand: Math.max(0, lvl.quantity_on_hand + d.delta),
-          updated_at: new Date().toISOString(),
-        }).eq('id', lvl.id)
-      }
+      setDone(true)
+      setTimeout(() => navigate('/warehouse-hq/fulfillment'), 1200)
+    } catch (err) {
+      console.error('Fulfillment push failed:', err)
+      alert(`Something went wrong: ${err.message || 'Unknown error'}. Please retry.`)
+      setPushing(false)
     }
-
-    // 2. Mark fulfillment sheet confirmed
-    await db.from('fulfillment_sheets').update({
-      confirmed_at: new Date().toISOString(),
-      confirmed_by: 'fulfillment',
-    }).eq('id', sheet.id)
-
-    // Mark all lines confirmed
-    await db.from('fulfillment_lines').update({ is_confirmed: true }).eq('sheet_id', sheet.id)
-
-    // 3. Create shipment record + update SO status
-    await db.from('shipments').insert({
-      so_id:    id,
-      sheet_id: sheet.id,
-      status:   'pending',
-    })
-
-    const hasBackOrders = lines.some(l => l.is_back_ordered)
-    await db.from('sales_orders').update({
-      status:      hasBackOrders ? 'back_ordered' : 'shipment',
-      shipment_at: new Date().toISOString(),
-      ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}),
-    }).eq('id', id)
-
-    logActivity(db, user?.id, 'warehouse_iq', {
-      category:    'fulfillment',
-      action:      'confirmed',
-      label:       `Confirmed Fulfillment for ${so?.so_number || id}`,
-      entity_type: 'fulfillment_sheet',
-      entity_id:   sheet?.id || id,
-      meta:        { so_id: id },
-    })
-    setDone(true)
-    setTimeout(() => navigate('/warehouse-hq/fulfillment'), 1400)
   }
 
   const fmt = n => `$${Number(n||0).toLocaleString('en-US',{maximumFractionDigits:0})}`
