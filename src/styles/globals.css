@@ -641,6 +641,7 @@ textarea { resize: vertical; }
    ============================================================================= */
 
 /* Main scrollable page area */
+.page,
 .page-content {
   flex: 1;
   overflow-y: auto;
@@ -2867,7 +2868,8 @@ textarea { resize: vertical; }
   }
 
   /* Page content clears the bar */
-  .page-content {
+  .page,
+.page-content {
     padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + var(--sp-4));
   }
 }
@@ -3023,7 +3025,8 @@ textarea { resize: vertical; }
 
   /* When sub-nav is visible, push page content up so it doesn't hide behind both bars */
   /* Sub-nav height is ~2.75rem — always add this when sub-nav could appear */
-  .has-sub-nav .page-content {
+  .has-sub-nav .page,
+.page-content {
     padding-bottom: calc(var(--bottom-nav-h) + 2.75rem + env(safe-area-inset-bottom) + var(--sp-6));
   }
 }

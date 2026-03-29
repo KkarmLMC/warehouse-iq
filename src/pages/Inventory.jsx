@@ -120,14 +120,14 @@ export default function Inventory() {
   const fmt = (n) => `$${Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
 
   if (loading) return (
-    <div className="page fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 'var(--sp-3)' }}>
+    <div className="page-content fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 'var(--sp-3)' }}>
       <div className="spinner" />
       <span style={{ color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>Loading Warehouse IQ…</span>
     </div>
   )
 
   return (
-    <div className="page fade-in">
+    <div className="page-content fade-in">
 
       {/* ── Page header ── */}
       <div style={{ marginBottom: 'var(--sp-5)' }}>
