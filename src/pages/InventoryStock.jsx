@@ -63,7 +63,7 @@ function PartRow({ part, levels, onPress }) {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
         <StockBadge qty={totalQty} minLevel={minLevel} onOrder={totalOnOrder} />
-        <CaretRight size={<CaretRight size={14} style={{ color: 'var(--text-2)' }}} />
+        <CaretRight size={14} style={{ color: 'var(--text-2)' }} />
       </div>
     </button>
   )

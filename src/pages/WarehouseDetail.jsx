@@ -182,7 +182,7 @@ function StockRow({ level, onPress }) {
         <span style={{ padding: '3px 10px', borderRadius: 'var(--r-full)', fontSize: 'var(--fs-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
-        <CaretRight size={<CaretRight size={13} style={{ color: 'var(--text-2)' }}} />
+        <CaretRight size={13} style={{ color: 'var(--text-2)' }} />
       </div>
     </button>
   )
@@ -457,7 +457,7 @@ export default function WarehouseDetail() {
                         ${po.grand_total.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     )}
-                    <CaretRight size={<CaretRight size={12} style={{ color: 'var(--text-2)' }}} />
+                    <CaretRight size={12} style={{ color: 'var(--text-2)' }} />
                   </div>
                 </button>
               )
