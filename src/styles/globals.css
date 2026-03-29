@@ -2990,11 +2990,10 @@ textarea { resize: vertical; }
 /* ── Label ───────────────────────────────────────────────────────────────────── */
 
 .bottom-nav__label {
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-xs);
   font-weight: 600;
-  color: var(--text-2);
+  color: var(--text-1);
   font-family: var(--font);
-  letter-spacing: 0.01em;
   white-space: nowrap;
   transition: color var(--ease-fast);
 }
@@ -3200,9 +3199,9 @@ textarea { resize: vertical; }
     padding: 8px 4px;
   }
   .bottom-nav__label {
-    font-size: 10px;
+    font-size: var(--fs-xs);
     font-weight: 600;
-    color: var(--text-3);
+    color: var(--text-1);
     font-family: var(--font);
   }
   .bottom-nav__tab--active .bottom-nav__label {
