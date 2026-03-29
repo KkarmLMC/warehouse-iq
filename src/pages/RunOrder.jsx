@@ -330,7 +330,7 @@ export default function RunOrder() {
                   <div key={line._idx} style={{ padding:'var(--sp-3)',background:'rgba(255,255,255,0.7)',borderRadius:'var(--r-lg)',border:'1px solid #FCD34D' }}>
                     <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between',gap:'var(--sp-3)' }}>
                       <div style={{ minWidth:0 }}>
-                        <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'#92400E' }}>{line.description}</div>
+                        <div style={{ fontSize:'var(--fs-sm)',fontWeight:700,color:'#92400E' }}>{line.description}</div>
                         <div style={{ fontSize:'var(--fs-xs)',color:'#B45309',fontFamily:'var(--mono)',marginTop:2 }}>{line.sku}</div>
                       </div>
                       <button onClick={() => { setKitModalIdx(line._idx); setShowKitModal(true) }}

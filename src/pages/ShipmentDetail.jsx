@@ -124,7 +124,7 @@ export default function ShipmentDetail() {
           <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,alignItems:'start',
             padding:'var(--sp-3) var(--sp-4)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
             <div>
-              <div style={{ fontSize:'var(--fs-xs)',fontWeight:600 }}>{line.description}</div>
+              <div style={{ fontSize:'var(--fs-sm)',fontWeight:600 }}>{line.description}</div>
               {line.sku && <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
               <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',marginTop:1 }}>
                 {line.warehouses?.name || '—'}

@@ -141,7 +141,7 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--sp-2)', alignItems: 'center', padding: 'var(--sp-2) 0', borderBottom: '1px solid var(--border-l)' }}>
       <div style={{ minWidth: 0 }}>
         {item.sku && <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2 }}>{item.sku}</div>}
-        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.description}</div>
+        <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.description}</div>
         {warehouses.length > 1 && (
           <select
             value={item.warehouse_id || ''}

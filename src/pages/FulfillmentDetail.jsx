@@ -207,7 +207,7 @@ export default function FulfillmentDetail() {
               {/* Part info */}
               <div>
                 <div style={{ display:'flex',alignItems:'center',gap:6 }}>
-                  <span style={{ fontSize:'var(--fs-xs)',fontWeight:600,color: isBO ? '#0891B2' : isOut ? '#991B1B' : isPulled ? 'var(--text-3)' : 'var(--text-1)',
+                  <span style={{ fontSize:'var(--fs-sm)',fontWeight:600,color: isBO ? '#0891B2' : isOut ? '#991B1B' : isPulled ? 'var(--text-3)' : 'var(--text-1)',
                     textDecoration: isPulled && !isBO ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
