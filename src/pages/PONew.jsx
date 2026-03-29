@@ -6,6 +6,9 @@ import {
   ArrowRight, Warning,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { useAuth } from '../lib/useAuth.jsx'
+import { logActivity } from '../lib/logActivity.js'
+import { logActivity } from '../lib/logActivity.js'
 import ProjectPicker from '../components/ProjectPicker.jsx'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -363,6 +366,7 @@ function TotalsBar({ sections, laborItems }) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 export default function PONew() {
   const navigate = useNavigate()
+  const { user } = useAuth()
 
   // Header fields
   const [division, setDivision]       = useState('LM')
@@ -505,6 +509,14 @@ export default function PONew() {
       })
     }
 
+    await logActivity(db, user?.id, 'warehouse_iq', {
+      category:    'sales_order',
+      action:      'created',
+      label:       `Created Sales Order ${poNumber}`,
+      entity_type: 'sales_order',
+      entity_id:   newPO.id,
+      meta:        { so_number: poNumber, customer: customerName, total: materialsTotal + installationTotal },
+    })
     setSaving(false)
     navigate(`/sales-orders/${newPO.id}`)
   }

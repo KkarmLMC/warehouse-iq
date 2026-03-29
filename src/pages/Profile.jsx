@@ -6,6 +6,7 @@ import {
   Buildings, AppWindow, Trash, IdentificationCard,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { logActivity } from '../lib/logActivity.js'
 import { useAuth } from '../lib/useAuth.jsx'
 
 async function hashPin(pin) {
@@ -94,6 +95,111 @@ function Row({ label, children }) {
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
+
+// ─── Activity Log Component ───────────────────────────────────────────────────
+function ActivityLog({ userId }) {
+  const [logs, setLogs]       = useState([])
+  const [loading, setLoading] = useState(true)
+  const [page, setPage]       = useState(0)
+  const PER_PAGE = 10
+
+  useEffect(() => {
+    if (!userId) return
+    setLoading(true)
+    db.from('user_activity_logs')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .range(page * PER_PAGE, (page + 1) * PER_PAGE - 1)
+      .then(({ data }) => {
+        setLogs(data || [])
+        setLoading(false)
+      })
+  }, [userId, page])
+
+  const fmtTime = (ts) => {
+    const d = new Date(ts)
+    const now = new Date()
+    const diffMs = now - d
+    const diffMin = Math.floor(diffMs / 60000)
+    const diffH   = Math.floor(diffMs / 3600000)
+    const diffD   = Math.floor(diffMs / 86400000)
+    if (diffMin < 1)  return 'Just now'
+    if (diffMin < 60) return `${diffMin}m ago`
+    if (diffH   < 24) return `${diffH}h ago`
+    if (diffD   < 7)  return `${diffD}d ago`
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  }
+
+  const APP_LABELS = { field_ops: 'Field Ops', warehouse_iq: 'Warehouse IQ', mission_control: 'Mission Control' }
+
+  const CATEGORY_COLOR = {
+    sales_order: '#1D4ED8', fulfillment: '#7C3AED', shipment: '#0891B2',
+    import: '#B45309',      profile: '#4B5563',     auth: '#6B7280',
+    parts: '#047857',       inventory: '#047857',   transfer: '#B45309',
+  }
+
+  return (
+    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
+      <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--fs-sm)', fontWeight: 700 }}>
+        Activity Log
+      </div>
+      <div style={{ padding: 'var(--sp-2) 0' }}>
+        {loading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-6)' }}>
+            <div className="spinner" />
+          </div>
+        ) : logs.length === 0 ? (
+          <div style={{ padding: 'var(--sp-6)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>
+            No activity recorded yet
+          </div>
+        ) : (
+          <>
+            {logs.map((log, i) => (
+              <div key={log.id} style={{
+                display: 'flex', alignItems: 'flex-start', gap: 'var(--sp-3)',
+                padding: 'var(--sp-3) var(--sp-4)',
+                borderBottom: i < logs.length - 1 ? '1px solid var(--border-l)' : 'none',
+              }}>
+                {/* Category dot */}
+                <div style={{
+                  width: 8, height: 8, borderRadius: '50%', flexShrink: 0, marginTop: 5,
+                  background: CATEGORY_COLOR[log.category] || 'var(--text-3)',
+                }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-1)', fontWeight: 500, lineHeight: 1.4 }}>
+                    {log.label}
+                  </div>
+                  <div style={{ display: 'flex', gap: 'var(--sp-2)', marginTop: 3, flexWrap: 'wrap', alignItems: 'center' }}>
+                    <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{fmtTime(log.created_at)}</span>
+                    <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>·</span>
+                    <span style={{
+                      fontSize: 'var(--fs-xs)', fontWeight: 600,
+                      color: CATEGORY_COLOR[log.category] || 'var(--text-3)',
+                    }}>{APP_LABELS[log.app] || log.app}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {/* Pagination */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--sp-3) var(--sp-4)', borderTop: '1px solid var(--border-l)' }}>
+              <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
+                style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: page === 0 ? 'var(--text-3)' : 'var(--navy)', background: 'none', border: 'none', cursor: page === 0 ? 'default' : 'pointer', padding: 0 }}>
+                ← Previous
+              </button>
+              <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Page {page + 1}</span>
+              <button onClick={() => setPage(p => p + 1)} disabled={logs.length < PER_PAGE}
+                style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: logs.length < PER_PAGE ? 'var(--text-3)' : 'var(--navy)', background: 'none', border: 'none', cursor: logs.length < PER_PAGE ? 'default' : 'pointer', padding: 0 }}>
+                Next →
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function Profile() {
   const navigate = useNavigate()
   const { user, profile, signOut } = useAuth()
@@ -134,6 +240,7 @@ export default function Profile() {
     if (error) { flash('Could not save name.', true); return }
     setEditingName(false)
     flash('Name updated.')
+    logActivity(db, user?.id, 'warehouse_iq', { category: 'profile', action: 'updated_name', label: 'Updated display name' })
   }
 
   const savePassword = async () => {
@@ -143,6 +250,7 @@ export default function Profile() {
     setPwSaving(false)
     if (error) { flash(error.message, true); return }
     setShowPwForm(false); setNewPw(''); setNewEmail('')
+    logActivity(db, user?.id, 'warehouse_iq', { category: 'profile', action: 'updated_password', label: newEmail ? 'Updated email and password' : 'Changed password' })
     flash(newEmail ? 'Email + password updated. Check your inbox to confirm.' : 'Password updated.')
   }
 
@@ -162,6 +270,7 @@ export default function Profile() {
       if (error) { setPinError('Could not save PIN.'); return }
       setPinSection('idle'); setNewPin('')
       flash('PIN updated. You can now log in with your PIN.')
+      logActivity(db, user?.id, 'warehouse_iq', { category: 'profile', action: 'updated_pin', label: 'Changed login PIN' })
     }
   }
 

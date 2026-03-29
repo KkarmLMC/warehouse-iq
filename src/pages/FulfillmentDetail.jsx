@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Package, CheckCircle, ArrowRight, Warning, ClockCountdown } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { useAuth } from '../lib/useAuth.jsx'
+import { logActivity } from '../lib/logActivity.js'
 
 export default function FulfillmentDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useAuth()
 
   const [order,   setOrder]   = useState(null)
   const [sheet,   setSheet]   = useState(null)
@@ -118,6 +121,14 @@ export default function FulfillmentDetail() {
       ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}),
     }).eq('id', id)
 
+    logActivity(db, user?.id, 'warehouse_iq', {
+      category:    'fulfillment',
+      action:      'confirmed',
+      label:       `Confirmed Fulfillment for ${so?.so_number || id}`,
+      entity_type: 'fulfillment_sheet',
+      entity_id:   sheet?.id || id,
+      meta:        { so_id: id },
+    })
     setDone(true)
     setTimeout(() => navigate('/warehouse-hq/fulfillment'), 1400)
   }

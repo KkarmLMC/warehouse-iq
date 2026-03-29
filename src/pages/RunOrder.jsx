@@ -6,6 +6,8 @@ import {
   ClockCountdown, SealWarning, Question,
 } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { useAuth } from '../lib/useAuth.jsx'
+import { logActivity } from '../lib/logActivity.js'
 
 // State abbreviation → region for proximity scoring
 const STATE_REGION = {
@@ -28,6 +30,7 @@ function normalise(s) { return (s||'').trim().toUpperCase() }
 export default function RunOrder() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useAuth()
 
   const [order,       setOrder]       = useState(null)
   const [lines,       setLines]       = useState([])
@@ -224,6 +227,13 @@ export default function RunOrder() {
       fulfillment_at:  new Date().toISOString(),
     }).eq('id', id)
 
+    logActivity(db, user?.id, 'warehouse_iq', {
+      category:    'sales_order',
+      action:      'pushed_to_fulfillment',
+      label:       `Pushed ${so?.so_number || id} to Fulfillment`,
+      entity_type: 'sales_order',
+      entity_id:   id,
+    })
     setTimeout(() => navigate('/warehouse-hq/queue'), 1200)
   }
 

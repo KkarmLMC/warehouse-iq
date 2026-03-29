@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Truck, CheckCircle, Package, MapPin } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { useAuth } from '../lib/useAuth.jsx'
+import { logActivity } from '../lib/logActivity.js'
 
 export default function ShipmentDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useAuth()
 
   const [order,    setOrder]    = useState(null)
   const [shipment, setShipment] = useState(null)
@@ -58,6 +61,14 @@ export default function ShipmentDetail() {
       fulfilled_at: new Date().toISOString(),
     }).eq('id', id)
 
+    logActivity(db, user?.id, 'warehouse_iq', {
+      category:    'shipment',
+      action:      'shipped',
+      label:       `Marked ${so?.so_number || id} Shipped — ${carrier.trim()}`,
+      entity_type: 'shipment',
+      entity_id:   shipment?.id || id,
+      meta:        { so_id: id, carrier: carrier.trim(), tracking: tracking.trim() },
+    })
     setDone(true)
     setTimeout(() => navigate('/warehouse-hq/shipment'), 1400)
   }
