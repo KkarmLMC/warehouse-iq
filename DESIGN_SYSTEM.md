@@ -481,3 +481,28 @@ vercel.json required in every app repo
 ---
 
 *Version 2.0 — March 2026. Always update Section 4 when adding a new component.*
+
+---
+
+## UI Component Library (added March 2026)
+
+All reusable components live in `src/components/ui/`. Import via the barrel:
+
+```jsx
+import { RowItem, StatusBadge, StatCard, SearchInput } from '../components/ui'
+```
+
+| Component | Replaces | Use |
+|-----------|---------|-----|
+| `PageHeader` | Repeated inline title blocks | Top of every page |
+| `StatCard` | `stat-card` + inline styles | Dashboard metric cards |
+| `RowItem` | 36px icon container + flex row + caret | Every list row |
+| `StatusBadge` | 37+ inline badge style objects | Status/stage pills |
+| `SearchInput` | MagnifyingGlass + input + clear | Search fields |
+| `EmptyState` | `.empty` + icon + text inline | Zero-data states |
+| `Card` | `.card` + `.card-header` inline | Content cards |
+| `ActionButton` | Full-width detail page CTA inline | Run/Fulfill/Ship CTAs |
+| `FilterPills` | Inline filter pill rows | Status filter tabs |
+| `Spinner` | Inline spinner wrappers | Loading states |
+
+**Rule:** If the same JSX pattern appears in 3+ places → it becomes a component.
