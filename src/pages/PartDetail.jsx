@@ -182,7 +182,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             </div>
             <div>
               <Label>Reason</Label>
-              <input value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. PO #1234" style={{ width: '100%' }} />
+              <input value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. SO-2026-0001" style={{ width: '100%' }} />
             </div>
           </div>
 

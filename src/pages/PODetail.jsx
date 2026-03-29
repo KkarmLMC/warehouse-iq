@@ -100,7 +100,7 @@ export default function PODetail() {
           p_warehouse_id: line.warehouse_id,
           p_quantity_delta: -Math.abs(line.quantity),
           p_transaction_type: 'job_checkout',
-          p_reason: `PO ${po.po_number} — ${po.customer_name}`,
+          p_reason: `SO ${po.po_number} — ${po.customer_name}`,
         })
       }
     }
@@ -110,7 +110,7 @@ export default function PODetail() {
   }
 
   if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
-  if (!po) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">PO not found</div></div></div>
+  if (!po) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Sales Order not found</div></div></div>
 
   const flow = STATUS_FLOW[po.status]
   const materialLines = lines.filter(l => l.line_type === 'material')
@@ -142,7 +142,7 @@ export default function PODetail() {
   return (
     <div className="page-content fade-in">
 
-      {/* PO Header card */}
+      {/* SO Header card */}
       <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-5)', marginBottom: 'var(--sp-4)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--sp-3)' }}>
           <div>

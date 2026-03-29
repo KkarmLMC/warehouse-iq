@@ -113,7 +113,7 @@ export default function PurchaseOrders() {
       db.from('po_line_items').select('po_id, line_type, quantity, unit_cost'),
     ]).then(([{ data: poData }, { data: lineData }]) => {
       setPos(poData || [])
-      // Compute totals per PO
+      // Compute totals per SO
       const t = {}
       for (const li of lineData || []) {
         if (!t[li.po_id]) t[li.po_id] = { materials: 0, labor: 0 }
@@ -167,7 +167,7 @@ export default function PurchaseOrders() {
         </div>
         <button onClick={() => navigate('/sales-orders/new')}
           style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-md)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--fs-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
-          <Plus size={15} /> New PO
+          <Plus size={15} /> New Sales Order
         </button>
       </div>
 
@@ -182,7 +182,7 @@ export default function PurchaseOrders() {
           <Warning size={18} weight="fill" style={{ color: '#D97706', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#92400E' }}>
-              {submittedCount} PO{submittedCount !== 1 ? 's' : ''} awaiting review
+              {submittedCount} Sales Order{submittedCount !== 1 ? 's' : ''} awaiting review
             </div>
             <div style={{ fontSize: 'var(--fs-xs)', color: '#92400E' }}>
               Tap to review and publish
@@ -233,7 +233,7 @@ export default function PurchaseOrders() {
         <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
           <MagnifyingGlass size={15} style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
           <input value={search} onChange={e => setSearch(e.target.value)}
-            placeholder="Search PO, customer, project…"
+            placeholder="Search SO#, customer, project…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
           {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}><X size={13} /></button>}
         </div>
@@ -257,10 +257,10 @@ export default function PurchaseOrders() {
         <div className="empty">
           <Receipt size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }} />
           <div className="empty-title">{pos.length === 0 ? 'No sales orders yet' : 'No SOs match filters'}</div>
-          <div className="empty-desc">{pos.length === 0 ? 'Create your first PO to get started.' : 'Try adjusting your filters.'}</div>
+          <div className="empty-desc">{pos.length === 0 ? 'Create your first Sales Order to get started.' : 'Try adjusting your filters.'}</div>
           {pos.length === 0 && (
             <button className="btn btn-primary" style={{ marginTop: 'var(--sp-4)' }} onClick={() => navigate('/sales-orders/new')}>
-              Create First PO
+              Create First Sales Order
             </button>
           )}
         </div>

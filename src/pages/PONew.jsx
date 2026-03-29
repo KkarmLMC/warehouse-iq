@@ -408,7 +408,7 @@ export default function PONew() {
         setWarehouses(data || [])
         if (data?.length) setDefaultWarehouseId(data[0].id)
       })
-    // Generate next PO number
+    // Generate next SO number
     db.from('purchase_orders').select('po_number').order('created_at', { ascending: false }).limit(1)
       .then(({ data }) => {
         if (data?.[0]?.po_number) {
@@ -444,12 +444,12 @@ export default function PONew() {
       s + sec.items.reduce((ss, i) => ss + ((parseFloat(i.quantity)||0)*(parseFloat(i.unit_cost)||0)), 0), 0)
     const installationTotal = laborItems.reduce((s, i) => s + ((parseFloat(i.quantity)||0)*(parseFloat(i.unit_cost)||0)), 0)
 
-    // Generate PO number
+    // Generate SO number
     const year = new Date().getFullYear()
     const { count } = await db.from('purchase_orders').select('*', { count: 'exact', head: true })
-    const poNumber = `PO-${year}-${String((count || 0) + 1).padStart(4, '0')}`
+    const poNumber = `SO-${year}-${String((count || 0) + 1).padStart(4, '0')}`
 
-    // Create PO
+    // Create SO
     const { data: newPO, error: poErr } = await db.from('purchase_orders').insert({
       po_number: poNumber,
       quote_number: quoteNumber || null,
@@ -472,7 +472,7 @@ export default function PONew() {
       submitted_at: submitAfter ? new Date().toISOString() : null,
     }).select().single()
 
-    if (poErr || !newPO) { setError('Failed to save PO. Please try again.'); setSaving(false); return }
+    if (poErr || !newPO) { setError('Failed to save Sales Order. Please try again.'); setSaving(false); return }
 
     // Insert line items
     let sortOrder = 0
@@ -514,7 +514,7 @@ export default function PONew() {
 
       {/* Page header */}
       <div style={{ marginBottom: 'var(--sp-5)' }}>
-        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>PURCHASE ORDERS</div>
+        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>SALES ORDERS</div>
         <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800 }}>New Sales Order</div>
       </div>
 
@@ -632,7 +632,7 @@ export default function PONew() {
       {/* Notes */}
       <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', border: '1px solid var(--border-l)', marginBottom: 'var(--sp-4)' }}>
         <Label>Notes</Label>
-        <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this PO…" rows={3} style={{ width: '100%', resize: 'vertical' }} />
+        <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this Sales Order…" rows={3} style={{ width: '100%', resize: 'vertical' }} />
       </div>
 
       {/* Running total */}
