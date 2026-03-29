@@ -260,8 +260,8 @@ export default function RunOrder() {
                       <div style={{ fontSize:'var(--fs-xs)',fontWeight:600,color: isShortage ? '#991B1B' : 'var(--text-1)' }}>{line.description}</div>
                       {line.sku && <div style={{ fontSize:10,color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                       <div style={{ fontSize:10,color: isShortage ? '#DC2626' : 'var(--text-3)',marginTop:2 }}>
-                        {line._primaryWhName || line.warehouse_id}
-                        {line.split_warehouse_id && <span style={{ marginLeft:4,color:'#D97706' }}>+ split</span>}
+                        <span style={{ fontWeight:600,color:'var(--navy)' }}>{line._primaryWhName || '—'}</span>
+                        {line.split_warehouse_id && <span style={{ marginLeft:4,color:'#D97706',fontWeight:600 }}>+ split ({line._splitWhName || 'other'})</span>}
                       </div>
                       {/* Split info toggle */}
                       {isShortage && (

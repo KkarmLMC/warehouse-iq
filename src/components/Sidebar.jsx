@@ -7,7 +7,8 @@ import {
 } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
 
-const NAV_ITEMS = [
+// Full nav for admins/managers
+const NAV_ITEMS_FULL = [
   { path: '/warehouse-hq', Icon: Warehouse, label: 'Warehouse HQ',
     children: [
       { path: '/warehouse-hq/iq',        Icon: ChartBar,        label: 'Warehouse IQ'  },
@@ -16,15 +17,40 @@ const NAV_ITEMS = [
       { path: '/warehouse-hq/transfer',  Icon: ArrowsLeftRight,  label: 'Transfer'      },
     ],
   },
-  { path: '/sales-orders', Icon: Receipt, label: 'Sales Orders' },
+  { path: '/sales-orders',      Icon: Receipt,      label: 'Sales Orders' },
   { path: '/warehouse-hq/queue', Icon: ListBullets, label: 'SO Pipeline',
     children: [
-      { path: '/warehouse-hq/queue',       Icon: ListBullets,    label: 'SO Queue'    },
-      { path: '/warehouse-hq/fulfillment', Icon: ClipboardText,  label: 'Fulfillment' },
-      { path: '/warehouse-hq/shipment',    Icon: Truck,          label: 'Shipment'    },
+      { path: '/warehouse-hq/queue',       Icon: ListBullets,   label: 'SO Queue'    },
+      { path: '/warehouse-hq/fulfillment', Icon: ClipboardText, label: 'Fulfillment' },
+      { path: '/warehouse-hq/shipment',    Icon: Truck,         label: 'Shipment'    },
     ],
   },
 ]
+
+// Warehouse manager: SO Queue + Run Order only
+const NAV_ITEMS_MANAGER = [
+  { path: '/warehouse-hq',      Icon: Warehouse,    label: 'Dashboard'   },
+  { path: '/warehouse-hq/queue', Icon: ListBullets, label: 'SO Queue'    },
+  { path: '/warehouse-hq/inventory', Icon: Package, label: 'Inventory'   },
+]
+
+// Fulfillment worker: their queue only
+const NAV_ITEMS_FULFILLMENT = [
+  { path: '/warehouse-hq/fulfillment', Icon: ClipboardText, label: 'Fulfillment Queue' },
+]
+
+// Shipping worker: their queue only
+const NAV_ITEMS_SHIPPING = [
+  { path: '/warehouse-hq/shipment', Icon: Truck, label: 'Shipment Queue' },
+]
+
+function getNavItems(profile) {
+  const pr = profile?.pipeline_role
+  if (pr === 'fulfillment')       return NAV_ITEMS_FULFILLMENT
+  if (pr === 'shipping')          return NAV_ITEMS_SHIPPING
+  if (pr === 'warehouse_manager') return NAV_ITEMS_MANAGER
+  return NAV_ITEMS_FULL
+}
 
 function pathMatch(itemPath, currentPath) {
   if (itemPath === '/warehouse-hq') return currentPath === itemPath || (currentPath.startsWith(itemPath + '/') && !currentPath.startsWith('/sales-orders'))
@@ -35,6 +61,7 @@ export default function Sidebar({ collapsed, onToggle }) {
   const navigate = useNavigate()
   const location = useLocation()
   const { profile, signOut } = useAuth()
+  const navItems = getNavItems(profile)
 
   const handleSignOut = async () => { await signOut(); navigate('/login') }
 
@@ -57,7 +84,7 @@ export default function Sidebar({ collapsed, onToggle }) {
 
         {/* Nav */}
         <nav className="sidebar-nav">
-          {NAV_ITEMS.map(item => {
+          {navItems.map(item => {
             const active = pathMatch(item.path, location.pathname)
             const hasChildren = item.children?.length > 0
             return (

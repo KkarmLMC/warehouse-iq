@@ -13,6 +13,7 @@ export default function FulfillmentDetail() {
   const [checked, setChecked] = useState({}) // lineId → bool
   const [pushing, setPushing] = useState(false)
   const [done,    setDone]    = useState(false)
+  const [flags,   setFlags]   = useState({}) // lineId → discrepancy note
   const [loading, setLoading] = useState(true)
 
   useEffect(() => { load() }, [id])
@@ -35,6 +36,17 @@ export default function FulfillmentDetail() {
 
   const toggleLine = (lineId) => {
     setChecked(p => ({ ...p, [lineId]: !p[lineId] }))
+  }
+
+  const flagLine = (e, lineId) => {
+    e.stopPropagation()
+    const note = window.prompt('Describe the discrepancy (e.g. "only 3 on shelf, need 5"):')
+    if (note) setFlags(p => ({ ...p, [lineId]: note }))
+  }
+
+  const clearFlag = (e, lineId) => {
+    e.stopPropagation()
+    setFlags(p => { const n = {...p}; delete n[lineId]; return n })
   }
 
   const allChecked = lines.length > 0 && lines.every(l => checked[l.id])
@@ -152,7 +164,7 @@ export default function FulfillmentDetail() {
         </div>
 
         {/* Column headers */}
-        <div style={{ display:'grid',gridTemplateColumns:'32px 1fr 50px',gap:8,padding:'var(--sp-2) var(--sp-4)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
+        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--sp-2) var(--sp-4)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
           {['','Part / Warehouse','Qty'].map(h => (
             <div key={h} style={{ fontSize:10,fontWeight:700,color:'var(--text-3)',textTransform:'uppercase' }}>{h}</div>
           ))}
@@ -162,14 +174,15 @@ export default function FulfillmentDetail() {
           const isOut = line.is_shortage
           const isPulled = checked[line.id]
           return (
-            <div key={line.id}
+            <div key={line.id}>
+            <div
               onClick={() => toggleLine(line.id)}
-              style={{ display:'grid',gridTemplateColumns:'32px 1fr 50px',gap:8,alignItems:'center',
-                padding:'var(--sp-3) var(--sp-4)',cursor:'pointer',
-                borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none',
+              style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,alignItems:'center',
+                padding:'var(--sp-4) var(--sp-4)',cursor:'pointer',minHeight:64,
+                borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-l)' : 'none',
                 background: isOut ? '#FEF2F2' : isPulled ? '#F0FDF4' : 'transparent' }}>
               {/* Checkbox */}
-              <div style={{ width:22,height:22,borderRadius:6,border:`2px solid ${isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,
+              <div style={{ width:36,height:36,borderRadius:8,border:`2px solid ${isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
                 background: isPulled ? 'var(--success-text)' : 'transparent',
                 display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
                 {isPulled && <CheckCircle size={14} weight="fill" color="#fff" />}
@@ -191,11 +204,25 @@ export default function FulfillmentDetail() {
                 </div>
               </div>
               {/* Qty */}
-              <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--fs-sm)',color: isOut ? '#DC2626' : 'var(--text-1)' }}>
-                {line.qty_available}
-                {line.split_qty > 0 && <span style={{ color:'#D97706',fontSize:10 }}>+{line.split_qty}</span>}
+              <div>
+                <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--fs-md)',color: isOut ? '#DC2626' : 'var(--text-1)' }}>
+                  {line.qty_available}
+                  {line.split_qty > 0 && <span style={{ color:'#D97706',fontSize:11 }}>+{line.split_qty}</span>}
+                </div>
+                <button onClick={(e) => flags[line.id] ? clearFlag(e, line.id) : flagLine(e, line.id)}
+                  style={{ fontSize:10,padding:'2px 6px',borderRadius:4,border:'none',cursor:'pointer',fontFamily:'var(--font)',marginTop:4,
+                    background: flags[line.id] ? '#FEF2F2' : 'var(--surface-raised)',
+                    color: flags[line.id] ? '#DC2626' : 'var(--text-3)' }}>
+                  {flags[line.id] ? '⚑ flagged' : '⚑ flag'}
+                </button>
               </div>
             </div>
+            {flags[line.id] && (
+              <div style={{ margin:'0 var(--sp-4) var(--sp-2)',padding:'var(--sp-2) var(--sp-3)',background:'#FEF2F2',borderRadius:6,fontSize:12,color:'#991B1B',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+                <strong>Discrepancy:</strong> {flags[line.id]}
+              </div>
+            )}
+          </div>
           )
         })}
       </div>

@@ -83,8 +83,17 @@ export default function ShipmentDetail() {
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {shipTo && (
-          <div style={{ fontSize:11,color:'var(--text-3)',marginTop:2,display:'flex',alignItems:'center',gap:4 }}>
-            <MapPin size={11} /> Ship to: {shipTo}
+          <div style={{ marginTop:8,padding:'var(--sp-2) var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-lg)',display:'inline-flex',alignItems:'center',gap:6 }}>
+            <MapPin size={14} style={{ color:'var(--navy)',flexShrink:0 }} />
+            <div>
+              <div style={{ fontSize:10,fontWeight:700,color:'var(--text-3)',textTransform:'uppercase',letterSpacing:'0.05em' }}>SHIP TO</div>
+              <div style={{ fontSize:'var(--fs-sm)',fontWeight:700,color:'var(--navy)' }}>
+                {order?.customer_name}
+              </div>
+              <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-2)' }}>
+                {[order?.customer_address, shipTo].filter(Boolean).join(' · ')}
+              </div>
+            </div>
           </div>
         )}
       </div>
