@@ -56,21 +56,38 @@ function PinPad({ onPin, loading, error }) {
               background: 'var(--surface-raised)',
               fontSize: 'var(--fs-2xl)', fontWeight: 700,
               cursor: 'pointer', fontFamily: 'var(--font)',
-              transition: 'background 0.1s',
+              transition: 'all 0.12s',
+              WebkitTapHighlightColor: 'transparent',
             }}
-            onMouseDown={e => e.currentTarget.style.background = 'var(--hover)'}
-            onMouseUp={e => e.currentTarget.style.background = 'var(--surface-raised)'}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}
+            onMouseDown={e => { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' }}
+            onMouseUp={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }}
+            onTouchStart={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
+            onTouchEnd={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}
           >
             {n}
           </button>
         ))}
         <div /> {/* spacer */}
         <button onClick={() => press('0')} disabled={loading}
-          style={{ height: 64, borderRadius: 'var(--r-xl)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', fontSize: 'var(--fs-2xl)', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font)' }}>
+          style={{ height: 64, borderRadius: 'var(--r-xl)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', fontSize: 'var(--fs-2xl)', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font)', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent' }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}
+          onMouseDown={e => { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' }}
+          onMouseUp={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }}
+          onTouchStart={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
+          onTouchEnd={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }}>
           0
         </button>
         <button onClick={del} disabled={loading}
-          style={{ height: 64, borderRadius: 'var(--r-xl)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', fontSize: 'var(--fs-lg)', cursor: 'pointer', color: 'var(--text-2)' }}>
+          style={{ height: 64, borderRadius: 'var(--r-xl)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', fontSize: 'var(--fs-lg)', cursor: 'pointer', color: 'var(--text-2)', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent' }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.borderColor = 'var(--border-l)' }}
+          onMouseDown={e => { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' }}
+          onMouseUp={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }}
+          onTouchStart={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }}
+          onTouchEnd={e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.borderColor = 'var(--border-l)' }}>
           ⌫
         </button>
       </div>
@@ -170,11 +187,11 @@ export default function Login() {
         <div style={{ width: 56, height: 56, borderRadius: 'var(--r-xl)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--sp-4)' }}>
           <Lightning size={28} weight="fill" style={{ color: '#fff' }} />
         </div>
-        <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>
+        <div style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', fontWeight: 800, lineHeight: 1.1 }}>
           {import.meta.env.VITE_APP_NAME || 'Field Ops'}
         </div>
-        <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)', marginTop: 4 }}>
-          {import.meta.env.VITE_APP_SUBTITLE || 'Lightning Master · Bolt Lightning Protection'}
+        <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)', marginTop: 6, maxWidth: 280, margin: '6px auto 0' }}>
+          Inventory, fulfillment & sales order pipeline management
         </div>
       </div>
 
