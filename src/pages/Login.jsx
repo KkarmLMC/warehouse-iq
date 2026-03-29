@@ -99,8 +99,8 @@ function PinPad({ onPin, loading, error }) {
 export default function Login({ forcePinSetup = false, session: forcedSession = null }) {
   const navigate = useNavigate()
   const location = useLocation()
-  const { signIn } = useAuth()
-  const from = location.state?.from?.pathname || '/'
+  const { signIn, refreshProfile } = useAuth()
+  const from = location.state?.from?.pathname || '/warehouse-hq'
 
   const [mode, setMode] = useState('pin') // pin | password | setup-pin
   const [email, setEmail] = useState('')
@@ -182,8 +182,12 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
     }
     setLoading(true); setError('')
     const hashed = await hashPin(pin)
-    await db.from('profiles').update({ pin_hash: hashed, pin_set_at: new Date().toISOString() })
+    const { error: saveErr } = await db.from('profiles')
+      .update({ pin_hash: hashed, pin_set_at: new Date().toISOString() })
       .eq('id', pendingSession.user.id)
+    if (saveErr) { setPinError('Could not save PIN. Try again.'); setLoading(false); return }
+    // Refresh profile in useAuth so pin_hash is updated before guard re-evaluates
+    await refreshProfile()
     navigate(from, { replace: true })
   }
 

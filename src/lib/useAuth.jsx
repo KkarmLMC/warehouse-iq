@@ -62,6 +62,7 @@ export function AuthProvider({ children }) {
     loading:      session === undefined || profileLoading,
     signIn,
     signOut,
+    refreshProfile: () => session?.user ? loadProfile(session.user.id) : Promise.resolve(),
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
