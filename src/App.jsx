@@ -15,6 +15,12 @@ const PartsCatalog   = lazy(() => import('./pages/PartsCatalog'))
 const WarehouseDetail= lazy(() => import('./pages/WarehouseDetail'))
 const AddEditPart    = lazy(() => import('./pages/AddEditPart'))
 const InventoryTransfer = lazy(() => import('./pages/InventoryTransfer'))
+const SOQueue           = lazy(() => import('./pages/SOQueue'))
+const RunOrder          = lazy(() => import('./pages/RunOrder'))
+const FulfillmentQueue  = lazy(() => import('./pages/FulfillmentQueue'))
+const FulfillmentDetail = lazy(() => import('./pages/FulfillmentDetail'))
+const ShipmentQueue     = lazy(() => import('./pages/ShipmentQueue'))
+const ShipmentDetail    = lazy(() => import('./pages/ShipmentDetail'))
 const PartDetail     = lazy(() => import('./pages/PartDetail'))
 const PurchaseOrders = lazy(() => import('./pages/PurchaseOrders'))
 const Profile       = lazy(() => import('./pages/Profile'))
@@ -108,6 +114,12 @@ export default function App() {
               <Route path="/sales-orders"                    element={<PurchaseOrders />} />
               <Route path="/sales-orders/new"                element={<PONew />} />
               <Route path="/sales-orders/:id"                element={<PODetail />} />
+              <Route path="/warehouse-hq/queue"                 element={<SOQueue />} />
+              <Route path="/warehouse-hq/queue/:id"             element={<RunOrder />} />
+              <Route path="/warehouse-hq/fulfillment"           element={<FulfillmentQueue />} />
+              <Route path="/warehouse-hq/fulfillment/:id"       element={<FulfillmentDetail />} />
+              <Route path="/warehouse-hq/shipment"              element={<ShipmentQueue />} />
+              <Route path="/warehouse-hq/shipment/:id"          element={<ShipmentDetail />} />
               <Route path="*"                                element={<Navigate to="/warehouse-hq" replace />} />
             </Routes>
           </Suspense>

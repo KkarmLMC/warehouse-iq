@@ -3,6 +3,7 @@ import {
   Warehouse, ChartBar, Package, BookOpen,
   ArrowsLeftRight, Receipt, SignOut,
   ArrowLineLeft, ArrowLineRight,
+  ClipboardText, Truck, ListBullets,
 } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
 
@@ -16,6 +17,13 @@ const NAV_ITEMS = [
     ],
   },
   { path: '/sales-orders', Icon: Receipt, label: 'Sales Orders' },
+  { path: '/warehouse-hq/queue', Icon: ListBullets, label: 'SO Pipeline',
+    children: [
+      { path: '/warehouse-hq/queue',       Icon: ListBullets,    label: 'SO Queue'    },
+      { path: '/warehouse-hq/fulfillment', Icon: ClipboardText,  label: 'Fulfillment' },
+      { path: '/warehouse-hq/shipment',    Icon: Truck,          label: 'Shipment'    },
+    ],
+  },
 ]
 
 function pathMatch(itemPath, currentPath) {
