@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate": "node scripts/validate-routes.mjs",
+    "prebuild": "node scripts/validate-routes.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
