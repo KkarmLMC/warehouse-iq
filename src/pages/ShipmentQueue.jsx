@@ -10,8 +10,8 @@ export default function ShipmentQueue() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    db.from('purchase_orders')
-      .select('id, po_number, customer_name, project_name, job_city, job_state, grand_total, shipment_at, status')
+    db.from('sales_orders')
+      .select('id, so_number, customer_name, project_name, job_city, job_state, grand_total, shipment_at, status')
       .eq('status', 'shipment')
       .order('shipment_at', { ascending: true })
       .then(({ data }) => { setOrders(data || []); setLoading(false) })
@@ -20,7 +20,7 @@ export default function ShipmentQueue() {
   const visible = orders.filter(o => {
     if (!search) return true
     const q = search.toLowerCase()
-    return (o.po_number||'').toLowerCase().includes(q) || (o.customer_name||'').toLowerCase().includes(q)
+    return (o.so_number||'').toLowerCase().includes(q) || (o.customer_name||'').toLowerCase().includes(q)
   })
 
   const fmtDate = d => d ? new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '—'
@@ -57,7 +57,7 @@ export default function ShipmentQueue() {
               <Truck size={16} style={{ color:'#0891B2' }} />
             </div>
             <div style={{ flex:1,minWidth:0 }}>
-              <div style={{ fontWeight:700,fontSize:'var(--fs-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.po_number}</div>
+              <div style={{ fontWeight:700,fontSize:'var(--fs-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
               <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-2)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
                 {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>

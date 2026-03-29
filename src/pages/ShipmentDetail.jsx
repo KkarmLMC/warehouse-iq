@@ -21,8 +21,8 @@ export default function ShipmentDetail() {
 
   const load = async () => {
     const [{ data: o }, { data: sh }] = await Promise.all([
-      db.from('purchase_orders').select('*').eq('id', id).single(),
-      db.from('shipments').select('*').eq('po_id', id).order('created_at',{ascending:false}).limit(1).single(),
+      db.from('sales_orders').select('*').eq('id', id).single(),
+      db.from('shipments').select('*').eq('so_id', id).order('created_at',{ascending:false}).limit(1).single(),
     ])
     setOrder(o)
     setShipment(sh)
@@ -52,7 +52,7 @@ export default function ShipmentDetail() {
       updated_at:      new Date().toISOString(),
     }).eq('id', shipment.id)
 
-    await db.from('purchase_orders').update({
+    await db.from('sales_orders').update({
       status:      'complete',
       completed_at: new Date().toISOString(),
       fulfilled_at: new Date().toISOString(),
@@ -78,7 +78,7 @@ export default function ShipmentDetail() {
       </button>
 
       <div style={{ marginBottom:'var(--sp-5)' }}>
-        <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800,marginBottom:4 }}>{order?.po_number}</div>
+        <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
         <div style={{ fontSize:'var(--fs-sm)',color:'var(--text-2)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>

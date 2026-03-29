@@ -64,7 +64,7 @@ function POCard({ po, totals, onPress }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', marginBottom: 3, flexWrap: 'wrap' }}>
           <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-1)' }}>
-            {po.po_number}
+            {po.so_number}
           </span>
           <StatusBadge status={po.status} />
           <span style={{
@@ -81,7 +81,7 @@ function POCard({ po, totals, onPress }) {
         </div>
         <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--sp-2)' }}>
           {po.project_name && <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{po.project_name}</span>}
-          {po.po_date && <span>· {new Date(po.po_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
+          {po.so_date && <span>· {new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
         </div>
       </div>
 
@@ -109,17 +109,17 @@ export default function PurchaseOrders() {
 
   useEffect(() => {
     Promise.all([
-      db.from('purchase_orders').select('*').order('created_at', { ascending: false }),
-      db.from('po_line_items').select('po_id, line_type, quantity, unit_cost'),
+      db.from('sales_orders').select('*').order('created_at', { ascending: false }),
+      db.from('so_line_items').select('so_id, line_type, quantity, unit_cost'),
     ]).then(([{ data: poData }, { data: lineData }]) => {
       setPos(poData || [])
       // Compute totals per SO
       const t = {}
       for (const li of lineData || []) {
-        if (!t[li.po_id]) t[li.po_id] = { materials: 0, labor: 0 }
+        if (!t[li.so_id]) t[li.so_id] = { materials: 0, labor: 0 }
         const amt = (li.quantity || 0) * (li.unit_cost || 0)
-        if (li.line_type === 'labor') t[li.po_id].labor += amt
-        else t[li.po_id].materials += amt
+        if (li.line_type === 'labor') t[li.so_id].labor += amt
+        else t[li.so_id].materials += amt
       }
       setTotals(t)
       setLoading(false)
@@ -132,7 +132,7 @@ export default function PurchaseOrders() {
     if (search) {
       const q = search.toLowerCase()
       return (
-        po.po_number.toLowerCase().includes(q) ||
+        po.so_number.toLowerCase().includes(q) ||
         (po.customer_name || '').toLowerCase().includes(q) ||
         (po.project_name || '').toLowerCase().includes(q) ||
         (po.job_reference || '').toLowerCase().includes(q)

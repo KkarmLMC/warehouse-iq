@@ -53,8 +53,8 @@ export default function RunOrder() {
 
   const load = async () => {
     const [{ data: o }, { data: li }, { data: wh }, { data: lvl }, { data: kt }] = await Promise.all([
-      db.from('purchase_orders').select('*').eq('id', id).single(),
-      db.from('po_line_items').select('*, parts(id,name,sku,unit_cost)').eq('po_id', id).eq('is_installation', false).order('sort_order'),
+      db.from('sales_orders').select('*').eq('id', id).single(),
+      db.from('so_line_items').select('*, parts(id,name,sku,unit_cost)').eq('so_id', id).eq('is_installation', false).order('sort_order'),
       db.from('warehouses').select('*').eq('is_active', true).order('sort_order'),
       db.from('inventory_levels').select('*'),
       db.from('kits').select('*').eq('is_active', true),
@@ -66,7 +66,7 @@ export default function RunOrder() {
     setKits(kt || [])
     setHasRun(o?.status === 'running' || o?.status === 'fulfillment')
     if (o?.status === 'running' || o?.status === 'fulfillment') {
-      const { data: sheet } = await db.from('fulfillment_sheets').select('*, fulfillment_lines(*)').eq('po_id', id).single()
+      const { data: sheet } = await db.from('fulfillment_sheets').select('*, fulfillment_lines(*)').eq('so_id', id).single()
       if (sheet?.fulfillment_lines) {
         setComputed(sheet.fulfillment_lines)
       }
@@ -116,7 +116,7 @@ export default function RunOrder() {
       const remainingAfterSplit = shortage - splitQty
 
       return {
-        po_line_id:                 line.id,
+        so_line_id:                 line.id,
         part_id:                    partId,
         sku,
         description:                soDesc || line.parts?.name || 'Unknown Part',
@@ -202,13 +202,13 @@ export default function RunOrder() {
     setPushed(true)
 
     // Persist: update SO + create/update fulfillment sheet
-    await db.from('purchase_orders').update({
+    await db.from('sales_orders').update({
       status:       'running',
       run_at:       new Date().toISOString(),
     }).eq('id', id)
 
     const { data: sheet } = await db.from('fulfillment_sheets')
-      .upsert({ po_id: id }, { onConflict: 'po_id' })
+      .upsert({ so_id: id }, { onConflict: 'so_id' })
       .select().single()
 
     if (sheet) {
@@ -219,7 +219,7 @@ export default function RunOrder() {
       await db.from('fulfillment_lines').insert(insertLines)
     }
 
-    await db.from('purchase_orders').update({
+    await db.from('sales_orders').update({
       status:          'fulfillment',
       fulfillment_at:  new Date().toISOString(),
     }).eq('id', id)
@@ -249,7 +249,7 @@ export default function RunOrder() {
       {/* Order header */}
       <div style={{ marginBottom:'var(--sp-5)' }}>
         <div style={{ display:'flex',alignItems:'center',gap:'var(--sp-2)',marginBottom:4 }}>
-          <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800 }}>{order?.po_number}</div>
+          <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800 }}>{order?.so_number}</div>
           {order?.status === 'fulfillment' && (
             <span style={{ fontSize:11,fontWeight:700,padding:'3px 8px',borderRadius:6,background:'#EFF6FF',color:'#1D4ED8' }}>In Fulfillment</span>
           )}

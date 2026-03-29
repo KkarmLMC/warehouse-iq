@@ -67,8 +67,8 @@ export default function PODetail() {
   const [confirmPublish, setConfirmPublish] = useState(false)
 
   const load = () => Promise.all([
-    db.from('purchase_orders').select('*').eq('id', id).single(),
-    db.from('po_line_items').select('*, parts(sku, name), warehouses(name)').eq('po_id', id).order('sort_order'),
+    db.from('sales_orders').select('*').eq('id', id).single(),
+    db.from('so_line_items').select('*, parts(sku, name), warehouses(name)').eq('so_id', id).order('sort_order'),
   ]).then(([{ data: poData }, { data: lineData }]) => {
     setPo(poData)
     setLines(lineData || [])
@@ -90,7 +90,7 @@ export default function PODetail() {
     if (flow.next === 'submitted') updates.submitted_at = new Date().toISOString()
     if (flow.next === 'published') updates.published_at = new Date().toISOString()
     if (flow.next === 'fulfilled') updates.fulfilled_at = new Date().toISOString()
-    await db.from('purchase_orders').update(updates).eq('id', id)
+    await db.from('sales_orders').update(updates).eq('id', id)
 
     // When publishing: deduct inventory
     if (flow.next === 'published') {
@@ -100,7 +100,7 @@ export default function PODetail() {
           p_warehouse_id: line.warehouse_id,
           p_quantity_delta: -Math.abs(line.quantity),
           p_transaction_type: 'job_checkout',
-          p_reason: `SO ${po.po_number} — ${po.customer_name}`,
+          p_reason: `SO ${po.so_number} — ${po.customer_name}`,
         })
       }
     }
@@ -147,7 +147,7 @@ export default function PODetail() {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--sp-3)' }}>
           <div>
             <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
-              {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.po_number}
+              {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
             </div>
             <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
             {po.project_name && (
@@ -183,10 +183,10 @@ export default function PODetail() {
               <Envelope size={12} /> {po.customer_email}
             </div>
           )}
-          {po.po_date && (
+          {po.so_date && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.6)' }}>
               <CalendarBlank size={12} />
-              {new Date(po.po_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              {new Date(po.so_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </div>
           )}
           {po.job_reference && (

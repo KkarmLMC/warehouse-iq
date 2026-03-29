@@ -211,17 +211,17 @@ export default function WarehouseDetail() {
         .eq('warehouse_id', id)
         .order('quantity_on_hand', { ascending: true }),
       // Find all POs that have line items for this warehouse
-      db.from('po_line_items')
-        .select('po_id')
+      db.from('so_line_items')
+        .select('so_id')
         .eq('warehouse_id', id),
     ]).then(async ([{ data: wh }, { data: lvl }, { data: poLineRefs }]) => {
       setWarehouse(wh)
       setLevels(lvl || [])
       // Fetch those POs
-      const poIds = [...new Set((poLineRefs || []).map(r => r.po_id))]
+      const poIds = [...new Set((poLineRefs || []).map(r => r.so_id))]
       if (poIds.length > 0) {
-        const { data: poData } = await db.from('purchase_orders')
-          .select('id, po_number, customer_name, project_name, status, grand_total, division, po_date')
+        const { data: poData } = await db.from('sales_orders')
+          .select('id, so_number, customer_name, project_name, status, grand_total, division, so_date')
           .in('id', poIds)
           .order('created_at', { ascending: false })
         setWarehousePOs(poData || [])
@@ -444,8 +444,8 @@ export default function WarehouseDetail() {
                       {po.customer_name}
                     </div>
                     <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 1 }}>
-                      {po.project_name || po.po_number}
-                      {po.po_date ? ` · ${new Date(po.po_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
+                      {po.project_name || po.so_number}
+                      {po.so_date ? ` · ${new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>

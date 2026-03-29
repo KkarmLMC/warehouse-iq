@@ -409,10 +409,10 @@ export default function PONew() {
         if (data?.length) setDefaultWarehouseId(data[0].id)
       })
     // Generate next SO number
-    db.from('purchase_orders').select('po_number').order('created_at', { ascending: false }).limit(1)
+    db.from('sales_orders').select('so_number').order('created_at', { ascending: false }).limit(1)
       .then(({ data }) => {
-        if (data?.[0]?.po_number) {
-          const match = data[0].po_number.match(/(\d+)$/)
+        if (data?.[0]?.so_number) {
+          const match = data[0].so_number.match(/(\d+)$/)
           if (match) {
             const next = parseInt(match[1]) + 1
             setQuoteNumber(`W-${new Date().getFullYear()}-${String(next).padStart(4,'0')}`)
@@ -446,12 +446,12 @@ export default function PONew() {
 
     // Generate SO number
     const year = new Date().getFullYear()
-    const { count } = await db.from('purchase_orders').select('*', { count: 'exact', head: true })
+    const { count } = await db.from('sales_orders').select('*', { count: 'exact', head: true })
     const poNumber = `SO-${year}-${String((count || 0) + 1).padStart(4, '0')}`
 
     // Create SO
-    const { data: newPO, error: poErr } = await db.from('purchase_orders').insert({
-      po_number: poNumber,
+    const { data: newPO, error: poErr } = await db.from('sales_orders').insert({
+      so_number: poNumber,
       quote_number: quoteNumber || null,
       division,
       status: submitAfter ? 'submitted' : 'draft',
@@ -464,7 +464,7 @@ export default function PONew() {
       customer_email: customerEmail || null,
       project_name: projectName || null,
       project_ref: projectRef || null,
-      po_date: poDate || null,
+      so_date: poDate || null,
       notes: notes || null,
       materials_total: materialsTotal,
       installation_total: installationTotal,
@@ -478,8 +478,8 @@ export default function PONew() {
     let sortOrder = 0
     for (const sec of sections) {
       for (const item of sec.items) {
-        await db.from('po_line_items').insert({
-          po_id: newPO.id,
+        await db.from('so_line_items').insert({
+          so_id: newPO.id,
           line_type: 'material',
           section_label: sec.title || null,
           part_id: item.part_id || null,
@@ -495,8 +495,8 @@ export default function PONew() {
 
     // Insert labor lines
     for (const item of laborItems) {
-      await db.from('po_line_items').insert({
-        po_id: newPO.id,
+      await db.from('so_line_items').insert({
+        so_id: newPO.id,
         line_type: 'labor',
         description: item.description,
         quantity: parseFloat(item.quantity) || 1,

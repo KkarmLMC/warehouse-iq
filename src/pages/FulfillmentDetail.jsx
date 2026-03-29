@@ -20,8 +20,8 @@ export default function FulfillmentDetail() {
 
   const load = async () => {
     const [{ data: o }, { data: s }] = await Promise.all([
-      db.from('purchase_orders').select('*').eq('id', id).single(),
-      db.from('fulfillment_sheets').select('*, fulfillment_lines(*, warehouses:warehouse_id(name), split_warehouse:split_warehouse_id(name))').eq('po_id', id).single(),
+      db.from('sales_orders').select('*').eq('id', id).single(),
+      db.from('fulfillment_sheets').select('*, fulfillment_lines(*, warehouses:warehouse_id(name), split_warehouse:split_warehouse_id(name))').eq('so_id', id).single(),
     ])
     setOrder(o)
     setSheet(s)
@@ -77,7 +77,7 @@ export default function FulfillmentDetail() {
         warehouse_id:     d.warehouse_id,
         transaction_type: 'fulfillment',
         quantity_delta:   d.delta,
-        reason:           `Fulfillment — SO ${order?.po_number}`,
+        reason:           `Fulfillment — SO ${order?.so_number}`,
         related_job_id:   order?.project_id || null,
         performed_by:     'warehouse',
       })
@@ -106,13 +106,13 @@ export default function FulfillmentDetail() {
 
     // 3. Create shipment record + update SO status
     await db.from('shipments').insert({
-      po_id:    id,
+      so_id:    id,
       sheet_id: sheet.id,
       status:   'pending',
     })
 
     const hasBackOrders = lines.some(l => l.is_back_ordered)
-    await db.from('purchase_orders').update({
+    await db.from('sales_orders').update({
       status:      hasBackOrders ? 'back_ordered' : 'shipment',
       shipment_at: new Date().toISOString(),
       ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}),
@@ -140,7 +140,7 @@ export default function FulfillmentDetail() {
       </button>
 
       <div style={{ marginBottom:'var(--sp-4)' }}>
-        <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800,marginBottom:4 }}>{order?.po_number}</div>
+        <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
         <div style={{ fontSize:'var(--fs-sm)',color:'var(--text-2)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>

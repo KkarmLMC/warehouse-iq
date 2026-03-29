@@ -91,10 +91,10 @@ export default function WarehouseIQ() {
         .eq('warehouse_id', activeWH)
         .gte('created_at', `${yr}-${String(mo).padStart(2,'0')}-01T00:00:00Z`),
       // Active POs referencing this warehouse
-      db.from('po_line_items')
-        .select('po_id, part_id, quantity, purchase_orders(po_number, customer_name, status, grand_total, division)')
+      db.from('so_line_items')
+        .select('so_id, part_id, quantity, sales_orders(so_number, customer_name, status, grand_total, division)')
         .eq('warehouse_id', activeWH)
-        .in('purchase_orders.status', ['submitted','published','draft']),
+        .in('sales_orders.status', ['submitted','published','draft']),
     ])
 
     // Build snap map
@@ -128,7 +128,7 @@ export default function WarehouseIQ() {
     // Unique active POs
     const poMap = {}
     poData?.forEach(li => {
-      if (li.purchase_orders) poMap[li.po_id] = li.purchase_orders
+      if (li.sales_orders) poMap[li.so_id] = li.sales_orders
     })
     setPOs(Object.values(poMap))
     setLoading(false)

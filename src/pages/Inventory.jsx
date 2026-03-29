@@ -65,14 +65,14 @@ export default function Inventory() {
     ] = await Promise.all([
       db.from('warehouses').select('*').eq('is_active', true).order('sort_order'),
       db.from('inventory_levels').select('*, parts(name, sku, unit_cost), warehouses(name)'),
-      db.from('purchase_orders').select('id, po_number, customer_name, project_name, status, grand_total, created_at, division')
+      db.from('sales_orders').select('id, so_number, customer_name, project_name, status, grand_total, created_at, division')
         .in('status', ['draft', 'submitted', 'published'])
         .order('created_at', { ascending: false }).limit(6),
       db.from('change_orders').select('id, co_number, submitted_by, justification, status, created_at, warehouses(name)')
         .eq('status', 'pending').order('created_at', { ascending: false }).limit(5),
       db.from('inventory_transfers').select('*, from_warehouse:warehouses!from_warehouse_id(name), to_warehouse:warehouses!to_warehouse_id(name)')
         .order('created_at', { ascending: false }).limit(5),
-      db.from('purchase_orders').select('id, po_number, customer_name, project_name, job_city, job_state, back_ordered_at')
+      db.from('sales_orders').select('id, so_number, customer_name, project_name, job_city, job_state, back_ordered_at')
         .eq('status', 'back_ordered')
         .order('back_ordered_at', { ascending: true }),
     ])
@@ -170,7 +170,7 @@ export default function Inventory() {
               {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
             </div>
             <div style={{ fontSize: 11, color: '#0E7490' }}>
-              {backOrders.slice(0, 2).map(o => o.po_number).join(', ')}
+              {backOrders.slice(0, 2).map(o => o.so_number).join(', ')}
               {backOrders.length > 2 ? ` + ${backOrders.length - 2} more` : ''} — tap to view queue
             </div>
           </div>
@@ -284,7 +284,7 @@ export default function Inventory() {
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.po_number}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
                 <span style={{ fontSize: 10, fontWeight: 700, padding: '1px 5px', borderRadius: 3, background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
               </div>
               <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

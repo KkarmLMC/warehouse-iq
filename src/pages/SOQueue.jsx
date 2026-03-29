@@ -38,8 +38,8 @@ export default function SOQueue() {
 
   const loadAll = async () => {
     const { data } = await db
-      .from('purchase_orders')
-      .select('id, po_number, customer_name, project_name, job_city, job_state, status, grand_total, created_at, queued_at, run_at, division')
+      .from('sales_orders')
+      .select('id, so_number, customer_name, project_name, job_city, job_state, status, grand_total, created_at, queued_at, run_at, division')
       .in('status', ['queued','running','fulfillment','shipment','back_ordered','complete','draft','submitted','published','fulfilled'])
       .order('created_at', { ascending: false })
     const all = data || []
@@ -72,7 +72,7 @@ export default function SOQueue() {
     if (ns !== tab) return false
     if (!search) return true
     const q = search.toLowerCase()
-    return (o.po_number||'').toLowerCase().includes(q)
+    return (o.so_number||'').toLowerCase().includes(q)
         || (o.customer_name||'').toLowerCase().includes(q)
         || (o.project_name||'').toLowerCase().includes(q)
   })
@@ -132,7 +132,7 @@ export default function SOQueue() {
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-                  <span style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{o.po_number}</span>
+                  <span style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{o.so_number}</span>
                   <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: stage.bg, color: stage.color }}>{stage.label}</span>
                 </div>
                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
