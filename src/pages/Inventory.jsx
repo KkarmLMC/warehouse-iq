@@ -290,10 +290,10 @@ export default function Inventory() {
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
+                <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
                 <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '1px 5px', borderRadius: 3, background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
               </div>
-              <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {so.customer_name} — {so.project_name || 'No project name'}
               </div>
             </div>
@@ -321,12 +321,12 @@ export default function Inventory() {
                 style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
                 <div style={{ width: 6, height: 6, borderRadius: '50%', background: isOut ? 'var(--error)' : 'var(--amber)', flexShrink: 0 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.parts?.name || 'Unknown Part'}
                   </div>
                   <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{item.warehouses?.name}</div>
                 </div>
-                <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: isOut ? 'var(--error-alt)' : 'var(--amber)', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: isOut ? 'var(--error-alt)' : 'var(--amber)', whiteSpace: 'nowrap' }}>
                   {isOut ? 'Out of Stock' : `${item.quantity_on_hand} left`}
                 </span>
               </div>
