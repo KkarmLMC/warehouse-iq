@@ -175,8 +175,8 @@ export default function FulfillmentDetail() {
       {/* Pull list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
-          <span className="card-title"><Package size={15} style={{ marginRight:6 }} />Pull List</span>
-          <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{lines.filter(l=>checked[l.id]).length}/{lines.length} pulled</span>
+          <span className="card-title"><Package size={16}  />Pull List</span>
+          <span className="card-header__meta">{lines.filter(l=>checked[l.id]).length}/{lines.length} pulled</span>
         </div>
 
         {/* Column headers */}

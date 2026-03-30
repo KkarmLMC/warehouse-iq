@@ -126,8 +126,8 @@ export default function ShipmentDetail() {
       {/* Packing list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
-          <span className="card-title"><Package size={15} style={{ marginRight:6 }} />Packing List</span>
-          <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{lines.length} items</span>
+          <span className="card-title"><Package size={16}  />Packing List</span>
+          <span className="card-header__meta">{lines.length} items</span>
         </div>
         <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
           {['Part','Qty','Source'].map(h => (
@@ -163,7 +163,7 @@ export default function ShipmentDetail() {
       {/* Shipment form */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
-          <span className="card-title"><Truck size={15} style={{ marginRight:6 }} />Process Shipment</span>
+          <span className="card-title"><Truck size={16}  />Process Shipment</span>
         </div>
         <div style={{ padding: 'var(--pad-l)',display:'flex',flexDirection:'column',gap:'var(--gap-m)' }}>
           <div>

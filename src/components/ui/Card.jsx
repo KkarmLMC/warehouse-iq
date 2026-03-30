@@ -1,18 +1,17 @@
 /**
  * Card
  * Standard content card with optional navy header.
- * Replaces the repeated .card + .card-header + .card-title pattern.
  *
  * Props:
- *   title      — header title text
- *   icon       — Phosphor icon component for header
- *   action     — JSX rendered right side of header (e.g. "View all →" link)
- *   onAction   — click handler for the header (makes it navigable)
+ *   title      — header title text (--text-base, 700, white)
+ *   icon       — Phosphor icon component — size 16, white (no color override)
+ *   meta       — right-side meta text (--text-sm, 55% white) e.g. counts, "3 items"
+ *   action     — right-side action text/JSX (--text-sm, full white, 600) e.g. "View all →"
+ *   onAction   — click handler for the whole header row
  *   children   — card body content
- *   noPad      — skip default body padding
- *   style      — additional style overrides for the card container
+ *   style      — additional style for the card container
  */
-export default function Card({ title, icon: Icon, action, onAction, children, noPad, style }) {
+export default function Card({ title, icon: Icon, meta, action, onAction, children, style }) {
   return (
     <div className="card" style={style}>
       {title && (
@@ -22,19 +21,14 @@ export default function Card({ title, icon: Icon, action, onAction, children, no
           style={{ cursor: onAction ? 'pointer' : 'default' }}
         >
           <span className="card-title">
-            {Icon && <Icon size={15} style={{ marginRight: 6 }} />}
+            {Icon && <Icon size={16} />}
             {title}
           </span>
-          {action && (
-            <span style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
-              {action}
-            </span>
-          )}
+          {meta   && <span className="card-header__meta">{meta}</span>}
+          {action && <span className="card-header__action">{action}</span>}
         </div>
       )}
-      <div style={noPad ? undefined : undefined}>
-        {children}
-      </div>
+      {children}
     </div>
   )
 }

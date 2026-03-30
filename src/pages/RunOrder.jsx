@@ -318,7 +318,7 @@ export default function RunOrder() {
       {!hasRun && (
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="card-header">
-            <span className="card-title"><Lightning size={15} style={{ marginRight:6 }} />Run Order</span>
+            <span className="card-title"><Lightning size={16}  />Run Order</span>
           </div>
           <div style={{ padding: 'var(--pad-xl)',textAlign:'center' }}>
             <div style={{ fontSize:'var(--text-sm)',color:'var(--black)',marginBottom:'var(--mar-l)',maxWidth:420,margin:'0 auto var(--mar-l)' }}>
@@ -401,8 +401,8 @@ export default function RunOrder() {
           {/* ── Fulfillment sheet ── */}
           <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
             <div className="card-header">
-              <span className="card-title"><Package size={15} style={{ marginRight:6 }} />Fulfillment Sheet</span>
-              <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{computed.length} parts</span>
+              <span className="card-title"><Package size={16}  />Fulfillment Sheet</span>
+              <span className="card-header__meta">{computed.length} parts</span>
             </div>
 
             {/* Column headers */}

@@ -39,13 +39,11 @@
    16. Animations     (@keyframes)
    ============================================================================= */
 
-
 /* =============================================================================
    1. FONTS
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
-
 
 /* =============================================================================
    2. DESIGN TOKENS
@@ -400,8 +398,6 @@
   --tab-h:       4rem;
   --content-pad: var(--pad-xl);
 
-
-
 /* ═══════════════════════════════════════════════════════════════════════════
    GLOBAL STATUS / STAGE / ROLE COLOR TOKENS
    
@@ -485,12 +481,9 @@
 
 }
 
-
-
 /* =============================================================================
    3. CSS RESET
    ============================================================================= */
-
 
 /* Button element reset — prevents browser default borders on all buttons */
 button {
@@ -1086,7 +1079,6 @@ textarea { resize: vertical; }
   padding-bottom: calc(var(--content-pad) + 4.5rem);
 }
 
-
 /* Standard vertical column layout for page content sections */
 .page-stack {
   display: flex;
@@ -1185,6 +1177,53 @@ textarea { resize: vertical; }
   overflow: hidden;
   margin-bottom: var(--mar-m);
 }
+.card-header {
+  padding: var(--pad-m) var(--pad-l);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-m);
+  flex-shrink: 0;
+}
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--white);
+  min-width: 0;
+}
+.card-title svg { color: var(--white); flex-shrink: 0; }
+.card-header__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.card-header__action {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--white);
+  flex-shrink: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font);
+  opacity: 0.85;
+  transition: opacity var(--ease-fast);
+}
+.card-header__action:hover { opacity: 1; }
 
 .card__header {
   padding: 0.875rem var(--pad-l);
@@ -1197,8 +1236,6 @@ textarea { resize: vertical; }
 }
 
 /* Legacy aliases */
-.card-header { padding: 0.875rem var(--pad-l); background: var(--navy); border-bottom: none; display: flex; align-items: center; justify-content: space-between; gap: var(--gap-s); }
-.card-title  { font-size: var(--text-base); font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: var(--gap-s); }
 .card-dot    { width: 0.5rem; height: 0.5rem; border-radius: 0.125rem; flex-shrink: 0; }
 .card-body   { padding: 0; }
 
@@ -3598,7 +3635,6 @@ padding-bottom: calc(var(--pad-s) + env(safe-area-inset-bottom, 0px));
 }
 
 /* ─── Login page — scoped variables, no app interior bleed ──────────────────── */
-
 
 /* ─── Warehouse IQ Dashboard ────────────────────────────────────────────────── */
 .wiq-stat-grid {

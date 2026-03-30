@@ -153,7 +153,7 @@ export default function UserManagement() {
       {/* Pipeline role legend */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
-          <span className="card-title"><Users size={15} style={{ marginRight:6 }} />Pipeline Role Guide</span>
+          <span className="card-title"><Users size={16}  />Pipeline Role Guide</span>
         </div>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)',display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'var(--gap-m)' }}>
           {[
@@ -173,8 +173,8 @@ export default function UserManagement() {
       {/* Users list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
-          <span className="card-title"><Users size={15} style={{ marginRight:6 }} />All Users</span>
-          <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{users.length} users</span>
+          <span className="card-title"><Users size={16}  />All Users</span>
+          <span className="card-header__meta">{users.length} users</span>
         </div>
 
         {loading ? (
