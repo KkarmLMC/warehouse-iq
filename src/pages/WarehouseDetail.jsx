@@ -288,7 +288,7 @@ export default function WarehouseDetail() {
             <div>
               <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, lineHeight: 1.1 }}>{warehouse.name}</div>
               {(warehouse.city || warehouse.state) && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(255,255,255,0.6)', marginTop: 4, fontSize: 'var(--text-xs)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--white)', marginTop: 4, fontSize: 'var(--text-xs)' }}>
                   <MapPin size={12} />
                   {[warehouse.city, warehouse.state].filter(Boolean).join(', ')}
                 </div>
@@ -305,26 +305,26 @@ export default function WarehouseDetail() {
         {(warehouse.contact_name || warehouse.contact_phone || warehouse.contact_email || warehouse.address) && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4,  paddingTop: 'var(--pad-m)', marginTop: 'var(--mar-s)' }}>
             {warehouse.address && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
                 <MapPin size={12} />
                 {warehouse.address}{warehouse.zip ? `, ${warehouse.zip}` : ''}
               </div>
             )}
             {warehouse.contact_name && (
-              <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>Contact: {warehouse.contact_name}</div>
+              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)' }}>Contact: {warehouse.contact_name}</div>
             )}
             {warehouse.contact_phone && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
                 <Phone size={12} /> {warehouse.contact_phone}
               </div>
             )}
             {warehouse.contact_email && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
                 <Envelope size={12} /> {warehouse.contact_email}
               </div>
             )}
             {warehouse.notes && (
-              <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.5)', fontStyle: 'italic', marginTop: 2 }}>{warehouse.notes}</div>
+              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', fontStyle: 'italic', marginTop: 2 }}>{warehouse.notes}</div>
             )}
           </div>
         )}

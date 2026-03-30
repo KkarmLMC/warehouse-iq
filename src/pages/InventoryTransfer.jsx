@@ -106,7 +106,7 @@ export default function InventoryTransfer() {
     <div className="page-content fade-in">
       <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
         <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>Transfer Stock</div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>Move parts between warehouses</div>
+        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--white)', marginTop: 4 }}>Move parts between warehouses</div>
       </div>
 
       {/* From / To */}

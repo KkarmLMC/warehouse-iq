@@ -265,11 +265,11 @@ export default function PartDetail() {
       <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', marginBottom: 4 }}>
               {part.part_categories?.name || 'Uncategorized'}
             </div>
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>{part.name}</div>
-            {part.sku && <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)', marginTop: 4 }}>{part.sku}</div>}
+            {part.sku && <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--text-xs)', color: 'var(--white)', marginTop: 4 }}>{part.sku}</div>}
           </div>
           <button onClick={() => navigate(`/warehouse-hq/part/${id}/edit`)}
             style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
@@ -280,7 +280,7 @@ export default function PartDetail() {
         {/* Total stock */}
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--gap-s)' }}>
           <div style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1 }}>{totalQty}</div>
-          <div style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>{part.unit_of_measure} total</div>
+          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--white)' }}>{part.unit_of_measure} total</div>
         </div>
       </div>
 

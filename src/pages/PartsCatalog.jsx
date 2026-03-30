@@ -64,7 +64,7 @@ function CategorySection({ category, parts, onPartPress }) {
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#fff' }}>{category.name}</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', marginTop: 1 }}>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', marginTop: 1 }}>
             {parts.length} {parts.length === 1 ? 'part' : 'parts'}
             {category.catalog === 'All' && (
               <span style={{ marginLeft: 6, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px' }}>
@@ -74,7 +74,7 @@ function CategorySection({ category, parts, onPartPress }) {
           </div>
         </div>
         <CaretDown size={15} style={{
-          color: 'rgba(255,255,255,0.5)', flexShrink: 0,
+          color: 'var(--white)', flexShrink: 0,
           transform: expanded ? 'rotate(180deg)' : 'none',
           transition: 'transform 0.2s ease' }} />
       </button>

@@ -33,10 +33,10 @@ function SectionGroup({ label, items }) {
         padding: 'var(--pad-s) var(--pad-l)', background: 'var(--navy)', cursor: 'pointer' }}>
         <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>{label}</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)' }}>
-          <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>
+          <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--white)' }}>
             ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </span>
-          <CaretDown size={13} style={{ color: 'rgba(255,255,255,0.5)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size={13} style={{ color: 'var(--white)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </div>
       </button>
       {open && items.map((item, idx) => (
@@ -119,12 +119,12 @@ export default function PODetail() {
       <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
           <div>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>
               {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
             </div>
             <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
             {po.project_name && (
-              <div style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>{po.project_name}</div>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--white)', marginTop: 4 }}>{po.project_name}</div>
             )}
           </div>
           <div style={{
@@ -140,29 +140,29 @@ export default function PODetail() {
         {/* Customer details */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-l)',  paddingTop: 'var(--pad-m)' }}>
           {(po.customer_city || po.customer_state) && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
               <MapPin size={12} />
               {[po.customer_city, po.customer_state].filter(Boolean).join(', ')}
             </div>
           )}
           {po.customer_phone && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
               <Phone size={12} /> {po.customer_phone}
             </div>
           )}
           {po.customer_email && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
               <Envelope size={12} /> {po.customer_email}
             </div>
           )}
           {po.so_date && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
               <CalendarBlank size={12} />
               {new Date(po.so_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </div>
           )}
           {po.job_reference && (
-            <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)', fontFamily: 'var(--mono)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', fontFamily: 'var(--mono)' }}>
               Ref: {po.job_reference}
             </div>
           )}
@@ -270,7 +270,7 @@ export default function PODetail() {
           >
             <div style={{ textAlign: 'left' }}>
               <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: '#fff' }}>{cfg.label}</div>
-              <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)', marginTop: 2 }}>{cfg.sub}</div>
+              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', marginTop: 2 }}>{cfg.sub}</div>
             </div>
             <ArrowRight size={20} style={{ color: '#fff', flexShrink: 0 }} weight="bold" />
           </button>

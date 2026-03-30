@@ -1102,7 +1102,7 @@ textarea { resize: vertical; }
 
 .app-header-left  { display: flex; align-items: center; gap: 0.625rem; }
 .app-title        { font-size: var(--text-lg); font-weight: 700; color: white; letter-spacing: -0.01em; }
-.app-subtitle     { font-size: var(--text-2xs); color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.2; }
+.app-subtitle     { font-size: var(--text-2xs); color: 'var(--white)'; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.2; }
 
 .app-logo {
   width: 1.875rem;
@@ -2304,7 +2304,7 @@ textarea { resize: vertical; }
 
 .dfl-card-head-left { display: flex; align-items: center; gap: var(--gap-s); min-width: 0; flex: 1; overflow: hidden; }
 .dfl-card-date      { font-size: var(--text-md); font-weight: 700; color: white; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dfl-card-site      { font-size: var(--text-xs); color: rgba(255, 255, 255, 0.65); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dfl-card-site      { font-size: var(--text-xs); color: 'var(--white)'; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .dfl-card__body { padding: 0.875rem var(--pad-xl); }
 
@@ -2418,7 +2418,7 @@ textarea { resize: vertical; }
 }
 
 .dfl-form-header  { display: flex; align-items: center; justify-content: space-between; padding: var(--pad-l) var(--pad-xl); flex-shrink: 0; }
-.dfl-form-part-label { font-size: var(--text-2xs); color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 0.125rem; }
+.dfl-form-part-label { font-size: var(--text-2xs); color: 'var(--white)'; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 0.125rem; }
 .dfl-form-close   { display: flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: none; cursor: pointer; color: #fff; transition: background var(--ease-fast); }
 .dfl-form-close:hover { background: rgba(255, 255, 255, 0.35); }
 .dfl-form-steps   { display: flex; border-bottom: 1px solid var(--border-l); overflow-x: auto; flex-shrink: 0; }
@@ -3052,7 +3052,7 @@ textarea { resize: vertical; }
 
 /* Card title / sub (inside card header) */
 .dfl-card-title { font-size: var(--text-md); font-weight: 700; color: white; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dfl-card-sub   { font-size: var(--text-xs); color: rgba(255, 255, 255, 0.65); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dfl-card-sub   { font-size: var(--text-xs); color: 'var(--white)'; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Right side of card header — hours + status pill */
 .dfl-card-head-right {

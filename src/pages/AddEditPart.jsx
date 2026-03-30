@@ -119,7 +119,7 @@ export default function AddEditPart() {
     <div className="page-content fade-in">
       <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
         <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>{isEdit ? 'Edit Part' : 'New Part'}</div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>
+        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--white)', marginTop: 4 }}>
           {isEdit ? 'Update part details' : 'Add a part to the catalog'}
         </div>
       </div>

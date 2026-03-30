@@ -196,7 +196,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: 'var(--text-xs)', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}>
+                <div style={{ fontSize: 'var(--text-xs)', fontWeight: 500, color: 'var(--white)' }}>
                   LMC · Bolt LP
                 </div>
               </div>
