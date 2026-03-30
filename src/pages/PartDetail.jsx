@@ -14,12 +14,12 @@ function WarehouseRow({ level, warehouseName }) {
   const bg = isOut ? '#FEF2F2' : isLow ? '#FFF7ED' : '#F0FDF4'
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <Buildings size={16} style={{ color: 'var(--black)' }} />
         <div>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{warehouseName}</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', display: 'flex', gap: 'var(--sp-2)', marginTop: 2 }}>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', display: 'flex', gap: 'var(--gap-s)', marginTop: 2 }}>
             {level.min_level > 0 && <span>Min: {level.min_level}</span>}
             {level.quantity_on_order > 0 && (
               <span style={{ color: '#1D4ED8', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>
@@ -27,7 +27,7 @@ function WarehouseRow({ level, warehouseName }) {
           </div>
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <span style={{ padding: '3px 10px', borderRadius: 'var(--r-full)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
@@ -49,7 +49,7 @@ function TransactionRow({ tx, warehouseName }) {
   }[tx.transaction_type] || tx.transaction_type
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
       <div style={{
         width: '2rem', height: '2rem', borderRadius: 'var(--r-full)',
         background: isPositive ? '#F0FDF4' : '#FEF2F2',
@@ -140,7 +140,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
   }
 
   const Label = ({ children }) => (
-    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--sp-1)' }}>
+    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>
       {children}
     </label>
   )
@@ -154,13 +154,13 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)',
       }}>
-        <div style={{ padding: 'var(--sp-4) var(--sp-5) 0', flexShrink: 0 }}>
-          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-full)', margin: '0 auto var(--sp-4)' }} />
-          <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 'var(--sp-4)' }}>Adjust Stock</div>
+        <div style={{ padding: 'var(--pad-l) var(--pad-xl) 0', flexShrink: 0 }}>
+          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-full)', margin: '0 auto var(--mar-l)' }} />
+          <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 'var(--mar-l)' }}>Adjust Stock</div>
         </div>
 
-        <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--sp-5)', paddingBottom: 'calc(var(--sp-2))' }}>
-          <div style={{ marginBottom: 'var(--sp-3)' }}>
+        <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--pad-xl)', paddingBottom: 'calc(var(--pad-s))' }}>
+          <div style={{ marginBottom: 'var(--mar-m)' }}>
             <Label>Warehouse</Label>
             <select value={warehouseId} onChange={e => handleWarehouseChange(e.target.value)} style={{ width: '100%' }}>
               {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
@@ -168,11 +168,11 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
 
           {/* Divider */}
-          <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-3) 0', paddingTop: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--sp-3)' }}>Stock Adjustment</div>
+          <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>Stock Adjustment</div>
           </div>
 
-          <div style={{ marginBottom: 'var(--sp-3)' }}>
+          <div style={{ marginBottom: 'var(--mar-m)' }}>
             <Label>Transaction Type</Label>
             <select value={type} onChange={e => setType(e.target.value)} style={{ width: '100%' }}>
               <option value="adjustment">Manual Adjustment</option>
@@ -183,7 +183,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)', marginBottom: 'var(--sp-3)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-m)' }}>
             <div>
               <Label>Qty Change</Label>
               <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" style={{ width: '100%' }} />
@@ -196,11 +196,11 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
 
           {/* Divider */}
-          <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-3) 0', paddingTop: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--sp-3)' }}>Thresholds</div>
+          <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>Thresholds</div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
             <div>
               <Label>On Order</Label>
               <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" style={{ width: '100%' }} />
@@ -214,10 +214,10 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
         </div>
 
-        <div style={{ padding: 'var(--sp-4) var(--sp-5)', paddingBottom: 'calc(var(--sp-4) + env(safe-area-inset-bottom))', flexShrink: 0, borderTop: '1px solid var(--border-l)' }}>
+        <div style={{ padding: 'var(--pad-l) var(--pad-xl)', paddingBottom: 'calc(var(--pad-l) + env(safe-area-inset-bottom))', flexShrink: 0, borderTop: '1px solid var(--border-l)' }}>
           <button onClick={handleSave} disabled={saving || (delta === 0 && onOrder === '' && minLevel === '')}
             style={{
-              width: '100%', padding: 'var(--sp-3)', borderRadius: 'var(--r-m)', border: 'none',
+              width: '100%', padding: '0.75rem', borderRadius: 'var(--r-m)', border: 'none',
               background: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--hover)' : 'var(--navy)',
               color: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--text-3)' : '#fff',
               fontWeight: 700, fontSize: 'var(--text-sm)',
@@ -259,7 +259,7 @@ export default function PartDetail() {
 
   useEffect(() => { load() }, [id])
 
-  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
   if (!part) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Part not found</div></div></div>
 
   const totalQty = levels.reduce((s, l) => s + l.quantity_on_hand, 0)
@@ -270,8 +270,8 @@ export default function PartDetail() {
   return (
     <div className="page-content fade-in">
       {/* Header */}
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-5)', marginBottom: 'var(--sp-4)', color: '#fff' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--sp-3)' }}>
+      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>
               {part.part_categories?.name || 'Uncategorized'}
@@ -286,39 +286,39 @@ export default function PartDetail() {
         </div>
 
         {/* Total stock */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--sp-2)' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--gap-s)' }}>
           <div style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1 }}>{totalQty}</div>
           <div style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>{part.unit_of_measure} total</div>
         </div>
       </div>
 
       {/* Action buttons */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
         <button onClick={() => setShowAdjust(true)}
-          style={{ padding: 'var(--sp-3)', borderRadius: 'var(--r-l)', border: '1px solid var(--navy)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', border: '1px solid var(--navy)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Adjust Stock
         </button>
         <button onClick={() => navigate('/warehouse-hq/transfer')}
-          style={{ padding: 'var(--sp-3)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)' }}>
+          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
           <ArrowsLeftRight size={16} /> Transfer
         </button>
       </div>
 
       {/* Stock by warehouse */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)' }}>
-        <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+        <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Stock by Warehouse</div>
         </div>
         {levels.length === 0 ? (
-          <div style={{ padding: 'var(--sp-5)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No stock recorded yet</div>
+          <div style={{ padding: 'var(--pad-xl)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No stock recorded yet</div>
         ) : (
           levels.map(l => <WarehouseRow key={l.id} level={l} warehouseName={l.warehouses?.name || '—'} />)
         )}
       </div>
 
       {/* Part details */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)' }}>
-        <div style={{ padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+        <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Part Details</div>
         </div>
         {[
@@ -328,13 +328,13 @@ export default function PartDetail() {
           ['Unit Cost', part.unit_cost ? `$${part.unit_cost}` : null],
           ['Barcode', part.barcode],
         ].filter(([, v]) => v).map(([label, value]) => (
-          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
+          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
             <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)' }}>{label}</span>
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{value}</span>
           </div>
         ))}
         {part.description && (
-          <div style={{ padding: 'var(--sp-3) var(--sp-4)' }}>
+          <div style={{ padding: 'var(--pad-m) var(--pad-l)' }}>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginBottom: 4 }}>Description</div>
             <div style={{ fontSize: 'var(--text-sm)' }}>{part.description}</div>
           </div>
@@ -342,11 +342,11 @@ export default function PartDetail() {
       </div>
 
       {/* Transaction history */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
         <button
           onClick={() => setShowTx(!showTx)}
-          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', border: 'none', background: 'none', cursor: 'pointer' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none', cursor: 'pointer' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
             <ClipboardText size={16} style={{ color: 'var(--black)' }} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>
             <span style={{ padding: '1px 8px', borderRadius: 'var(--r-full)', background: 'var(--hover)', fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
@@ -357,7 +357,7 @@ export default function PartDetail() {
           <TransactionRow key={tx.id} tx={tx} warehouseName={whMap[tx.warehouse_id] || '—'} />
         ))}
         {showTx && transactions.length === 0 && (
-          <div style={{ padding: 'var(--sp-4)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No transactions yet</div>
+          <div style={{ padding: 'var(--pad-l)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No transactions yet</div>
         )}
       </div>
 

@@ -215,9 +215,9 @@ export default function Sidebar({ collapsed, onToggle }) {
             onClick={toggleFloorMode}
             title={collapsed ? (floorMode ? 'Switch to App Mode' : 'Switch to Floor Mode') : undefined}
             style={{
-              display: 'flex', alignItems: 'center', gap: 'var(--sp-2)',
-              margin: '0 var(--sp-2) var(--sp-2)',
-              padding: 'var(--sp-2) var(--sp-3)',
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              margin: '0 var(--mar-s) var(--mar-s)',
+              padding: 'var(--pad-s) var(--pad-m)',
               borderRadius: 'var(--r-l)',
               border: `1px solid ${floorMode ? '#93C5FD' : 'rgba(255,255,255,0.15)'}`,
               background: floorMode ? 'rgba(147,197,253,0.1)' : 'rgba(255,255,255,0.05)',
@@ -253,7 +253,7 @@ export default function Sidebar({ collapsed, onToggle }) {
         {/* Footer */}
         <div className="sidebar-footer-nav">
           {!collapsed && (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-2) 0.625rem var(--sp-1)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-s) 0.625rem var(--pad-xs)' }}>
               <span className="sidebar-section-label" style={{ padding: 0 }}>ACCOUNT</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--success)', animation: 'livepulse 2s infinite', flexShrink: 0 }} />
@@ -261,7 +261,7 @@ export default function Sidebar({ collapsed, onToggle }) {
               </div>
             </div>
           )}
-          {collapsed && <div style={{ height: 'var(--sp-1)' }} />}
+          {collapsed && <div style={{ height: '0.25rem' }} />}
 
           {/* Profile */}
           <button onClick={() => navigate('/profile')} className={`sidebar-item ${location.pathname === '/profile' ? 'sidebar-item--active' : ''}`} title={collapsed ? 'View Profile' : undefined}>

@@ -21,7 +21,7 @@ export default function StatCard({ label, value, color, onClick, sub }) {
         {value}
       </div>
       {sub && (
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 'var(--sp-1)' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 'var(--mar-xs)' }}>
           {sub}
         </div>
       )}

@@ -133,7 +133,7 @@ export default function Inventory() {
   const fmt = (n) => `$${Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
 
   if (loading) return (
-    <div className="page-content fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 'var(--sp-3)' }}>
+    <div className="page-content fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 'var(--gap-m)' }}>
       <div className="spinner" />
       <span style={{ color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>Loading Warehouse IQ…</span>
     </div>
@@ -143,7 +143,7 @@ export default function Inventory() {
     <div className="page-content fade-in">
 
       {/* ── Page header ── */}
-      <div style={{ marginBottom: 'var(--sp-5)' }}>
+      <div style={{ marginBottom: 'var(--mar-xl)' }}>
         <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>WAREHOUSE IQ</div>
         <div style={{ fontSize: 'var(--text-base)', fontWeight: 800 }}>Master Dashboard</div>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginTop: 4 }}>
@@ -154,7 +154,7 @@ export default function Inventory() {
       {/* ── Pending CO alert ── */}
       {stats?.pendingCOs > 0 && (
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
-          style={{ background: '#FFFBEB', border: '1px solid #FCD34D', borderRadius: 'var(--r-xl)', padding: 'var(--sp-3) var(--sp-4)', marginBottom: 'var(--sp-4)', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', cursor: 'pointer' }}>
+          style={{ background: '#FFFBEB', border: '1px solid #FCD34D', borderRadius: 'var(--r-xl)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
           <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#92400E' }}>
@@ -169,7 +169,7 @@ export default function Inventory() {
       {/* ── Back order alert ── */}
       {backOrders.length > 0 && (
         <div onClick={() => navigate('/warehouse-hq/queue')}
-          style={{ background: '#ECFEFF', border: '1px solid #67E8F9', borderRadius: 'var(--r-xl)', padding: 'var(--sp-3) var(--sp-4)', marginBottom: 'var(--sp-4)', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', cursor: 'pointer' }}>
+          style={{ background: '#ECFEFF', border: '1px solid #67E8F9', borderRadius: 'var(--r-xl)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
           <ClockCountdown size={18} weight="fill" style={{ color: '#0891B2', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#155E75' }}>
@@ -185,7 +185,7 @@ export default function Inventory() {
       )}
 
       {/* ── 5 Stat cards ── */}
-      <div className="wiq-stat-grid" style={{ marginBottom: 'var(--sp-5)' }}>
+      <div className="wiq-stat-grid" style={{ marginBottom: 'var(--mar-xl)' }}>
         {[
           { label: 'Total Inventory Value', value: fmt(stats?.totalValue), color: 'var(--navy)', onClick: () => navigate('/warehouse-hq/inventory') },
           { label: 'Open Sales Orders',     value: stats?.openSOs ?? '—',  color: 'var(--blue)', onClick: () => navigate('/sales-orders') },
@@ -203,7 +203,7 @@ export default function Inventory() {
 
       {/* ── Master Warehouse ── */}
       {master && (
-        <div className="card" style={{ marginBottom: 'var(--sp-4)' }}>
+        <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
             <span className="card-title">
               <Lightning size={15} weight="fill" style={{ marginRight: 6, color: '#93C5FD' }} />
@@ -212,19 +212,19 @@ export default function Inventory() {
             </span>
             <span style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)' }}>{master.city}, {master.state}</span>
           </div>
-          <div style={{ padding: 'var(--sp-4)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)' }}>
+          <div style={{ padding: 'var(--pad-l)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)' }}>
             {[
               { label: 'Inventory Value', value: fmt(warehouseHealth[master.id]?.total) },
               { label: 'Parts Tracked',  value: warehouseHealth[master.id]?.parts ?? '—' },
               { label: 'Health',         value: <HealthBadge out={warehouseHealth[master.id]?.out || 0} low={warehouseHealth[master.id]?.low || 0} /> },
             ].map(f => (
-              <div key={f.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--sp-3)' }}>
+              <div key={f.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)' }}>
                 <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--black)', marginBottom: 4 }}>{f.label}</div>
                 <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, fontFamily: 'var(--font)' }}>{f.value}</div>
               </div>
             ))}
           </div>
-          <div style={{ padding: '0 var(--sp-4) var(--sp-4)', display: 'flex', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
+          <div style={{ padding: '0 var(--pad-l) var(--pad-l)', display: 'flex', gap: 'var(--gap-s)', flexWrap: 'wrap' }}>
             {[
               ['Sales Orders', '/sales-orders'],
               ['Inventory',    '/warehouse-hq/inventory'],
@@ -242,7 +242,7 @@ export default function Inventory() {
       )}
 
       {/* ── Sub-Warehouses ── */}
-      <div className="card" style={{ marginBottom: 'var(--sp-4)' }}>
+      <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
           <span className="card-title"><Buildings size={15} style={{ marginRight: 6 }} />Additional Warehouses</span>
         </div>
@@ -251,7 +251,7 @@ export default function Inventory() {
           return (
             <div key={wh.id}
               onClick={() => navigate(`/warehouse-hq/warehouse/${wh.id}`)}
-              style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < subs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < subs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
               {/* Icon */}
               <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <Package size={16} style={{ color: 'var(--navy)' }} />
@@ -272,7 +272,7 @@ export default function Inventory() {
       </div>
 
       {/* ── Active Sales Orders ── */}
-      <div className="card" style={{ marginBottom: 'var(--sp-4)' }}>
+      <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/sales-orders')}>
           <span className="card-title"><Receipt size={15} style={{ marginRight: 6 }} />Active Sales Orders</span>
           <span style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -280,14 +280,14 @@ export default function Inventory() {
           </span>
         </div>
         {recentSOs.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--sp-5)' }}>
+          <div className="empty" style={{ padding: 'var(--pad-xl)' }}>
             <Receipt size={28} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
             <div className="empty-title">No active sales orders</div>
           </div>
         ) : recentSOs.map((so, idx) => (
           <div key={so.id}
             onClick={() => navigate(`/sales-orders/${so.id}`)}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
             <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Receipt size={16} style={{ color: 'var(--navy)' }} />
             </div>
@@ -310,7 +310,7 @@ export default function Inventory() {
 
       {/* ── Low / Out of Stock ── */}
       {lowStock.length > 0 && (
-        <div className="card" style={{ marginBottom: 'var(--sp-4)' }}>
+        <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
             <span className="card-title"><Warning size={15} weight="fill" style={{ marginRight: 6, color: '#FCA5A5' }} />Low & Out of Stock</span>
             <span style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -321,7 +321,7 @@ export default function Inventory() {
             const isOut = item.quantity_on_hand === 0
             return (
               <div key={item.id}
-                style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
                 <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: isOut ? 'var(--error-soft)' : 'var(--warning-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Warning size={16} weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--warning)' }} />
                 </div>
@@ -341,7 +341,7 @@ export default function Inventory() {
       )}
 
       {/* ── Recent Transfers / Shipments ── */}
-      <div className="card" style={{ marginBottom: 'var(--sp-6)' }}>
+      <div className="card" style={{ marginBottom: 'var(--mar-xxl)' }}>
         <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/transfer')}>
           <span className="card-title"><Truck size={15} style={{ marginRight: 6 }} />Recent Transfers</span>
           <span style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -349,14 +349,14 @@ export default function Inventory() {
           </span>
         </div>
         {recentShips.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--sp-5)' }}>
+          <div className="empty" style={{ padding: 'var(--pad-xl)' }}>
             <Truck size={28} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
             <div className="empty-title">No transfers yet</div>
             <div className="empty-desc">Transfers between warehouses will appear here.</div>
           </div>
         ) : recentShips.map((t, idx) => (
           <div key={t.id}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
             <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--success-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <CheckCircle size={16} weight="fill" style={{ color: 'var(--success-text)' }} />
             </div>

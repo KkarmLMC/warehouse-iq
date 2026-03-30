@@ -53,8 +53,8 @@ function POCard({ po, totals, onPress }) {
 
   return (
     <button onClick={onPress} style={{
-      display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
-      padding: 'var(--sp-4)', border: 'none', background: 'none',
+      display: 'flex', alignItems: 'center', gap: '0.75rem',
+      padding: 'var(--pad-l)', border: 'none', background: 'none',
       width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
       cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
     }}>
@@ -69,7 +69,7 @@ function POCard({ po, totals, onPress }) {
 
       {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', marginBottom: 3, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 3, flexWrap: 'wrap' }}>
           <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
             {po.so_number}
           </span>
@@ -86,14 +86,14 @@ function POCard({ po, totals, onPress }) {
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {po.customer_name}
         </div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--sp-2)' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--gap-s)' }}>
           {po.project_name && <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{po.project_name}</span>}
           {po.so_date && <span>· {new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
         </div>
       </div>
 
       {/* Total + chevron */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexShrink: 0 }}>
         {grandTotal > 0 && (
           <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
@@ -167,13 +167,13 @@ export default function PurchaseOrders() {
     <div className="page-content fade-in">
 
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--sp-3)', marginBottom: 'var(--sp-5)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xl)', flexWrap: 'wrap' }}>
         <div>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
           <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Sales Orders</div>
         </div>
         <button onClick={() => navigate('/sales-orders/new')}
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
           <Plus size={15} /> New Sales Order
         </button>
       </div>
@@ -181,9 +181,9 @@ export default function PurchaseOrders() {
       {/* Alert banner for submitted POs awaiting review */}
       {queuedCount > 0 && (
         <div style={{
-          display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
-          padding: 'var(--sp-3) var(--sp-4)', background: '#FEF3C7',
-          borderRadius: 'var(--r-l)', marginBottom: 'var(--sp-4)',
+          display: 'flex', alignItems: 'center', gap: '0.75rem',
+          padding: 'var(--pad-m) var(--pad-l)', background: '#FEF3C7',
+          borderRadius: 'var(--r-l)', marginBottom: '1rem',
           border: '1px solid #FDE68A', cursor: 'pointer',
         }} onClick={() => setActiveTab('queued')}>
           <Warning size={18} weight="fill" style={{ color: '#D97706', flexShrink: 0 }} />
@@ -200,13 +200,13 @@ export default function PurchaseOrders() {
       )}
 
       {/* Stats strip */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
         {[
           { label: 'Total Orders', value: pos.length },
           { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? '#D97706' : undefined },
           { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: '#15803D' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--sp-3)', textAlign: 'center' }}>
+          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--black)' }}>{s.value}</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
           </div>
@@ -214,11 +214,11 @@ export default function PurchaseOrders() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 2, marginBottom: 'var(--sp-3)', overflowX: 'auto', scrollbarWidth: 'none', borderBottom: '2px solid var(--border-l)', paddingBottom: 0 }}>
+      <div style={{ display: 'flex', gap: 2, marginBottom: 'var(--mar-m)', overflowX: 'auto', scrollbarWidth: 'none', borderBottom: '2px solid var(--border-l)', paddingBottom: 0 }}>
         {TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             style={{
-              flexShrink: 0, padding: 'var(--sp-2) var(--sp-3)', border: 'none',
+              flexShrink: 0, padding: '0.5rem 0.75rem', border: 'none',
               background: 'none', cursor: 'pointer', fontSize: 'var(--text-sm)',
               fontWeight: activeTab === tab.key ? 700 : 500,
               color: activeTab === tab.key ? 'var(--navy)' : 'var(--text-3)',
@@ -236,7 +236,7 @@ export default function PurchaseOrders() {
       </div>
 
       {/* Search + division filter */}
-      <div style={{ display: 'flex', gap: 'var(--sp-2)', marginBottom: 'var(--sp-4)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 'var(--gap-s)', marginBottom: 'var(--mar-l)', flexWrap: 'wrap' }}>
         <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
           <MagnifyingGlass size={15} style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
           <input value={search} onChange={e => setSearch(e.target.value)}
@@ -247,7 +247,7 @@ export default function PurchaseOrders() {
         {['all', 'LM', 'Bolt'].map(d => (
           <button key={d} onClick={() => setDivisionFilter(d)}
             style={{
-              padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+              padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-full)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
               border: `1px solid ${divisionFilter === d ? 'var(--navy)' : 'var(--border-l)'}`,
               background: divisionFilter === d ? 'var(--navy)' : 'transparent',
               color: divisionFilter === d ? '#fff' : 'var(--black)',
@@ -259,14 +259,14 @@ export default function PurchaseOrders() {
 
       {/* PO list */}
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
       ) : filtered.length === 0 ? (
         <div className="empty">
-          <Receipt size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }} />
+          <Receipt size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
           <div className="empty-title">{pos.length === 0 ? 'No sales orders yet' : 'No SOs match filters'}</div>
           <div className="empty-desc">{pos.length === 0 ? 'Create your first Sales Order to get started.' : 'Try adjusting your filters.'}</div>
           {pos.length === 0 && (
-            <button className="btn btn-primary" style={{ marginTop: 'var(--sp-4)' }} onClick={() => navigate('/sales-orders/new')}>
+            <button className="btn btn-primary" style={{ marginTop: 'var(--mar-l)' }} onClick={() => navigate('/sales-orders/new')}>
               Create First Sales Order
             </button>
           )}

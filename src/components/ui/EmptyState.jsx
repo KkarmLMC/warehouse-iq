@@ -16,7 +16,7 @@ export default function EmptyState({ icon: Icon, title, desc, action }) {
       )}
       {title && <div className="empty-title">{title}</div>}
       {desc  && <div className="empty-desc">{desc}</div>}
-      {action && <div style={{ marginTop: 'var(--sp-3)' }}>{action}</div>}
+      {action && <div style={{ marginTop: 'var(--mar-m)' }}>{action}</div>}
     </div>
   )
 }

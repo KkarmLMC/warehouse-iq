@@ -16,7 +16,7 @@ export default function FilterPills({ options, active, onChange }) {
   return (
     <div style={{
       display: 'flex',
-      gap: 'var(--sp-2)',
+      gap: 'var(--gap-s)',
       overflowX: 'auto',
       scrollbarWidth: 'none',
       msOverflowStyle: 'none',

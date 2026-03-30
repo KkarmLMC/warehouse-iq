@@ -28,13 +28,13 @@ export default function FulfillmentQueue() {
 
   return (
     <div className="page-content fade-in">
-      <div style={{ marginBottom:'var(--sp-5)' }}>
+      <div style={{ marginBottom: 'var(--mar-xl)' }}>
         <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',marginBottom:4 }}>WAREHOUSE IQ</div>
         <div style={{ fontSize:'var(--text-base)',fontWeight:800 }}>Fulfillment Queue</div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--text-3)',marginTop:4 }}>Orders ready to pick and pack</div>
       </div>
 
-      <div style={{ position:'relative',marginBottom:'var(--sp-4)' }}>
+      <div style={{ position:'relative',marginBottom:'var(--mar-l)' }}>
         <MagnifyingGlass size={15} style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search orders…"
           style={{ paddingLeft:36,width:'100%',boxSizing:'border-box' }} />
@@ -42,16 +42,16 @@ export default function FulfillmentQueue() {
 
       <div className="card">
         {loading ? (
-          <div style={{ padding:'var(--sp-6)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
+          <div style={{ padding: 'var(--pad-xxl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
         ) : visible.length === 0 ? (
-          <div className="empty" style={{ padding:'var(--sp-6)' }}>
+          <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
             <ClipboardText size={32} style={{ color:'var(--text-3)',marginBottom:8 }} />
             <div className="empty-title">No orders in fulfillment</div>
             <div className="empty-desc">Orders pushed from the SO Queue will appear here.</div>
           </div>
         ) : visible.map((o, idx) => (
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/fulfillment/${o.id}`)}
-            style={{ display:'flex',alignItems:'center',gap:'var(--sp-3)',padding:'var(--sp-3) var(--sp-4)',
+            style={{ display:'flex',alignItems:'center',gap:'var(--gap-m)',padding: 'var(--pad-m) var(--pad-l)',
               borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none',cursor:'pointer' }}>
             <div style={{ width:36,height:36,borderRadius:'var(--r-l)',background:'#EFF6FF',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
               <ClipboardText size={16} style={{ color:'#1D4ED8' }} />

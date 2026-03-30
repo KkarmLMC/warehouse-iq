@@ -108,11 +108,11 @@ export default function AddEditPart() {
     setSaving(false)
   }
 
-  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
 
   const Field = ({ label, error, required, children }) => (
-    <div style={{ marginBottom: 'var(--sp-4)' }}>
-      <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, color: error ? 'var(--red)' : 'var(--black)', marginBottom: 'var(--sp-1)' }}>
+    <div style={{ marginBottom: 'var(--mar-l)' }}>
+      <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, color: error ? 'var(--red)' : 'var(--black)', marginBottom: 'var(--mar-xs)' }}>
         {label}{required && <span style={{ color: 'var(--red)', marginLeft: 4 }}>*</span>}
       </label>
       {children}
@@ -122,14 +122,14 @@ export default function AddEditPart() {
 
   return (
     <div className="page-content fade-in">
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-5)', marginBottom: 'var(--sp-4)', color: '#fff' }}>
+      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
         <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>{isEdit ? 'Edit Part' : 'New Part'}</div>
         <div style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>
           {isEdit ? 'Update part details' : 'Add a part to the catalog'}
         </div>
       </div>
 
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-5)', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)' }}>
         <Field label="Part Name" error={errors.name} required>
           <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Franklin Rod Air Terminal 1/2&quot;" style={{ width: '100%', borderColor: errors.name ? 'var(--red)' : undefined }} />
         </Field>
@@ -153,7 +153,7 @@ export default function AddEditPart() {
           <input value={form.manufacturer_part_no} onChange={e => set('manufacturer_part_no', e.target.value)} placeholder="e.g. LMC-1234-A" style={{ width: '100%', fontFamily: 'var(--mono)' }} />
         </Field>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)' }}>
           <Field label="Unit of Measure">
             <select value={form.unit_of_measure} onChange={e => set('unit_of_measure', e.target.value)} style={{ width: '100%' }}>
               {['each', 'ft', 'roll', 'box', 'bag', 'set', 'pair', 'lb'].map(u => <option key={u} value={u}>{u}</option>)}
@@ -177,11 +177,11 @@ export default function AddEditPart() {
         </Field>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)', marginBottom: 'var(--sp-8)' }}>
-        <button onClick={() => navigate(-1)} style={{ padding: 'var(--sp-3)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xxl)' }}>
+        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Cancel
         </button>
-        <button onClick={handleSubmit} disabled={saving} style={{ padding: 'var(--sp-3)', borderRadius: 'var(--r-m)', border: 'none', background: saving ? 'var(--hover)' : 'var(--navy)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)' }}>
+        <button onClick={handleSubmit} disabled={saving} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: 'none', background: saving ? 'var(--hover)' : 'var(--navy)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
           {saving ? <><SpinnerGap size={14} style={{ animation: 'spin 1s linear infinite' }} /> Saving…</> : <><CheckCircle size={14} /> {isEdit ? 'Save Changes' : 'Add Part'}</>}
         </button>
       </div>

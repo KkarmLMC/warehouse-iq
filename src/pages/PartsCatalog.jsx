@@ -51,13 +51,13 @@ function CategorySection({ category, parts, onPartPress }) {
     <div style={{
       background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)',
       overflow: 'hidden', border: '1px solid var(--border-l)',
-      marginBottom: 'var(--sp-3)',
+      marginBottom: 'var(--mar-m)',
     }}>
       <button
         onClick={() => setExpanded(e => !e)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center',
-          gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)',
+          gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--gap-l)',
           border: 'none', background: 'var(--navy)', cursor: 'pointer', textAlign: 'left',
         }}
       >
@@ -91,14 +91,14 @@ function CategorySection({ category, parts, onPartPress }) {
           {parts.map((part, idx) => (
             <button key={part.id} onClick={() => onPartPress(part.id)}
               style={{
-                display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
-                padding: 'var(--sp-3) var(--sp-4)',
+                display: 'flex', alignItems: 'center', gap: '0.75rem',
+                padding: 'var(--pad-m) var(--pad-l)',
                 border: 'none', background: 'none', width: '100%', textAlign: 'left',
                 borderBottom: idx < parts.length - 1 ? '1px solid var(--border-l)' : 'none',
                 cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
               }}>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexWrap: 'wrap' }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {part.name}
                   </div>
@@ -108,7 +108,7 @@ function CategorySection({ category, parts, onPartPress }) {
                     </span>
                   )}
                 </div>
-                <div style={{ display: 'flex', gap: 'var(--sp-3)', marginTop: 2, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: 'var(--gap-m)', marginTop: 2, flexWrap: 'wrap' }}>
                   {part.sku && <span style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>{part.sku}</span>}
                   {part.unit_cost && <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>${part.unit_cost}</span>}
                 </div>
@@ -181,12 +181,12 @@ export default function PartsCatalog() {
     <div className="page-content fade-in">
 
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)', flexWrap: 'wrap' }}>
         <div>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
           <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Parts Catalog</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', background: '#EFF6FF', fontSize: 'var(--text-xs)', fontWeight: 600, color: '#1D4ED8' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-full)', background: '#EFF6FF', fontSize: 'var(--text-xs)', fontWeight: 600, color: '#1D4ED8' }}>
           <ArrowSquareOut size={12} /> QuickBooks sync — coming soon
         </div>
       </div>
@@ -194,7 +194,7 @@ export default function PartsCatalog() {
       {/* Tabs */}
       <div style={{
         display: 'flex', background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)',
-        padding: 4, gap: 4, marginBottom: 'var(--sp-4)',
+        padding: 4, gap: 4, marginBottom: 'var(--pad-l)',
         border: '1px solid var(--border-l)',
       }}>
         {TABS.map(tab => {
@@ -203,7 +203,7 @@ export default function PartsCatalog() {
           return (
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
               style={{
-                flex: 1, padding: 'var(--sp-2) var(--sp-3)', borderRadius: 'var(--r-l)',
+                flex: 1, padding: '0.5rem 0.75rem', borderRadius: 'var(--r-l)',
                 border: 'none', cursor: 'pointer', transition: 'all 0.15s ease',
                 background: active ? 'var(--navy)' : 'transparent',
                 color: active ? '#fff' : 'var(--text-3)',
@@ -220,7 +220,7 @@ export default function PartsCatalog() {
       </div>
 
       {/* Search */}
-      <div style={{ position: 'relative', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ position: 'relative', marginBottom: 'var(--mar-l)' }}>
         <MagnifyingGlass size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)}
           placeholder={`Search ${activeTab === 'All' ? 'all parts' : activeTab === 'LM' ? 'Lightning Master parts' : 'Bolt Lightning parts'}…`}
@@ -233,10 +233,10 @@ export default function PartsCatalog() {
       </div>
 
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
       ) : grouped.length === 0 ? (
         <div className="empty">
-          <Package size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }} />
+          <Package size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
           <div className="empty-title">
             {search ? 'No parts found' : activeTab === 'Bolt' ? 'No Bolt parts yet' : 'No parts found'}
           </div>
@@ -247,7 +247,7 @@ export default function PartsCatalog() {
       ) : (
         <>
           {search && (
-            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }}>
+            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }}>
               {grouped.reduce((s, g) => s + g.parts.length, 0)} result{grouped.reduce((s, g) => s + g.parts.length, 0) !== 1 ? 's' : ''} for "{search}"
             </div>
           )}

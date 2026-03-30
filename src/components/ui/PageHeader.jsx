@@ -10,7 +10,7 @@
  */
 export default function PageHeader({ eyebrow, title, subtitle, action }) {
   return (
-    <div style={{ marginBottom: 'var(--sp-4)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--sp-3)' }}>
+    <div style={{ marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--gap-m)' }}>
       <div>
         {eyebrow && (
           <div style={{ fontSize: 'var(--blackxs)', fontWeight: 700, color: 'var(--text-3)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>

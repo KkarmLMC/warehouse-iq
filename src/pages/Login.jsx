@@ -64,10 +64,10 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
   const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--sp-4)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--gap-l)' }}>
 
       {/* Dots — green/red when confirming */}
-      <div style={{ display: 'flex', gap: 'var(--sp-3)', height: 20, alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: 'var(--gap-m)', height: 20, alignItems: 'center' }}>
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} style={{
             width: i < digits.length ? 16 : 14,
@@ -93,13 +93,13 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
       )}
 
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-2) var(--sp-3)', background: '#FEF2F2', borderRadius: 'var(--r-l)', color: '#B91C1C', fontSize: 'var(--text-sm)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', background: '#FEF2F2', borderRadius: 'var(--r-l)', color: '#B91C1C', fontSize: 'var(--text-sm)' }}>
           <Warning size={14} />{error}
         </div>
       )}
 
       {/* Number grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)', width: '100%', maxWidth: 260 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', width: '100%', maxWidth: 260 }}>
         {[1,2,3,4,5,6,7,8,9].map(n => (
           <button key={n} onClick={() => press(String(n))} disabled={loading}
             style={btnBase}
@@ -132,7 +132,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
           disabled={!isFull || loading || (confirmPin && digits.join('') !== confirmPin)}
           style={{
             width: '100%', maxWidth: 260,
-            padding: 'var(--sp-3)',
+            padding: 'var(--pad-m)',
             borderRadius: 'var(--r-xl)',
             border: 'none',
             background: !isFull || loading
@@ -164,7 +164,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
             disabled={loading}
             style={{
               width: '100%', maxWidth: 260,
-              padding: 'var(--sp-3)',
+              padding: 'var(--pad-m)',
               borderRadius: 'var(--r-xl)',
               border: 'none',
               background: loading ? 'var(--border-l)' : 'var(--navy)',
@@ -289,8 +289,8 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
   return (
     <div className="login-page">
       {/* Logo */}
-      <div style={{ marginBottom: 'var(--sp-8)', textAlign: 'center', minHeight: 148 }}>
-        <div style={{ width: 56, height: 56, borderRadius: 'var(--r-xl)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--sp-4)' }}>
+      <div style={{ marginBottom: 'var(--mar-xxl)', textAlign: 'center', minHeight: 148 }}>
+        <div style={{ width: 56, height: 56, borderRadius: 'var(--r-xl)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--mar-l)' }}>
           <Lightning size={28} weight="fill" style={{ color: '#fff' }} />
         </div>
         <div style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', fontWeight: 800, lineHeight: 1.1 }}>
@@ -306,7 +306,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         {/* ── PIN setup mode ── */}
         {mode === 'setup-pin' && (
           <>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--sp-5)' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'var(--mar-xl)' }}>
               <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 4 }}>
                 {pinStep === 'enter' ? 'Set Your PIN' : 'Confirm PIN'}
               </div>
@@ -324,13 +324,13 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         {/* ── PIN login mode ── */}
         {mode === 'pin' && (
           <>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--sp-5)' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'var(--mar-xl)' }}>
               <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 4 }}>Enter PIN</div>
               <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)' }}>Enter your 6-digit PIN</div>
             </div>
             <PinPad onPin={handlePinLogin} loading={loading} error={error} requireConfirm={true} />
             <button onClick={() => { setMode('password'); setError('') }}
-              style={{ width: '100%', marginTop: 'var(--sp-4)', padding: 'var(--sp-2)', border: 'none', background: 'none', color: 'var(--navy)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
+              style={{ width: '100%', marginTop: 'var(--mar-l)', padding: 'var(--pad-s)', border: 'none', background: 'none', color: 'var(--navy)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
               Sign in with email instead
             </button>
           </>
@@ -339,7 +339,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         {/* ── Password login mode ── */}
         {mode === 'password' && (
           <>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 'var(--mar-xl)' }}>
               <button onClick={() => { setMode('pin'); setError('') }}
                 style={{ border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex' }}>
                 <ArrowLeft size={18} />
@@ -347,12 +347,12 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
               <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Sign in</div>
             </div>
             <form onSubmit={handlePasswordLogin}>
-              <div style={{ marginBottom: 'var(--sp-3)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--sp-1)' }}>Email</label>
+              <div style={{ marginBottom: 'var(--mar-m)' }}>
+                <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>Email</label>
                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.com" autoComplete="email" style={{ width: '100%' }} autoFocus />
               </div>
-              <div style={{ marginBottom: 'var(--sp-5)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--sp-1)' }}>Password</label>
+              <div style={{ marginBottom: 'var(--mar-xl)' }}>
+                <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>Password</label>
                 <div style={{ position: 'relative' }}>
                   <input type={showPw ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" autoComplete="current-password" style={{ width: '100%', paddingRight: 40 }} />
                   <button type="button" onClick={() => setShowPw(s => !s)}
@@ -362,12 +362,12 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                 </div>
               </div>
               {error && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', background: '#FEF2F2', borderRadius: 'var(--r-l)', marginBottom: 'var(--sp-4)', color: '#B91C1C', fontSize: 'var(--text-sm)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: '#FEF2F2', borderRadius: 'var(--r-l)', marginBottom: 'var(--mar-l)', color: '#B91C1C', fontSize: 'var(--text-sm)' }}>
                   <Warning size={14} style={{ flexShrink: 0 }} />{error}
                 </div>
               )}
               <button type="submit" disabled={loading}
-                style={{ width: '100%', padding: 'var(--sp-3)', borderRadius: 'var(--r-l)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-md)', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1, fontFamily: 'var(--font)' }}>
+                style={{ width: '100%', padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-md)', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1, fontFamily: 'var(--font)' }}>
                 {loading ? 'Signing in…' : 'Sign In'}
               </button>
             </form>
@@ -375,7 +375,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         )}
       </div>
 
-      <div style={{ marginTop: 'var(--sp-6)', fontSize: 'var(--text-xs)', color: 'var(--text-3)', textAlign: 'center' }}>
+      <div style={{ marginTop: 'var(--mar-xxl)', fontSize: 'var(--text-xs)', color: 'var(--text-3)', textAlign: 'center' }}>
         Contact your administrator to create an account.
       </div>
     </div>

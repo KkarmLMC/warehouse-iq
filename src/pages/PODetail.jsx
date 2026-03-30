@@ -36,13 +36,13 @@ function SectionGroup({ label, items }) {
   const subtotal = items.reduce((s, i) => s + (i.quantity * i.unit_cost), 0)
 
   return (
-    <div style={{ marginBottom: 'var(--sp-3)' }}>
+    <div style={{ marginBottom: 'var(--mar-m)' }}>
       <button onClick={() => setOpen(o => !o)} style={{
         width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: 'var(--sp-2) var(--sp-4)', background: 'var(--navy)', border: 'none', cursor: 'pointer',
+        padding: 'var(--pad-s) var(--pad-l)', background: 'var(--navy)', border: 'none', cursor: 'pointer',
       }}>
         <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>{label}</span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)' }}>
           <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>
             ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </span>
@@ -54,7 +54,7 @@ function SectionGroup({ label, items }) {
           display: 'grid',
           gridTemplateColumns: '1fr 40px 56px 64px',
           gap: 6,
-          padding: 'var(--sp-2) var(--sp-3)',
+          padding: 'var(--pad-s) var(--pad-m)',
           borderBottom: idx < items.length - 1 ? '1px solid var(--border-l)' : 'none',
           alignItems: 'start',
           background: 'var(--surface-raised)',
@@ -95,7 +95,7 @@ export default function PODetail() {
 
 
 
-  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
   if (!po) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Sales Order not found</div></div></div>
 
   const statusDisplay = STATUS_DISPLAY[po.status] || STATUS_DISPLAY.draft
@@ -129,8 +129,8 @@ export default function PODetail() {
     <div className="page-content fade-in">
 
       {/* SO Header card */}
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-5)', marginBottom: 'var(--sp-4)', color: '#fff' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--sp-3)' }}>
+      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
           <div>
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
               {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
@@ -152,7 +152,7 @@ export default function PODetail() {
         </div>
 
         {/* Customer details */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-4)', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 'var(--sp-3)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-l)', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 'var(--pad-m)' }}>
           {(po.customer_city || po.customer_state) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)' }}>
               <MapPin size={12} />
@@ -185,13 +185,13 @@ export default function PODetail() {
 
       {/* Inventory impact (when not yet published) */}
       {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--sp-3)' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
           {Object.entries(warehouseImpact).map(([wName, impact]) => (
-            <div key={wName} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--sp-2)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--text-sm)' }}>
+            <div key={wName} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--mar-s)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-sm)' }}>
                 <Buildings size={14} style={{ color: 'var(--black)' }} />
                 {wName}
               </div>
@@ -207,9 +207,9 @@ export default function PODetail() {
 
       {/* Line items — materials by section */}
       {sections.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', maxWidth: '100%' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           {/* Column headers */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--sp-2) var(--sp-3)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--pad-s) var(--pad-m)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
             {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
               <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', textAlign: h !== 'Item / Description' ? 'right' : 'left', whiteSpace: 'nowrap', overflow: 'hidden' }}>{h}</div>
             ))}
@@ -222,7 +222,7 @@ export default function PODetail() {
             />
           ))}
           {/* Materials subtotal */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', borderTop: '2px solid var(--border-l)', background: 'var(--hover)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderTop: '2px solid var(--border-l)', background: 'var(--hover)' }}>
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Materials Subtotal</span>
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
               ${materialsTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
@@ -233,12 +233,12 @@ export default function PODetail() {
 
       {/* Labor lines */}
       {laborLines.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', maxWidth: '100%' }}>
-          <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
+          <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)' }}>
             <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>Installation / Labor</span>
           </div>
           {laborLines.map((line, idx) => (
-            <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-l)' : 'none', alignItems: 'center', background: 'var(--surface-raised)' }}>
+            <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-l)' : 'none', alignItems: 'center', background: 'var(--surface-raised)' }}>
               <div>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>{line.description}</div>
               </div>
@@ -247,7 +247,7 @@ export default function PODetail() {
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, textAlign: 'right' }}>${(line.quantity * line.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
             </div>
           ))}
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', borderTop: '2px solid var(--border-l)', background: 'var(--hover)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderTop: '2px solid var(--border-l)', background: 'var(--hover)' }}>
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Labor Subtotal</span>
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>${laborTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
           </div>
@@ -256,7 +256,7 @@ export default function PODetail() {
 
       {/* Grand total */}
       {grandTotal > 0 && (
-        <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4) var(--sp-5)', marginBottom: 'var(--sp-5)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-l) var(--pad-xl)', marginBottom: 'var(--mar-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: '#fff' }}>Total</span>
           <span style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: '#fff' }}>
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
@@ -266,8 +266,8 @@ export default function PODetail() {
 
       {/* Notes */}
       {po.notes && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--sp-2)' }}>Notes</div>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-s)' }}>Notes</div>
           <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', lineHeight: 1.6 }}>{po.notes}</div>
         </div>
       )}
@@ -281,9 +281,9 @@ export default function PODetail() {
             onClick={() => navigate(cfg.path(po.id))}
             style={{
               width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              padding: 'var(--sp-4) var(--sp-5)', borderRadius: 'var(--r-xl)',
+              padding: 'var(--pad-l) var(--pad-xl)', borderRadius: 'var(--r-xl)',
               background: cfg.color, border: 'none', cursor: 'pointer',
-              marginBottom: 'var(--sp-6)',
+              marginBottom: 'var(--mar-xxl)',
             }}
           >
             <div style={{ textAlign: 'left' }}>

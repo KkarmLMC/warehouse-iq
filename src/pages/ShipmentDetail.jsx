@@ -84,17 +84,17 @@ export default function ShipmentDetail() {
   return (
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/shipment')}
-        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--sp-3)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
         <ArrowLeft size={14} /> Back to Shipment Queue
       </button>
 
-      <div style={{ marginBottom:'var(--sp-5)' }}>
+      <div style={{ marginBottom: 'var(--mar-xl)' }}>
         <div style={{ fontSize:'var(--text-base)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--black)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {shipTo && (
-          <div style={{ marginTop:8,padding:'var(--sp-2) var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
+          <div style={{ marginTop: 8,padding:'var(--mar-s) var(--pad-m)',background:'var(--surface-raised)',borderRadius:'var(--r-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
             <MapPin size={14} style={{ color:'var(--navy)',flexShrink:0 }} />
             <div>
               <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>SHIP TO</div>
@@ -110,19 +110,19 @@ export default function ShipmentDetail() {
       </div>
 
       {/* Packing list */}
-      <div className="card" style={{ marginBottom:'var(--sp-4)' }}>
+      <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
           <span className="card-title"><Package size={15} style={{ marginRight:6 }} />Packing List</span>
           <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{lines.length} items</span>
         </div>
-        <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--sp-2) var(--sp-4)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
+        <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
           {['Part','Qty','Source'].map(h => (
             <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
           ))}
         </div>
         {lines.map((line, idx) => (
           <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,alignItems:'start',
-            padding:'var(--sp-3) var(--sp-4)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+            padding: 'var(--pad-m) var(--pad-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
             <div>
               <div style={{ fontSize:'var(--text-sm)',fontWeight:600 }}>{line.description}</div>
               {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
@@ -147,11 +147,11 @@ export default function ShipmentDetail() {
       </div>
 
       {/* Shipment form */}
-      <div className="card" style={{ marginBottom:'var(--sp-4)' }}>
+      <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
           <span className="card-title"><Truck size={15} style={{ marginRight:6 }} />Process Shipment</span>
         </div>
-        <div style={{ padding:'var(--sp-4)',display:'flex',flexDirection:'column',gap:'var(--sp-3)' }}>
+        <div style={{ padding: 'var(--pad-l)',display:'flex',flexDirection:'column',gap:'var(--gap-m)' }}>
           <div>
             <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>
               Carrier <span style={{ color:'var(--error)' }}>*</span>
@@ -175,11 +175,11 @@ export default function ShipmentDetail() {
       </div>
 
       <button onClick={processShipment} disabled={!carrier.trim() || shipping || done}
-        style={{ width:'100%',padding:'var(--sp-3)',borderRadius:'var(--r-xl)',border:'none',
+        style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',border:'none',
           background: done ? 'var(--success-text)' : !carrier.trim() ? 'var(--border)' : 'var(--navy)',
           color: !carrier.trim() ? 'var(--text-3)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
-          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'var(--sp-2)' }}>
+          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
         {done ? <><CheckCircle size={16} weight="fill" /> Shipment Complete</>
           : shipping ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
           : !carrier.trim() ? 'Enter carrier to continue'

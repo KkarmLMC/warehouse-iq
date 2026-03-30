@@ -23,8 +23,8 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--sp-3)',
-        padding: noPad ? 'var(--sp-3) 0' : 'var(--sp-3) var(--sp-4)',
+        gap: 'var(--gap-m)',
+        padding: noPad ? 'var(--pad-m) 0' : 'var(--pad-m) var(--pad-l)',
         borderBottom: last ? 'none' : '1px solid var(--border-l)',
         cursor: onClick ? 'pointer' : 'default',
         transition: 'background var(--ease-fast)',

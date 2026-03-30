@@ -68,7 +68,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
       {/* Selected project display */}
       {value ? (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)' }}>
           <Briefcase size={16} style={{ color: 'var(--navy)', flexShrink: 0 }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -104,7 +104,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
             <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-m)', marginTop: 2, overflow: 'hidden', maxHeight: 280, overflowY: 'auto' }}>
               {results.map(p => (
                 <button key={p.id} onClick={() => handleSelect(p)}
-                  style={{ width: '100%', border: 'none', background: 'none', padding: 'var(--sp-3) var(--sp-4)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}
+                  style={{ width: '100%', border: 'none', background: 'none', padding: 'var(--pad-m) var(--pad-l)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', borderBottom: '1px solid var(--border-l)' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-raised)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}>
                   <Briefcase size={14} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
@@ -125,7 +125,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
           )}
 
           {open && !loading && query && results.length === 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-m)', marginTop: 2, padding: 'var(--sp-4)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-m)', marginTop: 2, padding: 'var(--pad-l)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
               No projects found for "{query}"
             </div>
           )}

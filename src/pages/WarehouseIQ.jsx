@@ -23,8 +23,8 @@ function chip(bg, color) {
 // ─── Summary card ─────────────────────────────────────────────────────────────
 function SumCard({ label, value, sub, color = 'var(--black)', Icon }) {
   return (
-    <div style={{ background:'var(--surface-raised)', borderRadius:'var(--r-xl)', padding:'var(--sp-4)', border:'1px solid var(--border-l)' }}>
-      <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', marginBottom:'var(--sp-2)' }}>
+    <div style={{ background:'var(--surface-raised)', borderRadius:'var(--r-xl)', padding:'var(--pad-l)', border:'1px solid var(--border-l)' }}>
+      <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', marginBottom: 'var(--mar-s)' }}>
         {Icon && <Icon size={14} style={{ color:'var(--text-3)' }} />}
         <span style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--black)' }}>{label}</span>
       </div>
@@ -186,30 +186,30 @@ export default function WarehouseIQ() {
     <div className="page-content fade-in">
 
       {/* Page header */}
-      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:'var(--sp-3)', marginBottom:'var(--sp-4)', flexWrap:'wrap' }}>
+      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:'var(--gap-m)', marginBottom: 'var(--mar-l)', flexWrap:'wrap' }}>
         <div>
           <div style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--black)', marginBottom:4 }}>WAREHOUSE IQ</div>
           <div style={{ fontSize:'var(--text-base)', fontWeight:800, lineHeight:1.1 }}>Inventory Dashboard</div>
         </div>
-        <div style={{ display:'flex', gap:'var(--sp-2)', alignItems:'center', flexWrap:'wrap' }}>
+        <div style={{ display:'flex', gap:'var(--gap-s)', alignItems:'center', flexWrap:'wrap' }}>
           {!isClosed && period && (
             <button onClick={handleClosePeriod} disabled={closing}
-              style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-3)', borderRadius:'var(--r-m)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+              style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
               <Lock size={13} /> {closing ? 'Closing…' : `Close ${periodLabel}`}
             </button>
           )}
           <button onClick={loadPeriod}
-            style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-3)', borderRadius:'var(--r-m)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer' }}>
+            style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer' }}>
             <ArrowsClockwise size={13} /> Refresh
           </button>
         </div>
       </div>
 
       {/* Period + warehouse selector */}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'var(--sp-4)', flexWrap:'wrap', gap:'var(--sp-3)' }}>
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'var(--mar-l)', flexWrap:'wrap', gap:'var(--gap-m)' }}>
         {/* Period badge */}
-        <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)' }}>
-          <div style={{ padding:'var(--sp-2) var(--sp-4)', borderRadius:'var(--r-full)', background: isClosed ? '#F1F5F9' : 'var(--navy)', color: isClosed ? '#64748B' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)' }}>
+          <div style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius:'var(--r-full)', background: isClosed ? '#F1F5F9' : 'var(--navy)', color: isClosed ? '#64748B' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
             {periodLabel}
           </div>
           {isClosed
@@ -219,11 +219,11 @@ export default function WarehouseIQ() {
         </div>
 
         {/* Warehouse tabs */}
-        <div style={{ display:'flex', gap:'var(--sp-2)', overflowX:'auto', scrollbarWidth:'none' }}>
+        <div style={{ display:'flex', gap:'var(--gap-s)', overflowX:'auto', scrollbarWidth:'none' }}>
           {warehouses.map(w => (
             <button key={w.id} onClick={() => setActiveWH(w.id)}
               style={{
-                flexShrink:0, padding:'var(--sp-1) var(--sp-3)', borderRadius:'var(--r-full)',
+                flexShrink:0, padding:'0.25rem 0.75rem', borderRadius:'var(--r-full)',
                 border:`1px solid ${activeWH === w.id ? 'var(--navy)' : 'var(--border-l)'}`,
                 background: activeWH === w.id ? 'var(--navy)' : 'transparent',
                 color: activeWH === w.id ? '#fff' : 'var(--black)',
@@ -236,7 +236,7 @@ export default function WarehouseIQ() {
       </div>
 
       {/* Summary cards */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(160px,1fr))', gap:'var(--sp-3)', marginBottom:'var(--sp-5)' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(160px,1fr))', gap:'var(--gap-m)', marginBottom: 'var(--mar-xl)' }}>
         <SumCard label="Inventory Value"   value={`$${totalValue.toLocaleString('en-US',{maximumFractionDigits:0})}`} Icon={CurrencyDollar} color="#15803D" />
         <SumCard label="Units Added"       value={totalAdded.toLocaleString()} sub="this period" Icon={ArrowDown} color="#1D4ED8" />
         <SumCard label="Units Used"        value={totalUsed.toLocaleString()}  sub="this period" Icon={ArrowUp}   color="#7C3AED" />
@@ -247,9 +247,9 @@ export default function WarehouseIQ() {
 
       {/* Active POs section */}
       {pos.length > 0 && (
-        <div style={{ background:'var(--surface-raised)', borderRadius:'var(--r-xl)', overflow:'hidden', border:'1px solid var(--border-l)', marginBottom:'var(--sp-4)' }}>
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--sp-3) var(--sp-4)', borderBottom:'1px solid var(--border-l)' }}>
-            <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)' }}>
+        <div style={{ background:'var(--surface-raised)', borderRadius:'var(--r-xl)', overflow:'hidden', border:'1px solid var(--border-l)', marginBottom:'var(--mar-l)' }}>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--pad-m) var(--pad-l)', borderBottom:'1px solid var(--border-l)' }}>
+            <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)' }}>
               <Receipt size={15} style={{ color:'var(--navy)' }} />
               <span style={{ fontSize:'var(--text-sm)', fontWeight:700 }}>Active Sales Orders</span>
               <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
@@ -261,7 +261,7 @@ export default function WarehouseIQ() {
           </div>
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
-              style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--sp-3)', padding:'var(--sp-2) var(--sp-4)', border:'none', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+              style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--gap-m)', padding: 'var(--pad-s) var(--pad-l)', border:'none', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-l)' : 'none' }}>
               <div style={{ fontSize:'var(--blackxs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'#EFF6FF', color: po.division==='Bolt'?'#BE123C':'#1D4ED8' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
@@ -280,7 +280,7 @@ export default function WarehouseIQ() {
       <div style={{ background:'var(--surface-raised)', borderRadius:'var(--r-xl)', overflow:'hidden', border:'1px solid var(--border-l)' }}>
         
         {/* Table toolbar */}
-        <div style={{ padding:'var(--sp-3) var(--sp-4)', borderBottom:'1px solid var(--border-l)', display:'flex', gap:'var(--sp-3)', alignItems:'center', flexWrap:'wrap' }}>
+        <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom:'1px solid var(--border-l)', display:'flex', gap:'var(--gap-m)', alignItems:'center', flexWrap:'wrap' }}>
           {/* Search */}
           <div style={{ position:'relative', flex:1, minWidth:160 }}>
             <MagnifyingGlass size={13} style={{ position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:'var(--text-3)' }} />
@@ -289,7 +289,7 @@ export default function WarehouseIQ() {
             {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', border:'none', background:'none', cursor:'pointer', color:'var(--text-3)', padding:0 }}><X size={12}/></button>}
           </div>
           {/* Filter pills */}
-          <div style={{ display:'flex', gap:'var(--sp-1)' }}>
+          <div style={{ display:'flex', gap:'var(--gap-xs)' }}>
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
                 style={{ padding:'3px 10px', borderRadius:'var(--r-full)', border:`1px solid ${filter===val?'var(--navy)':'var(--border-l)'}`, background:filter===val?'var(--navy)':'transparent', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
@@ -301,7 +301,7 @@ export default function WarehouseIQ() {
         </div>
 
         {/* Column headers */}
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-4)', background:'var(--navy)', position:'sticky', top:0, zIndex:10 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', background:'var(--navy)', position:'sticky', top:0, zIndex:10 }}>
           {['Part / SKU','Start','Added','Used','On Order','Stock','Value',''].map((h,i) => (
             <div key={i} style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'rgba(255,255,255,0.6)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
           ))}
@@ -309,9 +309,9 @@ export default function WarehouseIQ() {
 
         {/* Rows */}
         {loading ? (
-          <div style={{ display:'flex', justifyContent:'center', padding:'var(--sp-10)' }}><div className="spinner" /></div>
+          <div style={{ display:'flex', justifyContent:'center', padding:'var(--pad-xxl)' }}><div className="spinner" /></div>
         ) : filtered.length === 0 ? (
-          <div style={{ padding:'var(--sp-8)', textAlign:'center', color:'var(--text-3)', fontSize:'var(--text-sm)' }}>
+          <div style={{ padding: 'var(--pad-xxl)', textAlign:'center', color:'var(--text-3)', fontSize:'var(--text-sm)' }}>
             {rows.length === 0 ? 'No inventory data for this warehouse.' : 'No parts match filters.'}
           </div>
         ) : filtered.map((r, idx) => {
@@ -323,7 +323,7 @@ export default function WarehouseIQ() {
           return (
             <div key={r.part.id}
               onClick={() => navigate(`/warehouse-hq/part/${r.part.id}`)}
-              style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-4)', borderBottom:'1px solid var(--border-l)', background:rowBg, cursor:'pointer', transition:'background 0.1s' }}
+              style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderBottom:'1px solid var(--border-l)', background:rowBg, cursor:'pointer', transition:'background 0.1s' }}
               onMouseEnter={e => e.currentTarget.style.background = isOut?'#FFE4E4':isLow?'#FEF3C7':'var(--hover)'}
               onMouseLeave={e => e.currentTarget.style.background = rowBg}
             >
@@ -371,7 +371,7 @@ export default function WarehouseIQ() {
 
         {/* Totals footer */}
         {filtered.length > 0 && (
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--sp-2)', padding:'var(--sp-3) var(--sp-4)', background:'var(--navy)', borderTop:'2px solid var(--border-l)' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-m) var(--pad-l)', background:'var(--navy)', borderTop:'2px solid var(--border-l)' }}>
             <div style={{ fontSize:'var(--text-xs)', fontWeight:800, color:'#fff' }}>Period Totals</div>
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'rgba(255,255,255,0.5)' }}>—</div>
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#93C5FD' }}>

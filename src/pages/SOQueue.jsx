@@ -83,13 +83,13 @@ export default function SOQueue() {
   return (
     <div className="page-content fade-in">
       {/* Header */}
-      <div style={{ marginBottom: 'var(--sp-5)' }}>
+      <div style={{ marginBottom: 'var(--mar-xl)' }}>
         <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>WAREHOUSE IQ</div>
         <div style={{ fontSize: 'var(--text-base)', fontWeight: 800 }}>Sales Order Pipeline</div>
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--sp-4)', overflowX: 'auto', paddingBottom: 2 }}>
+      <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
             style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-xl)', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
@@ -101,7 +101,7 @@ export default function SOQueue() {
       </div>
 
       {/* Search */}
-      <div style={{ position: 'relative', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ position: 'relative', marginBottom: 'var(--mar-l)' }}>
         <MagnifyingGlass size={15} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search by SO number, customer, project…"
           style={{ paddingLeft: 36, width: '100%', boxSizing: 'border-box' }} />
@@ -110,9 +110,9 @@ export default function SOQueue() {
       {/* Orders list */}
       <div className="card">
         {loading ? (
-          <div style={{ padding: 'var(--sp-6)', textAlign: 'center' }}><div className="spinner" style={{ margin: '0 auto' }} /></div>
+          <div style={{ padding: 'var(--pad-xxl)', textAlign: 'center' }}><div className="spinner" style={{ margin: '0 auto' }} /></div>
         ) : visible.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--sp-6)' }}>
+          <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
             <Receipt size={32} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
             <div className="empty-title">No orders in {TABS.find(t=>t.key===tab)?.label}</div>
             <div className="empty-desc">Orders will appear here as they move through the pipeline.</div>
@@ -129,7 +129,7 @@ export default function SOQueue() {
                 else if (ns === 'back_ordered') navigate(`/warehouse-hq/queue/${o.id}`)
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
-              style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
               <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <Receipt size={16} style={{ color: 'var(--navy)' }} />
               </div>

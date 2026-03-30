@@ -140,11 +140,11 @@ export default function FulfillmentDetail() {
   return (
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/fulfillment')}
-        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--sp-3)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
         <ArrowLeft size={14} /> Back to Fulfillment
       </button>
 
-      <div style={{ marginBottom:'var(--sp-4)' }}>
+      <div style={{ marginBottom: 'var(--mar-l)' }}>
         <div style={{ fontSize:'var(--text-base)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--black)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
@@ -157,7 +157,7 @@ export default function FulfillmentDetail() {
       </div>
 
       {shortageLines.length > 0 && (
-        <div style={{ background:'#FEF2F2',border:'1px solid #FCA5A5',borderRadius:'var(--r-xl)',padding:'var(--sp-3) var(--sp-4)',marginBottom:'var(--sp-4)',display:'flex',alignItems:'center',gap:'var(--sp-3)' }}>
+        <div style={{ background:'#FEF2F2',border:'1px solid #FCA5A5',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
           <Warning size={16} weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
           <div style={{ fontSize:'var(--text-xs)',color:'#991B1B' }}>
             {shortageLines.length} part{shortageLines.length!==1?'s':''} had shortages — split fulfillment applied where possible. Review red items before confirming.
@@ -166,14 +166,14 @@ export default function FulfillmentDetail() {
       )}
 
       {/* Pull list */}
-      <div className="card" style={{ marginBottom:'var(--sp-4)' }}>
+      <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
           <span className="card-title"><Package size={15} style={{ marginRight:6 }} />Pull List</span>
           <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{lines.filter(l=>checked[l.id]).length}/{lines.length} pulled</span>
         </div>
 
         {/* Column headers */}
-        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--sp-2) var(--sp-4)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
+        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
           {['','Part / Warehouse','Qty'].map(h => (
             <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
           ))}
@@ -188,7 +188,7 @@ export default function FulfillmentDetail() {
             <div
               onClick={() => toggleLine(line.id)}
               style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,alignItems:'center',
-                padding:'var(--sp-4) var(--sp-4)',cursor:'pointer',minHeight:64,
+                padding: 'var(--pad-l) var(--pad-l)',cursor:'pointer',minHeight:64,
                 borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-l)' : 'none',
                 background: isBO ? '#ECFEFF' : isOut ? '#FEF2F2' : isPulled ? '#F0FDF4' : 'transparent',
                 opacity: isBO ? 0.7 : 1 }}>
@@ -232,7 +232,7 @@ export default function FulfillmentDetail() {
               </div>
             </div>
             {flags[line.id] && (
-              <div style={{ margin:'0 var(--sp-4) var(--sp-2)',padding:'var(--sp-2) var(--sp-3)',background:'#FEF2F2',borderRadius:6,fontSize:'var(--text-sm)',color:'#991B1B',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+              <div style={{ margin: '0 var(--mar-l) var(--mar-s)',padding: 'var(--pad-s) var(--pad-m)',background:'#FEF2F2',borderRadius:6,fontSize:'var(--text-sm)',color:'#991B1B',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
                 <strong>Discrepancy:</strong> {flags[line.id]}
               </div>
             )}
@@ -242,17 +242,17 @@ export default function FulfillmentDetail() {
       </div>
 
       {/* Inventory note */}
-      <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginBottom:'var(--sp-4)',padding:'var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-l)' }}>
+      <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginBottom:'var(--mar-l)',padding: 'var(--pad-m)',background:'var(--surface-raised)',borderRadius:'var(--r-l)' }}>
         Inventory will be deducted from each warehouse when you push to shipment. Check off each part as you pull it from the shelves.
       </div>
 
       {/* Push to Shipment */}
       <button onClick={pushToShipment} disabled={!allChecked || pushing || done}
-        style={{ width:'100%',padding:'var(--sp-3)',borderRadius:'var(--r-xl)',border:'none',
+        style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',border:'none',
           background: done ? 'var(--success-text)' : !allChecked ? 'var(--border)' : 'var(--navy)',
           color: !allChecked ? 'var(--text-3)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: allChecked && !pushing && !done ? 'pointer' : 'not-allowed',
-          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'var(--sp-2)' }}>
+          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
         {done ? <><CheckCircle size={16} weight="fill" /> Pushed to Shipment</>
           : pushing ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
           : !allChecked ? `Check off all ${lines.length - Object.values(checked).filter(Boolean).length} remaining parts first`

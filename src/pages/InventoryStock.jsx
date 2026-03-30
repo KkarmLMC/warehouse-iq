@@ -37,8 +37,8 @@ function PartRow({ part, levels, onPress }) {
 
   return (
     <button onClick={onPress} style={{
-      display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
-      padding: 'var(--sp-3) var(--sp-4)', border: 'none', background: 'none',
+      display: 'flex', alignItems: 'center', gap: '0.75rem',
+      padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none',
       width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
       cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
     }}>
@@ -61,7 +61,7 @@ function PartRow({ part, levels, onPress }) {
           {part.part_categories?.name || 'Uncategorized'}
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexShrink: 0 }}>
         <StockBadge qty={totalQty} minLevel={minLevel} onOrder={totalOnOrder} />
         <CaretRight size={14} style={{ color: 'var(--black)' }} />
       </div>
@@ -126,33 +126,33 @@ export default function InventoryStock() {
     <div className="page-content fade-in">
 
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--sp-4)', flexWrap: 'wrap', gap: 'var(--sp-3)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--mar-l)', flexWrap: 'wrap', gap: 'var(--gap-m)' }}>
         <div>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>
             INVENTORY / {selectedWarehouseName.toUpperCase()}
           </div>
           <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>Inventory</div>
         </div>
-        <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
+        <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
           <button onClick={() => navigate('/warehouse-hq/transfer')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-1)', padding: 'var(--sp-2) var(--sp-3)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
             <ArrowsLeftRight size={14} /> Transfer
           </button>
           <button onClick={() => navigate('/warehouse-hq/add-part')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-1)', padding: 'var(--sp-2) var(--sp-3)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer' }}>
             <Plus size={14} /> Add Part
           </button>
         </div>
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
         {[
           { label: 'Total Parts', value: totalParts, color: 'var(--navy)' },
           { label: 'Low Stock', value: lowCount, color: '#C2410C' },
           { label: 'Out of Stock', value: outCount, color: '#B91C1C' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--sp-3)', textAlign: 'center' }}>
+          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: s.color }}>{s.value}</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
           </div>
@@ -160,7 +160,7 @@ export default function InventoryStock() {
       </div>
 
       {/* Search */}
-      <div style={{ position: 'relative', marginBottom: 'var(--sp-3)' }}>
+      <div style={{ position: 'relative', marginBottom: 'var(--mar-m)' }}>
         <MagnifyingGlass size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts, SKU, manufacturer…"
           style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
@@ -172,21 +172,21 @@ export default function InventoryStock() {
       </div>
 
       {/* Filters row */}
-      <div style={{ display: 'flex', gap: 'var(--sp-2)', marginBottom: 'var(--sp-4)', overflowX: 'auto', paddingBottom: 2, scrollbarWidth: 'none', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 'var(--gap-s)', marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2, scrollbarWidth: 'none', flexWrap: 'wrap' }}>
         <button onClick={() => setSelectedWarehouse(null)}
-          style={{ flexShrink: 0, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', border: `1px solid ${!selectedWarehouse ? 'var(--navy)' : 'var(--border-l)'}`, background: !selectedWarehouse ? 'var(--navy)' : 'transparent', color: !selectedWarehouse ? '#fff' : 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+          style={{ flexShrink: 0, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-full)', border: `1px solid ${!selectedWarehouse ? 'var(--navy)' : 'var(--border-l)'}`, background: !selectedWarehouse ? 'var(--navy)' : 'transparent', color: !selectedWarehouse ? '#fff' : 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
           All Warehouses
         </button>
         {warehouses.map(w => (
           <button key={w.id} onClick={() => setSelectedWarehouse(w.id)}
-            style={{ flexShrink: 0, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', border: `1px solid ${selectedWarehouse === w.id ? 'var(--navy)' : 'var(--border-l)'}`, background: selectedWarehouse === w.id ? 'var(--navy)' : 'transparent', color: selectedWarehouse === w.id ? '#fff' : 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+            style={{ flexShrink: 0, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-full)', border: `1px solid ${selectedWarehouse === w.id ? 'var(--navy)' : 'var(--border-l)'}`, background: selectedWarehouse === w.id ? 'var(--navy)' : 'transparent', color: selectedWarehouse === w.id ? '#fff' : 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
             {w.name.replace(' Warehouse', '')}
           </button>
         ))}
-        <div style={{ width: 1, background: 'var(--border-l)', margin: '0 var(--sp-1)' }} />
+        <div style={{ width: 1, background: 'var(--border-l)', margin: '0 var(--mar-xs)' }} />
         {[['all', 'All'], ['low', 'Low Stock'], ['out', 'Out of Stock']].map(([val, lbl]) => (
           <button key={val} onClick={() => setStockFilter(val)}
-            style={{ flexShrink: 0, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', border: `1px solid ${stockFilter === val ? 'var(--red)' : 'var(--border-l)'}`, background: stockFilter === val ? 'var(--red)' : 'transparent', color: stockFilter === val ? '#fff' : 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+            style={{ flexShrink: 0, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-full)', border: `1px solid ${stockFilter === val ? 'var(--red)' : 'var(--border-l)'}`, background: stockFilter === val ? 'var(--red)' : 'transparent', color: stockFilter === val ? '#fff' : 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
             {lbl}
           </button>
         ))}
@@ -194,10 +194,10 @@ export default function InventoryStock() {
 
       {/* Parts list */}
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--sp-10)' }}><div className="spinner" /></div>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
       ) : filtered.length === 0 ? (
         <div className="empty">
-          <Package size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }} />
+          <Package size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
           <div className="empty-title">{parts.length === 0 ? 'No parts yet' : 'No parts match filters'}</div>
           <div className="empty-desc">{parts.length === 0 ? 'Add your first part to get started.' : 'Try adjusting your filters.'}</div>
         </div>
