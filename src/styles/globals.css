@@ -636,7 +636,7 @@ textarea { resize: vertical; }
   align-items: center;
   gap: 0.625rem;
   padding: var(--pad-s) 0.625rem;
-  border-radius: var(--r-m);
+  border-radius: 0;
   width: 100%;
   background: none;
   border: none;
