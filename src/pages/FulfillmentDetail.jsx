@@ -4,6 +4,7 @@ import { ArrowLeft, Package, CheckCircle, ArrowRight, Warning, ClockCountdown, T
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 
 export default function FulfillmentDetail() {
   const { id } = useParams()
@@ -119,7 +120,7 @@ export default function FulfillmentDetail() {
           ...(isBackOrderRerun ? { back_order_resolved_at: new Date().toISOString() } : {}) }).eq('id', id),
       ])
 
-      logActivity(db, user?.id, 'warehouse_iq', {
+      logActivity(db, user?.id, APP_SOURCE, {
         category:    'fulfillment',
         action:      'confirmed',
         label:       `Confirmed Fulfillment for ${order?.so_number || id}`,

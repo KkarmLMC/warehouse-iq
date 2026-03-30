@@ -4,6 +4,7 @@ import { ArrowLeft, Truck, CheckCircle, Package, MapPin, Warning } from '@phosph
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 
 export default function ShipmentDetail() {
   const { id } = useParams()
@@ -63,7 +64,7 @@ export default function ShipmentDetail() {
       completed_at: order?.has_back_order ? null : new Date().toISOString(),
       fulfilled_at: new Date().toISOString() }).eq('id', id)
 
-    logActivity(db, user?.id, 'warehouse_iq', {
+    logActivity(db, user?.id, APP_SOURCE, {
       category:    'shipment',
       action:      'shipped',
       label:       `Marked ${order?.so_number || id} Shipped — ${carrier.trim()}${order?.has_back_order ? ' (partial — back-order pending)' : ''}`,

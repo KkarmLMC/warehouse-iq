@@ -7,6 +7,7 @@ import {
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 
 // State abbreviation → region for proximity scoring
 const STATE_REGION = {
@@ -362,7 +363,7 @@ export default function RunOrder() {
       status:         'fulfillment',
       fulfillment_at: new Date().toISOString() }).eq('id', id)
 
-    logActivity(db, user?.id, 'warehouse_iq', {
+    logActivity(db, user?.id, APP_SOURCE, {
       category:    'sales_order',
       action:      isBackOrderRerun ? 'back_order_rerun' : 'pushed_to_fulfillment',
       label:       `${isBackOrderRerun ? 'Re-ran back-order for' : 'Pushed'} ${order?.so_number || id} to Fulfillment`,
