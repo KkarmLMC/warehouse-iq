@@ -1,12 +1,10 @@
 /**
  * RowItem
  * Standard list row — the single most repeated pattern across all three apps.
- * Replaces the 36×36 icon container + flex row + caret pattern.
  *
  * Props:
  *   icon       — Phosphor icon component e.g. Receipt
- *   iconColor  — icon color (defaults to --navy)
- *   iconBg     — icon container background (defaults to --white)
+ *   iconColor  — icon color (defaults to --black)
  *   title      — primary text (--text-sm, weight 600)
  *   subtitle   — secondary text (--text-xs, text-3)
  *   right      — JSX for the right side (value, badge, etc.)
@@ -16,7 +14,7 @@
  */
 import { CaretRight } from '@phosphor-icons/react'
 
-export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle, right, onClick, last, noPad }) {
+export default function RowItem({ icon: Icon, iconColor, title, subtitle, right, onClick, last, noPad }) {
   return (
     <div
       onClick={onClick}
@@ -32,14 +30,7 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
       onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
     >
       {Icon && (
-        <div style={{
-          width: 36, height: 36,
-          borderRadius: 'var(--r-l)',
-          background: iconBg || 'var(--bg)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexShrink: 0 }}>
-          <Icon size={16} style={{ color: iconColor || 'var(--navy)' }} />
-        </div>
+        <Icon size={18} style={{ color: iconColor || 'var(--black)', flexShrink: 0 }} />
       )}
 
       <div style={{ flex: 1, minWidth: 0 }}>

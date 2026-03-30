@@ -249,9 +249,7 @@ export default function Inventory() {
               onClick={() => navigate(`/warehouse-hq/warehouse/${wh.id}`)}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < subs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
               {/* Icon */}
-              <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <Package size={16} style={{ color: 'var(--navy)' }} />
-              </div>
+              <Package size={16} style={{ color: 'var(--navy)' }} />
               {/* Info */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{wh.name}</div>
@@ -284,9 +282,7 @@ export default function Inventory() {
           <div key={so.id}
             onClick={() => navigate(`/sales-orders/${so.id}`)}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Receipt size={16} style={{ color: 'var(--navy)' }} />
-            </div>
+            <Receipt size={16} style={{ color: 'var(--navy)' }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
@@ -318,9 +314,7 @@ export default function Inventory() {
             return (
               <div key={item.id}
                 style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-                <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: isOut ? 'var(--error-soft)' : 'var(--warning-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Warning size={16} weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--warning)' }} />
-                </div>
+                <Warning size={16} weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--warning)' }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.parts?.name || 'Unknown Part'}
@@ -353,9 +347,7 @@ export default function Inventory() {
         ) : recentShips.map((t, idx) => (
           <div key={t.id}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--success-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <CheckCircle size={16} weight="fill" style={{ color: 'var(--success-text)' }} />
-            </div>
+            <CheckCircle size={16} weight="fill" style={{ color: 'var(--success-text)' }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600 }}>
                 {t.from_warehouse?.name?.replace(' Warehouse', '')} → {t.to_warehouse?.name?.replace(' Warehouse', '')}

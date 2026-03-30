@@ -53,9 +53,7 @@ export default function ShipmentQueue() {
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/shipment/${o.id}`)}
             style={{ display:'flex',alignItems:'center',gap:'var(--gap-m)',padding: 'var(--pad-m) var(--pad-l)',
               borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none',cursor:'pointer' }}>
-            <div style={{ width:36,height:36,borderRadius:'var(--r-l)',background:'var(--blue-tint-80)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
-              <Truck size={16} style={{ color:'var(--blue-shade-20)' }} />
-            </div>
+            <Truck size={16} style={{ color:'var(--blue-shade-20)' }} />
             <div style={{ flex:1,minWidth:0 }}>
               <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
               <div style={{ fontSize:'var(--text-xs)',color:'var(--black)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
