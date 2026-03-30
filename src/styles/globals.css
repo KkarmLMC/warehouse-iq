@@ -1194,6 +1194,7 @@ textarea { resize: vertical; }
   font-weight: 700;
   color: var(--white);
   min-width: 0;
+  text-transform: capitalize;
 }
 .card-title svg { color: var(--white); flex-shrink: 0; }
 .card-header__meta {
@@ -1205,6 +1206,7 @@ textarea { resize: vertical; }
   color: var(--white);
   flex-shrink: 0;
   white-space: nowrap;
+  text-transform: capitalize;
 }
 .card-header__action {
   display: flex;
@@ -1215,6 +1217,7 @@ textarea { resize: vertical; }
   color: var(--white);
   flex-shrink: 0;
   white-space: nowrap;
+  text-transform: capitalize;
   cursor: pointer;
   background: none;
   border: none;
