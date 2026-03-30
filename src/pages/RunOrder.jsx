@@ -66,10 +66,17 @@ export default function RunOrder() {
     setLevels(lvl || [])
     setKits(kt || [])
     setHasRun(o?.status === 'running' || o?.status === 'fulfillment')
-    if (o?.status === 'running' || o?.status === 'fulfillment') {
+    // For back_ordered: load existing sheet to show what was already fulfilled
+    // Staff will re-run only the back-ordered lines
+    if (o?.status === 'running' || o?.status === 'fulfillment' || o?.status === 'back_ordered') {
       const { data: sheet } = await db.from('fulfillment_sheets').select('*, fulfillment_lines(*)').eq('so_id', id).single()
       if (sheet?.fulfillment_lines) {
         setComputed(sheet.fulfillment_lines)
+        // For back_ordered, only re-run the BO lines — filter SO lines to just those
+        if (o?.status === 'back_ordered') {
+          const boLineIds = new Set(sheet.fulfillment_lines.filter(l => l.is_back_ordered).map(l => l.so_line_id))
+          setLines((li || []).filter(l => boLineIds.has(l.id)))
+        }
       }
     }
     setLoading(false)
@@ -200,6 +207,8 @@ export default function RunOrder() {
     if (!allKitsConfirmed) return
     setPushed(true)
 
+    const isBackOrderRerun = order?.status === 'back_ordered'
+
     // Persist: update SO + create/update fulfillment sheet
     await db.from('sales_orders').update({
       status:       'running',
@@ -210,7 +219,15 @@ export default function RunOrder() {
       .select().single()
 
     if (sheet) {
-      await db.from('fulfillment_lines').delete().eq('sheet_id', sheet.id)
+      if (isBackOrderRerun) {
+        // Only replace the back-ordered lines — leave previously confirmed lines intact
+        await db.from('fulfillment_lines')
+          .delete()
+          .eq('sheet_id', sheet.id)
+          .eq('is_back_ordered', true)
+      } else {
+        await db.from('fulfillment_lines').delete().eq('sheet_id', sheet.id)
+      }
       const insertLines = computed.map(({
         _primaryWhName, _splitWhName, _remainingShortage, _kitName, _idx, ...l
       }) => ({ ...l, sheet_id: sheet.id }))
@@ -218,13 +235,13 @@ export default function RunOrder() {
     }
 
     await db.from('sales_orders').update({
-      status:          'fulfillment',
-      fulfillment_at:  new Date().toISOString() }).eq('id', id)
+      status:         'fulfillment',
+      fulfillment_at: new Date().toISOString() }).eq('id', id)
 
     logActivity(db, user?.id, 'warehouse_iq', {
       category:    'sales_order',
-      action:      'pushed_to_fulfillment',
-      label:       `Pushed ${so?.so_number || id} to Fulfillment`,
+      action:      isBackOrderRerun ? 'back_order_rerun' : 'pushed_to_fulfillment',
+      label:       `${isBackOrderRerun ? 'Re-ran back-order for' : 'Pushed'} ${order?.so_number || id} to Fulfillment`,
       entity_type: 'sales_order',
       entity_id:   id })
     setTimeout(() => navigate('/warehouse-hq/queue'), 1200)
@@ -256,6 +273,9 @@ export default function RunOrder() {
           {order?.status === 'fulfillment' && (
             <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius:6,background:'var(--blue-soft)',color:'var(--blue)' }}>In Fulfillment</span>
           )}
+          {order?.status === 'back_ordered' && (
+            <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius:6,background:'var(--warning-soft)',color:'var(--warning-text)' }}>Back-Order Re-Run</span>
+          )}
         </div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--black)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
@@ -266,6 +286,19 @@ export default function RunOrder() {
           </div>
         )}
       </div>
+
+      {/* Back-order context banner */}
+      {order?.status === 'back_ordered' && (
+        <div style={{ background:'var(--warning-soft)',borderRadius:'var(--r-m)',padding:'var(--pad-m) var(--pad-l)',marginBottom:'var(--mar-l)',display:'flex',gap:'var(--gap-m)',alignItems:'flex-start' }}>
+          <Warning size={16} weight="fill" style={{ color:'var(--warning)',flexShrink:0,marginTop:1 }} />
+          <div>
+            <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--black)' }}>Back-Order Fulfillment</div>
+            <div style={{ fontSize:'var(--text-xs)',color:'var(--black)',marginTop:2,lineHeight:1.5 }}>
+              The first shipment for this SO has already been sent. You are now re-running fulfillment for the <strong>back-ordered items only</strong>. Once stock is available, run the order to allocate from current inventory, then confirm in Fulfillment to create a second shipment.
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Summary cards */}
       <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'var(--gap-m)',marginBottom: 'var(--mar-l)' }}>

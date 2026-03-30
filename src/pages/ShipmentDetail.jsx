@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Truck, CheckCircle, Package, MapPin } from '@phosphor-icons/react'
+import { ArrowLeft, Truck, CheckCircle, Package, MapPin, Warning } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -54,15 +54,19 @@ export default function ShipmentDetail() {
       status:          'shipped',
       updated_at:      new Date().toISOString() }).eq('id', shipment.id)
 
+    // If has_back_order, the SO returns to 'back_ordered' after this shipment
+    // so warehouse can fulfil remaining items when stock arrives.
+    // Otherwise the order is fully complete.
+    const nextStatus = order?.has_back_order ? 'back_ordered' : 'complete'
     await db.from('sales_orders').update({
-      status:      'complete',
-      completed_at: new Date().toISOString(),
+      status:       nextStatus,
+      completed_at: order?.has_back_order ? null : new Date().toISOString(),
       fulfilled_at: new Date().toISOString() }).eq('id', id)
 
     logActivity(db, user?.id, 'warehouse_iq', {
       category:    'shipment',
       action:      'shipped',
-      label:       `Marked ${so?.so_number || id} Shipped — ${carrier.trim()}`,
+      label:       `Marked ${order?.so_number || id} Shipped — ${carrier.trim()}${order?.has_back_order ? ' (partial — back-order pending)' : ''}`,
       entity_type: 'shipment',
       entity_id:   shipment?.id || id,
       meta:        { so_id: id, carrier: carrier.trim(), tracking: tracking.trim() } })
@@ -105,6 +109,19 @@ export default function ShipmentDetail() {
           </div>
         )}
       </div>
+
+      {/* Partial shipment warning */}
+      {order?.has_back_order && (
+        <div style={{ background: 'var(--warning-soft)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', gap: 'var(--gap-m)', alignItems: 'flex-start' }}>
+          <Warning size={16} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0, marginTop: 1 }} />
+          <div>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Partial Shipment</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)', marginTop: 2, lineHeight: 1.5 }}>
+              Some items were back-ordered and are not included in this shipment. After confirming this shipment, the SO will return to the Back-Order queue so the remaining items can be fulfilled once stock arrives.
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Packing list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
@@ -177,10 +194,10 @@ export default function ShipmentDetail() {
           color: !carrier.trim() ? 'var(--text-3)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
-        {done ? <><CheckCircle size={16} weight="fill" /> Shipment Complete</>
+        {done ? <><CheckCircle size={16} weight="fill" /> {order?.has_back_order ? 'Partial Shipment Confirmed' : 'Shipment Complete'}</>
           : shipping ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
           : !carrier.trim() ? 'Enter carrier to continue'
-          : <><Truck size={16} weight="fill" /> Mark as Shipped — Complete Order</>}
+          : <><Truck size={16} weight="fill" /> {order?.has_back_order ? 'Ship Available Items — Back-Order Pending' : 'Mark as Shipped — Complete Order'}</>}
       </button>
     </div>
   )

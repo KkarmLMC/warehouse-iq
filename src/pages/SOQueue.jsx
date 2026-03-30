@@ -9,7 +9,7 @@ const STAGE = {
   fulfillment: { label: 'Fulfillment', color: 'var(--blue)', bg: 'var(--blue-soft)' },
   shipment:    { label: 'Shipment',    color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
   complete:    { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' },
-  back_ordered:{ label: 'Back Order',  color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
+  back_ordered:{ label: 'Awaiting Stock',  color: 'var(--warning-text)', bg: 'var(--warning-soft)' },
   // legacy
   draft:       { label: 'Draft',       color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
   submitted:   { label: 'Submitted',   color: 'var(--warning)', bg: 'var(--warning-soft)' },
@@ -125,7 +125,7 @@ export default function SOQueue() {
                 if (ns === 'queued' || ns === 'running') navigate(`/warehouse-hq/queue/${o.id}`)
                 else if (ns === 'fulfillment') navigate(`/warehouse-hq/fulfillment/${o.id}`)
                 else if (ns === 'shipment') navigate(`/warehouse-hq/shipment/${o.id}`)
-                else if (ns === 'back_ordered') navigate(`/warehouse-hq/queue/${o.id}`)
+                else if (ns === 'back_ordered') navigate(`/warehouse-hq/queue/${o.id}`) // re-run remaining BO items
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>

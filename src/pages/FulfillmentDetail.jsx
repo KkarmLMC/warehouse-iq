@@ -76,14 +76,18 @@ export default function FulfillmentDetail() {
           transaction_type: 'fulfillment',
           quantity_delta:   d.delta,
           reason:           `Fulfillment — SO ${order?.so_number}`,
+          so_id:            id,
           related_job_id:   order?.project_id || null,
           performed_by:     'warehouse' })
         const { data: lvl } = await db.from('inventory_levels')
           .select('id, quantity_on_hand')
           .eq('part_id', d.part_id).eq('warehouse_id', d.warehouse_id).single()
         if (lvl) {
+          // Decrement on_hand; also reduce on_order (SO is being fulfilled, not just queued)
+          const newOnOrder = Math.max(0, (lvl.quantity_on_order || 0) + d.delta)
           await db.from('inventory_levels').update({
-            quantity_on_hand: Math.max(0, lvl.quantity_on_hand + d.delta),
+            quantity_on_hand:  Math.max(0, lvl.quantity_on_hand + d.delta),
+            quantity_on_order: newOnOrder,
             updated_at: new Date().toISOString() }).eq('id', lvl.id)
         }
       }))
@@ -96,14 +100,22 @@ export default function FulfillmentDetail() {
         db.from('fulfillment_lines').update({ is_confirmed: true }).eq('sheet_id', sheet.id),
       ])
 
-      // 4. Create shipment + update SO in parallel
+      // 4. Create shipment + update SO
+      // Always advance to 'shipment' so available items can ship immediately.
+      // If back-ordered items exist, set has_back_order=true — after this shipment
+      // is processed, the SO returns to 'back_ordered' to await a second fulfillment
+      // for the remaining items. This avoids blocking the first shipment.
+      // If this IS the back-order re-run (already has_back_order), clear the flag.
       const hasBackOrders = lines.some(l => l.is_back_ordered)
+      const isBackOrderRerun = order?.has_back_order === true
       await Promise.all([
         db.from('shipments').insert({ so_id: id, sheet_id: sheet.id, status: 'pending' }),
         db.from('sales_orders').update({
-          status:      hasBackOrders ? 'back_ordered' : 'shipment',
-          shipment_at: new Date().toISOString(),
-          ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}) }).eq('id', id),
+          status:         'shipment',
+          shipment_at:    new Date().toISOString(),
+          has_back_order: hasBackOrders && !isBackOrderRerun,  // cleared on BO re-run
+          ...(hasBackOrders && !isBackOrderRerun ? { back_ordered_at: new Date().toISOString() } : {}),
+          ...(isBackOrderRerun ? { back_order_resolved_at: new Date().toISOString() } : {}) }).eq('id', id),
       ])
 
       logActivity(db, user?.id, 'warehouse_iq', {
