@@ -654,11 +654,12 @@ textarea { resize: vertical; }
 .sidebar-item:hover:not(.sidebar-item--active) { background: var(--hover); }
 
 .sidebar-item--active {
-  background: #000000 !important;
-  color: #ffffff;
+  background: var(--navy) !important;
+  color: var(--white);
   font-weight: 600;
+  border-radius: 0;
 }
-.sidebar-item--active:hover { background: #000000 !important; }
+.sidebar-item--active:hover { background: var(--navy-dark) !important; }
 
 .sidebar-item-label {
   overflow: hidden;
@@ -680,9 +681,10 @@ textarea { resize: vertical; }
 .sidebar-sub-item:hover:not(.sidebar-item--active) { background: var(--hover); }
 
 .sidebar-sub-item.sidebar-item--active {
-  background: #000000;
-  color: #ffffff;
+  background: var(--navy);
+  color: var(--white);
   font-weight: 600;
+  border-radius: 0;
 }
 
 /* ── Sidebar footer ──────────────────────────────────────────────────────────── */
