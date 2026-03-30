@@ -334,7 +334,7 @@ export default function RunOrder() {
                         <div style={{ fontSize:'var(--text-xs)',color:'#B45309',fontFamily:'var(--mono)',marginTop:2 }}>{line.sku}</div>
                       </div>
                       <button onClick={() => { setKitModalIdx(line._idx); setShowKitModal(true) }}
-                        style={{ flexShrink:0,padding:'var(--sp-2) var(--sp-3)',borderRadius:'var(--r-l)',border:'none',background:'var(--amber)',color:'#fff',fontWeight:700,fontSize:'var(--text-xs)',cursor:'pointer',fontFamily:'var(--font)' }}>
+                        style={{ flexShrink:0,padding:'var(--sp-2) var(--sp-3)',borderRadius:'var(--r-l)',border:'none',background:'var(--warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-xs)',cursor:'pointer',fontFamily:'var(--font)' }}>
                         Review
                       </button>
                     </div>
@@ -412,8 +412,8 @@ export default function RunOrder() {
                       <div style={{ fontSize:'var(--text-xs)',fontWeight:600,
                         color: isBO ? '#0891B2' : isShortage ? '#991B1B' : 'var(--black)' }}>
                         {line.description}
-                        {line.is_kit && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#EFF6FF',color:'#1D4ED8' }}>KIT</span>}
-                        {isBO && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#ECFEFF',color:'#0891B2' }}>B/O</span>}
+                        {line.is_kit && <span style={{ marginLeft:6,fontSize:'var(--blackxs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#EFF6FF',color:'#1D4ED8' }}>KIT</span>}
+                        {isBO && <span style={{ marginLeft:6,fontSize:'var(--blackxs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#ECFEFF',color:'#0891B2' }}>B/O</span>}
                       </div>
                       {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                       <div style={{ fontSize:'var(--text-xs)',marginTop:2 }}>
@@ -565,7 +565,7 @@ export default function RunOrder() {
                   Reject — Revert to canonical
                 </button>
                 <button onClick={() => handleKitConfirm(kitModalIdx, 'accept')}
-                  style={{ padding:'var(--sp-3)',borderRadius:'var(--r-xl)',border:'none',background:'var(--amber)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)' }}>
+                  style={{ padding:'var(--sp-3)',borderRadius:'var(--r-xl)',border:'none',background:'var(--warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)' }}>
                   Accept — Use modified description
                 </button>
               </div>

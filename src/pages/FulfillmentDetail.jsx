@@ -205,7 +205,7 @@ export default function FulfillmentDetail() {
                     textDecoration: isPulled && !isBO ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
-                  {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#ECFEFF',color:'#0891B2',flexShrink:0 }}>BACK ORDER</span>}
+                  {isBO && <span style={{ fontSize:'var(--blackxs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#ECFEFF',color:'#0891B2',flexShrink:0 }}>BACK ORDER</span>}
                 </div>
                 {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                 <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>

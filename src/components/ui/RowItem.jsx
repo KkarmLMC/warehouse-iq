@@ -7,8 +7,8 @@
  *   icon       — Phosphor icon component e.g. Receipt
  *   iconColor  — icon color (defaults to --navy)
  *   iconBg     — icon container background (defaults to --surface-raised)
- *   title      — primary text (--fs-sm, weight 600)
- *   subtitle   — secondary text (--fs-xs, text-3)
+ *   title      — primary text (--text-sm, weight 600)
+ *   subtitle   — secondary text (--text-xs, text-3)
  *   right      — JSX for the right side (value, badge, etc.)
  *   onClick    — click handler; adds cursor pointer + hover
  *   last       — if true, removes bottom border

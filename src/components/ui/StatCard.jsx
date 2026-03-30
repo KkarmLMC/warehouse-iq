@@ -5,7 +5,7 @@
  * Props:
  *   label     — metric label e.g. "Open Sales Orders"
  *   value     — metric value e.g. "87" or "$1,175,491"
- *   color     — optional CSS color for the value (defaults to --text-1)
+ *   color     — optional CSS color for the value (defaults to --black)
  *   onClick   — optional click handler
  *   sub       — optional small line below value e.g. "Across 87 leads"
  */

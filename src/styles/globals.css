@@ -393,40 +393,8 @@
   --content-pad: var(--pad-xl);
 
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     LEGACY ALIASES — keep existing component code working during migration.
-     These will be removed once all component files are updated to new tokens.
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-  /* Typography → new text-* names */
-  --fs-2xs:  var(--text-2xs);
-  --fs-xs:   var(--text-xs);
-  --fs-sm:   var(--text-sm);
-  --fs-base: var(--text-base);
-  --fs-md:   var(--text-md);
-  --fs-lg:   var(--text-lg);
-  --fs-xl:   var(--text-xl);
-  --fs-2xl:  var(--text-base);
-  --fs-stat: var(--text-display);
-
-  /* Text colors → black/white */
-  --text-1: var(--black);
-  --text-2: var(--black);
-  --text-dim: var(--text-3);
-  --text-muted: var(--text-3);
-
-  /* Surfaces → white */
-  --surface: var(--white);
-
-  /* Radius → new scale names */
-  --r-sm:  var(--r-s);
-  --r-md:  var(--r-m);
-  --r-lg:  var(--r-l);
-  --r-2xl: var(--r-xl);
-  --r-full: var(--r-xxl);
-  --radius:    var(--r-m);
-  --radius-sm: var(--r-s);
-
-  /* Spacing → kept as-is (still valid, just not responsive) */
+     LEGACY — spacing aliases only (2000+ component hits — migrate in next sprint)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   --sp-1:  0.25rem;
   --sp-2:  0.5rem;
   --sp-3:  0.75rem;
@@ -436,43 +404,8 @@
   --sp-8:  2rem;
   --sp-10: 2.5rem;
 
-  /* Color aliases used in component code */
-  --green:       var(--success);
-  --green-s:     var(--success-soft);
-  --green-dim:   var(--success-soft);
-  --amber:       var(--warning);
-  --amber-s:     var(--warning-soft);
-  --red-mid:     var(--red-tint-80);
-  --red-dim:     var(--red-tint-80);
-  --blue-dim:    var(--blue-soft);
-  --blue-mid:    var(--blue-tint-80);
-  --orange-s:    var(--orange-soft);
-  --error-alt:   var(--error-shade-20);
-  --error-darker: var(--error-tint-60);
-  --success-dark: var(--success-shade-40);
-  --teal:        #0d9488;
-  --teal-s:      #f0fdfa;
-  --live:        #ea580c;
-
-  /* Shadow legacy */
-  --shadow:    var(--shadow-s);
-  --shadow-md: var(--shadow-m);
-  --shadow-lg: var(--shadow-xl);
-
-  /* Misc layout legacy */
-  --gap-sm: var(--gap-s);
-  --gap-md: var(--gap-m);
-  --gap-lg: var(--gap-l);
-  --accent:       var(--red);
-  --accent-dim:   var(--red-soft);
-  --head:         var(--font);
-  --text:         var(--black);
-  --bg-2:         var(--white);
-  --bg-3:         var(--bg);
-  --bg-4:         #f0f1f3;
-  --border-bright: transparent;
-  --card-header-bg: #eef2f9;
 }
+
 
 
 

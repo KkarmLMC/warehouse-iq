@@ -211,7 +211,7 @@ export default function PartsCatalog() {
                 fontSize: 'var(--text-xs)',
               }}>
               <div style={{ fontWeight: active ? 700 : 600 }}>{tab.label}</div>
-              <div style={{ fontSize: 'var(--text-2xs)', opacity: active ? 0.7 : 0.6, marginTop: 1 }}>
+              <div style={{ fontSize: 'var(--blackxs)', opacity: active ? 0.7 : 0.6, marginTop: 1 }}>
                 {count} parts
               </div>
             </button>

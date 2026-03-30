@@ -101,7 +101,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
           {/* Dropdown results */}
           {open && results.length > 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-md)', marginTop: 2, overflow: 'hidden', maxHeight: 280, overflowY: 'auto' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-m)', marginTop: 2, overflow: 'hidden', maxHeight: 280, overflowY: 'auto' }}>
               {results.map(p => (
                 <button key={p.id} onClick={() => handleSelect(p)}
                   style={{ width: '100%', border: 'none', background: 'none', padding: 'var(--sp-3) var(--sp-4)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}
@@ -125,7 +125,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
           )}
 
           {open && !loading && query && results.length === 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-md)', marginTop: 2, padding: 'var(--sp-4)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-m)', marginTop: 2, padding: 'var(--sp-4)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
               No projects found for "{query}"
             </div>
           )}

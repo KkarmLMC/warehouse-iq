@@ -28,7 +28,7 @@ const ACTION_CFG = {
   running:      { label: 'Continue Run Order',    sub: 'Order is being processed',                   color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
   fulfillment:  { label: 'Process Fulfillment',   sub: 'Pick parts and confirm availability',        color: '#0369A1',       path: id => `/warehouse-hq/fulfillment/${id}` },
   shipment:     { label: 'Process Shipment',      sub: 'Enter carrier details and mark shipped',     color: '#0891B2',       path: id => `/warehouse-hq/shipment/${id}` },
-  back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--amber)',  path: id => `/warehouse-hq/queue/${id}` },
+  back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--warning)',  path: id => `/warehouse-hq/queue/${id}` },
 }
 
 function SectionGroup({ label, items }) {

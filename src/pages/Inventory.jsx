@@ -30,7 +30,7 @@ function HealthBadge({ out, low }) {
     </span>
   )
   if (low > 0) return (
-    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--warning-soft)', color: 'var(--amber)' }}>
+    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--warning-soft)', color: 'var(--warning)' }}>
       {low} Low
     </span>
   )
@@ -155,7 +155,7 @@ export default function Inventory() {
       {stats?.pendingCOs > 0 && (
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
           style={{ background: '#FFFBEB', border: '1px solid #FCD34D', borderRadius: 'var(--r-xl)', padding: 'var(--sp-3) var(--sp-4)', marginBottom: 'var(--sp-4)', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', cursor: 'pointer' }}>
-          <Warning size={18} weight="fill" style={{ color: 'var(--amber)', flexShrink: 0 }} />
+          <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#92400E' }}>
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
@@ -189,7 +189,7 @@ export default function Inventory() {
         {[
           { label: 'Total Inventory Value', value: fmt(stats?.totalValue), color: 'var(--navy)', onClick: () => navigate('/warehouse-hq/inventory') },
           { label: 'Open Sales Orders',     value: stats?.openSOs ?? '—',  color: 'var(--blue)', onClick: () => navigate('/sales-orders') },
-          { label: 'Pending Change Orders', value: stats?.pendingCOs ?? '—', color: stats?.pendingCOs > 0 ? 'var(--amber)' : 'var(--black)', onClick: () => navigate('/warehouse-hq/change-orders') },
+          { label: 'Pending Change Orders', value: stats?.pendingCOs ?? '—', color: stats?.pendingCOs > 0 ? 'var(--warning)' : 'var(--black)', onClick: () => navigate('/warehouse-hq/change-orders') },
           { label: 'Low / Out of Stock',    value: `${stats?.outStock ?? 0} / ${stats?.lowStock ?? 0}`, color: (stats?.outStock > 0 || stats?.lowStock > 0) ? 'var(--error)' : 'var(--success-text)', onClick: () => navigate('/warehouse-hq/inventory') },
           { label: 'Recent Shipments',      value: stats?.shipments ?? '—', color: 'var(--black)', onClick: () => navigate('/warehouse-hq/transfer') },
         ].map(s => (
@@ -323,7 +323,7 @@ export default function Inventory() {
               <div key={item.id}
                 style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
                 <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: isOut ? 'var(--error-soft)' : 'var(--warning-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Warning size={16} weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--amber)' }} />
+                  <Warning size={16} weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--warning)' }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -331,7 +331,7 @@ export default function Inventory() {
                   </div>
                   <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{item.warehouses?.name}</div>
                 </div>
-                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: isOut ? 'var(--error-alt)' : 'var(--amber)', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: isOut ? 'var(--error-alt)' : 'var(--warning)', whiteSpace: 'nowrap' }}>
                   {isOut ? 'Out of Stock' : `${item.quantity_on_hand} left`}
                 </span>
               </div>

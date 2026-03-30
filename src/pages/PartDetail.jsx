@@ -187,7 +187,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div>
               <Label>Qty Change</Label>
               <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-3)', marginTop: 3 }}>Negative to reduce</div>
+              <div style={{ fontSize: 'var(--blackxs)', color: 'var(--text-3)', marginTop: 3 }}>Negative to reduce</div>
             </div>
             <div>
               <Label>Reason</Label>
@@ -204,12 +204,12 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div>
               <Label>On Order</Label>
               <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--text-2xs)', color: '#1D4ED8', marginTop: 3 }}>Incoming stock</div>
+              <div style={{ fontSize: 'var(--blackxs)', color: '#1D4ED8', marginTop: 3 }}>Incoming stock</div>
             </div>
             <div>
               <Label>Min Level</Label>
               <input type="number" min="0" value={minLevel} onChange={e => setMinLevel(e.target.value)} placeholder="e.g. 10" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-3)', marginTop: 3 }}>Low stock alert</div>
+              <div style={{ fontSize: 'var(--blackxs)', color: 'var(--text-3)', marginTop: 3 }}>Low stock alert</div>
             </div>
           </div>
         </div>
