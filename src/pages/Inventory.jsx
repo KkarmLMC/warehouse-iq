@@ -203,7 +203,7 @@ export default function Inventory() {
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
             <span className="card-title">
-              <Lightning size={16} weight="fill" />
+              <Lightning size={16} />
               {master.name}
               <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px', marginLeft: 8 }}>MASTER</span>
             </span>
@@ -305,7 +305,7 @@ export default function Inventory() {
       {lowStock.length > 0 && (
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
-            <span className="card-title"><Warning size={16} weight="fill" />Low & Out of Stock</span>
+            <span className="card-title"><Warning size={16} />Low & Out of Stock</span>
             <span className="card-header__meta">
               View inventory <ArrowRight size={12} />
             </span>
