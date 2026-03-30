@@ -300,7 +300,7 @@ export default function WarehouseIQ() {
         {/* Column headers */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', background:'var(--navy)', position:'sticky', top:0, zIndex:10 }}>
           {['Part / SKU','Start','Added','Used','On Order','Stock','Value',''].map((h,i) => (
-            <div key={i} style={{ fontSize:'var(--text-xs)', fontWeight:700, color: 'var(--white)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
+            <div key={i} style={{ fontSize:'var(--text-base)', fontWeight:700, color: 'var(--white)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
           ))}
         </div>
 
@@ -369,8 +369,8 @@ export default function WarehouseIQ() {
         {/* Totals footer */}
         {filtered.length > 0 && (
           <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-m) var(--pad-l)', background:'var(--navy)', borderTop:'2px solid var(--border-l)' }}>
-            <div style={{ fontSize:'var(--text-xs)', fontWeight:800, color:'#fff' }}>Period Totals</div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: 'var(--white)' }}>—</div>
+            <div style={{ fontSize:'var(--text-base)', fontWeight:800, color:'#fff' }}>Period Totals</div>
+            <div style={{ textAlign:'right', fontSize:'var(--text-base)', color: 'var(--white)' }}>—</div>
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--blue-tint-60)' }}>
               {filtered.reduce((s,r)=>s+r.added,0) > 0 ? `+${filtered.reduce((s,r)=>s+r.added,0).toLocaleString()}` : '—'}
             </div>
@@ -380,7 +380,7 @@ export default function WarehouseIQ() {
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--blue-tint-40)' }}>
               {filtered.reduce((s,r)=>s+r.onOrder,0) > 0 ? filtered.reduce((s,r)=>s+r.onOrder,0).toLocaleString() : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#fff' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-base)', fontWeight:800, color:'#fff' }}>
               {filtered.reduce((s,r)=>s+r.stock,0).toLocaleString()}
             </div>
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--success-tint-40)' }}>
