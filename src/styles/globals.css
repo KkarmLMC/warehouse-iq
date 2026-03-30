@@ -669,9 +669,9 @@ textarea { resize: vertical; }
 
 /* Sub-nav items (BEM: sidebar__sub-item) */
 .sidebar-sub-item {
-  margin-left: var(--mar-xl);
-  width: calc(100% - 1.25rem);
-  padding-left: var(--pad-xl);
+  margin-left: var(--mar-s);
+  width: calc(100% - var(--mar-s));
+  padding-left: var(--pad-m);
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--black);
