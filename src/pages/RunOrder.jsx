@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   ArrowLeft, Lightning, Warning, CheckCircle,
   Package, ArrowRight, CaretDown, CaretUp,
-  ClockCountdown, SealWarning, Question } from '@phosphor-icons/react'
+  ClockCountdown, SealWarning, Question, Truck } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -25,6 +25,77 @@ function proximityScore(whState, jobState) {
 // Normalise kit SKUs for matching (trim, uppercase, remove trailing spaces)
 function normalise(s) { return (s||'').trim().toUpperCase() }
 
+// ─── Drop Ship inline form ─────────────────────────────────────────────────
+function DropShipForm({ qty, onConfirm, onCancel }) {
+  const [supplier, setSupplier] = useState('')
+  const [reference, setReference] = useState('')
+  const [eta, setEta] = useState('')
+  const [cost, setCost] = useState('')
+  const [notes, setNotes] = useState('')
+
+  const inputStyle = {
+    width: '100%', fontSize: 'var(--text-xs)', padding: '5px 8px',
+    borderRadius: 4, border: '1px solid #d4d4d8', background: '#fff' }
+  const labelStyle = {
+    fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#6d28d9',
+    display: 'block', marginBottom: 2, marginTop: 6 }
+
+  return (
+    <div style={{ marginTop: 8, padding: 'var(--pad-m)', background: '#f5f3ff',
+      borderRadius: 'var(--r-l)', border: '1px solid #ddd6fe' }}>
+      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#6d28d9', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
+        <Truck size={12} /> Drop Ship {qty} unit{qty !== 1 ? 's' : ''}
+      </div>
+
+      <label style={labelStyle}>Supplier *</label>
+      <input value={supplier} onChange={e => setSupplier(e.target.value)}
+        placeholder="e.g., East Penn Manufacturing" style={inputStyle} />
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <div>
+          <label style={labelStyle}>PO / Reference</label>
+          <input value={reference} onChange={e => setReference(e.target.value)}
+            placeholder="e.g., PO-44821" style={inputStyle} />
+        </div>
+        <div>
+          <label style={labelStyle}>Expected Delivery</label>
+          <input type="date" value={eta} onChange={e => setEta(e.target.value)}
+            style={inputStyle} />
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <div>
+          <label style={labelStyle}>Cost ($)</label>
+          <input type="number" step="0.01" value={cost} onChange={e => setCost(e.target.value)}
+            placeholder="0.00" style={inputStyle} />
+        </div>
+        <div>
+          <label style={labelStyle}>Notes</label>
+          <input value={notes} onChange={e => setNotes(e.target.value)}
+            placeholder="Optional" style={inputStyle} />
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: 'var(--gap-s)', justifyContent: 'flex-end', marginTop: 8 }}>
+        <button onClick={onCancel}
+          style={{ fontSize: 'var(--text-xs)', padding: '4px 12px', borderRadius: 4,
+            background: 'transparent', cursor: 'pointer', color: 'var(--text-3)', fontFamily: 'var(--font)' }}>
+          Cancel
+        </button>
+        <button onClick={() => onConfirm({ supplier, reference, eta, cost, notes })}
+          disabled={!supplier.trim()}
+          style={{ fontSize: 'var(--text-xs)', padding: '4px 12px', borderRadius: 4,
+            background: !supplier.trim() ? '#d4d4d8' : '#6d28d9', color: '#fff', fontWeight: 700,
+            cursor: !supplier.trim() ? 'not-allowed' : 'pointer', fontFamily: 'var(--font)',
+            display: 'flex', alignItems: 'center', gap: 3 }}>
+          <Truck size={10} /> Confirm Drop Ship
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function RunOrder() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -43,6 +114,8 @@ export default function RunOrder() {
   const [expandedSplit, setExpandedSplit] = useState({})
   const [backOrdered, setBackOrdered] = useState({}) // lineIdx → bool
   const [backNotes,   setBackNotes]   = useState({}) // lineIdx → note
+  const [dropShip,    setDropShip]    = useState({}) // lineIdx → { active, supplier, reference, eta, cost, notes }
+  const [showDropForm, setShowDropForm] = useState({}) // lineIdx → bool (expanded form)
 
   // Kit change confirmation state
   const [kitChanges,       setKitChanges]       = useState([]) // lines with changed descriptions
@@ -137,6 +210,14 @@ export default function RunOrder() {
         is_shortage:                shortage > 0,
         is_back_ordered:            false,
         back_order_qty:             0,
+        is_drop_ship:               false,
+        drop_ship_qty:              0,
+        drop_ship_supplier:         null,
+        drop_ship_reference:        null,
+        drop_ship_eta:              null,
+        drop_ship_cost:             null,
+        drop_ship_notes:            null,
+        drop_ship_status:           'pending',
         is_kit:                     isKit,
         kit_id:                     canonicalKit?.id || null,
         kit_description_changed:    descChanged,
@@ -190,16 +271,59 @@ export default function RunOrder() {
 
   // ── Toggle back order on a line ───────────────────────────────────────────
   const toggleBackOrder = (lineIdx) => {
-    setBackOrdered(p => ({ ...p, [lineIdx]: !p[lineIdx] }))
-    // Update computed line
+    const nowBO = !backOrdered[lineIdx]
+    setBackOrdered(p => ({ ...p, [lineIdx]: nowBO }))
+    // Clear drop ship if enabling back order (mutually exclusive)
+    if (nowBO) {
+      setDropShip(p => ({ ...p, [lineIdx]: undefined }))
+      setShowDropForm(p => ({ ...p, [lineIdx]: false }))
+    }
     setComputed(prev => prev.map((l, i) => {
       if (i !== lineIdx) return l
-      const nowBO = !backOrdered[lineIdx]
       return {
         ...l,
         is_back_ordered: nowBO,
-        back_order_qty:  nowBO ? l._remainingShortage : 0 }
+        back_order_qty:  nowBO ? l._remainingShortage : 0,
+        is_drop_ship:    nowBO ? false : l.is_drop_ship,
+        drop_ship_qty:   nowBO ? 0 : l.drop_ship_qty }
     }))
+  }
+
+  // ── Toggle drop ship on a line ───────────────────────────────────────────
+  const toggleDropShip = (lineIdx) => {
+    const ds = dropShip[lineIdx]
+    if (ds?.active) {
+      // Cancel drop ship
+      setDropShip(p => ({ ...p, [lineIdx]: undefined }))
+      setShowDropForm(p => ({ ...p, [lineIdx]: false }))
+      setComputed(prev => prev.map((l, i) => i !== lineIdx ? l : {
+        ...l, is_drop_ship: false, drop_ship_qty: 0,
+        drop_ship_supplier: null, drop_ship_reference: null,
+        drop_ship_eta: null, drop_ship_cost: null, drop_ship_notes: null }))
+    } else {
+      // Open drop ship form
+      setShowDropForm(p => ({ ...p, [lineIdx]: true }))
+      // Clear back order if enabling drop ship (mutually exclusive)
+      setBackOrdered(p => ({ ...p, [lineIdx]: false }))
+      setComputed(prev => prev.map((l, i) => i !== lineIdx ? l : {
+        ...l, is_back_ordered: false, back_order_qty: 0 }))
+    }
+  }
+
+  const confirmDropShip = (lineIdx, details) => {
+    const line = computed[lineIdx]
+    setDropShip(p => ({ ...p, [lineIdx]: { active: true, ...details } }))
+    setShowDropForm(p => ({ ...p, [lineIdx]: false }))
+    setComputed(prev => prev.map((l, i) => i !== lineIdx ? l : {
+      ...l,
+      is_drop_ship:       true,
+      drop_ship_qty:      l._remainingShortage,
+      drop_ship_supplier: details.supplier,
+      drop_ship_reference: details.reference || null,
+      drop_ship_eta:      details.eta || null,
+      drop_ship_cost:     details.cost ? parseFloat(details.cost) : null,
+      drop_ship_notes:    details.notes || null,
+      drop_ship_status:   'ordered' }))
   }
 
   // ── Save + push to fulfillment ─────────────────────────────────────────────
@@ -415,13 +539,14 @@ export default function RunOrder() {
             {computed.map((line, idx) => {
               const isShortage = line.is_shortage
               const isBO       = backOrdered[idx] || line.is_back_ordered
+              const isDS       = dropShip[idx]?.active || line.is_drop_ship
               const splitOpen  = expandedSplit[idx]
               const kitChanged = line.kit_description_changed
               const conf       = kitConfirmations[line._idx ?? idx]
 
               return (
                 <div key={idx} style={{ borderBottom: idx < computed.length-1 ? '1px solid var(--border-l)' : 'none',
-                  background: isBO ? 'var(--blue-tint-80)' : isShortage ? 'var(--error-soft)' : kitChanged ? 'var(--warning-soft)' : 'transparent' }}>
+                  background: isDS ? '#f5f3ff' : isBO ? 'var(--blue-tint-80)' : isShortage ? 'var(--error-soft)' : kitChanged ? 'var(--warning-soft)' : 'transparent' }}>
 
                   {/* Kit change badge */}
                   {kitChanged && (
@@ -436,21 +561,22 @@ export default function RunOrder() {
                   <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--pad-m) var(--pad-l)',alignItems:'start' }}>
                     <div>
                       <div style={{ fontSize:'var(--text-sm)',fontWeight:600,
-                        color: isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-shade-40)' : 'var(--black)' }}>
+                        color: isDS ? '#6d28d9' : isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-shade-40)' : 'var(--black)' }}>
                         {line.description}
                         {line.is_kit && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-soft)',color:'var(--blue)' }}>KIT</span>}
                         {isBO && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-tint-80)',color:'var(--blue-shade-20)' }}>B/O</span>}
+                        {isDS && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'#ede9fe',color:'#6d28d9' }}>DROP SHIP</span>}
                       </div>
                       {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                       <div style={{ fontSize:'var(--text-xs)',marginTop:2 }}>
                         <span style={{ fontWeight:600,color:'var(--navy)' }}>{line._primaryWhName || line.warehouse_id || '—'}</span>
-                        {line.split_warehouse_id && !isBO && (
+                        {line.split_warehouse_id && !isBO && !isDS && (
                           <span style={{ marginLeft:4,color:'var(--warning)',fontWeight:600 }}>+ split ({line._splitWhName || 'other'})</span>
                         )}
                       </div>
 
-                      {/* Shortage actions */}
-                      {isShortage && !isBO && (
+                      {/* Shortage actions — show when shortage exists and neither B/O nor D/S active */}
+                      {isShortage && !isBO && !isDS && !showDropForm[idx] && (
                         <div style={{ display:'flex',gap:'var(--gap-s)',marginTop:6,flexWrap:'wrap' }}>
                           {line.split_warehouse_id && (
                             <button onClick={() => setExpandedSplit(p => ({ ...p, [idx]: !p[idx] }))}
@@ -462,10 +588,23 @@ export default function RunOrder() {
                             style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--blue-shade-20)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
                             <ClockCountdown size={10} /> Mark back order
                           </button>
+                          <button onClick={() => toggleDropShip(idx)}
+                            style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'#6d28d9',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
+                            <Truck size={10} /> Drop ship
+                          </button>
                         </div>
                       )}
 
-                      {/* Back order cancel */}
+                      {/* Drop ship inline form */}
+                      {showDropForm[idx] && !isDS && (
+                        <DropShipForm
+                          qty={line._remainingShortage}
+                          onConfirm={(details) => confirmDropShip(idx, details)}
+                          onCancel={() => setShowDropForm(p => ({ ...p, [idx]: false }))}
+                        />
+                      )}
+
+                      {/* Back order active state */}
                       {isBO && (
                         <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',marginTop:6 }}>
                           <span style={{ fontSize:'var(--text-xs)',color:'var(--blue-shade-20)' }}>Back ordering {line.back_order_qty || line._remainingShortage} units</span>
@@ -475,21 +614,46 @@ export default function RunOrder() {
                           </button>
                         </div>
                       )}
+
+                      {/* Drop ship active state */}
+                      {isDS && (
+                        <div style={{ marginTop:6 }}>
+                          <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',flexWrap:'wrap' }}>
+                            <Truck size={11} style={{ color:'#6d28d9' }} />
+                            <span style={{ fontSize:'var(--text-xs)',color:'#6d28d9',fontWeight:600 }}>
+                              Drop shipping {line.drop_ship_qty || line._remainingShortage} units
+                            </span>
+                            <span style={{ fontSize:'var(--text-xs)',color:'var(--text-3)' }}>
+                              via {line.drop_ship_supplier || dropShip[idx]?.supplier}
+                            </span>
+                            <button onClick={() => toggleDropShip(idx)}
+                              style={{ fontSize:'var(--text-xs)',padding:'1px 6px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--text-3)',fontFamily:'var(--font)' }}>
+                              Cancel D/S
+                            </button>
+                          </div>
+                          {(line.drop_ship_reference || dropShip[idx]?.reference) && (
+                            <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:2,marginLeft:17 }}>
+                              Ref: {line.drop_ship_reference || dropShip[idx]?.reference}
+                              {(line.drop_ship_eta || dropShip[idx]?.eta) && <span> · ETA: {line.drop_ship_eta || dropShip[idx]?.eta}</span>}
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
 
                     <div style={{ fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--mono)',color:'var(--black)' }}>{line.qty_required}</div>
                     <div style={{ fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--mono)',
-                      color: isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-alt)' : 'var(--success-text)' }}>
+                      color: isDS ? '#6d28d9' : isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-alt)' : 'var(--success-text)' }}>
                       {line.qty_available}
                     </div>
                     <div style={{ fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--mono)',
-                      color: isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-alt)' : 'var(--text-3)' }}>
+                      color: isDS ? '#6d28d9' : isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-alt)' : 'var(--text-3)' }}>
                       {line.qty_shortage > 0 ? line.qty_shortage : '—'}
                     </div>
                   </div>
 
                   {/* Split detail panel */}
-                  {splitOpen && isShortage && !isBO && (
+                  {splitOpen && isShortage && !isBO && !isDS && (
                     <div style={{ margin: '0 var(--mar-l) var(--mar-m)',padding: 'var(--pad-m)',background:'var(--orange-soft)',borderRadius:'var(--r-l)' }}>
                       <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--warning-text)',marginBottom:8 }}>Split Fulfillment Plan</div>
                       <div style={{ fontSize:'var(--text-xs)',color:'var(--orange-shade-60)',lineHeight:1.6 }}>
@@ -500,7 +664,7 @@ export default function RunOrder() {
                         }
                         {(line._remainingShortage||0) > 0 && (
                           <div style={{ color:'var(--error-alt)',marginTop:4 }}>
-                            ⚠ Still {line._remainingShortage} units short — consider marking as back order.
+                            ⚠ Still {line._remainingShortage} units short — consider back order or drop ship.
                           </div>
                         )}
                       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Package, CheckCircle, ArrowRight, Warning, ClockCountdown } from '@phosphor-icons/react'
+import { ArrowLeft, Package, CheckCircle, ArrowRight, Warning, ClockCountdown, Truck } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -52,8 +52,9 @@ export default function FulfillmentDetail() {
     setFlags(p => { const n = {...p}; delete n[lineId]; return n })
   }
 
-  // Back-ordered lines don't need to be checked — only non-BO lines block proceed
-  const pullableLines = lines.filter(l => !l.is_back_ordered)
+  // Back-ordered and drop-shipped lines don't need to be checked — only pullable lines block proceed
+  const pullableLines = lines.filter(l => !l.is_back_ordered && !l.is_drop_ship)
+  const dropShipLines = lines.filter(l => l.is_drop_ship)
   const allChecked = pullableLines.length > 0 && pullableLines.every(l => checked[l.id])
 
   const pushToShipment = async () => {
@@ -172,11 +173,20 @@ export default function FulfillmentDetail() {
         </div>
       )}
 
+      {dropShipLines.length > 0 && (
+        <div style={{ background:'#f5f3ff',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
+          <Truck size={16} weight="fill" style={{ color:'#6d28d9',flexShrink:0 }} />
+          <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9' }}>
+            {dropShipLines.length} part{dropShipLines.length!==1?'s':''} marked for drop ship — these will be fulfilled directly by the supplier, not from warehouse stock.
+          </div>
+        </div>
+      )}
+
       {/* Pull list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="card-header">
           <span className="card-title"><Package size={16}  />Pull List</span>
-          <span className="card-header__meta">{lines.filter(l=>checked[l.id]).length}/{lines.length} pulled</span>
+          <span className="card-header__meta">{pullableLines.filter(l=>checked[l.id]).length}/{pullableLines.length} pulled</span>
         </div>
 
         {/* Column headers */}
@@ -189,40 +199,50 @@ export default function FulfillmentDetail() {
         {lines.map((line, idx) => {
           const isOut = line.is_shortage
           const isBO  = line.is_back_ordered
+          const isDS  = line.is_drop_ship
           const isPulled = checked[line.id]
           return (
             <div key={line.id}>
             <div
-              onClick={() => toggleLine(line.id)}
+              onClick={() => !isDS && toggleLine(line.id)}
               style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,alignItems:'center',
-                padding: 'var(--pad-l) var(--pad-l)',cursor:'pointer',minHeight:64,
+                padding: 'var(--pad-l) var(--pad-l)',cursor: isDS ? 'default' : 'pointer',minHeight:64,
                 borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-l)' : 'none',
-                background: isBO ? 'var(--blue-tint-80)' : isOut ? 'var(--error-soft)' : isPulled ? 'var(--success-soft)' : 'transparent',
-                opacity: isBO ? 0.7 : 1 }}>
+                background: isDS ? '#f5f3ff' : isBO ? 'var(--blue-tint-80)' : isOut ? 'var(--error-soft)' : isPulled ? 'var(--success-soft)' : 'transparent',
+                opacity: isBO || isDS ? 0.7 : 1 }}>
               {/* Checkbox */}
-              <div style={{ width:36,height:36,borderRadius: 'var(--r-m)',border:`2px solid ${isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
-                background: isPulled ? 'var(--success-text)' : 'transparent',
+              <div style={{ width:36,height:36,borderRadius: 'var(--r-m)',border:`2px solid ${isDS ? '#a78bfa' : isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
+                background: isDS ? '#a78bfa' : isPulled ? 'var(--success-text)' : 'transparent',
                 display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
-                {isPulled && <CheckCircle size={14} weight="fill" color="#fff" />}
+                {isPulled && !isDS && <CheckCircle size={14} weight="fill" color="#fff" />}
+                {isDS && <Truck size={14} weight="bold" color="#fff" />}
               </div>
               {/* Part info */}
               <div>
                 <div style={{ display:'flex',alignItems:'center',gap:6 }}>
-                  <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isBO ? 'var(--blue-shade-20)' : isOut ? 'var(--error-shade-40)' : isPulled ? 'var(--text-3)' : 'var(--black)',
-                    textDecoration: isPulled && !isBO ? 'line-through' : 'none' }}>
+                  <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isDS ? '#6d28d9' : isBO ? 'var(--blue-shade-20)' : isOut ? 'var(--error-shade-40)' : isPulled ? 'var(--text-3)' : 'var(--black)',
+                    textDecoration: isPulled && !isBO && !isDS ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
                   {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-tint-80)',color:'var(--blue-shade-20)',flexShrink:0 }}>BACK ORDER</span>}
+                  {isDS && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'#ede9fe',color:'#6d28d9',flexShrink:0 }}>DROP SHIP</span>}
                 </div>
                 {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
-                <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
+                {isDS && line.drop_ship_supplier && (
+                  <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9',marginTop:2 }}>
+                    via {line.drop_ship_supplier}
+                    {line.drop_ship_reference && <span> · Ref: {line.drop_ship_reference}</span>}
+                    {line.drop_ship_eta && <span> · ETA: {line.drop_ship_eta}</span>}
+                  </div>
+                )}
+                {!isDS && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
                   {line.warehouses?.name || '—'}
                   {line.split_warehouse_id && line.split_qty > 0 && (
                     <span style={{ marginLeft:6,color:'var(--warning)' }}>
                       + {line.split_qty} from {line.split_warehouse?.name || 'split warehouse'}
                     </span>
                   )}
-                </div>
+                </div>}
               </div>
               {/* Qty */}
               <div>
