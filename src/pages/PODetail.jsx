@@ -9,14 +9,14 @@ import { db } from '../lib/supabase.js'
 const STATUS_DISPLAY = {
   draft:        { label: 'Draft',        icon: Clock,          color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
   queued:       { label: 'Queued',       icon: Clock,          color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)' },
-  running:      { label: 'Running',      icon: PaperPlaneTilt, color: 'var(--black)', bg: 'var(--warning-soft)' },
-  submitted:    { label: 'Submitted',    icon: PaperPlaneTilt, color: 'var(--black)', bg: 'var(--warning-soft)' },
-  fulfillment:  { label: 'Fulfillment',  icon: Receipt,        color: 'var(--black)', bg: 'var(--blue-soft)' },
-  published:    { label: 'Published',    icon: Receipt,        color: 'var(--black)', bg: 'var(--blue-soft)' },
-  shipment:     { label: 'Shipment',     icon: Receipt,        color: 'var(--black)', bg: 'var(--blue-tint-80)' },
-  back_ordered: { label: 'Back Order',   icon: Clock,          color: 'var(--black)', bg: 'var(--blue-tint-80)' },
-  complete:     { label: 'Complete',     icon: CheckCircle,    color: 'var(--black)', bg: 'var(--success-soft)' },
-  fulfilled:    { label: 'Complete',     icon: CheckCircle,    color: 'var(--black)', bg: 'var(--success-soft)' },
+  running:      { label: 'Running',      icon: PaperPlaneTilt, color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  submitted:    { label: 'Submitted',    icon: PaperPlaneTilt, color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  fulfillment:  { label: 'Fulfillment',  icon: Receipt,        color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)' },
+  published:    { label: 'Published',    icon: Receipt,        color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)' },
+  shipment:     { label: 'Shipment',     icon: Receipt,        color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
+  back_ordered: { label: 'Back Order',   icon: Clock,          color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
+  complete:     { label: 'Complete',     icon: CheckCircle,    color: 'var(--success-text)', bg: 'var(--success-soft)' },
+  fulfilled:    { label: 'Complete',     icon: CheckCircle,    color: 'var(--success-text)', bg: 'var(--success-soft)' },
   cancelled:    { label: 'Cancelled',    icon: Clock,          color: 'var(--grey-tint-20)', bg: 'var(--grey-tint-80)' } }
 
 
@@ -24,9 +24,9 @@ const STATUS_DISPLAY = {
 const ACTION_CFG = {
   queued:       { label: 'Run Order',             sub: 'Process parts & generate fulfillment sheet', color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
   running:      { label: 'Continue Run Order',    sub: 'Order is being processed',                   color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
-  fulfillment:  { label: 'Process Fulfillment',   sub: 'Pick parts and confirm availability',        color: 'var(--black)',       path: id => `/warehouse-hq/fulfillment/${id}` },
-  shipment:     { label: 'Process Shipment',      sub: 'Enter carrier details and mark shipped',     color: 'var(--black)',       path: id => `/warehouse-hq/shipment/${id}` },
-  back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--black)',  path: id => `/warehouse-hq/queue/${id}` } }
+  fulfillment:  { label: 'Process Fulfillment',   sub: 'Pick parts and confirm availability',        color: 'var(--blue-shade-40)',       path: id => `/warehouse-hq/fulfillment/${id}` },
+  shipment:     { label: 'Process Shipment',      sub: 'Enter carrier details and mark shipped',     color: 'var(--blue-shade-20)',       path: id => `/warehouse-hq/shipment/${id}` },
+  back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--warning)',  path: id => `/warehouse-hq/queue/${id}` } }
 
 function SectionGroup({ label, items }) {
   const [open, setOpen] = useState(true)
@@ -189,7 +189,7 @@ export default function PODetail() {
                 <Buildings size={14} style={{ color: 'var(--black)' }} />
                 {wName}
               </div>
-              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', background: 'var(--bg)', padding: '2px 8px', borderRadius: 'var(--r-xxl)' }}>
+              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--error-dark)', background: 'var(--error-soft)', padding: '2px 8px', borderRadius: 'var(--r-xxl)' }}>
                 -{impact.qty} units ({impact.parts} SKUs)
               </span>
             </div>

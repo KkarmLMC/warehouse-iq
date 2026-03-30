@@ -14,29 +14,29 @@
 
 const STATUS_MAP = {
   // Sales Order statuses
-  queued:       { bg: '#EEF2FF', color: 'var(--black)' },
-  running:      { bg: '#FEF3C7', color: 'var(--black)' },
-  fulfillment:  { bg: '#EFF6FF', color: 'var(--black)' },
+  queued:       { bg: '#EEF2FF', color: '#6366F1' },
+  running:      { bg: '#FEF3C7', color: '#D97706' },
+  fulfillment:  { bg: '#EFF6FF', color: '#0369A1' },
   shipment:     { bg: '#ECFEFF', color: '#0891B2' },
   back_ordered: { bg: '#ECFEFF', color: '#0891B2' },
   complete:     { bg: '#F0FDF4', color: '#15803D' },
   cancelled:    { bg: '#F1F5F9', color: '#64748B' },
   draft:        { bg: '#F1F5F9', color: '#64748B' },
   // Project stages
-  awarded:      { bg: '#EEF2FF', color: 'var(--black)' },
+  awarded:      { bg: '#EEF2FF', color: '#6366F1' },
   scheduled:    { bg: '#E0F2FE', color: '#0284C7' },
   'in progress':{ bg: '#ECFDF5', color: '#059669' },
-  inspection:   { bg: '#FEF3C7', color: 'var(--black)' },
-  'on hold':    { bg: '#FEF2F2', color: 'var(--black)' },
+  inspection:   { bg: '#FEF3C7', color: '#D97706' },
+  'on hold':    { bg: '#FEF2F2', color: '#DC2626' },
   // Generic
-  active:       { bg: '#FEF3C7', color: 'var(--black)' },
-  pending:      { bg: '#FEF3C7', color: 'var(--black)' },
+  active:       { bg: '#FEF3C7', color: '#D97706' },
+  pending:      { bg: '#FEF3C7', color: '#D97706' },
   submitted:    { bg: '#EFF6FF', color: '#1D4ED8' },
   reviewed:     { bg: '#F0FDF4', color: '#15803D' },
   approved:     { bg: '#F0FDF4', color: '#15803D' },
   rejected:     { bg: '#FEF2F2', color: '#B91C1C' },
   ok:           { bg: '#F0FDF4', color: '#15803D' },
-  low:          { bg: '#FEF3C7', color: 'var(--black)' },
+  low:          { bg: '#FEF3C7', color: '#D97706' },
   out:          { bg: '#FEF2F2', color: '#B91C1C' } }
 
 export default function StatusBadge({ status, custom, small }) {

@@ -86,7 +86,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
       )}
 
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', background: 'var(--bg)', borderRadius: 'var(--r-l)', color: 'var(--black)', fontSize: 'var(--text-sm)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', color: 'var(--error-dark)', fontSize: 'var(--text-sm)' }}>
           <Warning size={14} />{error}
         </div>
       )}
@@ -350,7 +350,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                 </div>
               </div>
               {error && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--bg)', borderRadius: 'var(--r-l)', marginBottom: 'var(--mar-l)', color: 'var(--black)', fontSize: 'var(--text-sm)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', marginBottom: 'var(--mar-l)', color: 'var(--error-dark)', fontSize: 'var(--text-sm)' }}>
                   <Warning size={14} style={{ flexShrink: 0 }} />{error}
                 </div>
               )}

@@ -9,16 +9,16 @@ import { db } from '../lib/supabase.js'
 const STATUS_META = {
   draft:        { label: 'Draft',        color: 'var(--grey-base)', bg: 'var(--grey-tint-80)', icon: Clock },
   queued:       { label: 'Queued',       color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)', icon: Clock },
-  running:      { label: 'Running',      color: 'var(--black)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
-  submitted:    { label: 'Submitted',    color: 'var(--black)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
-  fulfillment:  { label: 'Fulfillment',  color: 'var(--black)', bg: 'var(--blue-soft)', icon: Receipt },
-  published:    { label: 'Published',    color: 'var(--black)', bg: 'var(--blue-soft)', icon: Receipt },
-  shipment:     { label: 'Shipment',     color: 'var(--black)', bg: 'var(--blue-tint-80)', icon: Receipt },
-  back_ordered: { label: 'Back Order',   color: 'var(--black)', bg: 'var(--blue-tint-80)', icon: Clock },
-  complete:     { label: 'Complete',     color: 'var(--black)', bg: 'var(--success-soft)', icon: CheckCircle },
-  fulfilled:    { label: 'Fulfilled',    color: 'var(--black)', bg: 'var(--success-soft)', icon: CheckCircle },
-  fulfilled: { label: 'Fulfilled', color: 'var(--black)', bg: 'var(--success-soft)', icon: CheckCircle },
-  cancelled: { label: 'Cancelled', color: 'var(--black)', bg: 'var(--error-soft)', icon: X } }
+  running:      { label: 'Running',      color: 'var(--warning)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
+  submitted:    { label: 'Submitted',    color: 'var(--warning)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
+  fulfillment:  { label: 'Fulfillment',  color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)', icon: Receipt },
+  published:    { label: 'Published',    color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)', icon: Receipt },
+  shipment:     { label: 'Shipment',     color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)', icon: Receipt },
+  back_ordered: { label: 'Back Order',   color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)', icon: Clock },
+  complete:     { label: 'Complete',     color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
+  fulfilled:    { label: 'Fulfilled',    color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
+  fulfilled: { label: 'Fulfilled', color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
+  cancelled: { label: 'Cancelled', color: 'var(--error-dark)', bg: 'var(--error-soft)', icon: X } }
 
 const TABS = [
   { key: 'all',       label: 'All'       },
@@ -176,18 +176,18 @@ export default function PurchaseOrders() {
       {queuedCount > 0 && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: '0.75rem',
-          padding: 'var(--pad-m) var(--pad-l)', background: 'var(--bg)',
+          padding: 'var(--pad-m) var(--pad-l)', background: 'var(--warning-soft)',
           borderRadius: 'var(--r-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
-          <Warning size={18} weight="fill" style={{ color: 'var(--black)', flexShrink: 0 }} />
+          <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
               {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--warning-text)' }}>
               Tap to review and publish
             </div>
           </div>
-          <CaretRight size={14} style={{ color: 'var(--black)' }} />
+          <CaretRight size={14} style={{ color: 'var(--warning)' }} />
         </div>
       )}
 
@@ -196,7 +196,7 @@ export default function PurchaseOrders() {
         {[
           { label: 'Total Orders', value: pos.length },
           { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? 'var(--warning)' : undefined },
-          { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--black)' },
+          { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--success-text)' },
         ].map(s => (
           <div key={s.label} style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--black)' }}>{s.value}</div>

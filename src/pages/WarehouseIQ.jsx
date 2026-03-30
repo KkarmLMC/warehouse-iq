@@ -234,9 +234,9 @@ export default function WarehouseIQ() {
 
       {/* Summary cards */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(160px,1fr))', gap:'var(--gap-m)', marginBottom: 'var(--mar-xl)' }}>
-        <SumCard label="Inventory Value"   value={`$${totalValue.toLocaleString('en-US',{maximumFractionDigits:0})}`} Icon={CurrencyDollar} color="var(--black)" />
-        <SumCard label="Units Added"       value={totalAdded.toLocaleString()} sub="this period" Icon={ArrowDown} color="var(--black)" />
-        <SumCard label="Units Used"        value={totalUsed.toLocaleString()}  sub="this period" Icon={ArrowUp}   color="var(--black)" />
+        <SumCard label="Inventory Value"   value={`$${totalValue.toLocaleString('en-US',{maximumFractionDigits:0})}`} Icon={CurrencyDollar} color="var(--success-text)" />
+        <SumCard label="Units Added"       value={totalAdded.toLocaleString()} sub="this period" Icon={ArrowDown} color="var(--blue)" />
+        <SumCard label="Units Used"        value={totalUsed.toLocaleString()}  sub="this period" Icon={ArrowUp}   color="var(--purple)" />
         <SumCard label="On Order"          value={totalOnOrder.toLocaleString()} Icon={Truck} color={totalOnOrder > 0 ? 'var(--blue)' : 'var(--text-3)'} />
         <SumCard label="Low Stock"         value={lowCount} Icon={WarningCircle} color={lowCount > 0 ? 'var(--orange-shade-20)' : 'var(--text-3)'} />
         <SumCard label="Out of Stock"      value={outCount} Icon={Package} color={outCount > 0 ? 'var(--error-dark)' : 'var(--text-3)'} />

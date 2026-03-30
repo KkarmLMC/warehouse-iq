@@ -5,16 +5,16 @@ import { db } from '../lib/supabase.js'
 
 const STAGE = {
   queued:      { label: 'Queued',      color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)' },
-  running:     { label: 'Running',     color: 'var(--black)', bg: 'var(--warning-soft)' },
-  fulfillment: { label: 'Fulfillment', color: 'var(--black)', bg: 'var(--blue-soft)' },
-  shipment:    { label: 'Shipment',    color: 'var(--black)', bg: 'var(--blue-tint-80)' },
-  complete:    { label: 'Complete',    color: 'var(--black)', bg: 'var(--success-soft)' },
-  back_ordered:{ label: 'Back Order',  color: 'var(--black)', bg: 'var(--blue-tint-80)' },
+  running:     { label: 'Running',     color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  fulfillment: { label: 'Fulfillment', color: 'var(--blue)', bg: 'var(--blue-soft)' },
+  shipment:    { label: 'Shipment',    color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
+  complete:    { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' },
+  back_ordered:{ label: 'Back Order',  color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
   // legacy
   draft:       { label: 'Draft',       color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
-  submitted:   { label: 'Submitted',   color: 'var(--black)', bg: 'var(--warning-soft)' },
-  published:   { label: 'In Progress', color: 'var(--black)', bg: 'var(--blue-soft)' },
-  fulfilled:   { label: 'Complete',    color: 'var(--black)', bg: 'var(--success-soft)' } }
+  submitted:   { label: 'Submitted',   color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  published:   { label: 'In Progress', color: 'var(--blue)', bg: 'var(--blue-soft)' },
+  fulfilled:   { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' } }
 
 const TABS = [
   { key: 'queued',      label: 'Queue' },

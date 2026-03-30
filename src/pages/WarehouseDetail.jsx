@@ -129,7 +129,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <textarea value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Any relevant notes about this warehouse…" rows={3} style={{ width: '100%', resize: 'vertical' }} />
           </div>
 
-          {error && <div style={{ color: 'var(--black)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-m)', padding: 'var(--pad-s) var(--pad-m)', background: 'var(--bg)', borderRadius: 'var(--r-m)' }}>{error}</div>}
+          {error && <div style={{ color: 'var(--error-dark)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-m)', padding: 'var(--pad-s) var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-m)' }}>{error}</div>}
         </div>
 
         {/* Footer */}
@@ -178,7 +178,7 @@ function StockRow({ level, onPress }) {
         </div>
         <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--gap-s)' }}>
           {level.parts?.sku && <span style={{ fontFamily: 'var(--mono)' }}>{level.parts.sku}</span>}
-          {level.quantity_on_order > 0 && <span style={{ color: 'var(--black)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>}
+          {level.quantity_on_order > 0 && <span style={{ color: 'var(--blue)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>}
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexShrink: 0 }}>
@@ -344,7 +344,7 @@ export default function WarehouseDetail() {
             <CurrencyDollar size={16} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Est. Inventory Value</span>
           </div>
-          <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--black)' }}>
+          <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--success-text)' }}>
             ${totalValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}
           </span>
         </div>
@@ -412,10 +412,10 @@ export default function WarehouseDetail() {
       {warehousePOs.length > 0 && (() => {
         const STATUS_COLORS = {
           draft:     { color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
-          submitted: { color: 'var(--black)', bg: 'var(--warning-soft)' },
-          published: { color: 'var(--black)', bg: 'var(--blue-soft)' },
-          fulfilled: { color: 'var(--black)', bg: 'var(--success-soft)' },
-          cancelled: { color: 'var(--black)', bg: 'var(--error-soft)' } }
+          submitted: { color: 'var(--warning)', bg: 'var(--warning-soft)' },
+          published: { color: 'var(--blue)', bg: 'var(--blue-soft)' },
+          fulfilled: { color: 'var(--success-text)', bg: 'var(--success-soft)' },
+          cancelled: { color: 'var(--error-dark)', bg: 'var(--error-soft)' } }
         return (
           <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>

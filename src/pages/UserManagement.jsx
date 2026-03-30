@@ -111,10 +111,10 @@ export default function UserManagement() {
   }
 
   const roleColor = (r) => ({
-    admin: { bg: 'var(--blue-soft)', color: 'var(--black)' },
-    management: { bg: 'var(--success-soft)', color: 'var(--black)' },
-    warehouse: { bg: 'var(--warning-soft)', color: 'var(--black)' },
-    field: { bg: 'var(--purple-soft)', color: 'var(--black)' },
+    admin: { bg: 'var(--blue-soft)', color: 'var(--blue)' },
+    management: { bg: 'var(--success-soft)', color: 'var(--success-text)' },
+    warehouse: { bg: 'var(--warning-soft)', color: 'var(--warning)' },
+    field: { bg: 'var(--purple-soft)', color: 'var(--purple)' },
   }[r] || { bg: 'var(--white)', color: 'var(--black)' })
 
   if (!isAdmin) return null
