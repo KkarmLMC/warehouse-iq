@@ -35,7 +35,7 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
         <div style={{
           width: 36, height: 36,
           borderRadius: 'var(--r-l)',
-          background: iconBg || 'var(--white)',
+          background: iconBg || 'var(--bg)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           flexShrink: 0 }}>
           <Icon size={16} style={{ color: iconColor || 'var(--navy)' }} />
