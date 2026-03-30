@@ -58,7 +58,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
     <>
       <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 299, background: 'rgba(0,0,0,0.5)', animation: 'anim-fade-in 0.15s ease' }} />
       <div style={{
-        position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 300,
+        position: 'fixed', left: 0, right: 0, bottom: 'env(safe-area-inset-bottom, 0px)', zIndex: 300,
         background: 'var(--white)', borderRadius: 'var(--r-xl) var(--r-xl) 0 0',
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>

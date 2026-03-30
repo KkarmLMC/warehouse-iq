@@ -94,7 +94,7 @@ function SubNav({ children, collapsed, goTo, currentPath }) {
       <div style={{ position: 'relative', paddingLeft: 4 }}>
         <div style={{
           position: 'absolute', left: '1.375rem', top: 4, bottom: 4,
-          width: 1, background: 'var(--border)', borderRadius: 1 }} />
+          width: 1, background: 'var(--border)', borderRadius: 'var(--r-xs)' }} />
         {children.map(child => {
           const active = pathMatch(child.path, currentPath)
           return (

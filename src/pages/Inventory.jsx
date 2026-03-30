@@ -287,7 +287,7 @@ export default function Inventory() {
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 5px', borderRadius: 3, background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
+                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 5px', borderRadius: 'var(--r-xs)', background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
               </div>
               <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {so.customer_name} — {so.project_name || 'No project name'}
@@ -358,7 +358,7 @@ export default function Inventory() {
                 {t.reason ? ` · ${t.reason}` : ''}
               </div>
             </div>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 3, background: 'var(--success-soft)', color: 'var(--success-text)', textTransform: 'capitalize' }}>
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 'var(--r-xs)', background: 'var(--success-soft)', color: 'var(--success-text)', textTransform: 'capitalize' }}>
               {t.status}
             </span>
           </div>

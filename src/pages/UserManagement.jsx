@@ -198,7 +198,7 @@ export default function UserManagement() {
                   <div style={{ flex:1,minWidth:0 }}>
                     <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',flexWrap:'wrap' }}>
                       <span style={{ fontWeight:700,fontSize:'var(--text-sm)' }}>{u.full_name || '—'}</span>
-                      {isSelf && <span style={{ fontSize:'var(--text-xs)',fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--white)',color:'var(--text-3)' }}>you</span>}
+                      {isSelf && <span style={{ fontSize:'var(--text-xs)',fontWeight:600,padding:'1px 5px',borderRadius: 'var(--r-xs)',background:'var(--white)',color:'var(--text-3)' }}>you</span>}
                       <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:rc.bg,color:rc.color,textTransform:'capitalize' }}>{u.role}</span>
                       {u.pipeline_role && (
                         <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:'var(--blue-tint-80)',color:'var(--blue-shade-20)' }}>
@@ -273,7 +273,7 @@ export default function UserManagement() {
         <>
           <div onClick={() => setShowInvite(false)}
             style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:299 }} />
-          <div style={{ position:'fixed',bottom:0,left:0,right:0,zIndex:300,background:'var(--bg)',borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'var(--pad-xl)',maxHeight:'90vh',overflowY:'auto' }}>
+          <div style={{ position:'fixed',bottom: 'env(safe-area-inset-bottom, 0px)',left:0,right:0,zIndex:300,background:'var(--bg)',borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'var(--pad-xl)',maxHeight:'90vh',overflowY:'auto' }}>
             <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'var(--mar-l)' }}>
               <div style={{ fontSize:'var(--text-lg)',fontWeight:800 }}>Invite New User</div>
               <button onClick={() => setShowInvite(false)}

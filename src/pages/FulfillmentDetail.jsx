@@ -200,7 +200,7 @@ export default function FulfillmentDetail() {
                 background: isBO ? 'var(--blue-tint-80)' : isOut ? 'var(--error-soft)' : isPulled ? 'var(--success-soft)' : 'transparent',
                 opacity: isBO ? 0.7 : 1 }}>
               {/* Checkbox */}
-              <div style={{ width:36,height:36,borderRadius:8,border:`2px solid ${isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
+              <div style={{ width:36,height:36,borderRadius: 'var(--r-m)',border:`2px solid ${isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
                 background: isPulled ? 'var(--success-text)' : 'transparent',
                 display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
                 {isPulled && <CheckCircle size={14} weight="fill" color="#fff" />}
@@ -212,7 +212,7 @@ export default function FulfillmentDetail() {
                     textDecoration: isPulled && !isBO ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
-                  {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'var(--blue-tint-80)',color:'var(--blue-shade-20)',flexShrink:0 }}>BACK ORDER</span>}
+                  {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-tint-80)',color:'var(--blue-shade-20)',flexShrink:0 }}>BACK ORDER</span>}
                 </div>
                 {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                 <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
@@ -239,7 +239,7 @@ export default function FulfillmentDetail() {
               </div>
             </div>
             {flags[line.id] && (
-              <div style={{ margin: '0 var(--mar-l) var(--mar-s)',padding: 'var(--pad-s) var(--pad-m)',background:'var(--error-soft)',borderRadius:6,fontSize:'var(--text-sm)',color:'var(--error-shade-40)',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+              <div style={{ margin: '0 var(--mar-l) var(--mar-s)',padding: 'var(--pad-s) var(--pad-m)',background:'var(--error-soft)',borderRadius: 'var(--r-s)',fontSize:'var(--text-sm)',color:'var(--error-shade-40)',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
                 <strong>Discrepancy:</strong> {flags[line.id]}
               </div>
             )}

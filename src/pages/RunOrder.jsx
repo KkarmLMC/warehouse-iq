@@ -271,10 +271,10 @@ export default function RunOrder() {
         <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',marginBottom:4 }}>
           <div style={{ fontSize:'var(--text-base)',fontWeight:800 }}>{order?.so_number}</div>
           {order?.status === 'fulfillment' && (
-            <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius:6,background:'var(--blue-soft)',color:'var(--blue)' }}>In Fulfillment</span>
+            <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius: 'var(--r-s)',background:'var(--blue-soft)',color:'var(--blue)' }}>In Fulfillment</span>
           )}
           {order?.status === 'back_ordered' && (
-            <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius:6,background:'var(--warning-soft)',color:'var(--warning-text)' }}>Back-Order Re-Run</span>
+            <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius: 'var(--r-s)',background:'var(--warning-soft)',color:'var(--warning-text)' }}>Back-Order Re-Run</span>
           )}
         </div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--black)' }}>
@@ -438,8 +438,8 @@ export default function RunOrder() {
                       <div style={{ fontSize:'var(--text-xs)',fontWeight:600,
                         color: isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-shade-40)' : 'var(--black)' }}>
                         {line.description}
-                        {line.is_kit && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'var(--blue-soft)',color:'var(--blue)' }}>KIT</span>}
-                        {isBO && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'var(--blue-tint-80)',color:'var(--blue-shade-20)' }}>B/O</span>}
+                        {line.is_kit && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-soft)',color:'var(--blue)' }}>KIT</span>}
+                        {isBO && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-tint-80)',color:'var(--blue-shade-20)' }}>B/O</span>}
                       </div>
                       {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                       <div style={{ fontSize:'var(--text-xs)',marginTop:2 }}>
@@ -551,7 +551,7 @@ export default function RunOrder() {
           <>
             <div onClick={() => setShowKitModal(false)}
               style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:299 }} />
-            <div style={{ position:'fixed',bottom:0,left:0,right:0,zIndex:300,background:'var(--bg)',
+            <div style={{ position:'fixed',bottom: 'env(safe-area-inset-bottom, 0px)',left:0,right:0,zIndex:300,background:'var(--bg)',
               borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'1.25rem',maxHeight:'80vh',overflowY:'auto' }}>
               <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',marginBottom: 'var(--mar-l)' }}>
                 <SealWarning size={20} weight="fill" style={{ color:'var(--warning)' }} />

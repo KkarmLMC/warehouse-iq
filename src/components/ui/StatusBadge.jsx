@@ -1,61 +1,59 @@
 /**
  * StatusBadge
- * Inline pill badge for status/stage values.
- * Replaces the 37+ repeated inline badge style objects.
+ * Inline badge for status/stage values.
+ * Uses design system tokens from statusColors.js — no raw hex values.
  *
  * Props:
- *   status  — string value e.g. "queued", "In Progress", "complete"
+ *   status  — string e.g. "queued", "In Progress", "complete"
  *   custom  — { bg, color } override for non-standard statuses
- *   small   — reduces padding slightly (for dense tables/rows)
- *
- * Built-in status map covers all statuses used across the platform.
- * Pass `custom` for anything not in the map.
+ *   small   — reduces padding for dense tables/rows
  */
+import { soStatus, projectStage, approvalStatus, stockStatus } from '../../lib/statusColors.js'
 
-const STATUS_MAP = {
-  // Sales Order statuses
-  queued:       { bg: '#EEF2FF', color: '#6366F1' },
-  running:      { bg: '#FEF3C7', color: '#D97706' },
-  fulfillment:  { bg: '#EFF6FF', color: '#0369A1' },
-  shipment:     { bg: '#ECFEFF', color: '#0891B2' },
-  back_ordered: { bg: '#ECFEFF', color: '#0891B2' },
-  complete:     { bg: '#F0FDF4', color: '#15803D' },
-  cancelled:    { bg: '#F1F5F9', color: '#64748B' },
-  draft:        { bg: '#F1F5F9', color: '#64748B' },
-  // Project stages
-  awarded:      { bg: '#EEF2FF', color: '#6366F1' },
-  scheduled:    { bg: '#E0F2FE', color: '#0284C7' },
-  'in progress':{ bg: '#ECFDF5', color: '#059669' },
-  inspection:   { bg: '#FEF3C7', color: '#D97706' },
-  'on hold':    { bg: '#FEF2F2', color: '#DC2626' },
-  // Generic
-  active:       { bg: '#FEF3C7', color: '#D97706' },
-  pending:      { bg: '#FEF3C7', color: '#D97706' },
-  submitted:    { bg: '#EFF6FF', color: '#1D4ED8' },
-  reviewed:     { bg: '#F0FDF4', color: '#15803D' },
-  approved:     { bg: '#F0FDF4', color: '#15803D' },
-  rejected:     { bg: '#FEF2F2', color: '#B91C1C' },
-  ok:           { bg: '#F0FDF4', color: '#15803D' },
-  low:          { bg: '#FEF3C7', color: '#D97706' },
-  out:          { bg: '#FEF2F2', color: '#B91C1C' } }
+// Unified lookup — tries SO status, then project stage, then approval, then stock
+function getTokens(status) {
+  if (!status) return { color: 'var(--text-3)', bg: 'var(--hover)' }
+  const key = status.toLowerCase().replace(/[\s_-]+/g, '-')
+
+  // Try each map in order
+  const SO_KEYS = ['draft','queued','running','submitted','fulfillment','published','shipment','back-ordered','back_ordered','complete','fulfilled','cancelled']
+  const PROJ_KEYS = ['awarded','scheduled','in-progress','in progress','inspection','completion','customer-signoff','postponed','failed']
+  const APPR_KEYS = ['approved','rejected','pending-review','under-review']
+  const STOCK_KEYS = ['ok','low','out','on-order','on_order']
+
+  const normalized = key.replace(/_/g, '-')
+
+  if (SO_KEYS.some(k => k === normalized || k === key))   return soStatus(status)
+  if (PROJ_KEYS.some(k => k === normalized || k === key)) return projectStage(status)
+  if (APPR_KEYS.some(k => k === normalized || k === key)) return approvalStatus(status)
+  if (STOCK_KEYS.some(k => k === normalized || k === key)) return stockStatus(status)
+
+  // Extra aliases
+  const ALIAS = {
+    'active':    { color: 'var(--warning)',      bg: 'var(--warning-soft)' },
+    'pending':   { color: 'var(--warning)',      bg: 'var(--warning-soft)' },
+    'on hold':   { color: 'var(--error-dark)',   bg: 'var(--error-soft)' },
+    'hold':      { color: 'var(--error-dark)',   bg: 'var(--error-soft)' },
+    'reviewed':  { color: 'var(--success-text)', bg: 'var(--success-soft)' },
+  }
+  return ALIAS[key] || ALIAS[normalized] || { color: 'var(--text-3)', bg: 'var(--hover)' }
+}
 
 export default function StatusBadge({ status, custom, small }) {
-  const key = (status || '').toLowerCase().replace(/\s+/g, ' ')
-  const style = custom || STATUS_MAP[key] || { bg: '#F1F5F9', color: '#64748B' }
-
+  const style = custom || getTokens(status)
   return (
     <span style={{
       display: 'inline-flex',
       alignItems: 'center',
       padding: small ? '1px 6px' : '2px 8px',
-      borderRadius: 4,
+      borderRadius: 'var(--r-s)',
       fontSize: 'var(--text-xs)',
       fontWeight: 700,
       background: style.bg,
       color: style.color,
       whiteSpace: 'nowrap',
       textTransform: 'capitalize' }}>
-      {status}
+      {style.label || status}
     </span>
   )
 }
