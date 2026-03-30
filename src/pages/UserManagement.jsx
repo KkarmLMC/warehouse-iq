@@ -6,6 +6,7 @@ import {
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
+import PageHeader from '../components/ui/PageHeader'
 
 const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 const DEFAULT_ROUTE = import.meta.env.VITE_DEFAULT_ROUTE
@@ -131,19 +132,17 @@ export default function UserManagement() {
         <ArrowLeft size={14} /> Back
       </button>
 
-      <div style={{ display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'var(--mar-xl)' }}>
-        <div>
-          <div style={{ fontSize:'var(--text-xs)',fontWeight:'var(--fw-bold)',color:'var(--black)',marginBottom:4 }}>ADMIN</div>
-          <div style={{ fontSize:'var(--text-base)',fontWeight:800 }}>User Management</div>
-          <div style={{ fontSize:'var(--text-sm)',color:'var(--text-3)',marginTop:4 }}>
-            Manage roles and pipeline assignments for all users
-          </div>
-        </div>
-        <button onClick={() => setShowInvite(true)}
-          style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',padding: 'var(--pad-s) var(--pad-l)',borderRadius:'var(--r-s)',background:'var(--navy)',color:'var(--white)',fontWeight:'var(--fw-bold)',fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
-          <UserPlus size={16} /> Invite User
-        </button>
-      </div>
+      <PageHeader
+        eyebrow="ADMIN"
+        title="User Management"
+        subtitle="Manage roles and pipeline assignments for all users"
+        action={
+          <button onClick={() => setShowInvite(true)}
+            style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',padding: 'var(--pad-s) var(--pad-l)',borderRadius:'var(--r-s)',background:'var(--navy)',color:'var(--white)',fontWeight:'var(--fw-bold)',fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
+            <UserPlus size={16} /> Invite User
+          </button>
+        }
+      />
 
       {/* Flash */}
       {flash && (
