@@ -49,8 +49,8 @@ function SectionGroup({ label, items }) {
           alignItems: 'start',
           background: 'var(--white)' }}>
           <div style={{ minWidth: 0, overflow: 'hidden' }}>
-            {item.sku && <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 500, color: 'var(--black)', lineHeight: 1.4 }}>{item.description}</div>
+            {item.sku && <div style={{ fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--black)', lineHeight: 1.4 }}>{item.description}</div>
           </div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', textAlign: 'right', paddingTop: 2 }}>{item.quantity}</div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', textAlign: 'right', paddingTop: 2 }}>${item.unit_cost.toFixed(2)}</div>
@@ -195,7 +195,7 @@ export default function PODetail() {
           {/* Column headers */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--pad-s) var(--pad-m)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
             {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
-              <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', textAlign: h !== 'Item / Description' ? 'right' : 'left', whiteSpace: 'nowrap', overflow: 'hidden' }}>{h}</div>
+              <div key={h} style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)', textAlign: h !== 'Item / Description' ? 'right' : 'left', whiteSpace: 'nowrap', overflow: 'hidden' }}>{h}</div>
             ))}
           </div>
           {sections.map(sec => (

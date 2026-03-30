@@ -177,7 +177,7 @@ function StockRow({ level, onPress }) {
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {level.parts?.name || '—'}
         </div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--gap-s)' }}>
+        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--gap-s)' }}>
           {level.parts?.sku && <span style={{ fontFamily: 'var(--mono)' }}>{level.parts.sku}</span>}
           {level.quantity_on_order > 0 && <span style={{ color: 'var(--blue)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>}
         </div>
@@ -481,7 +481,7 @@ export default function WarehouseDetail() {
                   width: '2rem', height: '2rem', borderRadius: 'var(--r-xxl)', flexShrink: 0,
                   background: tx.quantity_delta > 0 ? 'var(--success-soft)' : 'var(--error-soft)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: tx.quantity_delta > 0 ? 'var(--success-text)' : 'var(--error-dark)' }}>
+                  <span style={{ fontSize: 'var(--text-sm)', fontWeight: 800, color: tx.quantity_delta > 0 ? 'var(--success-text)' : 'var(--error-dark)' }}>
                     {tx.quantity_delta > 0 ? '+' : ''}{tx.quantity_delta}
                   </span>
                 </div>

@@ -182,7 +182,7 @@ export default function FulfillmentDetail() {
         {/* Column headers */}
         <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
           {['','Part / Warehouse','Qty'].map(h => (
-            <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
+            <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--black)' }}>{h}</div>
           ))}
         </div>
 

@@ -330,22 +330,22 @@ export default function WarehouseIQ() {
                 {r.part.sku && <div style={{ fontSize:'var(--text-xs)', fontFamily:'var(--mono)', color:'var(--text-3)' }}>{r.part.sku}</div>}
               </div>
               {/* Start */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'var(--text-3)' }}>{r.startQty.toLocaleString()}</div>
+              <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color:'var(--text-3)' }}>{r.startQty.toLocaleString()}</div>
               {/* Added */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.added > 0 ? 'var(--blue)' : 'var(--text-3)', fontWeight: r.added > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color: r.added > 0 ? 'var(--blue)' : 'var(--text-3)', fontWeight: r.added > 0 ? 700 : 400 }}>
                 {r.added > 0 ? `+${r.added.toLocaleString()}` : '—'}
               </div>
               {/* Used */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.used > 0 ? 'var(--purple)' : 'var(--text-3)', fontWeight: r.used > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color: r.used > 0 ? 'var(--purple)' : 'var(--text-3)', fontWeight: r.used > 0 ? 700 : 400 }}>
                 {r.used > 0 ? r.used.toLocaleString() : '—'}
               </div>
               {/* On Order */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.onOrder > 0 ? 'var(--blue-shade-40)' : 'var(--text-3)', fontWeight: r.onOrder > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color: r.onOrder > 0 ? 'var(--blue-shade-40)' : 'var(--text-3)', fontWeight: r.onOrder > 0 ? 700 : 400 }}>
                 {r.onOrder > 0 ? r.onOrder.toLocaleString() : '—'}
               </div>
               {/* Stock + trend */}
               <div style={{ textAlign:'right', display:'flex', alignItems:'center', justifyContent:'flex-end', gap:4 }}>
-                <span style={{ fontSize:'var(--text-xs)', fontWeight:800, color: isOut ? 'var(--error-dark)' : isLow ? 'var(--orange-shade-20)' : 'var(--black)' }}>
+                <span style={{ fontSize:'var(--text-sm)', fontWeight:800, color: isOut ? 'var(--error-dark)' : isLow ? 'var(--orange-shade-20)' : 'var(--black)' }}>
                   {r.stock.toLocaleString()}
                 </span>
                 {delta !== 0 && (
@@ -355,7 +355,7 @@ export default function WarehouseIQ() {
                 )}
               </div>
               {/* Value */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'var(--black)', fontWeight:600 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color:'var(--black)', fontWeight:600 }}>
                 {r.value > 0 ? `$${r.value.toLocaleString('en-US',{maximumFractionDigits:0})}` : '—'}
               </div>
               {/* Status chip */}
@@ -371,13 +371,13 @@ export default function WarehouseIQ() {
           <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-m) var(--pad-l)', background:'var(--navy)', borderTop:'2px solid var(--border-l)' }}>
             <div style={{ fontSize:'var(--text-base)', fontWeight:800, color:'#fff' }}>Period Totals</div>
             <div style={{ textAlign:'right', fontSize:'var(--text-base)', color: 'var(--white)' }}>—</div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--blue-tint-60)' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-sm)', fontWeight:800, color:'var(--blue-tint-60)' }}>
               {filtered.reduce((s,r)=>s+r.added,0) > 0 ? `+${filtered.reduce((s,r)=>s+r.added,0).toLocaleString()}` : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--purple-tint-40)' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-sm)', fontWeight:800, color:'var(--purple-tint-40)' }}>
               {filtered.reduce((s,r)=>s+r.used,0) > 0 ? filtered.reduce((s,r)=>s+r.used,0).toLocaleString() : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--blue-tint-40)' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-sm)', fontWeight:800, color:'var(--blue-tint-40)' }}>
               {filtered.reduce((s,r)=>s+r.onOrder,0) > 0 ? filtered.reduce((s,r)=>s+r.onOrder,0).toLocaleString() : '—'}
             </div>
             <div style={{ textAlign:'right', fontSize:'var(--text-base)', fontWeight:800, color:'#fff' }}>

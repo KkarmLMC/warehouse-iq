@@ -56,7 +56,7 @@ export default function ShipmentQueue() {
             <Truck size={16} style={{ color:'var(--blue-shade-20)' }} />
             <div style={{ flex:1,minWidth:0 }}>
               <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--black)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
+              <div style={{ fontSize:'var(--text-sm)',color:'var(--black)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
                 {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>
               {(o.job_city||o.customer_city) && (

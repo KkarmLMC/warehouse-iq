@@ -408,7 +408,7 @@ export default function RunOrder() {
             {/* Column headers */}
             <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
               {['Part','Req','Avail','Short'].map(h => (
-                <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
+                <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--black)' }}>{h}</div>
               ))}
             </div>
 
@@ -425,7 +425,7 @@ export default function RunOrder() {
 
                   {/* Kit change badge */}
                   {kitChanged && (
-                    <div style={{ padding: '4px var(--pad-l)',background:'var(--warning-soft)',fontSize:'var(--text-xs)',fontWeight:700,color:'var(--warning-text)',display:'flex',alignItems:'center',gap:4 }}>
+                    <div style={{ padding: '4px var(--pad-l)',background:'var(--warning-soft)',fontSize:'var(--text-sm)',fontWeight:700,color:'var(--warning-text)',display:'flex',alignItems:'center',gap:4 }}>
                       <SealWarning size={11} /> Kit description modified by sales
                       {conf === 'accept' && <span style={{ color:'var(--success-text)',marginLeft:4 }}>✓ Accepted</span>}
                       {conf === 'reject' && <span style={{ color:'var(--text-3)',marginLeft:4 }}>✓ Reverted to canonical</span>}
@@ -435,7 +435,7 @@ export default function RunOrder() {
                   {/* Main row */}
                   <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--pad-m) var(--pad-l)',alignItems:'start' }}>
                     <div>
-                      <div style={{ fontSize:'var(--text-xs)',fontWeight:600,
+                      <div style={{ fontSize:'var(--text-sm)',fontWeight:600,
                         color: isBO ? 'var(--blue-shade-20)' : isShortage ? 'var(--error-shade-40)' : 'var(--black)' }}>
                         {line.description}
                         {line.is_kit && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-soft)',color:'var(--blue)' }}>KIT</span>}

@@ -131,7 +131,7 @@ export default function ShipmentDetail() {
         </div>
         <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
           {['Part','Qty','Source'].map(h => (
-            <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
+            <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--black)' }}>{h}</div>
           ))}
         </div>
         {lines.map((line, idx) => (
@@ -140,7 +140,7 @@ export default function ShipmentDetail() {
             <div>
               <div style={{ fontSize:'var(--text-sm)',fontWeight:600 }}>{line.description}</div>
               {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
+              <div style={{ fontSize:'var(--text-sm)',color:'var(--text-3)',marginTop:1 }}>
                 {line.warehouses?.name || '—'}
                 {line.split_warehouse_id && line.split_qty > 0 && (
                   <span style={{ marginLeft:6,color:'var(--warning)' }}>+ {line.split_qty} {line.split_warehouse?.name}</span>

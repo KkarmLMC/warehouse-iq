@@ -254,7 +254,7 @@ export default function Inventory() {
               {/* Info */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{wh.name}</div>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 1 }}>
+                <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginTop: 1 }}>
                   {wh.city}, {wh.state} · {h.parts || 0} parts · {fmt(h.total)}
                 </div>
               </div>
@@ -320,7 +320,7 @@ export default function Inventory() {
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.parts?.name || 'Unknown Part'}
                   </div>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{item.warehouses?.name}</div>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)' }}>{item.warehouses?.name}</div>
                 </div>
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: isOut ? 'var(--error-alt)' : 'var(--warning)', whiteSpace: 'nowrap' }}>
                   {isOut ? 'Out of Stock' : `${item.quantity_on_hand} left`}
@@ -350,10 +350,10 @@ export default function Inventory() {
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
             <CheckCircle size={16} weight="fill" style={{ color: 'var(--success-text)' }} />
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600 }}>
+              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>
                 {t.from_warehouse?.name?.replace(' Warehouse', '')} → {t.to_warehouse?.name?.replace(' Warehouse', '')}
               </div>
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)' }}>
                 {new Date(t.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 {t.reason ? ` · ${t.reason}` : ''}
               </div>
