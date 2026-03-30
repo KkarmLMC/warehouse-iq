@@ -157,9 +157,9 @@ export default function FulfillmentDetail() {
       </div>
 
       {shortageLines.length > 0 && (
-        <div style={{ background:'#FEF2F2',border:'1px solid #FCA5A5',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
+        <div style={{ background:'var(--error-soft)',border:'1px solid #FCA5A5',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
           <Warning size={16} weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
-          <div style={{ fontSize:'var(--text-xs)',color:'#991B1B' }}>
+          <div style={{ fontSize:'var(--text-xs)',color:'var(--error-shade-40)' }}>
             {shortageLines.length} part{shortageLines.length!==1?'s':''} had shortages — split fulfillment applied where possible. Review red items before confirming.
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function FulfillmentDetail() {
               style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,alignItems:'center',
                 padding: 'var(--pad-l) var(--pad-l)',cursor:'pointer',minHeight:64,
                 borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-l)' : 'none',
-                background: isBO ? '#ECFEFF' : isOut ? '#FEF2F2' : isPulled ? '#F0FDF4' : 'transparent',
+                background: isBO ? 'var(--blue-tint-80)' : isOut ? 'var(--error-soft)' : isPulled ? 'var(--success-soft)' : 'transparent',
                 opacity: isBO ? 0.7 : 1 }}>
               {/* Checkbox */}
               <div style={{ width:36,height:36,borderRadius:8,border:`2px solid ${isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
@@ -201,17 +201,17 @@ export default function FulfillmentDetail() {
               {/* Part info */}
               <div>
                 <div style={{ display:'flex',alignItems:'center',gap:6 }}>
-                  <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isBO ? '#0891B2' : isOut ? '#991B1B' : isPulled ? 'var(--text-3)' : 'var(--black)',
+                  <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isBO ? 'var(--blue-shade-20)' : isOut ? 'var(--error-shade-40)' : isPulled ? 'var(--text-3)' : 'var(--black)',
                     textDecoration: isPulled && !isBO ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
-                  {isBO && <span style={{ fontSize:'var(--blackxs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'#ECFEFF',color:'#0891B2',flexShrink:0 }}>BACK ORDER</span>}
+                  {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius:3,background:'var(--blue-tint-80)',color:'var(--blue-shade-20)',flexShrink:0 }}>BACK ORDER</span>}
                 </div>
                 {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                 <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
                   {line.warehouses?.name || '—'}
                   {line.split_warehouse_id && line.split_qty > 0 && (
-                    <span style={{ marginLeft:6,color:'#D97706' }}>
+                    <span style={{ marginLeft:6,color:'var(--warning)' }}>
                       + {line.split_qty} from {line.split_warehouse?.name || 'split warehouse'}
                     </span>
                   )}
@@ -219,20 +219,20 @@ export default function FulfillmentDetail() {
               </div>
               {/* Qty */}
               <div>
-                <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-md)',color: isOut ? '#DC2626' : 'var(--black)' }}>
+                <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-md)',color: isOut ? 'var(--error-alt)' : 'var(--black)' }}>
                   {line.qty_available}
-                  {line.split_qty > 0 && <span style={{ color:'#D97706',fontSize:'var(--text-xs)' }}>+{line.split_qty}</span>}
+                  {line.split_qty > 0 && <span style={{ color:'var(--warning)',fontSize:'var(--text-xs)' }}>+{line.split_qty}</span>}
                 </div>
                 <button onClick={(e) => flags[line.id] ? clearFlag(e, line.id) : flagLine(e, line.id)}
                   style={{ fontSize:'var(--text-xs)',padding:'2px 6px',borderRadius:4,border:'none',cursor:'pointer',fontFamily:'var(--font)',marginTop:4,
-                    background: flags[line.id] ? '#FEF2F2' : 'var(--surface-raised)',
-                    color: flags[line.id] ? '#DC2626' : 'var(--text-3)' }}>
+                    background: flags[line.id] ? 'var(--error-soft)' : 'var(--surface-raised)',
+                    color: flags[line.id] ? 'var(--error-alt)' : 'var(--text-3)' }}>
                   {flags[line.id] ? '⚑ flagged' : '⚑ flag'}
                 </button>
               </div>
             </div>
             {flags[line.id] && (
-              <div style={{ margin: '0 var(--mar-l) var(--mar-s)',padding: 'var(--pad-s) var(--pad-m)',background:'#FEF2F2',borderRadius:6,fontSize:'var(--text-sm)',color:'#991B1B',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+              <div style={{ margin: '0 var(--mar-l) var(--mar-s)',padding: 'var(--pad-s) var(--pad-m)',background:'var(--error-soft)',borderRadius:6,fontSize:'var(--text-sm)',color:'var(--error-shade-40)',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
                 <strong>Discrepancy:</strong> {flags[line.id]}
               </div>
             )}

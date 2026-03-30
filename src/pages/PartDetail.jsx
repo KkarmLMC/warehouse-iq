@@ -10,8 +10,8 @@ import { logActivity } from '../lib/logActivity.js'
 function WarehouseRow({ level, warehouseName }) {
   const isLow = level.min_level && level.quantity_on_hand <= level.min_level
   const isOut = level.quantity_on_hand === 0
-  const color = isOut ? '#B91C1C' : isLow ? '#C2410C' : '#15803D'
-  const bg = isOut ? '#FEF2F2' : isLow ? '#FFF7ED' : '#F0FDF4'
+  const color = isOut ? 'var(--error-dark)' : isLow ? 'var(--orange-shade-20)' : 'var(--success-text)'
+  const bg = isOut ? 'var(--error-soft)' : isLow ? 'var(--orange-soft)' : 'var(--success-soft)'
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
@@ -22,13 +22,13 @@ function WarehouseRow({ level, warehouseName }) {
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', display: 'flex', gap: 'var(--gap-s)', marginTop: 2 }}>
             {level.min_level > 0 && <span>Min: {level.min_level}</span>}
             {level.quantity_on_order > 0 && (
-              <span style={{ color: '#1D4ED8', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>
+              <span style={{ color: 'var(--blue)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>
             )}
           </div>
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-full)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
+        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
       </div>
@@ -51,13 +51,13 @@ function TransactionRow({ tx, warehouseName }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
       <div style={{
-        width: '2rem', height: '2rem', borderRadius: 'var(--r-full)',
-        background: isPositive ? '#F0FDF4' : '#FEF2F2',
+        width: '2rem', height: '2rem', borderRadius: 'var(--r-xxl)',
+        background: isPositive ? 'var(--success-soft)' : 'var(--error-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
       }}>
         {isPositive
-          ? <Plus size={14} weight="bold" style={{ color: '#15803D' }} />
-          : <Minus size={14} weight="bold" style={{ color: '#B91C1C' }} />
+          ? <Plus size={14} weight="bold" style={{ color: 'var(--success-text)' }} />
+          : <Minus size={14} weight="bold" style={{ color: 'var(--error-dark)' }} />
         }
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -69,7 +69,7 @@ function TransactionRow({ tx, warehouseName }) {
       </div>
       <div style={{
         fontSize: 'var(--text-md)', fontWeight: 800,
-        color: isPositive ? '#15803D' : '#B91C1C',
+        color: isPositive ? 'var(--success-text)' : 'var(--error-dark)',
       }}>
         {isPositive ? '+' : ''}{tx.quantity_delta}
       </div>
@@ -155,7 +155,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)',
       }}>
         <div style={{ padding: 'var(--pad-l) var(--pad-xl) 0', flexShrink: 0 }}>
-          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-full)', margin: '0 auto var(--mar-l)' }} />
+          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-xxl)', margin: '0 auto var(--mar-l)' }} />
           <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 'var(--mar-l)' }}>Adjust Stock</div>
         </div>
 
@@ -187,7 +187,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div>
               <Label>Qty Change</Label>
               <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--blackxs)', color: 'var(--text-3)', marginTop: 3 }}>Negative to reduce</div>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-3)', marginTop: 3 }}>Negative to reduce</div>
             </div>
             <div>
               <Label>Reason</Label>
@@ -204,12 +204,12 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div>
               <Label>On Order</Label>
               <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--blackxs)', color: '#1D4ED8', marginTop: 3 }}>Incoming stock</div>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--blue)', marginTop: 3 }}>Incoming stock</div>
             </div>
             <div>
               <Label>Min Level</Label>
               <input type="number" min="0" value={minLevel} onChange={e => setMinLevel(e.target.value)} placeholder="e.g. 10" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--blackxs)', color: 'var(--text-3)', marginTop: 3 }}>Low stock alert</div>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-3)', marginTop: 3 }}>Low stock alert</div>
             </div>
           </div>
         </div>
@@ -270,7 +270,7 @@ export default function PartDetail() {
   return (
     <div className="page-content fade-in">
       {/* Header */}
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
+      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>
@@ -305,7 +305,7 @@ export default function PartDetail() {
       </div>
 
       {/* Stock by warehouse */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Stock by Warehouse</div>
         </div>
@@ -317,7 +317,7 @@ export default function PartDetail() {
       </div>
 
       {/* Part details */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Part Details</div>
         </div>
@@ -342,14 +342,14 @@ export default function PartDetail() {
       </div>
 
       {/* Transaction history */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
         <button
           onClick={() => setShowTx(!showTx)}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
             <ClipboardText size={16} style={{ color: 'var(--black)' }} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>
-            <span style={{ padding: '1px 8px', borderRadius: 'var(--r-full)', background: 'var(--hover)', fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
+            <span style={{ padding: '1px 8px', borderRadius: 'var(--r-xxl)', background: 'var(--hover)', fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
           </div>
           <CaretDown size={14} style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>

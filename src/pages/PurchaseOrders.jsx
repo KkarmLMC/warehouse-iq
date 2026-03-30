@@ -8,18 +8,18 @@ import {
 import { db } from '../lib/supabase.js'
 
 const STATUS_META = {
-  draft:        { label: 'Draft',        color: '#64748B', bg: '#F1F5F9', icon: Clock },
-  queued:       { label: 'Queued',       color: '#6366F1', bg: '#EEF2FF', icon: Clock },
-  running:      { label: 'Running',      color: '#D97706', bg: '#FEF3C7', icon: PaperPlaneTilt },
-  submitted:    { label: 'Submitted',    color: '#D97706', bg: '#FEF3C7', icon: PaperPlaneTilt },
-  fulfillment:  { label: 'Fulfillment',  color: '#0369A1', bg: '#EFF6FF', icon: Receipt },
-  published:    { label: 'Published',    color: '#0369A1', bg: '#EFF6FF', icon: Receipt },
-  shipment:     { label: 'Shipment',     color: '#0891B2', bg: '#ECFEFF', icon: Receipt },
-  back_ordered: { label: 'Back Order',   color: '#0891B2', bg: '#ECFEFF', icon: Clock },
-  complete:     { label: 'Complete',     color: '#15803D', bg: '#F0FDF4', icon: CheckCircle },
-  fulfilled:    { label: 'Fulfilled',    color: '#15803D', bg: '#F0FDF4', icon: CheckCircle },
-  fulfilled: { label: 'Fulfilled', color: '#15803D', bg: '#F0FDF4', icon: CheckCircle },
-  cancelled: { label: 'Cancelled', color: '#B91C1C', bg: '#FEF2F2', icon: X },
+  draft:        { label: 'Draft',        color: 'var(--grey-base)', bg: 'var(--grey-tint-80)', icon: Clock },
+  queued:       { label: 'Queued',       color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)', icon: Clock },
+  running:      { label: 'Running',      color: 'var(--warning)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
+  submitted:    { label: 'Submitted',    color: 'var(--warning)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
+  fulfillment:  { label: 'Fulfillment',  color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)', icon: Receipt },
+  published:    { label: 'Published',    color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)', icon: Receipt },
+  shipment:     { label: 'Shipment',     color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)', icon: Receipt },
+  back_ordered: { label: 'Back Order',   color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)', icon: Clock },
+  complete:     { label: 'Complete',     color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
+  fulfilled:    { label: 'Fulfilled',    color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
+  fulfilled: { label: 'Fulfilled', color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
+  cancelled: { label: 'Cancelled', color: 'var(--error-dark)', bg: 'var(--error-soft)', icon: X },
 }
 
 const TABS = [
@@ -36,7 +36,7 @@ function StatusBadge({ status }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      padding: '3px 10px', borderRadius: 'var(--r-full)',
+      padding: '3px 10px', borderRadius: 'var(--r-xxl)',
       fontSize: 'var(--text-xs)', fontWeight: 700,
       background: meta.bg, color: meta.color,
     }}>
@@ -61,10 +61,10 @@ function POCard({ po, totals, onPress }) {
       {/* Icon */}
       <div style={{
         width: '2.75rem', height: '2.75rem', borderRadius: 'var(--r-l)',
-        background: po.division === 'Bolt' ? '#FFF7ED' : '#EFF6FF',
+        background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
       }}>
-        <Receipt size={20} style={{ color: po.division === 'Bolt' ? '#C2410C' : 'var(--navy)' }} />
+        <Receipt size={20} style={{ color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }} />
       </div>
 
       {/* Info */}
@@ -76,9 +76,9 @@ function POCard({ po, totals, onPress }) {
           <StatusBadge status={po.status} />
           <span style={{
             fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px',
-            borderRadius: 'var(--r-full)',
-            background: po.division === 'Bolt' ? '#FFF7ED' : '#EFF6FF',
-            color: po.division === 'Bolt' ? '#C2410C' : 'var(--navy)',
+            borderRadius: 'var(--r-xxl)',
+            background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
+            color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)',
           }}>
             {po.division === 'Bolt' ? 'Bolt' : 'LM'}
           </span>
@@ -182,20 +182,20 @@ export default function PurchaseOrders() {
       {queuedCount > 0 && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: '0.75rem',
-          padding: 'var(--pad-m) var(--pad-l)', background: '#FEF3C7',
+          padding: 'var(--pad-m) var(--pad-l)', background: 'var(--warning-soft)',
           borderRadius: 'var(--r-l)', marginBottom: '1rem',
           border: '1px solid #FDE68A', cursor: 'pointer',
         }} onClick={() => setActiveTab('queued')}>
-          <Warning size={18} weight="fill" style={{ color: '#D97706', flexShrink: 0 }} />
+          <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#92400E' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
               {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: '#92400E' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--warning-text)' }}>
               Tap to review and publish
             </div>
           </div>
-          <CaretRight size={14} style={{ color: '#D97706' }} />
+          <CaretRight size={14} style={{ color: 'var(--warning)' }} />
         </div>
       )}
 
@@ -203,8 +203,8 @@ export default function PurchaseOrders() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
         {[
           { label: 'Total Orders', value: pos.length },
-          { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? '#D97706' : undefined },
-          { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: '#15803D' },
+          { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? 'var(--warning)' : undefined },
+          { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--success-text)' },
         ].map(s => (
           <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--black)' }}>{s.value}</div>
@@ -227,7 +227,7 @@ export default function PurchaseOrders() {
             }}>
             {tab.label}
             {counts[tab.key] > 0 && (
-              <span style={{ marginLeft: 6, fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--navy)' : 'var(--hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-3)', borderRadius: 'var(--r-full)', padding: '1px 6px', fontWeight: 700 }}>
+              <span style={{ marginLeft: 6, fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--navy)' : 'var(--hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-3)', borderRadius: 'var(--r-xxl)', padding: '1px 6px', fontWeight: 700 }}>
                 {counts[tab.key]}
               </span>
             )}
@@ -247,7 +247,7 @@ export default function PurchaseOrders() {
         {['all', 'LM', 'Bolt'].map(d => (
           <button key={d} onClick={() => setDivisionFilter(d)}
             style={{
-              padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-full)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+              padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
               border: `1px solid ${divisionFilter === d ? 'var(--navy)' : 'var(--border-l)'}`,
               background: divisionFilter === d ? 'var(--navy)' : 'transparent',
               color: divisionFilter === d ? '#fff' : 'var(--black)',
@@ -272,7 +272,7 @@ export default function PurchaseOrders() {
           )}
         </div>
       ) : (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden' }}>
           {filtered.map(po => (
             <POCard key={po.id} po={po} totals={totals[po.id]} onPress={() => navigate(`/sales-orders/${po.id}`)} />
           ))}

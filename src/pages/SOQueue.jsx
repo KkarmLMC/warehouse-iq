@@ -4,17 +4,17 @@ import { Receipt, ClockCountdown, ArrowRight, MagnifyingGlass, CaretRight, Check
 import { db } from '../lib/supabase.js'
 
 const STAGE = {
-  queued:      { label: 'Queued',      color: '#6366F1', bg: '#EEF2FF' },
-  running:     { label: 'Running',     color: '#D97706', bg: '#FFFBEB' },
-  fulfillment: { label: 'Fulfillment', color: '#1D4ED8', bg: '#EFF6FF' },
-  shipment:    { label: 'Shipment',    color: '#0891B2', bg: '#ECFEFF' },
-  complete:    { label: 'Complete',    color: '#15803D', bg: '#F0FDF4' },
-  back_ordered:{ label: 'Back Order',  color: '#0891B2', bg: '#ECFEFF' },
+  queued:      { label: 'Queued',      color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)' },
+  running:     { label: 'Running',     color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  fulfillment: { label: 'Fulfillment', color: 'var(--blue)', bg: 'var(--blue-soft)' },
+  shipment:    { label: 'Shipment',    color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
+  complete:    { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' },
+  back_ordered:{ label: 'Back Order',  color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
   // legacy
-  draft:       { label: 'Draft',       color: '#64748B', bg: '#F1F5F9' },
-  submitted:   { label: 'Submitted',   color: '#D97706', bg: '#FFFBEB' },
-  published:   { label: 'In Progress', color: '#1D4ED8', bg: '#EFF6FF' },
-  fulfilled:   { label: 'Complete',    color: '#15803D', bg: '#F0FDF4' },
+  draft:       { label: 'Draft',       color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
+  submitted:   { label: 'Submitted',   color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  published:   { label: 'In Progress', color: 'var(--blue)', bg: 'var(--blue-soft)' },
+  fulfilled:   { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' },
 }
 
 const TABS = [
@@ -92,7 +92,7 @@ export default function SOQueue() {
       <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-xl)', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
+            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-m)', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
               background: tab === t.key ? 'var(--navy)' : 'var(--surface-raised)',
               color: tab === t.key ? '#fff' : 'var(--black)' }}>
             {t.label}{counts[t.key] > 0 ? ` (${counts[t.key]})` : ''}

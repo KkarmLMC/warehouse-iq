@@ -196,7 +196,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
                   Warehouse IQ
                   {floorMode && (
-                    <span style={{ marginLeft: 8, fontSize: 'var(--text-xs)', fontWeight: 700, color: '#93C5FD' }}>
+                    <span style={{ marginLeft: 8, fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--blue-tint-60)' }}>
                       Floor Mode
                     </span>
                   )}
@@ -219,10 +219,10 @@ export default function Sidebar({ collapsed, onToggle }) {
               margin: '0 var(--mar-s) var(--mar-s)',
               padding: 'var(--pad-s) var(--pad-m)',
               borderRadius: 'var(--r-l)',
-              border: `1px solid ${floorMode ? '#93C5FD' : 'rgba(255,255,255,0.15)'}`,
+              border: `1px solid ${floorMode ? 'var(--blue-tint-60)' : 'rgba(255,255,255,0.15)'}`,
               background: floorMode ? 'rgba(147,197,253,0.1)' : 'rgba(255,255,255,0.05)',
               cursor: 'pointer',
-              color: floorMode ? '#93C5FD' : 'rgba(255,255,255,0.55)',
+              color: floorMode ? 'var(--blue-tint-60)' : 'rgba(255,255,255,0.55)',
               fontSize: 'var(--text-xs)', fontWeight: 700,
               fontFamily: 'var(--font)', transition: 'all 0.15s',
               justifyContent: collapsed ? 'center' : 'flex-start',

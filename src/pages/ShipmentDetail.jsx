@@ -129,7 +129,7 @@ export default function ShipmentDetail() {
               <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
                 {line.warehouses?.name || '—'}
                 {line.split_warehouse_id && line.split_qty > 0 && (
-                  <span style={{ marginLeft:6,color:'#D97706' }}>+ {line.split_qty} {line.split_warehouse?.name}</span>
+                  <span style={{ marginLeft:6,color:'var(--warning)' }}>+ {line.split_qty} {line.split_warehouse?.name}</span>
                 )}
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function ShipmentDetail() {
             </div>
             <div>
               {line.is_shortage
-                ? <span style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'#D97706',background:'#FFF7ED',padding:'1px 5px',borderRadius:4 }}>Split</span>
+                ? <span style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--warning)',background:'var(--orange-soft)',padding:'1px 5px',borderRadius:4 }}>Split</span>
                 : <CheckCircle size={14} weight="fill" style={{ color:'var(--success-text)' }} />
               }
             </div>

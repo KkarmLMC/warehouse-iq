@@ -49,7 +49,7 @@ function CategorySection({ category, parts, onPartPress }) {
 
   return (
     <div style={{
-      background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)',
+      background: 'var(--surface-raised)', borderRadius: 'var(--r-m)',
       overflow: 'hidden', border: '1px solid var(--border-l)',
       marginBottom: 'var(--mar-m)',
     }}>
@@ -103,7 +103,7 @@ function CategorySection({ category, parts, onPartPress }) {
                     {part.name}
                   </div>
                   {part.tags?.includes('shared') && (
-                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-full)', background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-xxl)', background: 'var(--success-soft)', color: 'var(--success-text)', border: '1px solid #BBF7D0', whiteSpace: 'nowrap', flexShrink: 0 }}>
                       LM + Bolt
                     </span>
                   )}
@@ -186,14 +186,14 @@ export default function PartsCatalog() {
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
           <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Parts Catalog</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-full)', background: '#EFF6FF', fontSize: 'var(--text-xs)', fontWeight: 600, color: '#1D4ED8' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', background: 'var(--blue-soft)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--blue)' }}>
           <ArrowSquareOut size={12} /> QuickBooks sync — coming soon
         </div>
       </div>
 
       {/* Tabs */}
       <div style={{
-        display: 'flex', background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)',
+        display: 'flex', background: 'var(--surface-raised)', borderRadius: 'var(--r-m)',
         padding: 4, gap: 4, marginBottom: 'var(--pad-l)',
         border: '1px solid var(--border-l)',
       }}>
@@ -211,7 +211,7 @@ export default function PartsCatalog() {
                 fontSize: 'var(--text-xs)',
               }}>
               <div style={{ fontWeight: active ? 700 : 600 }}>{tab.label}</div>
-              <div style={{ fontSize: 'var(--blackxs)', opacity: active ? 0.7 : 0.6, marginTop: 1 }}>
+              <div style={{ fontSize: 'var(--text-2xs)', opacity: active ? 0.7 : 0.6, marginTop: 1 }}>
                 {count} parts
               </div>
             </button>

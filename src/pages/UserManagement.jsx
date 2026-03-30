@@ -117,10 +117,10 @@ export default function UserManagement() {
   }
 
   const roleColor = (r) => ({
-    admin: { bg: '#EFF6FF', color: '#1D4ED8' },
-    management: { bg: '#F0FDF4', color: '#15803D' },
-    warehouse: { bg: '#FFFBEB', color: '#D97706' },
-    field: { bg: '#F5F3FF', color: '#7C3AED' },
+    admin: { bg: 'var(--blue-soft)', color: 'var(--blue)' },
+    management: { bg: 'var(--success-soft)', color: 'var(--success-text)' },
+    warehouse: { bg: 'var(--warning-soft)', color: 'var(--warning)' },
+    field: { bg: 'var(--purple-soft)', color: 'var(--purple)' },
   }[r] || { bg: 'var(--surface-raised)', color: 'var(--black)' })
 
   if (!isAdmin) return null
@@ -207,7 +207,7 @@ export default function UserManagement() {
                       {isSelf && <span style={{ fontSize:'var(--text-xs)',fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--surface-raised)',color:'var(--text-3)' }}>you</span>}
                       <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:rc.bg,color:rc.color,textTransform:'capitalize' }}>{u.role}</span>
                       {u.pipeline_role && (
-                        <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:'#ECFEFF',color:'#0891B2' }}>
+                        <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:'var(--blue-tint-80)',color:'var(--blue-shade-20)' }}>
                           {PIPELINE_LABELS[u.pipeline_role] || u.pipeline_role}
                         </span>
                       )}
@@ -248,7 +248,7 @@ export default function UserManagement() {
                         <button key={pr.value||'none'} onClick={() => setEditData(p=>({...p,pipeline_role:pr.value}))}
                           style={{ padding: 'var(--pad-s) var(--pad-m)',borderRadius:'var(--r-l)',cursor:'pointer',fontFamily:'var(--font)',
                             border: editData.pipeline_role === pr.value ? '2px solid var(--navy)' : '1px solid var(--border-l)',
-                            background: editData.pipeline_role === pr.value ? '#EFF6FF' : 'var(--bg)',
+                            background: editData.pipeline_role === pr.value ? 'var(--blue-soft)' : 'var(--bg)',
                             color: editData.pipeline_role === pr.value ? 'var(--navy)' : 'var(--black)',
                             fontWeight: editData.pipeline_role === pr.value ? 700 : 400,
                             fontSize:'var(--text-xs)',textAlign:'left' }}>
@@ -310,7 +310,7 @@ export default function UserManagement() {
                     <button key={pr.value||'none'} onClick={() => setInvitePR(pr.value)}
                       style={{ padding: 'var(--pad-s) var(--pad-m)',borderRadius:'var(--r-l)',cursor:'pointer',fontFamily:'var(--font)',
                         border: invitePR === pr.value ? '2px solid var(--navy)' : '1px solid var(--border-l)',
-                        background: invitePR === pr.value ? '#EFF6FF' : 'var(--bg)',
+                        background: invitePR === pr.value ? 'var(--blue-soft)' : 'var(--bg)',
                         color: invitePR === pr.value ? 'var(--navy)' : 'var(--black)',
                         fontWeight: invitePR === pr.value ? 700 : 400,
                         fontSize:'var(--text-xs)',textAlign:'left' }}>

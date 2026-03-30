@@ -8,17 +8,17 @@ import {
 import { db } from '../lib/supabase.js'
 
 const STATUS_DISPLAY = {
-  draft:        { label: 'Draft',        icon: Clock,          color: '#64748B', bg: '#F1F5F9' },
-  queued:       { label: 'Queued',       icon: Clock,          color: '#6366F1', bg: '#EEF2FF' },
-  running:      { label: 'Running',      icon: PaperPlaneTilt, color: '#D97706', bg: '#FEF3C7' },
-  submitted:    { label: 'Submitted',    icon: PaperPlaneTilt, color: '#D97706', bg: '#FEF3C7' },
-  fulfillment:  { label: 'Fulfillment',  icon: Receipt,        color: '#0369A1', bg: '#EFF6FF' },
-  published:    { label: 'Published',    icon: Receipt,        color: '#0369A1', bg: '#EFF6FF' },
-  shipment:     { label: 'Shipment',     icon: Receipt,        color: '#0891B2', bg: '#ECFEFF' },
-  back_ordered: { label: 'Back Order',   icon: Clock,          color: '#0891B2', bg: '#ECFEFF' },
-  complete:     { label: 'Complete',     icon: CheckCircle,    color: '#15803D', bg: '#F0FDF4' },
-  fulfilled:    { label: 'Complete',     icon: CheckCircle,    color: '#15803D', bg: '#F0FDF4' },
-  cancelled:    { label: 'Cancelled',    icon: Clock,          color: '#9CA3AF', bg: '#F1F5F9' },
+  draft:        { label: 'Draft',        icon: Clock,          color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
+  queued:       { label: 'Queued',       icon: Clock,          color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)' },
+  running:      { label: 'Running',      icon: PaperPlaneTilt, color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  submitted:    { label: 'Submitted',    icon: PaperPlaneTilt, color: 'var(--warning)', bg: 'var(--warning-soft)' },
+  fulfillment:  { label: 'Fulfillment',  icon: Receipt,        color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)' },
+  published:    { label: 'Published',    icon: Receipt,        color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)' },
+  shipment:     { label: 'Shipment',     icon: Receipt,        color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
+  back_ordered: { label: 'Back Order',   icon: Clock,          color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
+  complete:     { label: 'Complete',     icon: CheckCircle,    color: 'var(--success-text)', bg: 'var(--success-soft)' },
+  fulfilled:    { label: 'Complete',     icon: CheckCircle,    color: 'var(--success-text)', bg: 'var(--success-soft)' },
+  cancelled:    { label: 'Cancelled',    icon: Clock,          color: 'var(--grey-tint-20)', bg: 'var(--grey-tint-80)' },
 }
 
 
@@ -26,8 +26,8 @@ const STATUS_DISPLAY = {
 const ACTION_CFG = {
   queued:       { label: 'Run Order',             sub: 'Process parts & generate fulfillment sheet', color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
   running:      { label: 'Continue Run Order',    sub: 'Order is being processed',                   color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
-  fulfillment:  { label: 'Process Fulfillment',   sub: 'Pick parts and confirm availability',        color: '#0369A1',       path: id => `/warehouse-hq/fulfillment/${id}` },
-  shipment:     { label: 'Process Shipment',      sub: 'Enter carrier details and mark shipped',     color: '#0891B2',       path: id => `/warehouse-hq/shipment/${id}` },
+  fulfillment:  { label: 'Process Fulfillment',   sub: 'Pick parts and confirm availability',        color: 'var(--blue-shade-40)',       path: id => `/warehouse-hq/fulfillment/${id}` },
+  shipment:     { label: 'Process Shipment',      sub: 'Enter carrier details and mark shipped',     color: 'var(--blue-shade-20)',       path: id => `/warehouse-hq/shipment/${id}` },
   back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--warning)',  path: id => `/warehouse-hq/queue/${id}` },
 }
 
@@ -129,7 +129,7 @@ export default function PODetail() {
     <div className="page-content fade-in">
 
       {/* SO Header card */}
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
+      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
           <div>
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
@@ -142,7 +142,7 @@ export default function PODetail() {
           </div>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 4,
-            padding: '4px 12px', borderRadius: 'var(--r-full)',
+            padding: '4px 12px', borderRadius: 'var(--r-xxl)',
             background: statusDisplay.bg,
             color: statusDisplay.color,
           }}>
@@ -185,7 +185,7 @@ export default function PODetail() {
 
       {/* Inventory impact (when not yet published) */}
       {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
@@ -195,7 +195,7 @@ export default function PODetail() {
                 <Buildings size={14} style={{ color: 'var(--black)' }} />
                 {wName}
               </div>
-              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#B91C1C', background: '#FEF2F2', padding: '2px 8px', borderRadius: 'var(--r-full)' }}>
+              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--error-dark)', background: 'var(--error-soft)', padding: '2px 8px', borderRadius: 'var(--r-xxl)' }}>
                 -{impact.qty} units ({impact.parts} SKUs)
               </span>
             </div>
@@ -207,7 +207,7 @@ export default function PODetail() {
 
       {/* Line items — materials by section */}
       {sections.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           {/* Column headers */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--pad-s) var(--pad-m)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
             {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
@@ -233,7 +233,7 @@ export default function PODetail() {
 
       {/* Labor lines */}
       {laborLines.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)' }}>
             <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>Installation / Labor</span>
           </div>
@@ -256,7 +256,7 @@ export default function PODetail() {
 
       {/* Grand total */}
       {grandTotal > 0 && (
-        <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-l) var(--pad-xl)', marginBottom: 'var(--mar-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l) var(--pad-xl)', marginBottom: 'var(--mar-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: '#fff' }}>Total</span>
           <span style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: '#fff' }}>
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
@@ -266,7 +266,7 @@ export default function PODetail() {
 
       {/* Notes */}
       {po.notes && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-s)' }}>Notes</div>
           <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', lineHeight: 1.6 }}>{po.notes}</div>
         </div>
@@ -281,7 +281,7 @@ export default function PODetail() {
             onClick={() => navigate(cfg.path(po.id))}
             style={{
               width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              padding: 'var(--pad-l) var(--pad-xl)', borderRadius: 'var(--r-xl)',
+              padding: 'var(--pad-l) var(--pad-xl)', borderRadius: 'var(--r-m)',
               background: cfg.color, border: 'none', cursor: 'pointer',
               marginBottom: 'var(--mar-xxl)',
             }}

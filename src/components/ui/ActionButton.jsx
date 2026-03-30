@@ -28,7 +28,7 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 'var(--pad-l) var(--pad-xl)',
-        borderRadius: 'var(--r-xl)',
+        borderRadius: 'var(--r-m)',
         background: isDisabled ? 'var(--text-3)' : (color || 'var(--navy)'),
         border: 'none',
         cursor: isDisabled ? 'not-allowed' : 'pointer',

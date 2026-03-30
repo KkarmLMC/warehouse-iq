@@ -24,7 +24,7 @@ function PinPad({ onComplete }) {
   }
   const del = () => setDigits(d => d.slice(0, -1))
   const btnStyle = {
-    height: 60, borderRadius: 'var(--r-xl)',
+    height: 60, borderRadius: 'var(--r-m)',
     border: '1px solid var(--border-l)',
     background: 'var(--surface-raised)',
     fontSize: 'var(--text-base)', fontWeight: 700,
@@ -33,7 +33,7 @@ function PinPad({ onComplete }) {
   }
   const hoverOn  = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }
   const hoverOff = e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }
-  const pressOn  = e => { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' }
+  const pressOn  = e => { e.currentTarget.style.background = 'var(--navy-dark)'; e.currentTarget.style.transform = 'scale(0.97)' }
   const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
 
   return (
@@ -64,7 +64,7 @@ function PinPad({ onComplete }) {
 // ─── Role badge ───────────────────────────────────────────────────────────────
 function RoleBadge({ label, color = 'var(--navy)', bg = 'rgba(4,36,92,0.08)' }) {
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 'var(--r-full)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize', letterSpacing: '0.02em' }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 'var(--r-xxl)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize', letterSpacing: '0.02em' }}>
       {label}
     </span>
   )
@@ -73,7 +73,7 @@ function RoleBadge({ label, color = 'var(--navy)', bg = 'rgba(4,36,92,0.08)' }) 
 // ─── Section card ─────────────────────────────────────────────────────────────
 function Section({ icon: Icon, title, children, action }) {
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', borderRadius: '0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
           {Icon && <Icon size={15} />} {title}
@@ -134,13 +134,13 @@ function ActivityLog({ userId }) {
   const APP_LABELS = { field_ops: 'Field Ops', warehouse_iq: 'Warehouse IQ', mission_control: 'Mission Control' }
 
   const CATEGORY_COLOR = {
-    sales_order: '#1D4ED8', fulfillment: '#7C3AED', shipment: '#0891B2',
-    import: '#B45309',      profile: '#4B5563',     auth: '#6B7280',
-    parts: '#047857',       inventory: '#047857',   transfer: '#B45309',
+    sales_order: 'var(--blue)', fulfillment: 'var(--purple)', shipment: 'var(--blue-shade-20)',
+    import: 'var(--warning-text)',      profile: 'var(--grey-shade-20)',     auth: 'var(--grey-base)',
+    parts: 'var(--success-dark)',       inventory: 'var(--success-dark)',   transfer: 'var(--warning-text)',
   }
 
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
       <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
         Activity Log
       </div>
@@ -289,16 +289,16 @@ export default function Profile() {
   }
 
   const roleColors = {
-    admin:   { color: '#991B1B', bg: '#FEF2F2' },
-    manager: { color: '#1D4ED8', bg: '#EFF6FF' },
-    user:    { color: '#065F46', bg: '#ECFDF5' },
+    admin:   { color: 'var(--error-shade-40)', bg: 'var(--error-soft)' },
+    manager: { color: 'var(--blue)', bg: 'var(--blue-soft)' },
+    user:    { color: 'var(--success-dark)', bg: 'var(--success-soft)' },
   }
   const roleStyle = roleColors[profile?.role] || roleColors.user
 
   const pipelineRoleColors = {
-    warehouse_manager: { color: '#6D28D9', bg: '#F5F3FF' },
-    fulfillment:       { color: '#0369A1', bg: '#EFF6FF' },
-    shipping:          { color: '#0891B2', bg: '#ECFEFF' },
+    warehouse_manager: { color: 'var(--purple-shade-20)', bg: 'var(--purple-soft)' },
+    fulfillment:       { color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)' },
+    shipping:          { color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
   }
   const pipelineStyle = pipelineRoleColors[profile?.pipeline_role] || null
 
@@ -412,7 +412,7 @@ export default function Profile() {
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 8 }}>App Access</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {profile.app_access.map(app => (
-                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-full)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600 }}>
+                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-xxl)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600 }}>
                   <AppWindow size={12} />
                   {appLabels[app] || app}
                 </span>
@@ -518,7 +518,7 @@ export default function Profile() {
       </Section>
 
       {/* ── Sign out ── */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--mar-xxl)', border: '1px solid var(--border-l)' }}>
+      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-xxl)', border: '1px solid var(--border-l)' }}>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>Session</div>
         <div style={{ padding: 'var(--pad-l)' }}>
           <button onClick={() => { signOut(); navigate('/login', { replace: true }) }}

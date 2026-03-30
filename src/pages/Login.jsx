@@ -45,11 +45,11 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
   const dotColor = (i) => {
     if (i >= digits.length) return 'var(--border-l)'
     if (!confirmPin) return 'var(--navy)'
-    return digits[i] === confirmPin[i] ? '#10B981' : '#EF4444'
+    return digits[i] === confirmPin[i] ? 'var(--success)' : 'var(--error)'
   }
 
   const btnBase = {
-    height: 64, borderRadius: 'var(--r-xl)',
+    height: 64, borderRadius: 'var(--r-m)',
     border: '1px solid var(--border-l)',
     background: 'var(--surface-raised)',
     fontSize: 'var(--text-base)', fontWeight: 700,
@@ -60,7 +60,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
   }
   const hoverOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' } }
   const hoverOff = e => { e.currentTarget.style.background = 'var(--surface-raised)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }
-  const pressOn  = e => { if (!loading) { e.currentTarget.style.background = '#031a45'; e.currentTarget.style.transform = 'scale(0.97)' } }
+  const pressOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy-dark)'; e.currentTarget.style.transform = 'scale(0.97)' } }
   const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
 
   return (
@@ -86,14 +86,14 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
       {confirmPin && isFull && (
         <div style={{
           fontSize: 'var(--text-xs)', fontWeight: 700, textAlign: 'center',
-          color: digits.join('') === confirmPin ? '#10B981' : '#EF4444',
+          color: digits.join('') === confirmPin ? 'var(--success)' : 'var(--error)',
         }}>
           {digits.join('') === confirmPin ? '✓ PINs match' : '✗ PINs do not match'}
         </div>
       )}
 
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', background: '#FEF2F2', borderRadius: 'var(--r-l)', color: '#B91C1C', fontSize: 'var(--text-sm)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', color: 'var(--error-dark)', fontSize: 'var(--text-sm)' }}>
           <Warning size={14} />{error}
         </div>
       )}
@@ -133,17 +133,17 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
           style={{
             width: '100%', maxWidth: 260,
             padding: 'var(--pad-m)',
-            borderRadius: 'var(--r-xl)',
+            borderRadius: 'var(--r-m)',
             border: 'none',
             background: !isFull || loading
               ? 'var(--border-l)'
               : confirmPin && digits.join('') !== confirmPin
-                ? '#FEF2F2'
+                ? 'var(--error-soft)'
                 : 'var(--navy)',
             color: !isFull || loading
               ? 'var(--text-3)'
               : confirmPin && digits.join('') !== confirmPin
-                ? '#B91C1C'
+                ? 'var(--error-dark)'
                 : '#fff',
             fontWeight: 700,
             fontSize: 'var(--text-md)',
@@ -165,7 +165,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
             style={{
               width: '100%', maxWidth: 260,
               padding: 'var(--pad-m)',
-              borderRadius: 'var(--r-xl)',
+              borderRadius: 'var(--r-m)',
               border: 'none',
               background: loading ? 'var(--border-l)' : 'var(--navy)',
               color: loading ? 'var(--text-3)' : '#fff',
@@ -290,7 +290,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
     <div className="login-page">
       {/* Logo */}
       <div style={{ marginBottom: 'var(--mar-xxl)', textAlign: 'center', minHeight: 148 }}>
-        <div style={{ width: 56, height: 56, borderRadius: 'var(--r-xl)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--mar-l)' }}>
+        <div style={{ width: 56, height: 56, borderRadius: 'var(--r-m)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--mar-l)' }}>
           <Lightning size={28} weight="fill" style={{ color: '#fff' }} />
         </div>
         <div style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', fontWeight: 800, lineHeight: 1.1 }}>
@@ -362,7 +362,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                 </div>
               </div>
               {error && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: '#FEF2F2', borderRadius: 'var(--r-l)', marginBottom: 'var(--mar-l)', color: '#B91C1C', fontSize: 'var(--text-sm)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', marginBottom: 'var(--mar-l)', color: 'var(--error-dark)', fontSize: 'var(--text-sm)' }}>
                   <Warning size={14} style={{ flexShrink: 0 }} />{error}
                 </div>
               )}

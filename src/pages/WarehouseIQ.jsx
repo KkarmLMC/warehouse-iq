@@ -12,12 +12,12 @@ const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'
 
 // ─── Status chip ──────────────────────────────────────────────────────────────
 function StockChip({ stock, min }) {
-  if (stock === 0)            return <span style={chip('#FEF2F2','#B91C1C')}>Out</span>
-  if (min && stock <= min)    return <span style={chip('#FFF7ED','#C2410C')}>Low</span>
-  return                             <span style={chip('#F0FDF4','#15803D')}>OK</span>
+  if (stock === 0)            return <span style={chip('var(--error-soft)','var(--error-dark)')}>Out</span>
+  if (min && stock <= min)    return <span style={chip('var(--orange-soft)','var(--orange-shade-20)')}>Low</span>
+  return                             <span style={chip('var(--success-soft)','var(--success-text)')}>OK</span>
 }
 function chip(bg, color) {
-  return { padding:'2px 8px', borderRadius:'var(--r-full)', fontSize:'var(--text-xs)', fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
+  return { padding:'2px 8px', borderRadius:'var(--r-xxl)', fontSize:'var(--text-xs)', fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
 }
 
 // ─── Summary card ─────────────────────────────────────────────────────────────
@@ -209,12 +209,12 @@ export default function WarehouseIQ() {
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'var(--mar-l)', flexWrap:'wrap', gap:'var(--gap-m)' }}>
         {/* Period badge */}
         <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)' }}>
-          <div style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius:'var(--r-full)', background: isClosed ? '#F1F5F9' : 'var(--navy)', color: isClosed ? '#64748B' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
+          <div style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius:'var(--r-xxl)', background: isClosed ? 'var(--grey-tint-80)' : 'var(--navy)', color: isClosed ? 'var(--grey-base)' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
             {periodLabel}
           </div>
           {isClosed
-            ? <span style={{ fontSize:'var(--text-xs)', color:'#64748B', fontWeight:600 }}>Closed</span>
-            : <span style={{ fontSize:'var(--text-xs)', color:'#16A34A', fontWeight:600 }}>● Open</span>
+            ? <span style={{ fontSize:'var(--text-xs)', color:'var(--grey-base)', fontWeight:600 }}>Closed</span>
+            : <span style={{ fontSize:'var(--text-xs)', color:'var(--success-text)', fontWeight:600 }}>● Open</span>
           }
         </div>
 
@@ -223,7 +223,7 @@ export default function WarehouseIQ() {
           {warehouses.map(w => (
             <button key={w.id} onClick={() => setActiveWH(w.id)}
               style={{
-                flexShrink:0, padding:'0.25rem 0.75rem', borderRadius:'var(--r-full)',
+                flexShrink:0, padding:'0.25rem 0.75rem', borderRadius:'var(--r-xxl)',
                 border:`1px solid ${activeWH === w.id ? 'var(--navy)' : 'var(--border-l)'}`,
                 background: activeWH === w.id ? 'var(--navy)' : 'transparent',
                 color: activeWH === w.id ? '#fff' : 'var(--black)',
@@ -237,12 +237,12 @@ export default function WarehouseIQ() {
 
       {/* Summary cards */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(160px,1fr))', gap:'var(--gap-m)', marginBottom: 'var(--mar-xl)' }}>
-        <SumCard label="Inventory Value"   value={`$${totalValue.toLocaleString('en-US',{maximumFractionDigits:0})}`} Icon={CurrencyDollar} color="#15803D" />
-        <SumCard label="Units Added"       value={totalAdded.toLocaleString()} sub="this period" Icon={ArrowDown} color="#1D4ED8" />
-        <SumCard label="Units Used"        value={totalUsed.toLocaleString()}  sub="this period" Icon={ArrowUp}   color="#7C3AED" />
-        <SumCard label="On Order"          value={totalOnOrder.toLocaleString()} Icon={Truck} color={totalOnOrder > 0 ? '#1D4ED8' : 'var(--text-3)'} />
-        <SumCard label="Low Stock"         value={lowCount} Icon={WarningCircle} color={lowCount > 0 ? '#C2410C' : 'var(--text-3)'} />
-        <SumCard label="Out of Stock"      value={outCount} Icon={Package} color={outCount > 0 ? '#B91C1C' : 'var(--text-3)'} />
+        <SumCard label="Inventory Value"   value={`$${totalValue.toLocaleString('en-US',{maximumFractionDigits:0})}`} Icon={CurrencyDollar} color="var(--success-text)" />
+        <SumCard label="Units Added"       value={totalAdded.toLocaleString()} sub="this period" Icon={ArrowDown} color="var(--blue)" />
+        <SumCard label="Units Used"        value={totalUsed.toLocaleString()}  sub="this period" Icon={ArrowUp}   color="var(--purple)" />
+        <SumCard label="On Order"          value={totalOnOrder.toLocaleString()} Icon={Truck} color={totalOnOrder > 0 ? 'var(--blue)' : 'var(--text-3)'} />
+        <SumCard label="Low Stock"         value={lowCount} Icon={WarningCircle} color={lowCount > 0 ? 'var(--orange-shade-20)' : 'var(--text-3)'} />
+        <SumCard label="Out of Stock"      value={outCount} Icon={Package} color={outCount > 0 ? 'var(--error-dark)' : 'var(--text-3)'} />
       </div>
 
       {/* Active POs section */}
@@ -252,7 +252,7 @@ export default function WarehouseIQ() {
             <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)' }}>
               <Receipt size={15} style={{ color:'var(--navy)' }} />
               <span style={{ fontSize:'var(--text-sm)', fontWeight:700 }}>Active Sales Orders</span>
-              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-xxl)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
             </div>
             <button onClick={() => navigate('/sales-orders')}
               style={{ fontSize:'var(--text-xs)', fontWeight:600, color:'var(--navy)', background:'none', border:'none', cursor:'pointer', padding:0 }}>
@@ -262,13 +262,13 @@ export default function WarehouseIQ() {
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
               style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--gap-m)', padding: 'var(--pad-s) var(--pad-l)', border:'none', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-l)' : 'none' }}>
-              <div style={{ fontSize:'var(--blackxs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'#EFF6FF', color: po.division==='Bolt'?'#BE123C':'#1D4ED8' }}>
+              <div style={{ fontSize:'var(--text-2xs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--blue-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--blue)' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
               <div style={{ flex:1, minWidth:0 }}>
                 <div style={{ fontSize:'var(--text-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
               </div>
-              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background: po.status==='queued'?'#EEF2FF':po.status==='running'?'#FEF3C7':po.status==='fulfillment'?'#EFF6FF':po.status==='shipment'?'#ECFEFF':'#F0FDF4', color: po.status==='queued'?'#6366F1':po.status==='running'?'#D97706':po.status==='fulfillment'?'#1D4ED8':po.status==='shipment'?'#0891B2':'#15803D', textTransform:'capitalize', flexShrink:0 }}>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-xxl)', background: po.status==='queued'?'var(--purple-soft)':po.status==='running'?'var(--warning-soft)':po.status==='fulfillment'?'var(--blue-soft)':po.status==='shipment'?'var(--blue-tint-80)':'var(--success-soft)', color: po.status==='queued'?'var(--purple-tint-20)':po.status==='running'?'var(--warning)':po.status==='fulfillment'?'var(--blue)':po.status==='shipment'?'var(--blue-shade-20)':'var(--success-text)', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
               </span>
             </button>
@@ -292,7 +292,7 @@ export default function WarehouseIQ() {
           <div style={{ display:'flex', gap:'var(--gap-xs)' }}>
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding:'3px 10px', borderRadius:'var(--r-full)', border:`1px solid ${filter===val?'var(--navy)':'var(--border-l)'}`, background:filter===val?'var(--navy)':'transparent', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+                style={{ padding:'3px 10px', borderRadius:'var(--r-xxl)', border:`1px solid ${filter===val?'var(--navy)':'var(--border-l)'}`, background:filter===val?'var(--navy)':'transparent', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
                 {lbl}
               </button>
             ))}
@@ -317,14 +317,14 @@ export default function WarehouseIQ() {
         ) : filtered.map((r, idx) => {
           const isLow = r.min && r.stock > 0 && r.stock <= r.min
           const isOut = r.stock === 0
-          const rowBg = isOut ? '#FFF5F5' : isLow ? '#FFFBEB' : 'transparent'
+          const rowBg = isOut ? '#FFF5F5' : isLow ? 'var(--warning-soft)' : 'transparent'
           const delta = r.stock - r.startQty
 
           return (
             <div key={r.part.id}
               onClick={() => navigate(`/warehouse-hq/part/${r.part.id}`)}
               style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderBottom:'1px solid var(--border-l)', background:rowBg, cursor:'pointer', transition:'background 0.1s' }}
-              onMouseEnter={e => e.currentTarget.style.background = isOut?'#FFE4E4':isLow?'#FEF3C7':'var(--hover)'}
+              onMouseEnter={e => e.currentTarget.style.background = isOut?'#FFE4E4':isLow?'var(--warning-soft)':'var(--hover)'}
               onMouseLeave={e => e.currentTarget.style.background = rowBg}
             >
               {/* Part name + SKU */}
@@ -335,24 +335,24 @@ export default function WarehouseIQ() {
               {/* Start */}
               <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'var(--text-3)' }}>{r.startQty.toLocaleString()}</div>
               {/* Added */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.added > 0 ? '#1D4ED8' : 'var(--text-3)', fontWeight: r.added > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.added > 0 ? 'var(--blue)' : 'var(--text-3)', fontWeight: r.added > 0 ? 700 : 400 }}>
                 {r.added > 0 ? `+${r.added.toLocaleString()}` : '—'}
               </div>
               {/* Used */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.used > 0 ? '#7C3AED' : 'var(--text-3)', fontWeight: r.used > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.used > 0 ? 'var(--purple)' : 'var(--text-3)', fontWeight: r.used > 0 ? 700 : 400 }}>
                 {r.used > 0 ? r.used.toLocaleString() : '—'}
               </div>
               {/* On Order */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.onOrder > 0 ? '#0369A1' : 'var(--text-3)', fontWeight: r.onOrder > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.onOrder > 0 ? 'var(--blue-shade-40)' : 'var(--text-3)', fontWeight: r.onOrder > 0 ? 700 : 400 }}>
                 {r.onOrder > 0 ? r.onOrder.toLocaleString() : '—'}
               </div>
               {/* Stock + trend */}
               <div style={{ textAlign:'right', display:'flex', alignItems:'center', justifyContent:'flex-end', gap:4 }}>
-                <span style={{ fontSize:'var(--text-xs)', fontWeight:800, color: isOut ? '#B91C1C' : isLow ? '#C2410C' : 'var(--black)' }}>
+                <span style={{ fontSize:'var(--text-xs)', fontWeight:800, color: isOut ? 'var(--error-dark)' : isLow ? 'var(--orange-shade-20)' : 'var(--black)' }}>
                   {r.stock.toLocaleString()}
                 </span>
                 {delta !== 0 && (
-                  <span style={{ fontSize:'var(--blackxs)', fontWeight:700, color: delta > 0 ? '#15803D' : '#B91C1C' }}>
+                  <span style={{ fontSize:'var(--text-2xs)', fontWeight:700, color: delta > 0 ? 'var(--success-text)' : 'var(--error-dark)' }}>
                     {delta > 0 ? `+${delta}` : delta}
                   </span>
                 )}
@@ -374,13 +374,13 @@ export default function WarehouseIQ() {
           <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--gap-s)', padding: 'var(--pad-m) var(--pad-l)', background:'var(--navy)', borderTop:'2px solid var(--border-l)' }}>
             <div style={{ fontSize:'var(--text-xs)', fontWeight:800, color:'#fff' }}>Period Totals</div>
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'rgba(255,255,255,0.5)' }}>—</div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#93C5FD' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--blue-tint-60)' }}>
               {filtered.reduce((s,r)=>s+r.added,0) > 0 ? `+${filtered.reduce((s,r)=>s+r.added,0).toLocaleString()}` : '—'}
             </div>
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#C4B5FD' }}>
               {filtered.reduce((s,r)=>s+r.used,0) > 0 ? filtered.reduce((s,r)=>s+r.used,0).toLocaleString() : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#7DD3FC' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--blue-tint-40)' }}>
               {filtered.reduce((s,r)=>s+r.onOrder,0) > 0 ? filtered.reduce((s,r)=>s+r.onOrder,0).toLocaleString() : '—'}
             </div>
             <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#fff' }}>

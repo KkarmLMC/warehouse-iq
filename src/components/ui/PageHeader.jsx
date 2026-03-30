@@ -13,7 +13,7 @@ export default function PageHeader({ eyebrow, title, subtitle, action }) {
     <div style={{ marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--gap-m)' }}>
       <div>
         {eyebrow && (
-          <div style={{ fontSize: 'var(--blackxs)', fontWeight: 700, color: 'var(--text-3)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>
+          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--text-3)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>
             {eyebrow}
           </div>
         )}

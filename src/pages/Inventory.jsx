@@ -9,17 +9,17 @@ import { db } from '../lib/supabase.js'
 
 // ─── Stage colors ─────────────────────────────────────────────────────────────
 const STAGE_COLOR = {
-  draft:        '#64748B',
-  queued:       '#6366F1',
-  running:      '#D97706',
-  submitted:    '#D97706',
-  fulfillment:  '#1D4ED8',
-  published:    '#1D4ED8',
-  shipment:     '#0891B2',
-  back_ordered: '#0891B2',
-  fulfilled:    '#10B981',
-  complete:     '#10B981',
-  cancelled:    '#9CA3AF',
+  draft:        'var(--grey-base)',
+  queued:       'var(--purple-tint-20)',
+  running:      'var(--warning)',
+  submitted:    'var(--warning)',
+  fulfillment:  'var(--blue)',
+  published:    'var(--blue)',
+  shipment:     'var(--blue-shade-20)',
+  back_ordered: 'var(--blue-shade-20)',
+  fulfilled:    'var(--success)',
+  complete:     'var(--success)',
+  cancelled:    'var(--grey-tint-20)',
 }
 
 // ─── Warehouse health badge ───────────────────────────────────────────────────
@@ -154,33 +154,33 @@ export default function Inventory() {
       {/* ── Pending CO alert ── */}
       {stats?.pendingCOs > 0 && (
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
-          style={{ background: '#FFFBEB', border: '1px solid #FCD34D', borderRadius: 'var(--r-xl)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
+          style={{ background: 'var(--warning-soft)', border: '1px solid #FCD34D', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
           <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#92400E' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: '#B45309' }}>Field crew part requests waiting for approval</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--warning-text)' }}>Field crew part requests waiting for approval</div>
           </div>
-          <CaretRight size={14} style={{ color: '#B45309', flexShrink: 0 }} />
+          <CaretRight size={14} style={{ color: 'var(--warning-text)', flexShrink: 0 }} />
         </div>
       )}
 
       {/* ── Back order alert ── */}
       {backOrders.length > 0 && (
         <div onClick={() => navigate('/warehouse-hq/queue')}
-          style={{ background: '#ECFEFF', border: '1px solid #67E8F9', borderRadius: 'var(--r-xl)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
-          <ClockCountdown size={18} weight="fill" style={{ color: '#0891B2', flexShrink: 0 }} />
+          style={{ background: 'var(--blue-tint-80)', border: '1px solid #67E8F9', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
+          <ClockCountdown size={18} weight="fill" style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#155E75' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--blue-shade-40)' }}>
               {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: '#0E7490' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--blue-shade-20)' }}>
               {backOrders.slice(0, 2).map(o => o.so_number).join(', ')}
               {backOrders.length > 2 ? ` + ${backOrders.length - 2} more` : ''} — tap to view queue
             </div>
           </div>
-          <CaretRight size={14} style={{ color: '#0E7490', flexShrink: 0 }} />
+          <CaretRight size={14} style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
         </div>
       )}
 
@@ -206,7 +206,7 @@ export default function Inventory() {
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
             <span className="card-title">
-              <Lightning size={15} weight="fill" style={{ marginRight: 6, color: '#93C5FD' }} />
+              <Lightning size={15} weight="fill" style={{ marginRight: 6, color: 'var(--blue-tint-60)' }} />
               {master.name}
               <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px', marginLeft: 8 }}>MASTER</span>
             </span>
@@ -312,7 +312,7 @@ export default function Inventory() {
       {lowStock.length > 0 && (
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
-            <span className="card-title"><Warning size={15} weight="fill" style={{ marginRight: 6, color: '#FCA5A5' }} />Low & Out of Stock</span>
+            <span className="card-title"><Warning size={15} weight="fill" style={{ marginRight: 6, color: 'var(--error-tint-40)' }} />Low & Out of Stock</span>
             <span style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
               View inventory <ArrowRight size={12} />
             </span>
