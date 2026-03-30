@@ -114,7 +114,7 @@ export default function InventoryTransfer() {
       </div>
 
       {/* From / To */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)' }}>
         <div style={{ marginBottom: 'var(--mar-l)' }}>
           <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--mar-xs)', color: errors.from ? 'var(--red)' : 'var(--black)' }}>From Warehouse</label>
           <select value={fromId} onChange={e => setFromId(e.target.value)} style={{ width: '100%', borderColor: errors.from ? 'var(--red)' : undefined }}>
@@ -143,7 +143,7 @@ export default function InventoryTransfer() {
       </div>
 
       {/* Parts */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Parts to Transfer</div>
           {errors.items && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--red)', marginTop: 2 }}>{errors.items}</div>}
@@ -194,7 +194,7 @@ export default function InventoryTransfer() {
               style={{ width: '4rem', textAlign: 'center' }}
             />
             <button onClick={() => removeItem(idx)}
-              style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--red)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+              style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--red)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
               <Trash size={14} />
             </button>
           </div>
@@ -203,7 +203,7 @@ export default function InventoryTransfer() {
 
       {/* Submit */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xxl)' }}>
-        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving}

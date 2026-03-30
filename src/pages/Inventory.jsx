@@ -218,7 +218,7 @@ export default function Inventory() {
               { label: 'Parts Tracked',  value: warehouseHealth[master.id]?.parts ?? '—' },
               { label: 'Health',         value: <HealthBadge out={warehouseHealth[master.id]?.out || 0} low={warehouseHealth[master.id]?.low || 0} /> },
             ].map(f => (
-              <div key={f.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)' }}>
+              <div key={f.label} style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)' }}>
                 <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--black)', marginBottom: 4 }}>{f.label}</div>
                 <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, fontFamily: 'var(--font)' }}>{f.value}</div>
               </div>
@@ -253,7 +253,7 @@ export default function Inventory() {
               onClick={() => navigate(`/warehouse-hq/warehouse/${wh.id}`)}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < subs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
               {/* Icon */}
-              <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--white)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <Package size={16} style={{ color: 'var(--navy)' }} />
               </div>
               {/* Info */}
@@ -288,7 +288,7 @@ export default function Inventory() {
           <div key={so.id}
             onClick={() => navigate(`/sales-orders/${so.id}`)}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--white)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Receipt size={16} style={{ color: 'var(--navy)' }} />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>

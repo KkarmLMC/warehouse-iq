@@ -135,7 +135,7 @@ export default function InventoryStock() {
         </div>
         <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
           <button onClick={() => navigate('/warehouse-hq/transfer')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
             <ArrowsLeftRight size={14} /> Transfer
           </button>
           <button onClick={() => navigate('/warehouse-hq/add-part')}
@@ -152,7 +152,7 @@ export default function InventoryStock() {
           { label: 'Low Stock', value: lowCount, color: 'var(--orange-shade-20)' },
           { label: 'Out of Stock', value: outCount, color: 'var(--error-dark)' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
+          <div key={s.label} style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: s.color }}>{s.value}</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
           </div>
@@ -202,7 +202,7 @@ export default function InventoryStock() {
           <div className="empty-desc">{parts.length === 0 ? 'Add your first part to get started.' : 'Try adjusting your filters.'}</div>
         </div>
       ) : (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden' }}>
           {filtered.map(part => (
             <PartRow
               key={part.id}

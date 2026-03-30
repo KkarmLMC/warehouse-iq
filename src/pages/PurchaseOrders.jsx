@@ -206,7 +206,7 @@ export default function PurchaseOrders() {
           { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? 'var(--warning)' : undefined },
           { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--success-text)' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
+          <div key={s.label} style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--black)' }}>{s.value}</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
           </div>
@@ -272,7 +272,7 @@ export default function PurchaseOrders() {
           )}
         </div>
       ) : (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden' }}>
           {filtered.map(po => (
             <POCard key={po.id} po={po} totals={totals[po.id]} onPress={() => navigate(`/sales-orders/${po.id}`)} />
           ))}

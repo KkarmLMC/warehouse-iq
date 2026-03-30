@@ -151,7 +151,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
 // ─── Stat card ────────────────────────────────────────────────────────────────
 function StatCard({ label, value, Icon, color = 'var(--black)', bg = 'var(--hover)' }) {
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)' }}>
+    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 'var(--mar-s)' }}>
         <div style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Icon size={14} style={{ color }} />
@@ -346,7 +346,7 @@ export default function WarehouseDetail() {
 
       {/* Value */}
       {totalValue > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: 'var(--text-3)' }}>
             <CurrencyDollar size={16} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Est. Inventory Value</span>
@@ -360,7 +360,7 @@ export default function WarehouseDetail() {
       {/* Actions */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xl)' }}>
         <button onClick={() => navigate(`/warehouse-hq/transfer?from=${id}`)}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           <ArrowsLeftRight size={15} /> Transfer
         </button>
         <button onClick={() => navigate('/warehouse-hq/add-part')}
@@ -401,7 +401,7 @@ export default function WarehouseDetail() {
         </div>
 
         {/* Stock list */}
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-xl)' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-xl)' }}>
           {filtered.length === 0 ? (
             <div style={{ padding: 'var(--pad-xxl)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
               No parts match filters
@@ -426,7 +426,7 @@ export default function WarehouseDetail() {
           cancelled: { color: 'var(--error-dark)', bg: 'var(--error-soft)' },
         }
         return (
-          <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+          <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
                 <Receipt size={16} style={{ color: 'var(--navy)' }} />
@@ -476,7 +476,7 @@ export default function WarehouseDetail() {
       })()}
 
       {/* Transaction history (collapsed by default) */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
         <button onClick={loadTransactions}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>

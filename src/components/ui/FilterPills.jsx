@@ -31,9 +31,10 @@ export default function FilterPills({ options, active, onChange }) {
             style={{
               padding: '4px 12px',
               borderRadius: 'var(--r-xxl)',
-              border: '1px solid var(--border-l)',
+              border: 'none',
               background: isActive ? 'var(--navy)' : 'var(--white)',
               color: isActive ? '#fff' : 'var(--black)',
+              boxShadow: isActive ? 'none' : 'var(--shadow-xs)',
               fontSize: 'var(--text-xs)',
               fontWeight: 600,
               cursor: 'pointer',

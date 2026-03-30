@@ -26,7 +26,7 @@ function PinPad({ onComplete }) {
   const btnStyle = {
     height: 60, borderRadius: 'var(--r-m)',
     border: '1px solid var(--border-l)',
-    background: 'var(--surface-raised)',
+    background: 'var(--white)',
     fontSize: 'var(--text-base)', fontWeight: 700,
     cursor: 'pointer', fontFamily: 'var(--font)',
     transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent',
@@ -73,7 +73,7 @@ function RoleBadge({ label, color = 'var(--navy)', bg = 'rgba(4,36,92,0.08)' }) 
 // ─── Section card ─────────────────────────────────────────────────────────────
 function Section({ icon: Icon, title, children, action }) {
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', borderRadius: '0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
           {Icon && <Icon size={15} />} {title}
@@ -140,7 +140,7 @@ function ActivityLog({ userId }) {
   }
 
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
       <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
         Activity Log
       </div>
@@ -518,7 +518,7 @@ export default function Profile() {
       </Section>
 
       {/* ── Sign out ── */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-xxl)', border: '1px solid var(--border-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-xxl)', border: '1px solid var(--border-l)' }}>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>Session</div>
         <div style={{ padding: 'var(--pad-l)' }}>
           <button onClick={() => { signOut(); navigate('/login', { replace: true }) }}

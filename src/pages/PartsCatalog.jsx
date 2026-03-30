@@ -49,7 +49,7 @@ function CategorySection({ category, parts, onPartPress }) {
 
   return (
     <div style={{
-      background: 'var(--surface-raised)', borderRadius: 'var(--r-m)',
+      background: 'var(--white)', borderRadius: 'var(--r-m)',
       overflow: 'hidden', border: '1px solid var(--border-l)',
       marginBottom: 'var(--mar-m)',
     }}>
@@ -193,7 +193,7 @@ export default function PartsCatalog() {
 
       {/* Tabs */}
       <div style={{
-        display: 'flex', background: 'var(--surface-raised)', borderRadius: 'var(--r-m)',
+        display: 'flex', background: 'var(--white)', borderRadius: 'var(--r-m)',
         padding: 4, gap: 4, marginBottom: 'var(--pad-l)',
         border: '1px solid var(--border-l)',
       }}>

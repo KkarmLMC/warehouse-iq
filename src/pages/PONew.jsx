@@ -146,7 +146,7 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
           <select
             value={item.warehouse_id || ''}
             onChange={e => onUpdate({ ...item, warehouse_id: e.target.value })}
-            style={{ fontSize: 'var(--text-xs)', marginTop: 4, padding: '2px 4px', border: '1px solid var(--border-l)', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', width: '100%' }}
+            style={{ fontSize: 'var(--text-xs)', marginTop: 4, padding: '2px 4px', border: '1px solid var(--border-l)', borderRadius: 4, background: 'var(--white)', color: 'var(--text-3)', width: '100%' }}
           >
             <option value="">No warehouse</option>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name.replace(' Warehouse','')}</option>)}
@@ -212,7 +212,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
   }
 
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', border: '1px solid var(--border-l)', marginBottom: 'var(--mar-l)' }}>
+    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', border: '1px solid var(--border-l)', marginBottom: 'var(--mar-l)' }}>
       {/* Section header */}
       <div style={{ background: 'var(--navy)', padding: 'var(--pad-m) var(--pad-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <button onClick={() => setExpanded(e => !e)}
@@ -288,7 +288,7 @@ function LaborSection({ items, onUpdate }) {
   const removeItem = (key) => onUpdate(items.filter(i => i._key !== key))
 
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', border: '1px solid var(--border-l)', marginBottom: 'var(--mar-l)' }}>
+    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', border: '1px solid var(--border-l)', marginBottom: 'var(--mar-l)' }}>
       <div style={{ background: 'var(--navy)', padding: 'var(--pad-m) var(--pad-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <button onClick={() => setExpanded(e => !e)}
           style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
@@ -547,7 +547,7 @@ export default function PONew() {
       </div>
 
       {/* Customer info */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, marginBottom: 'var(--mar-m)' }}>Customer</div>
 
         <div style={{ marginBottom: 'var(--mar-m)' }}>
@@ -573,7 +573,7 @@ export default function PONew() {
       </div>
 
       {/* Project info */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, marginBottom: 'var(--mar-m)' }}>Project Details</div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-s)', marginBottom: 'var(--mar-m)' }}>
@@ -641,7 +641,7 @@ export default function PONew() {
       <LaborSection items={laborItems} onUpdate={setLaborItems} />
 
       {/* Notes */}
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', border: '1px solid var(--border-l)', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', border: '1px solid var(--border-l)', marginBottom: 'var(--mar-l)' }}>
         <Label>Notes</Label>
         <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this Sales Order…" rows={3} style={{ width: '100%', resize: 'vertical' }} />
       </div>
@@ -660,7 +660,7 @@ export default function PONew() {
       {/* Save actions */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xxl)' }}>
         <button onClick={() => handleSave(false)} disabled={saving}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           {saving ? 'Saving…' : 'Save as Draft'}
         </button>
         <button onClick={() => handleSave(true)} disabled={saving}

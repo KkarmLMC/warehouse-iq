@@ -129,7 +129,7 @@ export default function AddEditPart() {
         </div>
       </div>
 
-      <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)' }}>
         <Field label="Part Name" error={errors.name} required>
           <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Franklin Rod Air Terminal 1/2&quot;" style={{ width: '100%', borderColor: errors.name ? 'var(--red)' : undefined }} />
         </Field>
@@ -178,7 +178,7 @@ export default function AddEditPart() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xxl)' }}>
-        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: 'none', background: saving ? 'var(--hover)' : 'var(--navy)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>

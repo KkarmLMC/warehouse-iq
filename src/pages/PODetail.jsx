@@ -57,7 +57,7 @@ function SectionGroup({ label, items }) {
           padding: 'var(--pad-s) var(--pad-m)',
           borderBottom: idx < items.length - 1 ? '1px solid var(--border-l)' : 'none',
           alignItems: 'start',
-          background: 'var(--surface-raised)',
+          background: 'var(--white)',
         }}>
           <div style={{ minWidth: 0, overflow: 'hidden' }}>
             {item.sku && <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
@@ -185,7 +185,7 @@ export default function PODetail() {
 
       {/* Inventory impact (when not yet published) */}
       {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
@@ -207,7 +207,7 @@ export default function PODetail() {
 
       {/* Line items — materials by section */}
       {sections.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           {/* Column headers */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--pad-s) var(--pad-m)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
             {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
@@ -233,12 +233,12 @@ export default function PODetail() {
 
       {/* Labor lines */}
       {laborLines.length > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)' }}>
             <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>Installation / Labor</span>
           </div>
           {laborLines.map((line, idx) => (
-            <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-l)' : 'none', alignItems: 'center', background: 'var(--surface-raised)' }}>
+            <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-l)' : 'none', alignItems: 'center', background: 'var(--white)' }}>
               <div>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>{line.description}</div>
               </div>
@@ -266,7 +266,7 @@ export default function PODetail() {
 
       {/* Notes */}
       {po.notes && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-s)' }}>Notes</div>
           <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', lineHeight: 1.6 }}>{po.notes}</div>
         </div>

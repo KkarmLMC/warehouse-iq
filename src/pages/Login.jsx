@@ -51,7 +51,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
   const btnBase = {
     height: 64, borderRadius: 'var(--r-m)',
     border: '1px solid var(--border-l)',
-    background: 'var(--surface-raised)',
+    background: 'var(--white)',
     fontSize: 'var(--text-base)', fontWeight: 700,
     cursor: 'pointer', fontFamily: 'var(--font)',
     transition: 'all 0.12s',
