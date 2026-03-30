@@ -209,20 +209,22 @@
   --text-3:         var(--grey-base);
   --text-4:         var(--grey-tint-40);
 
-  /* ── Typography — Plus Jakarta Sans · Minor Third (×1.2) · base = 1rem ────── */
+  /* ── Typography — Plus Jakarta Sans · Dual-ratio 1.125/1.200 · base 14→16px ─ */
   --font: 'Plus Jakarta Sans', sans-serif;
   --mono: var(--font);
 
-  --text-2xs:     clamp(0.500rem, 1.03vw, 0.579rem);
-  --text-xs:      clamp(0.579rem, 1.23vw, 0.694rem);
-  --text-sm:      clamp(0.694rem, 1.48vw, 0.833rem);
-  --text-base:    clamp(0.833rem, 1.78vw, 1.000rem);
-  --text-md:      clamp(1.000rem, 2.13vw, 1.200rem);
-  --text-lg:      clamp(1.200rem, 2.56vw, 1.440rem);
-  --text-xl:      clamp(1.440rem, 3.07vw, 1.728rem);
-  --text-xxl:     clamp(1.728rem, 3.69vw, 2.074rem);
-  --text-display: clamp(2.074rem, 4.42vw, 2.488rem);
-  --text-hero:    clamp(2.488rem, 5.31vw, 2.986rem);
+  /* Dual-ratio fluid scale: Mobile 1.125 (14px base) → Desktop 1.200 (16px base)
+     Fluid zone: 375px–1200px. Desktop sizes unchanged from v3.1.                */
+  --text-2xs:     clamp(0.579rem, 0.631rem - 0.07vw, 0.615rem);  /* 10→9px  · eyebrows, timestamps */
+  --text-xs:      clamp(0.691rem, 0.690rem + 0.01vw, 0.694rem);  /* 11→11px · badges, form labels */
+  --text-sm:      clamp(0.778rem, 0.753rem + 0.11vw, 0.833rem);  /* 12→13px · nav items, row labels */
+  --text-base:    clamp(0.875rem, 0.818rem + 0.24vw, 1.000rem);  /* 14→16px · body copy ← BASE */
+  --text-md:      clamp(0.984rem, 0.886rem + 0.42vw, 1.200rem);  /* 16→19px · subheadings */
+  --text-lg:      clamp(1.107rem, 0.956rem + 0.64vw, 1.440rem);  /* 18→23px · card titles */
+  --text-xl:      clamp(1.246rem, 1.027rem + 0.94vw, 1.728rem);  /* 20→28px · page titles */
+  --text-xxl:     clamp(1.402rem, 1.096rem + 1.30vw, 2.074rem);  /* 22→33px · hero subheadings */
+  --text-display: clamp(1.577rem, 1.162rem + 1.77vw, 2.488rem);  /* 25→40px · dashboard stats */
+  --text-hero:    clamp(1.774rem, 1.223rem + 2.35vw, 2.986rem);  /* 28→48px · landing hero */
 
   /* ── Line height ──────────────────────────────────────────────────────────── */
   --lh-2xs:     1.6;
