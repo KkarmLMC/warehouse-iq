@@ -287,7 +287,7 @@
   --r-m:   clamp(0.5rem,  0.8vw, 0.75rem);
   --r-l:   clamp(0.75rem, 1.2vw, 1rem);
   --r-xl:  clamp(1rem,    1.5vw, 1.25rem);
-  --r-xxl: 624rem;
+  --r-xxl: 0.375rem; /* squared — no pills */
 
   /* ── Border width scale ───────────────────────────────────────────────────── */
   --bw-xs:  0.0625em;

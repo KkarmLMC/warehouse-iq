@@ -61,7 +61,7 @@ function PinPad({ onComplete }) {
 // ─── Role badge ───────────────────────────────────────────────────────────────
 function RoleBadge({ label, color = 'var(--navy)', bg = 'rgba(4,36,92,0.08)' }) {
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 'var(--r-xxl)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize', letterSpacing: '0.02em' }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 'var(--r-s)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize', letterSpacing: '0.02em' }}>
       {label}
     </span>
   )
@@ -401,7 +401,7 @@ export default function Profile() {
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 8 }}>App Access</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {profile.app_access.map(app => (
-                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-xxl)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600 }}>
+                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-s)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600 }}>
                   <AppWindow size={12} />
                   {appLabels[app] || app}
                 </span>

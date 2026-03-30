@@ -16,7 +16,7 @@ function StockChip({ stock, min }) {
   return                             <span style={chip('var(--success-soft)','var(--success-text)')}>OK</span>
 }
 function chip(bg, color) {
-  return { padding:'2px 8px', borderRadius:'var(--r-xxl)', fontSize:'var(--text-xs)', fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
+  return { padding:'2px 8px', borderRadius:'var(--r-s)', fontSize:'var(--text-xs)', fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
 }
 
 // ─── Summary card ─────────────────────────────────────────────────────────────
@@ -249,7 +249,7 @@ export default function WarehouseIQ() {
             <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)' }}>
               <Receipt size={15} style={{ color:'var(--navy)' }} />
               <span style={{ fontSize:'var(--text-sm)', fontWeight:700 }}>Active Sales Orders</span>
-              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-xxl)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-s)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
             </div>
             <button onClick={() => navigate('/sales-orders')}
               style={{ fontSize:'var(--text-xs)', fontWeight:600, color:'var(--navy)', background:'none', cursor:'pointer', padding:0 }}>
@@ -265,7 +265,7 @@ export default function WarehouseIQ() {
               <div style={{ flex:1, minWidth:0 }}>
                 <div style={{ fontSize:'var(--text-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
               </div>
-              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-xxl)', background: po.status==='queued'?'var(--purple-soft)':po.status==='running'?'var(--warning-soft)':po.status==='fulfillment'?'var(--blue-soft)':po.status==='shipment'?'var(--blue-tint-80)':'var(--success-soft)', color: po.status==='queued'?'var(--purple-tint-20)':po.status==='running'?'var(--warning)':po.status==='fulfillment'?'var(--blue)':po.status==='shipment'?'var(--blue-shade-20)':'var(--success-text)', textTransform:'capitalize', flexShrink:0 }}>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-s)', background: po.status==='queued'?'var(--purple-soft)':po.status==='running'?'var(--warning-soft)':po.status==='fulfillment'?'var(--blue-soft)':po.status==='shipment'?'var(--blue-tint-80)':'var(--success-soft)', color: po.status==='queued'?'var(--purple-tint-20)':po.status==='running'?'var(--warning)':po.status==='fulfillment'?'var(--blue)':po.status==='shipment'?'var(--blue-shade-20)':'var(--success-text)', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
               </span>
             </button>
@@ -289,7 +289,7 @@ export default function WarehouseIQ() {
           <div style={{ display:'flex', gap:'var(--gap-xs)' }}>
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding:'3px 10px', borderRadius:'var(--r-xxl)', background:filter===val?'var(--navy)':'var(--hover)', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+                style={{ padding:'3px 10px', borderRadius:'var(--r-s)', background:filter===val?'var(--navy)':'var(--hover)', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
                 {lbl}
               </button>
             ))}

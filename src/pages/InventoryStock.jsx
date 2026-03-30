@@ -7,22 +7,22 @@ import { db } from '../lib/supabase.js'
 
 function StockBadge({ qty, minLevel, onOrder }) {
   if (qty === 0 && onOrder > 0) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--blue-soft)', color: 'var(--blue)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--blue-soft)', color: 'var(--blue)' }}>
       0 (+{onOrder} ordered)
     </span>
   )
   if (qty === 0) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--error-soft)', color: 'var(--error-dark)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--error-soft)', color: 'var(--error-dark)' }}>
       Out of stock
     </span>
   )
   if (minLevel && qty <= minLevel) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--orange-soft)', color: 'var(--orange-shade-20)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--orange-soft)', color: 'var(--orange-shade-20)' }}>
       Low: {qty}
     </span>
   )
   return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--success-soft)', color: 'var(--success-text)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--success-soft)', color: 'var(--success-text)' }}>
       {qty}
     </span>
   )

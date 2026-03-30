@@ -182,7 +182,7 @@ function StockRow({ level, onPress }) {
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexShrink: 0 }}>
-        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
+        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
         <CaretRight size={13} style={{ color: 'var(--black)' }} />
@@ -422,7 +422,7 @@ export default function WarehouseDetail() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
                 <Receipt size={16} style={{ color: 'var(--navy)' }} />
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Sales Orders</span>
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', background: 'var(--hover)', padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontWeight: 600 }}>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', background: 'var(--hover)', padding: '2px 8px', borderRadius: 'var(--r-s)', fontWeight: 600 }}>
                   {warehousePOs.length}
                 </span>
               </div>
@@ -449,7 +449,7 @@ export default function WarehouseDetail() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexShrink: 0 }}>
-                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--r-xxl)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
+                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--r-s)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
                       {po.status}
                     </span>
                     {po.grand_total > 0 && (

@@ -27,7 +27,7 @@ function WarehouseRow({ level, warehouseName }) {
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
+        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
       </div>
@@ -341,7 +341,7 @@ export default function PartDetail() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
             <ClipboardText size={16} style={{ color: 'var(--black)' }} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>
-            <span style={{ padding: '1px 8px', borderRadius: 'var(--r-xxl)', background: 'var(--hover)', fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
+            <span style={{ padding: '1px 8px', borderRadius: 'var(--r-s)', background: 'var(--hover)', fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
           </div>
           <CaretDown size={14} style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>

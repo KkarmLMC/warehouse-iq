@@ -129,7 +129,7 @@ export default function PODetail() {
           </div>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 4,
-            padding: '4px 12px', borderRadius: 'var(--r-xxl)',
+            padding: '4px 12px', borderRadius: 'var(--r-s)',
             background: statusDisplay.bg,
             color: statusDisplay.color }}>
             <StatusIcon size={12} weight="fill" />
@@ -181,7 +181,7 @@ export default function PODetail() {
                 <Buildings size={14} style={{ color: 'var(--black)' }} />
                 {wName}
               </div>
-              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--error-dark)', background: 'var(--error-soft)', padding: '2px 8px', borderRadius: 'var(--r-xxl)' }}>
+              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--error-dark)', background: 'var(--error-soft)', padding: '2px 8px', borderRadius: 'var(--r-s)' }}>
                 -{impact.qty} units ({impact.parts} SKUs)
               </span>
             </div>

@@ -73,7 +73,7 @@ export default function SOQueue() {
       <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-m)', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
+            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-s)', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
               background: tab === t.key ? 'var(--navy)' : 'var(--white)',
               color: tab === t.key ? '#fff' : 'var(--black)' }}>
             {t.label}{counts[t.key] > 0 ? ` (${counts[t.key]})` : ''}

@@ -34,7 +34,7 @@ function StatusBadge({ status }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      padding: '3px 10px', borderRadius: 'var(--r-xxl)',
+      padding: '3px 10px', borderRadius: 'var(--r-s)',
       fontSize: 'var(--text-xs)', fontWeight: 700,
       background: meta.bg, color: meta.color }}>
       <Icon size={11} weight="fill" />
@@ -71,7 +71,7 @@ function POCard({ po, totals, onPress }) {
           <StatusBadge status={po.status} />
           <span style={{
             fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px',
-            borderRadius: 'var(--r-xxl)',
+            borderRadius: 'var(--r-s)',
             background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
             color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }}>
             {po.division === 'Bolt' ? 'Bolt' : 'LM'}

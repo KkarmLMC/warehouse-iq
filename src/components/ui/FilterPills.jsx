@@ -29,7 +29,7 @@ export default function FilterPills({ options, active, onChange }) {
             onClick={() => onChange(key)}
             style={{
               padding: '4px 12px',
-              borderRadius: 'var(--r-xxl)',
+              borderRadius: 'var(--r-s)',
               background: isActive ? 'var(--navy)' : 'var(--white)',
               color: isActive ? '#fff' : 'var(--black)',
               fontSize: 'var(--text-xs)',
