@@ -7,6 +7,7 @@ import {
   Funnel, Nut, Stack, Pulse, HardHat, Hammer,
   Plugs, Rows, Scissors } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import PageHeader from '../components/ui/PageHeader'
 
 // ─── Category icon map ────────────────────────────────────────────────────────
 const CATEGORY_ICONS = {
@@ -169,16 +170,11 @@ export default function PartsCatalog() {
   return (
     <div className="page-content fade-in">
 
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)', flexWrap: 'wrap' }}>
-        <div>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
-          <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Parts Catalog</div>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', background: 'var(--blue-soft)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--blue)' }}>
+      <PageHeader eyebrow="INVENTORY" title="Parts Catalog" action={
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', background: 'var(--blue-soft)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--blue)' }}>
           <ArrowSquareOut size={12} /> QuickBooks sync — coming soon
         </div>
-      </div>
+      } />
 
       {/* Tabs */}
       <div style={{
