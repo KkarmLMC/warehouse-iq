@@ -80,6 +80,20 @@ export default function ShipmentDetail() {
     </div>
   )
 
+  if (!order) return (
+    <div className="page-content fade-in">
+      <div className="empty" style={{ minHeight: '60vh' }}>
+        <Warning size={32} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
+        <div className="empty-title">Order not found</div>
+        <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
+        <button onClick={() => navigate('/warehouse-hq/shipment')}
+          style={{ marginTop: 'var(--mar-l)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: 'var(--white)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          ← Back to Shipments
+        </button>
+      </div>
+    </div>
+  )
+
   const shipTo = [order?.job_city||order?.customer_city, order?.job_state||order?.customer_state, order?.customer_zip].filter(Boolean).join(', ')
 
   return (

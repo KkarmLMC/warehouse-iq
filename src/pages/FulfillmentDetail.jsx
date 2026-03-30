@@ -143,6 +143,20 @@ export default function FulfillmentDetail() {
     </div>
   )
 
+  if (!order) return (
+    <div className="page-content fade-in">
+      <div className="empty" style={{ minHeight: '60vh' }}>
+        <Warning size={32} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
+        <div className="empty-title">Order not found</div>
+        <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
+        <button onClick={() => navigate('/warehouse-hq/fulfillment')}
+          style={{ marginTop: 'var(--mar-l)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: 'var(--white)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          ← Back to Fulfillment
+        </button>
+      </div>
+    </div>
+  )
+
   const shortageLines = lines.filter(l => l.is_shortage)
 
   return (
