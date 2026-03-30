@@ -26,7 +26,7 @@ export default function Card({ title, icon: Icon, action, onAction, children, no
             {title}
           </span>
           {action && (
-            <span style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: 4 }}>
               {action}
             </span>
           )}

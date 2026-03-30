@@ -13,7 +13,7 @@ import { logActivity } from '../lib/logActivity.js'
 // ─── Shared label component ───────────────────────────────────────────────────
 function Label({ children }) {
   return (
-    <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 'var(--sp-1)' }}>
+    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--sp-1)' }}>
       {children}
     </label>
   )
@@ -61,7 +61,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
       <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 299, background: 'rgba(0,0,0,0.5)', animation: 'anim-fade-in 0.15s ease' }} />
       <div style={{
         position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 300,
-        background: 'var(--surface)', borderRadius: 'var(--r-xl) var(--r-xl) 0 0',
+        background: 'var(--white)', borderRadius: 'var(--r-xl) var(--r-xl) 0 0',
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)',
       }}>
@@ -69,9 +69,9 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         <div style={{ padding: 'var(--sp-4) var(--sp-5) 0', flexShrink: 0 }}>
           <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-full)', margin: '0 auto var(--sp-3)' }} />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--sp-4)' }}>
-            <div style={{ fontSize: 'var(--fs-lg)', fontWeight: 700 }}>Edit Warehouse</div>
+            <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Edit Warehouse</div>
             <button onClick={onClose} style={{ border: 'none', background: 'var(--hover)', borderRadius: 'var(--r-full)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-              <X size={14} style={{ color: 'var(--text-2)' }} />
+              <X size={14} style={{ color: 'var(--black)' }} />
             </button>
           </div>
         </div>
@@ -85,7 +85,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           </div>
 
           <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-3) 0', paddingTop: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 'var(--sp-3)' }}>Location</div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--sp-3)' }}>Location</div>
           </div>
 
           <div style={{ marginBottom: 'var(--sp-3)' }}>
@@ -109,7 +109,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           </div>
 
           <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--sp-3) 0', paddingTop: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 'var(--sp-3)' }}>Contact</div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--sp-3)' }}>Contact</div>
           </div>
 
           <div style={{ marginBottom: 'var(--sp-3)' }}>
@@ -133,13 +133,13 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <textarea value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Any relevant notes about this warehouse…" rows={3} style={{ width: '100%', resize: 'vertical' }} />
           </div>
 
-          {error && <div style={{ color: '#B91C1C', fontSize: 'var(--fs-sm)', marginBottom: 'var(--sp-3)', padding: 'var(--sp-2) var(--sp-3)', background: '#FEF2F2', borderRadius: 'var(--r-md)' }}>{error}</div>}
+          {error && <div style={{ color: '#B91C1C', fontSize: 'var(--text-sm)', marginBottom: 'var(--sp-3)', padding: 'var(--sp-2) var(--sp-3)', background: '#FEF2F2', borderRadius: 'var(--r-m)' }}>{error}</div>}
         </div>
 
         {/* Footer */}
         <div style={{ padding: 'var(--sp-4) var(--sp-5)', paddingBottom: 'calc(var(--sp-4) + env(safe-area-inset-bottom))', borderTop: '1px solid var(--border-l)', flexShrink: 0 }}>
           <button onClick={handleSave} disabled={saving || !form.name.trim()}
-            style={{ width: '100%', padding: 'var(--sp-3)', borderRadius: 'var(--r-md)', border: 'none', background: !form.name.trim() ? 'var(--hover)' : 'var(--navy)', color: !form.name.trim() ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: !form.name.trim() ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)' }}>
+            style={{ width: '100%', padding: 'var(--sp-3)', borderRadius: 'var(--r-m)', border: 'none', background: !form.name.trim() ? 'var(--hover)' : 'var(--navy)', color: !form.name.trim() ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: !form.name.trim() ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)' }}>
             {saving ? 'Saving…' : <><Check size={15} /> Save Changes</>}
           </button>
         </div>
@@ -149,16 +149,16 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
 }
 
 // ─── Stat card ────────────────────────────────────────────────────────────────
-function StatCard({ label, value, Icon, color = 'var(--text-1)', bg = 'var(--hover)' }) {
+function StatCard({ label, value, Icon, color = 'var(--black)', bg = 'var(--hover)' }) {
   return (
-    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-lg)', padding: 'var(--sp-4)' }}>
+    <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--sp-4)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', marginBottom: 'var(--sp-2)' }}>
-        <div style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-md)', background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Icon size={14} style={{ color }} />
         </div>
-        <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: 'var(--text-3)' }}>{label}</span>
+        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)' }}>{label}</span>
       </div>
-      <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, color }}>{value}</div>
+      <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color }}>{value}</div>
     </div>
   )
 }
@@ -179,19 +179,19 @@ function StockRow({ level, onPress }) {
       WebkitTapHighlightColor: 'transparent',
     }}>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {level.parts?.name || '—'}
         </div>
-        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--sp-2)' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--sp-2)' }}>
           {level.parts?.sku && <span style={{ fontFamily: 'var(--mono)' }}>{level.parts.sku}</span>}
           {level.quantity_on_order > 0 && <span style={{ color: '#1D4ED8', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>}
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
-        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-full)', fontSize: 'var(--fs-sm)', fontWeight: 700, background: bg, color }}>
+        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-full)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
-        <CaretRight size={13} style={{ color: 'var(--text-2)' }} />
+        <CaretRight size={13} style={{ color: 'var(--black)' }} />
       </div>
     </button>
   )
@@ -292,9 +292,9 @@ export default function WarehouseDetail() {
               <Buildings size={22} style={{ color: '#fff' }} />
             </div>
             <div>
-              <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 800, lineHeight: 1.1 }}>{warehouse.name}</div>
+              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, lineHeight: 1.1 }}>{warehouse.name}</div>
               {(warehouse.city || warehouse.state) && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(255,255,255,0.6)', marginTop: 4, fontSize: 'var(--fs-xs)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(255,255,255,0.6)', marginTop: 4, fontSize: 'var(--text-xs)' }}>
                   <MapPin size={12} />
                   {[warehouse.city, warehouse.state].filter(Boolean).join(', ')}
                 </div>
@@ -302,7 +302,7 @@ export default function WarehouseDetail() {
             </div>
           </div>
           <button onClick={() => setShowEdit(true)}
-            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-lg)', border: '1px solid rgba(255,255,255,0.2)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-l)', border: '1px solid rgba(255,255,255,0.2)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
             <PencilSimple size={15} />
           </button>
         </div>
@@ -311,26 +311,26 @@ export default function WarehouseDetail() {
         {(warehouse.contact_name || warehouse.contact_phone || warehouse.contact_email || warehouse.address) && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4, borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 'var(--sp-3)', marginTop: 'var(--sp-2)' }}>
             {warehouse.address && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>
                 <MapPin size={12} />
                 {warehouse.address}{warehouse.zip ? `, ${warehouse.zip}` : ''}
               </div>
             )}
             {warehouse.contact_name && (
-              <div style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)' }}>Contact: {warehouse.contact_name}</div>
+              <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>Contact: {warehouse.contact_name}</div>
             )}
             {warehouse.contact_phone && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>
                 <Phone size={12} /> {warehouse.contact_phone}
               </div>
             )}
             {warehouse.contact_email && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)' }}>
                 <Envelope size={12} /> {warehouse.contact_email}
               </div>
             )}
             {warehouse.notes && (
-              <div style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.5)', fontStyle: 'italic', marginTop: 2 }}>{warehouse.notes}</div>
+              <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.5)', fontStyle: 'italic', marginTop: 2 }}>{warehouse.notes}</div>
             )}
           </div>
         )}
@@ -339,19 +339,19 @@ export default function WarehouseDetail() {
       {/* Stats grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)' }}>
         <StatCard label="SKUs In Stock" value={totalSkus.toLocaleString()} Icon={Package} color="var(--navy)" bg="#EFF6FF" />
-        <StatCard label="Total Units" value={totalUnits.toLocaleString()} Icon={TrendUp} color="var(--text-1)" bg="var(--hover)" />
+        <StatCard label="Total Units" value={totalUnits.toLocaleString()} Icon={TrendUp} color="var(--black)" bg="var(--hover)" />
         <StatCard label="Low Stock" value={lowStock.length} Icon={WarningCircle} color={lowStock.length > 0 ? '#C2410C' : 'var(--text-3)'} bg={lowStock.length > 0 ? '#FFF7ED' : 'var(--hover)'} />
         <StatCard label="On Order" value={totalOnOrder.toLocaleString()} Icon={Truck} color={totalOnOrder > 0 ? '#1D4ED8' : 'var(--text-3)'} bg={totalOnOrder > 0 ? '#EFF6FF' : 'var(--hover)'} />
       </div>
 
       {/* Value */}
       {totalValue > 0 && (
-        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-lg)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--sp-4)', marginBottom: 'var(--sp-4)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', color: 'var(--text-3)' }}>
             <CurrencyDollar size={16} />
-            <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 600 }}>Est. Inventory Value</span>
+            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Est. Inventory Value</span>
           </div>
-          <span style={{ fontSize: 'var(--fs-xl)', fontWeight: 800, color: '#15803D' }}>
+          <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: '#15803D' }}>
             ${totalValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}
           </span>
         </div>
@@ -360,18 +360,18 @@ export default function WarehouseDetail() {
       {/* Actions */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)', marginBottom: 'var(--sp-5)' }}>
         <button onClick={() => navigate(`/warehouse-hq/transfer?from=${id}`)}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', borderRadius: 'var(--r-md)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--text-2)', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           <ArrowsLeftRight size={15} /> Transfer
         </button>
         <button onClick={() => navigate('/warehouse-hq/add-part')}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', borderRadius: 'var(--r-md)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           <Plus size={15} /> Add Part
         </button>
       </div>
 
       {/* Stock section */}
       <div style={{ marginBottom: 'var(--sp-2)' }}>
-        <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 'var(--sp-3)' }}>
+        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--sp-3)' }}>
           Stock ({levels.length} parts)
         </div>
 
@@ -394,8 +394,8 @@ export default function WarehouseDetail() {
                 flexShrink: 0, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)',
                 border: `1px solid ${stockFilter === val ? 'var(--navy)' : 'var(--border-l)'}`,
                 background: stockFilter === val ? 'var(--navy)' : 'transparent',
-                color: stockFilter === val ? '#fff' : 'var(--text-2)',
-                fontSize: 'var(--fs-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+                color: stockFilter === val ? '#fff' : 'var(--black)',
+                fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
               }}>{lbl}</button>
           ))}
         </div>
@@ -403,7 +403,7 @@ export default function WarehouseDetail() {
         {/* Stock list */}
         <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-5)' }}>
           {filtered.length === 0 ? (
-            <div style={{ padding: 'var(--sp-8)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>
+            <div style={{ padding: 'var(--sp-8)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
               No parts match filters
             </div>
           ) : filtered.map(level => (
@@ -430,13 +430,13 @@ export default function WarehouseDetail() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
                 <Receipt size={16} style={{ color: 'var(--navy)' }} />
-                <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700 }}>Sales Orders</span>
-                <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', background: 'var(--hover)', padding: '2px 8px', borderRadius: 'var(--r-full)', fontWeight: 600 }}>
+                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Sales Orders</span>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', background: 'var(--hover)', padding: '2px 8px', borderRadius: 'var(--r-full)', fontWeight: 600 }}>
                   {warehousePOs.length}
                 </span>
               </div>
               <button onClick={() => navigate('/sales-orders')}
-                style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: 'var(--navy)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--navy)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                 View all
               </button>
             </div>
@@ -445,28 +445,28 @@ export default function WarehouseDetail() {
               return (
                 <button key={po.id} onClick={() => navigate(`/sales-orders/${po.id}`)}
                   style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left', borderBottom: idx < warehousePOs.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-                  <div style={{ fontSize: 'var(--fs-2xs)', fontWeight: 800, padding: '2px 6px', borderRadius: 4, flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : '#EFF6FF', color: po.division === 'Bolt' ? '#BE123C' : '#1D4ED8' }}>
+                  <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, padding: '2px 6px', borderRadius: 4, flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : '#EFF6FF', color: po.division === 'Bolt' ? '#BE123C' : '#1D4ED8' }}>
                     {po.division === 'Bolt' ? 'BOLT' : 'LM'}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {po.customer_name}
                     </div>
-                    <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 1 }}>
+                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 1 }}>
                       {po.project_name || po.so_number}
                       {po.so_date ? ` · ${new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
-                    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--r-full)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
+                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--r-full)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
                       {po.status}
                     </span>
                     {po.grand_total > 0 && (
-                      <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>
+                      <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>
                         ${po.grand_total.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     )}
-                    <CaretRight size={12} style={{ color: 'var(--text-2)' }} />
+                    <CaretRight size={12} style={{ color: 'var(--black)' }} />
                   </div>
                 </button>
               )
@@ -480,15 +480,15 @@ export default function WarehouseDetail() {
         <button onClick={loadTransactions}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', border: 'none', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-            <ClipboardText size={16} style={{ color: 'var(--text-2)' }} />
-            <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-2)' }}>Transaction History</span>
+            <ClipboardText size={16} style={{ color: 'var(--black)' }} />
+            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>
           </div>
-          <CaretDown size={14} style={{ color: 'var(--text-2)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size={14} style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
         {showTx && (
           <div style={{ borderTop: '1px solid var(--border-l)' }}>
             {transactions.length === 0 ? (
-              <div style={{ padding: 'var(--sp-5)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>No transactions yet</div>
+              <div style={{ padding: 'var(--sp-5)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No transactions yet</div>
             ) : transactions.map(tx => (
               <div key={tx.id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: '1px solid var(--border-l)' }}>
                 <div style={{
@@ -496,15 +496,15 @@ export default function WarehouseDetail() {
                   background: tx.quantity_delta > 0 ? '#F0FDF4' : '#FEF2F2',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 800, color: tx.quantity_delta > 0 ? '#15803D' : '#B91C1C' }}>
+                  <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: tx.quantity_delta > 0 ? '#15803D' : '#B91C1C' }}>
                     {tx.quantity_delta > 0 ? '+' : ''}{tx.quantity_delta}
                   </span>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {tx.parts?.name || '—'}
                   </div>
-                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>
                     {txTypeLabel[tx.transaction_type] || tx.transaction_type} · {new Date(tx.created_at).toLocaleDateString()}
                     {tx.reason && ` · ${tx.reason}`}
                   </div>

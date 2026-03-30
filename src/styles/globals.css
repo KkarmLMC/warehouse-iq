@@ -53,142 +53,427 @@
 
 :root {
 
-  /* ── 2a. Brand Colors ─────────────────────────────────────────────────────── */
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     LMC DESIGN SYSTEM v3.0
+     Source of truth: lmc-design-system.html
+     Edit that document first → verify visually → then port here.
+     All three apps share this identical :root block.
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-  /* Primary palette */
-  --navy:      #04245C;   /* Lightning Master primary */
-  --navy-dark: #031a45;   /* Darker navy for hover states */
-  --navy-mid:  #1A4FA8;   /* Accent / accent strip */
-  --red:       #F5333F;   /* Bolt Lightning primary / CTA */
-  --red-dark:  #D42430;   /* Danger hover */
-  --red-soft:  #FEF0F1;   /* Danger background */
-  --blue:      #0047BA;
-  --blue-soft: #EEF3FC;
-  --blue-mid:  rgba(0, 71, 186, 0.1);
+  /* ── Absolute anchors ─────────────────────────────────────────────────────── */
+  --black: #000000;
+  --white: #ffffff;
 
-  /* Semantic colors — use these for state-driven UI */
-  --success:        #10B981;   /* Previously --green */
-  --success-soft:   #ECFDF5;   /* Previously --green-s */
-  --success-mid:    #BBF7D0;   /* Mid-weight green for borders */
-  --success-dark:   #065F46;   /* Deep green for completed states */
-  --success-text:   #15803D;   /* Text on light green bg */
+  /* ── Navy ─────────────────────────────────────────────────────────────────── */
+  --navy-base:     #04245c;
+  --navy-shade-20: #031d4a;
+  --navy-shade-40: #021637;
+  --navy-shade-60: #020e25;
+  --navy-shade-80: #010712;
+  --navy-tint-20:  #36507d;
+  --navy-tint-40:  #687c9d;
+  --navy-tint-60:  #9ba7be;
+  --navy-tint-80:  #cdd3de;
 
-  --error:          #EF4444;   /* Inline error / required */
-  --error-alt:      #DC2626;   /* Stronger error for active states */
-  --error-soft:     #FEF2F2;   /* Error background */
-  --error-dark:     #B91C1C;   /* Deep red badge */
-  --error-darker:   #FEE2E2;   /* Very soft error bg */
+  /* ── Red ──────────────────────────────────────────────────────────────────── */
+  --red-base:     #f5333f;
+  --red-shade-20: #c42932;
+  --red-shade-40: #931f26;
+  --red-shade-60: #621419;
+  --red-shade-80: #310a0d;
+  --red-tint-20:  #f75c65;
+  --red-tint-40:  #f9858c;
+  --red-tint-60:  #fbadb2;
+  --red-tint-80:  #fdd6d9;
 
-  --warning:        #F59E0B;   /* Amber — draft / pending */
-  --warning-text:   #92400E;   /* Amber text on soft bg */
-  --warning-soft:   #FFFBEB;   /* Previously --amber-s */
-  --warning-border: #FCD34D;   /* Amber border */
+  /* ── Blue ─────────────────────────────────────────────────────────────────── */
+  --blue-base:     #0047ba;
+  --blue-shade-20: #003995;
+  --blue-shade-40: #002b70;
+  --blue-shade-60: #001c4a;
+  --blue-shade-80: #000e25;
+  --blue-tint-20:  #336cc8;
+  --blue-tint-40:  #6691d6;
+  --blue-tint-60:  #99b5e3;
+  --blue-tint-80:  #ccdaf1;
 
-  --orange:         #F97316;
-  --orange-soft:    #FFF7ED;   /* Previously --orange-s */
+  /* ── Success / Green ──────────────────────────────────────────────────────── */
+  --success-base:     #10b981;
+  --success-shade-20: #0d9467;
+  --success-shade-40: #0a6f4d;
+  --success-shade-60: #064a34;
+  --success-shade-80: #03251a;
+  --success-tint-20:  #40c79a;
+  --success-tint-40:  #70d5b3;
+  --success-tint-60:  #9fe3cd;
+  --success-tint-80:  #cff1e6;
 
-  --purple:         #7C3AED;
-  --purple-soft:    #F5F3FF;
-  --purple-border:  #DDD6FE;
+  /* ── Warning / Amber ──────────────────────────────────────────────────────── */
+  --warning-base:     #f59e0b;
+  --warning-shade-20: #c47e09;
+  --warning-shade-40: #935f07;
+  --warning-shade-60: #623f04;
+  --warning-shade-80: #312002;
+  --warning-tint-20:  #f7b13c;
+  --warning-tint-40:  #f9c56d;
+  --warning-tint-60:  #fbd89d;
+  --warning-tint-80:  #fdecce;
 
-  --live:           #EA580C;   /* Live / active pulsing dot */
+  /* ── Error ────────────────────────────────────────────────────────────────── */
+  --error-base:     #ef4444;
+  --error-shade-20: #bf3636;
+  --error-shade-40: #8f2929;
+  --error-shade-60: #601b1b;
+  --error-shade-80: #300e0e;
+  --error-tint-20:  #f26969;
+  --error-tint-40:  #f58f8f;
+  --error-tint-60:  #f9b4b4;
+  --error-tint-80:  #fcdada;
 
-  /* ── 2b. Surface & Text Colors ────────────────────────────────────────────── */
+  /* ── Orange ───────────────────────────────────────────────────────────────── */
+  --orange-base:     #f97316;
+  --orange-shade-20: #c75c12;
+  --orange-shade-40: #95450d;
+  --orange-shade-60: #642e09;
+  --orange-shade-80: #321704;
+  --orange-tint-20:  #fa8f45;
+  --orange-tint-40:  #fbab73;
+  --orange-tint-60:  #fdc7a2;
+  --orange-tint-80:  #fee3d0;
 
-  --bg:             #FFFFFF;
-  --surface:        #FFFFFF;
-  --surface-raised: #F7F8FA;   /* Card backgrounds */
-  --card-header-bg: #EEF2F9;   /* Light navy tint — unused in flat design, kept for compat */
+  /* ── Purple ───────────────────────────────────────────────────────────────── */
+  --purple-base:     #7c3aed;
+  --purple-shade-20: #632ebe;
+  --purple-shade-40: #4a238e;
+  --purple-shade-60: #32175f;
+  --purple-shade-80: #190c2f;
+  --purple-tint-20:  #9661f1;
+  --purple-tint-40:  #b089f4;
+  --purple-tint-60:  #cbb0f8;
+  --purple-tint-80:  #e5d8fb;
 
-  --border:         transparent;   /* Flat design — cards have no border */
-  --border-l:       #EFEFEF;       /* Internal row dividers only */
-  --hover:          #F3F4F6;
+  /* ── Grey / Neutral ───────────────────────────────────────────────────────── */
+  --grey-base:     #a7a8a9;
+  --grey-shade-20: #868687;
+  --grey-shade-40: #646565;
+  --grey-shade-60: #434344;
+  --grey-shade-80: #212222;
+  --grey-tint-20:  #b9b9ba;
+  --grey-tint-40:  #cacbcb;
+  --grey-tint-60:  #dcdcdd;
+  --grey-tint-80:  #edeeee;
 
-  /* Text hierarchy */
-  --text-1:    #000000;   /* Primary content */
-  --text-2:    #111111;   /* Labels, secondary descriptions */
-  --text-3:    #6B7280;   /* Timestamps, mono labels, tertiary */
-  --text-4:    #D1D5DB;   /* Disabled / placeholder */
+  /* ── Semantic aliases — use these in all component code ──────────────────── */
+  --navy:       var(--navy-base);
+  --navy-dark:  var(--navy-shade-20);
+  --navy-mid:   var(--navy-tint-20);
+  --navy-soft:  var(--navy-tint-80);
+  --red:        var(--red-base);
+  --red-dark:   var(--red-shade-20);
+  --red-soft:   var(--red-tint-80);
+  --blue:       var(--blue-base);
+  --blue-dark:  var(--blue-shade-20);
+  --blue-soft:  var(--blue-tint-80);
+  --success:          var(--success-base);
+  --success-dark:     var(--success-shade-40);
+  --success-text:     var(--success-shade-40);
+  --success-soft:     var(--success-tint-80);
+  --success-mid:      var(--success-tint-40);
+  --warning:          var(--warning-base);
+  --warning-dark:     var(--warning-shade-40);
+  --warning-text:     var(--warning-shade-60);
+  --warning-soft:     var(--warning-tint-80);
+  --warning-border:   var(--warning-tint-40);
+  --error:            var(--error-base);
+  --error-alt:        var(--error-shade-20);
+  --error-dark:       var(--error-shade-40);
+  --error-soft:       var(--error-tint-80);
+  --orange:           var(--orange-base);
+  --orange-soft:      var(--orange-tint-80);
+  --purple:           var(--purple-base);
+  --purple-soft:      var(--purple-tint-80);
+  --purple-border:    var(--purple-tint-60);
 
-  /* ── 2c. Typography ───────────────────────────────────────────────────────── */
+  /* ── Surfaces, borders, text ──────────────────────────────────────────────── */
+  --surface-raised: #f7f8fa;
+  --bg:             #f3f4f6;
+  --hover:          #f3f4f6;
+  --border:         transparent;
+  --border-l:       var(--grey-tint-60);
+  --text-3:         var(--grey-base);
+  --text-4:         var(--grey-tint-40);
 
-  --font:      'Plus Jakarta Sans', sans-serif;
-  --mono:      var(--font);
+  /* ── Typography — Plus Jakarta Sans · Minor Third (×1.2) · base = 1rem ────── */
+  --font: 'Plus Jakarta Sans', sans-serif;
+  --mono: var(--font);
 
-  /* Fluid type scale — clamp(min, preferred, max)
-     Ensures readable text at all viewport sizes without JS */
-  --fs-2xs:  clamp(0.625rem,  1.2vw, 0.6875rem);   /* 10–11px (was 8–9px) */
-  --fs-xs:   clamp(0.75rem,   1.4vw, 0.8125rem);   /* 12–13px (was 10–11px) */
-  --fs-sm:   clamp(0.875rem,  1.6vw, 0.9375rem);   /* 14–15px (was 12–13px) */
-  --fs-base: clamp(0.9375rem, 1.8vw, 1rem);        /* 15–16px (was 13–14px) */
-  --fs-md:   clamp(1rem,      1.9vw, 1.0625rem);   /* 16–17px (was 14–15px) */
-  --fs-lg:   clamp(1.0625rem, 2.1vw, 1.125rem);    /* 17–18px (was 15–16px) */
-  --fs-xl:   clamp(1.125rem,  2.4vw, 1.25rem);     /* 18–20px (was 16–18px) */
-  --fs-2xl:  1rem;                                  /* 16px — PIN pad numbers (unchanged) */
-  --fs-stat: clamp(1.375rem,  3.2vw, 1.5rem);      /* 22–24px (was 20–22px) */
+  --text-2xs:     clamp(0.500rem, 1.03vw, 0.579rem);
+  --text-xs:      clamp(0.579rem, 1.23vw, 0.694rem);
+  --text-sm:      clamp(0.694rem, 1.48vw, 0.833rem);
+  --text-base:    clamp(0.833rem, 1.78vw, 1.000rem);
+  --text-md:      clamp(1.000rem, 2.13vw, 1.200rem);
+  --text-lg:      clamp(1.200rem, 2.56vw, 1.440rem);
+  --text-xl:      clamp(1.440rem, 3.07vw, 1.728rem);
+  --text-xxl:     clamp(1.728rem, 3.69vw, 2.074rem);
+  --text-display: clamp(2.074rem, 4.42vw, 2.488rem);
+  --text-hero:    clamp(2.488rem, 5.31vw, 2.986rem);
 
-  /* ── 2d. Spacing Scale (4px base grid) ───────────────────────────────────── */
+  /* ── Line height ──────────────────────────────────────────────────────────── */
+  --lh-2xs:     1.6;
+  --lh-xs:      1.5;
+  --lh-sm:      1.5;
+  --lh-base:    1.5;
+  --lh-md:      1.4;
+  --lh-lg:      1.3;
+  --lh-xl:      1.2;
+  --lh-xxl:     1.15;
+  --lh-display: 1.1;
+  --lh-hero:    1.0;
 
-  --sp-1:  0.25rem;    /*  4px */
-  --sp-2:  0.5rem;     /*  8px */
-  --sp-3:  0.75rem;    /* 12px */
-  --sp-4:  1rem;       /* 16px */
-  --sp-5:  1.25rem;    /* 20px */
-  --sp-6:  1.5rem;     /* 24px */
-  --sp-8:  2rem;       /* 32px */
-  --sp-10: 2.5rem;     /* 40px */
+  /* ── Letter spacing ───────────────────────────────────────────────────────── */
+  --ls-2xs:     0.06em;
+  --ls-xs:      0.02em;
+  --ls-sm:      0em;
+  --ls-base:    0em;
+  --ls-md:      0em;
+  --ls-lg:      -0.01em;
+  --ls-xl:      -0.02em;
+  --ls-xxl:     -0.03em;
+  --ls-display: -0.03em;
+  --ls-hero:    -0.04em;
 
-  /* ── 2e. Radius Scale ────────────────────────────────────────────────────── */
+  /* ── Font weight ──────────────────────────────────────────────────────────── */
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    800;
 
-  --r-xs:   0.25rem;       /*  4px */
-  --r-sm:   0.375rem;      /*  6px */
-  --r-md:   0.625rem;      /* 10px — primary card radius */
-  --r-lg:   0.875rem;      /* 14px */
-  --r-xl:   1rem;          /* 16px */
-  --r-full: 624.9375rem;   /* Pill shape */
+  /* ── Gap scale ────────────────────────────────────────────────────────────── */
+  --gap-xs:  clamp(0.25rem,  0.5vw,  0.375rem);
+  --gap-s:   clamp(0.375rem, 0.75vw, 0.625rem);
+  --gap-m:   clamp(0.625rem, 1.25vw, 1rem);
+  --gap-l:   clamp(0.875rem, 1.75vw, 1.25rem);
+  --gap-xl:  clamp(1.25rem,  2.5vw,  1.75rem);
+  --gap-xxl: clamp(1.5rem,   3.5vw,  2.5rem);
 
-  /* Legacy alias — kept for backward compat, prefer --r-* */
-  --radius:    var(--r-md);
-  --radius-sm: var(--r-sm);
+  /* ── Padding scale ────────────────────────────────────────────────────────── */
+  --pad-xs:  clamp(0.25rem,  0.5vw,  0.375rem);
+  --pad-s:   clamp(0.375rem, 0.75vw, 0.5rem);
+  --pad-m:   clamp(0.5rem,   1vw,    0.875rem);
+  --pad-l:   clamp(0.875rem, 1.5vw,  1.25rem);
+  --pad-xl:  clamp(1rem,     2vw,    1.5rem);
+  --pad-xxl: clamp(1.25rem,  2.5vw,  2rem);
 
-  /* ── 2f. Transitions ─────────────────────────────────────────────────────── */
+  /* ── Margin scale ─────────────────────────────────────────────────────────── */
+  --mar-xs:  clamp(0.25rem,  0.5vw,  0.375rem);
+  --mar-s:   clamp(0.375rem, 0.75vw, 0.625rem);
+  --mar-m:   clamp(0.625rem, 1.25vw, 1rem);
+  --mar-l:   clamp(0.875rem, 1.75vw, 1.25rem);
+  --mar-xl:  clamp(1.25rem,  2.5vw,  1.75rem);
+  --mar-xxl: clamp(1.5rem,   3.5vw,  2.5rem);
 
+  /* ── Radius scale ─────────────────────────────────────────────────────────── */
+  --r-xs:  0.25rem;
+  --r-s:   0.375rem;
+  --r-m:   clamp(0.5rem,  0.8vw, 0.75rem);
+  --r-l:   clamp(0.75rem, 1.2vw, 1rem);
+  --r-xl:  clamp(1rem,    1.5vw, 1.25rem);
+  --r-xxl: 624rem;
+
+  /* ── Border width scale ───────────────────────────────────────────────────── */
+  --bw-xs:  0.0625em;
+  --bw-s:   0.09375em;
+  --bw-m:   0.125em;
+  --bw-l:   0.1875em;
+  --bw-xl:  0.25em;
+  --bw-xxl: 0.375em;
+
+  /* ── Icon size scale ──────────────────────────────────────────────────────── */
+  --icon-xs:  clamp(0.625rem, 1.2vw,  0.875rem);
+  --icon-s:   clamp(0.875rem, 1.6vw,  1.125rem);
+  --icon-m:   clamp(1rem,     2vw,    1.375rem);
+  --icon-l:   clamp(1.25rem,  2.5vw,  1.625rem);
+  --icon-xl:  clamp(1.75rem,  3.5vw,  2.25rem);
+  --icon-xxl: clamp(2.5rem,   6vw,    3.5rem);
+
+  /* ── Shadow scale ─────────────────────────────────────────────────────────── */
+  --shadow-xs:  0 0.0625rem 0.125rem rgba(0,0,0,.04);
+  --shadow-s:   0 0.0625rem 0.25rem  rgba(0,0,0,.06);
+  --shadow-m:   0 0.125rem  0.5rem   rgba(0,0,0,.08);
+  --shadow-l:   0 0.25rem   1rem     rgba(0,0,0,.10);
+  --shadow-xl:  0 0.5rem    2rem     rgba(0,0,0,.12);
+  --shadow-xxl: 0 1rem      3rem     rgba(0,0,0,.16);
+
+  /* ── Z-index scale ────────────────────────────────────────────────────────── */
+  --z-base:    0;
+  --z-raised:  1;
+  --z-sticky:  10;
+  --z-overlay: 50;
+  --z-modal:   100;
+  --z-toast:   200;
+  --z-max:     9999;
+
+  /* ── Button tokens ────────────────────────────────────────────────────────── */
+  --btn-navy-bg:              var(--navy-base);
+  --btn-navy-text:            var(--white);
+  --btn-navy-border:          transparent;
+  --btn-navy-hover-bg:        var(--navy-shade-20);
+  --btn-navy-hover-text:      var(--white);
+  --btn-navy-hover-border:    transparent;
+  --btn-navy-active-bg:       var(--navy-shade-40);
+  --btn-navy-active-text:     var(--white);
+  --btn-navy-focus-ring:      var(--navy-tint-40);
+  --btn-navy-disabled-bg:     var(--navy-tint-60);
+  --btn-navy-disabled-text:   var(--white);
+  --btn-navy-disabled-border: transparent;
+
+  --btn-red-bg:              var(--red-base);
+  --btn-red-text:            var(--white);
+  --btn-red-border:          transparent;
+  --btn-red-hover-bg:        var(--red-shade-20);
+  --btn-red-hover-text:      var(--white);
+  --btn-red-hover-border:    transparent;
+  --btn-red-active-bg:       var(--red-shade-40);
+  --btn-red-active-text:     var(--white);
+  --btn-red-focus-ring:      var(--red-tint-40);
+  --btn-red-disabled-bg:     var(--red-tint-60);
+  --btn-red-disabled-text:   var(--white);
+  --btn-red-disabled-border: transparent;
+
+  --btn-black-bg:              var(--black);
+  --btn-black-text:            var(--white);
+  --btn-black-border:          transparent;
+  --btn-black-hover-bg:        var(--grey-shade-40);
+  --btn-black-hover-text:      var(--white);
+  --btn-black-hover-border:    transparent;
+  --btn-black-active-bg:       var(--grey-shade-60);
+  --btn-black-active-text:     var(--white);
+  --btn-black-focus-ring:      var(--grey-tint-20);
+  --btn-black-disabled-bg:     var(--grey-tint-40);
+  --btn-black-disabled-text:   var(--white);
+  --btn-black-disabled-border: transparent;
+
+  --btn-secondary-bg:              var(--white);
+  --btn-secondary-text:            var(--black);
+  --btn-secondary-border:          var(--grey-tint-60);
+  --btn-secondary-hover-bg:        var(--grey-tint-80);
+  --btn-secondary-hover-text:      var(--black);
+  --btn-secondary-hover-border:    var(--grey-tint-40);
+  --btn-secondary-active-bg:       var(--grey-tint-60);
+  --btn-secondary-active-text:     var(--black);
+  --btn-secondary-focus-ring:      var(--navy-tint-40);
+  --btn-secondary-disabled-bg:     var(--white);
+  --btn-secondary-disabled-text:   var(--grey-tint-40);
+  --btn-secondary-disabled-border: var(--grey-tint-80);
+
+  --btn-ghost-bg:              transparent;
+  --btn-ghost-text:            var(--grey-base);
+  --btn-ghost-border:          var(--grey-tint-60);
+  --btn-ghost-hover-bg:        var(--grey-tint-80);
+  --btn-ghost-hover-text:      var(--black);
+  --btn-ghost-hover-border:    var(--grey-tint-40);
+  --btn-ghost-active-bg:       var(--grey-tint-60);
+  --btn-ghost-active-text:     var(--black);
+  --btn-ghost-focus-ring:      var(--navy-tint-40);
+  --btn-ghost-disabled-bg:     transparent;
+  --btn-ghost-disabled-text:   var(--grey-tint-40);
+  --btn-ghost-disabled-border: var(--grey-tint-80);
+
+  /* ── Transitions ──────────────────────────────────────────────────────────── */
   --ease-fast:    0.12s ease;
   --ease-base:    0.18s ease;
   --ease-slow:    0.3s  ease;
   --ease-sidebar: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* ── 2g. Layout ──────────────────────────────────────────────────────────── */
+  /* ── Layout ───────────────────────────────────────────────────────────────── */
+  --sidebar-w:   13.75rem;
+  --sidebar-wc:  3.75rem;
+  --tab-h:       4rem;
+  --content-pad: var(--pad-xl);
 
-  --sidebar-w:   13.75rem;   /* 220px — expanded */
-  --sidebar-wc:  3.75rem;    /*  60px — collapsed */
-  --tab-h:       4rem;       /* Mobile bottom tab height */
-  --content-pad: 1.25rem;    /* Page horizontal padding */
-  --gap-sm:      0.5rem;
-  --gap-md:      0.625rem;
-  --gap-lg:      0.875rem;
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     LEGACY ALIASES — keep existing component code working during migration.
+     These will be removed once all component files are updated to new tokens.
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-  /* ── Legacy aliases — kept for compatibility, do not use in new code ──────── */
-  --accent:        var(--red);
-  --accent-dim:    var(--red-soft);
-  --head:          var(--font);
-  --text:          var(--text-1);
-  --text-dim:      var(--text-3);
-  --text-muted:    var(--text-3);
-  --bg-2:          var(--surface);
-  --bg-3:          var(--bg);
-  --bg-4:          #F0F1F3;
+  /* Typography → new text-* names */
+  --fs-2xs:  var(--text-2xs);
+  --fs-xs:   var(--text-xs);
+  --fs-sm:   var(--text-sm);
+  --fs-base: var(--text-base);
+  --fs-md:   var(--text-md);
+  --fs-lg:   var(--text-lg);
+  --fs-xl:   var(--text-xl);
+  --fs-2xl:  var(--text-base);
+  --fs-stat: var(--text-display);
+
+  /* Text colors → black/white */
+  --text-1: var(--black);
+  --text-2: var(--black);
+  --text-dim: var(--text-3);
+  --text-muted: var(--text-3);
+
+  /* Surfaces → white */
+  --surface: var(--white);
+
+  /* Radius → new scale names */
+  --r-sm:  var(--r-s);
+  --r-md:  var(--r-m);
+  --r-lg:  var(--r-l);
+  --r-2xl: var(--r-xl);
+  --r-full: var(--r-xxl);
+  --radius:    var(--r-m);
+  --radius-sm: var(--r-s);
+
+  /* Spacing → kept as-is (still valid, just not responsive) */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+
+  /* Color aliases used in component code */
+  --green:       var(--success);
+  --green-s:     var(--success-soft);
+  --green-dim:   var(--success-soft);
+  --amber:       var(--warning);
+  --amber-s:     var(--warning-soft);
+  --red-mid:     var(--red-tint-80);
+  --red-dim:     var(--red-tint-80);
+  --blue-dim:    var(--blue-soft);
+  --blue-mid:    var(--blue-tint-80);
+  --orange-s:    var(--orange-soft);
+  --error-alt:   var(--error-shade-20);
+  --error-darker: var(--error-tint-60);
+  --success-dark: var(--success-shade-40);
+  --teal:        #0d9488;
+  --teal-s:      #f0fdfa;
+  --live:        #ea580c;
+
+  /* Shadow legacy */
+  --shadow:    var(--shadow-s);
+  --shadow-md: var(--shadow-m);
+  --shadow-lg: var(--shadow-xl);
+
+  /* Misc layout legacy */
+  --gap-sm: var(--gap-s);
+  --gap-md: var(--gap-m);
+  --gap-lg: var(--gap-l);
+  --accent:       var(--red);
+  --accent-dim:   var(--red-soft);
+  --head:         var(--font);
+  --text:         var(--black);
+  --bg-2:         var(--white);
+  --bg-3:         var(--bg);
+  --bg-4:         #f0f1f3;
   --border-bright: transparent;
-  --green:         var(--success);
-  --green-s:       var(--success-soft);
-  --green-dim:     var(--success-soft);
-  --amber:         var(--warning);
-  --amber-s:       var(--warning-soft);
-  --blue-dim:      var(--blue-soft);
-  --shadow:        none;
-  --shadow-md:     none;
-  --shadow-lg:     none;
+  --card-header-bg: #eef2f9;
 }
+
 
 
 /* =============================================================================

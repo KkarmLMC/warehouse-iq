@@ -67,7 +67,7 @@ function Clock() {
     return () => clearInterval(i)
   }, [])
   return (
-    <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontFamily: 'var(--font)' }}>
+    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', fontFamily: 'var(--font)' }}>
       {t.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
       {' · '}
       {t.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
@@ -193,15 +193,15 @@ export default function Sidebar({ collapsed, onToggle }) {
             ? <Warehouse size={22} weight="fill" style={{ color: '#fff' }} />
             : (
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
+                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
                   Warehouse IQ
                   {floorMode && (
-                    <span style={{ marginLeft: 8, fontSize: 'var(--fs-xs)', fontWeight: 700, color: '#93C5FD' }}>
+                    <span style={{ marginLeft: 8, fontSize: 'var(--text-xs)', fontWeight: 700, color: '#93C5FD' }}>
                       Floor Mode
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}>
+                <div style={{ fontSize: 'var(--text-xs)', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}>
                   LMC · Bolt LP
                 </div>
               </div>
@@ -218,12 +218,12 @@ export default function Sidebar({ collapsed, onToggle }) {
               display: 'flex', alignItems: 'center', gap: 'var(--sp-2)',
               margin: '0 var(--sp-2) var(--sp-2)',
               padding: 'var(--sp-2) var(--sp-3)',
-              borderRadius: 'var(--r-lg)',
+              borderRadius: 'var(--r-l)',
               border: `1px solid ${floorMode ? '#93C5FD' : 'rgba(255,255,255,0.15)'}`,
               background: floorMode ? 'rgba(147,197,253,0.1)' : 'rgba(255,255,255,0.05)',
               cursor: 'pointer',
               color: floorMode ? '#93C5FD' : 'rgba(255,255,255,0.55)',
-              fontSize: 'var(--fs-xs)', fontWeight: 700,
+              fontSize: 'var(--text-xs)', fontWeight: 700,
               fontFamily: 'var(--font)', transition: 'all 0.15s',
               justifyContent: collapsed ? 'center' : 'flex-start',
             }}

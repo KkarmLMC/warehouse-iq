@@ -35,7 +35,7 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
       {Icon && (
         <div style={{
           width: 36, height: 36,
-          borderRadius: 'var(--r-lg)',
+          borderRadius: 'var(--r-l)',
           background: iconBg || 'var(--surface-raised)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           flexShrink: 0,
@@ -46,15 +46,15 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
 
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
-          fontSize: 'var(--fs-sm)', fontWeight: 600,
+          fontSize: 'var(--text-sm)', fontWeight: 600,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-          color: 'var(--text-1)',
+          color: 'var(--black)',
         }}>
           {title}
         </div>
         {subtitle && (
           <div style={{
-            fontSize: 'var(--fs-xs)', color: 'var(--text-3)',
+            fontSize: 'var(--text-xs)', color: 'var(--text-3)',
             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
             marginTop: 1,
           }}>
@@ -68,7 +68,7 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
       )}
 
       {onClick && (
-        <CaretRight size={14} style={{ color: 'var(--text-2)', flexShrink: 0 }} />
+        <CaretRight size={14} style={{ color: 'var(--black)', flexShrink: 0 }} />
       )}
     </div>
   )

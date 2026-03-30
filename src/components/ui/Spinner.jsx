@@ -13,7 +13,7 @@ export default function Spinner({ inline, size, label }) {
   const el = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
       <div className={`spinner ${s}`} />
-      {label && <span style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)' }}>{label}</span>}
+      {label && <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)' }}>{label}</span>}
     </div>
   )
 

@@ -121,7 +121,7 @@ export default function UserManagement() {
     management: { bg: '#F0FDF4', color: '#15803D' },
     warehouse: { bg: '#FFFBEB', color: '#D97706' },
     field: { bg: '#F5F3FF', color: '#7C3AED' },
-  }[r] || { bg: 'var(--surface-raised)', color: 'var(--text-2)' })
+  }[r] || { bg: 'var(--surface-raised)', color: 'var(--black)' })
 
   if (!isAdmin) return null
 
@@ -129,29 +129,29 @@ export default function UserManagement() {
     <div className="page-content fade-in">
       {/* Header */}
       <button onClick={() => navigate('/warehouse-hq')}
-        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--fs-xs)',cursor:'pointer',padding:0,marginBottom:'var(--sp-3)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--sp-3)' }}>
         <ArrowLeft size={14} /> Back
       </button>
 
       <div style={{ display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'var(--sp-5)' }}>
         <div>
-          <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',marginBottom:4 }}>ADMIN</div>
-          <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800 }}>User Management</div>
-          <div style={{ fontSize:'var(--fs-sm)',color:'var(--text-3)',marginTop:4 }}>
+          <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',marginBottom:4 }}>ADMIN</div>
+          <div style={{ fontSize:'var(--text-base)',fontWeight:800 }}>User Management</div>
+          <div style={{ fontSize:'var(--text-sm)',color:'var(--text-3)',marginTop:4 }}>
             Manage roles and pipeline assignments for all users
           </div>
         </div>
         <button onClick={() => setShowInvite(true)}
-          style={{ display:'flex',alignItems:'center',gap:'var(--sp-2)',padding:'var(--sp-2) var(--sp-4)',borderRadius:'var(--r-xl)',border:'none',background:'var(--navy)',color:'#fff',fontWeight:700,fontSize:'var(--fs-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
+          style={{ display:'flex',alignItems:'center',gap:'var(--sp-2)',padding:'var(--sp-2) var(--sp-4)',borderRadius:'var(--r-xl)',border:'none',background:'var(--navy)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
           <UserPlus size={16} /> Invite User
         </button>
       </div>
 
       {/* Flash */}
       {flash && (
-        <div style={{ padding:'var(--sp-3) var(--sp-4)',borderRadius:'var(--r-lg)',marginBottom:'var(--sp-4)',
+        <div style={{ padding:'var(--sp-3) var(--sp-4)',borderRadius:'var(--r-l)',marginBottom:'var(--sp-4)',
           background: flash.isErr ? 'var(--error-soft)' : 'var(--success-soft)',
-          color: flash.isErr ? 'var(--error-alt)' : 'var(--success-text)',fontSize:'var(--fs-sm)',fontWeight:600 }}>
+          color: flash.isErr ? 'var(--error-alt)' : 'var(--success-text)',fontSize:'var(--text-sm)',fontWeight:600 }}>
           {flash.isErr ? '✗' : '✓'} {flash.msg}
         </div>
       )}
@@ -168,9 +168,9 @@ export default function UserManagement() {
             { role:'shipping',          label:'Shipping Worker',    desc:'Sees only Shipment Queue. Enters carrier + tracking, marks orders shipped.' },
             { role:null,                label:'No Pipeline Role',   desc:'Full sidebar access. For office/admin users who need to see everything.' },
           ].map(item => (
-            <div key={item.role || 'none'} style={{ padding:'var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-lg)' }}>
-              <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--navy)',marginBottom:4 }}>{item.label}</div>
-              <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',lineHeight:1.5 }}>{item.desc}</div>
+            <div key={item.role || 'none'} style={{ padding:'var(--sp-3)',background:'var(--surface-raised)',borderRadius:'var(--r-l)' }}>
+              <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--navy)',marginBottom:4 }}>{item.label}</div>
+              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',lineHeight:1.5 }}>{item.desc}</div>
             </div>
           ))}
         </div>
@@ -180,7 +180,7 @@ export default function UserManagement() {
       <div className="card" style={{ marginBottom:'var(--sp-4)' }}>
         <div className="card-header">
           <span className="card-title"><Users size={15} style={{ marginRight:6 }} />All Users</span>
-          <span style={{ fontSize:'var(--fs-xs)',color:'rgba(255,255,255,0.55)' }}>{users.length} users</span>
+          <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{users.length} users</span>
         </div>
 
         {loading ? (
@@ -196,62 +196,62 @@ export default function UserManagement() {
                 <div style={{ display:'flex',alignItems:'center',gap:'var(--sp-3)',padding:'var(--sp-3) var(--sp-4)' }}>
                   {/* Avatar */}
                   <div style={{ width:38,height:38,borderRadius:'50%',background:'var(--navy)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
-                    <span style={{ fontSize:'var(--fs-sm)',fontWeight:700,color:'#fff' }}>
+                    <span style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'#fff' }}>
                       {(u.full_name||u.email||'?').slice(0,2).toUpperCase()}
                     </span>
                   </div>
                   {/* Info */}
                   <div style={{ flex:1,minWidth:0 }}>
                     <div style={{ display:'flex',alignItems:'center',gap:'var(--sp-2)',flexWrap:'wrap' }}>
-                      <span style={{ fontWeight:700,fontSize:'var(--fs-sm)' }}>{u.full_name || '—'}</span>
-                      {isSelf && <span style={{ fontSize:'var(--fs-xs)',fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--surface-raised)',color:'var(--text-3)' }}>you</span>}
-                      <span style={{ fontSize:'var(--fs-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:rc.bg,color:rc.color,textTransform:'capitalize' }}>{u.role}</span>
+                      <span style={{ fontWeight:700,fontSize:'var(--text-sm)' }}>{u.full_name || '—'}</span>
+                      {isSelf && <span style={{ fontSize:'var(--text-xs)',fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--surface-raised)',color:'var(--text-3)' }}>you</span>}
+                      <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:rc.bg,color:rc.color,textTransform:'capitalize' }}>{u.role}</span>
                       {u.pipeline_role && (
-                        <span style={{ fontSize:'var(--fs-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:'#ECFEFF',color:'#0891B2' }}>
+                        <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:'#ECFEFF',color:'#0891B2' }}>
                           {PIPELINE_LABELS[u.pipeline_role] || u.pipeline_role}
                         </span>
                       )}
                     </div>
-                    <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',marginTop:2 }}>{u.email}</div>
+                    <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:2 }}>{u.email}</div>
                   </div>
                   {/* Edit */}
                   <button onClick={() => startEdit(u)}
-                    style={{ display:'flex',alignItems:'center',gap:4,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--fs-xs)',cursor:'pointer',padding:'var(--sp-2)' }}>
+                    style={{ display:'flex',alignItems:'center',gap:4,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:'var(--sp-2)' }}>
                     <PencilSimple size={14} /> Edit
                   </button>
                 </div>
               ) : (
                 /* Edit form */
                 <div style={{ padding:'var(--sp-4)',background:'var(--surface-raised)' }}>
-                  <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--navy)',marginBottom:'var(--sp-3)' }}>
+                  <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--navy)',marginBottom:'var(--sp-3)' }}>
                     Editing: {u.email}
                   </div>
                   <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'var(--sp-3)',marginBottom:'var(--sp-3)' }}>
                     <div>
-                      <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>Name</label>
+                      <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>Name</label>
                       <input value={editData.full_name||''} onChange={e=>setEditData(p=>({...p,full_name:e.target.value}))} placeholder="Full name" />
                     </div>
                     <div>
-                      <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>App Role</label>
+                      <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>App Role</label>
                       <select value={editData.role||''} onChange={e=>setEditData(p=>({...p,role:e.target.value}))}
-                        style={{ width:'100%',height:40,borderRadius:'var(--r-lg)',border:'1px solid var(--border)',padding:'0 var(--sp-3)',background:'var(--bg)',fontSize:'var(--fs-sm)',fontFamily:'var(--font)' }}>
+                        style={{ width:'100%',height:40,borderRadius:'var(--r-l)',border:'1px solid var(--border)',padding:'0 var(--sp-3)',background:'var(--bg)',fontSize:'var(--text-sm)',fontFamily:'var(--font)' }}>
                         {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
                       </select>
                     </div>
                   </div>
                   <div style={{ marginBottom:'var(--sp-4)' }}>
-                    <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>
+                    <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>
                       Pipeline Role <span style={{ fontWeight:400,color:'var(--text-3)',textTransform:'none' }}>(controls what this user sees on their tablet)</span>
                     </label>
                     <div style={{ display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'var(--sp-2)' }}>
                       {PIPELINE_ROLES.map(pr => (
                         <button key={pr.value||'none'} onClick={() => setEditData(p=>({...p,pipeline_role:pr.value}))}
-                          style={{ padding:'var(--sp-2) var(--sp-3)',borderRadius:'var(--r-lg)',cursor:'pointer',fontFamily:'var(--font)',
+                          style={{ padding:'var(--sp-2) var(--sp-3)',borderRadius:'var(--r-l)',cursor:'pointer',fontFamily:'var(--font)',
                             border: editData.pipeline_role === pr.value ? '2px solid var(--navy)' : '1px solid var(--border-l)',
                             background: editData.pipeline_role === pr.value ? '#EFF6FF' : 'var(--bg)',
-                            color: editData.pipeline_role === pr.value ? 'var(--navy)' : 'var(--text-2)',
+                            color: editData.pipeline_role === pr.value ? 'var(--navy)' : 'var(--black)',
                             fontWeight: editData.pipeline_role === pr.value ? 700 : 400,
-                            fontSize:'var(--fs-xs)',textAlign:'left' }}>
+                            fontSize:'var(--text-xs)',textAlign:'left' }}>
                           {pr.label}
                         </button>
                       ))}
@@ -259,11 +259,11 @@ export default function UserManagement() {
                   </div>
                   <div style={{ display:'flex',gap:'var(--sp-2)' }}>
                     <button onClick={cancelEdit}
-                      style={{ flex:1,padding:'var(--sp-2)',borderRadius:'var(--r-lg)',border:'1px solid var(--border-l)',background:'transparent',cursor:'pointer',fontSize:'var(--fs-sm)',fontWeight:600,fontFamily:'var(--font)' }}>
+                      style={{ flex:1,padding:'var(--sp-2)',borderRadius:'var(--r-l)',border:'1px solid var(--border-l)',background:'transparent',cursor:'pointer',fontSize:'var(--text-sm)',fontWeight:600,fontFamily:'var(--font)' }}>
                       Cancel
                     </button>
                     <button onClick={() => saveEdit(u.id)} disabled={saving}
-                      style={{ flex:2,padding:'var(--sp-2)',borderRadius:'var(--r-lg)',border:'none',background:'var(--navy)',color:'#fff',cursor:'pointer',fontSize:'var(--fs-sm)',fontWeight:700,fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:6 }}>
+                      style={{ flex:2,padding:'var(--sp-2)',borderRadius:'var(--r-l)',border:'none',background:'var(--navy)',color:'#fff',cursor:'pointer',fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:6 }}>
                       {saving ? <><div className="spinner" style={{ width:14,height:14,borderWidth:2 }} /> Saving…</> : <><CheckCircle size={15} /> Save Changes</>}
                     </button>
                   </div>
@@ -279,9 +279,9 @@ export default function UserManagement() {
         <>
           <div onClick={() => setShowInvite(false)}
             style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:299 }} />
-          <div style={{ position:'fixed',bottom:0,left:0,right:0,zIndex:300,background:'var(--bg)',borderRadius:'var(--r-2xl) var(--r-2xl) 0 0',padding:'var(--sp-5)',boxShadow:'0 -4px 24px rgba(0,0,0,0.15)',maxHeight:'90vh',overflowY:'auto' }}>
+          <div style={{ position:'fixed',bottom:0,left:0,right:0,zIndex:300,background:'var(--bg)',borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'var(--sp-5)',boxShadow:'0 -4px 24px rgba(0,0,0,0.15)',maxHeight:'90vh',overflowY:'auto' }}>
             <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'var(--sp-4)' }}>
-              <div style={{ fontSize:'var(--fs-lg)',fontWeight:800 }}>Invite New User</div>
+              <div style={{ fontSize:'var(--text-lg)',fontWeight:800 }}>Invite New User</div>
               <button onClick={() => setShowInvite(false)}
                 style={{ border:'none',background:'none',cursor:'pointer',padding:'var(--sp-1)',color:'var(--text-3)' }}>
                 <X size={20} />
@@ -289,31 +289,31 @@ export default function UserManagement() {
             </div>
             <div style={{ display:'flex',flexDirection:'column',gap:'var(--sp-3)' }}>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>Email *</label>
+                <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>Email *</label>
                 <input type="email" value={inviteEmail} onChange={e=>setInviteEmail(e.target.value)} placeholder="worker@company.com" />
               </div>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>Full Name</label>
+                <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>Full Name</label>
                 <input value={inviteName} onChange={e=>setInviteName(e.target.value)} placeholder="Optional" />
               </div>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:6 }}>App Role</label>
+                <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>App Role</label>
                 <select value={inviteRole} onChange={e=>setInviteRole(e.target.value)}
-                  style={{ width:'100%',height:40,borderRadius:'var(--r-lg)',border:'1px solid var(--border)',padding:'0 var(--sp-3)',background:'var(--bg)',fontSize:'var(--fs-sm)',fontFamily:'var(--font)' }}>
+                  style={{ width:'100%',height:40,borderRadius:'var(--r-l)',border:'1px solid var(--border)',padding:'0 var(--sp-3)',background:'var(--bg)',fontSize:'var(--text-sm)',fontFamily:'var(--font)' }}>
                   {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
                 </select>
               </div>
               <div>
-                <label style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',display:'block',marginBottom:8 }}>Pipeline Role</label>
+                <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:8 }}>Pipeline Role</label>
                 <div style={{ display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'var(--sp-2)' }}>
                   {PIPELINE_ROLES.map(pr => (
                     <button key={pr.value||'none'} onClick={() => setInvitePR(pr.value)}
-                      style={{ padding:'var(--sp-2) var(--sp-3)',borderRadius:'var(--r-lg)',cursor:'pointer',fontFamily:'var(--font)',
+                      style={{ padding:'var(--sp-2) var(--sp-3)',borderRadius:'var(--r-l)',cursor:'pointer',fontFamily:'var(--font)',
                         border: invitePR === pr.value ? '2px solid var(--navy)' : '1px solid var(--border-l)',
                         background: invitePR === pr.value ? '#EFF6FF' : 'var(--bg)',
-                        color: invitePR === pr.value ? 'var(--navy)' : 'var(--text-2)',
+                        color: invitePR === pr.value ? 'var(--navy)' : 'var(--black)',
                         fontWeight: invitePR === pr.value ? 700 : 400,
-                        fontSize:'var(--fs-xs)',textAlign:'left' }}>
+                        fontSize:'var(--text-xs)',textAlign:'left' }}>
                       {pr.label}
                     </button>
                   ))}
@@ -323,7 +323,7 @@ export default function UserManagement() {
                 style={{ width:'100%',padding:'var(--sp-3)',borderRadius:'var(--r-xl)',border:'none',
                   background: inviteEmail.trim() ? 'var(--navy)' : 'var(--border)',
                   color: inviteEmail.trim() ? '#fff' : 'var(--text-3)',
-                  fontWeight:700,fontSize:'var(--fs-sm)',cursor: inviteEmail.trim() && !inviting ? 'pointer' : 'not-allowed',
+                  fontWeight:700,fontSize:'var(--text-sm)',cursor: inviteEmail.trim() && !inviting ? 'pointer' : 'not-allowed',
                   fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:6,marginTop:'var(--sp-2)' }}>
                 {inviting ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Inviting…</> : <><UserPlus size={16} /> Send Invite</>}
               </button>

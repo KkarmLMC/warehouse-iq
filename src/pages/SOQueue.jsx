@@ -84,17 +84,17 @@ export default function SOQueue() {
     <div className="page-content fade-in">
       {/* Header */}
       <div style={{ marginBottom: 'var(--sp-5)' }}>
-        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 4 }}>WAREHOUSE IQ</div>
-        <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800 }}>Sales Order Pipeline</div>
+        <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>WAREHOUSE IQ</div>
+        <div style={{ fontSize: 'var(--text-base)', fontWeight: 800 }}>Sales Order Pipeline</div>
       </div>
 
       {/* Tabs */}
       <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--sp-4)', overflowX: 'auto', paddingBottom: 2 }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-xl)', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--fs-xs)', fontFamily: 'var(--font)',
+            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-xl)', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
               background: tab === t.key ? 'var(--navy)' : 'var(--surface-raised)',
-              color: tab === t.key ? '#fff' : 'var(--text-2)' }}>
+              color: tab === t.key ? '#fff' : 'var(--black)' }}>
             {t.label}{counts[t.key] > 0 ? ` (${counts[t.key]})` : ''}
           </button>
         ))}
@@ -130,23 +130,23 @@ export default function SOQueue() {
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
-              <div style={{ width: 36, height: 36, borderRadius: 'var(--r-lg)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <Receipt size={16} style={{ color: 'var(--navy)' }} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-                  <span style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{o.so_number}</span>
-                  <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: stage.bg, color: stage.color }}>{stage.label}</span>
+                  <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{o.so_number}</span>
+                  <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: stage.bg, color: stage.color }}>{stage.label}</span>
                 </div>
-                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}{o.job_city ? ` · ${o.job_city}, ${o.job_state}` : ''}
                 </div>
-                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>Received {fmtDate(o.created_at)}</div>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>Received {fmtDate(o.created_at)}</div>
               </div>
               <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                <div style={{ fontWeight: 700, fontFamily: 'var(--mono)', fontSize: 'var(--fs-sm)', color: 'var(--text-1)' }}>{fmt(o.grand_total)}</div>
+                <div style={{ fontWeight: 700, fontFamily: 'var(--mono)', fontSize: 'var(--text-sm)', color: 'var(--black)' }}>{fmt(o.grand_total)}</div>
               </div>
-              <CaretRight size={14} style={{ color: 'var(--text-2)', flexShrink: 0 }} />
+              <CaretRight size={14} style={{ color: 'var(--black)', flexShrink: 0 }} />
             </div>
           )
         })}

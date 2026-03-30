@@ -50,7 +50,7 @@ export default function StatusBadge({ status, custom, small }) {
       alignItems: 'center',
       padding: small ? '1px 6px' : '2px 8px',
       borderRadius: 4,
-      fontSize: 'var(--fs-xs)',
+      fontSize: 'var(--text-xs)',
       fontWeight: 700,
       background: style.bg,
       color: style.color,

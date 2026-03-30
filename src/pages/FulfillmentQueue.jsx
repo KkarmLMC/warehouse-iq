@@ -29,9 +29,9 @@ export default function FulfillmentQueue() {
   return (
     <div className="page-content fade-in">
       <div style={{ marginBottom:'var(--sp-5)' }}>
-        <div style={{ fontSize:'var(--fs-xs)',fontWeight:700,color:'var(--text-2)',marginBottom:4 }}>WAREHOUSE IQ</div>
-        <div style={{ fontSize:'var(--fs-2xl)',fontWeight:800 }}>Fulfillment Queue</div>
-        <div style={{ fontSize:'var(--fs-sm)',color:'var(--text-3)',marginTop:4 }}>Orders ready to pick and pack</div>
+        <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',marginBottom:4 }}>WAREHOUSE IQ</div>
+        <div style={{ fontSize:'var(--text-base)',fontWeight:800 }}>Fulfillment Queue</div>
+        <div style={{ fontSize:'var(--text-sm)',color:'var(--text-3)',marginTop:4 }}>Orders ready to pick and pack</div>
       </div>
 
       <div style={{ position:'relative',marginBottom:'var(--sp-4)' }}>
@@ -53,18 +53,18 @@ export default function FulfillmentQueue() {
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/fulfillment/${o.id}`)}
             style={{ display:'flex',alignItems:'center',gap:'var(--sp-3)',padding:'var(--sp-3) var(--sp-4)',
               borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none',cursor:'pointer' }}>
-            <div style={{ width:36,height:36,borderRadius:'var(--r-lg)',background:'#EFF6FF',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
+            <div style={{ width:36,height:36,borderRadius:'var(--r-l)',background:'#EFF6FF',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
               <ClipboardText size={16} style={{ color:'#1D4ED8' }} />
             </div>
             <div style={{ flex:1,minWidth:0 }}>
-              <div style={{ fontWeight:700,fontSize:'var(--fs-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
-              <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-2)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
+              <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
+              <div style={{ fontSize:'var(--text-xs)',color:'var(--black)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
                 {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>
-              <div style={{ fontSize:'var(--fs-xs)',color:'var(--text-3)',marginTop:2 }}>Received {fmtDate(o.fulfillment_at)}</div>
+              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:2 }}>Received {fmtDate(o.fulfillment_at)}</div>
             </div>
-            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--fs-sm)',color:'var(--text-2)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
-            <CaretRight size={14} style={{ color:'var(--text-2)',flexShrink:0 }} />
+            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--black)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
+            <CaretRight size={14} style={{ color:'var(--black)',flexShrink:0 }} />
           </div>
         ))}
       </div>

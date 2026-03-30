@@ -27,7 +27,7 @@ function PinPad({ onComplete }) {
     height: 60, borderRadius: 'var(--r-xl)',
     border: '1px solid var(--border-l)',
     background: 'var(--surface-raised)',
-    fontSize: 'var(--fs-2xl)', fontWeight: 700,
+    fontSize: 'var(--text-base)', fontWeight: 700,
     cursor: 'pointer', fontFamily: 'var(--font)',
     transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent',
   }
@@ -53,7 +53,7 @@ function PinPad({ onComplete }) {
         <button onClick={() => press('0')} style={btnStyle}
           onMouseEnter={hoverOn} onMouseLeave={hoverOff} onMouseDown={pressOn} onMouseUp={pressOff}
           onTouchStart={hoverOn} onTouchEnd={hoverOff}>0</button>
-        <button onClick={del} style={{ ...btnStyle, fontSize: 'var(--fs-lg)' }}
+        <button onClick={del} style={{ ...btnStyle, fontSize: 'var(--text-lg)' }}
           onMouseEnter={hoverOn} onMouseLeave={hoverOff} onMouseDown={pressOn} onMouseUp={pressOff}
           onTouchStart={hoverOn} onTouchEnd={hoverOff}>⌫</button>
       </div>
@@ -64,7 +64,7 @@ function PinPad({ onComplete }) {
 // ─── Role badge ───────────────────────────────────────────────────────────────
 function RoleBadge({ label, color = 'var(--navy)', bg = 'rgba(4,36,92,0.08)' }) {
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 'var(--r-full)', background: bg, color, fontSize: 'var(--fs-xs)', fontWeight: 700, textTransform: 'capitalize', letterSpacing: '0.02em' }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 'var(--r-full)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize', letterSpacing: '0.02em' }}>
       {label}
     </span>
   )
@@ -75,7 +75,7 @@ function Section({ icon: Icon, title, children, action }) {
   return (
     <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)', borderRadius: '0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', color: '#fff', fontSize: 'var(--fs-sm)', fontWeight: 700 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
           {Icon && <Icon size={15} />} {title}
         </div>
         {action}
@@ -88,8 +88,8 @@ function Section({ icon: Icon, title, children, action }) {
 function Row({ label, children }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}>
-      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>{label}</div>
-      <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text-1)', textAlign: 'right' }}>{children}</div>
+      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>{label}</div>
+      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--black)', textAlign: 'right' }}>{children}</div>
     </div>
   )
 }
@@ -141,7 +141,7 @@ function ActivityLog({ userId }) {
 
   return (
     <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-4)', border: '1px solid var(--border-l)' }}>
-      <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--fs-sm)', fontWeight: 700 }}>
+      <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
         Activity Log
       </div>
       <div style={{ padding: 'var(--sp-2) 0' }}>
@@ -150,7 +150,7 @@ function ActivityLog({ userId }) {
             <div className="spinner" />
           </div>
         ) : logs.length === 0 ? (
-          <div style={{ padding: 'var(--sp-6)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>
+          <div style={{ padding: 'var(--sp-6)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
             No activity recorded yet
           </div>
         ) : (
@@ -167,14 +167,14 @@ function ActivityLog({ userId }) {
                   background: CATEGORY_COLOR[log.category] || 'var(--text-3)',
                 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-1)', fontWeight: 500, lineHeight: 1.4 }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', fontWeight: 500, lineHeight: 1.4 }}>
                     {log.label}
                   </div>
                   <div style={{ display: 'flex', gap: 'var(--sp-2)', marginTop: 3, flexWrap: 'wrap', alignItems: 'center' }}>
-                    <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{fmtTime(log.created_at)}</span>
-                    <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>·</span>
+                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{fmtTime(log.created_at)}</span>
+                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>·</span>
                     <span style={{
-                      fontSize: 'var(--fs-xs)', fontWeight: 600,
+                      fontSize: 'var(--text-xs)', fontWeight: 600,
                       color: CATEGORY_COLOR[log.category] || 'var(--text-3)',
                     }}>{APP_LABELS[log.app] || log.app}</span>
                   </div>
@@ -184,12 +184,12 @@ function ActivityLog({ userId }) {
             {/* Pagination */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--sp-3) var(--sp-4)', borderTop: '1px solid var(--border-l)' }}>
               <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
-                style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: page === 0 ? 'var(--text-3)' : 'var(--navy)', background: 'none', border: 'none', cursor: page === 0 ? 'default' : 'pointer', padding: 0 }}>
+                style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: page === 0 ? 'var(--text-3)' : 'var(--navy)', background: 'none', border: 'none', cursor: page === 0 ? 'default' : 'pointer', padding: 0 }}>
                 ← Previous
               </button>
-              <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Page {page + 1}</span>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>Page {page + 1}</span>
               <button onClick={() => setPage(p => p + 1)} disabled={logs.length < PER_PAGE}
-                style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: logs.length < PER_PAGE ? 'var(--text-3)' : 'var(--navy)', background: 'none', border: 'none', cursor: logs.length < PER_PAGE ? 'default' : 'pointer', padding: 0 }}>
+                style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: logs.length < PER_PAGE ? 'var(--text-3)' : 'var(--navy)', background: 'none', border: 'none', cursor: logs.length < PER_PAGE ? 'default' : 'pointer', padding: 0 }}>
                 Next →
               </button>
             </div>
@@ -317,30 +317,30 @@ export default function Profile() {
       {/* Header */}
       <div style={{ marginBottom: 'var(--sp-6)' }}>
         <button onClick={() => navigate(-1)}
-          style={{ display: 'flex', alignItems: 'center', gap: 6, border: 'none', background: 'none', color: 'var(--text-3)', fontSize: 'var(--fs-xs)', cursor: 'pointer', padding: 0, marginBottom: 'var(--sp-3)' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 6, border: 'none', background: 'none', color: 'var(--text-3)', fontSize: 'var(--text-xs)', cursor: 'pointer', padding: 0, marginBottom: 'var(--sp-3)' }}>
           <ArrowLeft size={14} /> Back
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-4)' }}>
           {/* Avatar */}
-          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 'var(--fs-xl)', fontWeight: 800, flexShrink: 0 }}>
+          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 'var(--text-xl)', fontWeight: 800, flexShrink: 0 }}>
             {initials}
           </div>
           <div>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 2 }}>ACCOUNT</div>
-            <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
-            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{user?.email}</div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 2 }}>ACCOUNT</div>
+            <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{user?.email}</div>
           </div>
         </div>
       </div>
 
       {/* Flash messages */}
       {success && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', background: 'var(--success-soft)', borderRadius: 'var(--r-lg)', color: 'var(--success-text)', fontSize: 'var(--fs-sm)', marginBottom: 'var(--sp-4)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', background: 'var(--success-soft)', borderRadius: 'var(--r-l)', color: 'var(--success-text)', fontSize: 'var(--text-sm)', marginBottom: 'var(--sp-4)' }}>
           <CheckCircle size={15} weight="fill" style={{ flexShrink: 0 }} /> {success}
         </div>
       )}
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', background: 'var(--error-soft)', borderRadius: 'var(--r-lg)', color: 'var(--error-alt)', fontSize: 'var(--fs-sm)', marginBottom: 'var(--sp-4)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-3)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginBottom: 'var(--sp-4)' }}>
           <Warning size={15} style={{ flexShrink: 0 }} /> {error}
         </div>
       )}
@@ -349,22 +349,22 @@ export default function Profile() {
       <Section icon={User} title="Identity"
         action={!editingName && (
           <button onClick={() => setEditingName(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: 4, border: 'none', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-md)', padding: '3px 10px', color: '#fff', fontSize: 'var(--fs-xs)', cursor: 'pointer', fontWeight: 600 }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 4, border: 'none', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: '3px 10px', color: '#fff', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 600 }}>
             <PencilSimple size={12} /> Edit Name
           </button>
         )}>
 
         {editingName ? (
           <div style={{ marginBottom: 'var(--sp-3)' }}>
-            <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 6 }}>Full Name</label>
+            <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>Full Name</label>
             <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
               <input value={nameVal} onChange={e => setNameVal(e.target.value)} autoFocus style={{ flex: 1 }} onKeyDown={e => e.key === 'Enter' && saveName()} />
               <button onClick={saveName} disabled={nameSaving}
-                style={{ padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-lg)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
+                style={{ padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-l)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
                 {nameSaving ? 'Saving…' : 'Save'}
               </button>
               <button onClick={() => { setEditingName(false); setNameVal(profile?.full_name || '') }}
-                style={{ padding: 'var(--sp-2) var(--sp-3)', borderRadius: 'var(--r-lg)', border: '1px solid var(--border-l)', background: 'transparent', fontSize: 'var(--fs-sm)', cursor: 'pointer' }}>
+                style={{ padding: 'var(--sp-2) var(--sp-3)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'transparent', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
                 Cancel
               </button>
             </div>
@@ -378,15 +378,15 @@ export default function Profile() {
         {profile?.division && (
           <Row label="Division">
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Buildings size={13} style={{ color: 'var(--text-2)' }} />
+              <Buildings size={13} style={{ color: 'var(--black)' }} />
               {profile.division}
             </span>
           </Row>
         )}
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-1)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>Member Since</div>
-          <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text-1)' }}>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>Member Since</div>
+          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--black)' }}>
             {profile?.created_at ? new Date(profile.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '—'}
           </div>
         </div>
@@ -396,23 +396,23 @@ export default function Profile() {
       <Section icon={Shield} title="Access & Roles">
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>App Role</div>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>App Role</div>
           <RoleBadge label={profile?.role || 'user'} color={roleStyle.color} bg={roleStyle.bg} />
         </div>
 
         {profile?.pipeline_role && pipelineStyle && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)' }}>Pipeline Role</div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>Pipeline Role</div>
             <RoleBadge label={profile.pipeline_role.replace('_', ' ')} color={pipelineStyle.color} bg={pipelineStyle.bg} />
           </div>
         )}
 
         {profile?.app_access?.length > 0 && (
           <div style={{ marginBottom: 'var(--sp-3)' }}>
-            <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 8 }}>App Access</div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 8 }}>App Access</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {profile.app_access.map(app => (
-                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-full)', background: 'var(--hover)', color: 'var(--text-2)', fontSize: 'var(--fs-xs)', fontWeight: 600 }}>
+                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-full)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600 }}>
                   <AppWindow size={12} />
                   {appLabels[app] || app}
                 </span>
@@ -421,7 +421,7 @@ export default function Profile() {
           </div>
         )}
 
-        <div style={{ padding: 'var(--sp-3)', background: 'var(--hover)', borderRadius: 'var(--r-lg)', fontSize: 'var(--fs-xs)', color: 'var(--text-3)', lineHeight: 1.5 }}>
+        <div style={{ padding: 'var(--sp-3)', background: 'var(--hover)', borderRadius: 'var(--r-l)', fontSize: 'var(--text-xs)', color: 'var(--text-3)', lineHeight: 1.5 }}>
           Role assignments are managed by your administrator. Contact admin to request changes.
         </div>
       </Section>
@@ -430,7 +430,7 @@ export default function Profile() {
       <Section icon={Lock} title={hasPin ? 'Login PIN' : 'Set Up PIN'}
         action={pinSection !== 'idle' && (
           <button onClick={() => { setPinSection('idle'); setPinError(''); setNewPin('') }}
-            style={{ border: 'none', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-md)', padding: '3px 8px', color: '#fff', fontSize: 'var(--fs-xs)', cursor: 'pointer' }}>
+            style={{ border: 'none', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: '3px 8px', color: '#fff', fontSize: 'var(--text-xs)', cursor: 'pointer' }}>
             Cancel
           </button>
         )}>
@@ -439,22 +439,22 @@ export default function Profile() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--sp-3)', marginBottom: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}>
               <div>
-                <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600 }}>{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
-                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>
+                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>
                   {hasPin
                     ? `Last set: ${profile?.pin_set_at ? new Date(profile.pin_set_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown'}`
                     : 'Set a PIN to log in faster — no password needed'}
                 </div>
               </div>
               <button onClick={() => setPinSection(hasPin ? 'verify-old' : 'enter-new')}
-                style={{ padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-lg)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                style={{ padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-l)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
                 {hasPin ? 'Change PIN' : 'Set PIN'}
               </button>
             </div>
 
             {hasPin && (
               <button onClick={removePin} disabled={removingPin}
-                style={{ display: 'flex', alignItems: 'center', gap: 6, border: 'none', background: 'none', color: 'var(--error-alt)', fontSize: 'var(--fs-xs)', fontWeight: 600, cursor: 'pointer', padding: 0 }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 6, border: 'none', background: 'none', color: 'var(--error-alt)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', padding: 0 }}>
                 <Trash size={13} /> {removingPin ? 'Removing…' : 'Remove PIN'}
               </button>
             )}
@@ -462,9 +462,9 @@ export default function Profile() {
         ) : (
           <div>
             <div style={{ textAlign: 'center', marginBottom: 'var(--sp-4)' }}>
-              <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, marginBottom: 4 }}>{pinLabel[pinSection]}</div>
+              <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, marginBottom: 4 }}>{pinLabel[pinSection]}</div>
               {pinError && (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, color: 'var(--error-alt)', fontSize: 'var(--fs-sm)', marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
                   <Warning size={14} /> {pinError}
                 </div>
               )}
@@ -478,7 +478,7 @@ export default function Profile() {
       <Section icon={Lock} title="Password & Email"
         action={!showPwForm && (
           <button onClick={() => setShowPwForm(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: 4, border: 'none', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-md)', padding: '3px 10px', color: '#fff', fontSize: 'var(--fs-xs)', cursor: 'pointer', fontWeight: 600 }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 4, border: 'none', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: '3px 10px', color: '#fff', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 600 }}>
             <PencilSimple size={12} /> Change
           </button>
         )}>
@@ -486,11 +486,11 @@ export default function Profile() {
         {showPwForm ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
             <div>
-              <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 6 }}>New Email (optional)</label>
+              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>New Email (optional)</label>
               <input type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="Leave blank to keep current" />
             </div>
             <div>
-              <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 6 }}>New Password</label>
+              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>New Password</label>
               <div style={{ position: 'relative' }}>
                 <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 40 }} />
                 <button onClick={() => setShowPw(v => !v)}
@@ -501,11 +501,11 @@ export default function Profile() {
             </div>
             <div style={{ display: 'flex', gap: 'var(--sp-2)' }}>
               <button onClick={() => { setShowPwForm(false); setNewPw(''); setNewEmail('') }}
-                style={{ flex: 1, padding: 'var(--sp-2)', borderRadius: 'var(--r-lg)', border: '1px solid var(--border-l)', background: 'transparent', cursor: 'pointer', fontSize: 'var(--fs-sm)', fontWeight: 600 }}>
+                style={{ flex: 1, padding: 'var(--sp-2)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'transparent', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 600 }}>
                 Cancel
               </button>
               <button onClick={savePassword} disabled={pwSaving}
-                style={{ flex: 2, padding: 'var(--sp-2)', borderRadius: 'var(--r-lg)', border: 'none', background: 'var(--navy)', color: '#fff', cursor: 'pointer', fontSize: 'var(--fs-sm)', fontWeight: 700 }}>
+                style={{ flex: 2, padding: 'var(--sp-2)', borderRadius: 'var(--r-l)', border: 'none', background: 'var(--navy)', color: '#fff', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
                 {pwSaving ? 'Saving…' : 'Update Password'}
               </button>
             </div>
@@ -519,10 +519,10 @@ export default function Profile() {
 
       {/* ── Sign out ── */}
       <div style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 'var(--sp-8)', border: '1px solid var(--border-l)' }}>
-        <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--fs-sm)', fontWeight: 700 }}>Session</div>
+        <div style={{ padding: 'var(--sp-3) var(--sp-4)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>Session</div>
         <div style={{ padding: 'var(--sp-4)' }}>
           <button onClick={() => { signOut(); navigate('/login', { replace: true }) }}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', border: 'none', background: 'none', color: 'var(--error-alt)', fontWeight: 700, fontSize: 'var(--fs-sm)', cursor: 'pointer', padding: 0 }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', border: 'none', background: 'none', color: 'var(--error-alt)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}>
             <SignOut size={16} /> Sign Out of this app
           </button>
         </div>

@@ -38,11 +38,11 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
       }}
     >
       <div style={{ textAlign: 'left' }}>
-        <div style={{ fontSize: 'var(--fs-md)', fontWeight: 700, color: '#fff' }}>
+        <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: '#fff' }}>
           {label}
         </div>
         {sub && (
-          <div style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.65)', marginTop: 2 }}>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.65)', marginTop: 2 }}>
             {sub}
           </div>
         )}

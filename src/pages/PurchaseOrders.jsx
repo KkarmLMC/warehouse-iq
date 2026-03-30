@@ -37,7 +37,7 @@ function StatusBadge({ status }) {
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
       padding: '3px 10px', borderRadius: 'var(--r-full)',
-      fontSize: 'var(--fs-xs)', fontWeight: 700,
+      fontSize: 'var(--text-xs)', fontWeight: 700,
       background: meta.bg, color: meta.color,
     }}>
       <Icon size={11} weight="fill" />
@@ -60,7 +60,7 @@ function POCard({ po, totals, onPress }) {
     }}>
       {/* Icon */}
       <div style={{
-        width: '2.75rem', height: '2.75rem', borderRadius: 'var(--r-lg)',
+        width: '2.75rem', height: '2.75rem', borderRadius: 'var(--r-l)',
         background: po.division === 'Bolt' ? '#FFF7ED' : '#EFF6FF',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
       }}>
@@ -70,12 +70,12 @@ function POCard({ po, totals, onPress }) {
       {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', marginBottom: 3, flexWrap: 'wrap' }}>
-          <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-1)' }}>
+          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
             {po.so_number}
           </span>
           <StatusBadge status={po.status} />
           <span style={{
-            fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '1px 6px',
+            fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px',
             borderRadius: 'var(--r-full)',
             background: po.division === 'Bolt' ? '#FFF7ED' : '#EFF6FF',
             color: po.division === 'Bolt' ? '#C2410C' : 'var(--navy)',
@@ -83,10 +83,10 @@ function POCard({ po, totals, onPress }) {
             {po.division === 'Bolt' ? 'Bolt' : 'LM'}
           </span>
         </div>
-        <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text-1)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {po.customer_name}
         </div>
-        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--sp-2)' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--sp-2)' }}>
           {po.project_name && <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{po.project_name}</span>}
           {po.so_date && <span>· {new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
         </div>
@@ -95,11 +95,11 @@ function POCard({ po, totals, onPress }) {
       {/* Total + chevron */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexShrink: 0 }}>
         {grandTotal > 0 && (
-          <span style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--text-1)' }}>
+          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           </span>
         )}
-        <CaretRight size={13} style={{ color: 'var(--text-2)' }} />
+        <CaretRight size={13} style={{ color: 'var(--black)' }} />
       </div>
     </button>
   )
@@ -169,11 +169,11 @@ export default function PurchaseOrders() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--sp-3)', marginBottom: 'var(--sp-5)', flexWrap: 'wrap' }}>
         <div>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 4 }}>INVENTORY</div>
-          <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>Sales Orders</div>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
+          <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Sales Orders</div>
         </div>
         <button onClick={() => navigate('/sales-orders/new')}
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-md)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--fs-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', padding: 'var(--sp-2) var(--sp-4)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
           <Plus size={15} /> New Sales Order
         </button>
       </div>
@@ -183,15 +183,15 @@ export default function PurchaseOrders() {
         <div style={{
           display: 'flex', alignItems: 'center', gap: 'var(--sp-3)',
           padding: 'var(--sp-3) var(--sp-4)', background: '#FEF3C7',
-          borderRadius: 'var(--r-lg)', marginBottom: 'var(--sp-4)',
+          borderRadius: 'var(--r-l)', marginBottom: 'var(--sp-4)',
           border: '1px solid #FDE68A', cursor: 'pointer',
         }} onClick={() => setActiveTab('queued')}>
           <Warning size={18} weight="fill" style={{ color: '#D97706', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#92400E' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#92400E' }}>
               {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
             </div>
-            <div style={{ fontSize: 'var(--fs-xs)', color: '#92400E' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: '#92400E' }}>
               Tap to review and publish
             </div>
           </div>
@@ -206,9 +206,9 @@ export default function PurchaseOrders() {
           { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? '#D97706' : undefined },
           { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: '#15803D' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-lg)', padding: 'var(--sp-3)', textAlign: 'center' }}>
-            <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 800, color: s.color || 'var(--text-1)' }}>{s.value}</div>
-            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
+          <div key={s.label} style={{ background: 'var(--surface-raised)', borderRadius: 'var(--r-l)', padding: 'var(--sp-3)', textAlign: 'center' }}>
+            <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--black)' }}>{s.value}</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
           </div>
         ))}
       </div>
@@ -219,7 +219,7 @@ export default function PurchaseOrders() {
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             style={{
               flexShrink: 0, padding: 'var(--sp-2) var(--sp-3)', border: 'none',
-              background: 'none', cursor: 'pointer', fontSize: 'var(--fs-sm)',
+              background: 'none', cursor: 'pointer', fontSize: 'var(--text-sm)',
               fontWeight: activeTab === tab.key ? 700 : 500,
               color: activeTab === tab.key ? 'var(--navy)' : 'var(--text-3)',
               borderBottom: activeTab === tab.key ? '2px solid var(--navy)' : '2px solid transparent',
@@ -227,7 +227,7 @@ export default function PurchaseOrders() {
             }}>
             {tab.label}
             {counts[tab.key] > 0 && (
-              <span style={{ marginLeft: 6, fontSize: 'var(--fs-xs)', background: activeTab === tab.key ? 'var(--navy)' : 'var(--hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-3)', borderRadius: 'var(--r-full)', padding: '1px 6px', fontWeight: 700 }}>
+              <span style={{ marginLeft: 6, fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--navy)' : 'var(--hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-3)', borderRadius: 'var(--r-full)', padding: '1px 6px', fontWeight: 700 }}>
                 {counts[tab.key]}
               </span>
             )}
@@ -247,10 +247,10 @@ export default function PurchaseOrders() {
         {['all', 'LM', 'Bolt'].map(d => (
           <button key={d} onClick={() => setDivisionFilter(d)}
             style={{
-              padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', fontSize: 'var(--fs-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+              padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
               border: `1px solid ${divisionFilter === d ? 'var(--navy)' : 'var(--border-l)'}`,
               background: divisionFilter === d ? 'var(--navy)' : 'transparent',
-              color: divisionFilter === d ? '#fff' : 'var(--text-2)',
+              color: divisionFilter === d ? '#fff' : 'var(--black)',
             }}>
             {d === 'all' ? 'All Divisions' : d === 'LM' ? 'Lightning Master' : 'Bolt Lightning'}
           </button>

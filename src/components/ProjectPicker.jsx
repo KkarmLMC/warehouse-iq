@@ -62,19 +62,19 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
   return (
     <div>
-      <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', display: 'block', marginBottom: 6 }}>
+      <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>
         {label}{required && <span style={{ color: 'var(--error)', marginLeft: 3 }}>*</span>}
       </label>
 
       {/* Selected project display */}
       {value ? (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderRadius: 'var(--r-lg)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', padding: 'var(--sp-3) var(--sp-4)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'var(--surface-raised)' }}>
           <Briefcase size={16} style={{ color: 'var(--navy)', flexShrink: 0 }} />
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {value.name}
             </div>
-            <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
               {[value.job_number, value.city && `${value.city}, ${value.state}`].filter(Boolean).join(' · ')}
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
           {/* Dropdown results */}
           {open && results.length > 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-lg)', boxShadow: 'var(--shadow-md)', marginTop: 2, overflow: 'hidden', maxHeight: 280, overflowY: 'auto' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-md)', marginTop: 2, overflow: 'hidden', maxHeight: 280, overflowY: 'auto' }}>
               {results.map(p => (
                 <button key={p.id} onClick={() => handleSelect(p)}
                   style={{ width: '100%', border: 'none', background: 'none', padding: 'var(--sp-3) var(--sp-4)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--sp-3)', borderBottom: '1px solid var(--border-l)' }}
@@ -109,14 +109,14 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}>
                   <Briefcase size={14} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {p.name}
                     </div>
-                    <div style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
+                    <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
                       {[p.job_number, p.customer_account, p.city && `${p.city}, ${p.state}`].filter(Boolean).join(' · ')}
                     </div>
                   </div>
-                  <span style={{ marginLeft: 'auto', fontSize: 'var(--fs-xs)', fontWeight: 600, padding: '1px 6px', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', flexShrink: 0 }}>
+                  <span style={{ marginLeft: 'auto', fontSize: 'var(--text-xs)', fontWeight: 600, padding: '1px 6px', borderRadius: 4, background: 'var(--surface-raised)', color: 'var(--text-3)', flexShrink: 0 }}>
                     {p.stage}
                   </span>
                 </button>
@@ -125,7 +125,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
           )}
 
           {open && !loading && query && results.length === 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-lg)', boxShadow: 'var(--shadow-md)', marginTop: 2, padding: 'var(--sp-4)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: 'var(--shadow-md)', marginTop: 2, padding: 'var(--sp-4)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
               No projects found for "{query}"
             </div>
           )}

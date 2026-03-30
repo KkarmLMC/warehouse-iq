@@ -62,15 +62,15 @@ function CategorySection({ category, parts, onPartPress }) {
         }}
       >
         <div style={{
-          width: '2rem', height: '2rem', borderRadius: 'var(--r-md)',
+          width: '2rem', height: '2rem', borderRadius: 'var(--r-m)',
           background: 'rgba(255,255,255,0.12)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         }}>
           <Icon size={15} style={{ color: '#fff' }} />
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: '#fff' }}>{category.name}</div>
-          <div style={{ fontSize: 'var(--fs-xs)', color: 'rgba(255,255,255,0.55)', marginTop: 1 }}>
+          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#fff' }}>{category.name}</div>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.55)', marginTop: 1 }}>
             {parts.length} {parts.length === 1 ? 'part' : 'parts'}
             {category.catalog === 'All' && (
               <span style={{ marginLeft: 6, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px' }}>
@@ -99,21 +99,21 @@ function CategorySection({ category, parts, onPartPress }) {
               }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
-                  <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {part.name}
                   </div>
                   {part.tags?.includes('shared') && (
-                    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-full)', background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-full)', background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0', whiteSpace: 'nowrap', flexShrink: 0 }}>
                       LM + Bolt
                     </span>
                   )}
                 </div>
                 <div style={{ display: 'flex', gap: 'var(--sp-3)', marginTop: 2, flexWrap: 'wrap' }}>
-                  {part.sku && <span style={{ fontSize: 'var(--fs-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>{part.sku}</span>}
-                  {part.unit_cost && <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>${part.unit_cost}</span>}
+                  {part.sku && <span style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>{part.sku}</span>}
+                  {part.unit_cost && <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>${part.unit_cost}</span>}
                 </div>
               </div>
-              <CaretRight size={13} style={{ color: 'var(--text-2)', flexShrink: 0 }} />
+              <CaretRight size={13} style={{ color: 'var(--black)', flexShrink: 0 }} />
             </button>
           ))}
         </div>
@@ -183,10 +183,10 @@ export default function PartsCatalog() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--sp-3)', marginBottom: 'var(--sp-4)', flexWrap: 'wrap' }}>
         <div>
-          <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--text-2)', marginBottom: 4 }}>INVENTORY</div>
-          <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 800, lineHeight: 1.1 }}>Parts Catalog</div>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
+          <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Parts Catalog</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', background: '#EFF6FF', fontSize: 'var(--fs-xs)', fontWeight: 600, color: '#1D4ED8' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--sp-1) var(--sp-3)', borderRadius: 'var(--r-full)', background: '#EFF6FF', fontSize: 'var(--text-xs)', fontWeight: 600, color: '#1D4ED8' }}>
           <ArrowSquareOut size={12} /> QuickBooks sync — coming soon
         </div>
       </div>
@@ -203,15 +203,15 @@ export default function PartsCatalog() {
           return (
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
               style={{
-                flex: 1, padding: 'var(--sp-2) var(--sp-3)', borderRadius: 'var(--r-lg)',
+                flex: 1, padding: 'var(--sp-2) var(--sp-3)', borderRadius: 'var(--r-l)',
                 border: 'none', cursor: 'pointer', transition: 'all 0.15s ease',
                 background: active ? 'var(--navy)' : 'transparent',
                 color: active ? '#fff' : 'var(--text-3)',
                 fontWeight: active ? 700 : 500,
-                fontSize: 'var(--fs-xs)',
+                fontSize: 'var(--text-xs)',
               }}>
               <div style={{ fontWeight: active ? 700 : 600 }}>{tab.label}</div>
-              <div style={{ fontSize: 'var(--fs-2xs)', opacity: active ? 0.7 : 0.6, marginTop: 1 }}>
+              <div style={{ fontSize: 'var(--text-2xs)', opacity: active ? 0.7 : 0.6, marginTop: 1 }}>
                 {count} parts
               </div>
             </button>
@@ -247,7 +247,7 @@ export default function PartsCatalog() {
       ) : (
         <>
           {search && (
-            <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }}>
+            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginBottom: 'var(--sp-3)' }}>
               {grouped.reduce((s, g) => s + g.parts.length, 0)} result{grouped.reduce((s, g) => s + g.parts.length, 0) !== 1 ? 's' : ''} for "{search}"
             </div>
           )}

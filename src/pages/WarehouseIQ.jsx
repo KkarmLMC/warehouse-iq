@@ -17,19 +17,19 @@ function StockChip({ stock, min }) {
   return                             <span style={chip('#F0FDF4','#15803D')}>OK</span>
 }
 function chip(bg, color) {
-  return { padding:'2px 8px', borderRadius:'var(--r-full)', fontSize:'var(--fs-xs)', fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
+  return { padding:'2px 8px', borderRadius:'var(--r-full)', fontSize:'var(--text-xs)', fontWeight:700, background:bg, color, whiteSpace:'nowrap' }
 }
 
 // ─── Summary card ─────────────────────────────────────────────────────────────
-function SumCard({ label, value, sub, color = 'var(--text-1)', Icon }) {
+function SumCard({ label, value, sub, color = 'var(--black)', Icon }) {
   return (
     <div style={{ background:'var(--surface-raised)', borderRadius:'var(--r-xl)', padding:'var(--sp-4)', border:'1px solid var(--border-l)' }}>
       <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', marginBottom:'var(--sp-2)' }}>
         {Icon && <Icon size={14} style={{ color:'var(--text-3)' }} />}
-        <span style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'var(--text-2)' }}>{label}</span>
+        <span style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--black)' }}>{label}</span>
       </div>
-      <div style={{ fontSize:'var(--fs-2xl)', fontWeight:800, color, lineHeight:1 }}>{value}</div>
-      {sub && <div style={{ fontSize:'var(--fs-xs)', color:'var(--text-3)', marginTop:4 }}>{sub}</div>}
+      <div style={{ fontSize:'var(--text-base)', fontWeight:800, color, lineHeight:1 }}>{value}</div>
+      {sub && <div style={{ fontSize:'var(--text-xs)', color:'var(--text-3)', marginTop:4 }}>{sub}</div>}
     </div>
   )
 }
@@ -188,18 +188,18 @@ export default function WarehouseIQ() {
       {/* Page header */}
       <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:'var(--sp-3)', marginBottom:'var(--sp-4)', flexWrap:'wrap' }}>
         <div>
-          <div style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'var(--text-2)', marginBottom:4 }}>WAREHOUSE IQ</div>
-          <div style={{ fontSize:'var(--fs-2xl)', fontWeight:800, lineHeight:1.1 }}>Inventory Dashboard</div>
+          <div style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--black)', marginBottom:4 }}>WAREHOUSE IQ</div>
+          <div style={{ fontSize:'var(--text-base)', fontWeight:800, lineHeight:1.1 }}>Inventory Dashboard</div>
         </div>
         <div style={{ display:'flex', gap:'var(--sp-2)', alignItems:'center', flexWrap:'wrap' }}>
           {!isClosed && period && (
             <button onClick={handleClosePeriod} disabled={closing}
-              style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-3)', borderRadius:'var(--r-md)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--text-2)', fontSize:'var(--fs-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+              style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-3)', borderRadius:'var(--r-m)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
               <Lock size={13} /> {closing ? 'Closing…' : `Close ${periodLabel}`}
             </button>
           )}
           <button onClick={loadPeriod}
-            style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-3)', borderRadius:'var(--r-md)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--text-2)', fontSize:'var(--fs-xs)', fontWeight:700, cursor:'pointer' }}>
+            style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-3)', borderRadius:'var(--r-m)', border:'1px solid var(--border-l)', background:'var(--surface-raised)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer' }}>
             <ArrowsClockwise size={13} /> Refresh
           </button>
         </div>
@@ -209,12 +209,12 @@ export default function WarehouseIQ() {
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'var(--sp-4)', flexWrap:'wrap', gap:'var(--sp-3)' }}>
         {/* Period badge */}
         <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)' }}>
-          <div style={{ padding:'var(--sp-2) var(--sp-4)', borderRadius:'var(--r-full)', background: isClosed ? '#F1F5F9' : 'var(--navy)', color: isClosed ? '#64748B' : '#fff', fontWeight:700, fontSize:'var(--fs-sm)' }}>
+          <div style={{ padding:'var(--sp-2) var(--sp-4)', borderRadius:'var(--r-full)', background: isClosed ? '#F1F5F9' : 'var(--navy)', color: isClosed ? '#64748B' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
             {periodLabel}
           </div>
           {isClosed
-            ? <span style={{ fontSize:'var(--fs-xs)', color:'#64748B', fontWeight:600 }}>Closed</span>
-            : <span style={{ fontSize:'var(--fs-xs)', color:'#16A34A', fontWeight:600 }}>● Open</span>
+            ? <span style={{ fontSize:'var(--text-xs)', color:'#64748B', fontWeight:600 }}>Closed</span>
+            : <span style={{ fontSize:'var(--text-xs)', color:'#16A34A', fontWeight:600 }}>● Open</span>
           }
         </div>
 
@@ -226,8 +226,8 @@ export default function WarehouseIQ() {
                 flexShrink:0, padding:'var(--sp-1) var(--sp-3)', borderRadius:'var(--r-full)',
                 border:`1px solid ${activeWH === w.id ? 'var(--navy)' : 'var(--border-l)'}`,
                 background: activeWH === w.id ? 'var(--navy)' : 'transparent',
-                color: activeWH === w.id ? '#fff' : 'var(--text-2)',
-                fontSize:'var(--fs-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap',
+                color: activeWH === w.id ? '#fff' : 'var(--black)',
+                fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap',
               }}>
               {w.name.replace(' Warehouse','')}
             </button>
@@ -251,24 +251,24 @@ export default function WarehouseIQ() {
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--sp-3) var(--sp-4)', borderBottom:'1px solid var(--border-l)' }}>
             <div style={{ display:'flex', alignItems:'center', gap:'var(--sp-2)' }}>
               <Receipt size={15} style={{ color:'var(--navy)' }} />
-              <span style={{ fontSize:'var(--fs-sm)', fontWeight:700 }}>Active Sales Orders</span>
-              <span style={{ fontSize:'var(--fs-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
+              <span style={{ fontSize:'var(--text-sm)', fontWeight:700 }}>Active Sales Orders</span>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
             </div>
             <button onClick={() => navigate('/sales-orders')}
-              style={{ fontSize:'var(--fs-xs)', fontWeight:600, color:'var(--navy)', background:'none', border:'none', cursor:'pointer', padding:0 }}>
+              style={{ fontSize:'var(--text-xs)', fontWeight:600, color:'var(--navy)', background:'none', border:'none', cursor:'pointer', padding:0 }}>
               View all
             </button>
           </div>
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
               style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--sp-3)', padding:'var(--sp-2) var(--sp-4)', border:'none', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-l)' : 'none' }}>
-              <div style={{ fontSize:'var(--fs-2xs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'#EFF6FF', color: po.division==='Bolt'?'#BE123C':'#1D4ED8' }}>
+              <div style={{ fontSize:'var(--text-2xs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'#EFF6FF', color: po.division==='Bolt'?'#BE123C':'#1D4ED8' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
               <div style={{ flex:1, minWidth:0 }}>
-                <div style={{ fontSize:'var(--fs-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
+                <div style={{ fontSize:'var(--text-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
               </div>
-              <span style={{ fontSize:'var(--fs-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background: po.status==='queued'?'#EEF2FF':po.status==='running'?'#FEF3C7':po.status==='fulfillment'?'#EFF6FF':po.status==='shipment'?'#ECFEFF':'#F0FDF4', color: po.status==='queued'?'#6366F1':po.status==='running'?'#D97706':po.status==='fulfillment'?'#1D4ED8':po.status==='shipment'?'#0891B2':'#15803D', textTransform:'capitalize', flexShrink:0 }}>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-full)', background: po.status==='queued'?'#EEF2FF':po.status==='running'?'#FEF3C7':po.status==='fulfillment'?'#EFF6FF':po.status==='shipment'?'#ECFEFF':'#F0FDF4', color: po.status==='queued'?'#6366F1':po.status==='running'?'#D97706':po.status==='fulfillment'?'#1D4ED8':po.status==='shipment'?'#0891B2':'#15803D', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
               </span>
             </button>
@@ -285,25 +285,25 @@ export default function WarehouseIQ() {
           <div style={{ position:'relative', flex:1, minWidth:160 }}>
             <MagnifyingGlass size={13} style={{ position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:'var(--text-3)' }} />
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
-              style={{ width:'100%', paddingLeft:28, paddingRight:search?28:8, fontSize:'var(--fs-xs)' }} />
+              style={{ width:'100%', paddingLeft:28, paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
             {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', border:'none', background:'none', cursor:'pointer', color:'var(--text-3)', padding:0 }}><X size={12}/></button>}
           </div>
           {/* Filter pills */}
           <div style={{ display:'flex', gap:'var(--sp-1)' }}>
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding:'3px 10px', borderRadius:'var(--r-full)', border:`1px solid ${filter===val?'var(--navy)':'var(--border-l)'}`, background:filter===val?'var(--navy)':'transparent', color:filter===val?'#fff':'var(--text-2)', fontSize:'var(--fs-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+                style={{ padding:'3px 10px', borderRadius:'var(--r-full)', border:`1px solid ${filter===val?'var(--navy)':'var(--border-l)'}`, background:filter===val?'var(--navy)':'transparent', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
                 {lbl}
               </button>
             ))}
           </div>
-          <span style={{ fontSize:'var(--fs-xs)', color:'var(--text-3)', whiteSpace:'nowrap' }}>{filtered.length} parts</span>
+          <span style={{ fontSize:'var(--text-xs)', color:'var(--text-3)', whiteSpace:'nowrap' }}>{filtered.length} parts</span>
         </div>
 
         {/* Column headers */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--sp-2)', padding:'var(--sp-2) var(--sp-4)', background:'var(--navy)', position:'sticky', top:0, zIndex:10 }}>
           {['Part / SKU','Start','Added','Used','On Order','Stock','Value',''].map((h,i) => (
-            <div key={i} style={{ fontSize:'var(--fs-xs)', fontWeight:700, color:'rgba(255,255,255,0.6)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
+            <div key={i} style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'rgba(255,255,255,0.6)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
           ))}
         </div>
 
@@ -311,7 +311,7 @@ export default function WarehouseIQ() {
         {loading ? (
           <div style={{ display:'flex', justifyContent:'center', padding:'var(--sp-10)' }}><div className="spinner" /></div>
         ) : filtered.length === 0 ? (
-          <div style={{ padding:'var(--sp-8)', textAlign:'center', color:'var(--text-3)', fontSize:'var(--fs-sm)' }}>
+          <div style={{ padding:'var(--sp-8)', textAlign:'center', color:'var(--text-3)', fontSize:'var(--text-sm)' }}>
             {rows.length === 0 ? 'No inventory data for this warehouse.' : 'No parts match filters.'}
           </div>
         ) : filtered.map((r, idx) => {
@@ -329,36 +329,36 @@ export default function WarehouseIQ() {
             >
               {/* Part name + SKU */}
               <div style={{ minWidth:0 }}>
-                <div style={{ fontSize:'var(--fs-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{r.part.name}</div>
-                {r.part.sku && <div style={{ fontSize:'var(--fs-xs)', fontFamily:'var(--mono)', color:'var(--text-3)' }}>{r.part.sku}</div>}
+                <div style={{ fontSize:'var(--text-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{r.part.name}</div>
+                {r.part.sku && <div style={{ fontSize:'var(--text-xs)', fontFamily:'var(--mono)', color:'var(--text-3)' }}>{r.part.sku}</div>}
               </div>
               {/* Start */}
-              <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', color:'var(--text-3)' }}>{r.startQty.toLocaleString()}</div>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'var(--text-3)' }}>{r.startQty.toLocaleString()}</div>
               {/* Added */}
-              <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', color: r.added > 0 ? '#1D4ED8' : 'var(--text-3)', fontWeight: r.added > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.added > 0 ? '#1D4ED8' : 'var(--text-3)', fontWeight: r.added > 0 ? 700 : 400 }}>
                 {r.added > 0 ? `+${r.added.toLocaleString()}` : '—'}
               </div>
               {/* Used */}
-              <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', color: r.used > 0 ? '#7C3AED' : 'var(--text-3)', fontWeight: r.used > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.used > 0 ? '#7C3AED' : 'var(--text-3)', fontWeight: r.used > 0 ? 700 : 400 }}>
                 {r.used > 0 ? r.used.toLocaleString() : '—'}
               </div>
               {/* On Order */}
-              <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', color: r.onOrder > 0 ? '#0369A1' : 'var(--text-3)', fontWeight: r.onOrder > 0 ? 700 : 400 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color: r.onOrder > 0 ? '#0369A1' : 'var(--text-3)', fontWeight: r.onOrder > 0 ? 700 : 400 }}>
                 {r.onOrder > 0 ? r.onOrder.toLocaleString() : '—'}
               </div>
               {/* Stock + trend */}
               <div style={{ textAlign:'right', display:'flex', alignItems:'center', justifyContent:'flex-end', gap:4 }}>
-                <span style={{ fontSize:'var(--fs-xs)', fontWeight:800, color: isOut ? '#B91C1C' : isLow ? '#C2410C' : 'var(--text-1)' }}>
+                <span style={{ fontSize:'var(--text-xs)', fontWeight:800, color: isOut ? '#B91C1C' : isLow ? '#C2410C' : 'var(--black)' }}>
                   {r.stock.toLocaleString()}
                 </span>
                 {delta !== 0 && (
-                  <span style={{ fontSize:'var(--fs-2xs)', fontWeight:700, color: delta > 0 ? '#15803D' : '#B91C1C' }}>
+                  <span style={{ fontSize:'var(--text-2xs)', fontWeight:700, color: delta > 0 ? '#15803D' : '#B91C1C' }}>
                     {delta > 0 ? `+${delta}` : delta}
                   </span>
                 )}
               </div>
               {/* Value */}
-              <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', color:'var(--text-2)', fontWeight:600 }}>
+              <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'var(--black)', fontWeight:600 }}>
                 {r.value > 0 ? `$${r.value.toLocaleString('en-US',{maximumFractionDigits:0})}` : '—'}
               </div>
               {/* Status chip */}
@@ -372,21 +372,21 @@ export default function WarehouseIQ() {
         {/* Totals footer */}
         {filtered.length > 0 && (
           <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--sp-2)', padding:'var(--sp-3) var(--sp-4)', background:'var(--navy)', borderTop:'2px solid var(--border-l)' }}>
-            <div style={{ fontSize:'var(--fs-xs)', fontWeight:800, color:'#fff' }}>Period Totals</div>
-            <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', color:'rgba(255,255,255,0.5)' }}>—</div>
-            <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', fontWeight:800, color:'#93C5FD' }}>
+            <div style={{ fontSize:'var(--text-xs)', fontWeight:800, color:'#fff' }}>Period Totals</div>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', color:'rgba(255,255,255,0.5)' }}>—</div>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#93C5FD' }}>
               {filtered.reduce((s,r)=>s+r.added,0) > 0 ? `+${filtered.reduce((s,r)=>s+r.added,0).toLocaleString()}` : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', fontWeight:800, color:'#C4B5FD' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#C4B5FD' }}>
               {filtered.reduce((s,r)=>s+r.used,0) > 0 ? filtered.reduce((s,r)=>s+r.used,0).toLocaleString() : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', fontWeight:800, color:'#7DD3FC' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#7DD3FC' }}>
               {filtered.reduce((s,r)=>s+r.onOrder,0) > 0 ? filtered.reduce((s,r)=>s+r.onOrder,0).toLocaleString() : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', fontWeight:800, color:'#fff' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#fff' }}>
               {filtered.reduce((s,r)=>s+r.stock,0).toLocaleString()}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--fs-xs)', fontWeight:800, color:'#6EE7B7' }}>
+            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'#6EE7B7' }}>
               ${filtered.reduce((s,r)=>s+r.value,0).toLocaleString('en-US',{maximumFractionDigits:0})}
             </div>
             <div />
