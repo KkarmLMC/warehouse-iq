@@ -282,14 +282,14 @@ export default function Profile() {
 
   const roleColors = {
     admin:   { color: 'var(--error-shade-40)', bg: 'var(--error-soft)' },
-    manager: { color: 'var(--blue)', bg: 'var(--blue-soft)' },
-    user:    { color: 'var(--success-dark)', bg: 'var(--success-soft)' } }
+    manager: { color: 'var(--black)', bg: 'var(--blue-soft)' },
+    user:    { color: 'var(--black)', bg: 'var(--success-soft)' } }
   const roleStyle = roleColors[profile?.role] || roleColors.user
 
   const pipelineRoleColors = {
     warehouse_manager: { color: 'var(--purple-shade-20)', bg: 'var(--purple-soft)' },
-    fulfillment:       { color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)' },
-    shipping:          { color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' } }
+    fulfillment:       { color: 'var(--black)', bg: 'var(--blue-soft)' },
+    shipping:          { color: 'var(--black)', bg: 'var(--blue-tint-80)' } }
   const pipelineStyle = pipelineRoleColors[profile?.pipeline_role] || null
 
   const appLabels = {
@@ -324,12 +324,12 @@ export default function Profile() {
 
       {/* Flash messages */}
       {success && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--success-soft)', borderRadius: 'var(--r-l)', color: 'var(--success-text)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--bg)', borderRadius: 'var(--r-l)', color: 'var(--black)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
           <CheckCircle size={15} weight="fill" style={{ flexShrink: 0 }} /> {success}
         </div>
       )}
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--bg)', borderRadius: 'var(--r-l)', color: 'var(--black)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
           <Warning size={15} style={{ flexShrink: 0 }} /> {error}
         </div>
       )}
@@ -443,7 +443,7 @@ export default function Profile() {
 
             {hasPin && (
               <button onClick={removePin} disabled={removingPin}
-                style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', color: 'var(--error-alt)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', padding: 0 }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', padding: 0 }}>
                 <Trash size={13} /> {removingPin ? 'Removing…' : 'Remove PIN'}
               </button>
             )}
@@ -453,7 +453,7 @@ export default function Profile() {
             <div style={{ textAlign: 'center', marginBottom: 'var(--mar-l)' }}>
               <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, marginBottom: 4 }}>{pinLabel[pinSection]}</div>
               {pinError && (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, color: 'var(--black)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
                   <Warning size={14} /> {pinError}
                 </div>
               )}
@@ -511,7 +511,7 @@ export default function Profile() {
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>Session</div>
         <div style={{ padding: 'var(--pad-l)' }}>
           <button onClick={() => { signOut(); navigate('/login', { replace: true }) }}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', background: 'none', color: 'var(--error-alt)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', background: 'none', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}>
             <SignOut size={16} /> Sign Out of this app
           </button>
         </div>

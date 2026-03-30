@@ -23,17 +23,17 @@ const STAGE_COLOR = {
 // ─── Warehouse health badge ───────────────────────────────────────────────────
 function HealthBadge({ out, low }) {
   if (out > 0) return (
-    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--error-soft)', color: 'var(--error-alt)' }}>
+    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--bg)', color: 'var(--black)' }}>
       {out} Out
     </span>
   )
   if (low > 0) return (
-    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--warning-soft)', color: 'var(--warning)' }}>
+    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--bg)', color: 'var(--black)' }}>
       {low} Low
     </span>
   )
   return (
-    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--success-soft)', color: 'var(--success-text)' }}>
+    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--bg)', color: 'var(--black)' }}>
       OK
     </span>
   )
@@ -150,33 +150,33 @@ export default function Inventory() {
       {/* ── Pending CO alert ── */}
       {stats?.pendingCOs > 0 && (
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
-          style={{ background: 'var(--warning-soft)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
-          <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
+          style={{ background: 'var(--bg)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
+          <Warning size={18} weight="fill" style={{ color: 'var(--black)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--warning-text)' }}>Field crew part requests waiting for approval</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)' }}>Field crew part requests waiting for approval</div>
           </div>
-          <CaretRight size={14} style={{ color: 'var(--warning-text)', flexShrink: 0 }} />
+          <CaretRight size={14} style={{ color: 'var(--black)', flexShrink: 0 }} />
         </div>
       )}
 
       {/* ── Back order alert ── */}
       {backOrders.length > 0 && (
         <div onClick={() => navigate('/warehouse-hq/queue')}
-          style={{ background: 'var(--blue-tint-80)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
-          <ClockCountdown size={18} weight="fill" style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
+          style={{ background: 'var(--bg)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
+          <ClockCountdown size={18} weight="fill" style={{ color: 'var(--black)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--blue-shade-40)' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
               {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--blue-shade-20)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)' }}>
               {backOrders.slice(0, 2).map(o => o.so_number).join(', ')}
               {backOrders.length > 2 ? ` + ${backOrders.length - 2} more` : ''} — tap to view queue
             </div>
           </div>
-          <CaretRight size={14} style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
+          <CaretRight size={14} style={{ color: 'var(--black)', flexShrink: 0 }} />
         </div>
       )}
 
@@ -184,7 +184,7 @@ export default function Inventory() {
       <div className="wiq-stat-grid" style={{ marginBottom: 'var(--mar-xl)' }}>
         {[
           { label: 'Total Inventory Value', value: fmt(stats?.totalValue), color: 'var(--navy)', onClick: () => navigate('/warehouse-hq/inventory') },
-          { label: 'Open Sales Orders',     value: stats?.openSOs ?? '—',  color: 'var(--blue)', onClick: () => navigate('/sales-orders') },
+          { label: 'Open Sales Orders',     value: stats?.openSOs ?? '—',  color: 'var(--black)', onClick: () => navigate('/sales-orders') },
           { label: 'Pending Change Orders', value: stats?.pendingCOs ?? '—', color: stats?.pendingCOs > 0 ? 'var(--warning)' : 'var(--black)', onClick: () => navigate('/warehouse-hq/change-orders') },
           { label: 'Low / Out of Stock',    value: `${stats?.outStock ?? 0} / ${stats?.lowStock ?? 0}`, color: (stats?.outStock > 0 || stats?.lowStock > 0) ? 'var(--error)' : 'var(--success-text)', onClick: () => navigate('/warehouse-hq/inventory') },
           { label: 'Recent Shipments',      value: stats?.shipments ?? '—', color: 'var(--black)', onClick: () => navigate('/warehouse-hq/transfer') },
@@ -353,8 +353,8 @@ export default function Inventory() {
         ) : recentShips.map((t, idx) => (
           <div key={t.id}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--success-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <CheckCircle size={16} weight="fill" style={{ color: 'var(--success-text)' }} />
+            <div style={{ width: 36, height: 36, borderRadius: 'var(--r-l)', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <CheckCircle size={16} weight="fill" style={{ color: 'var(--black)' }} />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600 }}>
@@ -365,7 +365,7 @@ export default function Inventory() {
                 {t.reason ? ` · ${t.reason}` : ''}
               </div>
             </div>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 3, background: 'var(--success-soft)', color: 'var(--success-text)', textTransform: 'capitalize' }}>
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 3, background: 'var(--bg)', color: 'var(--black)', textTransform: 'capitalize' }}>
               {t.status}
             </span>
           </div>

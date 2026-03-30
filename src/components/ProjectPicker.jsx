@@ -63,7 +63,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
   return (
     <div>
       <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>
-        {label}{required && <span style={{ color: 'var(--error)', marginLeft: 3 }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--black)', marginLeft: 3 }}>*</span>}
       </label>
 
       {/* Selected project display */}

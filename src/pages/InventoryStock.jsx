@@ -7,22 +7,22 @@ import { db } from '../lib/supabase.js'
 
 function StockBadge({ qty, minLevel, onOrder }) {
   if (qty === 0 && onOrder > 0) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--blue-soft)', color: 'var(--blue)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--bg)', color: 'var(--black)' }}>
       0 (+{onOrder} ordered)
     </span>
   )
   if (qty === 0) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--error-soft)', color: 'var(--error-dark)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--bg)', color: 'var(--black)' }}>
       Out of stock
     </span>
   )
   if (minLevel && qty <= minLevel) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--orange-soft)', color: 'var(--orange-shade-20)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--bg)', color: 'var(--black)' }}>
       Low: {qty}
     </span>
   )
   return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--success-soft)', color: 'var(--success-text)' }}>
+    <span style={{ padding: '2px 8px', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--bg)', color: 'var(--black)' }}>
       {qty}
     </span>
   )
@@ -45,7 +45,7 @@ function PartRow({ part, levels, onPress }) {
         background: isLow ? 'var(--orange-soft)' : 'var(--hover)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isLow
-          ? <WarningCircle size={20} weight="fill" style={{ color: 'var(--orange-shade-20)' }} />
+          ? <WarningCircle size={20} weight="fill" style={{ color: 'var(--black)' }} />
           : <Package size={20} style={{ color: 'var(--black)' }} />
         }
       </div>
@@ -146,8 +146,8 @@ export default function InventoryStock() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
         {[
           { label: 'Total Parts', value: totalParts, color: 'var(--navy)' },
-          { label: 'Low Stock', value: lowCount, color: 'var(--orange-shade-20)' },
-          { label: 'Out of Stock', value: outCount, color: 'var(--error-dark)' },
+          { label: 'Low Stock', value: lowCount, color: 'var(--black)' },
+          { label: 'Out of Stock', value: outCount, color: 'var(--black)' },
         ].map(s => (
           <div key={s.label} style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: s.color }}>{s.value}</div>

@@ -94,7 +94,7 @@ function CategorySection({ category, parts, onPartPress }) {
                     {part.name}
                   </div>
                   {part.tags?.includes('shared') && (
-                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-xxl)', background: 'var(--success-soft)', color: 'var(--success-text)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-xxl)', background: 'var(--bg)', color: 'var(--black)', whiteSpace: 'nowrap', flexShrink: 0 }}>
                       LM + Bolt
                     </span>
                   )}
@@ -175,7 +175,7 @@ export default function PartsCatalog() {
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
           <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Parts Catalog</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', background: 'var(--blue-soft)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--blue)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', background: 'var(--bg)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--black)' }}>
           <ArrowSquareOut size={12} /> QuickBooks sync — coming soon
         </div>
       </div>

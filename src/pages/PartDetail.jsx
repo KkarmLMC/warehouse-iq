@@ -21,7 +21,7 @@ function WarehouseRow({ level, warehouseName }) {
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', display: 'flex', gap: 'var(--gap-s)', marginTop: 2 }}>
             {level.min_level > 0 && <span>Min: {level.min_level}</span>}
             {level.quantity_on_order > 0 && (
-              <span style={{ color: 'var(--blue)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>
+              <span style={{ color: 'var(--black)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>
             )}
           </div>
         </div>
@@ -54,8 +54,8 @@ function TransactionRow({ tx, warehouseName }) {
         background: isPositive ? 'var(--success-soft)' : 'var(--error-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isPositive
-          ? <Plus size={14} weight="bold" style={{ color: 'var(--success-text)' }} />
-          : <Minus size={14} weight="bold" style={{ color: 'var(--error-dark)' }} />
+          ? <Plus size={14} weight="bold" style={{ color: 'var(--black)' }} />
+          : <Minus size={14} weight="bold" style={{ color: 'var(--black)' }} />
         }
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -197,7 +197,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div>
               <Label>On Order</Label>
               <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--blue)', marginTop: 3 }}>Incoming stock</div>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--black)', marginTop: 3 }}>Incoming stock</div>
             </div>
             <div>
               <Label>Min Level</Label>
