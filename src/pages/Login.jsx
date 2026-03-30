@@ -48,20 +48,6 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
     return digits[i] === confirmPin[i] ? 'var(--success)' : 'var(--error)'
   }
 
-  const btnBase = {
-    height: 64, borderRadius: 'var(--r-m)',
-    background: 'var(--bg)',
-    border: 'none', outline: 'none',
-    fontSize: 'var(--text-base)', fontWeight: 700,
-    cursor: 'pointer', fontFamily: 'var(--font)',
-    transition: 'background 0.12s',
-    WebkitTapHighlightColor: 'transparent',
-    opacity: loading ? 0.5 : 1 }
-  const hoverOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff' } }
-  const hoverOff = e => { e.currentTarget.style.background = 'var(--bg)'; e.currentTarget.style.color = '' }
-  const pressOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy-dark)'; e.currentTarget.style.transform = 'scale(0.97)' } }
-  const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--gap-l)' }}>
 
@@ -87,7 +73,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
       )}
 
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-m)', color: 'var(--error-dark)', fontSize: 'var(--text-sm)' }}>
+        <div className="login-error">
           <Warning size={14} />{error}
         </div>
       )}
@@ -96,25 +82,16 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', width: '100%', maxWidth: 260 }}>
         {[1,2,3,4,5,6,7,8,9].map(n => (
           <button key={n} onClick={() => press(String(n))} disabled={loading}
-            style={btnBase}
-            onMouseEnter={hoverOn} onMouseLeave={hoverOff}
-            onMouseDown={pressOn} onMouseUp={pressOff}
-            onTouchStart={hoverOn} onTouchEnd={hoverOff}>
+            className="pin-btn">
             {n}
           </button>
         ))}
         <div />
-        <button onClick={() => press('0')} disabled={loading} style={btnBase}
-          onMouseEnter={hoverOn} onMouseLeave={hoverOff}
-          onMouseDown={pressOn} onMouseUp={pressOff}
-          onTouchStart={hoverOn} onTouchEnd={hoverOff}>
+        <button onClick={() => press('0')} disabled={loading} className="pin-btn">
           0
         </button>
         <button onClick={del} disabled={loading}
-          style={{ ...btnBase, fontSize: 'var(--text-lg)', color: 'var(--black)' }}
-          onMouseEnter={hoverOn} onMouseLeave={hoverOff}
-          onMouseDown={pressOn} onMouseUp={pressOff}
-          onTouchStart={hoverOn} onTouchEnd={hoverOff}>
+          className="pin-btn">
           ⌫
         </button>
       </div>
@@ -124,25 +101,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
         <button
           onClick={submit}
           disabled={!isFull || loading || (confirmPin && digits.join('') !== confirmPin)}
-          style={{
-            width: '100%', maxWidth: 260,
-            padding: 'var(--pad-m)',
-            borderRadius: 'var(--r-m)',
-            background: !isFull || loading
-              ? 'var(--hover)'
-              : confirmPin && digits.join('') !== confirmPin
-                ? 'var(--error-soft)'
-                : 'var(--navy)',
-            color: !isFull || loading
-              ? 'var(--text-4)'
-              : confirmPin && digits.join('') !== confirmPin
-                ? 'var(--error-dark)'
-                : '#fff',
-            fontWeight: 700,
-            fontSize: 'var(--text-md)',
-            cursor: isFull && !loading && !(confirmPin && digits.join('') !== confirmPin) ? 'pointer' : 'not-allowed',
-            fontFamily: 'var(--font)',
-            transition: 'all 0.15s' }}>
+          className={`pin-submit${ (!isFull || loading) ? '' : confirmPin && digits.join('') !== confirmPin ? ' pin-submit--mismatch' : ''}`}>
           {loading ? 'Processing…'
             : !isFull ? 'Enter 6 digits'
             : confirmPin && digits.join('') !== confirmPin ? 'PINs do not match'
@@ -154,16 +113,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
           <button
             onClick={submit}
             disabled={loading}
-            style={{
-              width: '100%', maxWidth: 260,
-              padding: 'var(--pad-m)',
-              borderRadius: 'var(--r-m)',
-              background: loading ? 'var(--hover)' : 'var(--navy)',
-              color: loading ? 'var(--text-3)' : '#fff',
-              fontWeight: 700, fontSize: 'var(--text-md)',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontFamily: 'var(--font)',
-              transition: 'all 0.15s' }}>
+            className={`pin-submit${ (!isFull || loading) ? '' : confirmPin && digits.join('') !== confirmPin ? ' pin-submit--mismatch' : ''}`}>
             {loading ? 'Processing…' : 'Continue →'}
           </button>
         )
@@ -319,7 +269,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
             </div>
             <PinPad onPin={handlePinLogin} loading={loading} error={error} requireConfirm={true} />
             <button onClick={() => { setMode('password'); setError('') }}
-              style={{ width: '100%', marginTop: 'var(--mar-l)', padding: 'var(--pad-s)', background: 'none', border: 'none', outline: 'none', color: 'var(--navy)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
+              className="login-link-btn" style={{ marginTop: 'var(--mar-l)' }}>
               Sign in with email instead
             </button>
           </>
@@ -330,7 +280,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
           <>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 'var(--mar-xl)' }}>
               <button onClick={() => { setMode('pin'); setError('') }}
-                style={{ background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex' }}>
+                style={{ color: 'var(--text-3)', display: 'flex' }}>
                 <ArrowLeft size={18} />
               </button>
               <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Sign in</div>
@@ -351,12 +301,12 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                 </div>
               </div>
               {error && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-m)', marginBottom: 'var(--mar-l)', color: 'var(--error-dark)', fontSize: 'var(--text-sm)' }}>
+                <div className="login-error" style={{ marginBottom: 'var(--mar-l)' }}>
                   <Warning size={14} style={{ flexShrink: 0 }} />{error}
                 </div>
               )}
               <button type="submit" disabled={loading}
-                style={{ width: '100%', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-md)', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1, fontFamily: 'var(--font)' }}>
+                className="login-submit">
                 {loading ? 'Signing in…' : 'Sign In'}
               </button>
             </form>

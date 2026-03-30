@@ -409,6 +409,123 @@
    3. CSS RESET
    ============================================================================= */
 
+
+/* Button element reset — prevents browser default borders on all buttons */
+button {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Login page ──────────────────────────────────────────────────────────────── */
+.login-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: var(--pad-xl);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--white);
+  border-radius: var(--r-m);
+  padding: var(--pad-xxl);
+}
+
+/* PIN pad number buttons */
+.pin-btn {
+  height: 64px;
+  border-radius: var(--r-m);
+  background: var(--bg);
+  border: none;
+  outline: none;
+  font-size: var(--text-base);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+  color: var(--black);
+  transition: background var(--ease-fast);
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+}
+.pin-btn:hover  { background: var(--navy); color: var(--white); }
+.pin-btn:active { background: var(--navy-dark); color: var(--white); transform: scale(0.97); }
+.pin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* PIN submit button */
+.pin-submit {
+  width: 100%;
+  max-width: 260px;
+  padding: var(--pad-m);
+  border-radius: var(--r-m);
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 700;
+  font-size: var(--text-md);
+  cursor: pointer;
+  font-family: var(--font);
+  border: none;
+  outline: none;
+  transition: background var(--ease-fast);
+}
+.pin-submit:hover:not(:disabled)    { background: var(--navy-dark); }
+.pin-submit:disabled                { background: var(--hover); color: var(--text-4); cursor: not-allowed; }
+.pin-submit--mismatch               { background: var(--error-soft); color: var(--error-dark); }
+
+/* Password login submit button */
+.login-submit {
+  width: 100%;
+  padding: var(--pad-m);
+  border-radius: var(--r-m);
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 700;
+  font-size: var(--text-md);
+  cursor: pointer;
+  font-family: var(--font);
+  border: none;
+  outline: none;
+  transition: background var(--ease-fast), opacity var(--ease-fast);
+}
+.login-submit:hover:not(:disabled) { background: var(--navy-dark); }
+.login-submit:disabled             { opacity: 0.7; cursor: not-allowed; }
+
+/* Text link button (email fallback etc) */
+.login-link-btn {
+  width: 100%;
+  padding: var(--pad-s);
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--navy);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  text-align: center;
+}
+.login-link-btn:hover { color: var(--navy-dark); }
+
+/* Error banner */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+  padding: var(--pad-s) var(--pad-m);
+  background: var(--error-soft);
+  border-radius: var(--r-m);
+  color: var(--error-dark);
+  font-size: var(--text-sm);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -3390,25 +3507,7 @@ textarea { resize: vertical; }
 }
 
 /* ─── Login page — scoped variables, no app interior bleed ──────────────────── */
-.login-page {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg);
-  padding: var(--pad-xl);
-}
 
-.login-card {
-  width: 100%;
-  max-width: 380px;
-  background: var(--white);
-  border-radius: var(--r-m);
-  padding: var(--pad-xxl);
-  border: none;
-  outline: none;
-}
 
 /* ─── Warehouse IQ Dashboard ────────────────────────────────────────────────── */
 .wiq-stat-grid {
