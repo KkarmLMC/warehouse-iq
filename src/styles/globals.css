@@ -1196,7 +1196,7 @@ textarea { resize: vertical; }
 
 /* Legacy aliases */
 .card-header { padding: 0.875rem var(--pad-l); background: var(--navy); border-bottom: none; display: flex; align-items: center; justify-content: space-between; gap: var(--gap-s); }
-.card-title  { font-size: var(--text-lg); font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: var(--gap-s); }
+.card-title  { font-size: var(--text-base); font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: var(--gap-s); }
 .card-dot    { width: 0.5rem; height: 0.5rem; border-radius: 0.125rem; flex-shrink: 0; }
 .card-body   { padding: 0; }
 
