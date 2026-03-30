@@ -2,27 +2,15 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Receipt, ClockCountdown, ArrowRight, MagnifyingGlass, CaretRight, CheckCircle, Truck } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
-
-const STAGE = {
-  queued:      { label: 'Queued',      color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)' },
-  running:     { label: 'Running',     color: 'var(--warning)', bg: 'var(--warning-soft)' },
-  fulfillment: { label: 'Fulfillment', color: 'var(--blue)', bg: 'var(--blue-soft)' },
-  shipment:    { label: 'Shipment',    color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
-  complete:    { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' },
-  back_ordered:{ label: 'Awaiting Stock',  color: 'var(--warning-text)', bg: 'var(--warning-soft)' },
-  // legacy
-  draft:       { label: 'Draft',       color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
-  submitted:   { label: 'Submitted',   color: 'var(--warning)', bg: 'var(--warning-soft)' },
-  published:   { label: 'In Progress', color: 'var(--blue)', bg: 'var(--blue-soft)' },
-  fulfilled:   { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' } }
+import { soStatus } from '../lib/statusColors.js'
 
 const TABS = [
-  { key: 'queued',      label: 'Queue' },
-  { key: 'running',     label: 'Running' },
-  { key: 'fulfillment', label: 'Fulfillment' },
-  { key: 'shipment',    label: 'Shipment' },
+  { key: 'queued',       label: 'Queue' },
+  { key: 'running',      label: 'Running' },
+  { key: 'fulfillment',  label: 'Fulfillment' },
+  { key: 'shipment',     label: 'Shipment' },
   { key: 'back_ordered', label: 'Back Orders' },
-  { key: 'complete',    label: 'Complete' },
+  { key: 'complete',     label: 'Complete' },
 ]
 
 export default function SOQueue() {
@@ -42,16 +30,10 @@ export default function SOQueue() {
       .in('status', ['queued','running','fulfillment','shipment','back_ordered','complete','draft','submitted','published','fulfilled'])
       .order('created_at', { ascending: false })
     const all = data || []
-    // Normalise legacy statuses for counting
     const c = {}
     TABS.forEach(t => { c[t.key] = 0 })
-    c['back_ordered'] = 0
     all.forEach(o => {
-      const s = o.status === 'fulfilled' ? 'complete'
-              : o.status === 'published' ? 'fulfillment'
-              : o.status === 'submitted' ? 'queued'
-              : o.status === 'draft'     ? 'queued'
-              : o.status
+      const s = normaliseStatus(o.status)
       if (c[s] !== undefined) c[s]++
     })
     setCounts(c)
@@ -117,7 +99,7 @@ export default function SOQueue() {
             <div className="empty-desc">Orders will appear here as they move through the pipeline.</div>
           </div>
         ) : visible.map((o, idx) => {
-          const stage = STAGE[o.status] || STAGE.queued
+          const stage = soStatus(o.status)
           return (
             <div key={o.id}
               onClick={() => {

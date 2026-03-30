@@ -401,6 +401,88 @@
   --content-pad: var(--pad-xl);
 
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL STATUS / STAGE / ROLE COLOR TOKENS
+   
+   These CSS custom properties are the single source of truth for all
+   data-driven colors across all three apps. When a status color needs 
+   to change, update it here — every badge, label, and inline style that 
+   references these tokens updates automatically.
+
+   Usage in JSX:
+     style={{ color: 'var(--status-queued)' }}            ← text color
+     style={{ background: 'var(--status-queued-bg)' }}    ← background
+   
+   Or via the shared statusColors.js utility:
+     import { soStatus, projectStage, roleColor } from '../lib/statusColors.js'
+     const { color, bg } = soStatus('queued')
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Sales Order statuses ─────────────────────────────────────────────────── */
+--status-draft:           var(--grey-base);
+--status-draft-bg:        var(--grey-tint-80);
+--status-queued:          var(--purple-tint-20);
+--status-queued-bg:       var(--purple-soft);
+--status-running:         var(--warning);
+--status-running-bg:      var(--warning-soft);
+--status-submitted:       var(--warning);
+--status-submitted-bg:    var(--warning-soft);
+--status-fulfillment:     var(--blue-shade-40);
+--status-fulfillment-bg:  var(--blue-soft);
+--status-published:       var(--blue-shade-40);
+--status-published-bg:    var(--blue-soft);
+--status-shipment:        var(--blue-shade-20);
+--status-shipment-bg:     var(--blue-tint-80);
+--status-back-ordered:    var(--warning-text);
+--status-back-ordered-bg: var(--warning-soft);
+--status-complete:        var(--success-text);
+--status-complete-bg:     var(--success-soft);
+--status-fulfilled:       var(--success-text);
+--status-fulfilled-bg:    var(--success-soft);
+--status-cancelled:       var(--grey-base);
+--status-cancelled-bg:    var(--grey-tint-80);
+
+/* ── Project / field job stages ──────────────────────────────────────────── */
+--stage-awarded:          var(--purple);
+--stage-awarded-bg:       var(--purple-soft);
+--stage-site-survey:      var(--purple-tint-20);
+--stage-site-survey-bg:   var(--purple-soft);
+--stage-scheduled:        var(--purple);
+--stage-scheduled-bg:     var(--purple-soft);
+--stage-in-progress:      var(--orange-shade-20);
+--stage-in-progress-bg:   var(--orange-soft);
+--stage-inspection:       var(--blue-shade-20);
+--stage-inspection-bg:    var(--blue-soft);
+--stage-completion:       var(--orange);
+--stage-completion-bg:    var(--orange-soft);
+--stage-customer-signoff: var(--purple);
+--stage-customer-signoff-bg: var(--purple-soft);
+--stage-postponed:        var(--orange-shade-20);
+--stage-postponed-bg:     var(--orange-soft);
+
+/* ── Approval / review statuses ──────────────────────────────────────────── */
+--status-approved:        var(--success-text);
+--status-approved-bg:     var(--success-soft);
+--status-rejected:        var(--error-dark);
+--status-rejected-bg:     var(--error-soft);
+--status-failed:          var(--error-dark);
+--status-failed-bg:       var(--error-soft);
+--status-pending-review:  var(--blue);
+--status-pending-review-bg: var(--blue-soft);
+--status-under-review:    var(--warning);
+--status-under-review-bg: var(--warning-soft);
+
+/* ── Role colors ─────────────────────────────────────────────────────────── */
+--role-admin:             var(--error-shade-40);
+--role-admin-bg:          var(--error-soft);
+--role-manager:           var(--blue);
+--role-manager-bg:        var(--blue-soft);
+--role-warehouse-manager: var(--purple-shade-20);
+--role-warehouse-manager-bg: var(--purple-soft);
+--role-user:              var(--success-dark);
+--role-user-bg:           var(--success-soft);
+
 }
 
 

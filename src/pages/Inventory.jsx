@@ -5,6 +5,7 @@ import {
   Truck, ArrowRight, Buildings, CheckCircle,
   ArrowUp, CaretRight, Lightning, ClockCountdown } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import { soStatus, stockStatusFromQty } from '../lib/statusColors.js'
 
 // ─── Stage colors ─────────────────────────────────────────────────────────────
 const STAGE_COLOR = {
