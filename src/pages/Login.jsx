@@ -50,14 +50,12 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
 
   const btnBase = {
     height: 64, borderRadius: 'var(--r-m)',
-    border: '1px solid var(--border-l)',
     background: 'var(--white)',
     fontSize: 'var(--text-base)', fontWeight: 700,
     cursor: 'pointer', fontFamily: 'var(--font)',
     transition: 'all 0.12s',
     WebkitTapHighlightColor: 'transparent',
-    opacity: loading ? 0.5 : 1,
-  }
+    opacity: loading ? 0.5 : 1 }
   const hoverOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' } }
   const hoverOff = e => { e.currentTarget.style.background = 'var(--white)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }
   const pressOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy-dark)'; e.currentTarget.style.transform = 'scale(0.97)' } }
@@ -74,11 +72,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
             height: i < digits.length ? 16 : 14,
             borderRadius: '50%',
             background: dotColor(i),
-            transition: 'all 0.12s',
-            boxShadow: confirmPin && i < digits.length
-              ? `0 0 0 3px ${digits[i] === confirmPin[i] ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`
-              : 'none',
-          }} />
+            transition: 'all 0.12s' }} />
         ))}
       </div>
 
@@ -86,8 +80,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
       {confirmPin && isFull && (
         <div style={{
           fontSize: 'var(--text-xs)', fontWeight: 700, textAlign: 'center',
-          color: digits.join('') === confirmPin ? 'var(--success)' : 'var(--error)',
-        }}>
+          color: digits.join('') === confirmPin ? 'var(--success)' : 'var(--error)' }}>
           {digits.join('') === confirmPin ? '✓ PINs match' : '✗ PINs do not match'}
         </div>
       )}
@@ -134,7 +127,6 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
             width: '100%', maxWidth: 260,
             padding: 'var(--pad-m)',
             borderRadius: 'var(--r-m)',
-            border: 'none',
             background: !isFull || loading
               ? 'var(--border-l)'
               : confirmPin && digits.join('') !== confirmPin
@@ -149,8 +141,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
             fontSize: 'var(--text-md)',
             cursor: isFull && !loading && !(confirmPin && digits.join('') !== confirmPin) ? 'pointer' : 'not-allowed',
             fontFamily: 'var(--font)',
-            transition: 'all 0.15s',
-          }}>
+            transition: 'all 0.15s' }}>
           {loading ? 'Processing…'
             : !isFull ? 'Enter 6 digits'
             : confirmPin && digits.join('') !== confirmPin ? 'PINs do not match'
@@ -166,14 +157,12 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
               width: '100%', maxWidth: 260,
               padding: 'var(--pad-m)',
               borderRadius: 'var(--r-m)',
-              border: 'none',
               background: loading ? 'var(--border-l)' : 'var(--navy)',
               color: loading ? 'var(--text-3)' : '#fff',
               fontWeight: 700, fontSize: 'var(--text-md)',
               cursor: loading ? 'not-allowed' : 'pointer',
               fontFamily: 'var(--font)',
-              transition: 'all 0.15s',
-            }}>
+              transition: 'all 0.15s' }}>
             {loading ? 'Processing…' : 'Continue →'}
           </button>
         )
@@ -241,8 +230,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
       const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/pin-login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY },
-        body: JSON.stringify({ pin_hash: hashed }),
-      })
+        body: JSON.stringify({ pin_hash: hashed }) })
       const data = await res.json()
       if (!res.ok) { setError('Incorrect PIN. Try again.'); setLoading(false); return }
       // Set session manually
@@ -330,7 +318,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
             </div>
             <PinPad onPin={handlePinLogin} loading={loading} error={error} requireConfirm={true} />
             <button onClick={() => { setMode('password'); setError('') }}
-              style={{ width: '100%', marginTop: 'var(--mar-l)', padding: 'var(--pad-s)', border: 'none', background: 'none', color: 'var(--navy)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
+              style={{ width: '100%', marginTop: 'var(--mar-l)', padding: 'var(--pad-s)', background: 'none', color: 'var(--navy)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
               Sign in with email instead
             </button>
           </>
@@ -341,7 +329,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
           <>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 'var(--mar-xl)' }}>
               <button onClick={() => { setMode('pin'); setError('') }}
-                style={{ border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex' }}>
+                style={{ background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex' }}>
                 <ArrowLeft size={18} />
               </button>
               <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Sign in</div>
@@ -356,7 +344,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                 <div style={{ position: 'relative' }}>
                   <input type={showPw ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" autoComplete="current-password" style={{ width: '100%', paddingRight: 40 }} />
                   <button type="button" onClick={() => setShowPw(s => !s)}
-                    style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
+                    style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
                     {showPw ? <EyeSlash size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
@@ -367,7 +355,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                 </div>
               )}
               <button type="submit" disabled={loading}
-                style={{ width: '100%', padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-md)', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1, fontFamily: 'var(--font)' }}>
+                style={{ width: '100%', padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-md)', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1, fontFamily: 'var(--font)' }}>
                 {loading ? 'Signing in…' : 'Sign In'}
               </button>
             </form>

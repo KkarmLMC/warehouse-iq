@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
   MagnifyingGlass, Plus, Package, WarningCircle,
-  X, CaretRight, ArrowsLeftRight,
-} from '@phosphor-icons/react'
+  X, CaretRight, ArrowsLeftRight } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
 function StockBadge({ qty, minLevel, onOrder }) {
@@ -38,15 +37,13 @@ function PartRow({ part, levels, onPress }) {
   return (
     <button onClick={onPress} style={{
       display: 'flex', alignItems: 'center', gap: '0.75rem',
-      padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none',
+      padding: 'var(--pad-m) var(--pad-l)', background: 'none',
       width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
-      cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
-    }}>
+      cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
       <div style={{
         width: '2.5rem', height: '2.5rem', borderRadius: 'var(--r-l)',
         background: isLow ? 'var(--orange-soft)' : 'var(--hover)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-      }}>
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isLow
           ? <WarningCircle size={20} weight="fill" style={{ color: 'var(--orange-shade-20)' }} />
           : <Package size={20} style={{ color: 'var(--black)' }} />
@@ -135,11 +132,11 @@ export default function InventoryStock() {
         </div>
         <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
           <button onClick={() => navigate('/warehouse-hq/transfer')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--black)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
             <ArrowsLeftRight size={14} /> Transfer
           </button>
           <button onClick={() => navigate('/warehouse-hq/add-part')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer' }}>
             <Plus size={14} /> Add Part
           </button>
         </div>
@@ -165,7 +162,7 @@ export default function InventoryStock() {
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts, SKU, manufacturer…"
           style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
         {search && (
-          <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}>
+          <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}>
             <X size={14} />
           </button>
         )}

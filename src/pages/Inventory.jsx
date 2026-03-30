@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   Package, Receipt, ClipboardText, Warning,
   Truck, ArrowRight, Buildings, CheckCircle,
-  ArrowUp, CaretRight, Lightning, ClockCountdown,
-} from '@phosphor-icons/react'
+  ArrowUp, CaretRight, Lightning, ClockCountdown } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
 // ─── Stage colors ─────────────────────────────────────────────────────────────
@@ -19,8 +18,7 @@ const STAGE_COLOR = {
   back_ordered: 'var(--blue-shade-20)',
   fulfilled:    'var(--success)',
   complete:     'var(--success)',
-  cancelled:    'var(--grey-tint-20)',
-}
+  cancelled:    'var(--grey-tint-20)' }
 
 // ─── Warehouse health badge ───────────────────────────────────────────────────
 function HealthBadge({ out, low }) {
@@ -102,8 +100,7 @@ export default function Inventory() {
       lowStock:   lowItems.length,
       outStock:   outItems.length,
       shipments:    transfers?.length || 0,
-      backOrders:   bos?.length || 0,
-    })
+      backOrders:   bos?.length || 0 })
 
     // Low stock list (top 8 most urgent)
     const urgent = [
@@ -120,8 +117,7 @@ export default function Inventory() {
         out:   whLevels.filter(l => l.quantity_on_hand === 0).length,
         low:   whLevels.filter(l => l.quantity_on_hand > 0 && l.min_level && l.quantity_on_hand <= l.min_level).length,
         total: whLevels.reduce((s, l) => s + ((l.quantity_on_hand || 0) * (l.parts?.unit_cost || 0)), 0),
-        parts: whLevels.length,
-      }
+        parts: whLevels.length }
     }
     setWarehouseHealth(health)
     setLoading(false)
@@ -154,7 +150,7 @@ export default function Inventory() {
       {/* ── Pending CO alert ── */}
       {stats?.pendingCOs > 0 && (
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
-          style={{ background: 'var(--warning-soft)', border: '1px solid #FCD34D', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
+          style={{ background: 'var(--warning-soft)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
           <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
@@ -169,7 +165,7 @@ export default function Inventory() {
       {/* ── Back order alert ── */}
       {backOrders.length > 0 && (
         <div onClick={() => navigate('/warehouse-hq/queue')}
-          style={{ background: 'var(--blue-tint-80)', border: '1px solid #67E8F9', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
+          style={{ background: 'var(--blue-tint-80)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
           <ClockCountdown size={18} weight="fill" style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--blue-shade-40)' }}>
@@ -233,7 +229,7 @@ export default function Inventory() {
               ['IQ Dashboard', '/warehouse-hq/iq'],
             ].map(([label, path]) => (
               <button key={label} onClick={() => navigate(path)}
-                style={{ padding: '5px 12px', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'transparent', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', color: 'var(--navy)' }}>
+                style={{ padding: '5px 12px', borderRadius: 'var(--r-l)', background: 'transparent', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', color: 'var(--navy)' }}>
                 {label}
               </button>
             ))}

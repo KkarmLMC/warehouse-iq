@@ -37,8 +37,7 @@ const STATUS_MAP = {
   rejected:     { bg: '#FEF2F2', color: '#B91C1C' },
   ok:           { bg: '#F0FDF4', color: '#15803D' },
   low:          { bg: '#FEF3C7', color: '#D97706' },
-  out:          { bg: '#FEF2F2', color: '#B91C1C' },
-}
+  out:          { bg: '#FEF2F2', color: '#B91C1C' } }
 
 export default function StatusBadge({ status, custom, small }) {
   const key = (status || '').toLowerCase().replace(/\s+/g, ' ')
@@ -55,8 +54,7 @@ export default function StatusBadge({ status, custom, small }) {
       background: style.bg,
       color: style.color,
       whiteSpace: 'nowrap',
-      textTransform: 'capitalize',
-    }}>
+      textTransform: 'capitalize' }}>
       {status}
     </span>
   )

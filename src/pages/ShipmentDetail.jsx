@@ -52,14 +52,12 @@ export default function ShipmentDetail() {
       shipped_by:      'shipping',
       shipped_at:      new Date().toISOString(),
       status:          'shipped',
-      updated_at:      new Date().toISOString(),
-    }).eq('id', shipment.id)
+      updated_at:      new Date().toISOString() }).eq('id', shipment.id)
 
     await db.from('sales_orders').update({
       status:      'complete',
       completed_at: new Date().toISOString(),
-      fulfilled_at: new Date().toISOString(),
-    }).eq('id', id)
+      fulfilled_at: new Date().toISOString() }).eq('id', id)
 
     logActivity(db, user?.id, 'warehouse_iq', {
       category:    'shipment',
@@ -67,8 +65,7 @@ export default function ShipmentDetail() {
       label:       `Marked ${so?.so_number || id} Shipped — ${carrier.trim()}`,
       entity_type: 'shipment',
       entity_id:   shipment?.id || id,
-      meta:        { so_id: id, carrier: carrier.trim(), tracking: tracking.trim() },
-    })
+      meta:        { so_id: id, carrier: carrier.trim(), tracking: tracking.trim() } })
     setDone(true)
     setTimeout(() => navigate('/warehouse-hq/shipment'), 1400)
   }
@@ -84,7 +81,7 @@ export default function ShipmentDetail() {
   return (
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/shipment')}
-        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
         <ArrowLeft size={14} /> Back to Shipment Queue
       </button>
 
@@ -94,7 +91,7 @@ export default function ShipmentDetail() {
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {shipTo && (
-          <div style={{ marginTop: 8,padding:'var(--mar-s) var(--pad-m)',background:'var(--surface-raised)',borderRadius:'var(--r-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
+          <div style={{ marginTop: 8,padding:'var(--mar-s) var(--pad-m)',background:'var(--white)',borderRadius:'var(--r-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
             <MapPin size={14} style={{ color:'var(--navy)',flexShrink:0 }} />
             <div>
               <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>SHIP TO</div>
@@ -115,7 +112,7 @@ export default function ShipmentDetail() {
           <span className="card-title"><Package size={15} style={{ marginRight:6 }} />Packing List</span>
           <span style={{ fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.55)' }}>{lines.length} items</span>
         </div>
-        <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
+        <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
           {['Part','Qty','Source'].map(h => (
             <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
           ))}
@@ -175,7 +172,7 @@ export default function ShipmentDetail() {
       </div>
 
       <button onClick={processShipment} disabled={!carrier.trim() || shipping || done}
-        style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',border:'none',
+        style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',
           background: done ? 'var(--success-text)' : !carrier.trim() ? 'var(--border)' : 'var(--navy)',
           color: !carrier.trim() ? 'var(--text-3)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',

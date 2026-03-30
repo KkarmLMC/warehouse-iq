@@ -3,8 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   ArrowLeft, Lightning, Warning, CheckCircle,
   Package, ArrowRight, CaretDown, CaretUp,
-  ClockCountdown, SealWarning, Question,
-} from '@phosphor-icons/react'
+  ClockCountdown, SealWarning, Question } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -15,8 +14,7 @@ const STATE_REGION = {
   TX:'SC', OK:'SC', LA:'SC', AR:'SC',
   CA:'W',  OR:'W',  WA:'W',  NV:'W',  AZ:'W',
   NY:'NE', NJ:'NE', CT:'NE', MA:'NE', PA:'NE',
-  IL:'MW', IN:'MW', OH:'MW', MI:'MW', WI:'MW', MN:'MW',
-}
+  IL:'MW', IN:'MW', OH:'MW', MI:'MW', WI:'MW', MN:'MW' }
 function proximityScore(whState, jobState) {
   if (!jobState) return 0
   if (whState === jobState) return 3
@@ -144,8 +142,7 @@ export default function RunOrder() {
         _primaryWhName:             primaryWh?.wh.name || '—',
         _splitWhName:               splitWh?.name || null,
         _remainingShortage:         remainingAfterSplit,
-        _kitName:                   canonicalKit?.name || null,
-      }
+        _kitName:                   canonicalKit?.name || null }
     })
 
     setComputed(enriched)
@@ -194,8 +191,7 @@ export default function RunOrder() {
       return {
         ...l,
         is_back_ordered: nowBO,
-        back_order_qty:  nowBO ? l._remainingShortage : 0,
-      }
+        back_order_qty:  nowBO ? l._remainingShortage : 0 }
     }))
   }
 
@@ -207,8 +203,7 @@ export default function RunOrder() {
     // Persist: update SO + create/update fulfillment sheet
     await db.from('sales_orders').update({
       status:       'running',
-      run_at:       new Date().toISOString(),
-    }).eq('id', id)
+      run_at:       new Date().toISOString() }).eq('id', id)
 
     const { data: sheet } = await db.from('fulfillment_sheets')
       .upsert({ so_id: id }, { onConflict: 'so_id' })
@@ -224,16 +219,14 @@ export default function RunOrder() {
 
     await db.from('sales_orders').update({
       status:          'fulfillment',
-      fulfillment_at:  new Date().toISOString(),
-    }).eq('id', id)
+      fulfillment_at:  new Date().toISOString() }).eq('id', id)
 
     logActivity(db, user?.id, 'warehouse_iq', {
       category:    'sales_order',
       action:      'pushed_to_fulfillment',
       label:       `Pushed ${so?.so_number || id} to Fulfillment`,
       entity_type: 'sales_order',
-      entity_id:   id,
-    })
+      entity_id:   id })
     setTimeout(() => navigate('/warehouse-hq/queue'), 1200)
   }
 
@@ -252,7 +245,7 @@ export default function RunOrder() {
   return (
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/queue')}
-        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
         <ArrowLeft size={14} /> Back to Queue
       </button>
 
@@ -299,7 +292,7 @@ export default function RunOrder() {
               Running calculates all parts needed, checks stock across warehouses, validates kit descriptions against canonical definitions, and generates the fulfillment sheet. No inventory is deducted at this stage.
             </div>
             <button onClick={runOrder} disabled={running}
-              style={{ padding: 'var(--pad-m) var(--pad-xxl)',borderRadius:'var(--r-xl)',border:'none',background:'var(--navy)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',display:'inline-flex',alignItems:'center',gap:'var(--gap-s)' }}>
+              style={{ padding: 'var(--pad-m) var(--pad-xxl)',borderRadius:'var(--r-xl)',background:'var(--navy)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',display:'inline-flex',alignItems:'center',gap:'var(--gap-s)' }}>
               {running
                 ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Calculating…</>
                 : <><Lightning size={16} weight="fill" /> Run Order</>}
@@ -327,14 +320,14 @@ export default function RunOrder() {
               </div>
               <div style={{ display:'flex',flexDirection:'column',gap:'var(--gap-s)' }}>
                 {kitChanges.filter(l => kitConfirmations[l._idx] === null).map(line => (
-                  <div key={line._idx} style={{ padding: 'var(--pad-m)',background:'rgba(255,255,255,0.7)',borderRadius:'var(--r-l)',border:'1px solid #FCD34D' }}>
+                  <div key={line._idx} style={{ padding: 'var(--pad-m)',background:'rgba(255,255,255,0.7)',borderRadius:'var(--r-l)' }}>
                     <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between',gap:'var(--gap-m)' }}>
                       <div style={{ minWidth:0 }}>
                         <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--warning-text)' }}>{line.description}</div>
                         <div style={{ fontSize:'var(--text-xs)',color:'var(--warning-text)',fontFamily:'var(--mono)',marginTop:2 }}>{line.sku}</div>
                       </div>
                       <button onClick={() => { setKitModalIdx(line._idx); setShowKitModal(true) }}
-                        style={{ flexShrink:0,padding:'var(--pad-s) var(--pad-m)',borderRadius:'var(--r-l)',border:'none',background:'var(--warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-xs)',cursor:'pointer',fontFamily:'var(--font)' }}>
+                        style={{ flexShrink:0,padding:'var(--pad-s) var(--pad-m)',borderRadius:'var(--r-l)',background:'var(--warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-xs)',cursor:'pointer',fontFamily:'var(--font)' }}>
                         Review
                       </button>
                     </div>
@@ -358,7 +351,7 @@ export default function RunOrder() {
 
           {/* ── Stock summary ── */}
           {totalShortages > 0 ? (
-            <div style={{ background:'var(--error-soft)',border:'1px solid #FCA5A5',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
+            <div style={{ background:'var(--error-soft)',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
               <Warning size={18} weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
               <div>
                 <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--error-shade-40)' }}>{totalShortages} part{totalShortages!==1?'s':''} with stock shortage</div>
@@ -366,7 +359,7 @@ export default function RunOrder() {
               </div>
             </div>
           ) : (
-            <div style={{ background:'var(--success-soft)',border:'1px solid #86EFAC',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
+            <div style={{ background:'var(--success-soft)',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
               <CheckCircle size={18} weight="fill" style={{ color:'var(--success-text)',flexShrink:0 }} />
               <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--success-text)' }}>All {computed.length} parts are in stock</div>
             </div>
@@ -380,7 +373,7 @@ export default function RunOrder() {
             </div>
 
             {/* Column headers */}
-            <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
+            <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
               {['Part','Req','Avail','Short'].map(h => (
                 <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
               ))}
@@ -428,12 +421,12 @@ export default function RunOrder() {
                         <div style={{ display:'flex',gap:'var(--gap-s)',marginTop:6,flexWrap:'wrap' }}>
                           {line.split_warehouse_id && (
                             <button onClick={() => setExpandedSplit(p => ({ ...p, [idx]: !p[idx] }))}
-                              style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,border:'1px solid #D97706',background:'transparent',cursor:'pointer',color:'var(--warning)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
+                              style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--warning)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
                               {splitOpen ? <CaretUp size={9}/> : <CaretDown size={9}/>} Split details
                             </button>
                           )}
                           <button onClick={() => toggleBackOrder(idx)}
-                            style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,border:'1px solid #0891B2',background:'transparent',cursor:'pointer',color:'var(--blue-shade-20)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
+                            style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--blue-shade-20)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
                             <ClockCountdown size={10} /> Mark back order
                           </button>
                         </div>
@@ -444,7 +437,7 @@ export default function RunOrder() {
                         <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',marginTop:6 }}>
                           <span style={{ fontSize:'var(--text-xs)',color:'var(--blue-shade-20)' }}>Back ordering {line.back_order_qty || line._remainingShortage} units</span>
                           <button onClick={() => toggleBackOrder(idx)}
-                            style={{ fontSize:'var(--text-xs)',padding:'1px 6px',borderRadius:4,border:'1px solid var(--border-l)',background:'transparent',cursor:'pointer',color:'var(--text-3)',fontFamily:'var(--font)' }}>
+                            style={{ fontSize:'var(--text-xs)',padding:'1px 6px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--text-3)',fontFamily:'var(--font)' }}>
                             Cancel B/O
                           </button>
                         </div>
@@ -464,7 +457,7 @@ export default function RunOrder() {
 
                   {/* Split detail panel */}
                   {splitOpen && isShortage && !isBO && (
-                    <div style={{ margin: '0 var(--mar-l) var(--mar-m)',padding: 'var(--pad-m)',background:'var(--orange-soft)',borderRadius:'var(--r-l)',border:'1px solid #FED7AA' }}>
+                    <div style={{ margin: '0 var(--mar-l) var(--mar-m)',padding: 'var(--pad-m)',background:'var(--orange-soft)',borderRadius:'var(--r-l)' }}>
                       <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--warning-text)',marginBottom:8 }}>Split Fulfillment Plan</div>
                       <div style={{ fontSize:'var(--text-xs)',color:'var(--orange-shade-60)',lineHeight:1.6 }}>
                         <div>Primary: <strong>{line._primaryWhName||'—'}</strong> → pull {line.qty_available} of {line.qty_required}</div>
@@ -489,12 +482,12 @@ export default function RunOrder() {
           {order?.status !== 'fulfillment' && (
             <>
               {unconfirmedKits > 0 && (
-                <div style={{ fontSize:'var(--text-xs)',color:'var(--warning)',fontWeight:700,textAlign:'center',marginBottom:'var(--mar-m)',padding: 'var(--pad-s)',background:'var(--warning-soft)',borderRadius:'var(--r-l)',border:'1px solid #FCD34D' }}>
+                <div style={{ fontSize:'var(--text-xs)',color:'var(--warning)',fontWeight:700,textAlign:'center',marginBottom:'var(--mar-m)',padding: 'var(--pad-s)',background:'var(--warning-soft)',borderRadius:'var(--r-l)' }}>
                   ⚠ Confirm all {unconfirmedKits} kit change{unconfirmedKits!==1?'s':''} above before pushing to fulfillment
                 </div>
               )}
               <button onClick={pushToFulfillment} disabled={!allKitsConfirmed || pushed}
-                style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',border:'none',
+                style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',
                   background: pushed ? 'var(--success-text)' : !allKitsConfirmed ? 'var(--border)' : 'var(--navy)',
                   color: !allKitsConfirmed ? 'var(--text-3)' : '#fff',
                   fontWeight:700,fontSize:'var(--text-sm)',
@@ -526,8 +519,7 @@ export default function RunOrder() {
             <div onClick={() => setShowKitModal(false)}
               style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:299 }} />
             <div style={{ position:'fixed',bottom:0,left:0,right:0,zIndex:300,background:'var(--bg)',
-              borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'1.25rem',
-              boxShadow:'0 -4px 24px rgba(0,0,0,0.2)',maxHeight:'80vh',overflowY:'auto' }}>
+              borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'1.25rem',maxHeight:'80vh',overflowY:'auto' }}>
               <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',marginBottom: 'var(--mar-l)' }}>
                 <SealWarning size={20} weight="fill" style={{ color:'var(--warning)' }} />
                 <div style={{ fontSize:'var(--text-lg)',fontWeight:800 }}>Kit Description Changed</div>
@@ -541,7 +533,7 @@ export default function RunOrder() {
                 <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--warning)',marginBottom:6 }}>
                   Description on this Sales Order:
                 </div>
-                <div style={{ padding: 'var(--pad-m)',background:'var(--warning-soft)',borderRadius:'var(--r-l)',border:'1px solid #FCD34D',fontSize:'var(--text-sm)',color:'var(--warning-text)',lineHeight:1.6 }}>
+                <div style={{ padding: 'var(--pad-m)',background:'var(--warning-soft)',borderRadius:'var(--r-l)',fontSize:'var(--text-sm)',color:'var(--warning-text)',lineHeight:1.6 }}>
                   {line.kit_original_description || line.description}
                 </div>
               </div>
@@ -550,7 +542,7 @@ export default function RunOrder() {
                 <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--navy)',marginBottom:6 }}>
                   Canonical description on file (QB default):
                 </div>
-                <div style={{ padding: 'var(--pad-m)',background: 'var(--white)',borderRadius:'var(--r-l)',border: 'none', boxShadow: 'var(--shadow-xs)',fontSize:'var(--text-sm)',color:'var(--black)',lineHeight:1.6 }}>
+                <div style={{ padding: 'var(--pad-m)',background: 'var(--white)',borderRadius:'var(--r-l)',fontSize:'var(--text-sm)',color:'var(--black)',lineHeight:1.6 }}>
                   {line.kit_canonical_description}
                 </div>
               </div>
@@ -561,11 +553,11 @@ export default function RunOrder() {
 
               <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'var(--gap-m)' }}>
                 <button onClick={() => handleKitConfirm(kitModalIdx, 'reject')}
-                  style={{ padding: 'var(--pad-m)',borderRadius:'var(--r-xl)',border: 'none',background: 'var(--white)', boxShadow: 'var(--shadow-xs)',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',color:'var(--black)' }}>
+                  style={{ padding: 'var(--pad-m)',borderRadius:'var(--r-xl)',background: 'var(--white)',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',color:'var(--black)' }}>
                   Reject — Revert to canonical
                 </button>
                 <button onClick={() => handleKitConfirm(kitModalIdx, 'accept')}
-                  style={{ padding: 'var(--pad-m)',borderRadius:'var(--r-xl)',border:'none',background:'var(--warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)' }}>
+                  style={{ padding: 'var(--pad-m)',borderRadius:'var(--r-xl)',background:'var(--warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)' }}>
                   Accept — Use modified description
                 </button>
               </div>

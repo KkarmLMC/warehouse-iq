@@ -5,8 +5,7 @@ import {
   ArrowsLeftRight, Receipt, SignOut,
   ArrowLineLeft, ArrowLineRight,
   ClipboardText, Truck, ListBullets,
-  DeviceMobileCamera, Desktop, User,
-} from '@phosphor-icons/react'
+  DeviceMobileCamera, Desktop, User } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
 
 // ─── Nav item sets ─────────────────────────────────────────────────────────────
@@ -18,16 +17,14 @@ const NAV_ITEMS_FULL = [
       { path: '/warehouse-hq/inventory', Icon: Package,        label: 'Inventory'     },
       { path: '/warehouse-hq/catalog',   Icon: BookOpen,       label: 'Parts Catalog' },
       { path: '/warehouse-hq/transfer',  Icon: ArrowsLeftRight,label: 'Transfer'      },
-    ],
-  },
+    ] },
   { path: '/sales-orders',       Icon: Receipt,     label: 'Sales Orders' },
   { path: '/warehouse-hq/queue', Icon: ListBullets, label: 'SO Pipeline',
     children: [
       { path: '/warehouse-hq/queue',       Icon: ListBullets,   label: 'SO Queue'    },
       { path: '/warehouse-hq/fulfillment', Icon: ClipboardText, label: 'Fulfillment' },
       { path: '/warehouse-hq/shipment',    Icon: Truck,         label: 'Shipment'    },
-    ],
-  },
+    ] },
 ]
 
 const NAV_ITEMS_MANAGER = [
@@ -97,8 +94,7 @@ function SubNav({ children, collapsed, goTo, currentPath }) {
       <div style={{ position: 'relative', paddingLeft: 4 }}>
         <div style={{
           position: 'absolute', left: '1.375rem', top: 4, bottom: 4,
-          width: 1, background: 'var(--border)', borderRadius: 1,
-        }} />
+          width: 1, background: 'var(--border)', borderRadius: 1 }} />
         {children.map(child => {
           const active = pathMatch(child.path, currentPath)
           return (
@@ -137,8 +133,7 @@ function NavGroup({ item, collapsed, goTo, currentPath }) {
         {collapsed && active && (
           <div style={{
             position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)',
-            width: '0.25rem', height: '0.25rem', borderRadius: '50%', background: 'var(--red)',
-          }} />
+            width: '0.25rem', height: '0.25rem', borderRadius: '50%', background: 'var(--red)' }} />
         )}
       </button>
 
@@ -225,8 +220,7 @@ export default function Sidebar({ collapsed, onToggle }) {
               color: floorMode ? 'var(--blue-tint-60)' : 'rgba(255,255,255,0.55)',
               fontSize: 'var(--text-xs)', fontWeight: 700,
               fontFamily: 'var(--font)', transition: 'all 0.15s',
-              justifyContent: collapsed ? 'center' : 'flex-start',
-            }}
+              justifyContent: collapsed ? 'center' : 'flex-start' }}
           >
             {floorMode
               ? <Desktop size={14} style={{ flexShrink: 0 }} />

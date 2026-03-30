@@ -4,8 +4,7 @@ import {
   ArrowsClockwise, Lock, Buildings, Package,
   TrendUp, CurrencyDollar, Truck, WarningCircle,
   Receipt, CaretRight, ArrowDown, ArrowUp,
-  MagnifyingGlass, X, Download,
-} from '@phosphor-icons/react'
+  MagnifyingGlass, X, Download } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
 const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
@@ -23,7 +22,7 @@ function chip(bg, color) {
 // ─── Summary card ─────────────────────────────────────────────────────────────
 function SumCard({ label, value, sub, color = 'var(--black)', Icon }) {
   return (
-    <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', padding:'var(--pad-l)', border: 'none', boxShadow: 'var(--shadow-xs)' }}>
+    <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', padding:'var(--pad-l)' }}>
       <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', marginBottom: 'var(--mar-s)' }}>
         {Icon && <Icon size={14} style={{ color:'var(--text-3)' }} />}
         <span style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--black)' }}>{label}</span>
@@ -194,12 +193,12 @@ export default function WarehouseIQ() {
         <div style={{ display:'flex', gap:'var(--gap-s)', alignItems:'center', flexWrap:'wrap' }}>
           {!isClosed && period && (
             <button onClick={handleClosePeriod} disabled={closing}
-              style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', border: 'none', background: 'var(--white)', boxShadow: 'var(--shadow-xs)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+              style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
               <Lock size={13} /> {closing ? 'Closing…' : `Close ${periodLabel}`}
             </button>
           )}
           <button onClick={loadPeriod}
-            style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', border: 'none', background: 'var(--white)', boxShadow: 'var(--shadow-xs)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer' }}>
+            style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer' }}>
             <ArrowsClockwise size={13} /> Refresh
           </button>
         </div>
@@ -224,11 +223,9 @@ export default function WarehouseIQ() {
             <button key={w.id} onClick={() => setActiveWH(w.id)}
               style={{
                 flexShrink:0, padding:'0.25rem 0.75rem', borderRadius:'var(--r-xxl)',
-                border:'none',
                 background: activeWH === w.id ? 'var(--navy)' : 'var(--hover)',
                 color: activeWH === w.id ? '#fff' : 'var(--black)',
-                fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap',
-              }}>
+                fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
               {w.name.replace(' Warehouse','')}
             </button>
           ))}
@@ -247,7 +244,7 @@ export default function WarehouseIQ() {
 
       {/* Active POs section */}
       {pos.length > 0 && (
-        <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', overflow:'hidden', border: 'none', boxShadow: 'var(--shadow-xs)', marginBottom:'var(--mar-l)' }}>
+        <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', overflow:'hidden', marginBottom:'var(--mar-l)' }}>
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--pad-m) var(--pad-l)', borderBottom:'1px solid var(--border-l)' }}>
             <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)' }}>
               <Receipt size={15} style={{ color:'var(--navy)' }} />
@@ -255,13 +252,13 @@ export default function WarehouseIQ() {
               <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-xxl)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
             </div>
             <button onClick={() => navigate('/sales-orders')}
-              style={{ fontSize:'var(--text-xs)', fontWeight:600, color:'var(--navy)', background:'none', border:'none', cursor:'pointer', padding:0 }}>
+              style={{ fontSize:'var(--text-xs)', fontWeight:600, color:'var(--navy)', background:'none', cursor:'pointer', padding:0 }}>
               View all
             </button>
           </div>
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
-              style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--gap-m)', padding: 'var(--pad-s) var(--pad-l)', border:'none', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+              style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--gap-m)', padding: 'var(--pad-s) var(--pad-l)', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-l)' : 'none' }}>
               <div style={{ fontSize:'var(--text-2xs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--blue-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--blue)' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
@@ -277,7 +274,7 @@ export default function WarehouseIQ() {
       )}
 
       {/* Cycle table */}
-      <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', overflow:'hidden', border: 'none', boxShadow: 'var(--shadow-xs)' }}>
+      <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', overflow:'hidden' }}>
         
         {/* Table toolbar */}
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom:'1px solid var(--border-l)', display:'flex', gap:'var(--gap-m)', alignItems:'center', flexWrap:'wrap' }}>
@@ -286,13 +283,13 @@ export default function WarehouseIQ() {
             <MagnifyingGlass size={13} style={{ position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:'var(--text-3)' }} />
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
               style={{ width:'100%', paddingLeft:28, paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
-            {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', border:'none', background:'none', cursor:'pointer', color:'var(--text-3)', padding:0 }}><X size={12}/></button>}
+            {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', background:'none', cursor:'pointer', color:'var(--text-3)', padding:0 }}><X size={12}/></button>}
           </div>
           {/* Filter pills */}
           <div style={{ display:'flex', gap:'var(--gap-xs)' }}>
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding:'3px 10px', borderRadius:'var(--r-xxl)', border:'none', background:filter===val?'var(--navy)':'var(--hover)', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+                style={{ padding:'3px 10px', borderRadius:'var(--r-xxl)', background:filter===val?'var(--navy)':'var(--hover)', color:filter===val?'#fff':'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
                 {lbl}
               </button>
             ))}

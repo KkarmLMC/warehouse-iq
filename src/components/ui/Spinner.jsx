@@ -22,8 +22,7 @@ export default function Spinner({ inline, size, label }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: 'var(--pad-xxl)',
-    }}>
+      padding: 'var(--pad-xxl)' }}>
       {el}
     </div>
   )

@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Users, PencilSimple, CheckCircle, Warning,
-  UserPlus, X, ArrowLeft,
-} from '@phosphor-icons/react'
+  UserPlus, X, ArrowLeft } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -18,8 +17,7 @@ const PIPELINE_ROLES = [
 const PIPELINE_LABELS = {
   warehouse_manager: 'WH Manager',
   fulfillment:       'Fulfillment',
-  shipping:          'Shipping',
-}
+  shipping:          'Shipping' }
 
 export default function UserManagement() {
   const navigate  = useNavigate()
@@ -61,8 +59,7 @@ export default function UserManagement() {
     const { error } = await db.from('profiles').update({
       role:          editData.role,
       pipeline_role: editData.pipeline_role || null,
-      full_name:     editData.full_name,
-    }).eq('id', userId)
+      full_name:     editData.full_name }).eq('id', userId)
     setSaving(false)
     if (error) { showFlash('Save failed: ' + error.message, true); return }
     const edited = users.find(u => u.id === userId)
@@ -72,8 +69,7 @@ export default function UserManagement() {
       label:       `Updated role for ${editData.full_name || edited?.email}`,
       entity_type: 'profile',
       entity_id:   userId,
-      meta:        { role: editData.role, pipeline_role: editData.pipeline_role },
-    })
+      meta:        { role: editData.role, pipeline_role: editData.pipeline_role } })
     setEditId(null)
     showFlash('User updated.')
     loadUsers()
@@ -88,8 +84,7 @@ export default function UserManagement() {
       // Fallback: signUp with a temp password — user resets via email
       : db.auth.signUp({
           email: inviteEmail.trim(),
-          password: Math.random().toString(36).slice(2) + 'A1!',
-        })
+          password: Math.random().toString(36).slice(2) + 'A1!' })
     if (error && !error.message.includes('already registered')) {
       setInviting(false)
       showFlash('Invite failed: ' + error.message, true)
@@ -101,8 +96,7 @@ export default function UserManagement() {
       await db.from('profiles').update({
         full_name: inviteName.trim() || null,
         role: inviteRole,
-        pipeline_role: invitePR || null,
-      }).eq('id', existing.id)
+        pipeline_role: invitePR || null }).eq('id', existing.id)
     }
     setInviting(false)
     setShowInvite(false)
@@ -121,7 +115,7 @@ export default function UserManagement() {
     management: { bg: 'var(--success-soft)', color: 'var(--success-text)' },
     warehouse: { bg: 'var(--warning-soft)', color: 'var(--warning)' },
     field: { bg: 'var(--purple-soft)', color: 'var(--purple)' },
-  }[r] || { bg: 'var(--surface-raised)', color: 'var(--black)' })
+  }[r] || { bg: 'var(--white)', color: 'var(--black)' })
 
   if (!isAdmin) return null
 
@@ -129,7 +123,7 @@ export default function UserManagement() {
     <div className="page-content fade-in">
       {/* Header */}
       <button onClick={() => navigate('/warehouse-hq')}
-        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
         <ArrowLeft size={14} /> Back
       </button>
 
@@ -142,7 +136,7 @@ export default function UserManagement() {
           </div>
         </div>
         <button onClick={() => setShowInvite(true)}
-          style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',padding: 'var(--pad-s) var(--pad-l)',borderRadius:'var(--r-xl)',border:'none',background:'var(--navy)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
+          style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',padding: 'var(--pad-s) var(--pad-l)',borderRadius:'var(--r-xl)',background:'var(--navy)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
           <UserPlus size={16} /> Invite User
         </button>
       </div>
@@ -168,7 +162,7 @@ export default function UserManagement() {
             { role:'shipping',          label:'Shipping Worker',    desc:'Sees only Shipment Queue. Enters carrier + tracking, marks orders shipped.' },
             { role:null,                label:'No Pipeline Role',   desc:'Full sidebar access. For office/admin users who need to see everything.' },
           ].map(item => (
-            <div key={item.role || 'none'} style={{ padding: 'var(--pad-m)',background:'var(--surface-raised)',borderRadius:'var(--r-l)' }}>
+            <div key={item.role || 'none'} style={{ padding: 'var(--pad-m)',background:'var(--white)',borderRadius:'var(--r-l)' }}>
               <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--navy)',marginBottom:4 }}>{item.label}</div>
               <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',lineHeight:1.5 }}>{item.desc}</div>
             </div>
@@ -204,7 +198,7 @@ export default function UserManagement() {
                   <div style={{ flex:1,minWidth:0 }}>
                     <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',flexWrap:'wrap' }}>
                       <span style={{ fontWeight:700,fontSize:'var(--text-sm)' }}>{u.full_name || '—'}</span>
-                      {isSelf && <span style={{ fontSize:'var(--text-xs)',fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--surface-raised)',color:'var(--text-3)' }}>you</span>}
+                      {isSelf && <span style={{ fontSize:'var(--text-xs)',fontWeight:600,padding:'1px 5px',borderRadius:3,background:'var(--white)',color:'var(--text-3)' }}>you</span>}
                       <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:rc.bg,color:rc.color,textTransform:'capitalize' }}>{u.role}</span>
                       {u.pipeline_role && (
                         <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'2px 6px',borderRadius:4,background:'var(--blue-tint-80)',color:'var(--blue-shade-20)' }}>
@@ -216,13 +210,13 @@ export default function UserManagement() {
                   </div>
                   {/* Edit */}
                   <button onClick={() => startEdit(u)}
-                    style={{ display:'flex',alignItems:'center',gap:4,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:'var(--pad-s)' }}>
+                    style={{ display:'flex',alignItems:'center',gap:4,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:'var(--pad-s)' }}>
                     <PencilSimple size={14} /> Edit
                   </button>
                 </div>
               ) : (
                 /* Edit form */
-                <div style={{ padding: 'var(--pad-l)',background:'var(--surface-raised)' }}>
+                <div style={{ padding: 'var(--pad-l)',background:'var(--white)' }}>
                   <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--navy)',marginBottom:'var(--mar-m)' }}>
                     Editing: {u.email}
                   </div>
@@ -234,7 +228,7 @@ export default function UserManagement() {
                     <div>
                       <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>App Role</label>
                       <select value={editData.role||''} onChange={e=>setEditData(p=>({...p,role:e.target.value}))}
-                        style={{ width:'100%',height:40,borderRadius:'var(--r-l)',border:'1px solid var(--border)',padding:'0 var(--pad-m)',background:'var(--bg)',fontSize:'var(--text-sm)',fontFamily:'var(--font)' }}>
+                        style={{ width:'100%',height:40,borderRadius:'var(--r-l)',padding:'0 var(--pad-m)',background:'var(--bg)',fontSize:'var(--text-sm)',fontFamily:'var(--font)' }}>
                         {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
                       </select>
                     </div>
@@ -259,11 +253,11 @@ export default function UserManagement() {
                   </div>
                   <div style={{ display:'flex',gap:'var(--gap-s)' }}>
                     <button onClick={cancelEdit}
-                      style={{ flex:1,padding:'var(--pad-s)',borderRadius:'var(--r-l)',border:'1px solid var(--border-l)',background:'transparent',cursor:'pointer',fontSize:'var(--text-sm)',fontWeight:600,fontFamily:'var(--font)' }}>
+                      style={{ flex:1,padding:'var(--pad-s)',borderRadius:'var(--r-l)',background:'transparent',cursor:'pointer',fontSize:'var(--text-sm)',fontWeight:600,fontFamily:'var(--font)' }}>
                       Cancel
                     </button>
                     <button onClick={() => saveEdit(u.id)} disabled={saving}
-                      style={{ flex:2,padding:'var(--pad-s)',borderRadius:'var(--r-l)',border:'none',background:'var(--navy)',color:'#fff',cursor:'pointer',fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:6 }}>
+                      style={{ flex:2,padding:'var(--pad-s)',borderRadius:'var(--r-l)',background:'var(--navy)',color:'#fff',cursor:'pointer',fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:6 }}>
                       {saving ? <><div className="spinner" style={{ width:14,height:14,borderWidth:2 }} /> Saving…</> : <><CheckCircle size={15} /> Save Changes</>}
                     </button>
                   </div>
@@ -279,11 +273,11 @@ export default function UserManagement() {
         <>
           <div onClick={() => setShowInvite(false)}
             style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:299 }} />
-          <div style={{ position:'fixed',bottom:0,left:0,right:0,zIndex:300,background:'var(--bg)',borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'var(--pad-xl)',boxShadow:'0 -4px 24px rgba(0,0,0,0.15)',maxHeight:'90vh',overflowY:'auto' }}>
+          <div style={{ position:'fixed',bottom:0,left:0,right:0,zIndex:300,background:'var(--bg)',borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'var(--pad-xl)',maxHeight:'90vh',overflowY:'auto' }}>
             <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'var(--mar-l)' }}>
               <div style={{ fontSize:'var(--text-lg)',fontWeight:800 }}>Invite New User</div>
               <button onClick={() => setShowInvite(false)}
-                style={{ border:'none',background:'none',cursor:'pointer',padding:'var(--pad-xs)',color:'var(--text-3)' }}>
+                style={{ background:'none',cursor:'pointer',padding:'var(--pad-xs)',color:'var(--text-3)' }}>
                 <X size={20} />
               </button>
             </div>
@@ -299,7 +293,7 @@ export default function UserManagement() {
               <div>
                 <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)',display:'block',marginBottom:6 }}>App Role</label>
                 <select value={inviteRole} onChange={e=>setInviteRole(e.target.value)}
-                  style={{ width:'100%',height:40,borderRadius:'var(--r-l)',border:'1px solid var(--border)',padding:'0 var(--pad-m)',background:'var(--bg)',fontSize:'var(--text-sm)',fontFamily:'var(--font)' }}>
+                  style={{ width:'100%',height:40,borderRadius:'var(--r-l)',padding:'0 var(--pad-m)',background:'var(--bg)',fontSize:'var(--text-sm)',fontFamily:'var(--font)' }}>
                   {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
                 </select>
               </div>
@@ -320,7 +314,7 @@ export default function UserManagement() {
                 </div>
               </div>
               <button onClick={inviteUser} disabled={!inviteEmail.trim() || inviting}
-                style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',border:'none',
+                style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',
                   background: inviteEmail.trim() ? 'var(--navy)' : 'var(--border)',
                   color: inviteEmail.trim() ? '#fff' : 'var(--text-3)',
                   fontWeight:700,fontSize:'var(--text-sm)',cursor: inviteEmail.trim() && !inviting ? 'pointer' : 'not-allowed',

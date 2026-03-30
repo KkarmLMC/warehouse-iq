@@ -35,8 +35,7 @@ const PAGE_META = {
   '/warehouse-hq/inventory': { title: 'Inventory',      parent: '/warehouse-hq' },
   '/warehouse-hq/catalog':   { title: 'Parts Catalog',  parent: '/warehouse-hq' },
   '/warehouse-hq/transfer':  { title: 'Transfer',       parent: '/warehouse-hq' },
-  '/sales-orders':           { title: 'Sales Orders',   parent: null },
-}
+  '/sales-orders':           { title: 'Sales Orders',   parent: null } }
 
 function getPageMeta(pathname) {
   if (PAGE_META[pathname]) return PAGE_META[pathname]

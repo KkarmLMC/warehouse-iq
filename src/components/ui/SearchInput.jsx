@@ -19,8 +19,7 @@ export default function SearchInput({ value, onChange, placeholder = 'Search…'
         style={{
           position: 'absolute', left: 12, top: '50%',
           transform: 'translateY(-50%)',
-          color: 'var(--text-3)', pointerEvents: 'none',
-        }}
+          color: 'var(--text-3)', pointerEvents: 'none' }}
       />
       <input
         className="search-input"
@@ -36,10 +35,9 @@ export default function SearchInput({ value, onChange, placeholder = 'Search…'
           style={{
             position: 'absolute', right: 8, top: '50%',
             transform: 'translateY(-50%)',
-            background: 'none', border: 'none', cursor: 'pointer',
+            background: 'none', cursor: 'pointer',
             color: 'var(--text-3)', display: 'flex', alignItems: 'center',
-            padding: 2,
-          }}
+            padding: 2 }}
         >
           <X size={13} />
         </button>

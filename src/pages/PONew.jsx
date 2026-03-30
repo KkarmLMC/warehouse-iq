@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   Plus, Trash, MagnifyingGlass, X, CaretDown, CaretRight,
   DotsSixVertical, Buildings, Package, Wrench, Check,
-  ArrowRight, Warning,
-} from '@phosphor-icons/react'
+  ArrowRight, Warning } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -21,7 +20,7 @@ function Label({ children, required }) {
 
 function SectionDivider({ label }) {
   return (
-    <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--mar-l) 0', paddingTop: 'var(--pad-m)' }}>
+    <div style={{ margin: 'var(--mar-l) 0', paddingTop: 'var(--pad-m)' }}>
       <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>{label}</div>
     </div>
   )
@@ -89,7 +88,7 @@ function PartSearch({ onSelect, warehouseId }) {
         />
         {query && (
           <button onClick={() => { setQuery(''); setResults([]); setOpen(false) }}
-            style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
+            style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
             <X size={13} />
           </button>
         )}
@@ -98,18 +97,15 @@ function PartSearch({ onSelect, warehouseId }) {
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200,
           background: 'var(--white)', borderRadius: 'var(--r-l)', marginTop: 4,
-          border: 'none', boxShadow: 'var(--shadow-xs)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-          maxHeight: '16rem', overflowY: 'auto',
-        }}>
+          maxHeight: '16rem', overflowY: 'auto' }}>
           {loading ? (
             <div style={{ padding: 'var(--pad-m)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>Searching…</div>
           ) : results.map(part => (
             <button key={part.id} onMouseDown={() => handleSelect(part)}
               style={{
                 width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: 'var(--pad-s) var(--pad-m)', border: 'none', background: 'none',
-                cursor: 'pointer', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
-              }}
+                padding: 'var(--pad-s) var(--pad-m)', background: 'none',
+                cursor: 'pointer', textAlign: 'left', borderBottom: '1px solid var(--border-l)' }}
             >
               <div style={{ minWidth: 0 }}>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{part.name}</div>
@@ -146,7 +142,7 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
           <select
             value={item.warehouse_id || ''}
             onChange={e => onUpdate({ ...item, warehouse_id: e.target.value })}
-            style={{ fontSize: 'var(--text-xs)', marginTop: 4, padding: '2px 4px', border: '1px solid var(--border-l)', borderRadius: 4, background: 'var(--white)', color: 'var(--text-3)', width: '100%' }}
+            style={{ fontSize: 'var(--text-xs)', marginTop: 4, padding: '2px 4px', borderRadius: 4, background: 'var(--white)', color: 'var(--text-3)', width: '100%' }}
           >
             <option value="">No warehouse</option>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name.replace(' Warehouse','')}</option>)}
@@ -169,7 +165,7 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
         ${lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </div>
       <button onClick={onRemove}
-        style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
+        style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
         <Trash size={13} />
       </button>
     </div>
@@ -190,8 +186,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
       description: part.name,
       quantity: 1,
       unit_cost: part.unit_cost || 0,
-      warehouse_id: defaultWarehouseId || '',
-    }
+      warehouse_id: defaultWarehouseId || '' }
     onUpdate({ ...section, items: [...section.items, newItem] })
   }
 
@@ -212,18 +207,18 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
   }
 
   return (
-    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', border: 'none', boxShadow: 'var(--shadow-xs)', marginBottom: 'var(--mar-l)' }}>
+    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
       {/* Section header */}
       <div style={{ background: 'var(--navy)', padding: 'var(--pad-m) var(--pad-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <button onClick={() => setExpanded(e => !e)}
-          style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
+          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
           <CaretDown size={14} style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
         </button>
         <input
           value={section.title}
           onChange={e => onUpdate({ ...section, title: e.target.value })}
           placeholder="Section name (e.g. Green House Ground Ring)"
-          style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--font)' }}
+          style={{ flex: 1, background: 'transparent', outline: 'none', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--font)' }}
         />
         {subtotal > 0 && (
           <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.6)', whiteSpace: 'nowrap' }}>
@@ -231,7 +226,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           </span>
         )}
         <button onClick={onRemove}
-          style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,0,0,0.5)', display: 'flex' }}>
+          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,0,0,0.5)', display: 'flex' }}>
           <Trash size={13} />
         </button>
       </div>
@@ -269,7 +264,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
             <PartSearch onSelect={addPart} warehouseId={defaultWarehouseId} />
           </div>
           <button onClick={addManual}
-            style={{ marginTop: 'var(--mar-s)', display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+            style={{ marginTop: 'var(--mar-s)', display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', cursor: 'pointer', padding: 0 }}>
             <Plus size={12} /> Add custom line item
           </button>
         </div>
@@ -288,10 +283,10 @@ function LaborSection({ items, onUpdate }) {
   const removeItem = (key) => onUpdate(items.filter(i => i._key !== key))
 
   return (
-    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', border: 'none', boxShadow: 'var(--shadow-xs)', marginBottom: 'var(--mar-l)' }}>
+    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
       <div style={{ background: 'var(--navy)', padding: 'var(--pad-m) var(--pad-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <button onClick={() => setExpanded(e => !e)}
-          style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
+          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
           <CaretDown size={14} style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
         </button>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
@@ -318,13 +313,13 @@ function LaborSection({ items, onUpdate }) {
                 ${((parseFloat(item.quantity)||0)*(parseFloat(item.unit_cost)||0)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
               </div>
               <button onClick={() => removeItem(item._key)}
-                style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
+                style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
                 <Trash size={13} />
               </button>
             </div>
           ))}
           <button onClick={addLine}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginTop: 'var(--mar-s)' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', cursor: 'pointer', padding: 0, marginTop: 'var(--mar-s)' }}>
             <Plus size={12} /> Add labor line
           </button>
         </div>
@@ -354,7 +349,7 @@ function TotalsBar({ sections, laborItems }) {
           <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>${laborTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
         </div>
       )}
-      <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: 'var(--pad-s)', marginTop: 'var(--mar-xs)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between',  paddingTop: 'var(--pad-s)', marginTop: 'var(--mar-xs)' }}>
         <span style={{ fontSize: 'var(--text-lg)', fontWeight: 800 }}>Total</span>
         <span style={{ fontSize: 'var(--text-lg)', fontWeight: 800 }}>${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
       </div>
@@ -472,8 +467,7 @@ export default function PONew() {
       materials_total: materialsTotal,
       installation_total: installationTotal,
       grand_total: materialsTotal + installationTotal,
-      queued_at: new Date().toISOString(),
-    }).select().single()
+      queued_at: new Date().toISOString() }).select().single()
 
     if (poErr || !newPO) { setError('Failed to save Sales Order. Please try again.'); setSaving(false); return }
 
@@ -491,8 +485,7 @@ export default function PONew() {
           description: item.description,
           quantity: parseFloat(item.quantity) || 1,
           unit_cost: parseFloat(item.unit_cost) || 0,
-          sort_order: sortOrder++,
-        })
+          sort_order: sortOrder++ })
       }
     }
 
@@ -504,8 +497,7 @@ export default function PONew() {
         description: item.description,
         quantity: parseFloat(item.quantity) || 1,
         unit_cost: parseFloat(item.unit_cost) || 0,
-        sort_order: sortOrder++,
-      })
+        sort_order: sortOrder++ })
     }
 
     await logActivity(db, user?.id, 'warehouse_iq', {
@@ -514,8 +506,7 @@ export default function PONew() {
       label:       `Created Sales Order ${poNumber}`,
       entity_type: 'sales_order',
       entity_id:   newPO.id,
-      meta:        { so_number: poNumber, customer: customerName, total: materialsTotal + installationTotal },
-    })
+      meta:        { so_number: poNumber, customer: customerName, total: materialsTotal + installationTotal } })
     setSaving(false)
     navigate(`/sales-orders/${newPO.id}`)
   }
@@ -536,18 +527,17 @@ export default function PONew() {
             style={{
               padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', cursor: 'pointer',
               border: `2px solid ${division === val ? 'var(--navy)' : 'var(--border-l)'}`,
-              background: division === val ? 'var(--navy)' : 'var(--surface-raised)',
+              background: division === val ? 'var(--navy)' : 'var(--white)',
               color: division === val ? '#fff' : 'var(--black)',
               fontWeight: 700, fontSize: 'var(--text-sm)',
-              transition: 'all 0.15s',
-            }}>
+              transition: 'all 0.15s' }}>
             {lbl}
           </button>
         ))}
       </div>
 
       {/* Customer info */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: 'none', boxShadow: 'var(--shadow-xs)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)' }}>
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, marginBottom: 'var(--mar-m)' }}>Customer</div>
 
         <div style={{ marginBottom: 'var(--mar-m)' }}>
@@ -573,7 +563,7 @@ export default function PONew() {
       </div>
 
       {/* Project info */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: 'none', boxShadow: 'var(--shadow-xs)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)' }}>
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, marginBottom: 'var(--mar-m)' }}>Project Details</div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-s)', marginBottom: 'var(--mar-m)' }}>
@@ -641,7 +631,7 @@ export default function PONew() {
       <LaborSection items={laborItems} onUpdate={setLaborItems} />
 
       {/* Notes */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', border: 'none', boxShadow: 'var(--shadow-xs)', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)' }}>
         <Label>Notes</Label>
         <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this Sales Order…" rows={3} style={{ width: '100%', resize: 'vertical' }} />
       </div>
@@ -660,11 +650,11 @@ export default function PONew() {
       {/* Save actions */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xxl)' }}>
         <button onClick={() => handleSave(false)} disabled={saving}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           {saving ? 'Saving…' : 'Save as Draft'}
         </button>
         <button onClick={() => handleSave(true)} disabled={saving}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           {saving ? 'Saving…' : <><ArrowRight size={15} /> Save & Submit</>}
         </button>
       </div>

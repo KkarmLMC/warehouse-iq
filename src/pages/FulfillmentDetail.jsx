@@ -77,16 +77,14 @@ export default function FulfillmentDetail() {
           quantity_delta:   d.delta,
           reason:           `Fulfillment — SO ${order?.so_number}`,
           related_job_id:   order?.project_id || null,
-          performed_by:     'warehouse',
-        })
+          performed_by:     'warehouse' })
         const { data: lvl } = await db.from('inventory_levels')
           .select('id, quantity_on_hand')
           .eq('part_id', d.part_id).eq('warehouse_id', d.warehouse_id).single()
         if (lvl) {
           await db.from('inventory_levels').update({
             quantity_on_hand: Math.max(0, lvl.quantity_on_hand + d.delta),
-            updated_at: new Date().toISOString(),
-          }).eq('id', lvl.id)
+            updated_at: new Date().toISOString() }).eq('id', lvl.id)
         }
       }))
 
@@ -94,8 +92,7 @@ export default function FulfillmentDetail() {
       await Promise.all([
         db.from('fulfillment_sheets').update({
           confirmed_at: new Date().toISOString(),
-          confirmed_by: 'fulfillment',
-        }).eq('id', sheet.id),
+          confirmed_by: 'fulfillment' }).eq('id', sheet.id),
         db.from('fulfillment_lines').update({ is_confirmed: true }).eq('sheet_id', sheet.id),
       ])
 
@@ -106,8 +103,7 @@ export default function FulfillmentDetail() {
         db.from('sales_orders').update({
           status:      hasBackOrders ? 'back_ordered' : 'shipment',
           shipment_at: new Date().toISOString(),
-          ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}),
-        }).eq('id', id),
+          ...(hasBackOrders ? { back_ordered_at: new Date().toISOString() } : {}) }).eq('id', id),
       ])
 
       logActivity(db, user?.id, 'warehouse_iq', {
@@ -116,8 +112,7 @@ export default function FulfillmentDetail() {
         label:       `Confirmed Fulfillment for ${order?.so_number || id}`,
         entity_type: 'fulfillment_sheet',
         entity_id:   sheet?.id || id,
-        meta:        { so_id: id },
-      })
+        meta:        { so_id: id } })
       setDone(true)
       setTimeout(() => navigate('/warehouse-hq/fulfillment'), 1200)
     } catch (err) {
@@ -140,7 +135,7 @@ export default function FulfillmentDetail() {
   return (
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/fulfillment')}
-        style={{ display:'flex',alignItems:'center',gap:6,border:'none',background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
         <ArrowLeft size={14} /> Back to Fulfillment
       </button>
 
@@ -157,7 +152,7 @@ export default function FulfillmentDetail() {
       </div>
 
       {shortageLines.length > 0 && (
-        <div style={{ background:'var(--error-soft)',border:'1px solid #FCA5A5',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
+        <div style={{ background:'var(--error-soft)',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
           <Warning size={16} weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
           <div style={{ fontSize:'var(--text-xs)',color:'var(--error-shade-40)' }}>
             {shortageLines.length} part{shortageLines.length!==1?'s':''} had shortages — split fulfillment applied where possible. Review red items before confirming.
@@ -173,7 +168,7 @@ export default function FulfillmentDetail() {
         </div>
 
         {/* Column headers */}
-        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--surface-raised)',borderBottom:'1px solid var(--border-l)' }}>
+        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
           {['','Part / Warehouse','Qty'].map(h => (
             <div key={h} style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>{h}</div>
           ))}
@@ -224,8 +219,8 @@ export default function FulfillmentDetail() {
                   {line.split_qty > 0 && <span style={{ color:'var(--warning)',fontSize:'var(--text-xs)' }}>+{line.split_qty}</span>}
                 </div>
                 <button onClick={(e) => flags[line.id] ? clearFlag(e, line.id) : flagLine(e, line.id)}
-                  style={{ fontSize:'var(--text-xs)',padding:'2px 6px',borderRadius:4,border:'none',cursor:'pointer',fontFamily:'var(--font)',marginTop:4,
-                    background: flags[line.id] ? 'var(--error-soft)' : 'var(--surface-raised)',
+                  style={{ fontSize:'var(--text-xs)',padding:'2px 6px',borderRadius:4,cursor:'pointer',fontFamily:'var(--font)',marginTop:4,
+                    background: flags[line.id] ? 'var(--error-soft)' : 'var(--white)',
                     color: flags[line.id] ? 'var(--error-alt)' : 'var(--text-3)' }}>
                   {flags[line.id] ? '⚑ flagged' : '⚑ flag'}
                 </button>
@@ -242,13 +237,13 @@ export default function FulfillmentDetail() {
       </div>
 
       {/* Inventory note */}
-      <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginBottom:'var(--mar-l)',padding: 'var(--pad-m)',background:'var(--surface-raised)',borderRadius:'var(--r-l)' }}>
+      <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginBottom:'var(--mar-l)',padding: 'var(--pad-m)',background:'var(--white)',borderRadius:'var(--r-l)' }}>
         Inventory will be deducted from each warehouse when you push to shipment. Check off each part as you pull it from the shelves.
       </div>
 
       {/* Push to Shipment */}
       <button onClick={pushToShipment} disabled={!allChecked || pushing || done}
-        style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',border:'none',
+        style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',
           background: done ? 'var(--success-text)' : !allChecked ? 'var(--border)' : 'var(--navy)',
           color: !allChecked ? 'var(--text-3)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: allChecked && !pushing && !done ? 'pointer' : 'not-allowed',

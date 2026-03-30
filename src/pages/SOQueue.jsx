@@ -14,8 +14,7 @@ const STAGE = {
   draft:       { label: 'Draft',       color: 'var(--grey-base)', bg: 'var(--grey-tint-80)' },
   submitted:   { label: 'Submitted',   color: 'var(--warning)', bg: 'var(--warning-soft)' },
   published:   { label: 'In Progress', color: 'var(--blue)', bg: 'var(--blue-soft)' },
-  fulfilled:   { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' },
-}
+  fulfilled:   { label: 'Complete',    color: 'var(--success-text)', bg: 'var(--success-soft)' } }
 
 const TABS = [
   { key: 'queued',      label: 'Queue' },
@@ -92,8 +91,8 @@ export default function SOQueue() {
       <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-m)', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
-              background: tab === t.key ? 'var(--navy)' : 'var(--surface-raised)',
+            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-m)', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
+              background: tab === t.key ? 'var(--navy)' : 'var(--white)',
               color: tab === t.key ? '#fff' : 'var(--black)' }}>
             {t.label}{counts[t.key] > 0 ? ` (${counts[t.key]})` : ''}
           </button>

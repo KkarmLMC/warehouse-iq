@@ -30,12 +30,10 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
         padding: 'var(--pad-l) var(--pad-xl)',
         borderRadius: 'var(--r-m)',
         background: isDisabled ? 'var(--text-3)' : (color || 'var(--navy)'),
-        border: 'none',
         cursor: isDisabled ? 'not-allowed' : 'pointer',
         marginBottom: 'var(--mar-xxl)',
         opacity: isDisabled && !done ? 0.7 : 1,
-        transition: 'opacity var(--ease-fast), background var(--ease-fast)',
-      }}
+        transition: 'opacity var(--ease-fast), background var(--ease-fast)' }}
     >
       <div style={{ textAlign: 'left' }}>
         <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: '#fff' }}>
@@ -53,8 +51,7 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
         style={{
           color: '#fff',
           flexShrink: 0,
-          animation: loading ? 'anim-spin 0.8s linear infinite' : 'none',
-        }}
+          animation: loading ? 'anim-spin 0.8s linear infinite' : 'none' }}
       />
     </button>
   )

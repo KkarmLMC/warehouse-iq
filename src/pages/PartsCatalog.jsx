@@ -5,8 +5,7 @@ import {
   ArrowSquareOut, Lightning, Broadcast, GitFork,
   Wrench, Anchor, ShieldCheck, Cube, TreeStructure,
   Funnel, Nut, Stack, Pulse, HardHat, Hammer,
-  Plugs, Rows, Scissors,
-} from '@phosphor-icons/react'
+  Plugs, Rows, Scissors } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
 // ─── Category icon map ────────────────────────────────────────────────────────
@@ -32,8 +31,7 @@ const CATEGORY_ICONS = {
   'Mounting Bases':               Wrench,
   'Surge Protection Devices':     ShieldCheck,
   'Consumables':                  Funnel,
-  'Custom Fabrication':           Hammer,
-}
+  'Custom Fabrication':           Hammer }
 
 // ─── Tab config ───────────────────────────────────────────────────────────────
 const TABS = [
@@ -50,22 +48,18 @@ function CategorySection({ category, parts, onPartPress }) {
   return (
     <div style={{
       background: 'var(--white)', borderRadius: 'var(--r-m)',
-      overflow: 'hidden', border: 'none', boxShadow: 'var(--shadow-xs)',
-      marginBottom: 'var(--mar-m)',
-    }}>
+      overflow: 'hidden',
+      marginBottom: 'var(--mar-m)' }}>
       <button
         onClick={() => setExpanded(e => !e)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center',
-          gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--gap-l)',
-          border: 'none', background: 'var(--navy)', cursor: 'pointer', textAlign: 'left',
-        }}
+          gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--gap-l)', background: 'var(--navy)', cursor: 'pointer', textAlign: 'left' }}
       >
         <div style={{
           width: '2rem', height: '2rem', borderRadius: 'var(--r-m)',
           background: 'rgba(255,255,255,0.12)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-        }}>
+          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <Icon size={15} style={{ color: '#fff' }} />
         </div>
         <div style={{ flex: 1 }}>
@@ -82,28 +76,25 @@ function CategorySection({ category, parts, onPartPress }) {
         <CaretDown size={15} style={{
           color: 'rgba(255,255,255,0.5)', flexShrink: 0,
           transform: expanded ? 'rotate(180deg)' : 'none',
-          transition: 'transform 0.2s ease',
-        }} />
+          transition: 'transform 0.2s ease' }} />
       </button>
 
       {expanded && (
-        <div style={{ borderTop: '1px solid var(--border-l)' }}>
+        <div >
           {parts.map((part, idx) => (
             <button key={part.id} onClick={() => onPartPress(part.id)}
               style={{
                 display: 'flex', alignItems: 'center', gap: '0.75rem',
-                padding: 'var(--pad-m) var(--pad-l)',
-                border: 'none', background: 'none', width: '100%', textAlign: 'left',
+                padding: 'var(--pad-m) var(--pad-l)', background: 'none', width: '100%', textAlign: 'left',
                 borderBottom: idx < parts.length - 1 ? '1px solid var(--border-l)' : 'none',
-                cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
-              }}>
+                cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexWrap: 'wrap' }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {part.name}
                   </div>
                   {part.tags?.includes('shared') && (
-                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-xxl)', background: 'var(--success-soft)', color: 'var(--success-text)', border: '1px solid #BBF7D0', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--r-xxl)', background: 'var(--success-soft)', color: 'var(--success-text)', whiteSpace: 'nowrap', flexShrink: 0 }}>
                       LM + Bolt
                     </span>
                   )}
@@ -160,16 +151,14 @@ export default function PartsCatalog() {
       return categories
         .map(cat => ({
           category: { ...cat, catalog: 'All', originalCatalog: cat.catalog },
-          parts: filteredParts.filter(p => p.category_id === cat.id),
-        }))
+          parts: filteredParts.filter(p => p.category_id === cat.id) }))
         .filter(g => g.parts.length > 0)
     }
     return categories
       .filter(cat => cat.catalog === activeTab)
       .map(cat => ({
         category: cat,
-        parts: filteredParts.filter(p => p.category_id === cat.id),
-      }))
+        parts: filteredParts.filter(p => p.category_id === cat.id) }))
       .filter(g => g.parts.length > 0)
   })()
 
@@ -194,22 +183,18 @@ export default function PartsCatalog() {
       {/* Tabs */}
       <div style={{
         display: 'flex', background: 'var(--white)', borderRadius: 'var(--r-m)',
-        padding: 4, gap: 4, marginBottom: 'var(--pad-l)',
-        border: 'none', boxShadow: 'var(--shadow-xs)',
-      }}>
+        padding: 4, gap: 4, marginBottom: 'var(--pad-l)' }}>
         {TABS.map(tab => {
           const count = tab.key === 'LM' ? lmParts : tab.key === 'Bolt' ? boltParts : parts.length
           const active = activeTab === tab.key
           return (
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
               style={{
-                flex: 1, padding: '0.5rem 0.75rem', borderRadius: 'var(--r-l)',
-                border: 'none', cursor: 'pointer', transition: 'all 0.15s ease',
+                flex: 1, padding: '0.5rem 0.75rem', borderRadius: 'var(--r-l)', cursor: 'pointer', transition: 'all 0.15s ease',
                 background: active ? 'var(--navy)' : 'transparent',
                 color: active ? '#fff' : 'var(--text-3)',
                 fontWeight: active ? 700 : 500,
-                fontSize: 'var(--text-xs)',
-              }}>
+                fontSize: 'var(--text-xs)' }}>
               <div style={{ fontWeight: active ? 700 : 600 }}>{tab.label}</div>
               <div style={{ fontSize: 'var(--text-2xs)', opacity: active ? 0.7 : 0.6, marginTop: 1 }}>
                 {count} parts
@@ -226,7 +211,7 @@ export default function PartsCatalog() {
           placeholder={`Search ${activeTab === 'All' ? 'all parts' : activeTab === 'LM' ? 'Lightning Master parts' : 'Bolt Lightning parts'}…`}
           style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
         {search && (
-          <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}>
+          <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}>
             <X size={14} />
           </button>
         )}

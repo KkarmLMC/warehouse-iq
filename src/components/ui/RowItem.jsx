@@ -6,7 +6,7 @@
  * Props:
  *   icon       — Phosphor icon component e.g. Receipt
  *   iconColor  — icon color (defaults to --navy)
- *   iconBg     — icon container background (defaults to --surface-raised)
+ *   iconBg     — icon container background (defaults to --white)
  *   title      — primary text (--text-sm, weight 600)
  *   subtitle   — secondary text (--text-xs, text-3)
  *   right      — JSX for the right side (value, badge, etc.)
@@ -27,8 +27,7 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
         padding: noPad ? 'var(--pad-m) 0' : 'var(--pad-m) var(--pad-l)',
         borderBottom: last ? 'none' : '1px solid var(--border-l)',
         cursor: onClick ? 'pointer' : 'default',
-        transition: 'background var(--ease-fast)',
-      }}
+        transition: 'background var(--ease-fast)' }}
       onMouseEnter={e => { if (onClick) e.currentTarget.style.background = 'var(--hover)' }}
       onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
     >
@@ -36,10 +35,9 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
         <div style={{
           width: 36, height: 36,
           borderRadius: 'var(--r-l)',
-          background: iconBg || 'var(--surface-raised)',
+          background: iconBg || 'var(--white)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexShrink: 0,
-        }}>
+          flexShrink: 0 }}>
           <Icon size={16} style={{ color: iconColor || 'var(--navy)' }} />
         </div>
       )}
@@ -48,16 +46,14 @@ export default function RowItem({ icon: Icon, iconColor, iconBg, title, subtitle
         <div style={{
           fontSize: 'var(--text-sm)', fontWeight: 600,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-          color: 'var(--black)',
-        }}>
+          color: 'var(--black)' }}>
           {title}
         </div>
         {subtitle && (
           <div style={{
             fontSize: 'var(--text-xs)', color: 'var(--text-3)',
             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-            marginTop: 1,
-          }}>
+            marginTop: 1 }}>
             {subtitle}
           </div>
         )}

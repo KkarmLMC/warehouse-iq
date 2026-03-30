@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
   PencilSimple, ArrowsLeftRight, Plus, Minus,
-  Package, Buildings, ClipboardText, CaretDown, Trash,
-} from '@phosphor-icons/react'
+  Package, Buildings, ClipboardText, CaretDown, Trash } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { logActivity } from '../lib/logActivity.js'
 
@@ -53,8 +52,7 @@ function TransactionRow({ tx, warehouseName }) {
       <div style={{
         width: '2rem', height: '2rem', borderRadius: 'var(--r-xxl)',
         background: isPositive ? 'var(--success-soft)' : 'var(--error-soft)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-      }}>
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isPositive
           ? <Plus size={14} weight="bold" style={{ color: 'var(--success-text)' }} />
           : <Minus size={14} weight="bold" style={{ color: 'var(--error-dark)' }} />
@@ -69,8 +67,7 @@ function TransactionRow({ tx, warehouseName }) {
       </div>
       <div style={{
         fontSize: 'var(--text-md)', fontWeight: 800,
-        color: isPositive ? 'var(--success-text)' : 'var(--error-dark)',
-      }}>
+        color: isPositive ? 'var(--success-text)' : 'var(--error-dark)' }}>
         {isPositive ? '+' : ''}{tx.quantity_delta}
       </div>
     </div>
@@ -107,8 +104,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         p_warehouse_id: warehouseId,
         p_quantity_delta: delta,
         p_transaction_type: type,
-        p_reason: reason || null,
-      })
+        p_reason: reason || null })
     }
 
     // Update on_order and/or min_level if changed
@@ -123,8 +119,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           part_id: part.id,
           warehouse_id: warehouseId,
           quantity_on_hand: currentLevel?.quantity_on_hand || 0,
-          ...updates,
-        }, { onConflict: 'part_id,warehouse_id' })
+          ...updates }, { onConflict: 'part_id,warehouse_id' })
     }
 
     await logActivity(db, userId, 'warehouse_iq', {
@@ -133,8 +128,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
       label:       `Adjusted inventory for ${part?.name || part?.sku || 'part'}`,
       entity_type: 'part',
       entity_id:   part?.id,
-      meta:        { updates },
-    })
+      meta:        { updates } })
     setSaving(false)
     onDone()
   }
@@ -152,8 +146,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 300,
         background: 'var(--white)', borderRadius: 'var(--r-xl) var(--r-xl) 0 0',
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
-        animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)',
-      }}>
+        animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>
         <div style={{ padding: 'var(--pad-l) var(--pad-xl) 0', flexShrink: 0 }}>
           <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-xxl)', margin: '0 auto var(--mar-l)' }} />
           <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 'var(--mar-l)' }}>Adjust Stock</div>
@@ -168,7 +161,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
 
           {/* Divider */}
-          <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
+          <div style={{ margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>Stock Adjustment</div>
           </div>
 
@@ -196,7 +189,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
 
           {/* Divider */}
-          <div style={{ borderTop: '1px solid var(--border-l)', margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
+          <div style={{ margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>Thresholds</div>
           </div>
 
@@ -214,15 +207,14 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
         </div>
 
-        <div style={{ padding: 'var(--pad-l) var(--pad-xl)', paddingBottom: 'calc(var(--pad-l) + env(safe-area-inset-bottom))', flexShrink: 0, borderTop: '1px solid var(--border-l)' }}>
+        <div style={{ padding: 'var(--pad-l) var(--pad-xl)', paddingBottom: 'calc(var(--pad-l) + env(safe-area-inset-bottom))', flexShrink: 0 }}>
           <button onClick={handleSave} disabled={saving || (delta === 0 && onOrder === '' && minLevel === '')}
             style={{
-              width: '100%', padding: '0.75rem', borderRadius: 'var(--r-m)', border: 'none',
+              width: '100%', padding: '0.75rem', borderRadius: 'var(--r-m)',
               background: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--hover)' : 'var(--navy)',
               color: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--text-3)' : '#fff',
               fontWeight: 700, fontSize: 'var(--text-sm)',
-              cursor: (delta === 0 && onOrder === '' && minLevel === '') ? 'default' : 'pointer',
-            }}>
+              cursor: (delta === 0 && onOrder === '' && minLevel === '') ? 'default' : 'pointer' }}>
             {saving ? 'Saving…' : 'Save Changes'}
           </button>
         </div>
@@ -280,7 +272,7 @@ export default function PartDetail() {
             {part.sku && <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)', marginTop: 4 }}>{part.sku}</div>}
           </div>
           <button onClick={() => navigate(`/warehouse-hq/part/${id}/edit`)}
-            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-l)', border: '1px solid rgba(255,255,255,0.2)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
             <PencilSimple size={16} />
           </button>
         </div>
@@ -295,11 +287,11 @@ export default function PartDetail() {
       {/* Action buttons */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
         <button onClick={() => setShowAdjust(true)}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', border: '1px solid var(--navy)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Adjust Stock
         </button>
         <button onClick={() => navigate('/warehouse-hq/transfer')}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
+          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
           <ArrowsLeftRight size={16} /> Transfer
         </button>
       </div>
@@ -345,7 +337,7 @@ export default function PartDetail() {
       <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
         <button
           onClick={() => setShowTx(!showTx)}
-          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none', cursor: 'pointer' }}>
+          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
             <ClipboardText size={16} style={{ color: 'var(--black)' }} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>

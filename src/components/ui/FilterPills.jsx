@@ -20,8 +20,7 @@ export default function FilterPills({ options, active, onChange }) {
       overflowX: 'auto',
       scrollbarWidth: 'none',
       msOverflowStyle: 'none',
-      paddingBottom: 2,
-    }}>
+      paddingBottom: 2 }}>
       {items.map(({ key, label, count }) => {
         const isActive = active === key
         return (
@@ -31,17 +30,14 @@ export default function FilterPills({ options, active, onChange }) {
             style={{
               padding: '4px 12px',
               borderRadius: 'var(--r-xxl)',
-              border: 'none',
               background: isActive ? 'var(--navy)' : 'var(--white)',
               color: isActive ? '#fff' : 'var(--black)',
-              boxShadow: isActive ? 'none' : 'var(--shadow-xs)',
               fontSize: 'var(--text-xs)',
               fontWeight: 600,
               cursor: 'pointer',
               whiteSpace: 'nowrap',
               transition: 'all var(--ease-fast)',
-              flexShrink: 0,
-            }}
+              flexShrink: 0 }}
           >
             {label}{count != null ? ` (${count})` : ''}
           </button>

@@ -3,8 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   Receipt, Buildings, MapPin, Phone, Envelope,
   CalendarBlank, CheckCircle, PaperPlaneTilt,
-  Clock, CaretDown, ArrowRight, Lightning, ClipboardText, Truck,
-} from '@phosphor-icons/react'
+  Clock, CaretDown, ArrowRight, Lightning, ClipboardText, Truck } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
 const STATUS_DISPLAY = {
@@ -18,8 +17,7 @@ const STATUS_DISPLAY = {
   back_ordered: { label: 'Back Order',   icon: Clock,          color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' },
   complete:     { label: 'Complete',     icon: CheckCircle,    color: 'var(--success-text)', bg: 'var(--success-soft)' },
   fulfilled:    { label: 'Complete',     icon: CheckCircle,    color: 'var(--success-text)', bg: 'var(--success-soft)' },
-  cancelled:    { label: 'Cancelled',    icon: Clock,          color: 'var(--grey-tint-20)', bg: 'var(--grey-tint-80)' },
-}
+  cancelled:    { label: 'Cancelled',    icon: Clock,          color: 'var(--grey-tint-20)', bg: 'var(--grey-tint-80)' } }
 
 
 // Action config — what the CTA button does per status
@@ -28,8 +26,7 @@ const ACTION_CFG = {
   running:      { label: 'Continue Run Order',    sub: 'Order is being processed',                   color: 'var(--navy)',   path: id => `/warehouse-hq/queue/${id}` },
   fulfillment:  { label: 'Process Fulfillment',   sub: 'Pick parts and confirm availability',        color: 'var(--blue-shade-40)',       path: id => `/warehouse-hq/fulfillment/${id}` },
   shipment:     { label: 'Process Shipment',      sub: 'Enter carrier details and mark shipped',     color: 'var(--blue-shade-20)',       path: id => `/warehouse-hq/shipment/${id}` },
-  back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--warning)',  path: id => `/warehouse-hq/queue/${id}` },
-}
+  back_ordered:  { label: 'Re-enter Queue',        sub: 'Stock arrived — push back to fulfillment',  color: 'var(--warning)',  path: id => `/warehouse-hq/queue/${id}` } }
 
 function SectionGroup({ label, items }) {
   const [open, setOpen] = useState(true)
@@ -39,8 +36,7 @@ function SectionGroup({ label, items }) {
     <div style={{ marginBottom: 'var(--mar-m)' }}>
       <button onClick={() => setOpen(o => !o)} style={{
         width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: 'var(--pad-s) var(--pad-l)', background: 'var(--navy)', border: 'none', cursor: 'pointer',
-      }}>
+        padding: 'var(--pad-s) var(--pad-l)', background: 'var(--navy)', cursor: 'pointer' }}>
         <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>{label}</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)' }}>
           <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>
@@ -57,8 +53,7 @@ function SectionGroup({ label, items }) {
           padding: 'var(--pad-s) var(--pad-m)',
           borderBottom: idx < items.length - 1 ? '1px solid var(--border-l)' : 'none',
           alignItems: 'start',
-          background: 'var(--white)',
-        }}>
+          background: 'var(--white)' }}>
           <div style={{ minWidth: 0, overflow: 'hidden' }}>
             {item.sku && <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 500, color: 'var(--black)', lineHeight: 1.4 }}>{item.description}</div>
@@ -144,15 +139,14 @@ export default function PODetail() {
             display: 'flex', alignItems: 'center', gap: 4,
             padding: '4px 12px', borderRadius: 'var(--r-xxl)',
             background: statusDisplay.bg,
-            color: statusDisplay.color,
-          }}>
+            color: statusDisplay.color }}>
             <StatusIcon size={12} weight="fill" />
             <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize' }}>{po.status}</span>
           </div>
         </div>
 
         {/* Customer details */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-l)', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 'var(--pad-m)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-l)',  paddingTop: 'var(--pad-m)' }}>
           {(po.customer_city || po.customer_state) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)' }}>
               <MapPin size={12} />
@@ -185,7 +179,7 @@ export default function PODetail() {
 
       {/* Inventory impact (when not yet published) */}
       {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
-        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: 'none', boxShadow: 'var(--shadow-xs)' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)' }}>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
@@ -266,7 +260,7 @@ export default function PODetail() {
 
       {/* Notes */}
       {po.notes && (
-        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', border: 'none', boxShadow: 'var(--shadow-xs)' }}>
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)' }}>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-s)' }}>Notes</div>
           <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', lineHeight: 1.6 }}>{po.notes}</div>
         </div>
@@ -282,9 +276,8 @@ export default function PODetail() {
             style={{
               width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               padding: 'var(--pad-l) var(--pad-xl)', borderRadius: 'var(--r-m)',
-              background: cfg.color, border: 'none', cursor: 'pointer',
-              marginBottom: 'var(--mar-xxl)',
-            }}
+              background: cfg.color, cursor: 'pointer',
+              marginBottom: 'var(--mar-xxl)' }}
           >
             <div style={{ textAlign: 'left' }}>
               <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: '#fff' }}>{cfg.label}</div>

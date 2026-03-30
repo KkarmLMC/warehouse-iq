@@ -8,8 +8,7 @@ const SUB_NAV_MAP = {
     { path: '/warehouse-hq/inventory', label: 'Inventory'     },
     { path: '/warehouse-hq/catalog',   label: 'Parts Catalog' },
     { path: '/warehouse-hq/transfer',  label: 'Transfer'      },
-  ],
-}
+  ] }
 
 const SUPPRESS = ['/warehouse-hq/add-part']
 

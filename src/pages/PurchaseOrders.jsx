@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   Plus, Receipt, Buildings, CalendarBlank, CaretRight,
   MagnifyingGlass, X, CheckCircle, Clock, PaperPlaneTilt,
-  Package, Warning,
-} from '@phosphor-icons/react'
+  Package, Warning } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 
 const STATUS_META = {
@@ -19,8 +18,7 @@ const STATUS_META = {
   complete:     { label: 'Complete',     color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
   fulfilled:    { label: 'Fulfilled',    color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
   fulfilled: { label: 'Fulfilled', color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
-  cancelled: { label: 'Cancelled', color: 'var(--error-dark)', bg: 'var(--error-soft)', icon: X },
-}
+  cancelled: { label: 'Cancelled', color: 'var(--error-dark)', bg: 'var(--error-soft)', icon: X } }
 
 const TABS = [
   { key: 'all',       label: 'All'       },
@@ -38,8 +36,7 @@ function StatusBadge({ status }) {
       display: 'inline-flex', alignItems: 'center', gap: 4,
       padding: '3px 10px', borderRadius: 'var(--r-xxl)',
       fontSize: 'var(--text-xs)', fontWeight: 700,
-      background: meta.bg, color: meta.color,
-    }}>
+      background: meta.bg, color: meta.color }}>
       <Icon size={11} weight="fill" />
       {meta.label}
     </span>
@@ -54,16 +51,14 @@ function POCard({ po, totals, onPress }) {
   return (
     <button onClick={onPress} style={{
       display: 'flex', alignItems: 'center', gap: '0.75rem',
-      padding: 'var(--pad-l)', border: 'none', background: 'none',
+      padding: 'var(--pad-l)', background: 'none',
       width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
-      cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
-    }}>
+      cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
       {/* Icon */}
       <div style={{
         width: '2.75rem', height: '2.75rem', borderRadius: 'var(--r-l)',
         background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-      }}>
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         <Receipt size={20} style={{ color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }} />
       </div>
 
@@ -78,8 +73,7 @@ function POCard({ po, totals, onPress }) {
             fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px',
             borderRadius: 'var(--r-xxl)',
             background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
-            color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)',
-          }}>
+            color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }}>
             {po.division === 'Bolt' ? 'Bolt' : 'LM'}
           </span>
         </div>
@@ -173,7 +167,7 @@ export default function PurchaseOrders() {
           <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Sales Orders</div>
         </div>
         <button onClick={() => navigate('/sales-orders/new')}
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', border: 'none', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
           <Plus size={15} /> New Sales Order
         </button>
       </div>
@@ -183,9 +177,7 @@ export default function PurchaseOrders() {
         <div style={{
           display: 'flex', alignItems: 'center', gap: '0.75rem',
           padding: 'var(--pad-m) var(--pad-l)', background: 'var(--warning-soft)',
-          borderRadius: 'var(--r-l)', marginBottom: '1rem',
-          border: '1px solid #FDE68A', cursor: 'pointer',
-        }} onClick={() => setActiveTab('queued')}>
+          borderRadius: 'var(--r-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
           <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
@@ -218,13 +210,12 @@ export default function PurchaseOrders() {
         {TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             style={{
-              flexShrink: 0, padding: '0.5rem 0.75rem', border: 'none',
+              flexShrink: 0, padding: '0.5rem 0.75rem',
               background: 'none', cursor: 'pointer', fontSize: 'var(--text-sm)',
               fontWeight: activeTab === tab.key ? 700 : 500,
               color: activeTab === tab.key ? 'var(--navy)' : 'var(--text-3)',
               borderBottom: activeTab === tab.key ? '2px solid var(--navy)' : '2px solid transparent',
-              marginBottom: -2, whiteSpace: 'nowrap',
-            }}>
+              marginBottom: -2, whiteSpace: 'nowrap' }}>
             {tab.label}
             {counts[tab.key] > 0 && (
               <span style={{ marginLeft: 6, fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--navy)' : 'var(--hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-3)', borderRadius: 'var(--r-xxl)', padding: '1px 6px', fontWeight: 700 }}>
@@ -242,7 +233,7 @@ export default function PurchaseOrders() {
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
-          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}><X size={13} /></button>}
+          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}><X size={13} /></button>}
         </div>
         {['all', 'LM', 'Bolt'].map(d => (
           <button key={d} onClick={() => setDivisionFilter(d)}
@@ -250,8 +241,7 @@ export default function PurchaseOrders() {
               padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
               border: `1px solid ${divisionFilter === d ? 'var(--navy)' : 'var(--border-l)'}`,
               background: divisionFilter === d ? 'var(--navy)' : 'var(--hover)',
-              color: divisionFilter === d ? '#fff' : 'var(--black)',
-            }}>
+              color: divisionFilter === d ? '#fff' : 'var(--black)' }}>
             {d === 'all' ? 'All Divisions' : d === 'LM' ? 'Lightning Master' : 'Bolt Lightning'}
           </button>
         ))}

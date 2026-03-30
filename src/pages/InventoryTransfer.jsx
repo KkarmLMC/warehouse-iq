@@ -64,8 +64,7 @@ export default function InventoryTransfer() {
       status: 'completed',
       reason: reason || null,
       notes: notes || null,
-      completed_at: new Date().toISOString(),
-    }).select().single()
+      completed_at: new Date().toISOString() }).select().single()
 
     // Create line items
     await db.from('inventory_transfer_items').insert(
@@ -80,16 +79,14 @@ export default function InventoryTransfer() {
         p_quantity_delta: -item.quantity,
         p_transaction_type: 'transfer_out',
         p_reason: reason || `Transfer to ${warehouses.find(w => w.id === toId)?.name}`,
-        p_related_transfer_id: transfer.id,
-      })
+        p_related_transfer_id: transfer.id })
       await db.rpc('adjust_inventory', {
         p_part_id: item.part_id,
         p_warehouse_id: toId,
         p_quantity_delta: item.quantity,
         p_transaction_type: 'transfer_in',
         p_reason: reason || `Transfer from ${warehouses.find(w => w.id === fromId)?.name}`,
-        p_related_transfer_id: transfer.id,
-      })
+        p_related_transfer_id: transfer.id })
     }
 
     const fromName = warehouses.find(w => w.id === fromId)?.name || fromId
@@ -100,8 +97,7 @@ export default function InventoryTransfer() {
       label:       `Transferred ${items.length} part${items.length !== 1 ? 's' : ''} from ${fromName} → ${toName}`,
       entity_type: 'inventory_transfer',
       entity_id:   transfer?.id,
-      meta:        { from: fromName, to: toName, item_count: items.length, reason },
-    })
+      meta:        { from: fromName, to: toName, item_count: items.length, reason } })
     setSaving(false)
     navigate('/warehouse-hq')
   }
@@ -161,10 +157,10 @@ export default function InventoryTransfer() {
             />
           </div>
           {searchResults.length > 0 && (
-            <div style={{ position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 50, background: 'var(--white)', border: 'none', boxShadow: 'var(--shadow-xs)', borderRadius: 'var(--r-l)', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 50, background: 'var(--white)', borderRadius: 'var(--r-l)', overflow: 'hidden' }}>
               {searchResults.map(p => (
                 <button key={p.id} onClick={() => addItem(p)}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none', cursor: 'pointer', borderBottom: '1px solid var(--border-l)', textAlign: 'left' }}>
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: 'var(--pad-m) var(--pad-l)', background: 'none', cursor: 'pointer', borderBottom: '1px solid var(--border-l)', textAlign: 'left' }}>
                   <div>
                     <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{p.name}</div>
                     {p.sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', fontFamily: 'var(--mono)' }}>{p.sku}</div>}
@@ -194,7 +190,7 @@ export default function InventoryTransfer() {
               style={{ width: '4rem', textAlign: 'center' }}
             />
             <button onClick={() => removeItem(idx)}
-              style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--red)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+              style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--red)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
               <Trash size={14} />
             </button>
           </div>
@@ -203,11 +199,11 @@ export default function InventoryTransfer() {
 
       {/* Submit */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xxl)' }}>
-        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '1px solid var(--border-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: 'none', background: saving ? 'var(--hover)' : 'var(--red)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
+          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: saving ? 'var(--hover)' : 'var(--red)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
           {saving ? <><SpinnerGap size={14} style={{ animation: 'spin 1s linear infinite' }} /> Processing…</> : <><CheckCircle size={14} /> Complete Transfer</>}
         </button>
       </div>
