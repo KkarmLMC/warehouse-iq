@@ -393,7 +393,7 @@ export default function WarehouseDetail() {
               style={{
                 flexShrink: 0, padding: '0.25rem 0.75rem', borderRadius: 'var(--r-xxl)',
                 border: `1px solid ${stockFilter === val ? 'var(--navy)' : 'var(--border-l)'}`,
-                background: stockFilter === val ? 'var(--navy)' : 'transparent',
+                background: stockFilter === val ? 'var(--navy)' : 'var(--hover)',
                 color: stockFilter === val ? '#fff' : 'var(--black)',
                 fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
               }}>{lbl}</button>
@@ -426,7 +426,7 @@ export default function WarehouseDetail() {
           cancelled: { color: 'var(--error-dark)', bg: 'var(--error-soft)' },
         }
         return (
-          <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: '1px solid var(--border-l)' }}>
+          <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', border: 'none', boxShadow: 'var(--shadow-xs)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
                 <Receipt size={16} style={{ color: 'var(--navy)' }} />

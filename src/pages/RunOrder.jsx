@@ -550,7 +550,7 @@ export default function RunOrder() {
                 <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--navy)',marginBottom:6 }}>
                   Canonical description on file (QB default):
                 </div>
-                <div style={{ padding: 'var(--pad-m)',background:'var(--surface-raised)',borderRadius:'var(--r-l)',border:'1px solid var(--border-l)',fontSize:'var(--text-sm)',color:'var(--black)',lineHeight:1.6 }}>
+                <div style={{ padding: 'var(--pad-m)',background: 'var(--white)',borderRadius:'var(--r-l)',border: 'none', boxShadow: 'var(--shadow-xs)',fontSize:'var(--text-sm)',color:'var(--black)',lineHeight:1.6 }}>
                   {line.kit_canonical_description}
                 </div>
               </div>
@@ -561,7 +561,7 @@ export default function RunOrder() {
 
               <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'var(--gap-m)' }}>
                 <button onClick={() => handleKitConfirm(kitModalIdx, 'reject')}
-                  style={{ padding: 'var(--pad-m)',borderRadius:'var(--r-xl)',border:'1px solid var(--border-l)',background:'var(--surface-raised)',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',color:'var(--black)' }}>
+                  style={{ padding: 'var(--pad-m)',borderRadius:'var(--r-xl)',border: 'none',background: 'var(--white)', boxShadow: 'var(--shadow-xs)',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',color:'var(--black)' }}>
                   Reject — Revert to canonical
                 </button>
                 <button onClick={() => handleKitConfirm(kitModalIdx, 'accept')}

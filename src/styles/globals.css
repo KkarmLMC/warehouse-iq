@@ -193,6 +193,8 @@
   --purple:           var(--purple-base);
   --purple-soft:      var(--purple-tint-80);
   --purple-border:    var(--purple-tint-60);
+  --teal:             #0d9488;
+  --teal-soft:        #f0fdfa;
 
   /* ── Surfaces, borders, text ──────────────────────────────────────────────── */
   --surface-raised: #f4f5f7;
@@ -438,7 +440,7 @@ input,
 select,
 textarea {
   padding: 0.625rem 0.75rem;
-  background: var(--white);
+  background: var(--surface-raised);
   border: 1px solid var(--border-l);
   border-radius: var(--r-s);
   font-family: var(--font);
@@ -1142,7 +1144,7 @@ textarea { resize: vertical; }
 .form-select,
 .form-textarea {
   padding: 0.75rem;
-  background: var(--white);
+  background: var(--surface-raised);
   border: 1px solid var(--border-l);
   border-radius: var(--r-s);
   font-family: var(--font);
@@ -2024,7 +2026,7 @@ textarea { resize: vertical; }
   transition: background var(--ease-fast);
 }
 
-.kanban-card:hover { background: var(--navy-tint-80); }
+.kanban-card:hover { background: var(--navy-tint-80); transform: translateY(-1px); transition: all var(--ease-fast); }
 
 .kanban-card__top {
   display: flex;
@@ -2057,6 +2059,7 @@ textarea { resize: vertical; }
 
 .dfl-card {
   background: var(--white);
+  box-shadow: var(--shadow-xs);
   border-radius: var(--r-m);
   overflow: hidden;
   margin-bottom: var(--mar-m);

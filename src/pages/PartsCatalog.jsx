@@ -50,7 +50,7 @@ function CategorySection({ category, parts, onPartPress }) {
   return (
     <div style={{
       background: 'var(--white)', borderRadius: 'var(--r-m)',
-      overflow: 'hidden', border: '1px solid var(--border-l)',
+      overflow: 'hidden', border: 'none', boxShadow: 'var(--shadow-xs)',
       marginBottom: 'var(--mar-m)',
     }}>
       <button
@@ -195,7 +195,7 @@ export default function PartsCatalog() {
       <div style={{
         display: 'flex', background: 'var(--white)', borderRadius: 'var(--r-m)',
         padding: 4, gap: 4, marginBottom: 'var(--pad-l)',
-        border: '1px solid var(--border-l)',
+        border: 'none', boxShadow: 'var(--shadow-xs)',
       }}>
         {TABS.map(tab => {
           const count = tab.key === 'LM' ? lmParts : tab.key === 'Bolt' ? boltParts : parts.length

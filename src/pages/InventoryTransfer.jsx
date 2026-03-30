@@ -161,7 +161,7 @@ export default function InventoryTransfer() {
             />
           </div>
           {searchResults.length > 0 && (
-            <div style={{ position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 50, background: 'var(--white)', border: '1px solid var(--border-l)', borderRadius: 'var(--r-l)', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 50, background: 'var(--white)', border: 'none', boxShadow: 'var(--shadow-xs)', borderRadius: 'var(--r-l)', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
               {searchResults.map(p => (
                 <button key={p.id} onClick={() => addItem(p)}
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: 'var(--pad-m) var(--pad-l)', border: 'none', background: 'none', cursor: 'pointer', borderBottom: '1px solid var(--border-l)', textAlign: 'left' }}>

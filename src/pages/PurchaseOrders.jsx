@@ -249,7 +249,7 @@ export default function PurchaseOrders() {
             style={{
               padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
               border: `1px solid ${divisionFilter === d ? 'var(--navy)' : 'var(--border-l)'}`,
-              background: divisionFilter === d ? 'var(--navy)' : 'transparent',
+              background: divisionFilter === d ? 'var(--navy)' : 'var(--hover)',
               color: divisionFilter === d ? '#fff' : 'var(--black)',
             }}>
             {d === 'all' ? 'All Divisions' : d === 'LM' ? 'Lightning Master' : 'Bolt Lightning'}
