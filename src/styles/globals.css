@@ -872,16 +872,16 @@ textarea { resize: vertical; }
    ============================================================================= */
 
 /* Main scrollable page area */
-.page,
-.page-content {
+.page, .page-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   padding: var(--content-pad) var(--content-pad) var(--pad-xxl);
+  background: var(--bg);
   width: 100%;
   box-sizing: border-box;
-  max-width: 100%;
+  min-height: 100%;
 }
 
 /* Standard vertical column layout for page content sections */
@@ -3092,8 +3092,8 @@ textarea { resize: vertical; }
 
   /* Page content clears the bar */
   .page,
-.page-content {
-    padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + var(--pad-l));
+  .page, .page-content {
+    padding: var(--pad-l) var(--pad-m) calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + var(--pad-l));
   }
 }
 
@@ -3246,8 +3246,8 @@ textarea { resize: vertical; }
   /* When sub-nav is visible, push page content up so it doesn't hide behind both bars */
   /* Sub-nav height is ~2.75rem — always add this when sub-nav could appear */
   .has-sub-nav .page,
-.page-content {
-    padding-bottom: calc(var(--bottom-nav-h) + 2.75rem + env(safe-area-inset-bottom) + 1.5rem);
+  .page, .page-content {
+    padding: var(--pad-l) var(--pad-m) calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + var(--pad-l));
   }
 }
 
