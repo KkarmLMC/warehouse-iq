@@ -1202,7 +1202,7 @@ textarea { resize: vertical; }
   gap: var(--gap-xs);
   font-size: var(--text-sm);
   font-weight: 700;
-  color: rgba(255,255,255,0.55);
+  color: var(--white);
   flex-shrink: 0;
   white-space: nowrap;
 }
