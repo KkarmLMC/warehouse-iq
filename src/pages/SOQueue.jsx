@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Receipt, ClockCountdown, ArrowRight, MagnifyingGlass, CaretRight, CheckCircle, Truck } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { soStatus } from '../lib/statusColors.js'
+import PageHeader from '../components/ui/PageHeader'
 
 const TABS = [
   { key: 'queued',       label: 'Queue' },
@@ -53,19 +54,15 @@ export default function SOQueue() {
 
   return (
     <div className="page-content fade-in">
-      {/* Header */}
-      <div style={{ marginBottom: 'var(--mar-xl)' }}>
-        <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>WAREHOUSE IQ</div>
-        <div style={{ fontSize: 'var(--text-base)', fontWeight: 800 }}>Sales Order Pipeline</div>
-      </div>
+      <PageHeader eyebrow="WAREHOUSE IQ" title="Sales Order Pipeline" />
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>
+      <div style={{ display: 'flex', gap: 'var(--gap-xs)', marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            style={{ flexShrink: 0, padding: '6px 14px', borderRadius: 'var(--r-s)', cursor: 'pointer', fontWeight: 700, fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
+            style={{ flexShrink: 0, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-s)', cursor: 'pointer', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
               background: tab === t.key ? 'var(--navy)' : 'var(--white)',
-              color: tab === t.key ? '#fff' : 'var(--black)' }}>
+              color: tab === t.key ? 'var(--white)' : 'var(--black)' }}>
             {t.label}{counts[t.key] > 0 ? ` (${counts[t.key]})` : ''}
           </button>
         ))}
