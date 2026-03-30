@@ -6,6 +6,7 @@ import {
   ArrowUp, CaretRight, Lightning, ClockCountdown } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { soStatus, stockStatusFromQty } from '../lib/statusColors.js'
+import PageHeader from '../components/ui/PageHeader'
 
 // ─── Stage colors ─────────────────────────────────────────────────────────────
 const STAGE_COLOR = {
@@ -139,14 +140,7 @@ export default function Inventory() {
   return (
     <div className="page-content fade-in">
 
-      {/* ── Page header ── */}
-      <div style={{ marginBottom: 'var(--mar-xl)' }}>
-        <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>WAREHOUSE IQ</div>
-        <div style={{ fontSize: 'var(--text-base)', fontWeight: 800 }}>Master Dashboard</div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginTop: 4 }}>
-          All Sales Orders, Change Orders, Inventory & Fulfillment
-        </div>
-      </div>
+      <PageHeader eyebrow="WAREHOUSE IQ" title="Master Dashboard" subtitle="All Sales Orders, Change Orders, Inventory & Fulfillment" />
 
       {/* ── Pending CO alert ── */}
       {stats?.pendingCOs > 0 && (

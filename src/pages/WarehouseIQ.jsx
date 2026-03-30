@@ -6,6 +6,7 @@ import {
   Receipt, CaretRight, ArrowDown, ArrowUp,
   MagnifyingGlass, X, Download } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
+import PageHeader from '../components/ui/PageHeader'
 
 const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
@@ -184,25 +185,20 @@ export default function WarehouseIQ() {
   return (
     <div className="page-content fade-in">
 
-      {/* Page header */}
-      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:'var(--gap-m)', marginBottom: 'var(--mar-l)', flexWrap:'wrap' }}>
-        <div>
-          <div style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--black)', marginBottom:4 }}>WAREHOUSE IQ</div>
-          <div style={{ fontSize:'var(--text-base)', fontWeight:800, lineHeight:1.1 }}>Inventory Dashboard</div>
-        </div>
+      <PageHeader eyebrow="WAREHOUSE IQ" title="Inventory Dashboard" action={
         <div style={{ display:'flex', gap:'var(--gap-s)', alignItems:'center', flexWrap:'wrap' }}>
           {!isClosed && period && (
             <button onClick={handleClosePeriod} disabled={closing}
-              style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+              style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:'var(--fw-bold)', cursor:'pointer', whiteSpace:'nowrap' }}>
               <Lock size={13} /> {closing ? 'Closing…' : `Close ${periodLabel}`}
             </button>
           )}
           <button onClick={loadPeriod}
-            style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer' }}>
+            style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:'var(--fw-bold)', cursor:'pointer' }}>
             <ArrowsClockwise size={13} /> Refresh
           </button>
         </div>
-      </div>
+      } />
 
       {/* Period + warehouse selector */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'var(--mar-l)', flexWrap:'wrap', gap:'var(--gap-m)' }}>

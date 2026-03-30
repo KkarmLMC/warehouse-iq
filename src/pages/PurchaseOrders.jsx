@@ -161,17 +161,16 @@ export default function PurchaseOrders() {
   return (
     <div className="page-content fade-in">
 
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xl)', flexWrap: 'wrap' }}>
-        <div>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 4 }}>INVENTORY</div>
-          <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>Sales Orders</div>
-        </div>
-        <button onClick={() => navigate('/sales-orders/new')}
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
-          <Plus size={15} /> New Sales Order
-        </button>
-      </div>
+      <PageHeader
+        eyebrow="INVENTORY"
+        title="Sales Orders"
+        action={
+          <button onClick={() => navigate('/sales-orders/new')}
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+            <Plus size={15} /> New Sales Order
+          </button>
+        }
+      />
 
       {/* Alert banner for submitted POs awaiting review */}
       {queuedCount > 0 && (
