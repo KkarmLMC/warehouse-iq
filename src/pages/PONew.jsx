@@ -7,6 +7,7 @@ import {
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 import ProjectPicker from '../components/ProjectPicker.jsx'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -500,7 +501,7 @@ export default function PONew() {
         sort_order: sortOrder++ })
     }
 
-    await logActivity(db, user?.id, 'warehouse_iq', {
+    await logActivity(db, user?.id, APP_SOURCE, {
       category:    'sales_order',
       action:      'created',
       label:       `Created Sales Order ${poNumber}`,

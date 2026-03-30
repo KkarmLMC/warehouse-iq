@@ -4,6 +4,7 @@ import { Plus, Trash, CheckCircle, SpinnerGap, MagnifyingGlass } from '@phosphor
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 
 export default function InventoryTransfer() {
   const navigate = useNavigate()
@@ -91,7 +92,7 @@ export default function InventoryTransfer() {
 
     const fromName = warehouses.find(w => w.id === fromId)?.name || fromId
     const toName   = warehouses.find(w => w.id === toId)?.name   || toId
-    await logActivity(db, user?.id, 'warehouse_iq', {
+    await logActivity(db, user?.id, APP_SOURCE, {
       category:    'transfer',
       action:      'completed',
       label:       `Transferred ${items.length} part${items.length !== 1 ? 's' : ''} from ${fromName} → ${toName}`,

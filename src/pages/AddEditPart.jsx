@@ -4,6 +4,7 @@ import { CheckCircle, SpinnerGap } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
 import { db } from '../lib/supabase.js'
 import { logActivity } from '../lib/logActivity.js'
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 
 export default function AddEditPart() {
   const navigate = useNavigate()
@@ -81,7 +82,7 @@ export default function AddEditPart() {
 
     if (isEdit) {
       await db.from('parts').update(payload).eq('id', id)
-      await logActivity(db, user?.id, 'warehouse_iq', {
+      await logActivity(db, user?.id, APP_SOURCE, {
         category:    'parts',
         action:      'updated',
         label:       `Updated Part ${form.sku || form.name}`,
@@ -91,7 +92,7 @@ export default function AddEditPart() {
       navigate(`/warehouse-hq/part/${id}`)
     } else {
       const { data } = await db.from('parts').insert(payload).select().single()
-      await logActivity(db, user?.id, 'warehouse_iq', {
+      await logActivity(db, user?.id, APP_SOURCE, {
         category:    'parts',
         action:      'created',
         label:       `Created Part ${form.sku || form.name}`,

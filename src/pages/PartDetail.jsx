@@ -5,6 +5,7 @@ import {
   Package, Buildings, ClipboardText, CaretDown, Trash } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { logActivity } from '../lib/logActivity.js'
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 
 function WarehouseRow({ level, warehouseName }) {
   const isLow = level.min_level && level.quantity_on_hand <= level.min_level
@@ -122,7 +123,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           ...updates }, { onConflict: 'part_id,warehouse_id' })
     }
 
-    await logActivity(db, userId, 'warehouse_iq', {
+    await logActivity(db, userId, APP_SOURCE, {
       category:    'inventory',
       action:      'adjusted',
       label:       `Adjusted inventory for ${part?.name || part?.sku || 'part'}`,

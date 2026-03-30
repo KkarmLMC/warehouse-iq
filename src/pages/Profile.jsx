@@ -6,6 +6,9 @@ import {
   Buildings, AppWindow, Trash, IdentificationCard } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { logActivity } from '../lib/logActivity.js'
+
+// ─── App source for activity logging — derived from VITE_APP_NAME ─────────────
+const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 import { useAuth } from '../lib/useAuth.jsx'
 
 async function hashPin(pin) {
@@ -25,10 +28,10 @@ function PinPad({ onComplete }) {
   const btnStyle = {
     height: 60, borderRadius: 'var(--r-m)',
     background: 'var(--white)',
-    fontSize: 'var(--text-base)', fontWeight: 700,
+    fontSize: 'var(--text-base)', fontWeight: 'var(--fw-bold)',
     cursor: 'pointer', fontFamily: 'var(--font)',
     transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent' }
-  const hoverOn  = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--navy)' }
+  const hoverOn  = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = 'var(--white)'; e.currentTarget.style.borderColor = 'var(--navy)' }
   const hoverOff = e => { e.currentTarget.style.background = 'var(--white)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }
   const pressOn  = e => { e.currentTarget.style.background = 'var(--navy-dark)'; e.currentTarget.style.transform = 'scale(0.97)' }
   const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
@@ -61,7 +64,7 @@ function PinPad({ onComplete }) {
 // ─── Role badge ───────────────────────────────────────────────────────────────
 function RoleBadge({ label, color = 'var(--navy)', bg = 'rgba(4,36,92,0.08)' }) {
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 'var(--r-s)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize', letterSpacing: '0.02em' }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-s)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', textTransform: 'capitalize', letterSpacing: '0.02em' }}>
       {label}
     </span>
   )
@@ -72,7 +75,7 @@ function Section({ icon: Icon, title, children, action }) {
   return (
     <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', borderRadius: '0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
           {Icon && <Icon size={15} />} {title}
         </div>
         {action}
@@ -85,8 +88,8 @@ function Section({ icon: Icon, title, children, action }) {
 function Row({ label, children }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
-      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>{label}</div>
-      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--black)', textAlign: 'right' }}>{children}</div>
+      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>{label}</div>
+      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)', color: 'var(--black)', textAlign: 'right' }}>{children}</div>
     </div>
   )
 }
@@ -137,7 +140,7 @@ function ActivityLog({ userId }) {
 
   return (
     <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
-      <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
+      <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
         Activity Log
       </div>
       <div style={{ padding: 'var(--pad-s) 0' }}>
@@ -158,17 +161,17 @@ function ActivityLog({ userId }) {
                 borderBottom: i < logs.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
                 {/* Category dot */}
                 <div style={{
-                  width: 8, height: 8, borderRadius: '50%', flexShrink: 0, marginTop: 5,
+                  width: 8, height: 8, borderRadius: '50%', flexShrink: 0, marginTop: 'var(--mar-xs)',
                   background: CATEGORY_COLOR[log.category] || 'var(--text-3)' }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', fontWeight: 500, lineHeight: 1.4 }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', fontWeight: 'var(--fw-medium)', lineHeight: 1.4 }}>
                     {log.label}
                   </div>
                   <div style={{ display: 'flex', gap: 'var(--gap-s)', marginTop: 3, flexWrap: 'wrap', alignItems: 'center' }}>
                     <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{fmtTime(log.created_at)}</span>
                     <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>·</span>
                     <span style={{
-                      fontSize: 'var(--text-xs)', fontWeight: 600,
+                      fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)',
                       color: CATEGORY_COLOR[log.category] || 'var(--text-3)' }}>{APP_LABELS[log.app] || log.app}</span>
                   </div>
                 </div>
@@ -177,12 +180,12 @@ function ActivityLog({ userId }) {
             {/* Pagination */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--pad-m) var(--pad-l)' }}>
               <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
-                style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: page === 0 ? 'var(--text-3)' : 'var(--navy)', background: 'none', cursor: page === 0 ? 'default' : 'pointer', padding: 0 }}>
+                style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: page === 0 ? 'var(--text-3)' : 'var(--navy)', background: 'none', cursor: page === 0 ? 'default' : 'pointer', padding: 0 }}>
                 ← Previous
               </button>
               <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>Page {page + 1}</span>
               <button onClick={() => setPage(p => p + 1)} disabled={logs.length < PER_PAGE}
-                style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: logs.length < PER_PAGE ? 'var(--text-3)' : 'var(--navy)', background: 'none', cursor: logs.length < PER_PAGE ? 'default' : 'pointer', padding: 0 }}>
+                style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: logs.length < PER_PAGE ? 'var(--text-3)' : 'var(--navy)', background: 'none', cursor: logs.length < PER_PAGE ? 'default' : 'pointer', padding: 0 }}>
                 Next →
               </button>
             </div>
@@ -233,7 +236,7 @@ export default function Profile() {
     if (error) { flash('Could not save name.', true); return }
     setEditingName(false)
     flash('Name updated.')
-    logActivity(db, user?.id, 'warehouse_iq', { category: 'profile', action: 'updated_name', label: 'Updated display name' })
+    logActivity(db, user?.id, APP_SOURCE, { category: 'profile', action: 'updated_name', label: 'Updated display name' })
   }
 
   const savePassword = async () => {
@@ -243,7 +246,7 @@ export default function Profile() {
     setPwSaving(false)
     if (error) { flash(error.message, true); return }
     setShowPwForm(false); setNewPw(''); setNewEmail('')
-    logActivity(db, user?.id, 'warehouse_iq', { category: 'profile', action: 'updated_password', label: newEmail ? 'Updated email and password' : 'Changed password' })
+    logActivity(db, user?.id, APP_SOURCE, { category: 'profile', action: 'updated_password', label: newEmail ? 'Updated email and password' : 'Changed password' })
     flash(newEmail ? 'Email + password updated. Check your inbox to confirm.' : 'Password updated.')
   }
 
@@ -263,7 +266,7 @@ export default function Profile() {
       if (error) { setPinError('Could not save PIN.'); return }
       setPinSection('idle'); setNewPin('')
       flash('PIN updated. You can now log in with your PIN.')
-      logActivity(db, user?.id, 'warehouse_iq', { category: 'profile', action: 'updated_pin', label: 'Changed login PIN' })
+      logActivity(db, user?.id, APP_SOURCE, { category: 'profile', action: 'updated_pin', label: 'Changed login PIN' })
     }
   }
 
@@ -306,17 +309,17 @@ export default function Profile() {
       {/* Header */}
       <div style={{ marginBottom: 'var(--mar-xxl)' }}>
         <button onClick={() => navigate(-1)}
-          style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', color: 'var(--text-3)', fontSize: 'var(--text-xs)', cursor: 'pointer', padding: 0, marginBottom: 'var(--mar-m)' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'none', color: 'var(--text-3)', fontSize: 'var(--text-xs)', cursor: 'pointer', padding: 0, marginBottom: 'var(--mar-m)' }}>
           <ArrowLeft size={14} /> Back
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-l)' }}>
           {/* Avatar */}
-          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 'var(--text-xl)', fontWeight: 800, flexShrink: 0 }}>
+          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', fontSize: 'var(--text-xl)', fontWeight: 'var(--fw-black)', flexShrink: 0 }}>
             {initials}
           </div>
           <div>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 2 }}>ACCOUNT</div>
-            <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', marginBottom: 'var(--mar-xs)' }}>ACCOUNT</div>
+            <div style={{ fontSize: 'var(--text-base)', fontWeight: 'var(--fw-black)', lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{user?.email}</div>
           </div>
         </div>
@@ -338,18 +341,18 @@ export default function Profile() {
       <Section icon={User} title="Identity"
         action={!editingName && (
           <button onClick={() => setEditingName(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: '3px 10px', color: '#fff', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 600 }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-m)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 'var(--fw-semibold)' }}>
             <PencilSimple size={12} /> Edit Name
           </button>
         )}>
 
         {editingName ? (
           <div style={{ marginBottom: 'var(--mar-m)' }}>
-            <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>Full Name</label>
+            <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>Full Name</label>
             <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
               <input value={nameVal} onChange={e => setNameVal(e.target.value)} autoFocus style={{ flex: 1 }} onKeyDown={e => e.key === 'Enter' && saveName()} />
               <button onClick={saveName} disabled={nameSaving}
-                style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+                style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: 'var(--white)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
                 {nameSaving ? 'Saving…' : 'Save'}
               </button>
               <button onClick={() => { setEditingName(false); setNameVal(profile?.full_name || '') }}
@@ -366,7 +369,7 @@ export default function Profile() {
 
         {profile?.division && (
           <Row label="Division">
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)' }}>
               <Buildings size={13} style={{ color: 'var(--black)' }} />
               {profile.division}
             </span>
@@ -374,8 +377,8 @@ export default function Profile() {
         )}
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-xs)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>Member Since</div>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--black)' }}>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>Member Since</div>
+          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)', color: 'var(--black)' }}>
             {profile?.created_at ? new Date(profile.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '—'}
           </div>
         </div>
@@ -385,23 +388,23 @@ export default function Profile() {
       <Section icon={Shield} title="Access & Roles">
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>App Role</div>
+          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>App Role</div>
           <RoleBadge label={profile?.role || 'user'} color={roleStyle.color} bg={roleStyle.bg} />
         </div>
 
         {profile?.pipeline_role && pipelineStyle && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>Pipeline Role</div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>Pipeline Role</div>
             <RoleBadge label={profile.pipeline_role.replace('_', ' ')} color={pipelineStyle.color} bg={pipelineStyle.bg} />
           </div>
         )}
 
         {profile?.app_access?.length > 0 && (
           <div style={{ marginBottom: 'var(--mar-m)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 8 }}>App Access</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', marginBottom: 8 }}>App Access</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-xs)' }}>
               {profile.app_access.map(app => (
-                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-s)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 600 }}>
+                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-s)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)' }}>
                   <AppWindow size={12} />
                   {appLabels[app] || app}
                 </span>
@@ -419,7 +422,7 @@ export default function Profile() {
       <Section icon={Lock} title={hasPin ? 'Login PIN' : 'Set Up PIN'}
         action={pinSection !== 'idle' && (
           <button onClick={() => { setPinSection('idle'); setPinError(''); setNewPin('') }}
-            style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: '3px 8px', color: '#fff', fontSize: 'var(--text-xs)', cursor: 'pointer' }}>
+            style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-s)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer' }}>
             Cancel
           </button>
         )}>
@@ -428,7 +431,7 @@ export default function Profile() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
               <div>
-                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
+                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)' }}>{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
                 <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>
                   {hasPin
                     ? `Last set: ${profile?.pin_set_at ? new Date(profile.pin_set_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown'}`
@@ -436,14 +439,14 @@ export default function Profile() {
                 </div>
               </div>
               <button onClick={() => setPinSection(hasPin ? 'verify-old' : 'enter-new')}
-                style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: 'var(--white)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
                 {hasPin ? 'Change PIN' : 'Set PIN'}
               </button>
             </div>
 
             {hasPin && (
               <button onClick={removePin} disabled={removingPin}
-                style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', color: 'var(--error-alt)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', padding: 0 }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'none', color: 'var(--error-alt)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', cursor: 'pointer', padding: 0 }}>
                 <Trash size={13} /> {removingPin ? 'Removing…' : 'Remove PIN'}
               </button>
             )}
@@ -451,9 +454,9 @@ export default function Profile() {
         ) : (
           <div>
             <div style={{ textAlign: 'center', marginBottom: 'var(--mar-l)' }}>
-              <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, marginBottom: 4 }}>{pinLabel[pinSection]}</div>
+              <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-bold)', marginBottom: 4 }}>{pinLabel[pinSection]}</div>
               {pinError && (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-xs)', color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
                   <Warning size={14} /> {pinError}
                 </div>
               )}
@@ -467,7 +470,7 @@ export default function Profile() {
       <Section icon={Lock} title="Password & Email"
         action={!showPwForm && (
           <button onClick={() => setShowPwForm(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: '3px 10px', color: '#fff', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 600 }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-m)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 'var(--fw-semibold)' }}>
             <PencilSimple size={12} /> Change
           </button>
         )}>
@@ -475,13 +478,13 @@ export default function Profile() {
         {showPwForm ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-m)' }}>
             <div>
-              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>New Email (optional)</label>
+              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>New Email (optional)</label>
               <input type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="Leave blank to keep current" />
             </div>
             <div>
-              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>New Password</label>
+              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>New Password</label>
               <div style={{ position: 'relative' }}>
-                <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 40 }} />
+                <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 'var(--sp-10)' }} />
                 <button onClick={() => setShowPw(v => !v)}
                   style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex' }}>
                   {showPw ? <EyeSlash size={16} /> : <Eye size={16} />}
@@ -490,11 +493,11 @@ export default function Profile() {
             </div>
             <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
               <button onClick={() => { setShowPwForm(false); setNewPw(''); setNewEmail('') }}
-                style={{ flex: 1, padding: 'var(--pad-s)', borderRadius: 'var(--r-l)', background: 'transparent', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 600 }}>
+                style={{ flex: 1, padding: 'var(--pad-s)', borderRadius: 'var(--r-l)', background: 'transparent', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)' }}>
                 Cancel
               </button>
               <button onClick={savePassword} disabled={pwSaving}
-                style={{ flex: 2, padding: 'var(--pad-s)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: '#fff', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
+                style={{ flex: 2, padding: 'var(--pad-s)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: 'var(--white)', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
                 {pwSaving ? 'Saving…' : 'Update Password'}
               </button>
             </div>
@@ -508,10 +511,10 @@ export default function Profile() {
 
       {/* ── Sign out ── */}
       <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-xxl)' }}>
-        <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700 }}>Session</div>
+        <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>Session</div>
         <div style={{ padding: 'var(--pad-l)' }}>
           <button onClick={() => { signOut(); navigate('/login', { replace: true }) }}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', background: 'none', color: 'var(--error-alt)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', background: 'none', color: 'var(--error-alt)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}>
             <SignOut size={16} /> Sign Out of this app
           </button>
         </div>
