@@ -182,6 +182,11 @@ export default function UserManagement() {
 
         {loading ? (
           <div style={{ padding: 'var(--pad-xxl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
+        ) : users.length === 0 ? (
+          <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
+            <div className="empty-title">No users yet</div>
+            <div className="empty-desc">Invite your first team member using the button above.</div>
+          </div>
         ) : users.map((u, idx) => {
           const isEditing = editId === u.id
           const rc = roleColor(u.role)
