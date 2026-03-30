@@ -3406,6 +3406,8 @@ textarea { resize: vertical; }
   background: var(--white);
   border-radius: var(--r-m);
   padding: var(--pad-xxl);
+  border: none;
+  outline: none;
 }
 
 /* ─── Warehouse IQ Dashboard ────────────────────────────────────────────────── */

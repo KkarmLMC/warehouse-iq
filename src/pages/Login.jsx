@@ -50,15 +50,15 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
 
   const btnBase = {
     height: 64, borderRadius: 'var(--r-m)',
-    background: 'var(--white)',
-    border: 'none',
+    background: 'var(--bg)',
+    border: 'none', outline: 'none',
     fontSize: 'var(--text-base)', fontWeight: 700,
     cursor: 'pointer', fontFamily: 'var(--font)',
-    transition: 'all 0.12s',
+    transition: 'background 0.12s',
     WebkitTapHighlightColor: 'transparent',
     opacity: loading ? 0.5 : 1 }
   const hoverOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = '#fff' } }
-  const hoverOff = e => { e.currentTarget.style.background = 'var(--white)'; e.currentTarget.style.color = '' }
+  const hoverOff = e => { e.currentTarget.style.background = 'var(--bg)'; e.currentTarget.style.color = '' }
   const pressOn  = e => { if (!loading) { e.currentTarget.style.background = 'var(--navy-dark)'; e.currentTarget.style.transform = 'scale(0.97)' } }
   const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
 
@@ -129,12 +129,12 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
             padding: 'var(--pad-m)',
             borderRadius: 'var(--r-m)',
             background: !isFull || loading
-              ? 'var(--border-l)'
+              ? 'var(--hover)'
               : confirmPin && digits.join('') !== confirmPin
                 ? 'var(--error-soft)'
                 : 'var(--navy)',
             color: !isFull || loading
-              ? 'var(--text-3)'
+              ? 'var(--text-4)'
               : confirmPin && digits.join('') !== confirmPin
                 ? 'var(--error-dark)'
                 : '#fff',
@@ -158,7 +158,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
               width: '100%', maxWidth: 260,
               padding: 'var(--pad-m)',
               borderRadius: 'var(--r-m)',
-              background: loading ? 'var(--border-l)' : 'var(--navy)',
+              background: loading ? 'var(--hover)' : 'var(--navy)',
               color: loading ? 'var(--text-3)' : '#fff',
               fontWeight: 700, fontSize: 'var(--text-md)',
               cursor: loading ? 'not-allowed' : 'pointer',
@@ -319,7 +319,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
             </div>
             <PinPad onPin={handlePinLogin} loading={loading} error={error} requireConfirm={true} />
             <button onClick={() => { setMode('password'); setError('') }}
-              style={{ width: '100%', marginTop: 'var(--mar-l)', padding: 'var(--pad-s)', background: 'none', color: 'var(--navy)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
+              style={{ width: '100%', marginTop: 'var(--mar-l)', padding: 'var(--pad-s)', background: 'none', border: 'none', outline: 'none', color: 'var(--navy)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font)' }}>
               Sign in with email instead
             </button>
           </>
