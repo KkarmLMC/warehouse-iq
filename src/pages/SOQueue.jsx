@@ -11,6 +11,7 @@ const TABS = [
   { key: 'shipment',     label: 'Shipment' },
   { key: 'back_ordered', label: 'Back Orders' },
   { key: 'complete',     label: 'Complete' },
+  { key: 'cancelled',    label: 'Cancelled' },
 ]
 
 export default function SOQueue() {
@@ -27,30 +28,19 @@ export default function SOQueue() {
     const { data } = await db
       .from('sales_orders')
       .select('id, so_number, customer_name, project_name, job_city, job_state, status, grand_total, created_at, queued_at, run_at, division')
-      .in('status', ['queued','running','fulfillment','shipment','back_ordered','complete','draft','submitted','published','fulfilled'])
+      .in('status', ['queued','running','fulfillment','shipment','back_ordered','complete','cancelled'])
       .order('created_at', { ascending: false })
     const all = data || []
     const c = {}
     TABS.forEach(t => { c[t.key] = 0 })
-    all.forEach(o => {
-      const s = normaliseStatus(o.status)
-      if (c[s] !== undefined) c[s]++
-    })
+    all.forEach(o => { if (c[o.status] !== undefined) c[o.status]++ })
     setCounts(c)
     setOrders(all)
     setLoading(false)
   }
 
-  const normaliseStatus = (s) =>
-    s === 'fulfilled' ? 'complete'
-    : s === 'published' ? 'fulfillment'
-    : s === 'submitted' || s === 'draft' ? 'queued'
-    : s === 'back_ordered' ? 'back_ordered'
-    : s
-
   const visible = orders.filter(o => {
-    const ns = normaliseStatus(o.status)
-    if (ns !== tab) return false
+    if (o.status !== tab) return false
     if (!search) return true
     const q = search.toLowerCase()
     return (o.so_number||'').toLowerCase().includes(q)
@@ -103,11 +93,9 @@ export default function SOQueue() {
           return (
             <div key={o.id}
               onClick={() => {
-                const ns = normaliseStatus(o.status)
-                if (ns === 'queued' || ns === 'running') navigate(`/warehouse-hq/queue/${o.id}`)
-                else if (ns === 'fulfillment') navigate(`/warehouse-hq/fulfillment/${o.id}`)
-                else if (ns === 'shipment') navigate(`/warehouse-hq/shipment/${o.id}`)
-                else if (ns === 'back_ordered') navigate(`/warehouse-hq/queue/${o.id}`) // re-run remaining BO items
+                if (o.status === 'queued' || o.status === 'running' || o.status === 'back_ordered') navigate(`/warehouse-hq/queue/${o.id}`)
+                else if (o.status === 'fulfillment') navigate(`/warehouse-hq/fulfillment/${o.id}`)
+                else if (o.status === 'shipment') navigate(`/warehouse-hq/shipment/${o.id}`)
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>

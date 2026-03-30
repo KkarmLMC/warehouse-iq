@@ -5,7 +5,7 @@ import {
   ArrowsLeftRight, Receipt, SignOut,
   ArrowLineLeft, ArrowLineRight,
   ClipboardText, Truck, ListBullets,
-  DeviceMobileCamera, Desktop, User } from '@phosphor-icons/react'
+  DeviceMobileCamera, Desktop, User, UserGear } from '@phosphor-icons/react'
 import { useAuth } from '../lib/useAuth.jsx'
 
 // ─── Nav item sets ─────────────────────────────────────────────────────────────
@@ -50,10 +50,11 @@ function getFloorItems(profile) {
 }
 
 function getFullItems(profile) {
+  const items = [...NAV_ITEMS_FULL]
   if (profile?.role === 'admin') {
-    return NAV_ITEMS_FULL
+    items.push({ path: '/warehouse-hq/users', Icon: UserGear, label: 'Users' })
   }
-  return NAV_ITEMS_FULL
+  return items
 }
 
 // ── Live clock ────────────────────────────────────────────────────────────────

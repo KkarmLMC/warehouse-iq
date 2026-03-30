@@ -1,10 +1,11 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Warehouse, Receipt, ChartBar } from '@phosphor-icons/react'
+import { Warehouse, Receipt, ChartBar, UserCircle } from '@phosphor-icons/react'
 
 const TABS = [
-  { path: '/warehouse-hq', Icon: Warehouse, label: 'Warehouse',    prefix: '/warehouse-hq' },
-  { path: '/warehouse-hq/iq', Icon: ChartBar, label: 'IQ Dashboard', prefix: '/warehouse-hq/iq' },
-  { path: '/sales-orders', Icon: Receipt,   label: 'Sales Orders', prefix: '/sales-orders'  },
+  { path: '/warehouse-hq',    Icon: Warehouse, label: 'Warehouse',    prefix: '/warehouse-hq' },
+  { path: '/warehouse-hq/iq', Icon: ChartBar,  label: 'IQ Dashboard', prefix: '/warehouse-hq/iq' },
+  { path: '/sales-orders',    Icon: Receipt,   label: 'Sales Orders', prefix: '/sales-orders'  },
+  { path: '/profile',         Icon: UserCircle,label: 'Profile',      prefix: '/profile'       },
 ]
 
 export default function BottomNav() {
