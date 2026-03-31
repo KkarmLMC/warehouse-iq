@@ -430,6 +430,7 @@
   /* ── Layout ───────────────────────────────────────────────────────────────── */
   --sidebar-w:   13.75rem;
   --sidebar-wc:  3.75rem;
+  --header-h:    3.25rem;
   --tab-h:       4rem;
   --content-pad: var(--pad-xl);
 
@@ -949,7 +950,7 @@ textarea { resize: vertical; }
 
 .mobile-header {
   background: var(--navy);
-  height: 3.25rem;
+  height: var(--header-h);
   flex-shrink: 0;
   display: none;
   align-items: center;
@@ -1008,7 +1009,7 @@ textarea { resize: vertical; }
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--pad-l);
-  height: 3.25rem;
+  height: var(--header-h);
   flex-shrink: 0;
   background: var(--navy);
 }
