@@ -52,8 +52,8 @@ function SectionGroup({ label, items }) {
             {item.sku && <div style={{ fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--black)', lineHeight: 1.4 }}>{item.description}</div>
           </div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', textAlign: 'right', paddingTop: 2 }}>{item.quantity}</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', textAlign: 'right', paddingTop: 2 }}>${item.unit_cost.toFixed(2)}</div>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)', textAlign: 'right', paddingTop: 2 }}>{item.quantity}</div>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)', textAlign: 'right', paddingTop: 2 }}>${item.unit_cost.toFixed(2)}</div>
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--black)', textAlign: 'right', paddingTop: 2 }}>
             ${(item.quantity * item.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
@@ -232,8 +232,8 @@ export default function PODetail() {
               <div>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>{line.description}</div>
               </div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', textAlign: 'right' }}>{line.quantity}</div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', textAlign: 'right' }}>${line.unit_cost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', textAlign: 'right' }}>{line.quantity}</div>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', textAlign: 'right' }}>${line.unit_cost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, textAlign: 'right' }}>${(line.quantity * line.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
             </div>
           ))}
