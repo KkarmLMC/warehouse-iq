@@ -23,6 +23,7 @@ const ShipmentQueue     = lazy(() => import('./pages/ShipmentQueue'))
 const ShipmentDetail    = lazy(() => import('./pages/ShipmentDetail'))
 const DropShipQueue     = lazy(() => import('./pages/DropShipQueue'))
 const DropShipDetail    = lazy(() => import('./pages/DropShipDetail'))
+const BackorderQueue    = lazy(() => import('./pages/BackorderQueue'))
 const UserManagement    = lazy(() => import('./pages/UserManagement'))
 const PartDetail     = lazy(() => import('./pages/PartDetail'))
 const PurchaseOrders = lazy(() => import('./pages/PurchaseOrders'))
@@ -38,6 +39,7 @@ const PAGE_META = {
   '/warehouse-hq/catalog':   { title: 'Parts Catalog',  parent: '/warehouse-hq' },
   '/warehouse-hq/transfer':  { title: 'Transfer',       parent: '/warehouse-hq' },
   '/warehouse-hq/dropship':  { title: 'Drop Ship Queue', parent: '/warehouse-hq' },
+  '/warehouse-hq/backorder': { title: 'Back Orders',     parent: '/warehouse-hq' },
   '/sales-orders':           { title: 'Sales Orders',   parent: null } }
 
 function getPageMeta(pathname) {
@@ -163,6 +165,7 @@ export default function App() {
               <Route path="/warehouse-hq/shipment/:id"          element={<ShipmentDetail />} />
               <Route path="/warehouse-hq/dropship"              element={<DropShipQueue />} />
               <Route path="/warehouse-hq/dropship/:id"          element={<DropShipDetail />} />
+              <Route path="/warehouse-hq/backorder"             element={<BackorderQueue />} />
               <Route path="/warehouse-hq/users"             element={<UserManagement />} />
               <Route path="*"                                element={<Navigate to="/warehouse-hq" replace />} />
             </Routes>

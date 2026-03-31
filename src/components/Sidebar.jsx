@@ -9,7 +9,7 @@ import {
   Warehouse, ChartBar, Package, BookOpen,
   ArrowsLeftRight, Receipt, SignOut,
   ArrowLineLeft, ArrowLineRight,
-  ClipboardText, Truck, ListBullets, AirplaneTilt,
+  ClipboardText, Truck, ListBullets, AirplaneTilt, ClockCountdown,
   DeviceMobileCamera, Desktop, User, UserGear } from '@phosphor-icons/react'
 import { Sidebar as SharedSidebar } from './ui'
 import { useAuth } from '../lib/useAuth.jsx'
@@ -27,10 +27,11 @@ const NAV_ITEMS_FULL = [
   { path: '/sales-orders',       Icon: Receipt,     label: 'Sales Orders' },
   { path: '/warehouse-hq/queue', Icon: ListBullets, label: 'SO Pipeline',
     children: [
-      { path: '/warehouse-hq/queue',       Icon: ListBullets,   label: 'SO Queue'    },
-      { path: '/warehouse-hq/fulfillment', Icon: ClipboardText, label: 'Fulfillment' },
-      { path: '/warehouse-hq/shipment',    Icon: Truck,         label: 'Shipment'    },
-      { path: '/warehouse-hq/dropship',    Icon: AirplaneTilt,  label: 'Drop Ship'   },
+      { path: '/warehouse-hq/queue',       Icon: ListBullets,    label: 'SO Queue'     },
+      { path: '/warehouse-hq/fulfillment', Icon: ClipboardText,  label: 'Fulfillment'  },
+      { path: '/warehouse-hq/shipment',    Icon: Truck,          label: 'Shipment'     },
+      { path: '/warehouse-hq/dropship',    Icon: AirplaneTilt,   label: 'Drop Ship'    },
+      { path: '/warehouse-hq/backorder',   Icon: ClockCountdown, label: 'Back Orders'  },
     ] },
 ]
 
