@@ -45,7 +45,7 @@ function SectionGroup({ label, items }) {
           gap: 'var(--gap-s)',
           padding: 'var(--pad-s) var(--pad-l)',
           borderBottom: idx < items.length - 1 ? '1px solid var(--border-l)' : 'none',
-          alignItems: 'start',
+          alignItems: 'center',
           background: 'var(--white)' }}>
           <div style={{ minWidth: 0, overflow: 'hidden' }}>
             {item.sku && <div style={{ fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
