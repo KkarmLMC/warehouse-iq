@@ -16,16 +16,16 @@ export default function Card({ title, icon: Icon, meta, action, onAction, childr
     <div className="card" style={style}>
       {title && (
         <div
-          className="card-header"
+          className="list-card__header"
           onClick={onAction}
           style={{ cursor: onAction ? 'pointer' : 'default' }}
         >
-          <span className="card-title">
+          <span className="list-card__title">
             {Icon && <Icon size={16} />}
             {title}
           </span>
-          {meta   && <span className="card-header__meta">{meta}</span>}
-          {action && <span className="card-header__action">{action}</span>}
+          {meta   && <span className="list-card__meta">{meta}</span>}
+          {action && <span className="list-card__action">{action}</span>}
         </div>
       )}
       {children}

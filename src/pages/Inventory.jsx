@@ -195,13 +195,13 @@ export default function Inventory() {
       {/* ── Master Warehouse ── */}
       {master && (
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
-          <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
-            <span className="card-title">
+          <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
+            <span className="list-card__title">
               <Lightning size={16} />
               {master.name}
               <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px', marginLeft: 8 }}>MASTER</span>
             </span>
-            <span className="card-header__meta">{master.city}, {master.state}</span>
+            <span className="list-card__meta">{master.city}, {master.state}</span>
           </div>
           <div style={{ padding: 'var(--pad-l)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)' }}>
             {[
@@ -234,8 +234,8 @@ export default function Inventory() {
 
       {/* ── Sub-Warehouses ── */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
-        <div className="card-header">
-          <span className="card-title"><Buildings size={16}  />Additional Warehouses</span>
+        <div className="list-card__header">
+          <span className="list-card__title"><Buildings size={16}  />Additional Warehouses</span>
         </div>
         {subs.map((wh, idx) => {
           const h = warehouseHealth[wh.id] || {}
@@ -262,9 +262,9 @@ export default function Inventory() {
 
       {/* ── Active Sales Orders ── */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
-        <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/sales-orders')}>
-          <span className="card-title"><Receipt size={16}  />Active Sales Orders</span>
-          <span className="card-header__meta">
+        <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/sales-orders')}>
+          <span className="list-card__title"><Receipt size={16}  />Active Sales Orders</span>
+          <span className="list-card__meta">
             View all <ArrowRight size={12} />
           </span>
         </div>
@@ -298,9 +298,9 @@ export default function Inventory() {
       {/* ── Low / Out of Stock ── */}
       {lowStock.length > 0 && (
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
-          <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
-            <span className="card-title"><Warning size={16} />Low & Out of Stock</span>
-            <span className="card-header__meta">
+          <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
+            <span className="list-card__title"><Warning size={16} />Low & Out of Stock</span>
+            <span className="list-card__meta">
               View inventory <ArrowRight size={12} />
             </span>
           </div>
@@ -327,9 +327,9 @@ export default function Inventory() {
 
       {/* ── Recent Transfers / Shipments ── */}
       <div className="card" style={{ marginBottom: 'var(--mar-xxl)' }}>
-        <div className="card-header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/transfer')}>
-          <span className="card-title"><Truck size={16}  />Recent Transfers</span>
-          <span className="card-header__meta">
+        <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/transfer')}>
+          <span className="list-card__title"><Truck size={16}  />Recent Transfers</span>
+          <span className="list-card__meta">
             New transfer <ArrowRight size={12} />
           </span>
         </div>
