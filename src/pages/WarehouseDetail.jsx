@@ -156,7 +156,7 @@ function StatCard({ label, value, Icon, color = 'var(--black)', bg = 'var(--hove
         </div>
         <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)' }}>{label}</span>
       </div>
-      <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color }}>{value}</div>
+      <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color }}>{value}</div>
     </div>
   )
 }

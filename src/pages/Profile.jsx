@@ -28,7 +28,7 @@ function PinPad({ onComplete }) {
   const btnStyle = {
     height: 60, borderRadius: 'var(--r-m)',
     background: 'var(--white)',
-    fontSize: 'var(--text-base)', fontWeight: 'var(--fw-bold)',
+    fontSize: 'var(--text-md)', fontWeight: 'var(--fw-bold)',
     cursor: 'pointer', fontFamily: 'var(--font)',
     transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent' }
   const hoverOn  = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = 'var(--white)'; e.currentTarget.style.borderColor = 'var(--navy)' }
@@ -319,7 +319,7 @@ export default function Profile() {
           </div>
           <div>
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', marginBottom: 'var(--mar-xs)' }}>ACCOUNT</div>
-            <div style={{ fontSize: 'var(--text-base)', fontWeight: 'var(--fw-black)', lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
+            <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-black)', lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{user?.email}</div>
           </div>
         </div>

@@ -150,7 +150,7 @@ export default function InventoryStock() {
           { label: 'Out of Stock', value: outCount, color: 'var(--error-dark)' },
         ].map(s => (
           <div key={s.label} style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
-            <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: s.color }}>{s.value}</div>
+            <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: s.color }}>{s.value}</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
           </div>
         ))}

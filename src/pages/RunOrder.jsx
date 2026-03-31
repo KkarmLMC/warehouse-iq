@@ -408,7 +408,7 @@ export default function RunOrder() {
       {/* Order header */}
       <div style={{ marginBottom: 'var(--mar-xl)' }}>
         <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',marginBottom:4 }}>
-          <div style={{ fontSize:'var(--text-base)',fontWeight:800 }}>{order?.so_number}</div>
+          <div style={{ fontSize:'var(--text-md)',fontWeight:800 }}>{order?.so_number}</div>
           {order?.status === 'fulfillment' && (
             <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius: 'var(--r-s)',background:'var(--blue-soft)',color:'var(--blue)' }}>In Fulfillment</span>
           )}

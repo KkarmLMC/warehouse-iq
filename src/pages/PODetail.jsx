@@ -122,7 +122,7 @@ export default function PODetail() {
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>
               {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
             </div>
-            <div style={{ fontSize: 'var(--text-base)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
+            <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
             {po.project_name && (
               <div style={{ fontSize: 'var(--text-sm)', color: 'var(--white)', marginTop: 4 }}>{po.project_name}</div>
             )}
@@ -242,7 +242,7 @@ export default function PODetail() {
       {grandTotal > 0 && (
         <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-l) var(--pad-xl)', marginBottom: 'var(--mar-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: '#fff' }}>Total</span>
-          <span style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: '#fff' }}>
+          <span style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: '#fff' }}>
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </span>
         </div>
