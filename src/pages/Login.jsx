@@ -259,7 +259,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         <div style={{ width: 56, height: 56, borderRadius: 'var(--r-m)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--mar-l)' }}>
           <Lightning size="1.75rem" weight="fill" style={{ color: 'var(--white)' }} />
         </div>
-        <div style={{ fontSize: 'var(--text-xxl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--lh-display)', letterSpacing: 'var(--ls-xxl)' }}>
+        <div style={{ fontSize: 'var(--text-xxl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--lh-xxl)', letterSpacing: 'var(--ls-xxl)' }}>
           {import.meta.env.VITE_APP_NAME || 'LMC Platform'}
         </div>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginTop: 'var(--mar-xs)', maxWidth: 280, margin: 'var(--mar-xs) auto 0' }}>
