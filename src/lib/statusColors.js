@@ -54,6 +54,7 @@ const PROJECT_STAGE = {
   'completion':      { color: 'var(--stage-completion)',       bg: 'var(--stage-completion-bg)',       label: 'Completion' },
   'customer-signoff':{ color: 'var(--stage-customer-signoff)', bg: 'var(--stage-customer-signoff-bg)', label: 'Customer Sign-Off' },
   'postponed':       { color: 'var(--stage-postponed)',        bg: 'var(--stage-postponed-bg)',        label: 'Postponed' },
+  'failed':          { color: 'var(--status-failed)',          bg: 'var(--status-failed-bg)',          label: 'Failed' },
   // Aliases used in OpsBoard / MC
   'Awarded':         { color: 'var(--stage-awarded)',          bg: 'var(--stage-awarded-bg)',          label: 'Awarded' },
   'Scheduled':       { color: 'var(--stage-scheduled)',        bg: 'var(--stage-scheduled-bg)',        label: 'Scheduled' },
