@@ -483,8 +483,6 @@
 --stage-in-progress-bg:   var(--orange-soft);
 --stage-inspection:       var(--blue-shade-20);
 --stage-inspection-bg:    var(--blue-soft);
---stage-completion:       var(--orange);
---stage-completion-bg:    var(--orange-soft);
 --stage-customer-signoff: var(--purple);
 --stage-customer-signoff-bg: var(--purple-soft);
 --stage-postponed:        var(--orange-shade-20);
