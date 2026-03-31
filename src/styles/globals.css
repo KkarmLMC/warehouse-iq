@@ -1,49 +1,40 @@
 /* =============================================================================
-   FIELD OPS — GLOBAL STYLESHEET
+   WAREHOUSE IQ — GLOBAL STYLESHEET
    Lightning Master Controls | Bolt Lightning
    =============================================================================
+
+   Token Architecture (3 layers):
+     Layer 1 — Foundation:  Raw palette, type scale, spacing scale, radii
+     Layer 2 — Semantic:    Purpose-driven mappings (--text-*, --surface-*, --state-*, --brand-*)
+     Layer 3 — Component:   UI-part tokens (--btn-*, --field-*, --card-*)
+     Bridge  — Legacy aliases (deprecated — remove when migration complete)
 
    Structure:
    1.  Fonts
    2.  Design Tokens  (:root)
-       2a. Brand Colors
-       2b. Semantic Colors
-       2c. Typography
-       2d. Spacing Scale
-       2e. Radius Scale
-       2f. Transitions
-       2g. Layout
+       2a. Foundation — Colors (palette scales)
+       2b. Foundation — Typography
+       2c. Foundation — Spacing, Radius, Borders, Icons, Grid, Shadows
+       2d. Semantic — Brand, State, Text, Surface, Border
+       2e. Component — Buttons, Fields, Cards, Layout, Transitions, Z-index
+       2f. Status / Stage / Role tokens
+       2g. Legacy alias bridge (deprecated)
    3.  CSS Reset
    4.  Base Elements  (html, body, inputs, buttons)
    5.  Layout Shell   (.app-shell, .sidebar, .main-area)
    6.  Navigation     (.sidebar-*, .tab-bar)
    7.  Page Wrappers  (.page-content, .page-stack)
    8.  Typography     (.label, .fade-in, utilities)
-   9.  Components
-       9a.  Cards
-       9b.  Badges
-       9c.  Buttons
-       9d.  Inputs & Forms
-       9e.  Stats
-       9f.  Sync Badge
-       9g.  Empty & Loading States
-       9h.  Modal / Bottom Sheet
-       9i.  FAB
-       9j.  Section Divider
-   10. Branch Cards   (.branch-*)
-   11. Dashboard      (.dash-*)
-   12. Kanban Board   (.kanban-*)
-   13. Daily Field Log (.dfl-*)
-   14. Safety Forms   (.fr-*)
-   15. Report Forms   (.form-catalog-*)
-   16. Animations     (@keyframes)
+   9.  Components     (Cards, Badges, Buttons, Forms, Stats, etc.)
+   10. Page-specific  (Dashboard, Kanban, etc.)
+   11. Animations     (@keyframes)
    ============================================================================= */
 
 /* =============================================================================
    1. FONTS
    ============================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap');
 
 /* =============================================================================
    2. DESIGN TOKENS
@@ -52,11 +43,17 @@
 :root {
 
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     LMC DESIGN SYSTEM v3.0
-     Source of truth: lmc-design-system.html
-     Edit that document first → verify visually → then port here.
-     All three apps share this identical :root block.
+     LMC DESIGN SYSTEM v3.0 — 3-Layer Token Architecture
+     Layer 1: Foundation (raw values)
+     Layer 2: Semantic   (purpose-driven)
+     Layer 3: Component  (UI-part tokens)
+     Bridge:  Legacy aliases (deprecated, remove after full migration)
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* =========================================================================
+     LAYER 1 — FOUNDATION TOKENS
+     Raw palette values. Not used directly in components.
+     ========================================================================= */
 
   /* ── Absolute anchors ─────────────────────────────────────────────────────── */
   --black: #000000;
@@ -161,13 +158,27 @@
   --grey-tint-60:  #dcdcdd;
   --grey-tint-80:  #edeeee;
 
-  /* ── SEMANTIC TOKENS (Phase 8 cleanup) — replaced legacy color aliases ───── */
-  /* Brand colors */
+  /* ── Teal ─────────────────────────────────────────────────────────────────── */
+  --teal-base:     #0d9488;
+  --teal-shade-20: #0a766d;
+  --teal-shade-40: #085952;
+  --teal-shade-60: #053b36;
+  --teal-shade-80: #031e1b;
+  --teal-tint-20:  #3da9a0;
+  --teal-tint-40:  #6ebfb8;
+  --teal-tint-60:  #9ed4cf;
+  --teal-tint-80:  #cfeae7;
+
+  /* =========================================================================
+     LAYER 2 — SEMANTIC TOKENS
+     Purpose-driven mappings. Default target for all styling work.
+     ========================================================================= */
+  /* ── Brand ─────────────────────────────────────────────────────────────────── */
   --brand-primary:   var(--navy-base);
   --brand-soft:      var(--purple-tint-80);
   --brand-light:     var(--purple-tint-20);
 
-  /* State colors */
+  /* ── State ────────────────────────────────────────────────────────────────── */
   --state-error:           var(--error-base);
   --state-error-text:      var(--error-shade-40);
   --state-error-soft:      var(--error-tint-80);
@@ -180,39 +191,34 @@
   --state-info:            var(--blue-base);
   --state-info-soft:       var(--blue-tint-80);
 
-  /* Text colors */
+  /* ── Text ─────────────────────────────────────────────────────────────────── */
   --text-primary:    #1a1a1a;
   --text-secondary:  var(--grey-base);
   --text-muted:      var(--grey-shade-20);
   --text-inverse:    #ffffff;
 
-  /* Surface colors */
+  /* ── Surfaces — flat UI: color-only depth, NO shadows ─────────────────────
+     Page canvas (#eef0f2) vs White cards (#ffffff) = visual elevation.
+     --surface-raised: input backgrounds, recessed areas within cards ONLY.
+     NEVER use --surface-raised as a card/panel bg — use --surface-base.
+     NEVER add border or box-shadow to containers. Color IS the boundary.  */
   --surface-base:    #ffffff;
   --surface-light:   var(--grey-tint-80);
   --surface-hover:   #f0f1f3;
+  --surface-raised:  #f4f5f7;
+  --surface-page:    #eef0f2;
 
-  /* Border colors */
+  /* ── Borders ──────────────────────────────────────────────────────────────── */
   --border-default:  var(--grey-tint-60);
   --border-subtle:   var(--grey-tint-60);
+  --border-focus:    var(--brand-primary);
 
-  /* ── Surfaces — pure color contrast, no shadows or borders ─────────────────
-     Depth is created ONLY through background color contrast.
-     Page canvas (#eef0f2) vs White cards (#ffffff) = clear elevation.
-     --surface-raised used ONLY for: stat grid bg within white cards,
-       input field backgrounds (recessed), hover states on dark surfaces.
-     NEVER use --surface-raised as a card/panel background — use --white.
-     NEVER add border or box-shadow to containers. Color IS the boundary.  */
-  --surface-raised: #f4f5f7;   /* inputs, recessed within cards */
-  --bg:             #eef0f2;   /* page canvas — all cards sit on this */
-  --hover:          #f0f1f3;   /* hover state for list rows */
-  --border:         transparent;
-  --border-l:       var(--grey-tint-60);  /* row dividers inside cards ONLY */
-  --text-3:         var(--grey-base);
-  --text-4:         var(--grey-tint-40);
-
-  /* ── Typography — Plus Jakarta Sans · Dual-ratio 1.125/1.200 · base 14→16px ─ */
-  --font: 'Plus Jakarta Sans', sans-serif;
-  --mono: var(--font);
+  /* ── Typography — Plus Jakarta Sans · DM Mono · Dual-ratio 1.125/1.200 ───── */
+  --font:         'Plus Jakarta Sans', sans-serif;
+  --mono:         'DM Mono', monospace;
+  --font-body:    var(--font);
+  --font-heading: var(--font);
+  --font-mono:    var(--mono);
 
   /* Dual-ratio fluid scale: Mobile 1.125 (14px base) → Desktop 1.200 (16px base)
      Fluid zone: 375px–1440px. Desktop sizes unchanged from v3.1.                */
@@ -259,37 +265,55 @@
   --fw-bold:     700;
   --fw-black:    800;
 
-  /* ── Gap scale ────────────────────────────────────────────────────────────── */
-  --gap-xs:  clamp(0.25rem,  0.5vw,  0.375rem);
-  --gap-s:   clamp(0.375rem, 0.75vw, 0.625rem);
-  --gap-m:   clamp(0.625rem, 1.25vw, 1rem);
-  --gap-l:   clamp(0.875rem, 1.75vw, 1.25rem);
-  --gap-xl:  clamp(1.25rem,  2.5vw,  1.75rem);
-  --gap-xxl: clamp(1.5rem,   3.5vw,  2.5rem);
+  /* ── Unified spacing scale (canonical) ──────────────────────────────────── */
+  --space-2xs: clamp(0.125rem, 0.25vw,  0.1875rem);
+  --space-xs:  clamp(0.25rem,  0.5vw,   0.375rem);
+  --space-s:   clamp(0.375rem, 0.75vw,  0.625rem);
+  --space-m:   clamp(0.625rem, 1.25vw,  1rem);
+  --space-l:   clamp(0.875rem, 1.75vw,  1.25rem);
+  --space-xl:  clamp(1.25rem,  2.5vw,   1.75rem);
+  --space-2xl: clamp(1.5rem,   3.5vw,   2.5rem);
+  --space-3xl: clamp(2rem,     4.5vw,   3.5rem);
 
-  /* ── Padding scale ────────────────────────────────────────────────────────── */
-  --pad-xs:  clamp(0.25rem,  0.5vw,  0.375rem);
-  --pad-s:   clamp(0.375rem, 0.75vw, 0.5rem);
-  --pad-m:   clamp(0.5rem,   1vw,    0.875rem);
-  --pad-l:   clamp(0.875rem, 1.5vw,  1.25rem);
-  --pad-xl:  clamp(1rem,     2vw,    1.5rem);
-  --pad-xxl: clamp(1.25rem,  2.5vw,  2rem);
+  /* ── Gap scale (deprecated — alias to --space-*) ─────────────────────────── */
+  --gap-xs:  var(--space-xs);
+  --gap-s:   var(--space-s);
+  --gap-m:   var(--space-m);
+  --gap-l:   var(--space-l);
+  --gap-xl:  var(--space-xl);
+  --gap-xxl: var(--space-2xl);
 
-  /* ── Margin scale ─────────────────────────────────────────────────────────── */
-  --mar-xs:  clamp(0.25rem,  0.5vw,  0.375rem);
-  --mar-s:   clamp(0.375rem, 0.75vw, 0.625rem);
-  --mar-m:   clamp(0.625rem, 1.25vw, 1rem);
-  --mar-l:   clamp(0.875rem, 1.75vw, 1.25rem);
-  --mar-xl:  clamp(1.25rem,  2.5vw,  1.75rem);
-  --mar-xxl: clamp(1.5rem,   3.5vw,  2.5rem);
+  /* ── Padding scale (deprecated — alias to --space-*) ─────────────────────── */
+  --pad-xs:  var(--space-xs);
+  --pad-s:   var(--space-s);
+  --pad-m:   var(--space-m);
+  --pad-l:   var(--space-l);
+  --pad-xl:  var(--space-xl);
+  --pad-xxl: var(--space-2xl);
 
-  /* ── Radius scale ─────────────────────────────────────────────────────────── */
+  /* ── Margin scale (deprecated — alias to --space-*) ──────────────────────── */
+  --mar-xs:  var(--space-xs);
+  --mar-s:   var(--space-s);
+  --mar-m:   var(--space-m);
+  --mar-l:   var(--space-l);
+  --mar-xl:  var(--space-xl);
+  --mar-xxl: var(--space-2xl);
+
+  /* ── Foundation radius scale ──────────────────────────────────────────────── */
   --r-xs:  0.25rem;
   --r-s:   0.375rem;
   --r-m:   clamp(0.5rem,  0.8vw, 0.75rem);
   --r-l:   clamp(0.75rem, 1.2vw, 1rem);
   --r-xl:  clamp(1rem,    1.5vw, 1.25rem);
   --r-xxl: 0.375rem; /* squared — no pills */
+
+  /* ── Semantic radius aliases ──────────────────────────────────────────────── */
+  --radius-xs:  var(--r-xs);
+  --radius-s:   var(--r-s);
+  --radius-m:   var(--r-m);
+  --radius-l:   var(--r-l);
+  --radius-xl:  var(--r-xl);
+  --radius-xxl: var(--r-xxl);
 
   /* ── Border width scale ───────────────────────────────────────────────────── */
   --bw-xs:  0.0625em;
@@ -357,6 +381,11 @@
   --z-toast:   200;
   --z-max:     9999;
 
+  /* =========================================================================
+     LAYER 3 — COMPONENT TOKENS
+     Reusable UI-part tokens. Components resolve appearance from these.
+     ========================================================================= */
+
   /* ── Button tokens ────────────────────────────────────────────────────────── */
   --btn-navy-bg:              var(--navy-base);
   --btn-navy-text:            var(--surface-base);
@@ -423,6 +452,23 @@
   --btn-ghost-disabled-text:   var(--grey-tint-40);
   --btn-ghost-disabled-border: var(--grey-tint-80);
 
+  /* ── Field tokens ─────────────────────────────────────────────────────────── */
+  --field-bg:           var(--surface-base);
+  --field-text:         var(--text-primary);
+  --field-placeholder:  var(--grey-tint-20);
+  --field-border:       var(--border-subtle);
+  --field-border-focus: var(--brand-primary);
+  --field-radius:       var(--radius-s);
+  --field-disabled-bg:  var(--grey-tint-80);
+  --field-disabled-text: var(--text-muted);
+
+  /* ── Card tokens ──────────────────────────────────────────────────────────── */
+  --card-bg:            var(--surface-base);
+  --card-radius:        var(--radius-m);
+  --card-header-bg:     var(--brand-primary);
+  --card-header-text:   var(--text-inverse);
+  --card-padding:       var(--space-l);
+
   /* ── Transitions ──────────────────────────────────────────────────────────── */
   --ease-fast:    0.12s ease;
   --ease-base:    0.18s ease;
@@ -436,12 +482,71 @@
   --tab-h:       4rem;
   --content-pad: var(--space-xl);
 
+  /* =========================================================================
+     LEGACY ALIAS BRIDGE (deprecated — remove after full migration)
+     Maps old shorthand token names → new foundation/semantic tokens.
+     No new code should reference these. Use semantic tokens instead.
+     ========================================================================= */
+
+  /* Shorthand color aliases → foundation base values */
+  --navy:    var(--navy-base);
+  --red:     var(--red-base);
+  --blue:    var(--blue-base);
+  --green:   var(--success-base);
+  --orange:  var(--orange-base);
+  --purple:  var(--purple-base);
+  --teal:    var(--teal-base);
+  --warning: var(--warning-base);
+  --success: var(--success-base);
+  --error:   var(--error-base);
+
+  /* Soft background aliases → tint-80 of each scale */
+  --navy-soft:    var(--navy-tint-80);
+  --red-soft:     var(--red-tint-80);
+  --blue-soft:    var(--blue-tint-80);
+  --success-soft: var(--success-tint-80);
+  --warning-soft: var(--warning-tint-80);
+  --error-soft:   var(--error-tint-80);
+  --orange-soft:  var(--orange-tint-80);
+  --purple-soft:  var(--purple-tint-80);
+  --teal-soft:    var(--teal-tint-80);
+
+  /* Dark/text convenience aliases */
+  --success-dark: var(--success-shade-40);
+  --success-text: var(--success-shade-40);
+  --error-dark:   var(--error-shade-40);
+  --error-darker: var(--error-shade-60);
+  --warning-text: var(--warning-shade-60);
+  --warning-dark: var(--warning-shade-40);
+
+  /* Surface / layout legacy aliases */
+  --bg:       var(--surface-page);
+  --hover:    var(--surface-hover);
+  --border:   transparent;
+  --border-l: var(--grey-tint-60);
+
+  /* Text legacy aliases */
+  --text-3: var(--grey-base);
+  --text-4: var(--grey-tint-40);
+
+  /* Additional color convenience aliases */
+  --red-dark:        var(--red-shade-40);
+  --error-alt:       var(--error-shade-20);
+  --success-mid:     var(--success-tint-20);
+  --live:            var(--success-base);
+  --purple-border:   var(--purple-tint-40);
+  --warning-border:  var(--warning-tint-40);
+  --lh-snug:         1.35;
+
+  /* Layout legacy aliases */
+  --bottom-nav-h: var(--tab-h);
+
 /* ═══════════════════════════════════════════════════════════════════════════
    GLOBAL STATUS / STAGE / ROLE COLOR TOKENS
-   
+
    These CSS custom properties are the single source of truth for all
-   data-driven colors across all three apps. When a status color needs 
-   to change, update it here — every badge, label, and inline style that 
+   data-driven colors across all three apps. When a status color needs
+   to change, update it here — every badge, label, and inline style that
    references these tokens updates automatically.
 
    Usage in JSX:
