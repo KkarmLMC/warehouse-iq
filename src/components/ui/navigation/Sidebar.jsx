@@ -1,30 +1,39 @@
 /**
- * Sidebar
- * Shared platform sidebar — token-driven, BEM, flat UI.
- * All three apps share this identical shell. App-specific config
- * is passed via props.
+ * Sidebar — Shared platform shell
+ * Token-driven, BEM, flat UI. All three apps share this renderer.
+ * App-specific config is passed via props.
  *
  * Props:
- *   collapsed     — boolean, sidebar collapsed state
- *   onToggle      — toggle collapse handler
- *   items         — nav item array: [{ path, Icon, label, children? }]
- *   footerItems   — footer nav items: [{ path, Icon, label, onClick? }]
- *   brand         — { name, subtitle, icon: Icon } — logo area content
- *   currentPath   — current route path
- *   onNavigate    — (path) => void — navigation handler
- *   headerSlot    — optional JSX below brand (e.g. floor-mode toggle)
- *   footerSlot    — optional JSX above footer items (e.g. clock, status)
+ *   collapsed      — boolean
+ *   onToggle       — toggle handler
+ *   items          — [{ path, Icon, label, count?, children? }]
+ *   footerItems    — [{ path, Icon, label, onClick? }]
+ *   brand          — { name, subtitle, icon, badge? }
+ *   currentPath    — current route
+ *   onNavigate     — (path) => void
+ *   headerSlot     — JSX below brand
+ *   afterNavSlot   — JSX between nav and footer (e.g. alerts)
+ *   footerSlot     — JSX above footer items
+ *   collapseIcons  — { expanded, collapsed } JSX icons
  */
 function pathMatch(itemPath, currentPath, rootPath) {
   if (itemPath === rootPath)
-    return currentPath === itemPath ||
-      (currentPath.startsWith(itemPath + '/'))
+    return currentPath === itemPath || currentPath.startsWith(itemPath + '/')
   return currentPath === itemPath || currentPath.startsWith(itemPath + '/')
 }
 
 function groupIsActive(item, currentPath, rootPath) {
   if (pathMatch(item.path, currentPath, rootPath)) return true
   return item.children?.some(c => pathMatch(c.path, currentPath, rootPath)) ?? false
+}
+
+function CountBadge({ count, active }) {
+  if (!count || count <= 0) return null
+  return (
+    <span className={`sidebar-item__count ${active ? 'sidebar-item__count--active' : ''}`}>
+      {count}
+    </span>
+  )
 }
 
 function SubNav({ children, collapsed, onNavigate, currentPath, rootPath }) {
@@ -41,7 +50,12 @@ function SubNav({ children, collapsed, onNavigate, currentPath, rootPath }) {
               title={collapsed ? child.label : undefined}
             >
               <child.Icon size="0.875rem" weight={active ? 'fill' : 'regular'} />
-              {!collapsed && <span className="sidebar-item-label">{child.label}</span>}
+              {!collapsed && (
+                <span className="sidebar-item-label">
+                  {child.label}
+                  <CountBadge count={child.count} active={active} />
+                </span>
+              )}
             </button>
           )
         })}
@@ -62,7 +76,12 @@ function NavGroup({ item, collapsed, onNavigate, currentPath, rootPath }) {
         title={collapsed ? item.label : undefined}
       >
         <item.Icon size="1.0625rem" weight={active ? 'fill' : 'regular'} />
-        {!collapsed && <span className="sidebar-item-label">{item.label}</span>}
+        {!collapsed && (
+          <span className="sidebar-item-label">
+            {item.label}
+            <CountBadge count={item.count} active={active} />
+          </span>
+        )}
       </button>
 
       {hasChildren && !collapsed && (
@@ -87,6 +106,7 @@ export default function Sidebar({
   currentPath = '/',
   onNavigate,
   headerSlot,
+  afterNavSlot,
   footerSlot,
   collapseIcons,
 }) {
@@ -112,7 +132,7 @@ export default function Sidebar({
           )}
       </div>
 
-      {/* Optional header slot (e.g. mode toggle) */}
+      {/* Optional header slot */}
       {headerSlot}
 
       {/* Main nav */}
@@ -129,6 +149,9 @@ export default function Sidebar({
           />
         ))}
       </nav>
+
+      {/* Optional after-nav slot (e.g. alerts) */}
+      {afterNavSlot}
 
       {/* Footer */}
       <div className="sidebar-footer-nav">
