@@ -1174,7 +1174,6 @@ textarea { resize: vertical; }
 
 .card {
   background: var(--white);
-  
   border-radius: var(--r-m);
   overflow: hidden;
   margin-bottom: var(--mar-m);
@@ -1192,34 +1191,32 @@ textarea { resize: vertical; }
   display: flex;
   align-items: center;
   gap: var(--gap-s);
-  font-size: var(--text-base);
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: var(--white);
   min-width: 0;
-  text-transform: capitalize;
 }
 .card-title svg { color: var(--white); flex-shrink: 0; }
 .card-header__meta {
   display: flex;
   align-items: center;
   gap: var(--gap-xs);
-  font-size: var(--text-sm);
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: var(--white);
   flex-shrink: 0;
   white-space: nowrap;
-  text-transform: capitalize;
+  opacity: 0.8;
 }
 .card-header__action {
   display: flex;
   align-items: center;
   gap: var(--gap-xs);
-  font-size: var(--text-sm);
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
   color: var(--white);
   flex-shrink: 0;
   white-space: nowrap;
-  text-transform: capitalize;
   cursor: pointer;
   background: none;
   border: none;
@@ -1230,19 +1227,7 @@ textarea { resize: vertical; }
 }
 .card-header__action:hover { opacity: 1; }
 
-.card__header {
-  padding: 0.875rem var(--pad-l);
-  background: var(--navy);
-  border-bottom: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap-s);
-}
-
-/* Legacy aliases */
-.card-dot    { width: 0.5rem; height: 0.5rem; border-radius: 0.125rem; flex-shrink: 0; }
-.card-body   { padding: 0; }
+.card-body { padding: 0; }
 
 /* Section header inside cards */
 .section-header {
@@ -1968,58 +1953,6 @@ textarea { resize: vertical; }
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
   gap: var(--gap-l);
 }
-
-.dash-card {
-  background: var(--white);
-  border: none;
-  border-radius: var(--r-m);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.dash-card-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--pad-l) var(--pad-xl);
-  background: var(--navy);
-  border-bottom: none;
-  flex-shrink: 0;
-}
-
-.dash-card-body {
-  flex: 1;
-  min-height: clamp(13.75rem, 25vh, 20rem);
-  display: flex;
-  flex-direction: column;
-}
-
-.dash-card-title {
-  font-size: var(--text-sm);
-  font-weight: 700;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  gap: var(--gap-s);
-}
-
-.dash-card-meta { font-size: var(--text-xs); color: inherit; opacity: 0.7; }
-
-.dash-card-link {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  color: inherit;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.125rem;
-  opacity: 0.85;
-}
-
-.dash-card-link:hover { opacity: 1; }
 
 /* ── Dashboard job rows ──────────────────────────────────────────────────────── */
 
