@@ -71,16 +71,22 @@ export default function PODetail() {
   const [lines, setLines] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const load = () => Promise.all([
-    db.from('sales_orders').select('*').eq('id', id).single(),
-    db.from('so_line_items').select('*, parts(sku, name), warehouses(name)').eq('so_id', id).order('sort_order'),
-  ]).then(([{ data: poData }, { data: lineData }]) => {
-    setPo(poData)
-    setLines(lineData || [])
-    setLoading(false)
-  })
-
-  useEffect(() => { load() }, [id])
+  useEffect(() => {
+    let cancelled = false
+    const timeout = ms => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))
+    Promise.race([
+      Promise.all([
+        db.from('sales_orders').select('*').eq('id', id).maybeSingle(),
+        db.from('so_line_items').select('*, parts(sku, name), warehouses(name)').eq('so_id', id).order('sort_order'),
+      ]),
+      timeout(5000),
+    ]).then(([{ data: poData }, { data: lineData }]) => {
+      if (cancelled) return
+      setPo(poData)
+      setLines(lineData || [])
+    }).catch(() => {}).finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
+  }, [id])
 
   if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
   if (!po) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Sales Order not found</div></div></div>
