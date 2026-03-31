@@ -17,7 +17,7 @@ function getTokens(status) {
 
   // Try each map in order
   const SO_KEYS = ['draft','queued','running','submitted','fulfillment','published','shipment','back-ordered','back_ordered','complete','fulfilled','cancelled']
-  const PROJ_KEYS = ['awarded','scheduled','in-progress','in progress','inspection','completion','customer-signoff','postponed','failed']
+  const PROJ_KEYS = ['scheduled','in-progress','in progress','inspection','completion','customer-signoff','postponed','failed']
   const APPR_KEYS = ['approved','rejected','pending-review','under-review']
   const STOCK_KEYS = ['ok','low','out','on-order','on_order']
 

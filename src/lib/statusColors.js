@@ -46,7 +46,6 @@ export function soStatus(status) {
 
 // ── Project / field job stages ────────────────────────────────────────────────
 const PROJECT_STAGE = {
-  'awarded':         { color: 'var(--stage-awarded)',          bg: 'var(--stage-awarded-bg)',          label: 'Awarded' },
   'site-survey':     { color: 'var(--stage-site-survey)',      bg: 'var(--stage-site-survey-bg)',      label: 'Site Survey' },
   'scheduled':       { color: 'var(--stage-scheduled)',        bg: 'var(--stage-scheduled-bg)',        label: 'Scheduled' },
   'in-progress':     { color: 'var(--stage-in-progress)',      bg: 'var(--stage-in-progress-bg)',      label: 'In Progress' },
@@ -56,7 +55,6 @@ const PROJECT_STAGE = {
   'postponed':       { color: 'var(--stage-postponed)',        bg: 'var(--stage-postponed-bg)',        label: 'Postponed' },
   'failed':          { color: 'var(--status-failed)',          bg: 'var(--status-failed-bg)',          label: 'Failed' },
   // Aliases used in OpsBoard / MC
-  'Awarded':         { color: 'var(--stage-awarded)',          bg: 'var(--stage-awarded-bg)',          label: 'Awarded' },
   'Scheduled':       { color: 'var(--stage-scheduled)',        bg: 'var(--stage-scheduled-bg)',        label: 'Scheduled' },
   'In Progress':     { color: 'var(--stage-in-progress)',      bg: 'var(--stage-in-progress-bg)',      label: 'In Progress' },
   'Inspection':      { color: 'var(--stage-inspection)',       bg: 'var(--stage-inspection-bg)',       label: 'Inspection' },

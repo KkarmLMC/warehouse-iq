@@ -475,8 +475,6 @@
 --status-cancelled-bg:    var(--grey-tint-80);
 
 /* ── Project / field job stages ──────────────────────────────────────────── */
---stage-awarded:          var(--purple);
---stage-awarded-bg:       var(--purple-soft);
 --stage-site-survey:      var(--purple-tint-20);
 --stage-site-survey-bg:   var(--purple-soft);
 --stage-scheduled:        var(--purple);
