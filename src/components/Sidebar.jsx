@@ -138,7 +138,7 @@ function NavGroup({ item, collapsed, goTo, currentPath }) {
         )}
       </button>
 
-      {hasChildren && active && !collapsed && (
+      {hasChildren && !collapsed && (
         <SubNav
           children={item.children}
           collapsed={collapsed}
