@@ -305,6 +305,14 @@
   --icon-xl:  clamp(1.75rem,  3.5vw,  2.25rem);
   --icon-xxl: clamp(2.5rem,   6vw,    3.5rem);
 
+  /* ── Grid min-width tokens ─────────────────────────────────────────────────
+     Used with auto-fit grids: repeat(auto-fit, minmax(min(100%, TOKEN), 1fr))
+     The min(100%, ...) ensures single-col on narrow containers.            ── */
+  --grid-min-xs:  7rem;      /* compact items, tags, badges                    */
+  --grid-min-sm:  10rem;     /* nav cards, form fields, narrow cards           */
+  --grid-min-md:  14rem;     /* medium cards, data panels                      */
+  --grid-min-lg:  17.5rem;   /* wide cards, list cards, detail panels          */
+
   /* ── Shadow scale ─────────────────────────────────────────────────────────── */
   --shadow-xs:  0 0.0625rem 0.125rem rgba(0,0,0,.04);
   --shadow-s:   0 0.0625rem 0.25rem  rgba(0,0,0,.06);
@@ -1172,6 +1180,33 @@ textarea { resize: vertical; }
 
 /* Page enter animation */
 .fade-in { animation: anim-fade-in 0.2s ease; }
+
+/* =============================================================================
+   8b. GRID UTILITIES
+   Container-responsive grid system. Uses @container content breakpoints:
+     sm 480px · md 640px · lg 900px
+   ============================================================================= */
+
+/* ── Auto-fit grids — intrinsically responsive ─────────────────────────────── */
+.grid-auto-xs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-xs)), 1fr)); gap: var(--gap-s); }
+.grid-auto-sm { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-sm)), 1fr)); gap: var(--gap-m); }
+.grid-auto-md { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-md)), 1fr)); gap: var(--gap-m); }
+.grid-auto-lg { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-lg)), 1fr)); gap: var(--gap-l); }
+
+/* ── Fixed-column grids — collapse via @container ──────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-m); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-m); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-m); }
+
+@container content (max-width: 640px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@container content (max-width: 480px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr; }
+}
 
 /* =============================================================================
    9a. CARDS
