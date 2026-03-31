@@ -93,8 +93,7 @@ export default function Sidebar({
   const { name, subtitle, icon: BrandIcon } = brand
 
   return (
-    <a
-ide className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
+    <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
       {/* Brand */}
       <div className="sidebar-brand-row">
         {collapsed && BrandIcon
@@ -156,7 +155,6 @@ ide className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
           </button>
         )}
       </div>
-    </a
-ide>
+    </aside>
   )
 }

@@ -4,6 +4,7 @@ import {
   ArrowLeft, Lightning, Warning, CheckCircle,
   Package, ArrowRight, CaretDown, CaretUp,
   ClockCountdown, SealWarning, Question, Truck } from '@phosphor-icons/react'
+import { Card, StatCard, Button, Badge } from '../components/ui'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -446,16 +447,13 @@ export default function RunOrder() {
           { label:'LINE ITEMS',  value: lines.length },
           { label:'DIVISION',    value: order?.division || '—' },
         ].map(s => (
-          <div key={s.label} className="stat-card">
-            <div className="stat-card__label">{s.label}</div>
-            <div className="stat-card__value" style={{ fontFamily:'var(--mono)' }}>{s.value}</div>
-          </div>
+          <StatCard key={s.label} label={s.label} value={s.value} />
         ))}
       </div>
 
       {/* ── Pre-run state ── */}
       {!hasRun && (
-        <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
+        <Card className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="list-card__header">
             <span className="list-card__title"><Lightning size="1rem"  />Run Order</span>
           </div>
@@ -470,7 +468,7 @@ export default function RunOrder() {
                 : <><Lightning size="1rem" weight="fill" /> Run Order</>}
             </button>
           </div>
-        </div>
+        </Card>
       )}
 
       {/* ── Post-run state ── */}
@@ -538,7 +536,7 @@ export default function RunOrder() {
           )}
 
           {/* ── Fulfillment sheet ── */}
-          <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
+          <Card className="card" style={{ marginBottom: 'var(--mar-l)' }}>
             <div className="list-card__header">
               <span className="list-card__title"><Package size="1rem"  />Fulfillment Sheet</span>
               <span className="list-card__meta">{computed.length} parts</span>
@@ -688,7 +686,7 @@ export default function RunOrder() {
                 </div>
               )
             })}
-          </div>
+          </Card>
 
           {/* Push to fulfillment */}
           {order?.status !== 'fulfillment' && (

@@ -5,6 +5,7 @@ import {
   Plus, TrendUp, CurrencyDollar, Truck, CaretRight,
   PencilSimple, MapPin, Phone, Envelope, ClipboardText,
   CaretDown, MagnifyingGlass, X, Check, Receipt } from '@phosphor-icons/react'
+import { Card, StatCard, SearchInput, FilterPills, Button } from '../components/ui'
 import { db } from '../lib/supabase.js'
 import { soStatus } from '../lib/statusColors.js'
 import { useAuth } from '../lib/useAuth.jsx'
@@ -66,9 +67,9 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         {/* Sheet header */}
         <div style={{ padding: 'var(--pad-l) var(--pad-xl) 0', flexShrink: 0 }}>
           <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-xxl)', margin: '0 auto var(--mar-m)' }} />
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--mar-l)' }}>
+          <div className="flex-between" style={{ marginBottom: 'var(--mar-l)' }}>
             <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Edit Warehouse</div>
-            <button onClick={onClose} style={{ background: 'var(--hover)', borderRadius: 'var(--r-xxl)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            <button onClick={onClose} className="flex-center" style={{ background: 'var(--hover)', borderRadius: 'var(--r-xxl)', width: '2rem', height: '2rem', cursor: 'pointer' }}>
               <X size="0.875rem" style={{ color: 'var(--black)' }} />
             </button>
           </div>
@@ -146,20 +147,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
   )
 }
 
-// ─── Stat card ────────────────────────────────────────────────────────────────
-function StatCard({ label, value, Icon, color = 'var(--black)', bg = 'var(--hover)' }) {
-  return (
-    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 'var(--mar-s)' }}>
-        <div style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Icon size="0.875rem" style={{ color }} />
-        </div>
-        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)' }}>{label}</span>
-      </div>
-      <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color }}>{value}</div>
-    </div>
-  )
-}
+
 
 // ─── Part row in the stock list ───────────────────────────────────────────────
 function StockRow({ level, onPress }) {
@@ -246,7 +234,7 @@ export default function WarehouseDetail() {
     setShowTx(true)
   }
 
-  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in flex-center" style={{ padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
   if (!warehouse) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Warehouse not found</div></div></div>
 
   // Stats
@@ -280,16 +268,16 @@ export default function WarehouseDetail() {
     <div className="page-content fade-in">
 
       {/* Header */}
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-xl)', color: '#fff' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)' }}>
-            <div style={{ width: '3rem', height: '3rem', borderRadius: 'var(--r-m)', background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+      <div className="wh-header">
+        <div className="wh-header__top">
+          <div className="flex-gap-m">
+            <div className="wh-header__icon">
               <Buildings size="1.375rem" style={{ color: '#fff' }} />
             </div>
             <div>
-              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, lineHeight: 1.1 }}>{warehouse.name}</div>
+              <div className="wh-header__name">{warehouse.name}</div>
               {(warehouse.city || warehouse.state) && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--white)', marginTop: 4, fontSize: 'var(--text-xs)' }}>
+                <div className="wh-header__loc">
                   <MapPin size="0.75rem" />
                   {[warehouse.city, warehouse.state].filter(Boolean).join(', ')}
                 </div>
@@ -304,9 +292,9 @@ export default function WarehouseDetail() {
 
         {/* Contact info */}
         {(warehouse.contact_name || warehouse.contact_phone || warehouse.contact_email || warehouse.address) && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4,  paddingTop: 'var(--pad-m)', marginTop: 'var(--mar-s)' }}>
+          <div className="wh-header__contact">
             {warehouse.address && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
+              <div className="wh-header__contact-row">
                 <MapPin size="0.75rem" />
                 {warehouse.address}{warehouse.zip ? `, ${warehouse.zip}` : ''}
               </div>
@@ -315,12 +303,12 @@ export default function WarehouseDetail() {
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)' }}>Contact: {warehouse.contact_name}</div>
             )}
             {warehouse.contact_phone && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
+              <div className="wh-header__contact-row">
                 <Phone size="0.75rem" /> {warehouse.contact_phone}
               </div>
             )}
             {warehouse.contact_email && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
+              <div className="wh-header__contact-row">
                 <Envelope size="0.75rem" /> {warehouse.contact_email}
               </div>
             )}
@@ -333,20 +321,20 @@ export default function WarehouseDetail() {
 
       {/* Stats grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
-        <StatCard label="SKUs In Stock" value={totalSkus.toLocaleString()} Icon={Package} color="var(--navy)" bg="var(--blue-soft)" />
-        <StatCard label="Total Units" value={totalUnits.toLocaleString()} Icon={TrendUp} color="var(--black)" bg="var(--hover)" />
-        <StatCard label="Low Stock" value={lowStock.length} Icon={WarningCircle} color={lowStock.length > 0 ? 'var(--orange-shade-20)' : 'var(--text-3)'} bg={lowStock.length > 0 ? 'var(--orange-soft)' : 'var(--hover)'} />
-        <StatCard label="On Order" value={totalOnOrder.toLocaleString()} Icon={Truck} color={totalOnOrder > 0 ? 'var(--blue)' : 'var(--text-3)'} bg={totalOnOrder > 0 ? 'var(--blue-soft)' : 'var(--hover)'} />
+        <StatCard label="SKUs In Stock" value={totalSkus.toLocaleString()} />
+        <StatCard label="Total Units" value={totalUnits.toLocaleString()} />
+        <StatCard label="Low Stock" value={lowStock.length} />
+        <StatCard label="On Order" value={totalOnOrder.toLocaleString()} />
       </div>
 
       {/* Value */}
       {totalValue > 0 && (
-        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: 'var(--text-3)' }}>
+        <div className="value-card">
+          <div className="value-card__label">
             <CurrencyDollar size="1rem" />
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Est. Inventory Value</span>
+            <span>Est. Inventory Value</span>
           </div>
-          <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--success-text)' }}>
+          <span className="value-card__amount">
             ${totalValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}
           </span>
         </div>
@@ -366,7 +354,7 @@ export default function WarehouseDetail() {
 
       {/* Stock section */}
       <div style={{ marginBottom: 'var(--mar-s)' }}>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>
+        <div className="stock-section__title">
           Stock ({levels.length} parts)
         </div>
 

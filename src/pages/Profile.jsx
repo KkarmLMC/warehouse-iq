@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   User, Lock, Eye, EyeSlash, CheckCircle, Shield,
@@ -6,6 +6,7 @@ import {
   Buildings, AppWindow, Trash, IdentificationCard } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { logActivity } from '../lib/logActivity.js'
+import { Button, Badge, Card } from '../components/ui'
 
 // ─── App source for activity logging — derived from VITE_APP_NAME ─────────────
 const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
@@ -61,40 +62,29 @@ function PinPad({ onComplete }) {
   )
 }
 
-// ─── Role badge ───────────────────────────────────────────────────────────────
-function RoleBadge({ label, color = 'var(--navy)', bg = 'rgba(4,36,92,0.08)' }) {
-  return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-s)', background: bg, color, fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', textTransform: 'capitalize', letterSpacing: '0.02em' }}>
-      {label}
-    </span>
-  )
-}
-
 // ─── Section card ─────────────────────────────────────────────────────────────
 function Section({ icon: Icon, title, children, action }) {
   return (
-    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', borderRadius: '0' }}>
+    <Card className="profile-section">
+      <div className="profile-section__header">
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
           {Icon && <Icon size="0.9375rem" />} {title}
         </div>
         {action}
       </div>
-      <div style={{ padding: 'var(--pad-l)' }}>{children}</div>
-    </div>
+      <div className="profile-section__body">{children}</div>
+    </Card>
   )
 }
 
 function Row({ label, children }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
-      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>{label}</div>
-      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)', color: 'var(--black)', textAlign: 'right' }}>{children}</div>
+    <div className="profile-row">
+      <div className="profile-row__label">{label}</div>
+      <div className="profile-row__value">{children}</div>
     </div>
   )
 }
-
-// ─── Main ─────────────────────────────────────────────────────────────────────
 
 // ─── Activity Log Component ───────────────────────────────────────────────────
 function ActivityLog({ userId }) {
@@ -139,60 +129,55 @@ function ActivityLog({ userId }) {
     parts: 'var(--success-dark)',       inventory: 'var(--success-dark)',   transfer: 'var(--warning-text)' }
 
   return (
-    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
-      <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
+    <Card className="activity-log">
+      <div className="activity-log__header">
         Activity Log
       </div>
-      <div style={{ padding: 'var(--pad-s) 0' }}>
+      <div className="activity-log__content">
         {loading ? (
-          <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}>
+          <div className="activity-log__loading">
             <div className="spinner" />
           </div>
         ) : logs.length === 0 ? (
-          <div style={{ padding: 'var(--pad-xxl)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
+          <div className="activity-log__empty">
             No activity recorded yet
           </div>
         ) : (
           <>
             {logs.map((log, i) => (
-              <div key={log.id} style={{
-                display: 'flex', alignItems: 'flex-start', gap: '0.75rem',
-                padding: 'var(--pad-m) var(--pad-l)',
-                borderBottom: i < logs.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
+              <div key={log.id} className="activity-log__item">
                 {/* Category dot */}
-                <div style={{
-                  width: 8, height: 8, borderRadius: '50%', flexShrink: 0, marginTop: 'var(--mar-xs)',
+                <div className="activity-log__dot" style={{
                   background: CATEGORY_COLOR[log.category] || 'var(--text-3)' }} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--black)', fontWeight: 'var(--fw-medium)', lineHeight: 1.4 }}>
+                <div className="activity-log__text">
+                  <div className="activity-log__label">
                     {log.label}
                   </div>
-                  <div style={{ display: 'flex', gap: 'var(--gap-s)', marginTop: 3, flexWrap: 'wrap', alignItems: 'center' }}>
-                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{fmtTime(log.created_at)}</span>
-                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>·</span>
+                  <div className="activity-log__meta">
+                    <span>{fmtTime(log.created_at)}</span>
+                    <span>·</span>
                     <span style={{
-                      fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)',
                       color: CATEGORY_COLOR[log.category] || 'var(--text-3)' }}>{APP_LABELS[log.app] || log.app}</span>
                   </div>
                 </div>
               </div>
             ))}
             {/* Pagination */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--pad-m) var(--pad-l)' }}>
+            <div className="activity-log__pagination">
               <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
-                style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: page === 0 ? 'var(--text-3)' : 'var(--navy)', background: 'none', cursor: page === 0 ? 'default' : 'pointer', padding: 0 }}>
+                className="activity-log__page-btn">
                 ← Previous
               </button>
-              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>Page {page + 1}</span>
+              <span className="activity-log__page-num">Page {page + 1}</span>
               <button onClick={() => setPage(p => p + 1)} disabled={logs.length < PER_PAGE}
-                style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: logs.length < PER_PAGE ? 'var(--text-3)' : 'var(--navy)', background: 'none', cursor: logs.length < PER_PAGE ? 'default' : 'pointer', padding: 0 }}>
+                className="activity-log__page-btn">
                 Next →
               </button>
             </div>
           </>
         )}
       </div>
-    </div>
+    </Card>
   )
 }
 
@@ -307,58 +292,54 @@ export default function Profile() {
     <div className="page-content fade-in">
 
       {/* Header */}
-      <div style={{ marginBottom: 'var(--mar-xxl)' }}>
-        <button onClick={() => navigate(-1)}
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'none', color: 'var(--text-3)', fontSize: 'var(--text-xs)', cursor: 'pointer', padding: 0, marginBottom: 'var(--mar-m)' }}>
+      <div className="profile-header">
+        <button onClick={() => navigate(-1)} className="profile-header__back">
           <ArrowLeft size="0.875rem" /> Back
         </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-l)' }}>
+        <div className="profile-header__content">
           {/* Avatar */}
-          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', fontSize: 'var(--text-xl)', fontWeight: 'var(--fw-black)', flexShrink: 0 }}>
+          <div className="profile-header__avatar">
             {initials}
           </div>
           <div>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', marginBottom: 'var(--mar-xs)' }}>ACCOUNT</div>
-            <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-black)', lineHeight: 1.1 }}>{profile?.full_name || 'My Profile'}</div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{user?.email}</div>
+            <div className="profile-header__label">ACCOUNT</div>
+            <div className="profile-header__title">{profile?.full_name || 'My Profile'}</div>
+            <div className="profile-header__email">{user?.email}</div>
           </div>
         </div>
       </div>
 
       {/* Flash messages */}
       {success && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--success-soft)', borderRadius: 'var(--r-l)', color: 'var(--success-text)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
-          <CheckCircle size="0.9375rem" weight="fill" style={{ flexShrink: 0 }} /> {success}
+        <div className="profile-flash profile-flash--success">
+          <CheckCircle size="0.9375rem" weight="fill" /> {success}
         </div>
       )}
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
-          <Warning size="0.9375rem" style={{ flexShrink: 0 }} /> {error}
+        <div className="profile-flash profile-flash--error">
+          <Warning size="0.9375rem" /> {error}
         </div>
       )}
 
       {/* ── Identity ── */}
       <Section icon={User} title="Identity"
         action={!editingName && (
-          <button onClick={() => setEditingName(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-m)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 'var(--fw-semibold)' }}>
+          <Button size="sm" variant="secondary" onClick={() => setEditingName(true)}>
             <PencilSimple size="0.75rem" /> Edit Name
-          </button>
+          </Button>
         )}>
 
         {editingName ? (
           <div style={{ marginBottom: 'var(--mar-m)' }}>
-            <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>Full Name</label>
+            <label className="profile-label">Full Name</label>
             <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
               <input value={nameVal} onChange={e => setNameVal(e.target.value)} autoFocus style={{ flex: 1 }} onKeyDown={e => e.key === 'Enter' && saveName()} />
-              <button onClick={saveName} disabled={nameSaving}
-                style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: 'var(--white)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+              <Button onClick={saveName} disabled={nameSaving}>
                 {nameSaving ? 'Saving…' : 'Save'}
-              </button>
-              <button onClick={() => { setEditingName(false); setNameVal(profile?.full_name || '') }}
-                style={{ padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-l)', background: 'transparent', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+              </Button>
+              <Button variant="ghost" onClick={() => { setEditingName(false); setNameVal(profile?.full_name || '') }}>
                 Cancel
-              </button>
+              </Button>
             </div>
           </div>
         ) : (
@@ -376,9 +357,9 @@ export default function Profile() {
           </Row>
         )}
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-xs)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>Member Since</div>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)', color: 'var(--black)' }}>
+        <div className="profile-row">
+          <div className="profile-row__label">Member Since</div>
+          <div className="profile-row__value">
             {profile?.created_at ? new Date(profile.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '—'}
           </div>
         </div>
@@ -387,15 +368,19 @@ export default function Profile() {
       {/* ── Access & Roles ── */}
       <Section icon={Shield} title="Access & Roles">
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>App Role</div>
-          <RoleBadge label={profile?.role || 'user'} color={roleStyle.color} bg={roleStyle.bg} />
+        <div className="profile-row">
+          <div className="profile-row__label">App Role</div>
+          <Badge variant={roleStyle.bg} style={{ color: roleStyle.color }}>
+            {profile?.role || 'user'}
+          </Badge>
         </div>
 
         {profile?.pipeline_role && pipelineStyle && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)' }}>Pipeline Role</div>
-            <RoleBadge label={profile.pipeline_role.replace('_', ' ')} color={pipelineStyle.color} bg={pipelineStyle.bg} />
+          <div className="profile-row">
+            <div className="profile-row__label">Pipeline Role</div>
+            <Badge variant={pipelineStyle.bg} style={{ color: pipelineStyle.color }}>
+              {profile.pipeline_role.replace('_', ' ')}
+            </Badge>
           </div>
         )}
 
@@ -404,10 +389,10 @@ export default function Profile() {
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', marginBottom: 8 }}>App Access</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-xs)' }}>
               {profile.app_access.map(app => (
-                <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-s)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)' }}>
+                <Badge key={app}>
                   <AppWindow size="0.75rem" />
                   {appLabels[app] || app}
-                </span>
+                </Badge>
               ))}
             </div>
           </div>
@@ -421,15 +406,14 @@ export default function Profile() {
       {/* ── PIN ── */}
       <Section icon={Lock} title={hasPin ? 'Login PIN' : 'Set Up PIN'}
         action={pinSection !== 'idle' && (
-          <button onClick={() => { setPinSection('idle'); setPinError(''); setNewPin('') }}
-            style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-s)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer' }}>
+          <Button size="sm" variant="secondary" onClick={() => { setPinSection('idle'); setPinError(''); setNewPin('') }}>
             Cancel
-          </button>
+          </Button>
         )}>
 
         {pinSection === 'idle' ? (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 'var(--pad-m)', marginBottom: 'var(--mar-m)', borderBottom: '1px solid var(--border-l)' }}>
+            <div className="profile-row">
               <div>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)' }}>{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
                 <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>
@@ -438,17 +422,15 @@ export default function Profile() {
                     : 'Set a PIN to log in faster — no password needed'}
                 </div>
               </div>
-              <button onClick={() => setPinSection(hasPin ? 'verify-old' : 'enter-new')}
-                style={{ padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: 'var(--white)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+              <Button onClick={() => setPinSection(hasPin ? 'verify-old' : 'enter-new')}>
                 {hasPin ? 'Change PIN' : 'Set PIN'}
-              </button>
+              </Button>
             </div>
 
             {hasPin && (
-              <button onClick={removePin} disabled={removingPin}
-                style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'none', color: 'var(--error-alt)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', cursor: 'pointer', padding: 0 }}>
+              <Button variant="ghost" style={{ color: 'var(--error-alt)' }} onClick={removePin} disabled={removingPin}>
                 <Trash size="0.8125rem" /> {removingPin ? 'Removing…' : 'Remove PIN'}
-              </button>
+              </Button>
             )}
           </div>
         ) : (
@@ -469,20 +451,19 @@ export default function Profile() {
       {/* ── Password & Email ── */}
       <Section icon={Lock} title="Password & Email"
         action={!showPwForm && (
-          <button onClick={() => setShowPwForm(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-m)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 'var(--fw-semibold)' }}>
+          <Button size="sm" variant="secondary" onClick={() => setShowPwForm(true)}>
             <PencilSimple size="0.75rem" /> Change
-          </button>
+          </Button>
         )}>
 
         {showPwForm ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-m)' }}>
             <div>
-              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>New Email (optional)</label>
+              <label className="profile-label">New Email (optional)</label>
               <input type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="Leave blank to keep current" />
             </div>
             <div>
-              <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>New Password</label>
+              <label className="profile-label">New Password</label>
               <div style={{ position: 'relative' }}>
                 <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 'var(--sp-10)' }} />
                 <button onClick={() => setShowPw(v => !v)}
@@ -492,14 +473,12 @@ export default function Profile() {
               </div>
             </div>
             <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
-              <button onClick={() => { setShowPwForm(false); setNewPw(''); setNewEmail('') }}
-                style={{ flex: 1, padding: 'var(--pad-s)', borderRadius: 'var(--r-l)', background: 'transparent', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)' }}>
+              <Button variant="ghost" onClick={() => { setShowPwForm(false); setNewPw(''); setNewEmail('') }} style={{ flex: 1 }}>
                 Cancel
-              </button>
-              <button onClick={savePassword} disabled={pwSaving}
-                style={{ flex: 2, padding: 'var(--pad-s)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: 'var(--white)', cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
+              </Button>
+              <Button onClick={savePassword} disabled={pwSaving} style={{ flex: 2 }}>
                 {pwSaving ? 'Saving…' : 'Update Password'}
-              </button>
+              </Button>
             </div>
           </div>
         ) : (
@@ -510,15 +489,14 @@ export default function Profile() {
       </Section>
 
       {/* ── Sign out ── */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-xxl)' }}>
-        <div style={{ padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>Session</div>
-        <div style={{ padding: 'var(--pad-l)' }}>
-          <button onClick={() => { signOut(); navigate('/login', { replace: true }) }}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', background: 'none', color: 'var(--error-alt)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}>
+      <Card className="profile-session">
+        <div className="profile-session__header">Session</div>
+        <div className="profile-session__body">
+          <Button variant="ghost" style={{ color: 'var(--error-alt)' }} onClick={() => { signOut(); navigate('/login', { replace: true }) }}>
             <SignOut size="1rem" /> Sign Out of this app
-          </button>
+          </Button>
         </div>
-      </div>
+      </Card>
 
     </div>
   )

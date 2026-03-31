@@ -6,6 +6,7 @@ import {
   ArrowLineLeft, ArrowLineRight,
   ClipboardText, Truck, ListBullets,
   DeviceMobileCamera, Desktop, User, UserGear } from '@phosphor-icons/react'
+import { Sidebar as SharedSidebar } from './ui'
 import { useAuth } from '../lib/useAuth.jsx'
 
 // ─── Nav item sets ─────────────────────────────────────────────────────────────

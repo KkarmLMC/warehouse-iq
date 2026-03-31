@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   PencilSimple, ArrowsLeftRight, Plus, Minus,
   Package, Buildings, ClipboardText, CaretDown, Trash } from '@phosphor-icons/react'
+import { Card, Button } from '../components/ui'
 import { db } from '../lib/supabase.js'
 import { logActivity } from '../lib/logActivity.js'
 const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
@@ -14,15 +15,15 @@ function WarehouseRow({ level, warehouseName }) {
   const bg = isOut ? 'var(--error-soft)' : isLow ? 'var(--orange-soft)' : 'var(--success-soft)'
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+    <div className="warehouse-row">
+      <div className="warehouse-row__icon">
         <Buildings size="1rem" style={{ color: 'var(--black)' }} />
         <div>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{warehouseName}</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', display: 'flex', gap: 'var(--gap-s)', marginTop: 2 }}>
+          <div className="warehouse-row__name">{warehouseName}</div>
+          <div className="warehouse-row__meta">
             {level.min_level > 0 && <span>Min: {level.min_level}</span>}
             {level.quantity_on_order > 0 && (
-              <span style={{ color: 'var(--blue)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>
+              <span className="warehouse-row__on-order">+{level.quantity_on_order} on order</span>
             )}
           </div>
         </div>
@@ -298,7 +299,7 @@ export default function PartDetail() {
       </div>
 
       {/* Stock by warehouse */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <Card style={{ marginBottom: 'var(--mar-l)' }}>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Stock by Warehouse</div>
         </div>
@@ -307,10 +308,10 @@ export default function PartDetail() {
         ) : (
           levels.map(l => <WarehouseRow key={l.id} level={l} warehouseName={l.warehouses?.name || '—'} />)
         )}
-      </div>
+      </Card>
 
       {/* Part details */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <Card style={{ marginBottom: 'var(--mar-l)' }}>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Part Details</div>
         </div>
@@ -332,10 +333,10 @@ export default function PartDetail() {
             <div style={{ fontSize: 'var(--text-sm)' }}>{part.description}</div>
           </div>
         )}
-      </div>
+      </Card>
 
       {/* Transaction history */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+      <Card style={{ marginBottom: 'var(--mar-l)' }}>
         <button
           onClick={() => setShowTx(!showTx)}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'none', cursor: 'pointer' }}>
@@ -352,7 +353,7 @@ export default function PartDetail() {
         {showTx && transactions.length === 0 && (
           <div style={{ padding: 'var(--pad-l)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No transactions yet</div>
         )}
-      </div>
+      </Card>
 
       {showAdjust && (
         <AdjustSheet

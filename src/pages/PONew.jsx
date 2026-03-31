@@ -4,6 +4,7 @@ import {
   Plus, Trash, MagnifyingGlass, X, CaretDown, CaretRight,
   DotsSixVertical, Buildings, Package, Wrench, Check,
   ArrowRight, Warning } from '@phosphor-icons/react'
+import { Card, Button, SearchInput } from '../components/ui'
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
@@ -13,7 +14,7 @@ import ProjectPicker from '../components/ProjectPicker.jsx'
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Label({ children, required }) {
   return (
-    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>
+    <label className="text-label">
       {children}{required && <span style={{ color: 'var(--red)', marginLeft: 3 }}>*</span>}
     </label>
   )
@@ -21,8 +22,8 @@ function Label({ children, required }) {
 
 function SectionDivider({ label }) {
   return (
-    <div style={{ margin: 'var(--mar-l) 0', paddingTop: 'var(--pad-m)' }}>
-      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)' }}>{label}</div>
+    <div className="section-gap">
+      <div className="section-divider-label">{label}</div>
     </div>
   )
 }
@@ -77,9 +78,9 @@ function PartSearch({ onSelect, warehouseId }) {
   }
 
   return (
-    <div ref={ref} style={{ position: 'relative' }}>
-      <div style={{ position: 'relative' }}>
-        <MagnifyingGlass size="0.875rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+    <div ref={ref} className="position-relative">
+      <div className="position-relative">
+        <MagnifyingGlass size="0.875rem" className="search-overlay-icon" />
         <input
           value={query}
           onChange={e => setQuery(e.target.value)}
@@ -89,7 +90,7 @@ function PartSearch({ onSelect, warehouseId }) {
         />
         {query && (
           <button onClick={() => { setQuery(''); setResults([]); setOpen(false) }}
-            style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
+            className="search-overlay-clear">
             <X size="0.8125rem" />
           </button>
         )}
@@ -100,7 +101,7 @@ function PartSearch({ onSelect, warehouseId }) {
           background: 'var(--white)', borderRadius: 'var(--r-l)', marginTop: 4,
           maxHeight: '16rem', overflowY: 'auto' }}>
           {loading ? (
-            <div style={{ padding: 'var(--pad-m)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>Searching…</div>
+            <div className="empty-message">Searching…</div>
           ) : results.map(part => (
             <button key={part.id} onMouseDown={() => handleSelect(part)}
               style={{
@@ -135,15 +136,15 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
   const lineTotal = (parseFloat(item.quantity) || 0) * (parseFloat(item.unit_cost) || 0)
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--gap-s)', alignItems: 'center', padding: 'var(--pad-s) 0', borderBottom: '1px solid var(--border-l)' }}>
-      <div style={{ minWidth: 0 }}>
-        {item.sku && <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)', marginBottom: 2 }}>{item.sku}</div>}
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.description}</div>
+    <div className="grid-parts-table">
+      <div className="min-width-0">
+        {item.sku && <div className="text-xs-mono">{item.sku}</div>}
+        <div className="part-row-label--truncate">{item.description}</div>
         {warehouses.length > 1 && (
           <select
             value={item.warehouse_id || ''}
             onChange={e => onUpdate({ ...item, warehouse_id: e.target.value })}
-            style={{ fontSize: 'var(--text-xs)', marginTop: 4, padding: '2px 4px', borderRadius: 4, background: 'var(--white)', color: 'var(--text-3)', width: '100%' }}
+            className="input-meta-label"
           >
             <option value="">No warehouse</option>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name.replace(' Warehouse','')}</option>)}
@@ -154,19 +155,20 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
         type="number" min="0" step="1"
         value={item.quantity}
         onChange={e => onUpdate({ ...item, quantity: e.target.value })}
-        style={{ width: '100%', textAlign: 'right', fontSize: 'var(--text-xs)' }}
+        className="text-xs-right"
+        style={{ width: '100%' }}
       />
       <input
         type="number" min="0" step="0.01"
         value={item.unit_cost}
         onChange={e => onUpdate({ ...item, unit_cost: e.target.value })}
-        style={{ width: '100%', textAlign: 'right', fontSize: 'var(--text-xs)' }}
+        className="text-xs-right"
+        style={{ width: '100%' }}
       />
-      <div style={{ textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 700, color: lineTotal > 0 ? 'var(--black)' : 'var(--text-3)' }}>
+      <div className="text-xs-right" style={{ fontWeight: 700, color: lineTotal > 0 ? 'var(--black)' : 'var(--text-3)' }}>
         ${lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </div>
-      <button onClick={onRemove}
-        style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
+      <button onClick={onRemove} className="icon-btn icon-btn--error">
         <Trash size="0.8125rem" />
       </button>
     </div>
@@ -208,11 +210,10 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
   }
 
   return (
-    <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
+    <Card className="margin-bottom-l">
       {/* Section header */}
-      <div style={{ background: 'var(--navy)', padding: 'var(--pad-m) var(--pad-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-        <button onClick={() => setExpanded(e => !e)}
-          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'var(--white)', display: 'flex' }}>
+      <div className="header-button-group">
+        <button onClick={() => setExpanded(e => !e)} className="header-button-group .button">
           <CaretDown size="0.875rem" style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
         </button>
         <input
@@ -236,9 +237,9 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
         <div style={{ padding: 'var(--pad-m) var(--pad-l)' }}>
           {/* Column headers */}
           {section.items.length > 0 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 90px 80px 36px', gap: 'var(--gap-s)', marginBottom: 'var(--mar-s)' }}>
+            <div className="grid-parts-table" style={{ marginBottom: 'var(--mar-s)' }}>
               {['Item / SKU', 'Qty', 'Unit Cost', 'Amount', ''].map((h, i) => (
-                <div key={i} style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
+                <div key={i} className="section-divider-label" style={{ textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
               ))}
             </div>
           )}
@@ -255,7 +256,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           ))}
 
           {section.items.length === 0 && (
-            <div style={{ textAlign: 'center', padding: 'var(--pad-l)', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
+            <div className="empty-message" style={{ padding: 'var(--pad-l)' }}>
               No items yet. Search for a part or add manually.
             </div>
           )}
@@ -270,7 +271,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           </button>
         </div>
       )}
-    </div>
+    </Card>
   )
 }
 
@@ -303,24 +304,22 @@ function LaborSection({ items, onUpdate }) {
       {expanded && (
         <div style={{ padding: 'var(--pad-m) var(--pad-l)' }}>
           {items.map(item => (
-            <div key={item._key} style={{ display: 'grid', gridTemplateColumns: '1fr 70px 100px 80px 36px', gap: 'var(--gap-s)', alignItems: 'center', marginBottom: 'var(--mar-s)' }}>
+            <div key={item._key} className="grid-parts-table" style={{ gridTemplateColumns: '1fr 70px 100px 80px 36px', marginBottom: 'var(--mar-s)' }}>
               <input value={item.description} onChange={e => updateItem(item._key, { ...item, description: e.target.value })}
                 placeholder="Description (e.g. Bolt Install Crew)" style={{ width: '100%', fontSize: 'var(--text-xs)' }} />
               <input type="number" min="0" value={item.quantity} onChange={e => updateItem(item._key, { ...item, quantity: e.target.value })}
-                style={{ width: '100%', textAlign: 'right', fontSize: 'var(--text-xs)' }} />
+                className="text-xs-right" style={{ width: '100%' }} />
               <input type="number" min="0" step="0.01" value={item.unit_cost} onChange={e => updateItem(item._key, { ...item, unit_cost: e.target.value })}
-                placeholder="0.00" style={{ width: '100%', textAlign: 'right', fontSize: 'var(--text-xs)' }} />
-              <div style={{ textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 700 }}>
+                placeholder="0.00" className="text-xs-right" style={{ width: '100%' }} />
+              <div className="text-xs-right" style={{ fontWeight: 700 }}>
                 ${((parseFloat(item.quantity)||0)*(parseFloat(item.unit_cost)||0)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
               </div>
-              <button onClick={() => removeItem(item._key)}
-                style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
+              <button onClick={() => removeItem(item._key)} className="icon-btn icon-btn--error">
                 <Trash size="0.8125rem" />
               </button>
             </div>
           ))}
-          <button onClick={addLine}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', cursor: 'pointer', padding: 0, marginTop: 'var(--mar-s)' }}>
+          <button onClick={addLine} className="flex-gap-s" style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', cursor: 'pointer', padding: 0, marginTop: 'var(--mar-s)' }}>
             <Plus size="0.75rem" /> Add labor line
           </button>
         </div>
