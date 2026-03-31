@@ -80,17 +80,17 @@ function DesktopTopBar() {
   }
 
   return (
-    <div className="desktop-topbar">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+    <div className="page-header">
+      <div className="page-header__actions">
         {meta.parent && (
           <button onClick={() => navigate(meta.parent)}
             style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--r-s)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
             <ArrowLeft size="1.125rem" color="var(--white)" />
           </button>
         )}
-        <div className="desktop-topbar__title">{meta.title}</div>
+        <div className="page-header__title">{meta.title}</div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+      <div className="page-header__actions">
         <div className="status-live">
           <div className="dot-live" />LIVE
         </div>
