@@ -5,7 +5,6 @@ import {
   MagnifyingGlass, X, CheckCircle, Clock, PaperPlaneTilt,
   Package, Warning } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
-import PageHeader from '../components/ui/PageHeader'
 
 const STATUS_META = {
   draft:        { label: 'Draft',        color: 'var(--grey-base)', bg: 'var(--grey-tint-80)', icon: Clock },
@@ -161,16 +160,13 @@ export default function PurchaseOrders() {
   return (
     <div className="page-content fade-in">
 
-      <PageHeader
-        eyebrow="INVENTORY"
-        title="Sales Orders"
-        action={
-          <button onClick={() => navigate('/sales-orders/new')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
-            <Plus size="0.9375rem" /> New Sales Order
-          </button>
-        }
-      />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--mar-m)' }}>
+        <button onClick={() => navigate('/sales-orders/new')}
+          className="btn btn-navy"
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+          <Plus size="0.9375rem" /> New Sales Order
+        </button>
+      </div>
 
       {/* Alert banner for submitted POs awaiting review */}
       {queuedCount > 0 && (

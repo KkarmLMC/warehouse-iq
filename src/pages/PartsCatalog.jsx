@@ -7,7 +7,6 @@ import {
   Funnel, Nut, Stack, Pulse, HardHat, Hammer,
   Plugs, Rows, Scissors } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
-import PageHeader from '../components/ui/PageHeader'
 
 // ─── Category icon map ────────────────────────────────────────────────────────
 const CATEGORY_ICONS = {
@@ -169,12 +168,6 @@ export default function PartsCatalog() {
 
   return (
     <div className="page-content fade-in">
-
-      <PageHeader eyebrow="INVENTORY" title="Parts Catalog" action={
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', background: 'var(--blue-soft)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--blue)' }}>
-          <ArrowSquareOut size="0.75rem" /> QuickBooks sync — coming soon
-        </div>
-      } />
 
       {/* Tabs */}
       <div style={{

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { Receipt, ClockCountdown, ArrowRight, MagnifyingGlass, CaretRight, CheckCircle, Truck } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { soStatus } from '../lib/statusColors.js'
-import PageHeader from '../components/ui/PageHeader'
 
 const TABS = [
   { key: 'queued',       label: 'Queue' },
@@ -54,7 +53,6 @@ export default function SOQueue() {
 
   return (
     <div className="page-content fade-in">
-      <PageHeader eyebrow="WAREHOUSE IQ" title="Sales Order Pipeline" />
 
       {/* Tabs */}
       <div style={{ display: 'flex', gap: 'var(--gap-xs)', marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>

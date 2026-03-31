@@ -6,7 +6,6 @@ import {
 import { db } from '../lib/supabase.js'
 import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
-import PageHeader from '../components/ui/PageHeader'
 
 const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 const DEFAULT_ROUTE = import.meta.env.VITE_DEFAULT_ROUTE
@@ -132,17 +131,13 @@ export default function UserManagement() {
         <ArrowLeft size="0.875rem" /> Back
       </button>
 
-      <PageHeader
-        eyebrow="ADMIN"
-        title="User Management"
-        subtitle="Manage roles and pipeline assignments for all users"
-        action={
-          <button onClick={() => setShowInvite(true)}
-            style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',padding: 'var(--pad-s) var(--pad-l)',borderRadius:'var(--r-s)',background:'var(--navy)',color:'var(--white)',fontWeight:'var(--fw-bold)',fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
-            <UserPlus size="1rem" /> Invite User
-          </button>
-        }
-      />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--mar-m)' }}>
+        <button onClick={() => setShowInvite(true)}
+          className="btn btn-navy"
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+          <UserPlus size="1rem" /> Invite User
+        </button>
+      </div>
 
       {/* Flash */}
       {flash && (

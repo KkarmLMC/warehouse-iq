@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ClipboardText, CaretRight, CheckCircle, MagnifyingGlass } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
-import PageHeader from '../components/ui/PageHeader'
 
 export default function FulfillmentQueue() {
   const navigate = useNavigate()
@@ -29,7 +28,6 @@ export default function FulfillmentQueue() {
 
   return (
     <div className="page-content fade-in">
-      <PageHeader eyebrow="WAREHOUSE IQ" title="Fulfillment Queue" subtitle="Orders ready to pick and pack" />
 
       <div style={{ position:'relative',marginBottom:'var(--mar-l)' }}>
         <MagnifyingGlass size="0.9375rem" style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-3)' }} />

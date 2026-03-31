@@ -9,7 +9,6 @@ import { useAuth } from '../lib/useAuth.jsx'
 import { logActivity } from '../lib/logActivity.js'
 const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase().replace(/ /g, '_')
 import ProjectPicker from '../components/ProjectPicker.jsx'
-import PageHeader from '../components/ui/PageHeader'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Label({ children, required }) {
@@ -516,7 +515,6 @@ export default function PONew() {
   return (
     <div className="page-content fade-in">
 
-      <PageHeader eyebrow="SALES ORDERS" title="New Sales Order" />
 
       {/* Division selector */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xl)' }}>
