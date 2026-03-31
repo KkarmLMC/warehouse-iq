@@ -1190,15 +1190,17 @@ textarea { resize: vertical; }
   justify-content: space-between;
   gap: var(--gap-m);
   flex-shrink: 0;
+  min-height: 2.5rem;
 }
 .list-card__title {
   display: flex;
   align-items: center;
-  gap: var(--gap-s);
+  gap: var(--gap-xs);
   font-size: var(--text-sm);
   font-weight: var(--fw-bold);
   color: var(--white);
   min-width: 0;
+  line-height: 1;
 }
 .list-card__title svg { color: var(--white); flex-shrink: 0; }
 .list-card__meta {
@@ -1211,6 +1213,7 @@ textarea { resize: vertical; }
   flex-shrink: 0;
   white-space: nowrap;
   opacity: 0.8;
+  line-height: 1;
 }
 .list-card__action {
   display: flex;
@@ -1228,6 +1231,7 @@ textarea { resize: vertical; }
   font-family: var(--font);
   opacity: 0.85;
   transition: opacity var(--ease-fast);
+  line-height: 1;
 }
 .list-card__action:hover { opacity: 1; }
 .list-card__body { padding: 0; }
