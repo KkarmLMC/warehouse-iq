@@ -27,11 +27,11 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 'var(--pad-l) var(--pad-xl)',
-        borderRadius: 'var(--r-m)',
-        background: isDisabled ? 'var(--text-3)' : (color || 'var(--navy)'),
+        padding: 'var(--space-l) var(--space-xl)',
+        borderRadius: 'var(--radius-m)',
+        background: isDisabled ? 'var(--text-muted)' : (color || 'var(--brand-primary)'),
         cursor: isDisabled ? 'not-allowed' : 'pointer',
-        marginBottom: 'var(--mar-xxl)',
+        marginBottom: 'var(--space-2xl)',
         opacity: isDisabled && !done ? 0.7 : 1,
         transition: 'opacity var(--ease-fast), background var(--ease-fast)' }}
     >
@@ -40,7 +40,7 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
           {label}
         </div>
         {sub && (
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', marginTop: 2 }}>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 2 }}>
             {sub}
           </div>
         )}

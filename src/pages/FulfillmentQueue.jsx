@@ -29,35 +29,35 @@ export default function FulfillmentQueue() {
   return (
     <div className="page-content fade-in">
 
-      <div style={{ position:'relative',marginBottom:'var(--mar-l)' }}>
-        <MagnifyingGlass size="0.9375rem" style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-3)' }} />
+      <div style={{ position:'relative',marginBottom:'var(--space-l)' }}>
+        <MagnifyingGlass size="0.9375rem" style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-muted)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search orders…"
           style={{ paddingLeft:36,width:'100%',boxSizing:'border-box' }} />
       </div>
 
       <div className="card">
         {loading ? (
-          <div style={{ padding: 'var(--pad-xxl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
+          <div style={{ padding: 'var(--space-2xl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
         ) : visible.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
-            <ClipboardText size="2rem" style={{ color:'var(--text-3)',marginBottom:8 }} />
+          <div className="empty" style={{ padding: 'var(--space-2xl)' }}>
+            <ClipboardText size="2rem" style={{ color:'var(--text-muted)',marginBottom:8 }} />
             <div className="empty-title">No orders in fulfillment</div>
             <div className="empty-desc">Orders pushed from the SO Queue will appear here.</div>
           </div>
         ) : visible.map((o, idx) => (
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/fulfillment/${o.id}`)}
-            style={{ display:'flex',alignItems:'center',gap:'var(--gap-m)',padding: 'var(--pad-m) var(--pad-l)',
-              borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none',cursor:'pointer' }}>
-            <ClipboardText size="1rem" style={{ color:'var(--blue)' }} />
+            style={{ display:'flex',alignItems:'center',gap:'var(--space-m)',padding: 'var(--space-m) var(--space-l)',
+              borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none',cursor:'pointer' }}>
+            <ClipboardText size="1rem" style={{ color:'var(--state-info)' }} />
             <div style={{ flex:1,minWidth:0 }}>
-              <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
-              <div style={{ fontSize:'var(--text-sm)',color:'var(--black)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
+              <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--brand-primary)' }}>{o.so_number}</div>
+              <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
                 {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:2 }}>Received {fmtDate(o.fulfillment_at)}</div>
+              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:2 }}>Received {fmtDate(o.fulfillment_at)}</div>
             </div>
-            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--black)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
-            <CaretRight size="0.875rem" style={{ color:'var(--black)',flexShrink:0 }} />
+            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--text-primary)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
+            <CaretRight size="0.875rem" style={{ color:'var(--text-primary)',flexShrink:0 }} />
           </div>
         ))}
       </div>

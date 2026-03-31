@@ -7,18 +7,18 @@ import {
 import { db } from '../lib/supabase.js'
 
 const STATUS_META = {
-  draft:        { label: 'Draft',        color: 'var(--grey-base)', bg: 'var(--grey-tint-80)', icon: Clock },
-  queued:       { label: 'Queued',       color: 'var(--purple-tint-20)', bg: 'var(--purple-soft)', icon: Clock },
-  running:      { label: 'Running',      color: 'var(--warning)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
-  submitted:    { label: 'Submitted',    color: 'var(--warning)', bg: 'var(--warning-soft)', icon: PaperPlaneTilt },
-  fulfillment:  { label: 'Fulfillment',  color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)', icon: Receipt },
-  published:    { label: 'Published',    color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)', icon: Receipt },
-  shipment:     { label: 'Shipment',     color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)', icon: Receipt },
-  back_ordered: { label: 'Back Order',   color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)', icon: Clock },
-  complete:     { label: 'Complete',     color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
-  fulfilled:    { label: 'Fulfilled',    color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
-  fulfilled: { label: 'Fulfilled', color: 'var(--success-text)', bg: 'var(--success-soft)', icon: CheckCircle },
-  cancelled: { label: 'Cancelled', color: 'var(--error-dark)', bg: 'var(--error-soft)', icon: X } }
+  draft:        { label: 'Draft',        color: 'var(--text-secondary)', bg: 'var(--surface-light)', icon: Clock },
+  queued:       { label: 'Queued',       color: 'var(--brand-light)', bg: 'var(--brand-soft)', icon: Clock },
+  running:      { label: 'Running',      color: 'var(--state-warning)', bg: 'var(--state-warning-soft)', icon: PaperPlaneTilt },
+  submitted:    { label: 'Submitted',    color: 'var(--state-warning)', bg: 'var(--state-warning-soft)', icon: PaperPlaneTilt },
+  fulfillment:  { label: 'Fulfillment',  color: 'var(--state-info)', bg: 'var(--state-info-soft)', icon: Receipt },
+  published:    { label: 'Published',    color: 'var(--state-info)', bg: 'var(--state-info-soft)', icon: Receipt },
+  shipment:     { label: 'Shipment',     color: 'var(--state-info)', bg: 'var(--state-info-soft)', icon: Receipt },
+  back_ordered: { label: 'Back Order',   color: 'var(--state-info)', bg: 'var(--state-info-soft)', icon: Clock },
+  complete:     { label: 'Complete',     color: 'var(--state-success-text)', bg: 'var(--state-success-soft)', icon: CheckCircle },
+  fulfilled:    { label: 'Fulfilled',    color: 'var(--state-success-text)', bg: 'var(--state-success-soft)', icon: CheckCircle },
+  fulfilled: { label: 'Fulfilled', color: 'var(--state-success-text)', bg: 'var(--state-success-soft)', icon: CheckCircle },
+  cancelled: { label: 'Cancelled', color: 'var(--state-error-text)', bg: 'var(--state-error-soft)', icon: X } }
 
 const TABS = [
   { key: 'all',       label: 'All'       },
@@ -34,7 +34,7 @@ function StatusBadge({ status }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      padding: '3px 10px', borderRadius: 'var(--r-s)',
+      padding: '3px 10px', borderRadius: 'var(--radius-s)',
       fontSize: 'var(--text-xs)', fontWeight: 700,
       background: meta.bg, color: meta.color }}>
       <Icon size="0.6875rem" weight="fill" />
@@ -51,49 +51,49 @@ function POCard({ po, totals, onPress }) {
   return (
     <button onClick={onPress} style={{
       display: 'flex', alignItems: 'center', gap: '0.75rem',
-      padding: 'var(--pad-l)', background: 'none',
-      width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-l)',
+      padding: 'var(--space-l)', background: 'none',
+      width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-subtle)',
       cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
       {/* Icon */}
       <div style={{
-        width: '2.75rem', height: '2.75rem', borderRadius: 'var(--r-l)',
-        background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
+        width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-l)',
+        background: po.division === 'Bolt' ? 'var(--state-warning-soft)' : 'var(--state-info-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-        <Receipt size="1.25rem" style={{ color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }} />
+        <Receipt size="1.25rem" style={{ color: po.division === 'Bolt' ? 'var(--state-warning-text)' : 'var(--brand-primary)' }} />
       </div>
 
       {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 3, flexWrap: 'wrap' }}>
-          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', marginBottom: 3, flexWrap: 'wrap' }}>
+          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>
             {po.so_number}
           </span>
           <StatusBadge status={po.status} />
           <span style={{
             fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px',
-            borderRadius: 'var(--r-s)',
-            background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
-            color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }}>
+            borderRadius: 'var(--radius-s)',
+            background: po.division === 'Bolt' ? 'var(--state-warning-soft)' : 'var(--state-info-soft)',
+            color: po.division === 'Bolt' ? 'var(--state-warning-text)' : 'var(--brand-primary)' }}>
             {po.division === 'Bolt' ? 'Bolt' : 'LM'}
           </span>
         </div>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {po.customer_name}
         </div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2, display: 'flex', gap: 'var(--gap-s)' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2, display: 'flex', gap: 'var(--space-s)' }}>
           {po.project_name && <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{po.project_name}</span>}
           {po.so_date && <span>· {new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
         </div>
       </div>
 
       {/* Total + chevron */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexShrink: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexShrink: 0 }}>
         {grandTotal > 0 && (
-          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>
+          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           </span>
         )}
-        <CaretRight size="0.8125rem" style={{ color: 'var(--black)' }} />
+        <CaretRight size="0.8125rem" style={{ color: 'var(--text-primary)' }} />
       </div>
     </button>
   )
@@ -160,10 +160,10 @@ export default function PurchaseOrders() {
   return (
     <div className="page-content fade-in">
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--mar-m)' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--space-m)' }}>
         <button onClick={() => navigate('/sales-orders/new')}
           className="btn btn-navy"
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
           <Plus size="0.9375rem" /> New Sales Order
         </button>
       </div>
@@ -172,49 +172,49 @@ export default function PurchaseOrders() {
       {queuedCount > 0 && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: '0.75rem',
-          padding: 'var(--pad-m) var(--pad-l)', background: 'var(--warning-soft)',
-          borderRadius: 'var(--r-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
-          <Warning size="1.125rem" weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
+          padding: 'var(--space-m) var(--space-l)', background: 'var(--state-warning-soft)',
+          borderRadius: 'var(--radius-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
+          <Warning size="1.125rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--state-warning-text)' }}>
               {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--warning-text)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-warning-text)' }}>
               Tap to review and publish
             </div>
           </div>
-          <CaretRight size="0.875rem" style={{ color: 'var(--warning)' }} />
+          <CaretRight size="0.875rem" style={{ color: 'var(--state-warning)' }} />
         </div>
       )}
 
       {/* Stats strip */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
         {[
           { label: 'Total Orders', value: pos.length },
-          { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? 'var(--warning)' : undefined },
-          { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--success-text)' },
+          { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? 'var(--state-warning)' : undefined },
+          { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--state-success-text)' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-m)', textAlign: 'center' }}>
-            <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--black)' }}>{s.value}</div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>{s.label}</div>
+          <div key={s.label} style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', padding: 'var(--space-m)', textAlign: 'center' }}>
+            <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--text-primary)' }}>{s.value}</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>{s.label}</div>
           </div>
         ))}
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 2, marginBottom: 'var(--mar-m)', overflowX: 'auto', scrollbarWidth: 'none', borderBottom: '2px solid var(--border-l)', paddingBottom: 0 }}>
+      <div style={{ display: 'flex', gap: 2, marginBottom: 'var(--space-m)', overflowX: 'auto', scrollbarWidth: 'none', borderBottom: '2px solid var(--border-subtle)', paddingBottom: 0 }}>
         {TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             style={{
               flexShrink: 0, padding: '0.5rem 0.75rem',
               background: 'none', cursor: 'pointer', fontSize: 'var(--text-sm)',
               fontWeight: activeTab === tab.key ? 700 : 500,
-              color: activeTab === tab.key ? 'var(--navy)' : 'var(--text-3)',
-              borderBottom: activeTab === tab.key ? '2px solid var(--navy)' : '2px solid transparent',
+              color: activeTab === tab.key ? 'var(--brand-primary)' : 'var(--text-muted)',
+              borderBottom: activeTab === tab.key ? '2px solid var(--brand-primary)' : '2px solid transparent',
               marginBottom: -2, whiteSpace: 'nowrap' }}>
             {tab.label}
             {counts[tab.key] > 0 && (
-              <span style={{ marginLeft: 6, fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--navy)' : 'var(--hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-3)', borderRadius: 'var(--r-xxl)', padding: '1px 6px', fontWeight: 700 }}>
+              <span style={{ marginLeft: 6, fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--brand-primary)' : 'var(--surface-hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-muted)', borderRadius: 'var(--radius-l)', padding: '1px 6px', fontWeight: 700 }}>
                 {counts[tab.key]}
               </span>
             )}
@@ -223,21 +223,21 @@ export default function PurchaseOrders() {
       </div>
 
       {/* Search + division filter */}
-      <div style={{ display: 'flex', gap: 'var(--gap-s)', marginBottom: 'var(--mar-l)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 'var(--space-s)', marginBottom: 'var(--space-l)', flexWrap: 'wrap' }}>
         <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
-          <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+          <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
-          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}><X size="0.8125rem" /></button>}
+          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}><X size="0.8125rem" /></button>}
         </div>
         {['all', 'LM', 'Bolt'].map(d => (
           <button key={d} onClick={() => setDivisionFilter(d)}
             style={{
-              padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
-              border: `1px solid ${divisionFilter === d ? 'var(--navy)' : 'var(--border-l)'}`,
-              background: divisionFilter === d ? 'var(--navy)' : 'var(--hover)',
-              color: divisionFilter === d ? '#fff' : 'var(--black)' }}>
+              padding: 'var(--space-xs) var(--space-m)', borderRadius: 'var(--radius-l)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+              border: `1px solid ${divisionFilter === d ? 'var(--brand-primary)' : 'var(--border-subtle)'}`,
+              background: divisionFilter === d ? 'var(--brand-primary)' : 'var(--surface-hover)',
+              color: divisionFilter === d ? '#fff' : 'var(--text-primary)' }}>
             {d === 'all' ? 'All Divisions' : d === 'LM' ? 'Lightning Master' : 'Bolt Lightning'}
           </button>
         ))}
@@ -245,20 +245,20 @@ export default function PurchaseOrders() {
 
       {/* PO list */}
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--space-2xl)' }}><div className="spinner" /></div>
       ) : filtered.length === 0 ? (
         <div className="empty">
-          <Receipt size="2.5rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
+          <Receipt size="2.5rem" style={{ color: 'var(--text-muted)', marginBottom: 'var(--space-m)' }} />
           <div className="empty-title">{pos.length === 0 ? 'No sales orders yet' : 'No SOs match filters'}</div>
           <div className="empty-desc">{pos.length === 0 ? 'Create your first Sales Order to get started.' : 'Try adjusting your filters.'}</div>
           {pos.length === 0 && (
-            <button className="btn btn-primary" style={{ marginTop: 'var(--mar-l)' }} onClick={() => navigate('/sales-orders/new')}>
+            <button className="btn btn-primary" style={{ marginTop: 'var(--space-l)' }} onClick={() => navigate('/sales-orders/new')}>
               Create First Sales Order
             </button>
           )}
         </div>
       ) : (
-        <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden' }}>
           {filtered.map(po => (
             <POCard key={po.id} po={po} totals={totals[po.id]} onPress={() => navigate(`/sales-orders/${po.id}`)} />
           ))}

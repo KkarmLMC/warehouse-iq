@@ -11,13 +11,13 @@ const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase
 function WarehouseRow({ level, warehouseName }) {
   const isLow = level.min_level && level.quantity_on_hand <= level.min_level
   const isOut = level.quantity_on_hand === 0
-  const color = isOut ? 'var(--error-dark)' : isLow ? 'var(--orange-shade-20)' : 'var(--success-text)'
-  const bg = isOut ? 'var(--error-soft)' : isLow ? 'var(--orange-soft)' : 'var(--success-soft)'
+  const color = isOut ? 'var(--state-error-text)' : isLow ? 'var(--state-warning-text)' : 'var(--state-success-text)'
+  const bg = isOut ? 'var(--state-error-soft)' : isLow ? 'var(--state-warning-soft)' : 'var(--state-success-soft)'
 
   return (
     <div className="warehouse-row">
       <div className="warehouse-row__icon">
-        <Buildings size="1rem" style={{ color: 'var(--black)' }} />
+        <Buildings size="1rem" style={{ color: 'var(--text-primary)' }} />
         <div>
           <div className="warehouse-row__name">{warehouseName}</div>
           <div className="warehouse-row__meta">
@@ -28,8 +28,8 @@ function WarehouseRow({ level, warehouseName }) {
           </div>
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-        <span style={{ padding: '3px 10px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+        <span style={{ padding: '3px 10px', borderRadius: 'var(--radius-s)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
       </div>
@@ -50,26 +50,26 @@ function TransactionRow({ tx, warehouseName }) {
   }[tx.transaction_type] || tx.transaction_type
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
       <div style={{
-        width: '2rem', height: '2rem', borderRadius: 'var(--r-xxl)',
-        background: isPositive ? 'var(--success-soft)' : 'var(--error-soft)',
+        width: '2rem', height: '2rem', borderRadius: 'var(--radius-l)',
+        background: isPositive ? 'var(--state-success-soft)' : 'var(--state-error-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isPositive
-          ? <Plus size="0.875rem" weight="bold" style={{ color: 'var(--success-text)' }} />
-          : <Minus size="0.875rem" weight="bold" style={{ color: 'var(--error-dark)' }} />
+          ? <Plus size="0.875rem" weight="bold" style={{ color: 'var(--state-success-text)' }} />
+          : <Minus size="0.875rem" weight="bold" style={{ color: 'var(--state-error-text)' }} />
         }
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{typeLabel}</div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
           {warehouseName} · {new Date(tx.created_at).toLocaleDateString()}
         </div>
-        {tx.reason && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{tx.reason}</div>}
+        {tx.reason && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{tx.reason}</div>}
       </div>
       <div style={{
         fontSize: 'var(--text-md)', fontWeight: 800,
-        color: isPositive ? 'var(--success-text)' : 'var(--error-dark)' }}>
+        color: isPositive ? 'var(--state-success-text)' : 'var(--state-error-text)' }}>
         {isPositive ? '+' : ''}{tx.quantity_delta}
       </div>
     </div>
@@ -136,7 +136,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
   }
 
   const Label = ({ children }) => (
-    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 'var(--mar-xs)' }}>
+    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: 'var(--space-xs)' }}>
       {children}
     </label>
   )
@@ -146,16 +146,16 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
       <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 299, background: 'rgba(0,0,0,0.5)', animation: 'anim-fade-in 0.15s ease' }} />
       <div style={{
         position: 'fixed', left: 0, right: 0, bottom: 'env(safe-area-inset-bottom, 0px)', zIndex: 300,
-        background: 'var(--white)', borderRadius: 'var(--r-xl) var(--r-xl) 0 0',
+        background: 'var(--surface-base)', borderRadius: 'var(--radius-l) var(--radius-l) 0 0',
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>
-        <div style={{ padding: 'var(--pad-l) var(--pad-xl) 0', flexShrink: 0 }}>
-          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-l)', borderRadius: 'var(--r-xxl)', margin: '0 auto var(--mar-l)' }} />
-          <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 'var(--mar-l)' }}>Adjust Stock</div>
+        <div style={{ padding: 'var(--space-l) var(--space-xl) 0', flexShrink: 0 }}>
+          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-l)' }} />
+          <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 'var(--space-l)' }}>Adjust Stock</div>
         </div>
 
-        <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--pad-xl)', paddingBottom: 'calc(var(--pad-s))' }}>
-          <div style={{ marginBottom: 'var(--mar-m)' }}>
+        <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--space-xl)', paddingBottom: 'calc(var(--space-s))' }}>
+          <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Warehouse</Label>
             <select value={warehouseId} onChange={e => handleWarehouseChange(e.target.value)} style={{ width: '100%' }}>
               {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
@@ -163,11 +163,11 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
 
           {/* Divider */}
-          <div style={{ margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>Stock Adjustment</div>
+          <div style={{ margin: 'var(--space-m) 0', paddingTop: 'var(--space-m)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Stock Adjustment</div>
           </div>
 
-          <div style={{ marginBottom: 'var(--mar-m)' }}>
+          <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Transaction Type</Label>
             <select value={type} onChange={e => setType(e.target.value)} style={{ width: '100%' }}>
               <option value="adjustment">Manual Adjustment</option>
@@ -178,11 +178,11 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-m)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-m)' }}>
             <div>
               <Label>Qty Change</Label>
               <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-3)', marginTop: 3 }}>Negative to reduce</div>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginTop: 3 }}>Negative to reduce</div>
             </div>
             <div>
               <Label>Reason</Label>
@@ -191,30 +191,30 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           </div>
 
           {/* Divider */}
-          <div style={{ margin: 'var(--mar-m) 0', paddingTop: 'var(--pad-m)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', marginBottom: 'var(--mar-m)' }}>Thresholds</div>
+          <div style={{ margin: 'var(--space-m) 0', paddingTop: 'var(--space-m)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Thresholds</div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
             <div>
               <Label>On Order</Label>
               <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--blue)', marginTop: 3 }}>Incoming stock</div>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--state-info)', marginTop: 3 }}>Incoming stock</div>
             </div>
             <div>
               <Label>Min Level</Label>
               <input type="number" min="0" value={minLevel} onChange={e => setMinLevel(e.target.value)} placeholder="e.g. 10" style={{ width: '100%' }} />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-3)', marginTop: 3 }}>Low stock alert</div>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginTop: 3 }}>Low stock alert</div>
             </div>
           </div>
         </div>
 
-        <div style={{ padding: 'var(--pad-l) var(--pad-xl)', paddingBottom: 'calc(var(--pad-l) + env(safe-area-inset-bottom))', flexShrink: 0 }}>
+        <div style={{ padding: 'var(--space-l) var(--space-xl)', paddingBottom: 'calc(var(--space-l) + env(safe-area-inset-bottom))', flexShrink: 0 }}>
           <button onClick={handleSave} disabled={saving || (delta === 0 && onOrder === '' && minLevel === '')}
             style={{
-              width: '100%', padding: '0.75rem', borderRadius: 'var(--r-m)',
-              background: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--hover)' : 'var(--navy)',
-              color: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--text-3)' : '#fff',
+              width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-m)',
+              background: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--surface-hover)' : 'var(--brand-primary)',
+              color: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--text-muted)' : '#fff',
               fontWeight: 700, fontSize: 'var(--text-sm)',
               cursor: (delta === 0 && onOrder === '' && minLevel === '') ? 'default' : 'pointer' }}>
             {saving ? 'Saving…' : 'Save Changes'}
@@ -253,7 +253,7 @@ export default function PartDetail() {
 
   useEffect(() => { load() }, [id])
 
-  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--space-2xl)' }}><div className="spinner" /></div>
   if (!part) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Part not found</div></div></div>
 
   const totalQty = levels.reduce((s, l) => s + l.quantity_on_hand, 0)
@@ -264,56 +264,56 @@ export default function PartDetail() {
   return (
     <div className="page-content fade-in">
       {/* Header */}
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
+      <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--space-m)' }}>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', marginBottom: 4 }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginBottom: 4 }}>
               {part.part_categories?.name || 'Uncategorized'}
             </div>
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>{part.name}</div>
-            {part.sku && <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--text-xs)', color: 'var(--white)', marginTop: 4 }}>{part.sku}</div>}
+            {part.sku && <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 4 }}>{part.sku}</div>}
           </div>
           <button onClick={() => navigate(`/warehouse-hq/part/${id}/edit`)}
-            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--radius-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
             <PencilSimple size="1rem" />
           </button>
         </div>
 
         {/* Total stock */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--gap-s)' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--space-s)' }}>
           <div style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1 }}>{totalQty}</div>
-          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--white)' }}>{part.unit_of_measure} total</div>
+          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>{part.unit_of_measure} total</div>
         </div>
       </div>
 
       {/* Action buttons */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-l)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
         <button onClick={() => setShowAdjust(true)}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-l)', background: 'var(--brand-primary)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Adjust Stock
         </button>
         <button onClick={() => navigate('/warehouse-hq/transfer')}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
+          style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-l)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
           <ArrowsLeftRight size="1rem" /> Transfer
         </button>
       </div>
 
       {/* Stock by warehouse */}
-      <Card style={{ marginBottom: 'var(--mar-l)' }}>
-        <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Stock by Warehouse</div>
+      <Card style={{ marginBottom: 'var(--space-l)' }}>
+        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Stock by Warehouse</div>
         </div>
         {levels.length === 0 ? (
-          <div style={{ padding: 'var(--pad-xl)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No stock recorded yet</div>
+          <div style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>No stock recorded yet</div>
         ) : (
           levels.map(l => <WarehouseRow key={l.id} level={l} warehouseName={l.warehouses?.name || '—'} />)
         )}
       </Card>
 
       {/* Part details */}
-      <Card style={{ marginBottom: 'var(--mar-l)' }}>
-        <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Part Details</div>
+      <Card style={{ marginBottom: 'var(--space-l)' }}>
+        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Part Details</div>
         </div>
         {[
           ['Manufacturer', part.manufacturer],
@@ -322,36 +322,36 @@ export default function PartDetail() {
           ['Unit Cost', part.unit_cost ? `$${part.unit_cost}` : null],
           ['Barcode', part.barcode],
         ].filter(([, v]) => v).map(([label, value]) => (
-          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
-            <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)' }}>{label}</span>
+          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+            <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>{label}</span>
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{value}</span>
           </div>
         ))}
         {part.description && (
-          <div style={{ padding: 'var(--pad-m) var(--pad-l)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginBottom: 4 }}>Description</div>
+          <div style={{ padding: 'var(--space-m) var(--space-l)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 4 }}>Description</div>
             <div style={{ fontSize: 'var(--text-sm)' }}>{part.description}</div>
           </div>
         )}
       </Card>
 
       {/* Transaction history */}
-      <Card style={{ marginBottom: 'var(--mar-l)' }}>
+      <Card style={{ marginBottom: 'var(--space-l)' }}>
         <button
           onClick={() => setShowTx(!showTx)}
-          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'none', cursor: 'pointer' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-            <ClipboardText size="1rem" style={{ color: 'var(--black)' }} />
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>
-            <span style={{ padding: '1px 8px', borderRadius: 'var(--r-s)', background: 'var(--hover)', fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
+          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+            <ClipboardText size="1rem" style={{ color: 'var(--text-primary)' }} />
+            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Transaction History</span>
+            <span style={{ padding: '1px 8px', borderRadius: 'var(--radius-s)', background: 'var(--surface-hover)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{transactions.length}</span>
           </div>
-          <CaretDown size="0.875rem" style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size="0.875rem" style={{ color: 'var(--text-primary)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
         {showTx && transactions.map(tx => (
           <TransactionRow key={tx.id} tx={tx} warehouseName={whMap[tx.warehouse_id] || '—'} />
         ))}
         {showTx && transactions.length === 0 && (
-          <div style={{ padding: 'var(--pad-l)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>No transactions yet</div>
+          <div style={{ padding: 'var(--space-l)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>No transactions yet</div>
         )}
       </Card>
 

@@ -55,20 +55,20 @@ export default function SOQueue() {
     <div className="page-content fade-in">
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 'var(--gap-xs)', marginBottom: 'var(--mar-l)', overflowX: 'auto', paddingBottom: 2 }}>
+      <div style={{ display: 'flex', gap: 'var(--space-xs)', marginBottom: 'var(--space-l)', overflowX: 'auto', paddingBottom: 2 }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            style={{ flexShrink: 0, padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-s)', cursor: 'pointer', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
-              background: tab === t.key ? 'var(--navy)' : 'var(--white)',
-              color: tab === t.key ? 'var(--white)' : 'var(--black)' }}>
+            style={{ flexShrink: 0, padding: 'var(--space-xs) var(--space-m)', borderRadius: 'var(--radius-s)', cursor: 'pointer', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
+              background: tab === t.key ? 'var(--brand-primary)' : 'var(--surface-base)',
+              color: tab === t.key ? 'var(--surface-base)' : 'var(--text-primary)' }}>
             {t.label}{counts[t.key] > 0 ? ` (${counts[t.key]})` : ''}
           </button>
         ))}
       </div>
 
       {/* Search */}
-      <div style={{ position: 'relative', marginBottom: 'var(--mar-l)' }}>
-        <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+      <div style={{ position: 'relative', marginBottom: 'var(--space-l)' }}>
+        <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search by SO number, customer, project…"
           style={{ paddingLeft: 36, width: '100%', boxSizing: 'border-box' }} />
       </div>
@@ -76,10 +76,10 @@ export default function SOQueue() {
       {/* Orders list */}
       <div className="card">
         {loading ? (
-          <div style={{ padding: 'var(--pad-xxl)', textAlign: 'center' }}><div className="spinner" style={{ margin: '0 auto' }} /></div>
+          <div style={{ padding: 'var(--space-2xl)', textAlign: 'center' }}><div className="spinner" style={{ margin: '0 auto' }} /></div>
         ) : visible.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
-            <Receipt size="2rem" style={{ color: 'var(--text-3)', marginBottom: 8 }} />
+          <div className="empty" style={{ padding: 'var(--space-2xl)' }}>
+            <Receipt size="2rem" style={{ color: 'var(--text-muted)', marginBottom: 8 }} />
             <div className="empty-title">No orders in {TABS.find(t=>t.key===tab)?.label}</div>
             <div className="empty-desc">Orders will appear here as they move through the pipeline.</div>
           </div>
@@ -93,22 +93,22 @@ export default function SOQueue() {
                 else if (o.status === 'shipment') navigate(`/warehouse-hq/shipment/${o.id}`)
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
-              style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
-              <Receipt size="1rem" style={{ color: 'var(--navy)' }} />
+              style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
+              <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-                  <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{o.so_number}</span>
+                  <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--brand-primary)' }}>{o.so_number}</span>
                   <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: stage.bg, color: stage.color }}>{stage.label}</span>
                 </div>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}{o.job_city ? ` · ${o.job_city}, ${o.job_state}` : ''}
                 </div>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>Received {fmtDate(o.created_at)}</div>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>Received {fmtDate(o.created_at)}</div>
               </div>
               <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                <div style={{ fontWeight: 700, fontFamily: 'var(--mono)', fontSize: 'var(--text-sm)', color: 'var(--black)' }}>{fmt(o.grand_total)}</div>
+                <div style={{ fontWeight: 700, fontFamily: 'var(--mono)', fontSize: 'var(--text-sm)', color: 'var(--text-primary)' }}>{fmt(o.grand_total)}</div>
               </div>
-              <CaretRight size="0.875rem" style={{ color: 'var(--black)', flexShrink: 0 }} />
+              <CaretRight size="0.875rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />
             </div>
           )
         })}

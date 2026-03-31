@@ -16,7 +16,7 @@ export default function FilterPills({ options, active, onChange }) {
   return (
     <div style={{
       display: 'flex',
-      gap: 'var(--gap-s)',
+      gap: 'var(--space-s)',
       overflowX: 'auto',
       scrollbarWidth: 'none',
       msOverflowStyle: 'none',
@@ -29,9 +29,9 @@ export default function FilterPills({ options, active, onChange }) {
             onClick={() => onChange(key)}
             style={{
               padding: '4px 12px',
-              borderRadius: 'var(--r-s)',
-              background: isActive ? 'var(--navy)' : 'var(--white)',
-              color: isActive ? '#fff' : 'var(--black)',
+              borderRadius: 'var(--radius-s)',
+              background: isActive ? 'var(--brand-primary)' : 'var(--surface-base)',
+              color: isActive ? '#fff' : 'var(--text-primary)',
               fontSize: 'var(--text-xs)',
               fontWeight: 600,
               cursor: 'pointer',

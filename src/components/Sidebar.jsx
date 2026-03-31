@@ -66,7 +66,7 @@ function Clock() {
     return () => clearInterval(i)
   }, [])
   return (
-    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', fontFamily: 'var(--font)' }}>
+    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontFamily: 'var(--font)' }}>
       {t.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
       {' · '}
       {t.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
@@ -96,7 +96,7 @@ function SubNav({ children, collapsed, goTo, currentPath }) {
       <div style={{ position: 'relative', paddingLeft: 4 }}>
         <div style={{
           position: 'absolute', left: '1.375rem', top: 4, bottom: 4,
-          width: 1, background: 'var(--border)', borderRadius: 'var(--r-xs)' }} />
+          width: 1, background: 'var(--border-default)', borderRadius: 'var(--radius-xs)' }} />
         {children.map(child => {
           const active = pathMatch(child.path, currentPath)
           return (
@@ -135,7 +135,7 @@ function NavGroup({ item, collapsed, goTo, currentPath }) {
         {collapsed && active && (
           <div style={{
             position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)',
-            width: '0.25rem', height: '0.25rem', borderRadius: '50%', background: 'var(--red)' }} />
+            width: '0.25rem', height: '0.25rem', borderRadius: '50%', background: 'var(--state-error)' }} />
         )}
       </button>
 
@@ -198,7 +198,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: 'var(--text-xs)', fontWeight: 500, color: 'var(--white)' }}>
+                <div style={{ fontSize: 'var(--text-xs)', fontWeight: 500, color: 'var(--surface-base)' }}>
                   LMC · Bolt LP
                 </div>
               </div>
@@ -213,9 +213,9 @@ export default function Sidebar({ collapsed, onToggle }) {
             title={collapsed ? (floorMode ? 'Switch to App Mode' : 'Switch to Floor Mode') : undefined}
             style={{
               display: 'flex', alignItems: 'center', gap: '0.5rem',
-              margin: '0 var(--mar-s) var(--mar-s)',
-              padding: 'var(--pad-s) var(--pad-m)',
-              borderRadius: 'var(--r-l)',
+              margin: '0 var(--space-s) var(--space-s)',
+              padding: 'var(--space-s) var(--space-m)',
+              borderRadius: 'var(--radius-l)',
               border: `1px solid ${floorMode ? 'var(--blue-tint-60)' : 'rgba(255,255,255,0.15)'}`,
               background: floorMode ? 'rgba(147,197,253,0.1)' : 'rgba(255,255,255,0.05)',
               cursor: 'pointer',
@@ -249,10 +249,10 @@ export default function Sidebar({ collapsed, onToggle }) {
         {/* Footer */}
         <div className="sidebar-footer-nav">
           {!collapsed && (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-s) 0.625rem var(--pad-xs)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-s) 0.625rem var(--space-xs)' }}>
               <span className="sidebar-section-label" style={{ padding: 0 }}>ACCOUNT</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--success)', animation: 'livepulse 2s infinite', flexShrink: 0 }} />
+                <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--state-success)', animation: 'livepulse 2s infinite', flexShrink: 0 }} />
                 <Clock />
               </div>
             </div>

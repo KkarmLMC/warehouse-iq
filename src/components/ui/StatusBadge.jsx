@@ -12,7 +12,7 @@ import { soStatus, projectStage, approvalStatus, stockStatus } from '../../lib/s
 
 // Unified lookup — tries SO status, then project stage, then approval, then stock
 function getTokens(status) {
-  if (!status) return { color: 'var(--text-3)', bg: 'var(--hover)' }
+  if (!status) return { color: 'var(--text-muted)', bg: 'var(--surface-hover)' }
   const key = status.toLowerCase().replace(/[\s_-]+/g, '-')
 
   // Try each map in order
@@ -30,13 +30,13 @@ function getTokens(status) {
 
   // Extra aliases
   const ALIAS = {
-    'active':    { color: 'var(--warning)',      bg: 'var(--warning-soft)' },
-    'pending':   { color: 'var(--warning)',      bg: 'var(--warning-soft)' },
-    'on hold':   { color: 'var(--error-dark)',   bg: 'var(--error-soft)' },
-    'hold':      { color: 'var(--error-dark)',   bg: 'var(--error-soft)' },
-    'reviewed':  { color: 'var(--success-text)', bg: 'var(--success-soft)' },
+    'active':    { color: 'var(--state-warning)',      bg: 'var(--state-warning-soft)' },
+    'pending':   { color: 'var(--state-warning)',      bg: 'var(--state-warning-soft)' },
+    'on hold':   { color: 'var(--state-error-text)',   bg: 'var(--state-error-soft)' },
+    'hold':      { color: 'var(--state-error-text)',   bg: 'var(--state-error-soft)' },
+    'reviewed':  { color: 'var(--state-success-text)', bg: 'var(--state-success-soft)' },
   }
-  return ALIAS[key] || ALIAS[normalized] || { color: 'var(--text-3)', bg: 'var(--hover)' }
+  return ALIAS[key] || ALIAS[normalized] || { color: 'var(--text-muted)', bg: 'var(--surface-hover)' }
 }
 
 export default function StatusBadge({ status, custom, small }) {
@@ -46,7 +46,7 @@ export default function StatusBadge({ status, custom, small }) {
       display: 'inline-flex',
       alignItems: 'center',
       padding: small ? '1px 6px' : '2px 8px',
-      borderRadius: 'var(--r-s)',
+      borderRadius: 'var(--radius-s)',
       fontSize: 'var(--text-xs)',
       fontWeight: 700,
       background: style.bg,

@@ -105,51 +105,51 @@ export default function InventoryTransfer() {
 
   return (
     <div className="page-content fade-in">
-      <div style={{ background: 'var(--navy)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)', color: '#fff' }}>
+      <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
         <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>Transfer Stock</div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--white)', marginTop: 4 }}>Move parts between warehouses</div>
+        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)', marginTop: 4 }}>Move parts between warehouses</div>
       </div>
 
       {/* From / To */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xl)', marginBottom: 'var(--mar-l)' }}>
-        <div style={{ marginBottom: 'var(--mar-l)' }}>
-          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--mar-xs)', color: errors.from ? 'var(--red)' : 'var(--black)' }}>From Warehouse</label>
-          <select value={fromId} onChange={e => setFromId(e.target.value)} style={{ width: '100%', borderColor: errors.from ? 'var(--red)' : undefined }}>
+      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)' }}>
+        <div style={{ marginBottom: 'var(--space-l)' }}>
+          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)', color: errors.from ? 'var(--state-error)' : 'var(--text-primary)' }}>From Warehouse</label>
+          <select value={fromId} onChange={e => setFromId(e.target.value)} style={{ width: '100%', borderColor: errors.from ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
-          {errors.from && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--red)', marginTop: 4 }}>{errors.from}</div>}
+          {errors.from && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 4 }}>{errors.from}</div>}
         </div>
 
-        <div style={{ marginBottom: 'var(--mar-l)' }}>
-          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--mar-xs)', color: errors.to ? 'var(--red)' : 'var(--black)' }}>To Warehouse</label>
-          <select value={toId} onChange={e => setToId(e.target.value)} style={{ width: '100%', borderColor: errors.to ? 'var(--red)' : undefined }}>
+        <div style={{ marginBottom: 'var(--space-l)' }}>
+          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)', color: errors.to ? 'var(--state-error)' : 'var(--text-primary)' }}>To Warehouse</label>
+          <select value={toId} onChange={e => setToId(e.target.value)} style={{ width: '100%', borderColor: errors.to ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
-          {errors.to && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--red)', marginTop: 4 }}>{errors.to}</div>}
+          {errors.to && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 4 }}>{errors.to}</div>}
         </div>
 
-        <div style={{ marginBottom: 'var(--mar-l)' }}>
-          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--mar-xs)' }}>Reason (optional)</label>
+        <div style={{ marginBottom: 'var(--space-l)' }}>
+          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)' }}>Reason (optional)</label>
           <input value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Resupply field crew" style={{ width: '100%' }} />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--mar-xs)' }}>Notes (optional)</label>
+          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)' }}>Notes (optional)</label>
           <textarea value={notes} onChange={e => setNotes(e.target.value)} rows={2} style={{ width: '100%', resize: 'vertical' }} />
         </div>
       </div>
 
       {/* Parts */}
-      <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
-        <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Parts to Transfer</div>
-          {errors.items && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--red)', marginTop: 2 }}>{errors.items}</div>}
+      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)' }}>
+        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Parts to Transfer</div>
+          {errors.items && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 2 }}>{errors.items}</div>}
         </div>
 
         {/* Search */}
-        <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)', position: 'relative' }}>
+        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)', position: 'relative' }}>
           <div style={{ position: 'relative' }}>
-            <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+            <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -158,15 +158,15 @@ export default function InventoryTransfer() {
             />
           </div>
           {searchResults.length > 0 && (
-            <div style={{ position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 50, background: 'var(--white)', borderRadius: 'var(--r-l)', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 50, background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', overflow: 'hidden' }}>
               {searchResults.map(p => (
                 <button key={p.id} onClick={() => addItem(p)}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: 'var(--pad-m) var(--pad-l)', background: 'none', cursor: 'pointer', borderBottom: '1px solid var(--border-l)', textAlign: 'left' }}>
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer', borderBottom: '1px solid var(--border-subtle)', textAlign: 'left' }}>
                   <div>
                     <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{p.name}</div>
-                    {p.sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', fontFamily: 'var(--mono)' }}>{p.sku}</div>}
+                    {p.sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>{p.sku}</div>}
                   </div>
-                  <Plus size="1rem" style={{ color: 'var(--navy)' }} />
+                  <Plus size="1rem" style={{ color: 'var(--brand-primary)' }} />
                 </button>
               ))}
             </div>
@@ -175,14 +175,14 @@ export default function InventoryTransfer() {
 
         {/* Line items */}
         {items.length === 0 ? (
-          <div style={{ padding: 'var(--pad-xl)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
+          <div style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>
             Search for parts above to add them to the transfer
           </div>
         ) : items.map((item, idx) => (
-          <div key={item.part_id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
+          <div key={item.part_id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.part_name}</div>
-              {item.part_sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', fontFamily: 'var(--mono)' }}>{item.part_sku}</div>}
+              {item.part_sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>{item.part_sku}</div>}
             </div>
             <input
               type="number" min="1"
@@ -191,7 +191,7 @@ export default function InventoryTransfer() {
               style={{ width: '4rem', textAlign: 'center' }}
             />
             <button onClick={() => removeItem(idx)}
-              style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--red)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+              style={{ width: '2rem', height: '2rem', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--state-error)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
               <Trash size="0.875rem" />
             </button>
           </div>
@@ -199,12 +199,12 @@ export default function InventoryTransfer() {
       </div>
 
       {/* Submit */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xxl)' }}>
-        <button onClick={() => navigate(-1)} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-2xl)' }}>
+        <button onClick={() => navigate(-1)} style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving}
-          style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: saving ? 'var(--hover)' : 'var(--red)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
+          style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: saving ? 'var(--surface-hover)' : 'var(--state-error)', color: saving ? 'var(--text-muted)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
           {saving ? <><SpinnerGap size="0.875rem" style={{ animation: 'spin 1s linear infinite' }} /> Processing…</> : <><CheckCircle size="0.875rem" /> Complete Transfer</>}
         </button>
       </div>

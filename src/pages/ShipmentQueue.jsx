@@ -29,40 +29,40 @@ export default function ShipmentQueue() {
   return (
     <div className="page-content fade-in">
 
-      <div style={{ position:'relative',marginBottom:'var(--mar-l)' }}>
-        <MagnifyingGlass size="0.9375rem" style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-3)' }} />
+      <div style={{ position:'relative',marginBottom:'var(--space-l)' }}>
+        <MagnifyingGlass size="0.9375rem" style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-muted)' }} />
         <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search orders…"
           style={{ paddingLeft:36,width:'100%',boxSizing:'border-box' }} />
       </div>
 
       <div className="card">
         {loading ? (
-          <div style={{ padding: 'var(--pad-xxl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
+          <div style={{ padding: 'var(--space-2xl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
         ) : visible.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
-            <Truck size="2rem" style={{ color:'var(--text-3)',marginBottom:8 }} />
+          <div className="empty" style={{ padding: 'var(--space-2xl)' }}>
+            <Truck size="2rem" style={{ color:'var(--text-muted)',marginBottom:8 }} />
             <div className="empty-title">No orders ready to ship</div>
             <div className="empty-desc">Orders confirmed by fulfillment will appear here.</div>
           </div>
         ) : visible.map((o, idx) => (
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/shipment/${o.id}`)}
-            style={{ display:'flex',alignItems:'center',gap:'var(--gap-m)',padding: 'var(--pad-m) var(--pad-l)',
-              borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none',cursor:'pointer' }}>
-            <Truck size="1rem" style={{ color:'var(--blue-shade-20)' }} />
+            style={{ display:'flex',alignItems:'center',gap:'var(--space-m)',padding: 'var(--space-m) var(--space-l)',
+              borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none',cursor:'pointer' }}>
+            <Truck size="1rem" style={{ color:'var(--state-info)' }} />
             <div style={{ flex:1,minWidth:0 }}>
-              <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
-              <div style={{ fontSize:'var(--text-sm)',color:'var(--black)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
+              <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--brand-primary)' }}>{o.so_number}</div>
+              <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
                 {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>
               {(o.job_city||o.customer_city) && (
-                <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
+                <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:1 }}>
                   Ship to: {o.job_city||o.customer_city}, {o.job_state||o.customer_state}
                 </div>
               )}
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)' }}>Ready {fmtDate(o.shipment_at)}</div>
+              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)' }}>Ready {fmtDate(o.shipment_at)}</div>
             </div>
-            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--black)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
-            <CaretRight size="0.875rem" style={{ color:'var(--black)',flexShrink:0 }} />
+            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--text-primary)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
+            <CaretRight size="0.875rem" style={{ color:'var(--text-primary)',flexShrink:0 }} />
           </div>
         ))}
       </div>

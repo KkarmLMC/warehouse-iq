@@ -27,24 +27,24 @@ function PinPad({ onComplete }) {
   }
   const del = () => setDigits(d => d.slice(0, -1))
   const btnStyle = {
-    height: 60, borderRadius: 'var(--r-m)',
-    background: 'var(--white)',
+    height: 60, borderRadius: 'var(--radius-m)',
+    background: 'var(--surface-base)',
     fontSize: 'var(--text-md)', fontWeight: 'var(--fw-bold)',
     cursor: 'pointer', fontFamily: 'var(--font)',
     transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent' }
-  const hoverOn  = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = 'var(--white)'; e.currentTarget.style.borderColor = 'var(--navy)' }
-  const hoverOff = e => { e.currentTarget.style.background = 'var(--white)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-l)' }
+  const hoverOn  = e => { e.currentTarget.style.background = 'var(--brand-primary)'; e.currentTarget.style.color = 'var(--surface-base)'; e.currentTarget.style.borderColor = 'var(--brand-primary)' }
+  const hoverOff = e => { e.currentTarget.style.background = 'var(--surface-base)'; e.currentTarget.style.color = ''; e.currentTarget.style.borderColor = 'var(--border-subtle)' }
   const pressOn  = e => { e.currentTarget.style.background = 'var(--navy-dark)'; e.currentTarget.style.transform = 'scale(0.97)' }
-  const pressOff = e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.transform = 'scale(1)' }
+  const pressOff = e => { e.currentTarget.style.background = 'var(--brand-primary)'; e.currentTarget.style.transform = 'scale(1)' }
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 'var(--mar-xl)' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 'var(--space-xl)' }}>
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} style={{ width: 14, height: 14, borderRadius: '50%', background: i < digits.length ? 'var(--navy)' : 'var(--border-l)', transition: 'background 0.1s' }} />
+          <div key={i} style={{ width: 14, height: 14, borderRadius: '50%', background: i < digits.length ? 'var(--brand-primary)' : 'var(--border-subtle)', transition: 'background 0.1s' }} />
         ))}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-m)', maxWidth: 260, margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-m)', maxWidth: 260, margin: '0 auto' }}>
         {[1,2,3,4,5,6,7,8,9].map(n => (
           <button key={n} onClick={() => press(String(n))} style={btnStyle}
             onMouseEnter={hoverOn} onMouseLeave={hoverOff} onMouseDown={pressOn} onMouseUp={pressOff}
@@ -67,7 +67,7 @@ function Section({ icon: Icon, title, children, action }) {
   return (
     <Card className="profile-section">
       <div className="profile-section__header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', color: 'var(--surface-base)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
           {Icon && <Icon size="0.9375rem" />} {title}
         </div>
         {action}
@@ -124,9 +124,9 @@ function ActivityLog({ userId }) {
   const APP_LABELS = { field_ops: 'Field Ops', warehouse_iq: 'Warehouse IQ', mission_control: 'Mission Control' }
 
   const CATEGORY_COLOR = {
-    sales_order: 'var(--blue)', fulfillment: 'var(--purple)', shipment: 'var(--blue-shade-20)',
-    import: 'var(--warning-text)',      profile: 'var(--grey-shade-20)',     auth: 'var(--grey-base)',
-    parts: 'var(--success-dark)',       inventory: 'var(--success-dark)',   transfer: 'var(--warning-text)' }
+    sales_order: 'var(--state-info)', fulfillment: 'var(--brand-primary)', shipment: 'var(--state-info)',
+    import: 'var(--state-warning-text)',      profile: 'var(--text-muted)',     auth: 'var(--text-secondary)',
+    parts: 'var(--state-success-text)',       inventory: 'var(--state-success-text)',   transfer: 'var(--state-warning-text)' }
 
   return (
     <Card className="activity-log">
@@ -148,7 +148,7 @@ function ActivityLog({ userId }) {
               <div key={log.id} className="activity-log__item">
                 {/* Category dot */}
                 <div className="activity-log__dot" style={{
-                  background: CATEGORY_COLOR[log.category] || 'var(--text-3)' }} />
+                  background: CATEGORY_COLOR[log.category] || 'var(--text-muted)' }} />
                 <div className="activity-log__text">
                   <div className="activity-log__label">
                     {log.label}
@@ -157,7 +157,7 @@ function ActivityLog({ userId }) {
                     <span>{fmtTime(log.created_at)}</span>
                     <span>·</span>
                     <span style={{
-                      color: CATEGORY_COLOR[log.category] || 'var(--text-3)' }}>{APP_LABELS[log.app] || log.app}</span>
+                      color: CATEGORY_COLOR[log.category] || 'var(--text-muted)' }}>{APP_LABELS[log.app] || log.app}</span>
                   </div>
                 </div>
               </div>
@@ -269,15 +269,15 @@ export default function Profile() {
     'confirm-new': 'Confirm your PIN' }
 
   const roleColors = {
-    admin:   { color: 'var(--error-shade-40)', bg: 'var(--error-soft)' },
-    manager: { color: 'var(--blue)', bg: 'var(--blue-soft)' },
-    user:    { color: 'var(--success-dark)', bg: 'var(--success-soft)' } }
+    admin:   { color: 'var(--state-error-text)', bg: 'var(--state-error-soft)' },
+    manager: { color: 'var(--state-info)', bg: 'var(--state-info-soft)' },
+    user:    { color: 'var(--state-success-text)', bg: 'var(--state-success-soft)' } }
   const roleStyle = roleColors[profile?.role] || roleColors.user
 
   const pipelineRoleColors = {
-    warehouse_manager: { color: 'var(--purple-shade-20)', bg: 'var(--purple-soft)' },
-    fulfillment:       { color: 'var(--blue-shade-40)', bg: 'var(--blue-soft)' },
-    shipping:          { color: 'var(--blue-shade-20)', bg: 'var(--blue-tint-80)' } }
+    warehouse_manager: { color: 'var(--brand-primary)', bg: 'var(--brand-soft)' },
+    fulfillment:       { color: 'var(--state-info)', bg: 'var(--state-info-soft)' },
+    shipping:          { color: 'var(--state-info)', bg: 'var(--state-info-soft)' } }
   const pipelineStyle = pipelineRoleColors[profile?.pipeline_role] || null
 
   const appLabels = {
@@ -330,9 +330,9 @@ export default function Profile() {
         )}>
 
         {editingName ? (
-          <div style={{ marginBottom: 'var(--mar-m)' }}>
+          <div style={{ marginBottom: 'var(--space-m)' }}>
             <label className="profile-label">Full Name</label>
-            <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
+            <div style={{ display: 'flex', gap: 'var(--space-s)' }}>
               <input value={nameVal} onChange={e => setNameVal(e.target.value)} autoFocus style={{ flex: 1 }} onKeyDown={e => e.key === 'Enter' && saveName()} />
               <Button onClick={saveName} disabled={nameSaving}>
                 {nameSaving ? 'Saving…' : 'Save'}
@@ -350,8 +350,8 @@ export default function Profile() {
 
         {profile?.division && (
           <Row label="Division">
-            <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)' }}>
-              <Buildings size="0.8125rem" style={{ color: 'var(--black)' }} />
+            <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+              <Buildings size="0.8125rem" style={{ color: 'var(--text-primary)' }} />
               {profile.division}
             </span>
           </Row>
@@ -385,9 +385,9 @@ export default function Profile() {
         )}
 
         {profile?.app_access?.length > 0 && (
-          <div style={{ marginBottom: 'var(--mar-m)' }}>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', marginBottom: 8 }}>App Access</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-xs)' }}>
+          <div style={{ marginBottom: 'var(--space-m)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', marginBottom: 8 }}>App Access</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
               {profile.app_access.map(app => (
                 <Badge key={app}>
                   <AppWindow size="0.75rem" />
@@ -398,7 +398,7 @@ export default function Profile() {
           </div>
         )}
 
-        <div style={{ padding: 'var(--pad-m)', background: 'var(--hover)', borderRadius: 'var(--r-l)', fontSize: 'var(--text-xs)', color: 'var(--text-3)', lineHeight: 1.5 }}>
+        <div style={{ padding: 'var(--space-m)', background: 'var(--surface-hover)', borderRadius: 'var(--radius-l)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', lineHeight: 1.5 }}>
           Role assignments are managed by your administrator. Contact admin to request changes.
         </div>
       </Section>
@@ -416,7 +416,7 @@ export default function Profile() {
             <div className="profile-row">
               <div>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)' }}>{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', marginTop: 2 }}>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>
                   {hasPin
                     ? `Last set: ${profile?.pin_set_at ? new Date(profile.pin_set_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown'}`
                     : 'Set a PIN to log in faster — no password needed'}
@@ -428,17 +428,17 @@ export default function Profile() {
             </div>
 
             {hasPin && (
-              <Button variant="ghost" style={{ color: 'var(--error-alt)' }} onClick={removePin} disabled={removingPin}>
+              <Button variant="ghost" style={{ color: 'var(--state-error)' }} onClick={removePin} disabled={removingPin}>
                 <Trash size="0.8125rem" /> {removingPin ? 'Removing…' : 'Remove PIN'}
               </Button>
             )}
           </div>
         ) : (
           <div>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--mar-l)' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'var(--space-l)' }}>
               <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-bold)', marginBottom: 4 }}>{pinLabel[pinSection]}</div>
               {pinError && (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-xs)', color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-xs)', color: 'var(--state-error)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
                   <Warning size="0.875rem" /> {pinError}
                 </div>
               )}
@@ -457,7 +457,7 @@ export default function Profile() {
         )}>
 
         {showPwForm ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-m)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-m)' }}>
             <div>
               <label className="profile-label">New Email (optional)</label>
               <input type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="Leave blank to keep current" />
@@ -467,12 +467,12 @@ export default function Profile() {
               <div style={{ position: 'relative' }}>
                 <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 'var(--sp-10)' }} />
                 <button onClick={() => setShowPw(v => !v)}
-                  style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex' }}>
+                  style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: 0, display: 'flex' }}>
                   {showPw ? <EyeSlash size="1rem" /> : <Eye size="1rem" />}
                 </button>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
+            <div style={{ display: 'flex', gap: 'var(--space-s)' }}>
               <Button variant="ghost" onClick={() => { setShowPwForm(false); setNewPw(''); setNewEmail('') }} style={{ flex: 1 }}>
                 Cancel
               </Button>
@@ -483,7 +483,7 @@ export default function Profile() {
           </div>
         ) : (
           <Row label="Password">
-            <span style={{ color: 'var(--text-3)' }}>••••••••</span>
+            <span style={{ color: 'var(--text-muted)' }}>••••••••</span>
           </Row>
         )}
       </Section>
@@ -492,7 +492,7 @@ export default function Profile() {
       <Card className="profile-session">
         <div className="profile-session__header">Session</div>
         <div className="profile-session__body">
-          <Button variant="ghost" style={{ color: 'var(--error-alt)' }} onClick={() => { signOut(); navigate('/login', { replace: true }) }}>
+          <Button variant="ghost" style={{ color: 'var(--state-error)' }} onClick={() => { signOut(); navigate('/login', { replace: true }) }}>
             <SignOut size="1rem" /> Sign Out of this app
           </Button>
         </div>

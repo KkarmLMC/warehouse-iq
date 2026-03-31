@@ -21,28 +21,28 @@ export default function RowItem({ icon: Icon, iconColor, title, subtitle, right,
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--gap-m)',
-        padding: noPad ? 'var(--pad-m) 0' : 'var(--pad-m) var(--pad-l)',
-        borderBottom: last ? 'none' : '1px solid var(--border-l)',
+        gap: 'var(--space-m)',
+        padding: noPad ? 'var(--space-m) 0' : 'var(--space-m) var(--space-l)',
+        borderBottom: last ? 'none' : '1px solid var(--border-subtle)',
         cursor: onClick ? 'pointer' : 'default',
         transition: 'background var(--ease-fast)' }}
-      onMouseEnter={e => { if (onClick) e.currentTarget.style.background = 'var(--hover)' }}
+      onMouseEnter={e => { if (onClick) e.currentTarget.style.background = 'var(--surface-hover)' }}
       onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
     >
       {Icon && (
-        <Icon size="1.125rem" style={{ color: iconColor || 'var(--black)', flexShrink: 0 }} />
+        <Icon size="1.125rem" style={{ color: iconColor || 'var(--text-primary)', flexShrink: 0 }} />
       )}
 
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
           fontSize: 'var(--text-sm)', fontWeight: 600,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-          color: 'var(--black)' }}>
+          color: 'var(--text-primary)' }}>
           {title}
         </div>
         {subtitle && (
           <div style={{
-            fontSize: 'var(--text-xs)', color: 'var(--text-3)',
+            fontSize: 'var(--text-xs)', color: 'var(--text-muted)',
             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
             marginTop: 1 }}>
             {subtitle}
@@ -55,7 +55,7 @@ export default function RowItem({ icon: Icon, iconColor, title, subtitle, right,
       )}
 
       {onClick && (
-        <CaretRight size="0.875rem" style={{ color: 'var(--black)', flexShrink: 0 }} />
+        <CaretRight size="0.875rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />
       )}
     </div>
   )

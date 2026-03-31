@@ -10,18 +10,18 @@
  */
 export default function PageHeader({ eyebrow, title, subtitle, action }) {
   return (
-    <div style={{ marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--gap-m)' }}>
+    <div style={{ marginBottom: 'var(--space-l)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-m)' }}>
       <div>
         {eyebrow && (
-          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-3)', letterSpacing: 'var(--ls-2xs)', textTransform: 'uppercase', marginBottom: 'var(--mar-xs)' }}>
+          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-muted)', letterSpacing: 'var(--ls-2xs)', textTransform: 'uppercase', marginBottom: 'var(--space-xs)' }}>
             {eyebrow}
           </div>
         )}
-        <div style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--lh-xxl)', color: 'var(--black)' }}>
+        <div style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--lh-xxl)', color: 'var(--text-primary)' }}>
           {title}
         </div>
         {subtitle && (
-          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)', marginTop: 'var(--mar-xs)' }}>
+          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 'var(--space-xs)' }}>
             {subtitle}
           </div>
         )}

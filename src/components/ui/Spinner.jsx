@@ -11,9 +11,9 @@ export default function Spinner({ inline, size, label }) {
   const s = size === 'sm' ? 'spinner--sm' : size === 'lg' ? 'spinner--lg' : ''
 
   const el = (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
       <div className={`spinner ${s}`} />
-      {label && <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-3)' }}>{label}</span>}
+      {label && <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>{label}</span>}
     </div>
   )
 
@@ -22,7 +22,7 @@ export default function Spinner({ inline, size, label }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: 'var(--pad-xxl)' }}>
+      padding: 'var(--space-2xl)' }}>
       {el}
     </div>
   )

@@ -62,23 +62,23 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
   return (
     <div>
-      <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--black)', display: 'block', marginBottom: 6 }}>
-        {label}{required && <span style={{ color: 'var(--error)', marginLeft: 3 }}>*</span>}
+      <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
+        {label}{required && <span style={{ color: 'var(--state-error)', marginLeft: 3 }}>*</span>}
       </label>
 
       {/* Selected project display */}
       {value ? (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--white)' }}>
-          <Briefcase size="1rem" style={{ color: 'var(--navy)', flexShrink: 0 }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderRadius: 'var(--radius-l)', background: 'var(--surface-base)' }}>
+          <Briefcase size="1rem" style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {value.name}
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>
               {[value.job_number, value.city && `${value.city}, ${value.state}`].filter(Boolean).join(' · ')}
             </div>
           </div>
-          <button onClick={handleClear} style={{ background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex', flexShrink: 0 }}>
+          <button onClick={handleClear} style={{ background: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: 0, display: 'flex', flexShrink: 0 }}>
             <X size="0.9375rem" />
           </button>
         </div>
@@ -86,7 +86,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
         <div ref={ref} style={{ position: 'relative' }}>
           {/* Search input */}
           <div style={{ position: 'relative' }}>
-            <MagnifyingGlass size="0.875rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)', pointerEvents: 'none' }} />
+            <MagnifyingGlass size="0.875rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
             <input
               value={query}
               onChange={e => setQuery(e.target.value)}
@@ -101,22 +101,22 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
           {/* Dropdown results */}
           {open && results.length > 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', borderRadius: 'var(--r-l)', marginTop: 2, overflow: 'hidden', maxHeight: 280, overflowY: 'auto' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', borderRadius: 'var(--radius-l)', marginTop: 2, overflow: 'hidden', maxHeight: 280, overflowY: 'auto' }}>
               {results.map(p => (
                 <button key={p.id} onClick={() => handleSelect(p)}
-                  style={{ width: '100%', background: 'none', padding: 'var(--pad-m) var(--pad-l)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', borderBottom: '1px solid var(--border-l)' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'var(--white)'}
+                  style={{ width: '100%', background: 'none', padding: 'var(--space-m) var(--space-l)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', borderBottom: '1px solid var(--border-subtle)' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-base)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}>
-                  <Briefcase size="0.875rem" style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+                  <Briefcase size="0.875rem" style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {p.name}
                     </div>
-                    <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-3)' }}>
+                    <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>
                       {[p.job_number, p.customer_account, p.city && `${p.city}, ${p.state}`].filter(Boolean).join(' · ')}
                     </div>
                   </div>
-                  <span style={{ marginLeft: 'auto', fontSize: 'var(--text-xs)', fontWeight: 600, padding: '1px 6px', borderRadius: 4, background: 'var(--white)', color: 'var(--text-3)', flexShrink: 0 }}>
+                  <span style={{ marginLeft: 'auto', fontSize: 'var(--text-xs)', fontWeight: 600, padding: '1px 6px', borderRadius: 4, background: 'var(--surface-base)', color: 'var(--text-muted)', flexShrink: 0 }}>
                     {p.stage}
                   </span>
                 </button>
@@ -125,7 +125,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
           )}
 
           {open && !loading && query && results.length === 0 && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', borderRadius: 'var(--r-l)', marginTop: 2, padding: 'var(--pad-l)', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--text-sm)' }}>
+            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200, background: '#fff', borderRadius: 'var(--radius-l)', marginTop: 2, padding: 'var(--space-l)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>
               No projects found for "{query}"
             </div>
           )}

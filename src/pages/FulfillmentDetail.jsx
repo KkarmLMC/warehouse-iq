@@ -147,11 +147,11 @@ export default function FulfillmentDetail() {
   if (!order) return (
     <div className="page-content fade-in">
       <div className="empty" style={{ minHeight: '60vh' }}>
-        <Warning size="2rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
+        <Warning size="2rem" style={{ color: 'var(--text-muted)', marginBottom: 'var(--space-s)' }} />
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/fulfillment')}
-          style={{ marginTop: 'var(--mar-l)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: 'var(--white)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          style={{ marginTop: 'var(--space-l)', padding: 'var(--space-s) var(--space-l)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: 'var(--surface-base)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           ← Back to Fulfillment
         </button>
       </div>
@@ -163,33 +163,33 @@ export default function FulfillmentDetail() {
   return (
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/fulfillment')}
-        style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
+        style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-muted)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--space-m)' }}>
         <ArrowLeft size="0.875rem" /> Back to Fulfillment
       </button>
 
-      <div style={{ marginBottom: 'var(--mar-l)' }}>
+      <div style={{ marginBottom: 'var(--space-l)' }}>
         <div style={{ fontSize:'var(--text-md)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
-        <div style={{ fontSize:'var(--text-sm)',color:'var(--black)' }}>
+        <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {(order?.job_city || order?.customer_city) && (
-          <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:2 }}>
+          <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:2 }}>
             Job: {order?.job_city||order?.customer_city}, {order?.job_state||order?.customer_state}
           </div>
         )}
       </div>
 
       {shortageLines.length > 0 && (
-        <div style={{ background:'var(--error-soft)',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
-          <Warning size="1rem" weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
-          <div style={{ fontSize:'var(--text-xs)',color:'var(--error-shade-40)' }}>
+        <div style={{ background:'var(--state-error-soft)',borderRadius:'var(--radius-l)',padding:'var(--space-m) var(--space-l)',marginBottom: 'var(--space-l)',display:'flex',alignItems:'center',gap:'var(--space-m)' }}>
+          <Warning size="1rem" weight="fill" style={{ color:'var(--state-error)',flexShrink:0 }} />
+          <div style={{ fontSize:'var(--text-xs)',color:'var(--state-error-text)' }}>
             {shortageLines.length} part{shortageLines.length!==1?'s':''} had shortages — split fulfillment applied where possible. Review red items before confirming.
           </div>
         </div>
       )}
 
       {dropShipLines.length > 0 && (
-        <div style={{ background:'#f5f3ff',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
+        <div style={{ background:'#f5f3ff',borderRadius:'var(--radius-l)',padding:'var(--space-m) var(--space-l)',marginBottom: 'var(--space-l)',display:'flex',alignItems:'center',gap:'var(--space-m)' }}>
           <Truck size="1rem" weight="fill" style={{ color:'#6d28d9',flexShrink:0 }} />
           <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9' }}>
             {dropShipLines.length} part{dropShipLines.length!==1?'s':''} marked for drop ship — these will be fulfilled directly by the supplier, not from warehouse stock.
@@ -198,16 +198,16 @@ export default function FulfillmentDetail() {
       )}
 
       {/* Pull list */}
-      <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
+      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
         <div className="list-card__header">
           <span className="list-card__title"><Package size="1rem"  />Pull List</span>
           <span className="list-card__meta">{pullableLines.filter(l=>checked[l.id]).length}/{pullableLines.length} pulled</span>
         </div>
 
         {/* Column headers */}
-        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
+        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
           {['','Part / Warehouse','Qty'].map(h => (
-            <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--black)' }}>{h}</div>
+            <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--text-primary)' }}>{h}</div>
           ))}
         </div>
 
@@ -221,13 +221,13 @@ export default function FulfillmentDetail() {
             <div
               onClick={() => !isDS && toggleLine(line.id)}
               style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,alignItems:'center',
-                padding: 'var(--pad-l) var(--pad-l)',cursor: isDS ? 'default' : 'pointer',minHeight:64,
-                borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-l)' : 'none',
-                background: isDS ? '#f5f3ff' : isBO ? 'var(--blue-tint-80)' : isOut ? 'var(--error-soft)' : isPulled ? 'var(--success-soft)' : 'transparent',
+                padding: 'var(--space-l) var(--space-l)',cursor: isDS ? 'default' : 'pointer',minHeight:64,
+                borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none',
+                background: isDS ? '#f5f3ff' : isBO ? 'var(--state-info-soft)' : isOut ? 'var(--state-error-soft)' : isPulled ? 'var(--state-success-soft)' : 'transparent',
                 opacity: isBO || isDS ? 0.7 : 1 }}>
               {/* Checkbox */}
-              <div style={{ width:36,height:36,borderRadius: 'var(--r-m)',border:`2px solid ${isDS ? '#a78bfa' : isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
-                background: isDS ? '#a78bfa' : isPulled ? 'var(--success-text)' : 'transparent',
+              <div style={{ width:36,height:36,borderRadius: 'var(--radius-m)',border:`2px solid ${isDS ? '#a78bfa' : isPulled ? 'var(--state-success-text)' : isOut ? 'var(--state-error)' : 'var(--border-default)'}`,flexShrink:0,
+                background: isDS ? '#a78bfa' : isPulled ? 'var(--state-success-text)' : 'transparent',
                 display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
                 {isPulled && !isDS && <CheckCircle size="0.875rem" weight="fill" color="#fff" />}
                 {isDS && <Truck size="0.875rem" weight="bold" color="#fff" />}
@@ -235,14 +235,14 @@ export default function FulfillmentDetail() {
               {/* Part info */}
               <div>
                 <div style={{ display:'flex',alignItems:'center',gap:6 }}>
-                  <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isDS ? '#6d28d9' : isBO ? 'var(--blue-shade-20)' : isOut ? 'var(--error-shade-40)' : isPulled ? 'var(--text-3)' : 'var(--black)',
+                  <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isOut ? 'var(--state-error-text)' : isPulled ? 'var(--text-muted)' : 'var(--text-primary)',
                     textDecoration: isPulled && !isBO && !isDS ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
-                  {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'var(--blue-tint-80)',color:'var(--blue-shade-20)',flexShrink:0 }}>BACK ORDER</span>}
-                  {isDS && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--r-xs)',background:'#ede9fe',color:'#6d28d9',flexShrink:0 }}>DROP SHIP</span>}
+                  {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'var(--state-info-soft)',color:'var(--state-info)',flexShrink:0 }}>BACK ORDER</span>}
+                  {isDS && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'#ede9fe',color:'#6d28d9',flexShrink:0 }}>DROP SHIP</span>}
                 </div>
-                {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
+                {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
                 {isDS && line.drop_ship_supplier && (
                   <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9',marginTop:2 }}>
                     via {line.drop_ship_supplier}
@@ -250,10 +250,10 @@ export default function FulfillmentDetail() {
                     {line.drop_ship_eta && <span> · ETA: {line.drop_ship_eta}</span>}
                   </div>
                 )}
-                {!isDS && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:1 }}>
+                {!isDS && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:1 }}>
                   {line.warehouses?.name || '—'}
                   {line.split_warehouse_id && line.split_qty > 0 && (
-                    <span style={{ marginLeft:6,color:'var(--warning)' }}>
+                    <span style={{ marginLeft:6,color:'var(--state-warning)' }}>
                       + {line.split_qty} from {line.split_warehouse?.name || 'split warehouse'}
                     </span>
                   )}
@@ -261,20 +261,20 @@ export default function FulfillmentDetail() {
               </div>
               {/* Qty */}
               <div>
-                <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-md)',color: isOut ? 'var(--error-alt)' : 'var(--black)' }}>
+                <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-md)',color: isOut ? 'var(--state-error)' : 'var(--text-primary)' }}>
                   {line.qty_available}
-                  {line.split_qty > 0 && <span style={{ color:'var(--warning)',fontSize:'var(--text-xs)' }}>+{line.split_qty}</span>}
+                  {line.split_qty > 0 && <span style={{ color:'var(--state-warning)',fontSize:'var(--text-xs)' }}>+{line.split_qty}</span>}
                 </div>
                 <button onClick={(e) => flags[line.id] ? clearFlag(e, line.id) : flagLine(e, line.id)}
                   style={{ fontSize:'var(--text-xs)',padding:'2px 6px',borderRadius:4,cursor:'pointer',fontFamily:'var(--font)',marginTop:4,
-                    background: flags[line.id] ? 'var(--error-soft)' : 'var(--white)',
-                    color: flags[line.id] ? 'var(--error-alt)' : 'var(--text-3)' }}>
+                    background: flags[line.id] ? 'var(--state-error-soft)' : 'var(--surface-base)',
+                    color: flags[line.id] ? 'var(--state-error)' : 'var(--text-muted)' }}>
                   {flags[line.id] ? '⚑ flagged' : '⚑ flag'}
                 </button>
               </div>
             </div>
             {flags[line.id] && (
-              <div style={{ margin: '0 var(--mar-l) var(--mar-s)',padding: 'var(--pad-s) var(--pad-m)',background:'var(--error-soft)',borderRadius: 'var(--r-s)',fontSize:'var(--text-sm)',color:'var(--error-shade-40)',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-l)' : 'none' }}>
+              <div style={{ margin: '0 var(--space-l) var(--space-s)',padding: 'var(--space-s) var(--space-m)',background:'var(--state-error-soft)',borderRadius: 'var(--radius-s)',fontSize:'var(--text-sm)',color:'var(--state-error-text)',borderLeft:'3px solid #DC2626',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
                 <strong>Discrepancy:</strong> {flags[line.id]}
               </div>
             )}
@@ -284,15 +284,15 @@ export default function FulfillmentDetail() {
       </div>
 
       {/* Inventory note */}
-      <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginBottom:'var(--mar-l)',padding: 'var(--pad-m)',background:'var(--white)',borderRadius:'var(--r-l)' }}>
+      <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginBottom:'var(--space-l)',padding: 'var(--space-m)',background:'var(--surface-base)',borderRadius:'var(--radius-l)' }}>
         Inventory will be deducted from each warehouse when you push to shipment. Check off each part as you pull it from the shelves.
       </div>
 
       {/* Push to Shipment */}
       <button onClick={pushToShipment} disabled={!allChecked || pushing || done}
-        style={{ width:'100%',padding:'var(--pad-m)',borderRadius:'var(--r-xl)',
-          background: done ? 'var(--success-text)' : !allChecked ? 'var(--border)' : 'var(--navy)',
-          color: !allChecked ? 'var(--text-3)' : '#fff',
+        style={{ width:'100%',padding:'var(--space-m)',borderRadius:'var(--radius-l)',
+          background: done ? 'var(--state-success-text)' : !allChecked ? 'var(--border-default)' : 'var(--brand-primary)',
+          color: !allChecked ? 'var(--text-muted)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: allChecked && !pushing && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
         {done ? <><CheckCircle size="1rem" weight="fill" /> Pushed to Shipment</>
