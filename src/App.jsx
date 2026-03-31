@@ -21,6 +21,8 @@ const FulfillmentQueue  = lazy(() => import('./pages/FulfillmentQueue'))
 const FulfillmentDetail = lazy(() => import('./pages/FulfillmentDetail'))
 const ShipmentQueue     = lazy(() => import('./pages/ShipmentQueue'))
 const ShipmentDetail    = lazy(() => import('./pages/ShipmentDetail'))
+const DropShipQueue     = lazy(() => import('./pages/DropShipQueue'))
+const DropShipDetail    = lazy(() => import('./pages/DropShipDetail'))
 const UserManagement    = lazy(() => import('./pages/UserManagement'))
 const PartDetail     = lazy(() => import('./pages/PartDetail'))
 const PurchaseOrders = lazy(() => import('./pages/PurchaseOrders'))
@@ -35,6 +37,7 @@ const PAGE_META = {
   '/warehouse-hq/inventory': { title: 'Inventory',      parent: '/warehouse-hq' },
   '/warehouse-hq/catalog':   { title: 'Parts Catalog',  parent: '/warehouse-hq' },
   '/warehouse-hq/transfer':  { title: 'Transfer',       parent: '/warehouse-hq' },
+  '/warehouse-hq/dropship':  { title: 'Drop Ship Queue', parent: '/warehouse-hq' },
   '/sales-orders':           { title: 'Sales Orders',   parent: null } }
 
 function getPageMeta(pathname) {
@@ -45,6 +48,7 @@ function getPageMeta(pathname) {
   if (/^\/warehouse-hq\/warehouse\/[^/]+$/.test(pathname))     return { title: 'Warehouse',     parent: '/warehouse-hq' }
   if (/^\/warehouse-hq\/part\/[^/]+\/edit$/.test(pathname))   return { title: 'Edit Part',     parent: '/warehouse-hq' }
   if (/^\/warehouse-hq\/part\/[^/]+$/.test(pathname))          return { title: 'Part Detail',   parent: '/warehouse-hq' }
+  if (/^\/warehouse-hq\/dropship\/[^/]+$/.test(pathname))     return { title: 'Drop Ship',     parent: '/warehouse-hq/dropship' }
   return { title: 'Warehouse IQ', parent: null }
 }
 
@@ -157,6 +161,8 @@ export default function App() {
               <Route path="/warehouse-hq/fulfillment/:id"       element={<FulfillmentDetail />} />
               <Route path="/warehouse-hq/shipment"              element={<ShipmentQueue />} />
               <Route path="/warehouse-hq/shipment/:id"          element={<ShipmentDetail />} />
+              <Route path="/warehouse-hq/dropship"              element={<DropShipQueue />} />
+              <Route path="/warehouse-hq/dropship/:id"          element={<DropShipDetail />} />
               <Route path="/warehouse-hq/users"             element={<UserManagement />} />
               <Route path="*"                                element={<Navigate to="/warehouse-hq" replace />} />
             </Routes>
