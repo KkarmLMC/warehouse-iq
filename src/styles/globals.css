@@ -191,8 +191,8 @@
   --purple:           var(--purple-base);
   --purple-soft:      var(--purple-tint-80);
   --purple-border:    var(--purple-tint-60);
-  --teal:             #0d9488;
-  --teal-soft:        #f0fdfa;
+  --teal:             #0e7490;
+  --teal-soft:        #d4eff5;
 
   /* ── Surfaces — pure color contrast, no shadows or borders ─────────────────
      Depth is created ONLY through background color contrast.
@@ -455,38 +455,38 @@
 --status-draft-bg:        var(--grey-tint-80);
 --status-queued:          var(--purple-tint-20);
 --status-queued-bg:       var(--purple-soft);
---status-running:         var(--warning);
---status-running-bg:      var(--warning-soft);
+--status-running:         #2563eb;
+--status-running-bg:      #dbeafe;
 --status-submitted:       var(--warning);
 --status-submitted-bg:    var(--warning-soft);
 --status-fulfillment:     var(--blue-shade-40);
 --status-fulfillment-bg:  var(--blue-soft);
 --status-published:       var(--blue-shade-40);
 --status-published-bg:    var(--blue-soft);
---status-shipment:        var(--blue-shade-20);
---status-shipment-bg:     var(--blue-tint-80);
+--status-shipment:        var(--navy);
+--status-shipment-bg:     #d4dae5;
 --status-back-ordered:    var(--warning-text);
 --status-back-ordered-bg: var(--warning-soft);
 --status-complete:        var(--success-text);
 --status-complete-bg:     var(--success-soft);
 --status-fulfilled:       var(--success-text);
 --status-fulfilled-bg:    var(--success-soft);
---status-cancelled:       var(--grey-base);
---status-cancelled-bg:    var(--grey-tint-80);
+--status-cancelled:       #8b6b6b;
+--status-cancelled-bg:    #f5eaea;
 
 /* ── Project / field job stages ──────────────────────────────────────────── */
---stage-site-survey:      var(--purple-tint-20);
---stage-site-survey-bg:   var(--purple-soft);
+--stage-site-survey:      var(--teal);
+--stage-site-survey-bg:   var(--teal-soft);
 --stage-scheduled:        var(--purple);
 --stage-scheduled-bg:     var(--purple-soft);
 --stage-in-progress:      var(--orange-shade-20);
 --stage-in-progress-bg:   var(--orange-soft);
---stage-inspection:       var(--blue-shade-20);
---stage-inspection-bg:    var(--blue-soft);
---stage-customer-signoff: var(--purple);
---stage-customer-signoff-bg: var(--purple-soft);
---stage-postponed:        var(--orange-shade-20);
---stage-postponed-bg:     var(--orange-soft);
+--stage-inspection:       var(--teal);
+--stage-inspection-bg:    var(--teal-soft);
+--stage-customer-signoff: var(--teal);
+--stage-customer-signoff-bg: var(--teal-soft);
+--stage-postponed:        var(--warning-shade-40);
+--stage-postponed-bg:     var(--warning-soft);
 
 /* ── Approval / review statuses ──────────────────────────────────────────── */
 --status-approved:        var(--success-text);
@@ -497,8 +497,8 @@
 --status-failed-bg:       var(--error-soft);
 --status-pending-review:  var(--blue);
 --status-pending-review-bg: var(--blue-soft);
---status-under-review:    var(--warning);
---status-under-review-bg: var(--warning-soft);
+--status-under-review:    var(--orange-shade-20);
+--status-under-review-bg: var(--orange-soft);
 
 /* ── Role colors ─────────────────────────────────────────────────────────── */
 --role-admin:             var(--error-shade-40);
