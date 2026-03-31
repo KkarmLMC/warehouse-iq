@@ -862,7 +862,7 @@ textarea,
   width: var(--sidebar-w);
   min-width: var(--sidebar-w);
   height: 100%;
-  background: var(--surface-base);
+  background: var(--brand-primary);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
