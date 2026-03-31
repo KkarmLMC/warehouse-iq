@@ -1030,6 +1030,31 @@ textarea { resize: vertical; }
   .page-header { display: flex; }
 }
 
+/* ── Sync / LIVE badge ─────────────────────────────────────────────────────── */
+.status-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3125rem;
+  padding: 0.1875rem 0.5rem;
+  border-radius: var(--r-xs);
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  color: var(--success-text);
+  background: var(--success-soft);
+}
+.dot-live {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--success-text);
+  animation: pulse-live 2s ease-in-out infinite;
+}
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
 
 /* ── Mobile bottom tab bar ───────────────────────────────────────────────────── */
 

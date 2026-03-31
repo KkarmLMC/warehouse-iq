@@ -42,9 +42,9 @@ function SectionGroup({ label, items }) {
       {open && items.map((item, idx) => (
         <div key={item.id} style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 40px 56px 64px',
-          gap: 6,
-          padding: 'var(--pad-s) var(--pad-m)',
+          gridTemplateColumns: '1fr 2.5rem 3.5rem 4.5rem',
+          gap: 'var(--gap-s)',
+          padding: 'var(--pad-s) var(--pad-l)',
           borderBottom: idx < items.length - 1 ? '1px solid var(--border-l)' : 'none',
           alignItems: 'start',
           background: 'var(--white)' }}>
@@ -199,9 +199,9 @@ export default function PODetail() {
       {sections.length > 0 && (
         <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           {/* Column headers */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 40px 56px 64px', gap: 6, padding: 'var(--pad-s) var(--pad-m)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.5rem 3.5rem 4.5rem', gap: 'var(--gap-s)', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
             {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
-              <div key={h} style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)', textAlign: h !== 'Item / Description' ? 'right' : 'left', whiteSpace: 'nowrap', overflow: 'hidden' }}>{h}</div>
+              <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-3)', textAlign: h !== 'Item / Description' ? 'right' : 'left', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{h}</div>
             ))}
           </div>
           {sections.map(sec => (
