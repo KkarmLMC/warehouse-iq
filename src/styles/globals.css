@@ -181,15 +181,15 @@
   --state-info-soft:       var(--blue-tint-80);
 
   /* Text colors */
-  --text-primary:    var(--text-primary);
+  --text-primary:    #1a1a1a;
   --text-secondary:  var(--grey-base);
   --text-muted:      var(--grey-shade-20);
-  --text-inverse:    var(--surface-base);
+  --text-inverse:    #ffffff;
 
   /* Surface colors */
-  --surface-base:    var(--surface-base);
+  --surface-base:    #ffffff;
   --surface-light:   var(--grey-tint-80);
-  --surface-hover:   var(--hover);
+  --surface-hover:   #f0f1f3;
 
   /* Border colors */
   --border-default:  var(--grey-tint-60);
