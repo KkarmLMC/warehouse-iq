@@ -29,55 +29,23 @@ function normalise(s) { return (s||'').trim().toUpperCase() }
 
 // ─── Drop Ship inline form ─────────────────────────────────────────────────
 function DropShipForm({ qty, onConfirm, onCancel }) {
-  const [supplier, setSupplier] = useState('')
-  const [reference, setReference] = useState('')
-  const [eta, setEta] = useState('')
-  const [cost, setCost] = useState('')
   const [notes, setNotes] = useState('')
-
-  const inputStyle = {
-    width: '100%', fontSize: 'var(--text-xs)', padding: '5px 8px',
-    borderRadius: 4, border: '1px solid #d4d4d8', background: '#fff' }
-  const labelStyle = {
-    fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#6d28d9',
-    display: 'block', marginBottom: 2, marginTop: 6 }
 
   return (
     <div style={{ marginTop: 8, padding: 'var(--space-m)', background: '#f5f3ff',
       borderRadius: 'var(--radius-l)', border: '1px solid #ddd6fe' }}>
       <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#6d28d9', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
-        <Truck size="0.75rem" /> Drop Ship {qty} unit{qty !== 1 ? 's' : ''}
+        <Truck size="0.75rem" /> Drop Ship {qty} unit{qty !== 1 ? 's' : ''} from PLP
+      </div>
+      <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginBottom: 8, lineHeight: 1.4 }}>
+        These items will be sent to the Drop Ship Queue. Once PLP provides tracking info, the warehouse manager will process the shipment from the queue.
       </div>
 
-      <label style={labelStyle}>Supplier *</label>
-      <input value={supplier} onChange={e => setSupplier(e.target.value)}
-        placeholder="e.g., East Penn Manufacturing" style={inputStyle} />
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        <div>
-          <label style={labelStyle}>PO / Reference</label>
-          <input value={reference} onChange={e => setReference(e.target.value)}
-            placeholder="e.g., PO-44821" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Expected Delivery</label>
-          <input type="date" value={eta} onChange={e => setEta(e.target.value)}
-            style={inputStyle} />
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        <div>
-          <label style={labelStyle}>Cost ($)</label>
-          <input type="number" step="0.01" value={cost} onChange={e => setCost(e.target.value)}
-            placeholder="0.00" style={inputStyle} />
-        </div>
-        <div>
-          <label style={labelStyle}>Notes</label>
-          <input value={notes} onChange={e => setNotes(e.target.value)}
-            placeholder="Optional" style={inputStyle} />
-        </div>
-      </div>
+      <label style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#6d28d9', display: 'block', marginBottom: 2 }}>Notes (optional)</label>
+      <input value={notes} onChange={e => setNotes(e.target.value)}
+        placeholder="Any notes for this drop ship"
+        style={{ width: '100%', fontSize: 'var(--text-xs)', padding: '5px 8px',
+          borderRadius: 4, border: '1px solid #d4d4d8', background: '#fff' }} />
 
       <div style={{ display: 'flex', gap: 'var(--space-s)', justifyContent: 'flex-end', marginTop: 8 }}>
         <button onClick={onCancel}
@@ -85,11 +53,10 @@ function DropShipForm({ qty, onConfirm, onCancel }) {
             background: 'transparent', cursor: 'pointer', color: 'var(--text-muted)', fontFamily: 'var(--font)' }}>
           Cancel
         </button>
-        <button onClick={() => onConfirm({ supplier, reference, eta, cost, notes })}
-          disabled={!supplier.trim()}
+        <button onClick={() => onConfirm({ supplier: 'PLP', notes })}
           style={{ fontSize: 'var(--text-xs)', padding: '4px 12px', borderRadius: 4,
-            background: !supplier.trim() ? '#d4d4d8' : '#6d28d9', color: '#fff', fontWeight: 700,
-            cursor: !supplier.trim() ? 'not-allowed' : 'pointer', fontFamily: 'var(--font)',
+            background: '#6d28d9', color: '#fff', fontWeight: 700,
+            cursor: 'pointer', fontFamily: 'var(--font)',
             display: 'flex', alignItems: 'center', gap: 3 }}>
           <Truck size="0.625rem" /> Confirm Drop Ship
         </button>
@@ -320,12 +287,9 @@ export default function RunOrder() {
       ...l,
       is_drop_ship:       true,
       drop_ship_qty:      l._remainingShortage,
-      drop_ship_supplier: details.supplier,
-      drop_ship_reference: details.reference || null,
-      drop_ship_eta:      details.eta || null,
-      drop_ship_cost:     details.cost ? parseFloat(details.cost) : null,
+      drop_ship_supplier: 'PLP',
       drop_ship_notes:    details.notes || null,
-      drop_ship_status:   'ordered' }))
+      drop_ship_status:   'pending' }))
   }
 
   // ── Save + push to fulfillment ─────────────────────────────────────────────
@@ -334,6 +298,11 @@ export default function RunOrder() {
     setPushed(true)
 
     const isBackOrderRerun = order?.status === 'back_ordered'
+
+    // Determine which parallel tracks exist
+    const hasDropShipLines  = computed.some(l => l.is_drop_ship)
+    const hasBackOrderLines = computed.some(l => l.is_back_ordered)
+    const hasInStockLines   = computed.some(l => !l.is_drop_ship && !l.is_back_ordered)
 
     // Persist: update SO + create/update fulfillment sheet
     await db.from('sales_orders').update({
@@ -360,14 +329,48 @@ export default function RunOrder() {
       await db.from('fulfillment_lines').insert(insertLines)
     }
 
-    await db.from('sales_orders').update({
-      status:         'fulfillment',
-      fulfillment_at: new Date().toISOString() }).eq('id', id)
+    // Determine the correct compound status
+    let nextStatus = 'fulfillment'
+    if (hasDropShipLines || hasBackOrderLines) {
+      if (hasInStockLines) {
+        nextStatus = 'partial_fulfillment'
+      } else if (hasDropShipLines && !hasBackOrderLines) {
+        // All lines are drop ship, nothing to fulfill locally
+        nextStatus = 'partial_fulfillment'
+      } else {
+        nextStatus = 'partial_fulfillment'
+      }
+    }
+
+    // Set SO-level flags and status
+    const soUpdate = {
+      status:         nextStatus,
+      fulfillment_at: new Date().toISOString(),
+    }
+
+    if (hasDropShipLines) {
+      soUpdate.has_drop_ship = true
+      soUpdate.drop_ship_at  = new Date().toISOString()
+    }
+
+    if (hasBackOrderLines) {
+      soUpdate.has_back_order  = true
+      soUpdate.back_ordered_at = new Date().toISOString()
+    }
+
+    await db.from('sales_orders').update(soUpdate).eq('id', id)
+
+    // Build descriptive log label
+    const tracks = []
+    if (hasInStockLines) tracks.push('fulfillment')
+    if (hasDropShipLines) tracks.push('drop ship (PLP)')
+    if (hasBackOrderLines) tracks.push('back order')
+    const trackDesc = tracks.length > 1 ? ` — split: ${tracks.join(' + ')}` : ''
 
     logActivity(db, user?.id, APP_SOURCE, {
       category:    'sales_order',
       action:      isBackOrderRerun ? 'back_order_rerun' : 'pushed_to_fulfillment',
-      label:       `${isBackOrderRerun ? 'Re-ran back-order for' : 'Pushed'} ${order?.so_number || id} to Fulfillment`,
+      label:       `${isBackOrderRerun ? 'Re-ran back-order for' : 'Pushed'} ${order?.so_number || id} to Fulfillment${trackDesc}`,
       entity_type: 'sales_order',
       entity_id:   id })
     setTimeout(() => navigate('/warehouse-hq/queue'), 1200)
@@ -704,10 +707,12 @@ export default function RunOrder() {
                   cursor: allKitsConfirmed && !pushed ? 'pointer' : 'not-allowed',
                   fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
                 {pushed
-                  ? <><CheckCircle size="1rem" weight="fill" /> Sent to Fulfillment</>
+                  ? <><CheckCircle size="1rem" weight="fill" /> Sent to Fulfillment{(computed.some(l => l.is_drop_ship) || computed.some(l => l.is_back_ordered)) ? ' (split order)' : ''}</>
                   : !allKitsConfirmed
                     ? 'Confirm kit changes first'
-                    : <>Push to Fulfillment <ArrowRight size="1rem" /></>}
+                    : computed.some(l => l.is_drop_ship)
+                      ? <>Push to Fulfillment + Drop Ship Queue <ArrowRight size="1rem" /></>
+                      : <>Push to Fulfillment <ArrowRight size="1rem" /></>}
               </button>
             </>
           )}

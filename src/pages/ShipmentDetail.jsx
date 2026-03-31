@@ -53,21 +53,38 @@ export default function ShipmentDetail() {
       shipped_by:      'shipping',
       shipped_at:      new Date().toISOString(),
       status:          'shipped',
+      shipment_type:   'warehouse',
       updated_at:      new Date().toISOString() }).eq('id', shipment.id)
 
-    // If has_back_order, the SO returns to 'back_ordered' after this shipment
-    // so warehouse can fulfil remaining items when stock arrives.
-    // Otherwise the order is fully complete.
-    const nextStatus = order?.has_back_order ? 'back_ordered' : 'complete'
+    // Determine next status based on parallel tracks
+    const hasBackOrder       = order?.has_back_order && !order?.back_order_resolved_at
+    const hasDropShipPending = order?.has_drop_ship  && !order?.drop_ship_resolved_at
+
+    let nextStatus = 'complete'
+    if (hasBackOrder && hasDropShipPending) {
+      nextStatus = 'partial_shipment' // warehouse shipped, back order + drop ship still pending
+    } else if (hasBackOrder) {
+      nextStatus = 'back_ordered'     // warehouse shipped, back order still pending
+    } else if (hasDropShipPending) {
+      nextStatus = 'partial_shipment' // warehouse shipped, drop ship still pending
+    }
+
+    const isComplete = nextStatus === 'complete'
     await db.from('sales_orders').update({
       status:       nextStatus,
-      completed_at: order?.has_back_order ? null : new Date().toISOString(),
-      fulfilled_at: new Date().toISOString() }).eq('id', id)
+      shipment_at:  new Date().toISOString(),
+      completed_at: isComplete ? new Date().toISOString() : null,
+    }).eq('id', id)
+
+    const pendingTracks = []
+    if (hasBackOrder) pendingTracks.push('back-order')
+    if (hasDropShipPending) pendingTracks.push('drop ship')
+    const partialNote = pendingTracks.length > 0 ? ` (partial — ${pendingTracks.join(' + ')} pending)` : ''
 
     logActivity(db, user?.id, APP_SOURCE, {
       category:    'shipment',
       action:      'shipped',
-      label:       `Marked ${order?.so_number || id} Shipped — ${carrier.trim()}${order?.has_back_order ? ' (partial — back-order pending)' : ''}`,
+      label:       `Marked ${order?.so_number || id} Shipped — ${carrier.trim()}${partialNote}`,
       entity_type: 'shipment',
       entity_id:   shipment?.id || id,
       meta:        { so_id: id, carrier: carrier.trim(), tracking: tracking.trim() } })
@@ -126,13 +143,17 @@ export default function ShipmentDetail() {
       </div>
 
       {/* Partial shipment warning */}
-      {order?.has_back_order && (
+      {(order?.has_back_order || order?.has_drop_ship) && (
         <div style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', gap: 'var(--space-m)', alignItems: 'flex-start' }}>
           <Warning size="1rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0, marginTop: 1 }} />
           <div>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Partial Shipment</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 2, lineHeight: 1.5 }}>
-              Some items were back-ordered and are not included in this shipment. After confirming this shipment, the SO will return to the Back-Order queue so the remaining items can be fulfilled once stock arrives.
+              {order?.has_back_order && order?.has_drop_ship
+                ? 'Some items were back-ordered and others are being drop shipped from PLP. After confirming this shipment, the SO will remain open until all tracks are resolved.'
+                : order?.has_back_order
+                ? 'Some items were back-ordered and are not included in this shipment. After confirming, the SO will return to the Back-Order queue so remaining items can be fulfilled once stock arrives.'
+                : 'Some items are being drop shipped from PLP. After confirming this warehouse shipment, the SO will remain open in the Drop Ship Queue until PLP ships.'}
             </div>
           </div>
         </div>
@@ -209,10 +230,10 @@ export default function ShipmentDetail() {
           color: !carrier.trim() ? 'var(--text-muted)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
-        {done ? <><CheckCircle size="1rem" weight="fill" /> {order?.has_back_order ? 'Partial Shipment Confirmed' : 'Shipment Complete'}</>
+        {done ? <><CheckCircle size="1rem" weight="fill" /> {(order?.has_back_order || order?.has_drop_ship) ? 'Partial Shipment Confirmed' : 'Shipment Complete'}</>
           : shipping ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
           : !carrier.trim() ? 'Enter carrier to continue'
-          : <><Truck size="1rem" weight="fill" /> {order?.has_back_order ? 'Ship Available Items — Back-Order Pending' : 'Mark as Shipped — Complete Order'}</>}
+          : <><Truck size="1rem" weight="fill" /> {(order?.has_back_order || order?.has_drop_ship) ? 'Ship Available Items — Pending Tracks Remain' : 'Mark as Shipped — Complete Order'}</>}
       </button>
     </div>
   )
