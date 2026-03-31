@@ -84,7 +84,7 @@ export default function ShipmentDetail() {
   if (!order) return (
     <div className="page-content fade-in">
       <div className="empty" style={{ minHeight: '60vh' }}>
-        <Warning size={32} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
+        <Warning size="2rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/shipment')}
@@ -101,7 +101,7 @@ export default function ShipmentDetail() {
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/shipment')}
         style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
-        <ArrowLeft size={14} /> Back to Shipment Queue
+        <ArrowLeft size="0.875rem" /> Back to Shipment Queue
       </button>
 
       <div style={{ marginBottom: 'var(--mar-xl)' }}>
@@ -111,7 +111,7 @@ export default function ShipmentDetail() {
         </div>
         {shipTo && (
           <div style={{ marginTop: 8,padding:'var(--mar-s) var(--pad-m)',background:'var(--white)',borderRadius:'var(--r-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
-            <MapPin size={14} style={{ color:'var(--navy)',flexShrink:0 }} />
+            <MapPin size="0.875rem" style={{ color:'var(--navy)',flexShrink:0 }} />
             <div>
               <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--black)' }}>SHIP TO</div>
               <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--navy)' }}>
@@ -128,7 +128,7 @@ export default function ShipmentDetail() {
       {/* Partial shipment warning */}
       {order?.has_back_order && (
         <div style={{ background: 'var(--warning-soft)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', gap: 'var(--gap-m)', alignItems: 'flex-start' }}>
-          <Warning size={16} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0, marginTop: 1 }} />
+          <Warning size="1rem" weight="fill" style={{ color: 'var(--warning)', flexShrink: 0, marginTop: 1 }} />
           <div>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Partial Shipment</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--black)', marginTop: 2, lineHeight: 1.5 }}>
@@ -141,7 +141,7 @@ export default function ShipmentDetail() {
       {/* Packing list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="list-card__header">
-          <span className="list-card__title"><Package size={16}  />Packing List</span>
+          <span className="list-card__title"><Package size="1rem"  />Packing List</span>
           <span className="list-card__meta">{lines.length} items</span>
         </div>
         <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--pad-s) var(--pad-l)',background:'var(--white)',borderBottom:'1px solid var(--border-l)' }}>
@@ -168,7 +168,7 @@ export default function ShipmentDetail() {
             <div>
               {line.is_shortage
                 ? <span style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--warning)',background:'var(--orange-soft)',padding:'1px 5px',borderRadius:4 }}>Split</span>
-                : <CheckCircle size={14} weight="fill" style={{ color:'var(--success-text)' }} />
+                : <CheckCircle size="0.875rem" weight="fill" style={{ color:'var(--success-text)' }} />
               }
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function ShipmentDetail() {
       {/* Shipment form */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="list-card__header">
-          <span className="list-card__title"><Truck size={16}  />Process Shipment</span>
+          <span className="list-card__title"><Truck size="1rem"  />Process Shipment</span>
         </div>
         <div style={{ padding: 'var(--pad-l)',display:'flex',flexDirection:'column',gap:'var(--gap-m)' }}>
           <div>
@@ -209,10 +209,10 @@ export default function ShipmentDetail() {
           color: !carrier.trim() ? 'var(--text-3)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
-        {done ? <><CheckCircle size={16} weight="fill" /> {order?.has_back_order ? 'Partial Shipment Confirmed' : 'Shipment Complete'}</>
+        {done ? <><CheckCircle size="1rem" weight="fill" /> {order?.has_back_order ? 'Partial Shipment Confirmed' : 'Shipment Complete'}</>
           : shipping ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
           : !carrier.trim() ? 'Enter carrier to continue'
-          : <><Truck size={16} weight="fill" /> {order?.has_back_order ? 'Ship Available Items — Back-Order Pending' : 'Mark as Shipped — Complete Order'}</>}
+          : <><Truck size="1rem" weight="fill" /> {order?.has_back_order ? 'Ship Available Items — Back-Order Pending' : 'Mark as Shipped — Complete Order'}</>}
       </button>
     </div>
   )

@@ -129,7 +129,7 @@ export default function UserManagement() {
       {/* Header */}
       <button onClick={() => navigate(DEFAULT_ROUTE)}
         style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
-        <ArrowLeft size={14} /> Back
+        <ArrowLeft size="0.875rem" /> Back
       </button>
 
       <PageHeader
@@ -139,7 +139,7 @@ export default function UserManagement() {
         action={
           <button onClick={() => setShowInvite(true)}
             style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',padding: 'var(--pad-s) var(--pad-l)',borderRadius:'var(--r-s)',background:'var(--navy)',color:'var(--white)',fontWeight:'var(--fw-bold)',fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',flexShrink:0 }}>
-            <UserPlus size={16} /> Invite User
+            <UserPlus size="1rem" /> Invite User
           </button>
         }
       />
@@ -156,7 +156,7 @@ export default function UserManagement() {
       {/* Pipeline role legend */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="list-card__header">
-          <span className="list-card__title"><Users size={16}  />Pipeline Role Guide</span>
+          <span className="list-card__title"><Users size="1rem"  />Pipeline Role Guide</span>
         </div>
         <div style={{ padding: 'var(--pad-m) var(--pad-l)',display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'var(--gap-m)' }}>
           {[
@@ -176,7 +176,7 @@ export default function UserManagement() {
       {/* Users list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="list-card__header">
-          <span className="list-card__title"><Users size={16}  />All Users</span>
+          <span className="list-card__title"><Users size="1rem"  />All Users</span>
           <span className="list-card__meta">{users.length} users</span>
         </div>
 
@@ -219,7 +219,7 @@ export default function UserManagement() {
                   {/* Edit */}
                   <button onClick={() => startEdit(u)}
                     style={{ display:'flex',alignItems:'center',gap:4,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:'var(--pad-s)' }}>
-                    <PencilSimple size={14} /> Edit
+                    <PencilSimple size="0.875rem" /> Edit
                   </button>
                 </div>
               ) : (
@@ -266,7 +266,7 @@ export default function UserManagement() {
                     </button>
                     <button onClick={() => saveEdit(u.id)} disabled={saving}
                       style={{ flex:2,padding:'var(--pad-s)',borderRadius:'var(--r-l)',background:'var(--navy)',color:'var(--white)',cursor:'pointer',fontSize:'var(--text-sm)',fontWeight:'var(--fw-bold)',fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:6 }}>
-                      {saving ? <><div className="spinner" style={{ width:14,height:14,borderWidth:2 }} /> Saving…</> : <><CheckCircle size={15} /> Save Changes</>}
+                      {saving ? <><div className="spinner" style={{ width:14,height:14,borderWidth:2 }} /> Saving…</> : <><CheckCircle size="0.9375rem" /> Save Changes</>}
                     </button>
                   </div>
                 </div>
@@ -286,7 +286,7 @@ export default function UserManagement() {
               <div style={{ fontSize:'var(--text-lg)',fontWeight:800 }}>Invite New User</div>
               <button onClick={() => setShowInvite(false)}
                 style={{ background:'none',cursor:'pointer',padding:'var(--pad-xs)',color:'var(--text-3)' }}>
-                <X size={20} />
+                <X size="1.25rem" />
               </button>
             </div>
             <div style={{ display:'flex',flexDirection:'column',gap:'var(--gap-m)' }}>
@@ -327,7 +327,7 @@ export default function UserManagement() {
                   color: inviteEmail.trim() ? 'var(--white)' : 'var(--text-3)',
                   fontWeight:'var(--fw-bold)',fontSize:'var(--text-sm)',cursor: inviteEmail.trim() && !inviting ? 'pointer' : 'not-allowed',
                   fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:6,marginTop:'0.5rem' }}>
-                {inviting ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Inviting…</> : <><UserPlus size={16} /> Send Invite</>}
+                {inviting ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Inviting…</> : <><UserPlus size="1rem" /> Send Invite</>}
               </button>
             </div>
           </div>

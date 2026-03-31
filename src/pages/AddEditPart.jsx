@@ -178,7 +178,7 @@ export default function AddEditPart() {
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving} style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: saving ? 'var(--hover)' : 'var(--navy)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
-          {saving ? <><SpinnerGap size={14} style={{ animation: 'spin 1s linear infinite' }} /> Saving…</> : <><CheckCircle size={14} /> {isEdit ? 'Save Changes' : 'Add Part'}</>}
+          {saving ? <><SpinnerGap size="0.875rem" style={{ animation: 'spin 1s linear infinite' }} /> Saving…</> : <><CheckCircle size="0.875rem" /> {isEdit ? 'Save Changes' : 'Add Part'}</>}
         </button>
       </div>
     </div>

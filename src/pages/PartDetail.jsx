@@ -16,7 +16,7 @@ function WarehouseRow({ level, warehouseName }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-        <Buildings size={16} style={{ color: 'var(--black)' }} />
+        <Buildings size="1rem" style={{ color: 'var(--black)' }} />
         <div>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{warehouseName}</div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', display: 'flex', gap: 'var(--gap-s)', marginTop: 2 }}>
@@ -55,8 +55,8 @@ function TransactionRow({ tx, warehouseName }) {
         background: isPositive ? 'var(--success-soft)' : 'var(--error-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isPositive
-          ? <Plus size={14} weight="bold" style={{ color: 'var(--success-text)' }} />
-          : <Minus size={14} weight="bold" style={{ color: 'var(--error-dark)' }} />
+          ? <Plus size="0.875rem" weight="bold" style={{ color: 'var(--success-text)' }} />
+          : <Minus size="0.875rem" weight="bold" style={{ color: 'var(--error-dark)' }} />
         }
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -274,7 +274,7 @@ export default function PartDetail() {
           </div>
           <button onClick={() => navigate(`/warehouse-hq/part/${id}/edit`)}
             style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-            <PencilSimple size={16} />
+            <PencilSimple size="1rem" />
           </button>
         </div>
 
@@ -293,7 +293,7 @@ export default function PartDetail() {
         </button>
         <button onClick={() => navigate('/warehouse-hq/transfer')}
           style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-l)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
-          <ArrowsLeftRight size={16} /> Transfer
+          <ArrowsLeftRight size="1rem" /> Transfer
         </button>
       </div>
 
@@ -340,11 +340,11 @@ export default function PartDetail() {
           onClick={() => setShowTx(!showTx)}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-            <ClipboardText size={16} style={{ color: 'var(--black)' }} />
+            <ClipboardText size="1rem" style={{ color: 'var(--black)' }} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>
             <span style={{ padding: '1px 8px', borderRadius: 'var(--r-s)', background: 'var(--hover)', fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>{transactions.length}</span>
           </div>
-          <CaretDown size={14} style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size="0.875rem" style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
         {showTx && transactions.map(tx => (
           <TransactionRow key={tx.id} tx={tx} warehouseName={whMap[tx.warehouse_id] || '—'} />

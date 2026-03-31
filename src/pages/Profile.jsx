@@ -76,7 +76,7 @@ function Section({ icon: Icon, title, children, action }) {
     <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', borderRadius: '0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
-          {Icon && <Icon size={15} />} {title}
+          {Icon && <Icon size="0.9375rem" />} {title}
         </div>
         {action}
       </div>
@@ -310,7 +310,7 @@ export default function Profile() {
       <div style={{ marginBottom: 'var(--mar-xxl)' }}>
         <button onClick={() => navigate(-1)}
           style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'none', color: 'var(--text-3)', fontSize: 'var(--text-xs)', cursor: 'pointer', padding: 0, marginBottom: 'var(--mar-m)' }}>
-          <ArrowLeft size={14} /> Back
+          <ArrowLeft size="0.875rem" /> Back
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-l)' }}>
           {/* Avatar */}
@@ -328,12 +328,12 @@ export default function Profile() {
       {/* Flash messages */}
       {success && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--success-soft)', borderRadius: 'var(--r-l)', color: 'var(--success-text)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
-          <CheckCircle size={15} weight="fill" style={{ flexShrink: 0 }} /> {success}
+          <CheckCircle size="0.9375rem" weight="fill" style={{ flexShrink: 0 }} /> {success}
         </div>
       )}
       {error && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginBottom: 'var(--mar-l)' }}>
-          <Warning size={15} style={{ flexShrink: 0 }} /> {error}
+          <Warning size="0.9375rem" style={{ flexShrink: 0 }} /> {error}
         </div>
       )}
 
@@ -342,7 +342,7 @@ export default function Profile() {
         action={!editingName && (
           <button onClick={() => setEditingName(true)}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-m)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 'var(--fw-semibold)' }}>
-            <PencilSimple size={12} /> Edit Name
+            <PencilSimple size="0.75rem" /> Edit Name
           </button>
         )}>
 
@@ -370,7 +370,7 @@ export default function Profile() {
         {profile?.division && (
           <Row label="Division">
             <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)' }}>
-              <Buildings size={13} style={{ color: 'var(--black)' }} />
+              <Buildings size="0.8125rem" style={{ color: 'var(--black)' }} />
               {profile.division}
             </span>
           </Row>
@@ -405,7 +405,7 @@ export default function Profile() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-xs)' }}>
               {profile.app_access.map(app => (
                 <span key={app} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 'var(--r-s)', background: 'var(--hover)', color: 'var(--black)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)' }}>
-                  <AppWindow size={12} />
+                  <AppWindow size="0.75rem" />
                   {appLabels[app] || app}
                 </span>
               ))}
@@ -447,7 +447,7 @@ export default function Profile() {
             {hasPin && (
               <button onClick={removePin} disabled={removingPin}
                 style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'none', color: 'var(--error-alt)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', cursor: 'pointer', padding: 0 }}>
-                <Trash size={13} /> {removingPin ? 'Removing…' : 'Remove PIN'}
+                <Trash size="0.8125rem" /> {removingPin ? 'Removing…' : 'Remove PIN'}
               </button>
             )}
           </div>
@@ -457,7 +457,7 @@ export default function Profile() {
               <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-bold)', marginBottom: 4 }}>{pinLabel[pinSection]}</div>
               {pinError && (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-xs)', color: 'var(--error-alt)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
-                  <Warning size={14} /> {pinError}
+                  <Warning size="0.875rem" /> {pinError}
                 </div>
               )}
             </div>
@@ -471,7 +471,7 @@ export default function Profile() {
         action={!showPwForm && (
           <button onClick={() => setShowPwForm(true)}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', background: 'rgba(255,255,255,0.15)', borderRadius: 'var(--r-m)', padding: 'var(--pad-xs) var(--pad-m)', color: 'var(--white)', fontSize: 'var(--text-xs)', cursor: 'pointer', fontWeight: 'var(--fw-semibold)' }}>
-            <PencilSimple size={12} /> Change
+            <PencilSimple size="0.75rem" /> Change
           </button>
         )}>
 
@@ -487,7 +487,7 @@ export default function Profile() {
                 <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 'var(--sp-10)' }} />
                 <button onClick={() => setShowPw(v => !v)}
                   style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex' }}>
-                  {showPw ? <EyeSlash size={16} /> : <Eye size={16} />}
+                  {showPw ? <EyeSlash size="1rem" /> : <Eye size="1rem" />}
                 </button>
               </div>
             </div>
@@ -515,7 +515,7 @@ export default function Profile() {
         <div style={{ padding: 'var(--pad-l)' }}>
           <button onClick={() => { signOut(); navigate('/login', { replace: true }) }}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', background: 'none', color: 'var(--error-alt)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}>
-            <SignOut size={16} /> Sign Out of this app
+            <SignOut size="1rem" /> Sign Out of this app
           </button>
         </div>
       </div>

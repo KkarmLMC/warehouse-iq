@@ -36,7 +36,7 @@ function SectionGroup({ label, items }) {
           <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--white)' }}>
             ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </span>
-          <CaretDown size={13} style={{ color: 'var(--white)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size="0.8125rem" style={{ color: 'var(--white)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </div>
       </button>
       {open && items.map((item, idx) => (
@@ -132,7 +132,7 @@ export default function PODetail() {
             padding: '4px 12px', borderRadius: 'var(--r-s)',
             background: statusDisplay.bg,
             color: statusDisplay.color }}>
-            <StatusIcon size={12} weight="fill" />
+            <StatusIcon size="0.75rem" weight="fill" />
             <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize' }}>{po.status}</span>
           </div>
         </div>
@@ -141,23 +141,23 @@ export default function PODetail() {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-l)',  paddingTop: 'var(--pad-m)' }}>
           {(po.customer_city || po.customer_state) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
-              <MapPin size={12} />
+              <MapPin size="0.75rem" />
               {[po.customer_city, po.customer_state].filter(Boolean).join(', ')}
             </div>
           )}
           {po.customer_phone && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
-              <Phone size={12} /> {po.customer_phone}
+              <Phone size="0.75rem" /> {po.customer_phone}
             </div>
           )}
           {po.customer_email && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
-              <Envelope size={12} /> {po.customer_email}
+              <Envelope size="0.75rem" /> {po.customer_email}
             </div>
           )}
           {po.so_date && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
-              <CalendarBlank size={12} />
+              <CalendarBlank size="0.75rem" />
               {new Date(po.so_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </div>
           )}
@@ -178,7 +178,7 @@ export default function PODetail() {
           {Object.entries(warehouseImpact).map(([wName, impact]) => (
             <div key={wName} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--mar-s)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-sm)' }}>
-                <Buildings size={14} style={{ color: 'var(--black)' }} />
+                <Buildings size="0.875rem" style={{ color: 'var(--black)' }} />
                 {wName}
               </div>
               <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--error-dark)', background: 'var(--error-soft)', padding: '2px 8px', borderRadius: 'var(--r-s)' }}>
@@ -272,7 +272,7 @@ export default function PODetail() {
               <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: '#fff' }}>{cfg.label}</div>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--white)', marginTop: 2 }}>{cfg.sub}</div>
             </div>
-            <ArrowRight size={20} style={{ color: '#fff', flexShrink: 0 }} weight="bold" />
+            <ArrowRight size="1.25rem" style={{ color: '#fff', flexShrink: 0 }} weight="bold" />
           </button>
         )
       })()}

@@ -38,7 +38,7 @@ function StatusBadge({ status }) {
       padding: '3px 10px', borderRadius: 'var(--r-s)',
       fontSize: 'var(--text-xs)', fontWeight: 700,
       background: meta.bg, color: meta.color }}>
-      <Icon size={11} weight="fill" />
+      <Icon size="0.6875rem" weight="fill" />
       {meta.label}
     </span>
   )
@@ -60,7 +60,7 @@ function POCard({ po, totals, onPress }) {
         width: '2.75rem', height: '2.75rem', borderRadius: 'var(--r-l)',
         background: po.division === 'Bolt' ? 'var(--orange-soft)' : 'var(--blue-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-        <Receipt size={20} style={{ color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }} />
+        <Receipt size="1.25rem" style={{ color: po.division === 'Bolt' ? 'var(--orange-shade-20)' : 'var(--navy)' }} />
       </div>
 
       {/* Info */}
@@ -94,7 +94,7 @@ function POCard({ po, totals, onPress }) {
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           </span>
         )}
-        <CaretRight size={13} style={{ color: 'var(--black)' }} />
+        <CaretRight size="0.8125rem" style={{ color: 'var(--black)' }} />
       </div>
     </button>
   )
@@ -167,7 +167,7 @@ export default function PurchaseOrders() {
         action={
           <button onClick={() => navigate('/sales-orders/new')}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-s) var(--pad-l)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: 'var(--white)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
-            <Plus size={15} /> New Sales Order
+            <Plus size="0.9375rem" /> New Sales Order
           </button>
         }
       />
@@ -178,7 +178,7 @@ export default function PurchaseOrders() {
           display: 'flex', alignItems: 'center', gap: '0.75rem',
           padding: 'var(--pad-m) var(--pad-l)', background: 'var(--warning-soft)',
           borderRadius: 'var(--r-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
-          <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
+          <Warning size="1.125rem" weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
               {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
@@ -187,7 +187,7 @@ export default function PurchaseOrders() {
               Tap to review and publish
             </div>
           </div>
-          <CaretRight size={14} style={{ color: 'var(--warning)' }} />
+          <CaretRight size="0.875rem" style={{ color: 'var(--warning)' }} />
         </div>
       )}
 
@@ -229,11 +229,11 @@ export default function PurchaseOrders() {
       {/* Search + division filter */}
       <div style={{ display: 'flex', gap: 'var(--gap-s)', marginBottom: 'var(--mar-l)', flexWrap: 'wrap' }}>
         <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
-          <MagnifyingGlass size={15} style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+          <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
-          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}><X size={13} /></button>}
+          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}><X size="0.8125rem" /></button>}
         </div>
         {['all', 'LM', 'Bolt'].map(d => (
           <button key={d} onClick={() => setDivisionFilter(d)}
@@ -252,7 +252,7 @@ export default function PurchaseOrders() {
         <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
       ) : filtered.length === 0 ? (
         <div className="empty">
-          <Receipt size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
+          <Receipt size="2.5rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
           <div className="empty-title">{pos.length === 0 ? 'No sales orders yet' : 'No SOs match filters'}</div>
           <div className="empty-desc">{pos.length === 0 ? 'Create your first Sales Order to get started.' : 'Try adjusting your filters.'}</div>
           {pos.length === 0 && (

@@ -32,7 +32,7 @@ export default function FulfillmentQueue() {
       <PageHeader eyebrow="WAREHOUSE IQ" title="Fulfillment Queue" subtitle="Orders ready to pick and pack" />
 
       <div style={{ position:'relative',marginBottom:'var(--mar-l)' }}>
-        <MagnifyingGlass size={15} style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-3)' }} />
+        <MagnifyingGlass size="0.9375rem" style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search orders…"
           style={{ paddingLeft:36,width:'100%',boxSizing:'border-box' }} />
       </div>
@@ -42,7 +42,7 @@ export default function FulfillmentQueue() {
           <div style={{ padding: 'var(--pad-xxl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
         ) : visible.length === 0 ? (
           <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
-            <ClipboardText size={32} style={{ color:'var(--text-3)',marginBottom:8 }} />
+            <ClipboardText size="2rem" style={{ color:'var(--text-3)',marginBottom:8 }} />
             <div className="empty-title">No orders in fulfillment</div>
             <div className="empty-desc">Orders pushed from the SO Queue will appear here.</div>
           </div>
@@ -50,7 +50,7 @@ export default function FulfillmentQueue() {
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/fulfillment/${o.id}`)}
             style={{ display:'flex',alignItems:'center',gap:'var(--gap-m)',padding: 'var(--pad-m) var(--pad-l)',
               borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none',cursor:'pointer' }}>
-            <ClipboardText size={16} style={{ color:'var(--blue)' }} />
+            <ClipboardText size="1rem" style={{ color:'var(--blue)' }} />
             <div style={{ flex:1,minWidth:0 }}>
               <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--navy)' }}>{o.so_number}</div>
               <div style={{ fontSize:'var(--text-sm)',color:'var(--black)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
@@ -59,7 +59,7 @@ export default function FulfillmentQueue() {
               <div style={{ fontSize:'var(--text-xs)',color:'var(--text-3)',marginTop:2 }}>Received {fmtDate(o.fulfillment_at)}</div>
             </div>
             <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--black)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
-            <CaretRight size={14} style={{ color:'var(--black)',flexShrink:0 }} />
+            <CaretRight size="0.875rem" style={{ color:'var(--black)',flexShrink:0 }} />
           </div>
         ))}
       </div>

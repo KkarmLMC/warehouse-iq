@@ -12,7 +12,7 @@ export default function EmptyState({ icon: Icon, title, desc, action }) {
   return (
     <div className="empty">
       {Icon && (
-        <Icon size={36} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
+        <Icon size="2.25rem" style={{ color: 'var(--text-3)', marginBottom: 8 }} />
       )}
       {title && <div className="empty-title">{title}</div>}
       {desc  && <div className="empty-desc">{desc}</div>}

@@ -146,14 +146,14 @@ export default function Inventory() {
       {stats?.pendingCOs > 0 && (
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
           style={{ background: 'var(--warning-soft)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
-          <Warning size={18} weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
+          <Warning size="1.125rem" weight="fill" style={{ color: 'var(--warning)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--warning-text)' }}>
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--warning-text)' }}>Field crew part requests waiting for approval</div>
           </div>
-          <CaretRight size={14} style={{ color: 'var(--warning-text)', flexShrink: 0 }} />
+          <CaretRight size="0.875rem" style={{ color: 'var(--warning-text)', flexShrink: 0 }} />
         </div>
       )}
 
@@ -161,7 +161,7 @@ export default function Inventory() {
       {backOrders.length > 0 && (
         <div onClick={() => navigate('/warehouse-hq/queue')}
           style={{ background: 'var(--blue-tint-80)', borderRadius: 'var(--r-m)', padding: 'var(--pad-m) var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', cursor: 'pointer' }}>
-          <ClockCountdown size={18} weight="fill" style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
+          <ClockCountdown size="1.125rem" weight="fill" style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--blue-shade-40)' }}>
               {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
@@ -171,7 +171,7 @@ export default function Inventory() {
               {backOrders.length > 2 ? ` + ${backOrders.length - 2} more` : ''} — tap to view queue
             </div>
           </div>
-          <CaretRight size={14} style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
+          <CaretRight size="0.875rem" style={{ color: 'var(--blue-shade-20)', flexShrink: 0 }} />
         </div>
       )}
 
@@ -197,7 +197,7 @@ export default function Inventory() {
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
             <span className="list-card__title">
-              <Lightning size={16} />
+              <Lightning size="1rem" />
               {master.name}
               <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px', marginLeft: 8 }}>MASTER</span>
             </span>
@@ -235,7 +235,7 @@ export default function Inventory() {
       {/* ── Sub-Warehouses ── */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="list-card__header">
-          <span className="list-card__title"><Buildings size={16}  />Additional Warehouses</span>
+          <span className="list-card__title"><Buildings size="1rem"  />Additional Warehouses</span>
         </div>
         {subs.map((wh, idx) => {
           const h = warehouseHealth[wh.id] || {}
@@ -244,7 +244,7 @@ export default function Inventory() {
               onClick={() => navigate(`/warehouse-hq/warehouse/${wh.id}`)}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < subs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
               {/* Icon */}
-              <Package size={16} style={{ color: 'var(--navy)' }} />
+              <Package size="1rem" style={{ color: 'var(--navy)' }} />
               {/* Info */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{wh.name}</div>
@@ -254,7 +254,7 @@ export default function Inventory() {
               </div>
               {/* Health */}
               <HealthBadge out={h.out || 0} low={h.low || 0} />
-              <CaretRight size={14} style={{ color: 'var(--black)', flexShrink: 0 }} />
+              <CaretRight size="0.875rem" style={{ color: 'var(--black)', flexShrink: 0 }} />
             </div>
           )
         })}
@@ -263,21 +263,21 @@ export default function Inventory() {
       {/* ── Active Sales Orders ── */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/sales-orders')}>
-          <span className="list-card__title"><Receipt size={16}  />Active Sales Orders</span>
+          <span className="list-card__title"><Receipt size="1rem"  />Active Sales Orders</span>
           <span className="list-card__meta">
-            View all <ArrowRight size={12} />
+            View all <ArrowRight size="0.75rem" />
           </span>
         </div>
         {recentSOs.length === 0 ? (
           <div className="empty" style={{ padding: 'var(--pad-xl)' }}>
-            <Receipt size={28} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
+            <Receipt size="1.75rem" style={{ color: 'var(--text-3)', marginBottom: 8 }} />
             <div className="empty-title">No active sales orders</div>
           </div>
         ) : recentSOs.map((so, idx) => (
           <div key={so.id}
             onClick={() => navigate(`/sales-orders/${so.id}`)}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
-            <Receipt size={16} style={{ color: 'var(--navy)' }} />
+            <Receipt size="1rem" style={{ color: 'var(--navy)' }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{so.so_number}</span>
@@ -290,7 +290,7 @@ export default function Inventory() {
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--black)', flexShrink: 0 }}>
               {fmt(so.grand_total)}
             </div>
-            <CaretRight size={13} style={{ color: 'var(--black)', flexShrink: 0 }} />
+            <CaretRight size="0.8125rem" style={{ color: 'var(--black)', flexShrink: 0 }} />
           </div>
         ))}
       </div>
@@ -299,9 +299,9 @@ export default function Inventory() {
       {lowStock.length > 0 && (
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
-            <span className="list-card__title"><Warning size={16} />Low & Out of Stock</span>
+            <span className="list-card__title"><Warning size="1rem" />Low & Out of Stock</span>
             <span className="list-card__meta">
-              View inventory <ArrowRight size={12} />
+              View inventory <ArrowRight size="0.75rem" />
             </span>
           </div>
           {lowStock.map((item, idx) => {
@@ -309,7 +309,7 @@ export default function Inventory() {
             return (
               <div key={item.id}
                 style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-                <Warning size={16} weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--warning)' }} />
+                <Warning size="1rem" weight="fill" style={{ color: isOut ? 'var(--error-alt)' : 'var(--warning)' }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.parts?.name || 'Unknown Part'}
@@ -328,21 +328,21 @@ export default function Inventory() {
       {/* ── Recent Transfers / Shipments ── */}
       <div className="card" style={{ marginBottom: 'var(--mar-xxl)' }}>
         <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/transfer')}>
-          <span className="list-card__title"><Truck size={16}  />Recent Transfers</span>
+          <span className="list-card__title"><Truck size="1rem"  />Recent Transfers</span>
           <span className="list-card__meta">
-            New transfer <ArrowRight size={12} />
+            New transfer <ArrowRight size="0.75rem" />
           </span>
         </div>
         {recentShips.length === 0 ? (
           <div className="empty" style={{ padding: 'var(--pad-xl)' }}>
-            <Truck size={28} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
+            <Truck size="1.75rem" style={{ color: 'var(--text-3)', marginBottom: 8 }} />
             <div className="empty-title">No transfers yet</div>
             <div className="empty-desc">Transfers between warehouses will appear here.</div>
           </div>
         ) : recentShips.map((t, idx) => (
           <div key={t.id}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-l)' : 'none' }}>
-            <CheckCircle size={16} weight="fill" style={{ color: 'var(--success-text)' }} />
+            <CheckCircle size="1rem" weight="fill" style={{ color: 'var(--success-text)' }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>
                 {t.from_warehouse?.name?.replace(' Warehouse', '')} → {t.to_warehouse?.name?.replace(' Warehouse', '')}

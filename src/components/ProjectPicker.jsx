@@ -69,7 +69,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
       {/* Selected project display */}
       {value ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderRadius: 'var(--r-l)', background: 'var(--white)' }}>
-          <Briefcase size={16} style={{ color: 'var(--navy)', flexShrink: 0 }} />
+          <Briefcase size="1rem" style={{ color: 'var(--navy)', flexShrink: 0 }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {value.name}
@@ -79,14 +79,14 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
             </div>
           </div>
           <button onClick={handleClear} style={{ background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0, display: 'flex', flexShrink: 0 }}>
-            <X size={15} />
+            <X size="0.9375rem" />
           </button>
         </div>
       ) : (
         <div ref={ref} style={{ position: 'relative' }}>
           {/* Search input */}
           <div style={{ position: 'relative' }}>
-            <MagnifyingGlass size={14} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)', pointerEvents: 'none' }} />
+            <MagnifyingGlass size="0.875rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)', pointerEvents: 'none' }} />
             <input
               value={query}
               onChange={e => setQuery(e.target.value)}
@@ -107,7 +107,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
                   style={{ width: '100%', background: 'none', padding: 'var(--pad-m) var(--pad-l)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', borderBottom: '1px solid var(--border-l)' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--white)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}>
-                  <Briefcase size={14} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+                  <Briefcase size="0.875rem" style={{ color: 'var(--text-3)', flexShrink: 0 }} />
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {p.name}

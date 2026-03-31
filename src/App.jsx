@@ -58,7 +58,7 @@ function MobileHeader() {
     <div className="mobile-header">
       {meta.parent ? (
         <button className="mobile-header__back" onClick={() => navigate(meta.parent)}>
-          <ArrowLeft size={18} />
+          <ArrowLeft size="1.125rem" />
         </button>
       ) : <div style={{ width: 32 }} />}
       <span className="mobile-header__title">{meta.title}</span>

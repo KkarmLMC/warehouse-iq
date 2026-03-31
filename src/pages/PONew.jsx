@@ -80,7 +80,7 @@ function PartSearch({ onSelect, warehouseId }) {
   return (
     <div ref={ref} style={{ position: 'relative' }}>
       <div style={{ position: 'relative' }}>
-        <MagnifyingGlass size={14} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+        <MagnifyingGlass size="0.875rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
         <input
           value={query}
           onChange={e => setQuery(e.target.value)}
@@ -91,7 +91,7 @@ function PartSearch({ onSelect, warehouseId }) {
         {query && (
           <button onClick={() => { setQuery(''); setResults([]); setOpen(false) }}
             style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
-            <X size={13} />
+            <X size="0.8125rem" />
           </button>
         )}
       </div>
@@ -168,7 +168,7 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
       </div>
       <button onClick={onRemove}
         style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
-        <Trash size={13} />
+        <Trash size="0.8125rem" />
       </button>
     </div>
   )
@@ -214,7 +214,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
       <div style={{ background: 'var(--navy)', padding: 'var(--pad-m) var(--pad-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <button onClick={() => setExpanded(e => !e)}
           style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'var(--white)', display: 'flex' }}>
-          <CaretDown size={14} style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
+          <CaretDown size="0.875rem" style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
         </button>
         <input
           value={section.title}
@@ -229,7 +229,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
         )}
         <button onClick={onRemove}
           style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,0,0,0.5)', display: 'flex' }}>
-          <Trash size={13} />
+          <Trash size="0.8125rem" />
         </button>
       </div>
 
@@ -267,7 +267,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           </div>
           <button onClick={addManual}
             style={{ marginTop: 'var(--mar-s)', display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', cursor: 'pointer', padding: 0 }}>
-            <Plus size={12} /> Add custom line item
+            <Plus size="0.75rem" /> Add custom line item
           </button>
         </div>
       )}
@@ -289,10 +289,10 @@ function LaborSection({ items, onUpdate }) {
       <div style={{ background: 'var(--navy)', padding: 'var(--pad-m) var(--pad-l)', display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
         <button onClick={() => setExpanded(e => !e)}
           style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'var(--white)', display: 'flex' }}>
-          <CaretDown size={14} style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
+          <CaretDown size="0.875rem" style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
         </button>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-          <Wrench size={14} style={{ color: 'var(--white)' }} />
+          <Wrench size="0.875rem" style={{ color: 'var(--white)' }} />
           <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', color: '#fff' }}>Installation / Labor</span>
         </div>
         {total > 0 && (
@@ -316,13 +316,13 @@ function LaborSection({ items, onUpdate }) {
               </div>
               <button onClick={() => removeItem(item._key)}
                 style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--hover)', borderRadius: 'var(--r-m)', cursor: 'pointer', color: 'var(--error-dark)' }}>
-                <Trash size={13} />
+                <Trash size="0.8125rem" />
               </button>
             </div>
           ))}
           <button onClick={addLine}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)', background: 'none', cursor: 'pointer', padding: 0, marginTop: 'var(--mar-s)' }}>
-            <Plus size={12} /> Add labor line
+            <Plus size="0.75rem" /> Add labor line
           </button>
         </div>
       )}
@@ -622,7 +622,7 @@ export default function PONew() {
 
       <button onClick={addSection}
         style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', width: '100%', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', border: '2px dashed var(--border-l)', background: 'transparent', color: 'var(--text-3)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', justifyContent: 'center', marginBottom: 'var(--mar-l)' }}>
-        <Plus size={15} /> Add Scope Section
+        <Plus size="0.9375rem" /> Add Scope Section
       </button>
 
       {/* Labor */}
@@ -640,7 +640,7 @@ export default function PONew() {
       {/* Error */}
       {error && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', background: 'var(--error-soft)', borderRadius: 'var(--r-l)', marginBottom: 'var(--mar-l)', color: 'var(--error-dark)', fontSize: 'var(--text-sm)' }}>
-          <Warning size={15} />
+          <Warning size="0.9375rem" />
           {error}
         </div>
       )}
@@ -653,7 +653,7 @@ export default function PONew() {
         </button>
         <button onClick={() => handleSave(true)} disabled={saving}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
-          {saving ? 'Saving…' : <><ArrowRight size={15} /> Save & Submit</>}
+          {saving ? 'Saving…' : <><ArrowRight size="0.9375rem" /> Save & Submit</>}
         </button>
       </div>
     </div>

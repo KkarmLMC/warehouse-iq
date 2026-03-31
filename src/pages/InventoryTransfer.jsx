@@ -149,7 +149,7 @@ export default function InventoryTransfer() {
         {/* Search */}
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)', position: 'relative' }}>
           <div style={{ position: 'relative' }}>
-            <MagnifyingGlass size={15} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+            <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -166,7 +166,7 @@ export default function InventoryTransfer() {
                     <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{p.name}</div>
                     {p.sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', fontFamily: 'var(--mono)' }}>{p.sku}</div>}
                   </div>
-                  <Plus size={16} style={{ color: 'var(--navy)' }} />
+                  <Plus size="1rem" style={{ color: 'var(--navy)' }} />
                 </button>
               ))}
             </div>
@@ -192,7 +192,7 @@ export default function InventoryTransfer() {
             />
             <button onClick={() => removeItem(idx)}
               style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--red)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
-              <Trash size={14} />
+              <Trash size="0.875rem" />
             </button>
           </div>
         ))}
@@ -205,7 +205,7 @@ export default function InventoryTransfer() {
         </button>
         <button onClick={handleSubmit} disabled={saving}
           style={{ padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: saving ? 'var(--hover)' : 'var(--red)', color: saving ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
-          {saving ? <><SpinnerGap size={14} style={{ animation: 'spin 1s linear infinite' }} /> Processing…</> : <><CheckCircle size={14} /> Complete Transfer</>}
+          {saving ? <><SpinnerGap size="0.875rem" style={{ animation: 'spin 1s linear infinite' }} /> Processing…</> : <><CheckCircle size="0.875rem" /> Complete Transfer</>}
         </button>
       </div>
     </div>

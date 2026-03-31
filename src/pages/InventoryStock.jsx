@@ -45,8 +45,8 @@ function PartRow({ part, levels, onPress }) {
         background: isLow ? 'var(--orange-soft)' : 'var(--hover)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isLow
-          ? <WarningCircle size={20} weight="fill" style={{ color: 'var(--orange-shade-20)' }} />
-          : <Package size={20} style={{ color: 'var(--black)' }} />
+          ? <WarningCircle size="1.25rem" weight="fill" style={{ color: 'var(--orange-shade-20)' }} />
+          : <Package size="1.25rem" style={{ color: 'var(--black)' }} />
         }
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -60,7 +60,7 @@ function PartRow({ part, levels, onPress }) {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', flexShrink: 0 }}>
         <StockBadge qty={totalQty} minLevel={minLevel} onOrder={totalOnOrder} />
-        <CaretRight size={14} style={{ color: 'var(--black)' }} />
+        <CaretRight size="0.875rem" style={{ color: 'var(--black)' }} />
       </div>
     </button>
   )
@@ -133,11 +133,11 @@ export default function InventoryStock() {
         <div style={{ display: 'flex', gap: 'var(--gap-s)' }}>
           <button onClick={() => navigate('/warehouse-hq/transfer')}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--black)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
-            <ArrowsLeftRight size={14} /> Transfer
+            <ArrowsLeftRight size="0.875rem" /> Transfer
           </button>
           <button onClick={() => navigate('/warehouse-hq/add-part')}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-s) var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer' }}>
-            <Plus size={14} /> Add Part
+            <Plus size="0.875rem" /> Add Part
           </button>
         </div>
       </div>
@@ -158,12 +158,12 @@ export default function InventoryStock() {
 
       {/* Search */}
       <div style={{ position: 'relative', marginBottom: 'var(--mar-m)' }}>
-        <MagnifyingGlass size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+        <MagnifyingGlass size="1rem" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts, SKU, manufacturer…"
           style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
         {search && (
           <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}>
-            <X size={14} />
+            <X size="0.875rem" />
           </button>
         )}
       </div>
@@ -194,7 +194,7 @@ export default function InventoryStock() {
         <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
       ) : filtered.length === 0 ? (
         <div className="empty">
-          <Package size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
+          <Package size="2.5rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
           <div className="empty-title">{parts.length === 0 ? 'No parts yet' : 'No parts match filters'}</div>
           <div className="empty-desc">{parts.length === 0 ? 'Add your first part to get started.' : 'Try adjusting your filters.'}</div>
         </div>

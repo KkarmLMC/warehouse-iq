@@ -69,7 +69,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--mar-l)' }}>
             <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Edit Warehouse</div>
             <button onClick={onClose} style={{ background: 'var(--hover)', borderRadius: 'var(--r-xxl)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-              <X size={14} style={{ color: 'var(--black)' }} />
+              <X size="0.875rem" style={{ color: 'var(--black)' }} />
             </button>
           </div>
         </div>
@@ -138,7 +138,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         <div style={{ padding: 'var(--pad-l) var(--pad-xl)', paddingBottom: 'calc(var(--pad-l) + env(safe-area-inset-bottom))', flexShrink: 0 }}>
           <button onClick={handleSave} disabled={saving || !form.name.trim()}
             style={{ width: '100%', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: !form.name.trim() ? 'var(--hover)' : 'var(--navy)', color: !form.name.trim() ? 'var(--text-3)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: !form.name.trim() ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)' }}>
-            {saving ? 'Saving…' : <><Check size={15} /> Save Changes</>}
+            {saving ? 'Saving…' : <><Check size="0.9375rem" /> Save Changes</>}
           </button>
         </div>
       </div>
@@ -152,7 +152,7 @@ function StatCard({ label, value, Icon, color = 'var(--black)', bg = 'var(--hove
     <div style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 'var(--mar-s)' }}>
         <div style={{ width: '2rem', height: '2rem', borderRadius: 'var(--r-m)', background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Icon size={14} style={{ color }} />
+          <Icon size="0.875rem" style={{ color }} />
         </div>
         <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-3)' }}>{label}</span>
       </div>
@@ -187,7 +187,7 @@ function StockRow({ level, onPress }) {
         <span style={{ padding: '3px 10px', borderRadius: 'var(--r-s)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
-        <CaretRight size={13} style={{ color: 'var(--black)' }} />
+        <CaretRight size="0.8125rem" style={{ color: 'var(--black)' }} />
       </div>
     </button>
   )
@@ -284,13 +284,13 @@ export default function WarehouseDetail() {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--mar-m)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)' }}>
             <div style={{ width: '3rem', height: '3rem', borderRadius: 'var(--r-m)', background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Buildings size={22} style={{ color: '#fff' }} />
+              <Buildings size="1.375rem" style={{ color: '#fff' }} />
             </div>
             <div>
               <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, lineHeight: 1.1 }}>{warehouse.name}</div>
               {(warehouse.city || warehouse.state) && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--white)', marginTop: 4, fontSize: 'var(--text-xs)' }}>
-                  <MapPin size={12} />
+                  <MapPin size="0.75rem" />
                   {[warehouse.city, warehouse.state].filter(Boolean).join(', ')}
                 </div>
               )}
@@ -298,7 +298,7 @@ export default function WarehouseDetail() {
           </div>
           <button onClick={() => setShowEdit(true)}
             style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--r-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
-            <PencilSimple size={15} />
+            <PencilSimple size="0.9375rem" />
           </button>
         </div>
 
@@ -307,7 +307,7 @@ export default function WarehouseDetail() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4,  paddingTop: 'var(--pad-m)', marginTop: 'var(--mar-s)' }}>
             {warehouse.address && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
-                <MapPin size={12} />
+                <MapPin size="0.75rem" />
                 {warehouse.address}{warehouse.zip ? `, ${warehouse.zip}` : ''}
               </div>
             )}
@@ -316,12 +316,12 @@ export default function WarehouseDetail() {
             )}
             {warehouse.contact_phone && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
-                <Phone size={12} /> {warehouse.contact_phone}
+                <Phone size="0.75rem" /> {warehouse.contact_phone}
               </div>
             )}
             {warehouse.contact_email && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', fontSize: 'var(--text-xs)', color: 'var(--white)' }}>
-                <Envelope size={12} /> {warehouse.contact_email}
+                <Envelope size="0.75rem" /> {warehouse.contact_email}
               </div>
             )}
             {warehouse.notes && (
@@ -343,7 +343,7 @@ export default function WarehouseDetail() {
       {totalValue > 0 && (
         <div style={{ background: 'var(--white)', borderRadius: 'var(--r-l)', padding: 'var(--pad-l)', marginBottom: 'var(--mar-l)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', color: 'var(--text-3)' }}>
-            <CurrencyDollar size={16} />
+            <CurrencyDollar size="1rem" />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Est. Inventory Value</span>
           </div>
           <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--success-text)' }}>
@@ -356,11 +356,11 @@ export default function WarehouseDetail() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--gap-m)', marginBottom: 'var(--mar-xl)' }}>
         <button onClick={() => navigate(`/warehouse-hq/transfer?from=${id}`)}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--white)', color: 'var(--black)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
-          <ArrowsLeftRight size={15} /> Transfer
+          <ArrowsLeftRight size="0.9375rem" /> Transfer
         </button>
         <button onClick={() => navigate('/warehouse-hq/add-part')}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--gap-s)', padding: 'var(--pad-m)', borderRadius: 'var(--r-m)', background: 'var(--navy)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
-          <Plus size={15} /> Add Part
+          <Plus size="0.9375rem" /> Add Part
         </button>
       </div>
 
@@ -372,12 +372,12 @@ export default function WarehouseDetail() {
 
         {/* Search + filters */}
         <div style={{ position: 'relative', marginBottom: 'var(--mar-m)' }}>
-          <MagnifyingGlass size={15} style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+          <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
           {search && (
             <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}>
-              <X size={13} />
+              <X size="0.8125rem" />
             </button>
           )}
         </div>
@@ -416,7 +416,7 @@ export default function WarehouseDetail() {
           <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', borderBottom: '1px solid var(--border-l)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-                <Receipt size={16} style={{ color: 'var(--navy)' }} />
+                <Receipt size="1rem" style={{ color: 'var(--navy)' }} />
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Sales Orders</span>
                 <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)', background: 'var(--hover)', padding: '2px 8px', borderRadius: 'var(--r-s)', fontWeight: 600 }}>
                   {warehousePOs.length}
@@ -453,7 +453,7 @@ export default function WarehouseDetail() {
                         ${po.grand_total.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     )}
-                    <CaretRight size={12} style={{ color: 'var(--black)' }} />
+                    <CaretRight size="0.75rem" style={{ color: 'var(--black)' }} />
                   </div>
                 </button>
               )
@@ -467,10 +467,10 @@ export default function WarehouseDetail() {
         <button onClick={loadTransactions}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--pad-m) var(--pad-l)', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
-            <ClipboardText size={16} style={{ color: 'var(--black)' }} />
+            <ClipboardText size="1rem" style={{ color: 'var(--black)' }} />
             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--black)' }}>Transaction History</span>
           </div>
-          <CaretDown size={14} style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+          <CaretDown size="0.875rem" style={{ color: 'var(--black)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
         {showTx && (
           <div >

@@ -25,7 +25,7 @@ function SumCard({ label, value, sub, color = 'var(--black)', Icon }) {
   return (
     <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', padding:'var(--pad-l)' }}>
       <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', marginBottom: 'var(--mar-s)' }}>
-        {Icon && <Icon size={14} style={{ color:'var(--text-3)' }} />}
+        {Icon && <Icon size="0.875rem" style={{ color:'var(--text-3)' }} />}
         <span style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--black)' }}>{label}</span>
       </div>
       <div style={{ fontSize:'var(--text-base)', fontWeight:800, color, lineHeight:1 }}>{value}</div>
@@ -190,12 +190,12 @@ export default function WarehouseIQ() {
           {!isClosed && period && (
             <button onClick={handleClosePeriod} disabled={closing}
               style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:'var(--fw-bold)', cursor:'pointer', whiteSpace:'nowrap' }}>
-              <Lock size={13} /> {closing ? 'Closing…' : `Close ${periodLabel}`}
+              <Lock size="0.8125rem" /> {closing ? 'Closing…' : `Close ${periodLabel}`}
             </button>
           )}
           <button onClick={loadPeriod}
             style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)', padding: 'var(--pad-s) var(--pad-m)', borderRadius:'var(--r-m)', background: 'var(--white)', color:'var(--black)', fontSize:'var(--text-xs)', fontWeight:'var(--fw-bold)', cursor:'pointer' }}>
-            <ArrowsClockwise size={13} /> Refresh
+            <ArrowsClockwise size="0.8125rem" /> Refresh
           </button>
         </div>
       } />
@@ -243,7 +243,7 @@ export default function WarehouseIQ() {
         <div style={{ background: 'var(--white)', borderRadius:'var(--r-xl)', overflow:'hidden', marginBottom:'var(--mar-l)' }}>
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--pad-m) var(--pad-l)', borderBottom:'1px solid var(--border-l)' }}>
             <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-s)' }}>
-              <Receipt size={15} style={{ color:'var(--navy)' }} />
+              <Receipt size="0.9375rem" style={{ color:'var(--navy)' }} />
               <span style={{ fontSize:'var(--text-sm)', fontWeight:700 }}>Active Sales Orders</span>
               <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--r-s)', background:'var(--hover)', color:'var(--text-3)' }}>{pos.length}</span>
             </div>
@@ -276,10 +276,10 @@ export default function WarehouseIQ() {
         <div style={{ padding: 'var(--pad-m) var(--pad-l)', borderBottom:'1px solid var(--border-l)', display:'flex', gap:'var(--gap-m)', alignItems:'center', flexWrap:'wrap' }}>
           {/* Search */}
           <div style={{ position:'relative', flex:1, minWidth:160 }}>
-            <MagnifyingGlass size={13} style={{ position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:'var(--text-3)' }} />
+            <MagnifyingGlass size="0.8125rem" style={{ position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:'var(--text-3)' }} />
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
               style={{ width:'100%', paddingLeft:28, paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
-            {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', background:'none', cursor:'pointer', color:'var(--text-3)', padding:0 }}><X size={12}/></button>}
+            {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', background:'none', cursor:'pointer', color:'var(--text-3)', padding:0 }}><X size="0.75rem"/></button>}
           </div>
           {/* Filter pills */}
           <div style={{ display:'flex', gap:'var(--gap-xs)' }}>

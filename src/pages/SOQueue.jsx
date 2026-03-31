@@ -70,7 +70,7 @@ export default function SOQueue() {
 
       {/* Search */}
       <div style={{ position: 'relative', marginBottom: 'var(--mar-l)' }}>
-        <MagnifyingGlass size={15} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+        <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search by SO number, customer, project…"
           style={{ paddingLeft: 36, width: '100%', boxSizing: 'border-box' }} />
       </div>
@@ -81,7 +81,7 @@ export default function SOQueue() {
           <div style={{ padding: 'var(--pad-xxl)', textAlign: 'center' }}><div className="spinner" style={{ margin: '0 auto' }} /></div>
         ) : visible.length === 0 ? (
           <div className="empty" style={{ padding: 'var(--pad-xxl)' }}>
-            <Receipt size={32} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
+            <Receipt size="2rem" style={{ color: 'var(--text-3)', marginBottom: 8 }} />
             <div className="empty-title">No orders in {TABS.find(t=>t.key===tab)?.label}</div>
             <div className="empty-desc">Orders will appear here as they move through the pipeline.</div>
           </div>
@@ -96,7 +96,7 @@ export default function SOQueue() {
                 else navigate(`/warehouse-hq/queue/${o.id}`)
               }}
               style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)', padding: 'var(--pad-m) var(--pad-l)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-l)' : 'none', cursor: 'pointer' }}>
-              <Receipt size={16} style={{ color: 'var(--navy)' }} />
+              <Receipt size="1rem" style={{ color: 'var(--navy)' }} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
                   <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--navy)' }}>{o.so_number}</span>
@@ -110,7 +110,7 @@ export default function SOQueue() {
               <div style={{ textAlign: 'right', flexShrink: 0 }}>
                 <div style={{ fontWeight: 700, fontFamily: 'var(--mono)', fontSize: 'var(--text-sm)', color: 'var(--black)' }}>{fmt(o.grand_total)}</div>
               </div>
-              <CaretRight size={14} style={{ color: 'var(--black)', flexShrink: 0 }} />
+              <CaretRight size="0.875rem" style={{ color: 'var(--black)', flexShrink: 0 }} />
             </div>
           )
         })}

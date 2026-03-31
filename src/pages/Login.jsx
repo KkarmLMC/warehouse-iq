@@ -74,7 +74,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
 
       {error && (
         <div className="login-error">
-          <Warning size={14} />{error}
+          <Warning size="0.875rem" />{error}
         </div>
       )}
 
@@ -257,7 +257,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
       {/* Logo */}
       <div style={{ marginBottom: 'var(--mar-xxl)', textAlign: 'center', minHeight: 148 }}>
         <div style={{ width: 56, height: 56, borderRadius: 'var(--r-m)', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--mar-l)' }}>
-          <Lightning size={28} weight="fill" style={{ color: 'var(--white)' }} />
+          <Lightning size="1.75rem" weight="fill" style={{ color: 'var(--white)' }} />
         </div>
         <div style={{ fontSize: 'var(--text-xxl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--lh-display)', letterSpacing: 'var(--ls-xxl)' }}>
           {import.meta.env.VITE_APP_NAME || 'LMC Platform'}
@@ -308,7 +308,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)', marginBottom: 'var(--mar-xl)' }}>
               <button onClick={() => { setMode('pin'); setError('') }}
                 style={{ color: 'var(--text-3)', display: 'flex' }}>
-                <ArrowLeft size={18} />
+                <ArrowLeft size="1.125rem" />
               </button>
               <div style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--fw-bold)' }}>Sign in</div>
             </div>
@@ -323,13 +323,13 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                   <input type={showPw ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" autoComplete="current-password" style={{ width: '100%', paddingRight: 'var(--sp-10)' }} />
                   <button type="button" onClick={() => setShowPw(s => !s)}
                     style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)', padding: 0 }}>
-                    {showPw ? <EyeSlash size={16} /> : <Eye size={16} />}
+                    {showPw ? <EyeSlash size="1rem" /> : <Eye size="1rem" />}
                   </button>
                 </div>
               </div>
               {error && (
                 <div className="login-error" style={{ marginBottom: 'var(--mar-l)' }}>
-                  <Warning size={14} style={{ flexShrink: 0 }} />{error}
+                  <Warning size="0.875rem" style={{ flexShrink: 0 }} />{error}
                 </div>
               )}
               <button type="submit" disabled={loading}

@@ -46,7 +46,7 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
         )}
       </div>
       <RightIcon
-        size={20}
+        size="1.25rem"
         weight={done ? 'fill' : 'bold'}
         style={{
           color: '#fff',

@@ -30,7 +30,7 @@ export default function RowItem({ icon: Icon, iconColor, title, subtitle, right,
       onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
     >
       {Icon && (
-        <Icon size={18} style={{ color: iconColor || 'var(--black)', flexShrink: 0 }} />
+        <Icon size="1.125rem" style={{ color: iconColor || 'var(--black)', flexShrink: 0 }} />
       )}
 
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -55,7 +55,7 @@ export default function RowItem({ icon: Icon, iconColor, title, subtitle, right,
       )}
 
       {onClick && (
-        <CaretRight size={14} style={{ color: 'var(--black)', flexShrink: 0 }} />
+        <CaretRight size="0.875rem" style={{ color: 'var(--black)', flexShrink: 0 }} />
       )}
     </div>
   )

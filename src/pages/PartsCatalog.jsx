@@ -61,7 +61,7 @@ function CategorySection({ category, parts, onPartPress }) {
           width: '2rem', height: '2rem', borderRadius: 'var(--r-m)',
           background: 'rgba(255,255,255,0.12)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <Icon size={15} style={{ color: '#fff' }} />
+          <Icon size="0.9375rem" style={{ color: '#fff' }} />
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#fff' }}>{category.name}</div>
@@ -74,7 +74,7 @@ function CategorySection({ category, parts, onPartPress }) {
             )}
           </div>
         </div>
-        <CaretDown size={15} style={{
+        <CaretDown size="0.9375rem" style={{
           color: 'var(--white)', flexShrink: 0,
           transform: expanded ? 'rotate(180deg)' : 'none',
           transition: 'transform 0.2s ease' }} />
@@ -105,7 +105,7 @@ function CategorySection({ category, parts, onPartPress }) {
                   {part.unit_cost && <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-3)' }}>${part.unit_cost}</span>}
                 </div>
               </div>
-              <CaretRight size={13} style={{ color: 'var(--black)', flexShrink: 0 }} />
+              <CaretRight size="0.8125rem" style={{ color: 'var(--black)', flexShrink: 0 }} />
             </button>
           ))}
         </div>
@@ -172,7 +172,7 @@ export default function PartsCatalog() {
 
       <PageHeader eyebrow="INVENTORY" title="Parts Catalog" action={
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-xs)', padding: 'var(--pad-xs) var(--pad-m)', borderRadius: 'var(--r-xxl)', background: 'var(--blue-soft)', fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--blue)' }}>
-          <ArrowSquareOut size={12} /> QuickBooks sync — coming soon
+          <ArrowSquareOut size="0.75rem" /> QuickBooks sync — coming soon
         </div>
       } />
 
@@ -202,13 +202,13 @@ export default function PartsCatalog() {
 
       {/* Search */}
       <div style={{ position: 'relative', marginBottom: 'var(--mar-l)' }}>
-        <MagnifyingGlass size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
+        <MagnifyingGlass size="1rem" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }} />
         <input value={search} onChange={e => setSearch(e.target.value)}
           placeholder={`Search ${activeTab === 'All' ? 'all parts' : activeTab === 'LM' ? 'Lightning Master parts' : 'Bolt Lightning parts'}…`}
           style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
         {search && (
           <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-3)' }}>
-            <X size={14} />
+            <X size="0.875rem" />
           </button>
         )}
       </div>
@@ -217,7 +217,7 @@ export default function PartsCatalog() {
         <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--pad-xxl)' }}><div className="spinner" /></div>
       ) : grouped.length === 0 ? (
         <div className="empty">
-          <Package size={40} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
+          <Package size="2.5rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-m)' }} />
           <div className="empty-title">
             {search ? 'No parts found' : activeTab === 'Bolt' ? 'No Bolt parts yet' : 'No parts found'}
           </div>

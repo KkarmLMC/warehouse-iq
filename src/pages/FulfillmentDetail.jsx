@@ -147,7 +147,7 @@ export default function FulfillmentDetail() {
   if (!order) return (
     <div className="page-content fade-in">
       <div className="empty" style={{ minHeight: '60vh' }}>
-        <Warning size={32} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
+        <Warning size="2rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/fulfillment')}
@@ -164,7 +164,7 @@ export default function FulfillmentDetail() {
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/fulfillment')}
         style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
-        <ArrowLeft size={14} /> Back to Fulfillment
+        <ArrowLeft size="0.875rem" /> Back to Fulfillment
       </button>
 
       <div style={{ marginBottom: 'var(--mar-l)' }}>
@@ -181,7 +181,7 @@ export default function FulfillmentDetail() {
 
       {shortageLines.length > 0 && (
         <div style={{ background:'var(--error-soft)',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
-          <Warning size={16} weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
+          <Warning size="1rem" weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
           <div style={{ fontSize:'var(--text-xs)',color:'var(--error-shade-40)' }}>
             {shortageLines.length} part{shortageLines.length!==1?'s':''} had shortages — split fulfillment applied where possible. Review red items before confirming.
           </div>
@@ -190,7 +190,7 @@ export default function FulfillmentDetail() {
 
       {dropShipLines.length > 0 && (
         <div style={{ background:'#f5f3ff',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
-          <Truck size={16} weight="fill" style={{ color:'#6d28d9',flexShrink:0 }} />
+          <Truck size="1rem" weight="fill" style={{ color:'#6d28d9',flexShrink:0 }} />
           <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9' }}>
             {dropShipLines.length} part{dropShipLines.length!==1?'s':''} marked for drop ship — these will be fulfilled directly by the supplier, not from warehouse stock.
           </div>
@@ -200,7 +200,7 @@ export default function FulfillmentDetail() {
       {/* Pull list */}
       <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
         <div className="list-card__header">
-          <span className="list-card__title"><Package size={16}  />Pull List</span>
+          <span className="list-card__title"><Package size="1rem"  />Pull List</span>
           <span className="list-card__meta">{pullableLines.filter(l=>checked[l.id]).length}/{pullableLines.length} pulled</span>
         </div>
 
@@ -229,8 +229,8 @@ export default function FulfillmentDetail() {
               <div style={{ width:36,height:36,borderRadius: 'var(--r-m)',border:`2px solid ${isDS ? '#a78bfa' : isPulled ? 'var(--success-text)' : isOut ? 'var(--error)' : 'var(--border)'}`,flexShrink:0,
                 background: isDS ? '#a78bfa' : isPulled ? 'var(--success-text)' : 'transparent',
                 display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
-                {isPulled && !isDS && <CheckCircle size={14} weight="fill" color="#fff" />}
-                {isDS && <Truck size={14} weight="bold" color="#fff" />}
+                {isPulled && !isDS && <CheckCircle size="0.875rem" weight="fill" color="#fff" />}
+                {isDS && <Truck size="0.875rem" weight="bold" color="#fff" />}
               </div>
               {/* Part info */}
               <div>
@@ -295,10 +295,10 @@ export default function FulfillmentDetail() {
           color: !allChecked ? 'var(--text-3)' : '#fff',
           fontWeight:700,fontSize:'var(--text-sm)',cursor: allChecked && !pushing && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
-        {done ? <><CheckCircle size={16} weight="fill" /> Pushed to Shipment</>
+        {done ? <><CheckCircle size="1rem" weight="fill" /> Pushed to Shipment</>
           : pushing ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
           : !allChecked ? `Check off all ${lines.length - Object.values(checked).filter(Boolean).length} remaining parts first`
-          : <>{pullableLines.length < lines.length ? 'Push Available Items — Back Order Rest' : 'Push to Shipment — Deduct Inventory'} <ArrowRight size={16} /></>}
+          : <>{pullableLines.length < lines.length ? 'Push Available Items — Back Order Rest' : 'Push to Shipment — Deduct Inventory'} <ArrowRight size="1rem" /></>}
       </button>
     </div>
   )

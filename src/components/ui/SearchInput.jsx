@@ -15,7 +15,7 @@ export default function SearchInput({ value, onChange, placeholder = 'Search…'
   return (
     <div style={{ position: 'relative' }}>
       <MagnifyingGlass
-        size={15}
+        size="0.9375rem"
         style={{
           position: 'absolute', left: 12, top: '50%',
           transform: 'translateY(-50%)',
@@ -39,7 +39,7 @@ export default function SearchInput({ value, onChange, placeholder = 'Search…'
             color: 'var(--text-3)', display: 'flex', alignItems: 'center',
             padding: 2 }}
         >
-          <X size={13} />
+          <X size="0.8125rem" />
         </button>
       )}
     </div>

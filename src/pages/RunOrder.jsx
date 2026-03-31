@@ -45,7 +45,7 @@ function DropShipForm({ qty, onConfirm, onCancel }) {
     <div style={{ marginTop: 8, padding: 'var(--pad-m)', background: '#f5f3ff',
       borderRadius: 'var(--r-l)', border: '1px solid #ddd6fe' }}>
       <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#6d28d9', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
-        <Truck size={12} /> Drop Ship {qty} unit{qty !== 1 ? 's' : ''}
+        <Truck size="0.75rem" /> Drop Ship {qty} unit{qty !== 1 ? 's' : ''}
       </div>
 
       <label style={labelStyle}>Supplier *</label>
@@ -90,7 +90,7 @@ function DropShipForm({ qty, onConfirm, onCancel }) {
             background: !supplier.trim() ? '#d4d4d8' : '#6d28d9', color: '#fff', fontWeight: 700,
             cursor: !supplier.trim() ? 'not-allowed' : 'pointer', fontFamily: 'var(--font)',
             display: 'flex', alignItems: 'center', gap: 3 }}>
-          <Truck size={10} /> Confirm Drop Ship
+          <Truck size="0.625rem" /> Confirm Drop Ship
         </button>
       </div>
     </div>
@@ -387,7 +387,7 @@ export default function RunOrder() {
   if (!order) return (
     <div className="page-content fade-in">
       <div className="empty" style={{ minHeight: '60vh' }}>
-        <Warning size={32} style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
+        <Warning size="2rem" style={{ color: 'var(--text-3)', marginBottom: 'var(--mar-s)' }} />
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/queue')}
@@ -402,7 +402,7 @@ export default function RunOrder() {
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/queue')}
         style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-3)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--mar-m)' }}>
-        <ArrowLeft size={14} /> Back to Queue
+        <ArrowLeft size="0.875rem" /> Back to Queue
       </button>
 
       {/* Order header */}
@@ -429,7 +429,7 @@ export default function RunOrder() {
       {/* Back-order context banner */}
       {order?.status === 'back_ordered' && (
         <div style={{ background:'var(--warning-soft)',borderRadius:'var(--r-m)',padding:'var(--pad-m) var(--pad-l)',marginBottom:'var(--mar-l)',display:'flex',gap:'var(--gap-m)',alignItems:'flex-start' }}>
-          <Warning size={16} weight="fill" style={{ color:'var(--warning)',flexShrink:0,marginTop:1 }} />
+          <Warning size="1rem" weight="fill" style={{ color:'var(--warning)',flexShrink:0,marginTop:1 }} />
           <div>
             <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--black)' }}>Back-Order Fulfillment</div>
             <div style={{ fontSize:'var(--text-xs)',color:'var(--black)',marginTop:2,lineHeight:1.5 }}>
@@ -457,7 +457,7 @@ export default function RunOrder() {
       {!hasRun && (
         <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
           <div className="list-card__header">
-            <span className="list-card__title"><Lightning size={16}  />Run Order</span>
+            <span className="list-card__title"><Lightning size="1rem"  />Run Order</span>
           </div>
           <div style={{ padding: 'var(--pad-xl)',textAlign:'center' }}>
             <div style={{ fontSize:'var(--text-sm)',color:'var(--black)',marginBottom:'var(--mar-l)',maxWidth:420,margin:'0 auto var(--mar-l)' }}>
@@ -467,7 +467,7 @@ export default function RunOrder() {
               style={{ padding: 'var(--pad-m) var(--pad-xxl)',borderRadius:'var(--r-xl)',background:'var(--navy)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',display:'inline-flex',alignItems:'center',gap:'var(--gap-s)' }}>
               {running
                 ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Calculating…</>
-                : <><Lightning size={16} weight="fill" /> Run Order</>}
+                : <><Lightning size="1rem" weight="fill" /> Run Order</>}
             </button>
           </div>
         </div>
@@ -480,7 +480,7 @@ export default function RunOrder() {
           {unconfirmedKits > 0 && (
             <div style={{ background:'var(--warning-soft)',border:'2px solid #F59E0B',borderRadius:'var(--r-xl)',padding:'var(--pad-l)',marginBottom: 'var(--mar-l)' }}>
               <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-m)',marginBottom: 'var(--mar-m)' }}>
-                <SealWarning size={22} weight="fill" style={{ color:'var(--warning)',flexShrink:0 }} />
+                <SealWarning size="1.375rem" weight="fill" style={{ color:'var(--warning)',flexShrink:0 }} />
                 <div>
                   <div style={{ fontSize:'var(--text-sm)',fontWeight:800,color:'var(--warning-text)' }}>
                     Kit Description Change Detected — Review Required
@@ -513,8 +513,8 @@ export default function RunOrder() {
           {kitChanges.filter(l => kitConfirmations[l._idx] !== null).map(line => (
             <div key={line._idx} style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',padding: 'var(--pad-s) var(--pad-m)',background: kitConfirmations[line._idx]==='accept' ? 'var(--success-soft)' : 'var(--grey-tint-80)',borderRadius:'var(--r-l)',marginBottom:'var(--mar-s)',fontSize:'var(--text-xs)' }}>
               {kitConfirmations[line._idx]==='accept'
-                ? <CheckCircle size={13} weight="fill" style={{ color:'var(--success-text)',flexShrink:0 }} />
-                : <CheckCircle size={13} weight="fill" style={{ color:'var(--text-3)',flexShrink:0 }} />}
+                ? <CheckCircle size="0.8125rem" weight="fill" style={{ color:'var(--success-text)',flexShrink:0 }} />
+                : <CheckCircle size="0.8125rem" weight="fill" style={{ color:'var(--text-3)',flexShrink:0 }} />}
               <span style={{ color:'var(--black)' }}>
                 <strong>{line.sku}</strong> — kit change {kitConfirmations[line._idx]==='accept' ? 'accepted (modified description will go to fulfillment)' : 'rejected (reverted to canonical description)'}
               </span>
@@ -524,7 +524,7 @@ export default function RunOrder() {
           {/* ── Stock summary ── */}
           {totalShortages > 0 ? (
             <div style={{ background:'var(--error-soft)',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
-              <Warning size={18} weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
+              <Warning size="1.125rem" weight="fill" style={{ color:'var(--error)',flexShrink:0 }} />
               <div>
                 <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--error-shade-40)' }}>{totalShortages} part{totalShortages!==1?'s':''} with stock shortage</div>
                 <div style={{ fontSize:'var(--text-xs)',color:'var(--error-dark)' }}>Review red lines. Use split fulfillment or mark as back order.</div>
@@ -532,7 +532,7 @@ export default function RunOrder() {
             </div>
           ) : (
             <div style={{ background:'var(--success-soft)',borderRadius:'var(--r-xl)',padding:'var(--pad-m) var(--pad-l)',marginBottom: 'var(--mar-l)',display:'flex',alignItems:'center',gap:'var(--gap-m)' }}>
-              <CheckCircle size={18} weight="fill" style={{ color:'var(--success-text)',flexShrink:0 }} />
+              <CheckCircle size="1.125rem" weight="fill" style={{ color:'var(--success-text)',flexShrink:0 }} />
               <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--success-text)' }}>All {computed.length} parts are in stock</div>
             </div>
           )}
@@ -540,7 +540,7 @@ export default function RunOrder() {
           {/* ── Fulfillment sheet ── */}
           <div className="card" style={{ marginBottom: 'var(--mar-l)' }}>
             <div className="list-card__header">
-              <span className="list-card__title"><Package size={16}  />Fulfillment Sheet</span>
+              <span className="list-card__title"><Package size="1rem"  />Fulfillment Sheet</span>
               <span className="list-card__meta">{computed.length} parts</span>
             </div>
 
@@ -566,7 +566,7 @@ export default function RunOrder() {
                   {/* Kit change badge */}
                   {kitChanged && (
                     <div style={{ padding: '4px var(--pad-l)',background:'var(--warning-soft)',fontSize:'var(--text-sm)',fontWeight:700,color:'var(--warning-text)',display:'flex',alignItems:'center',gap:4 }}>
-                      <SealWarning size={11} /> Kit description modified by sales
+                      <SealWarning size="0.6875rem" /> Kit description modified by sales
                       {conf === 'accept' && <span style={{ color:'var(--success-text)',marginLeft:4 }}>✓ Accepted</span>}
                       {conf === 'reject' && <span style={{ color:'var(--text-3)',marginLeft:4 }}>✓ Reverted to canonical</span>}
                     </div>
@@ -596,16 +596,16 @@ export default function RunOrder() {
                           {line.split_warehouse_id && (
                             <button onClick={() => setExpandedSplit(p => ({ ...p, [idx]: !p[idx] }))}
                               style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--warning)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
-                              {splitOpen ? <CaretUp size={9}/> : <CaretDown size={9}/>} Split details
+                              {splitOpen ? <CaretUp size="0.5625rem"/> : <CaretDown size="0.5625rem"/>} Split details
                             </button>
                           )}
                           <button onClick={() => toggleBackOrder(idx)}
                             style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--blue-shade-20)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
-                            <ClockCountdown size={10} /> Mark back order
+                            <ClockCountdown size="0.625rem" /> Mark back order
                           </button>
                           <button onClick={() => toggleDropShip(idx)}
                             style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'#6d28d9',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
-                            <Truck size={10} /> Drop ship
+                            <Truck size="0.625rem" /> Drop ship
                           </button>
                         </div>
                       )}
@@ -634,7 +634,7 @@ export default function RunOrder() {
                       {isDS && (
                         <div style={{ marginTop:6 }}>
                           <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',flexWrap:'wrap' }}>
-                            <Truck size={11} style={{ color:'#6d28d9' }} />
+                            <Truck size="0.6875rem" style={{ color:'#6d28d9' }} />
                             <span style={{ fontSize:'var(--text-xs)',color:'#6d28d9',fontWeight:600 }}>
                               Drop shipping {line.drop_ship_qty || line._remainingShortage} units
                             </span>
@@ -706,10 +706,10 @@ export default function RunOrder() {
                   cursor: allKitsConfirmed && !pushed ? 'pointer' : 'not-allowed',
                   fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
                 {pushed
-                  ? <><CheckCircle size={16} weight="fill" /> Sent to Fulfillment</>
+                  ? <><CheckCircle size="1rem" weight="fill" /> Sent to Fulfillment</>
                   : !allKitsConfirmed
                     ? 'Confirm kit changes first'
-                    : <>Push to Fulfillment <ArrowRight size={16} /></>}
+                    : <>Push to Fulfillment <ArrowRight size="1rem" /></>}
               </button>
             </>
           )}
@@ -733,7 +733,7 @@ export default function RunOrder() {
             <div style={{ position:'fixed',bottom: 'env(safe-area-inset-bottom, 0px)',left:0,right:0,zIndex:300,background:'var(--bg)',
               borderRadius:'var(--r-xl) var(--r-xl) 0 0',padding:'1.25rem',maxHeight:'80vh',overflowY:'auto' }}>
               <div style={{ display:'flex',alignItems:'center',gap:'var(--gap-s)',marginBottom: 'var(--mar-l)' }}>
-                <SealWarning size={20} weight="fill" style={{ color:'var(--warning)' }} />
+                <SealWarning size="1.25rem" weight="fill" style={{ color:'var(--warning)' }} />
                 <div style={{ fontSize:'var(--text-lg)',fontWeight:800 }}>Kit Description Changed</div>
               </div>
 

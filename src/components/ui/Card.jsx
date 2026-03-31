@@ -21,7 +21,7 @@ export default function Card({ title, icon: Icon, meta, action, onAction, childr
           style={{ cursor: onAction ? 'pointer' : 'default' }}
         >
           <span className="list-card__title">
-            {Icon && <Icon size={16} />}
+            {Icon && <Icon size="1rem" />}
             {title}
           </span>
           {meta   && <span className="list-card__meta">{meta}</span>}
