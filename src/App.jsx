@@ -60,9 +60,9 @@ function MobileHeader() {
         <button className="mobile-header__back" onClick={() => navigate(meta.parent)}>
           <ArrowLeft size="1.125rem" />
         </button>
-      ) : <div style={{ width: 32 }} />}
+      ) : <div className="mobile-header__spacer" />}
       <span className="mobile-header__title">{meta.title}</span>
-      <div style={{ width: 32 }} />
+      <div className="mobile-header__spacer" />
     </div>
   )
 }
@@ -83,9 +83,8 @@ function DesktopTopBar() {
     <div className="page-header">
       <div className="page-header__actions">
         {meta.parent && (
-          <button onClick={() => navigate(meta.parent)}
-            style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--r-s)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
-            <ArrowLeft size="1.125rem" color="var(--white)" />
+          <button className="page-header__icon-btn" onClick={() => navigate(meta.parent)}>
+            <ArrowLeft size="1.125rem" color="var(--color-white)" />
           </button>
         )}
         <div className="page-header__title">{meta.title}</div>
@@ -94,8 +93,7 @@ function DesktopTopBar() {
         <div className="status-live">
           <div className="dot-live" />LIVE
         </div>
-        <button onClick={handleSignOut}
-          style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--r-s)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+        <button className="page-header__icon-btn" onClick={handleSignOut}>
           <SignOut size="1rem" color="rgba(255,255,255,0.7)" />
         </button>
       </div>
@@ -103,19 +101,12 @@ function DesktopTopBar() {
   )
 }
 
-// ─── Spinner ──────────────────────────────────────────────────────────────────
-const Spinner = () => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100dvh' }}>
-    <div className="spinner" />
-  </div>
-)
-
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const [collapsed, setCollapsed] = useState(false)
   const { session, loading, profile } = useAuth()
 
-  if (loading) return <Spinner />
+  if (loading) return <div className="spinner-page"><div className="spinner" /></div>
 
   if (!session) return (
     <Suspense fallback={null}>
@@ -126,8 +117,6 @@ export default function App() {
     </Suspense>
   )
 
-  // PIN guard — loading covers both session + profile loading
-  // When we reach here, profile is fully loaded. If no pin_hash → force setup
   if (session && !profile?.pin_hash) return (
     <Suspense fallback={null}>
       <Routes>
@@ -147,7 +136,7 @@ export default function App() {
 
         <div className="page-content-area">
           <PageSubNav />
-          <Suspense fallback={<div className="page-content" style={{ display:'flex',alignItems:'center',justifyContent:'center',minHeight:'60vh' }}><div className="spinner"/></div>}>
+          <Suspense fallback={<div className="page-content spinner-content"><div className="spinner" /></div>}>
             <Routes>
               <Route path="/"                                element={<Navigate to="/warehouse-hq" replace />} />
               <Route path="/warehouse-hq"                    element={<Inventory />} />

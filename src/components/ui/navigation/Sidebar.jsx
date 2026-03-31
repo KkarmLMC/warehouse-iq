@@ -88,9 +88,10 @@ export default function Sidebar({
   onNavigate,
   headerSlot,
   footerSlot,
+  collapseIcons,
 }) {
   const rootPath = items[0]?.path || '/'
-  const { name, subtitle, icon: BrandIcon } = brand
+  const { name, subtitle, icon: BrandIcon, badge } = brand
 
   return (
     <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
@@ -100,7 +101,12 @@ export default function Sidebar({
           ? <BrandIcon size="1.375rem" weight="fill" />
           : (
             <div className="sidebar__brand-text">
-              {name && <div className="sidebar__brand-name">{name}</div>}
+              {name && (
+                <div className="sidebar__brand-name">
+                  {name}
+                  {badge && <span className="sidebar__brand-badge">{badge}</span>}
+                </div>
+              )}
               {subtitle && <div className="sidebar__brand-sub">{subtitle}</div>}
             </div>
           )}
@@ -148,9 +154,10 @@ export default function Sidebar({
         {onToggle && (
           <button className="sidebar-item sidebar-collapse-btn" onClick={onToggle}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
-            <span className="sidebar-collapse-btn__icon">
-              {collapsed ? '\u25B6' : '\u25C0'}
-            </span>
+            {collapseIcons
+              ? (collapsed ? collapseIcons.collapsed : collapseIcons.expanded)
+              : <span className="sidebar-collapse-btn__icon">{collapsed ? '\u25B6' : '\u25C0'}</span>
+            }
             {!collapsed && <span className="sidebar-item-label">Collapse</span>}
           </button>
         )}
