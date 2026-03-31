@@ -305,13 +305,38 @@
   --icon-xl:  clamp(1.75rem,  3.5vw,  2.25rem);
   --icon-xxl: clamp(2.5rem,   6vw,    3.5rem);
 
-  /* ── Grid min-width tokens ─────────────────────────────────────────────────
-     Used with auto-fit grids: repeat(auto-fit, minmax(min(100%, TOKEN), 1fr))
-     The min(100%, ...) ensures single-col on narrow containers.            ── */
-  --grid-min-xs:  7rem;      /* compact items, tags, badges                    */
-  --grid-min-sm:  10rem;     /* nav cards, form fields, narrow cards           */
-  --grid-min-md:  14rem;     /* medium cards, data panels                      */
-  --grid-min-lg:  17.5rem;   /* wide cards, list cards, detail panels          */
+  /* ── Grid tokens ────────────────────────────────────────────────────────────
+     Building blocks for any grid class. Use these variables when writing
+     component-specific grid rules — never hardcode column counts or minmax.
+
+     Column templates:  grid-template-columns: var(--grid-cols-3);
+     Auto-fit:          grid-template-columns: var(--grid-fit-md);
+     Min-widths:        minmax(min(100%, var(--grid-min-sm)), 1fr)
+     Container breaks:  @container content (max-width: 640px) { ... }    ── */
+
+  /* Fixed column templates */
+  --grid-cols-1: 1fr;
+  --grid-cols-2: repeat(2, 1fr);
+  --grid-cols-3: repeat(3, 1fr);
+  --grid-cols-4: repeat(4, 1fr);
+  --grid-cols-5: repeat(5, 1fr);
+
+  /* Auto-fit min-width thresholds */
+  --grid-min-xs:  7rem;
+  --grid-min-sm:  10rem;
+  --grid-min-md:  14rem;
+  --grid-min-lg:  17.5rem;
+
+  /* Auto-fit column templates (intrinsically responsive) */
+  --grid-fit-xs: repeat(auto-fit, minmax(min(100%, 7rem),    1fr));
+  --grid-fit-sm: repeat(auto-fit, minmax(min(100%, 10rem),   1fr));
+  --grid-fit-md: repeat(auto-fit, minmax(min(100%, 14rem),   1fr));
+  --grid-fit-lg: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+
+  /* Container breakpoints (reference — used in @container rules)
+     --bp-sm: 480px    narrow — mobile portrait, sidebar panels
+     --bp-md: 640px    medium — tablet, narrow desktop
+     --bp-lg: 900px    wide   — full desktop content area              */
 
   /* ── Shadow scale ─────────────────────────────────────────────────────────── */
   --shadow-xs:  0 0.0625rem 0.125rem rgba(0,0,0,.04);
@@ -1188,15 +1213,15 @@ textarea { resize: vertical; }
    ============================================================================= */
 
 /* ── Auto-fit grids — intrinsically responsive ─────────────────────────────── */
-.grid-auto-xs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-xs)), 1fr)); gap: var(--gap-s); }
-.grid-auto-sm { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-sm)), 1fr)); gap: var(--gap-m); }
-.grid-auto-md { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-md)), 1fr)); gap: var(--gap-m); }
-.grid-auto-lg { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-lg)), 1fr)); gap: var(--gap-l); }
+.grid-auto-xs { display: grid; grid-template-columns: var(--grid-fit-xs); gap: var(--gap-s); }
+.grid-auto-sm { display: grid; grid-template-columns: var(--grid-fit-sm); gap: var(--gap-m); }
+.grid-auto-md { display: grid; grid-template-columns: var(--grid-fit-md); gap: var(--gap-m); }
+.grid-auto-lg { display: grid; grid-template-columns: var(--grid-fit-lg); gap: var(--gap-l); }
 
 /* ── Fixed-column grids — collapse via @container ──────────────────────────── */
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-m); }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-m); }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-m); }
+.grid-2 { display: grid; grid-template-columns: var(--grid-cols-2); gap: var(--gap-m); }
+.grid-3 { display: grid; grid-template-columns: var(--grid-cols-3); gap: var(--gap-m); }
+.grid-4 { display: grid; grid-template-columns: var(--grid-cols-4); gap: var(--gap-m); }
 
 @container content (max-width: 640px) {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
