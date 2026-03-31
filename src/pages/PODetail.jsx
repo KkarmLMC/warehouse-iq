@@ -199,9 +199,9 @@ export default function PODetail() {
       {sections.length > 0 && (
         <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           {/* Column headers */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.5rem 3.5rem 4.5rem', gap: 'var(--gap-s)', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--hover)', borderBottom: '1px solid var(--border-l)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.5rem 3.5rem 4.5rem', gap: 'var(--gap-s)', padding: 'var(--pad-l)', background: 'var(--white)', borderBottom: '1px solid var(--border-l)', borderRadius: 'var(--r-m) var(--r-m) 0 0' }}>
             {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
-              <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-3)', textAlign: h !== 'Item / Description' ? 'right' : 'left', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{h}</div>
+              <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', textAlign: h !== 'Item / Description' ? 'right' : 'left', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{h}</div>
             ))}
           </div>
           {sections.map(sec => (
