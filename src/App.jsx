@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense } from 'react'
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { ArrowLeft } from '@phosphor-icons/react'
+import { ArrowLeft, SignOut } from '@phosphor-icons/react'
 import Sidebar    from './components/Sidebar'
 import BottomNav  from './components/BottomNav'
 import PageSubNav from './components/PageSubNav'
@@ -67,6 +67,42 @@ function MobileHeader() {
   )
 }
 
+// ─── Desktop top bar ──────────────────────────────────────────────────────────
+function DesktopTopBar() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { signOut } = useAuth()
+  const meta = getPageMeta(location.pathname)
+
+  const handleSignOut = async () => {
+    await signOut()
+    navigate('/login')
+  }
+
+  return (
+    <div className="desktop-topbar">
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+        {meta.parent && (
+          <button onClick={() => navigate(meta.parent)}
+            style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--r-s)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+            <ArrowLeft size="1.125rem" color="var(--white)" />
+          </button>
+        )}
+        <div className="desktop-topbar__title">{meta.title}</div>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-s)' }}>
+        <div className="status-live">
+          <div className="dot-live" />LIVE
+        </div>
+        <button onClick={handleSignOut}
+          style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--r-s)', width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+          <SignOut size="1rem" color="rgba(255,255,255,0.7)" />
+        </button>
+      </div>
+    </div>
+  )
+}
+
 // ─── Spinner ──────────────────────────────────────────────────────────────────
 const Spinner = () => (
   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100dvh' }}>
@@ -107,6 +143,7 @@ export default function App() {
 
       <div className="main-area">
         <MobileHeader />
+        <DesktopTopBar />
 
         <div className="page-content-area">
           <PageSubNav />
