@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   Receipt, Buildings, MapPin, Phone, Envelope,
   CalendarBlank, CheckCircle, PaperPlaneTilt,
-  Clock, CaretDown, ArrowRight, Lightning, ClipboardText, Truck,
+  Clock, ArrowRight, Lightning, ClipboardText, Truck,
   Warning, X } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
 import { soStatus } from '../lib/statusColors.js'
@@ -27,17 +27,16 @@ function SectionGroup({ label, items }) {
   const subtotal = items.reduce((s, i) => s + (i.quantity * i.unit_cost), 0)
 
   return (
-    <div style={{ marginBottom: 'var(--mar-m)' }}>
+    <div style={{ marginBottom: 0 }}>
       <button onClick={() => setOpen(o => !o)} style={{
-        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: 'var(--pad-s) var(--pad-l)', background: 'var(--navy)', cursor: 'pointer' }}>
-        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>{label}</span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-m)' }}>
-          <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--white)' }}>
-            ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </span>
-          <CaretDown size="0.8125rem" style={{ color: 'var(--white)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-        </div>
+        width: '100%', display: 'grid', gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem',
+        gap: 'var(--gap-s)', padding: 'var(--pad-m) var(--pad-l)', background: 'var(--navy)', cursor: 'pointer', alignItems: 'center' }}>
+        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--white)', textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'left' }}>{label}</span>
+        <span />
+        <span />
+        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--white)', textAlign: 'right' }}>
+          ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        </span>
       </button>
       {open && items.map((item, idx) => (
         <div key={item.id} style={{
@@ -200,7 +199,7 @@ export default function PODetail() {
         <div style={{ background: 'var(--white)', borderRadius: 'var(--r-m)', overflow: 'hidden', marginBottom: 'var(--mar-l)', maxWidth: '100%' }}>
           {/* Column headers */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem', gap: 'var(--gap-s)', padding: 'var(--pad-l)', background: 'var(--white)', borderBottom: '1px solid var(--border-l)', borderRadius: 'var(--r-m) var(--r-m) 0 0' }}>
-            {['Item / Description', 'Qty', 'Unit', 'Amount'].map(h => (
+            {['Item / Description', 'Quantity', 'Unit', 'Amount'].map(h => (
               <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--black)', textAlign: h !== 'Item / Description' ? 'right' : 'left', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{h}</div>
             ))}
           </div>
