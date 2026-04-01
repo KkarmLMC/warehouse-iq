@@ -12,6 +12,7 @@
     "prebuild": "node scripts/validate-routes.mjs"
   },
   "dependencies": {
+    "@kkarm-lmc/shared": "github:KkarmLMC/lmc-shared",
     "@phosphor-icons/react": "^2.1.10",
     "@supabase/supabase-js": "^2.100.0",
     "react": "^19.2.4",
