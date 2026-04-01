@@ -251,7 +251,7 @@ export default function WarehouseIQ() {
           </div>
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
-              style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--space-m)', padding: 'var(--space-s) var(--space-l)', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
+              style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--space-m)', padding: 'var(--space-s) var(--space-l)', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
               <div style={{ fontSize:'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding: 'var(--space-3xs) var(--space-xs)', borderRadius: 'var(--radius-xs)', flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--state-info-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--state-info)' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
@@ -313,7 +313,7 @@ export default function WarehouseIQ() {
           return (
             <div key={r.part.id}
               onClick={() => navigate(`/warehouse-hq/part/${r.part.id}`)}
-              style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--space-s)', padding: 'var(--space-s) var(--space-l)', borderBottom:'1px solid var(--border-subtle)', background:rowBg, cursor:'pointer', transition:'background 0.1s' }}
+              style={{ display:'grid', gridTemplateColumns:'1fr 4.5rem 4.5rem 4.5rem 5rem 5.5rem 5.625rem 3rem', gap:'var(--space-s)', padding: 'var(--space-s) var(--space-l)', borderBottom:'var(--border-width-1) solid var(--border-subtle)', background:rowBg, cursor:'pointer', transition:'background 0.1s' }}
               onMouseEnter={e => e.currentTarget.style.background = isOut?'var(--state-error-soft)':isLow?'var(--state-warning-soft)':'var(--surface-hover)'}
               onMouseLeave={e => e.currentTarget.style.background = rowBg}
             >

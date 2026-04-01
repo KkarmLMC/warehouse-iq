@@ -49,7 +49,7 @@ export default function BackorderQueue() {
           const days = daysSince(o.back_ordered_at)
           return (
             <div key={o.id} onClick={() => navigate(`/warehouse-hq/queue/${o.id}`)}
-              className="queue-row" style={{ borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
+              className="queue-row" style={{ borderBottom: idx < visible.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
               <ClockCountdown size="1rem" style={{ color:'var(--state-info)' }} />
               <div className="queue-row__body">
                 <div className="so-number">{o.so_number}</div>

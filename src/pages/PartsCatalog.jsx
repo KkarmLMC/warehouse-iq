@@ -165,7 +165,7 @@ export default function PartsCatalog() {
           return (
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
               style={{
-                flex: 1, padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-l)', cursor: 'pointer', transition: 'all 0.15s ease',
+                flex: 1, padding: 'var(--space-s) var(--space-m)', borderRadius: 'var(--radius-l)', cursor: 'pointer', transition: 'all 0.15s ease',
                 background: active ? 'var(--brand-primary)' : 'transparent',
                 color: active ? '#fff' : 'var(--text-muted)',
                 fontWeight: active ? 700 : 500,

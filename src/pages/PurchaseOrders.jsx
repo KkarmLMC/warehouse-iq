@@ -167,9 +167,9 @@ export default function PurchaseOrders() {
       {/* Alert banner for submitted POs awaiting review */}
       {queuedCount > 0 && (
         <div style={{
-          display: 'flex', alignItems: 'center', gap: '0.75rem',
+          display: 'flex', alignItems: 'center', gap: 'var(--space-m)',
           padding: 'var(--space-m) var(--space-l)', background: 'var(--state-warning-soft)',
-          borderRadius: 'var(--radius-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
+          borderRadius: 'var(--radius-l)', marginBottom: 'var(--space-l)', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
           <Warning size="1.125rem" weight="fill" className="purchase-orders-e393" />
           <div className="content-body">
             <div className="text-sm-bold">
@@ -202,7 +202,7 @@ export default function PurchaseOrders() {
         {TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             style={{
-              flexShrink: 0, padding: '0.5rem 0.75rem',
+              flexShrink: 0, padding: 'var(--space-s) var(--space-m)',
               background: 'none', cursor: 'pointer', fontSize: 'var(--text-sm)',
               fontWeight: activeTab === tab.key ? 700 : 500,
               color: activeTab === tab.key ? 'var(--brand-primary)' : 'var(--text-muted)',

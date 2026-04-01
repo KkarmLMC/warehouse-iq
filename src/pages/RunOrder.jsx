@@ -555,7 +555,7 @@ export default function RunOrder() {
               const conf       = kitConfirmations[line._idx ?? idx]
 
               return (
-                <div key={idx} style={{ borderBottom: idx < computed.length-1 ? '1px solid var(--border-subtle)' : 'none',
+                <div key={idx} style={{ borderBottom: idx < computed.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none',
                   background: isDS ? '#f5f3ff' : isBO ? 'var(--state-info-soft)' : isShortage ? 'var(--state-error-soft)' : kitChanged ? 'var(--state-warning-soft)' : 'transparent' }}>
 
                   {/* Kit change badge */}
@@ -728,7 +728,7 @@ export default function RunOrder() {
             <div onClick={() => setShowKitModal(false)}
               className="run-order-0f8f" />
             <div style={{ position:'fixed',bottom: 'env(safe-area-inset-bottom, 0px)',left:0,right:0,zIndex: 'var(--z-sheet)',background:'var(--bg)',
-              borderRadius:'var(--radius-l) var(--radius-l) 0 0',padding:'1.25rem',maxHeight:'80vh',overflowY:'auto' }}>
+              borderRadius:'var(--radius-l) var(--radius-l) 0 0',padding: 'var(--space-xl)',maxHeight:'80vh',overflowY:'auto' }}>
               <div className="run-order-6678">
                 <SealWarning size="1.25rem" weight="fill" style={{ color:'var(--state-warning)' }} />
                 <div className="run-order-a7a2">Kit Description Changed</div>

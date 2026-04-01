@@ -212,7 +212,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         <div className="part-detail-fa13">
           <button onClick={handleSave} disabled={saving || (delta === 0 && onOrder === '' && minLevel === '')}
             style={{
-              width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-m)',
+              width: '100%', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)',
               background: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--surface-hover)' : 'var(--brand-primary)',
               color: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--text-muted)' : '#fff',
               fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)',

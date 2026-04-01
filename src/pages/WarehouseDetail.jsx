@@ -415,7 +415,7 @@ export default function WarehouseDetail() {
               const sc = soStatus(po.status)
               return (
                 <button key={po.id} onClick={() => navigate(`/sales-orders/${po.id}`)}
-                  style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer', textAlign: 'left', borderBottom: idx < warehousePOs.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
+                  style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer', textAlign: 'left', borderBottom: idx < warehousePOs.length - 1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
                   <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding: 'var(--space-3xs) var(--space-xs)', borderRadius: 'var(--radius-xs)', flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : 'var(--state-info-soft)', color: po.division === 'Bolt' ? 'var(--red-shade-40)' : 'var(--state-info)' }}>
                     {po.division === 'Bolt' ? 'BOLT' : 'LM'}
                   </div>

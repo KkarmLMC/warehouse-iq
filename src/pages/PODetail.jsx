@@ -44,7 +44,7 @@ function SectionGroup({ label, items }) {
           gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem',
           gap: 'var(--space-s)',
           padding: 'var(--space-s) var(--space-l)',
-          borderBottom: idx < items.length - 1 ? '1px solid var(--border-subtle)' : 'none',
+          borderBottom: idx < items.length - 1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none',
           alignItems: 'center',
           background: 'var(--surface-base)' }}>
           <div className="p-o-detail-e25b">
@@ -198,7 +198,7 @@ export default function PODetail() {
       {sections.length > 0 && (
         <div className="p-o-detail-1fac">
           {/* Column headers */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem', gap: 'var(--space-s)', padding: 'var(--space-l)', background: 'var(--surface-base)', borderBottom: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-m) var(--radius-m) 0 0' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem', gap: 'var(--space-s)', padding: 'var(--space-l)', background: 'var(--surface-base)', borderBottom: 'var(--border-width-1) solid var(--border-subtle)', borderRadius: 'var(--radius-m) var(--radius-m) 0 0' }}>
             {['Item / Description', 'Quantity', 'Unit', 'Amount'].map(h => (
               <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', textAlign: h !== 'Item / Description' ? 'right' : 'left', textTransform: 'uppercase', letterSpacing: 'var(--tracking-normal)' }}>{h}</div>
             ))}
@@ -227,7 +227,7 @@ export default function PODetail() {
             <span className="text-label">Installation / Labor</span>
           </div>
           {laborLines.map((line, idx) => (
-            <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-subtle)' : 'none', alignItems: 'center', background: 'var(--surface-base)' }}>
+            <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < laborLines.length - 1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none', alignItems: 'center', background: 'var(--surface-base)' }}>
               <div>
                 <div className="p-o-detail-4e79">{line.description}</div>
               </div>

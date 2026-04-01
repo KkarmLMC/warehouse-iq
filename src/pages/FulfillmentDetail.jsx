@@ -222,7 +222,7 @@ export default function FulfillmentDetail() {
               onClick={() => !isDS && toggleLine(line.id)}
               style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap: 'var(--space-s)',alignItems:'center',
                 padding: 'var(--space-l) var(--space-l)',cursor: isDS ? 'default' : 'pointer',minHeight:64,
-                borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none',
+                borderBottom: !flags[line.id] && idx < lines.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none',
                 background: isDS ? '#f5f3ff' : isBO ? 'var(--state-info-soft)' : isOut ? 'var(--state-error-soft)' : isPulled ? 'var(--state-success-soft)' : 'transparent',
                 opacity: isBO || isDS ? 0.7 : 1 }}>
               {/* Checkbox */}
@@ -274,7 +274,7 @@ export default function FulfillmentDetail() {
               </div>
             </div>
             {flags[line.id] && (
-              <div style={{ margin: '0 var(--space-l) var(--space-s)',padding: 'var(--space-s) var(--space-m)',background:'var(--state-error-soft)',borderRadius: 'var(--radius-s)',fontSize:'var(--text-sm)',color:'var(--state-error-text)',borderLeft:'3px solid var(--state-error)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
+              <div style={{ margin: '0 var(--space-l) var(--space-s)',padding: 'var(--space-s) var(--space-m)',background:'var(--state-error-soft)',borderRadius: 'var(--radius-s)',fontSize:'var(--text-sm)',color:'var(--state-error-text)',borderLeft:'3px solid var(--state-error)',borderBottom: idx < lines.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
                 <strong>Discrepancy:</strong> {flags[line.id]}
               </div>
             )}

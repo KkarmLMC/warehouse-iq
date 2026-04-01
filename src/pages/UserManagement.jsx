@@ -178,7 +178,7 @@ export default function UserManagement() {
           const rc = roleColor(u.role)
           const isSelf = u.id === currentUser?.id
           return (
-            <div key={u.id} style={{ borderBottom: idx < users.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
+            <div key={u.id} style={{ borderBottom: idx < users.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
               {!isEditing ? (
                 <div className="um-user-row">
                   <div className="avatar">

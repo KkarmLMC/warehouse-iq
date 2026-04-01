@@ -45,7 +45,7 @@ export default function ShipmentQueue() {
           </div>
         ) : visible.map((o, idx) => (
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/shipment/${o.id}`)}
-            className="queue-row" style={{ borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
+            className="queue-row" style={{ borderBottom: idx < visible.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
             <Truck size="1rem" style={{ color:'var(--state-info)' }} />
             <div className="queue-row__body">
               <div className="so-number">{o.so_number}</div>

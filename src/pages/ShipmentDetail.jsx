@@ -172,7 +172,7 @@ export default function ShipmentDetail() {
         </div>
         {lines.map((line, idx) => (
           <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap: 'var(--space-s)',alignItems:'start',
-            padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
+            padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
             <div>
               <div className="text-sm-semi">{line.description}</div>
               {line.sku && <div className="text-xs-mono">{line.sku}</div>}

@@ -240,7 +240,7 @@ export default function Inventory() {
           return (
             <div key={wh.id}
               onClick={() => navigate(`/warehouse-hq/warehouse/${wh.id}`)}
-              style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < subs.length - 1 ? '1px solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < subs.length - 1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
               {/* Icon */}
               <Package size="1rem" style={{ color: 'var(--brand-primary)' }} />
               {/* Info */}
@@ -274,7 +274,7 @@ export default function Inventory() {
         ) : recentSOs.map((so, idx) => (
           <div key={so.id}
             onClick={() => navigate(`/sales-orders/${so.id}`)}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < recentSOs.length - 1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
             <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
             <div className="content-body">
               <div className="inventory-faf9">
@@ -306,7 +306,7 @@ export default function Inventory() {
             const isOut = item.quantity_on_hand === 0
             return (
               <div key={item.id}
-                style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < lowStock.length - 1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
                 <Warning size="1rem" weight="fill" style={{ color: isOut ? 'var(--state-error)' : 'var(--state-warning)' }} />
                 <div className="content-body">
                   <div className="text-sm-truncate">
@@ -339,7 +339,7 @@ export default function Inventory() {
           </div>
         ) : recentShips.map((t, idx) => (
           <div key={t.id}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < recentShips.length - 1 ? 'var(--border-width-1) solid var(--border-subtle)' : 'none' }}>
             <CheckCircle size="1rem" weight="fill" style={{ color: 'var(--state-success-text)' }} />
             <div className="content-body">
               <div className="text-sm-semi">
