@@ -136,7 +136,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
   }
 
   const Label = ({ children }) => (
-    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: 'var(--space-xs)' }}>
+    <label className="form-field__label">
       {children}
     </label>
   )

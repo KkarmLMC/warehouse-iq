@@ -218,25 +218,25 @@ export default function DropShipDetail() {
         </div>
         <div style={{ padding: 'var(--space-l)',display:'flex',flexDirection:'column',gap:'var(--space-m)' }}>
           <div>
-            <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',display:'block',marginBottom:6 }}>
+            <label className="form-field__label">
               Carrier <span style={{ color:'var(--state-error)' }}>*</span>
             </label>
             <input value={carrier} onChange={e=>setCarrier(e.target.value)} placeholder="e.g. FedEx, UPS, LTL Freight" />
           </div>
           <div>
-            <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',display:'block',marginBottom:6 }}>
+            <label className="form-field__label">
               Tracking Number <span style={{ color:'var(--state-error)' }}>*</span>
             </label>
             <input value={tracking} onChange={e=>setTracking(e.target.value)} placeholder="PLP tracking number" />
           </div>
           <div>
-            <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',display:'block',marginBottom:6 }}>
+            <label className="form-field__label">
               PLP PO / Reference #
             </label>
             <input value={plpRef} onChange={e=>setPlpRef(e.target.value)} placeholder="PLP purchase order or reference number" />
           </div>
           <div>
-            <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',display:'block',marginBottom:6 }}>
+            <label className="form-field__label">
               Notes
             </label>
             <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Delivery instructions, special notes…"

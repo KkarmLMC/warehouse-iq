@@ -15,7 +15,7 @@ const APP_SOURCE = (import.meta.env.VITE_APP_NAME || 'lmc_platform').toLowerCase
 // ─── Shared label component ───────────────────────────────────────────────────
 function Label({ children }) {
   return (
-    <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: 'var(--space-xs)' }}>
+    <label className="form-field__label">
       {children}
     </label>
   )

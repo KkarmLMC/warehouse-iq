@@ -203,19 +203,19 @@ export default function ShipmentDetail() {
         </div>
         <div style={{ padding: 'var(--space-l)',display:'flex',flexDirection:'column',gap:'var(--space-m)' }}>
           <div>
-            <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',display:'block',marginBottom:6 }}>
+            <label className="form-field__label">
               Carrier <span style={{ color:'var(--state-error)' }}>*</span>
             </label>
             <input value={carrier} onChange={e=>setCarrier(e.target.value)} placeholder="e.g. FedEx, UPS, USPS, LTL" />
           </div>
           <div>
-            <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',display:'block',marginBottom:6 }}>
+            <label className="form-field__label">
               Tracking Number
             </label>
             <input value={tracking} onChange={e=>setTracking(e.target.value)} placeholder="Optional" />
           </div>
           <div>
-            <label style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',display:'block',marginBottom:6 }}>
+            <label className="form-field__label">
               Notes
             </label>
             <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Special instructions, partial shipment notes…"
