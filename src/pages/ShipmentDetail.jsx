@@ -93,7 +93,7 @@ export default function ShipmentDetail() {
   }
 
   if (loading) return (
-    <div className="page-content fade-in" style={{ display:'flex',alignItems:'center',justifyContent:'center',minHeight:'60vh' }}>
+    <div className="page-content fade-in spinner-pad">
       <div className="spinner" />
     </div>
   )
@@ -130,7 +130,7 @@ export default function ShipmentDetail() {
           <div style={{ marginTop: 8,padding:'var(--space-s) var(--space-m)',background:'var(--surface-base)',borderRadius:'var(--radius-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
             <MapPin size="0.875rem" style={{ color:'var(--brand-primary)',flexShrink:0 }} />
             <div>
-              <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)' }}>SHIP TO</div>
+              <div className="text-label">SHIP TO</div>
               <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--brand-primary)' }}>
                 {order?.customer_name}
               </div>

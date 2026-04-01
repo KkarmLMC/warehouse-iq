@@ -139,7 +139,7 @@ export default function FulfillmentDetail() {
   const fmt = n => `$${Number(n||0).toLocaleString('en-US',{maximumFractionDigits:0})}`
 
   if (loading) return (
-    <div className="page-content fade-in" style={{ display:'flex',alignItems:'center',justifyContent:'center',minHeight:'60vh' }}>
+    <div className="page-content fade-in spinner-pad">
       <div className="spinner" />
     </div>
   )

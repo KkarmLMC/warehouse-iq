@@ -128,7 +128,7 @@ export default function UserManagement() {
 
       <div className="um-invite-header">
         <button onClick={() => setShowInvite(true)} className="btn btn-navy"
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+          className="flex-gap-s">
           <UserPlus size="1rem" /> Invite User
         </button>
       </div>

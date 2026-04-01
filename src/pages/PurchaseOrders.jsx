@@ -163,7 +163,7 @@ export default function PurchaseOrders() {
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--space-m)' }}>
         <button onClick={() => navigate('/sales-orders/new')}
           className="btn btn-navy"
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+          className="flex-gap-s">
           <Plus size="0.9375rem" /> New Sales Order
         </button>
       </div>
@@ -258,7 +258,7 @@ export default function PurchaseOrders() {
           )}
         </div>
       ) : (
-        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden' }}>
+        <div className="card-section">
           {filtered.map(po => (
             <POCard key={po.id} po={po} totals={totals[po.id]} onPress={() => navigate(`/sales-orders/${po.id}`)} />
           ))}

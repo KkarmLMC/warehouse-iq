@@ -114,7 +114,7 @@ function PartSearch({ onSelect, warehouseId }) {
                 <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>{part.sku}</div>
               </div>
               <div style={{ flexShrink: 0, textAlign: 'right', marginLeft: 'var(--space-m)' }}>
-                <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)' }}>
+                <div className="text-label">
                   ${part.unit_cost?.toFixed(2) || '—'}
                 </div>
                 {part.stock !== null && (
@@ -285,7 +285,7 @@ function LaborSection({ items, onUpdate }) {
   const removeItem = (key) => onUpdate(items.filter(i => i._key !== key))
 
   return (
-    <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)' }}>
+    <div className="card-section">
       <div style={{ background: 'var(--brand-primary)', padding: 'var(--space-m) var(--space-l)', display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
         <button onClick={() => setExpanded(e => !e)}
           style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'var(--surface-base)', display: 'flex' }}>
@@ -643,7 +643,7 @@ export default function PONew() {
       )}
 
       {/* Save actions */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-2xl)' }}>
+      <div className="grid-2col margin-bottom-l">
         <button onClick={() => handleSave(false)} disabled={saving}
           style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           {saving ? 'Saving…' : 'Save as Draft'}

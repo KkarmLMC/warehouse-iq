@@ -83,7 +83,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Lightning Master Warehouse" />
           </div>
 
-          <div style={{ margin: 'var(--space-m) 0', paddingTop: 'var(--space-m)' }}>
+          <div className="section-gap">
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Location</div>
           </div>
 
@@ -107,7 +107,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             </div>
           </div>
 
-          <div style={{ margin: 'var(--space-m) 0', paddingTop: 'var(--space-m)' }}>
+          <div className="section-gap">
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Contact</div>
           </div>
 
@@ -401,9 +401,9 @@ export default function WarehouseDetail() {
       {/* Sales Orders for this warehouse */}
       {warehousePOs.length > 0 && (() => {
         return (
-          <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)' }}>
+          <div className="card-section">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+              <div className="flex-gap-s">
                 <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
                 <span className="text-sm-bold">Sales Orders</span>
                 <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', background: 'var(--surface-hover)', padding: '2px 8px', borderRadius: 'var(--radius-s)', fontWeight: 600 }}>
@@ -437,7 +437,7 @@ export default function WarehouseDetail() {
                       {po.status}
                     </span>
                     {po.grand_total > 0 && (
-                      <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)' }}>
+                      <span className="text-label">
                         ${po.grand_total.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     )}
@@ -451,10 +451,10 @@ export default function WarehouseDetail() {
       })()}
 
       {/* Transaction history (collapsed by default) */}
-      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)' }}>
+      <div className="card-section">
         <button onClick={loadTransactions}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+          <div className="flex-gap-s">
             <ClipboardText size="1rem" style={{ color: 'var(--text-primary)' }} />
             <span className="text-sm-bold">Transaction History</span>
           </div>

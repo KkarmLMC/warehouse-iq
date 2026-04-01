@@ -140,7 +140,7 @@ export default function InventoryTransfer() {
       </div>
 
       {/* Parts */}
-      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)' }}>
+      <div className="card-section">
         <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
           <div className="text-sm-bold">Parts to Transfer</div>
           {errors.items && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 2 }}>{errors.items}</div>}
@@ -199,7 +199,7 @@ export default function InventoryTransfer() {
       </div>
 
       {/* Submit */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-2xl)' }}>
+      <div className="grid-2col margin-bottom-l">
         <button onClick={() => navigate(-1)} style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Cancel
         </button>

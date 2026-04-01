@@ -124,7 +124,7 @@ export default function DropShipDetail() {
   }
 
   if (loading) return (
-    <div className="page-content fade-in" style={{ display:'flex',alignItems:'center',justifyContent:'center',minHeight:'60vh' }}>
+    <div className="page-content fade-in spinner-pad">
       <div className="spinner" />
     </div>
   )
@@ -162,7 +162,7 @@ export default function DropShipDetail() {
           <div style={{ marginTop: 8,padding:'var(--space-s) var(--space-m)',background:'var(--surface-base)',borderRadius:'var(--radius-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
             <MapPin size="0.875rem" style={{ color:'var(--brand-primary)',flexShrink:0 }} />
             <div>
-              <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)' }}>SHIP TO (PLP DIRECT)</div>
+              <div className="text-label">SHIP TO (PLP DIRECT)</div>
               <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--brand-primary)' }}>{order?.customer_name}</div>
               <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)' }}>{[order?.customer_address, shipTo].filter(Boolean).join(' · ')}</div>
             </div>

@@ -312,7 +312,7 @@ export default function Inventory() {
                   <div className="text-sm-truncate">
                     {item.parts?.name || 'Unknown Part'}
                   </div>
-                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>{item.warehouses?.name}</div>
+                  <div className="meta-text">{item.warehouses?.name}</div>
                 </div>
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: isOut ? 'var(--state-error)' : 'var(--state-warning)', whiteSpace: 'nowrap' }}>
                   {isOut ? 'Out of Stock' : `${item.quantity_on_hand} left`}
@@ -345,7 +345,7 @@ export default function Inventory() {
               <div className="text-sm-semi">
                 {t.from_warehouse?.name?.replace(' Warehouse', '')} → {t.to_warehouse?.name?.replace(' Warehouse', '')}
               </div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+              <div className="meta-text">
                 {new Date(t.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 {t.reason ? ` · ${t.reason}` : ''}
               </div>

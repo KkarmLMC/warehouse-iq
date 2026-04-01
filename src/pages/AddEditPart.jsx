@@ -149,7 +149,7 @@ export default function AddEditPart() {
           <input value={form.manufacturer_part_no} onChange={e => set('manufacturer_part_no', e.target.value)} placeholder="e.g. LMC-1234-A" style={{ width: '100%', fontFamily: 'var(--mono)' }} />
         </Field>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)' }}>
+        <div className="grid-2col">
           <Field label="Unit of Measure">
             <select value={form.unit_of_measure} onChange={e => set('unit_of_measure', e.target.value)} style={{ width: '100%' }}>
               {['each', 'ft', 'roll', 'box', 'bag', 'set', 'pair', 'lb'].map(u => <option key={u} value={u}>{u}</option>)}
@@ -173,7 +173,7 @@ export default function AddEditPart() {
         </Field>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-2xl)' }}>
+      <div className="grid-2col margin-bottom-l">
         <button onClick={() => navigate(-1)} style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Cancel
         </button>

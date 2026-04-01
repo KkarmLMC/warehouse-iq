@@ -200,7 +200,7 @@ export default function WarehouseIQ() {
       {/* Period + warehouse selector */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'var(--space-l)', flexWrap:'wrap', gap:'var(--space-m)' }}>
         {/* Period badge */}
-        <div style={{ display:'flex', alignItems:'center', gap:'var(--space-s)' }}>
+        <div className="flex-gap-s">
           <div style={{ padding: 'var(--space-s) var(--space-l)', borderRadius:'var(--radius-l)', background: isClosed ? 'var(--surface-light)' : 'var(--brand-primary)', color: isClosed ? 'var(--text-secondary)' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
             {periodLabel}
           </div>
@@ -239,7 +239,7 @@ export default function WarehouseIQ() {
       {pos.length > 0 && (
         <div style={{ background: 'var(--surface-base)', borderRadius:'var(--radius-l)', overflow:'hidden', marginBottom:'var(--space-l)' }}>
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--space-m) var(--space-l)', borderBottom:'1px solid var(--border-subtle)' }}>
-            <div style={{ display:'flex', alignItems:'center', gap:'var(--space-s)' }}>
+            <div className="flex-gap-s">
               <Receipt size="0.9375rem" style={{ color:'var(--brand-primary)' }} />
               <span style={{ fontSize:'var(--text-sm)', fontWeight:700 }}>Active Sales Orders</span>
               <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--radius-s)', background:'var(--surface-hover)', color:'var(--text-muted)' }}>{pos.length}</span>
@@ -255,7 +255,7 @@ export default function WarehouseIQ() {
               <div style={{ fontSize:'var(--text-2xs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--state-info-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--state-info)' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
-              <div style={{ flex:1, minWidth:0 }}>
+              <div className="content-body">
                 <div style={{ fontSize:'var(--text-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
               </div>
               <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--radius-s)', background: po.status==='queued'?'var(--brand-soft)':po.status==='running'?'var(--state-warning-soft)':po.status==='fulfillment'?'var(--state-info-soft)':po.status==='shipment'?'var(--state-info-soft)':'var(--state-success-soft)', color: po.status==='queued'?'var(--brand-light)':po.status==='running'?'var(--state-warning)':po.status==='fulfillment'?'var(--state-info)':po.status==='shipment'?'var(--state-info)':'var(--state-success-text)', textTransform:'capitalize', flexShrink:0 }}>

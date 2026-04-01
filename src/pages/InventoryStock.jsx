@@ -130,7 +130,7 @@ export default function InventoryStock() {
           </div>
           <div className="page-heading">Inventory</div>
         </div>
-        <div style={{ display: 'flex', gap: 'var(--space-s)' }}>
+        <div className="flex-gap-s">
           <button onClick={() => navigate('/warehouse-hq/transfer')}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', padding: 'var(--space-s) var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
             <ArrowsLeftRight size="0.875rem" /> Transfer
@@ -199,7 +199,7 @@ export default function InventoryStock() {
           <div className="empty-desc">{parts.length === 0 ? 'Add your first part to get started.' : 'Try adjusting your filters.'}</div>
         </div>
       ) : (
-        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden' }}>
+        <div className="card-section">
           {filtered.map(part => (
             <PartRow
               key={part.id}
