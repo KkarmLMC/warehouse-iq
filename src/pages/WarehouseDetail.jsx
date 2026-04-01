@@ -69,7 +69,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           <div style={{ width: 'var(--icon-size-lg)', height: 'var(--space-2xs)', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-m)' }} />
           <div className="flex-between mb-l">
             <div className="warehouse-detail-860f">Edit Warehouse</div>
-            <button onClick={onClose} className="flex-center" style={{ background: 'var(--surface-hover)', borderRadius: 'var(--radius-l)', width: '2rem', height: '2rem', cursor: 'pointer' }}>
+            <button onClick={onClose} className="flex-center" style={{ background: 'var(--surface-hover)', borderRadius: 'var(--radius-l)', width: 'var(--space-3xl)', height: 'var(--space-3xl)', cursor: 'pointer' }}>
               <X size="0.875rem" style={{ color: 'var(--text-primary)' }} />
             </button>
           </div>
@@ -406,7 +406,7 @@ export default function WarehouseDetail() {
               <div className="flex-gap-s">
                 <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
                 <span className="text-sm-bold">Sales Orders</span>
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', background: 'var(--surface-hover)', padding: '2px 8px', borderRadius: 'var(--radius-s)', fontWeight: 'var(--fw-semibold)' }}>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', background: 'var(--surface-hover)', padding: 'var(--space-3xs) var(--space-s)', borderRadius: 'var(--radius-s)', fontWeight: 'var(--fw-semibold)' }}>
                   {warehousePOs.length}
                 </span>
               </div>
@@ -420,7 +420,7 @@ export default function WarehouseDetail() {
               return (
                 <button key={po.id} onClick={() => navigate(`/sales-orders/${po.id}`)}
                   style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer', textAlign: 'left', borderBottom: idx < warehousePOs.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
-                  <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding: '2px 6px', borderRadius: 'var(--radius-xs)', flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : 'var(--state-info-soft)', color: po.division === 'Bolt' ? 'var(--red-shade-40)' : 'var(--state-info)' }}>
+                  <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding: 'var(--space-3xs) var(--space-xs)', borderRadius: 'var(--radius-xs)', flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : 'var(--state-info-soft)', color: po.division === 'Bolt' ? 'var(--red-shade-40)' : 'var(--state-info)' }}>
                     {po.division === 'Bolt' ? 'BOLT' : 'LM'}
                   </div>
                   <div className="content-body">
@@ -467,7 +467,7 @@ export default function WarehouseDetail() {
             ) : transactions.map(tx => (
               <div key={tx.id} className="warehouse-detail-e298">
                 <div style={{
-                  width: '2rem', height: '2rem', borderRadius: 'var(--radius-l)', flexShrink: 0,
+                  width: 'var(--space-3xl)', height: 'var(--space-3xl)', borderRadius: 'var(--radius-l)', flexShrink: 0,
                   background: tx.quantity_delta > 0 ? 'var(--state-success-soft)' : 'var(--state-error-soft)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <span style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-black)', color: tx.quantity_delta > 0 ? 'var(--state-success-text)' : 'var(--state-error-text)' }}>

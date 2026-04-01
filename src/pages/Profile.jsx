@@ -41,7 +41,7 @@ function PinPad({ onComplete }) {
     <div>
       <div className="profile-00b7">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} style={{ width: 14, height: 14, borderRadius: 'var(--radius-round)', background: i < digits.length ? 'var(--brand-primary)' : 'var(--border-subtle)', transition: 'background 0.1s' }} />
+          <div key={i} style={{ width: 'var(--space-l)', height: 'var(--space-l)', borderRadius: 'var(--radius-round)', background: i < digits.length ? 'var(--brand-primary)' : 'var(--border-subtle)', transition: 'background 0.1s' }} />
         ))}
       </div>
       <div className="grid-3col">

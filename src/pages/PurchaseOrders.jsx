@@ -34,7 +34,7 @@ function StatusBadge({ status }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2xs)',
-      padding: '3px 10px', borderRadius: 'var(--radius-s)',
+      padding: 'var(--space-2xs) var(--space-m)', borderRadius: 'var(--radius-s)',
       fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)',
       background: meta.bg, color: meta.color }}>
       <Icon size="0.6875rem" weight="fill" />
@@ -70,7 +70,7 @@ function POCard({ po, totals, onPress }) {
           </span>
           <StatusBadge status={po.status} />
           <span style={{
-            fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', padding: '1px 6px',
+            fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', padding: 'var(--space-3xs) var(--space-xs)',
             borderRadius: 'var(--radius-s)',
             background: po.division === 'Bolt' ? 'var(--state-warning-soft)' : 'var(--state-info-soft)',
             color: po.division === 'Bolt' ? 'var(--state-warning-text)' : 'var(--brand-primary)' }}>
@@ -214,7 +214,7 @@ export default function PurchaseOrders() {
               marginBottom: -2, whiteSpace: 'nowrap' }}>
             {tab.label}
             {counts[tab.key] > 0 && (
-              <span style={{ marginLeft: 'var(--space-xs)', fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--brand-primary)' : 'var(--surface-hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-muted)', borderRadius: 'var(--radius-l)', padding: '1px 6px', fontWeight: 'var(--fw-bold)' }}>
+              <span style={{ marginLeft: 'var(--space-xs)', fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--brand-primary)' : 'var(--surface-hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-muted)', borderRadius: 'var(--radius-l)', padding: 'var(--space-3xs) var(--space-xs)', fontWeight: 'var(--fw-bold)' }}>
                 {counts[tab.key]}
               </span>
             )}

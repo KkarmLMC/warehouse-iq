@@ -252,13 +252,13 @@ export default function WarehouseIQ() {
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
               style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--space-m)', padding: 'var(--space-s) var(--space-l)', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
-              <div style={{ fontSize:'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding:'2px 6px', borderRadius: 'var(--radius-xs)', flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--state-info-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--state-info)' }}>
+              <div style={{ fontSize:'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding: 'var(--space-3xs) var(--space-xs)', borderRadius: 'var(--radius-xs)', flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--state-info-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--state-info)' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
               <div className="content-body">
                 <div className="text-sm-truncate">{po.customer_name}</div>
               </div>
-              <span style={{ fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', padding:'2px 8px', borderRadius:'var(--radius-s)', background: po.status==='queued'?'var(--brand-soft)':po.status==='running'?'var(--state-warning-soft)':po.status==='fulfillment'?'var(--state-info-soft)':po.status==='shipment'?'var(--state-info-soft)':'var(--state-success-soft)', color: po.status==='queued'?'var(--brand-light)':po.status==='running'?'var(--state-warning)':po.status==='fulfillment'?'var(--state-info)':po.status==='shipment'?'var(--state-info)':'var(--state-success-text)', textTransform:'capitalize', flexShrink:0 }}>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', padding: 'var(--space-3xs) var(--space-s)', borderRadius:'var(--radius-s)', background: po.status==='queued'?'var(--brand-soft)':po.status==='running'?'var(--state-warning-soft)':po.status==='fulfillment'?'var(--state-info-soft)':po.status==='shipment'?'var(--state-info-soft)':'var(--state-success-soft)', color: po.status==='queued'?'var(--brand-light)':po.status==='running'?'var(--state-warning)':po.status==='fulfillment'?'var(--state-info)':po.status==='shipment'?'var(--state-info)':'var(--state-success-text)', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
               </span>
             </button>
@@ -282,7 +282,7 @@ export default function WarehouseIQ() {
           <div className="flex-gap-s">
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding:'3px 10px', borderRadius:'var(--radius-s)', background:filter===val?'var(--brand-primary)':'var(--surface-hover)', color:filter===val?'#fff':'var(--text-primary)', fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', cursor:'pointer', whiteSpace:'nowrap' }}>
+                style={{ padding: 'var(--space-2xs) var(--space-m)', borderRadius:'var(--radius-s)', background:filter===val?'var(--brand-primary)':'var(--surface-hover)', color:filter===val?'#fff':'var(--text-primary)', fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', cursor:'pointer', whiteSpace:'nowrap' }}>
                 {lbl}
               </button>
             ))}

@@ -52,7 +52,7 @@ function TransactionRow({ tx, warehouseName }) {
   return (
     <div className="part-detail-e298">
       <div style={{
-        width: '2rem', height: '2rem', borderRadius: 'var(--radius-l)',
+        width: 'var(--space-3xl)', height: 'var(--space-3xl)', borderRadius: 'var(--radius-l)',
         background: isPositive ? 'var(--state-success-soft)' : 'var(--state-error-soft)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isPositive
@@ -343,7 +343,7 @@ export default function PartDetail() {
           <div className="flex-gap-s">
             <ClipboardText size="1rem" style={{ color: 'var(--text-primary)' }} />
             <span className="text-sm-bold">Transaction History</span>
-            <span style={{ padding: '1px 8px', borderRadius: 'var(--radius-s)', background: 'var(--surface-hover)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{transactions.length}</span>
+            <span style={{ padding: 'var(--space-3xs) var(--space-s)', borderRadius: 'var(--radius-s)', background: 'var(--surface-hover)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{transactions.length}</span>
           </div>
           <CaretDown size="0.875rem" style={{ color: 'var(--text-primary)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
