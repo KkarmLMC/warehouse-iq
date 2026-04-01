@@ -456,7 +456,7 @@ export default function RunOrder() {
 
       {/* ── Pre-run state ── */}
       {!hasRun && (
-        <Card className="card" style={{ marginBottom: 'var(--space-l)' }}>
+        <Card className="card mb-l">
           <div className="list-card__header">
             <span className="list-card__title"><Lightning size="1rem"  />Run Order</span>
           </div>
@@ -539,7 +539,7 @@ export default function RunOrder() {
           )}
 
           {/* ── Fulfillment sheet ── */}
-          <Card className="card" style={{ marginBottom: 'var(--space-l)' }}>
+          <Card className="card mb-l">
             <div className="list-card__header">
               <span className="list-card__title"><Package size="1rem"  />Fulfillment Sheet</span>
               <span className="list-card__meta">{computed.length} parts</span>
@@ -744,7 +744,7 @@ export default function RunOrder() {
                 {line.sku} — {line._kitName}
               </div>
 
-              <div style={{ marginBottom: 'var(--space-l)' }}>
+              <div className="mb-l">
                 <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--state-warning)',marginBottom:6 }}>
                   Description on this Sales Order:
                 </div>

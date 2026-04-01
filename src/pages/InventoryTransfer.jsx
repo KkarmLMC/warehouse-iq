@@ -112,7 +112,7 @@ export default function InventoryTransfer() {
 
       {/* From / To */}
       <div className="card-section">
-        <div style={{ marginBottom: 'var(--space-l)' }}>
+        <div className="mb-l">
           <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)', color: errors.from ? 'var(--state-error)' : 'var(--text-primary)' }}>From Warehouse</label>
           <select value={fromId} onChange={e => setFromId(e.target.value)} style={{ width: '100%', borderColor: errors.from ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
@@ -120,7 +120,7 @@ export default function InventoryTransfer() {
           {errors.from && <div className="validation-error">{errors.from}</div>}
         </div>
 
-        <div style={{ marginBottom: 'var(--space-l)' }}>
+        <div className="mb-l">
           <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)', color: errors.to ? 'var(--state-error)' : 'var(--text-primary)' }}>To Warehouse</label>
           <select value={toId} onChange={e => setToId(e.target.value)} style={{ width: '100%', borderColor: errors.to ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
@@ -128,7 +128,7 @@ export default function InventoryTransfer() {
           {errors.to && <div className="validation-error">{errors.to}</div>}
         </div>
 
-        <div style={{ marginBottom: 'var(--space-l)' }}>
+        <div className="mb-l">
           <label className="text-label">Reason (optional)</label>
           <input value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Resupply field crew" style={{ width: '100%' }} />
         </div>

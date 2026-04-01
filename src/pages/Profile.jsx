@@ -330,10 +330,10 @@ export default function Profile() {
         )}>
 
         {editingName ? (
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <label className="profile-label">Full Name</label>
             <div className="flex-gap-s">
-              <input value={nameVal} onChange={e => setNameVal(e.target.value)} autoFocus style={{ flex: 1 }} onKeyDown={e => e.key === 'Enter' && saveName()} />
+              <input value={nameVal} onChange={e => setNameVal(e.target.value)} autoFocus className="content-body" onKeyDown={e => e.key === 'Enter' && saveName()} />
               <Button onClick={saveName} disabled={nameSaving}>
                 {nameSaving ? 'Saving…' : 'Save'}
               </Button>
@@ -385,7 +385,7 @@ export default function Profile() {
         )}
 
         {profile?.app_access?.length > 0 && (
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', marginBottom: 8 }}>App Access</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
               {profile.app_access.map(app => (
@@ -473,7 +473,7 @@ export default function Profile() {
               </div>
             </div>
             <div className="flex-gap-s">
-              <Button variant="ghost" onClick={() => { setShowPwForm(false); setNewPw(''); setNewEmail('') }} style={{ flex: 1 }}>
+              <Button variant="ghost" onClick={() => { setShowPwForm(false); setNewPw(''); setNewEmail('') }} className="content-body">
                 Cancel
               </Button>
               <Button onClick={savePassword} disabled={pwSaving} style={{ flex: 2 }}>

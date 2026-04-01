@@ -167,7 +167,7 @@ export default function FulfillmentDetail() {
         <ArrowLeft size="0.875rem" /> Back to Fulfillment
       </button>
 
-      <div style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="mb-l">
         <div className="detail-header__so">{order?.so_number}</div>
         <div className="text-sm-bold">
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
@@ -198,7 +198,7 @@ export default function FulfillmentDetail() {
       )}
 
       {/* Pull list */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><Package size="1rem"  />Pull List</span>
           <span className="list-card__meta">{pullableLines.filter(l=>checked[l.id]).length}/{pullableLines.length} pulled</span>

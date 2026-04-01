@@ -62,7 +62,7 @@ function CategorySection({ category, parts, onPartPress }) {
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <Icon size="0.9375rem" style={{ color: '#fff' }} />
         </div>
-        <div style={{ flex: 1 }}>
+        <div className="content-body">
           <div className="text-sm-bold--inverse">{category.name}</div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 1 }}>
             {parts.length} {parts.length === 1 ? 'part' : 'parts'}

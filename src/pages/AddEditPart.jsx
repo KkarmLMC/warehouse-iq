@@ -107,7 +107,7 @@ export default function AddEditPart() {
   if (loading) return <div className="page-content fade-in spinner-pad"><div className="spinner" /></div>
 
   const Field = ({ label, error, required, children }) => (
-    <div style={{ marginBottom: 'var(--space-l)' }}>
+    <div className="mb-l">
       <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, color: error ? 'var(--state-error)' : 'var(--text-primary)', marginBottom: 'var(--space-xs)' }}>
         {label}{required && <span className="text-error-marker">*</span>}
       </label>

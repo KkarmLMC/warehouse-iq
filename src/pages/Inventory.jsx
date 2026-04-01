@@ -145,7 +145,7 @@ export default function Inventory() {
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
           style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', cursor: 'pointer' }}>
           <Warning size="1.125rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0 }} />
-          <div style={{ flex: 1 }}>
+          <div className="content-body">
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--state-warning-text)' }}>
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
             </div>
@@ -160,7 +160,7 @@ export default function Inventory() {
         <div onClick={() => navigate('/warehouse-hq/queue')}
           style={{ background: 'var(--state-info-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', cursor: 'pointer' }}>
           <ClockCountdown size="1.125rem" weight="fill" style={{ color: 'var(--state-info)', flexShrink: 0 }} />
-          <div style={{ flex: 1 }}>
+          <div className="content-body">
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--state-info)' }}>
               {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
             </div>
@@ -192,7 +192,7 @@ export default function Inventory() {
 
       {/* ── Master Warehouse ── */}
       {master && (
-        <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+        <div className="card mb-l">
           <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
             <span className="list-card__title">
               <Lightning size="1rem" />
@@ -231,7 +231,7 @@ export default function Inventory() {
       )}
 
       {/* ── Sub-Warehouses ── */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><Buildings size="1rem"  />Additional Warehouses</span>
         </div>
@@ -259,7 +259,7 @@ export default function Inventory() {
       </div>
 
       {/* ── Active Sales Orders ── */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/sales-orders')}>
           <span className="list-card__title"><Receipt size="1rem"  />Active Sales Orders</span>
           <span className="list-card__meta">
@@ -295,7 +295,7 @@ export default function Inventory() {
 
       {/* ── Low / Out of Stock ── */}
       {lowStock.length > 0 && (
-        <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+        <div className="card mb-l">
           <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
             <span className="list-card__title"><Warning size="1rem" />Low & Out of Stock</span>
             <span className="list-card__meta">

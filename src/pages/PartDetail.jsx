@@ -155,7 +155,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         </div>
 
         <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--space-xl)', paddingBottom: 'calc(var(--space-s))' }}>
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <Label>Warehouse</Label>
             <select value={warehouseId} onChange={e => handleWarehouseChange(e.target.value)}>
               {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
@@ -167,7 +167,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div className="text-label mb-m">Stock Adjustment</div>
           </div>
 
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <Label>Transaction Type</Label>
             <select value={type} onChange={e => setType(e.target.value)}>
               <option value="adjustment">Manual Adjustment</option>
@@ -266,7 +266,7 @@ export default function PartDetail() {
       {/* Header */}
       <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--space-m)' }}>
-          <div style={{ flex: 1 }}>
+          <div className="content-body">
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginBottom: 4 }}>
               {part.part_categories?.name || 'Uncategorized'}
             </div>
@@ -299,7 +299,7 @@ export default function PartDetail() {
       </div>
 
       {/* Stock by warehouse */}
-      <Card style={{ marginBottom: 'var(--space-l)' }}>
+      <Card className="mb-l">
         <div className="pad-row">
           <div className="text-sm-bold">Stock by Warehouse</div>
         </div>
@@ -311,7 +311,7 @@ export default function PartDetail() {
       </Card>
 
       {/* Part details */}
-      <Card style={{ marginBottom: 'var(--space-l)' }}>
+      <Card className="mb-l">
         <div className="pad-row">
           <div className="text-sm-bold">Part Details</div>
         </div>
@@ -336,7 +336,7 @@ export default function PartDetail() {
       </Card>
 
       {/* Transaction history */}
-      <Card style={{ marginBottom: 'var(--space-l)' }}>
+      <Card className="mb-l">
         <button
           onClick={() => setShowTx(!showTx)}
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer' }}>

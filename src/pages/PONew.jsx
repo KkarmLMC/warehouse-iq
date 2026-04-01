@@ -256,7 +256,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           ))}
 
           {section.items.length === 0 && (
-            <div className="empty-message" style={{ padding: 'var(--space-l)' }}>
+            <div className="empty-message pad-l">
               No items yet. Search for a part or add manually.
             </div>
           )}
@@ -535,12 +535,12 @@ export default function PONew() {
       <div className="card-section">
         <div className="section-title">Customer</div>
 
-        <div style={{ marginBottom: 'var(--space-m)' }}>
+        <div className="mb-m">
           <Label required>Customer Name</Label>
           <input value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="e.g. GNS Electric Inc" />
         </div>
 
-        <div style={{ marginBottom: 'var(--space-m)' }}>
+        <div className="mb-m">
           <Label>Street Address</Label>
           <input value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} placeholder="123 Main St" />
         </div>
@@ -572,7 +572,7 @@ export default function PONew() {
           </div>
         </div>
 
-        <div style={{ marginBottom: 'var(--space-m)' }}>
+        <div className="mb-m">
           <ProjectPicker
             value={selectedProject}
             onChange={handleProjectSelect}

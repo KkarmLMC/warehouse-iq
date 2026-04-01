@@ -2011,6 +2011,9 @@ textarea,
 .text-error-marker { color: var(--state-error); margin-left: 4px; }
 .badge--brand { background: var(--brand-soft); color: var(--brand-primary); }
 
+/* --- Final singles --- */
+.pad-l { padding: var(--space-l); }
+
 .empty {
   display: flex;
   flex-direction: column;

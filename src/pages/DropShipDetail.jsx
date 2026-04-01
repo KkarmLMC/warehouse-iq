@@ -183,7 +183,7 @@ export default function DropShipDetail() {
       </div>
 
       {/* Drop ship line items */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><Package size="1rem" />Drop Ship Items</span>
           <span className="list-card__meta">{lines.length} items</span>
@@ -212,7 +212,7 @@ export default function DropShipDetail() {
       </div>
 
       {/* PLP shipping info form */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><AirplaneTilt size="1rem" />PLP Shipping Info</span>
         </div>

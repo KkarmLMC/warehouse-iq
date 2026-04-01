@@ -67,7 +67,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         {/* Sheet header */}
         <div style={{ padding: 'var(--space-l) var(--space-xl) 0', flexShrink: 0 }}>
           <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-m)' }} />
-          <div className="flex-between" style={{ marginBottom: 'var(--space-l)' }}>
+          <div className="flex-between mb-l">
             <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Edit Warehouse</div>
             <button onClick={onClose} className="flex-center" style={{ background: 'var(--surface-hover)', borderRadius: 'var(--radius-l)', width: '2rem', height: '2rem', cursor: 'pointer' }}>
               <X size="0.875rem" style={{ color: 'var(--text-primary)' }} />
@@ -78,7 +78,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         {/* Scrollable fields */}
         <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--space-xl) var(--space-s)' }}>
 
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <Label>Warehouse Name *</Label>
             <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Lightning Master Warehouse" />
           </div>
@@ -87,7 +87,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <div className="text-label mb-m">Location</div>
           </div>
 
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <Label>Street Address</Label>
             <input value={form.address} onChange={e => set('address', e.target.value)} placeholder="123 Main St" />
           </div>
@@ -111,7 +111,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <div className="text-label mb-m">Contact</div>
           </div>
 
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <Label>Contact Name</Label>
             <input value={form.contact_name} onChange={e => set('contact_name', e.target.value)} placeholder="John Smith" />
           </div>
@@ -127,7 +127,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             </div>
           </div>
 
-          <div style={{ marginBottom: 'var(--space-m)' }}>
+          <div className="mb-m">
             <Label>Notes</Label>
             <textarea value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Any relevant notes about this warehouse…" rows={3} />
           </div>

@@ -160,7 +160,7 @@ export default function ShipmentDetail() {
       )}
 
       {/* Packing list */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><Package size="1rem"  />Packing List</span>
           <span className="list-card__meta">{lines.length} items</span>
@@ -197,7 +197,7 @@ export default function ShipmentDetail() {
       </div>
 
       {/* Shipment form */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><Truck size="1rem"  />Process Shipment</span>
         </div>

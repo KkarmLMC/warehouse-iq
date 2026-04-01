@@ -140,7 +140,7 @@ export default function UserManagement() {
       )}
 
       {/* Pipeline role legend */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><Users size="1rem" />Pipeline Role Guide</span>
         </div>
@@ -160,7 +160,7 @@ export default function UserManagement() {
       </div>
 
       {/* Users list */}
-      <div className="card" style={{ marginBottom: 'var(--space-l)' }}>
+      <div className="card mb-l">
         <div className="list-card__header">
           <span className="list-card__title"><Users size="1rem" />All Users</span>
           <span className="list-card__meta">{users.length} users</span>
@@ -218,7 +218,7 @@ export default function UserManagement() {
                       </select>
                     </div>
                   </div>
-                  <div style={{ marginBottom: 'var(--space-l)' }}>
+                  <div className="mb-l">
                     <label className="form-field__label">
                       Pipeline Role <span style={{ fontWeight: 400, color: 'var(--text-muted)', textTransform: 'none' }}>(controls what this user sees on their tablet)</span>
                     </label>
