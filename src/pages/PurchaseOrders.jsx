@@ -63,9 +63,9 @@ function POCard({ po, totals, onPress }) {
       </div>
 
       {/* Info */}
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="content-body">
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', marginBottom: 3, flexWrap: 'wrap' }}>
-          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>
+          <span className="text-sm-bold">
             {po.so_number}
           </span>
           <StatusBadge status={po.status} />
@@ -89,7 +89,7 @@ function POCard({ po, totals, onPress }) {
       {/* Total + chevron */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexShrink: 0 }}>
         {grandTotal > 0 && (
-          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>
+          <span className="text-sm-bold">
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           </span>
         )}
@@ -196,7 +196,7 @@ export default function PurchaseOrders() {
         ].map(s => (
           <div key={s.label} style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', padding: 'var(--space-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--text-primary)' }}>{s.value}</div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>{s.label}</div>
+            <div className="meta-text">{s.label}</div>
           </div>
         ))}
       </div>

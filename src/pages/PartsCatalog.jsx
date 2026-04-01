@@ -88,9 +88,9 @@ function CategorySection({ category, parts, onPartPress }) {
                 padding: 'var(--space-m) var(--space-l)', background: 'none', width: '100%', textAlign: 'left',
                 borderBottom: idx < parts.length - 1 ? '1px solid var(--border-subtle)' : 'none',
                 cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
-              <div style={{ flex: 1, minWidth: 0 }}>
+              <div className="content-body">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexWrap: 'wrap' }}>
-                  <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div className="text-sm-truncate">
                     {part.name}
                   </div>
                   {part.tags?.includes('shared') && (
@@ -101,7 +101,7 @@ function CategorySection({ category, parts, onPartPress }) {
                 </div>
                 <div style={{ display: 'flex', gap: 'var(--space-m)', marginTop: 2, flexWrap: 'wrap' }}>
                   {part.sku && <span style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>{part.sku}</span>}
-                  {part.unit_cost && <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>${part.unit_cost}</span>}
+                  {part.unit_cost && <span className="meta-text">${part.unit_cost}</span>}
                 </div>
               </div>
               <CaretRight size="0.8125rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />

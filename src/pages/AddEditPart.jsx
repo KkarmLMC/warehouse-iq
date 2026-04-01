@@ -104,7 +104,7 @@ export default function AddEditPart() {
     setSaving(false)
   }
 
-  if (loading) return <div className="page-content fade-in" className="spinner-pad"><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in spinner-pad"><div className="spinner" /></div>
 
   const Field = ({ label, error, required, children }) => (
     <div style={{ marginBottom: 'var(--space-l)' }}>
@@ -119,7 +119,7 @@ export default function AddEditPart() {
   return (
     <div className="page-content fade-in">
       <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
-        <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>{isEdit ? 'Edit Part' : 'New Part'}</div>
+        <div className="page-heading">{isEdit ? 'Edit Part' : 'New Part'}</div>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)', marginTop: 4 }}>
           {isEdit ? 'Update part details' : 'Add a part to the catalog'}
         </div>

@@ -110,7 +110,7 @@ function PartSearch({ onSelect, warehouseId }) {
                 cursor: 'pointer', textAlign: 'left', borderBottom: '1px solid var(--border-subtle)' }}
             >
               <div style={{ minWidth: 0 }}>
-                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{part.name}</div>
+                <div className="text-sm-semi">{part.name}</div>
                 <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>{part.sku}</div>
               </div>
               <div style={{ flexShrink: 0, textAlign: 'right', marginLeft: 'var(--space-m)' }}>
@@ -341,12 +341,12 @@ function TotalsBar({ sections, laborItems }) {
     <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l) var(--space-xl)', marginBottom: 'var(--space-xl)', color: '#fff' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-s)' }}>
         <span style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>Materials</span>
-        <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>${materialsTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+        <span className="text-sm-semi">${materialsTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
       </div>
       {laborTotal > 0 && (
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-s)' }}>
           <span style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>Installation</span>
-          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>${laborTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+          <span className="text-sm-semi">${laborTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
         </div>
       )}
       <div style={{ display: 'flex', justifyContent: 'space-between',  paddingTop: 'var(--space-s)', marginTop: 'var(--space-xs)' }}>
@@ -532,8 +532,8 @@ export default function PONew() {
       </div>
 
       {/* Customer info */}
-      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l)', marginBottom: 'var(--space-l)' }}>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, marginBottom: 'var(--space-m)' }}>Customer</div>
+      <div className="card-section">
+        <div className="section-title">Customer</div>
 
         <div style={{ marginBottom: 'var(--space-m)' }}>
           <Label required>Customer Name</Label>
@@ -558,8 +558,8 @@ export default function PONew() {
       </div>
 
       {/* Project info */}
-      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l)', marginBottom: 'var(--space-l)' }}>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, marginBottom: 'var(--space-m)' }}>Project Details</div>
+      <div className="card-section">
+        <div className="section-title">Project Details</div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
           <div>
@@ -604,7 +604,7 @@ export default function PONew() {
       </div>
 
       {/* Scope sections */}
-      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, marginBottom: 'var(--space-m)' }}>Line Items</div>
+      <div className="section-title">Line Items</div>
 
       {sections.map(sec => (
         <ScopeSection
@@ -626,7 +626,7 @@ export default function PONew() {
       <LaborSection items={laborItems} onUpdate={setLaborItems} />
 
       {/* Notes */}
-      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l)', marginBottom: 'var(--space-l)' }}>
+      <div className="card-section">
         <Label>Notes</Label>
         <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this Sales Order…" rows={3} />
       </div>

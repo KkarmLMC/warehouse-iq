@@ -70,7 +70,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
       {value ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderRadius: 'var(--radius-l)', background: 'var(--surface-base)' }}>
           <Briefcase size="1rem" style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div className="content-body">
             <div style={{ fontSize: "var(--text-sm)", fontWeight: 700, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {value.name}
             </div>
@@ -83,9 +83,9 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
           </button>
         </div>
       ) : (
-        <div ref={ref} style={{ position: 'relative' }}>
+        <div ref={ref} className="position-relative">
           {/* Search input */}
-          <div style={{ position: 'relative' }}>
+          <div className="position-relative">
             <MagnifyingGlass size="0.875rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
             <input
               value={query}
@@ -109,7 +109,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}>
                   <Briefcase size="0.875rem" style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div className="text-sm-truncate">
                       {p.name}
                     </div>
                     <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>

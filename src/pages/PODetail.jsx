@@ -87,7 +87,7 @@ export default function PODetail() {
     return () => { cancelled = true }
   }, [id])
 
-  if (loading) return <div className="page-content fade-in" className="spinner-pad"><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in spinner-pad"><div className="spinner" /></div>
   if (!po) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Sales Order not found</div></div></div>
 
   const statusDisplay = soStatus(po.status)
@@ -176,7 +176,7 @@ export default function PODetail() {
 
       {/* Inventory impact (when not yet published) */}
       {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
-        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l)', marginBottom: 'var(--space-l)' }}>
+        <div className="card-section">
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
@@ -212,8 +212,8 @@ export default function PODetail() {
           ))}
           {/* Materials subtotal */}
           <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderTop: '2px solid var(--border-subtle)', background: 'var(--surface-hover)' }}>
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Materials Subtotal</span>
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>
+            <span className="text-sm-bold">Materials Subtotal</span>
+            <span className="text-sm-bold">
               ${materialsTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </span>
           </div>
@@ -237,8 +237,8 @@ export default function PODetail() {
             </div>
           ))}
           <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderTop: '2px solid var(--border-subtle)', background: 'var(--surface-hover)' }}>
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Labor Subtotal</span>
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>${laborTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+            <span className="text-sm-bold">Labor Subtotal</span>
+            <span className="text-sm-bold">${laborTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
           </div>
         </div>
       )}
@@ -255,7 +255,7 @@ export default function PODetail() {
 
       {/* Notes */}
       {po.notes && (
-        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l)', marginBottom: 'var(--space-l)' }}>
+        <div className="card-section">
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-s)' }}>Notes</div>
           <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-primary)', lineHeight: 1.6 }}>{po.notes}</div>
         </div>

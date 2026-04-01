@@ -154,7 +154,7 @@ export default function DropShipDetail() {
 
       {/* SO header */}
       <div style={{ marginBottom: 'var(--space-xl)' }}>
-        <div style={{ fontSize:'var(--text-md)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
+        <div className="detail-header__so">{order?.so_number}</div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
@@ -174,7 +174,7 @@ export default function DropShipDetail() {
       <div style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', gap: 'var(--space-m)', alignItems: 'flex-start' }}>
         <AirplaneTilt size="1rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0, marginTop: 1 }} />
         <div>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Drop Ship from PLP</div>
+          <div className="text-sm-bold">Drop Ship from PLP</div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 2, lineHeight: 1.5 }}>
             These {lines.length} item{lines.length !== 1 ? 's' : ''} will ship directly from PLP to the job site.
             Enter the tracking information provided by PLP to process this drop shipment.
@@ -190,7 +190,7 @@ export default function DropShipDetail() {
         </div>
         <div style={{ display:'grid',gridTemplateColumns:'1fr 70px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
           {['Part','Qty'].map(h => (
-            <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--text-primary)' }}>{h}</div>
+            <div key={h} className="text-sm-bold">{h}</div>
           ))}
         </div>
         {lines.length === 0 ? (
@@ -201,7 +201,7 @@ export default function DropShipDetail() {
           <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 70px',gap:8,alignItems:'start',
             padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <div>
-              <div style={{ fontSize:'var(--text-sm)',fontWeight:600 }}>{line.description}</div>
+              <div className="text-sm-semi">{line.description}</div>
               {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
             </div>
             <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>

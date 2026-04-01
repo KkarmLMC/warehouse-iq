@@ -168,12 +168,12 @@ export default function FulfillmentDetail() {
       </button>
 
       <div style={{ marginBottom: 'var(--space-l)' }}>
-        <div style={{ fontSize:'var(--text-md)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
+        <div className="detail-header__so">{order?.so_number}</div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {(order?.job_city || order?.customer_city) && (
-          <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:2 }}>
+          <div className="meta-text">
             Job: {order?.job_city||order?.customer_city}, {order?.job_state||order?.customer_state}
           </div>
         )}
@@ -207,7 +207,7 @@ export default function FulfillmentDetail() {
         {/* Column headers */}
         <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
           {['','Part / Warehouse','Qty'].map(h => (
-            <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--text-primary)' }}>{h}</div>
+            <div key={h} className="text-sm-bold">{h}</div>
           ))}
         </div>
 

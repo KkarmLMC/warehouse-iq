@@ -49,11 +49,11 @@ function PartRow({ part, levels, onPress }) {
           : <Package size="1.25rem" style={{ color: 'var(--text-primary)' }} />
         }
       </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+      <div className="content-body">
+        <div className="text-sm-truncate">
           {part.name}
         </div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>
+        <div className="meta-text">
           {part.sku && <span style={{ fontFamily: 'var(--mono)' }}>{part.sku} · </span>}
           {part.part_categories?.name || 'Uncategorized'}
         </div>
@@ -128,7 +128,7 @@ export default function InventoryStock() {
           <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>
             INVENTORY / {selectedWarehouseName.toUpperCase()}
           </div>
-          <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>Inventory</div>
+          <div className="page-heading">Inventory</div>
         </div>
         <div style={{ display: 'flex', gap: 'var(--space-s)' }}>
           <button onClick={() => navigate('/warehouse-hq/transfer')}
@@ -151,7 +151,7 @@ export default function InventoryStock() {
         ].map(s => (
           <div key={s.label} style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', padding: 'var(--space-m)', textAlign: 'center' }}>
             <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: s.color }}>{s.value}</div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>{s.label}</div>
+            <div className="meta-text">{s.label}</div>
           </div>
         ))}
       </div>

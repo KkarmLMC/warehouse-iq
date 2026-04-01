@@ -244,7 +244,7 @@ export default function Inventory() {
               {/* Icon */}
               <Package size="1rem" style={{ color: 'var(--brand-primary)' }} />
               {/* Info */}
-              <div style={{ flex: 1, minWidth: 0 }}>
+              <div className="content-body">
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{wh.name}</div>
                 <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 1 }}>
                   {wh.city}, {wh.state} · {h.parts || 0} parts · {fmt(h.total)}
@@ -276,7 +276,7 @@ export default function Inventory() {
             onClick={() => navigate(`/sales-orders/${so.id}`)}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
             <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div className="content-body">
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                 <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--brand-primary)' }}>{so.so_number}</span>
                 <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 5px', borderRadius: 'var(--radius-xs)', background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
@@ -308,8 +308,8 @@ export default function Inventory() {
               <div key={item.id}
                 style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < lowStock.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
                 <Warning size="1rem" weight="fill" style={{ color: isOut ? 'var(--state-error)' : 'var(--state-warning)' }} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <div className="content-body">
+                  <div className="text-sm-truncate">
                     {item.parts?.name || 'Unknown Part'}
                   </div>
                   <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>{item.warehouses?.name}</div>
@@ -341,8 +341,8 @@ export default function Inventory() {
           <div key={t.id}
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < recentShips.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <CheckCircle size="1rem" weight="fill" style={{ color: 'var(--state-success-text)' }} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>
+            <div className="content-body">
+              <div className="text-sm-semi">
                 {t.from_warehouse?.name?.replace(' Warehouse', '')} → {t.to_warehouse?.name?.replace(' Warehouse', '')}
               </div>
               <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>

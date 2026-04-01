@@ -122,7 +122,7 @@ export default function ShipmentDetail() {
       </button>
 
       <div style={{ marginBottom: 'var(--space-xl)' }}>
-        <div style={{ fontSize:'var(--text-md)',fontWeight:800,marginBottom:4 }}>{order?.so_number}</div>
+        <div className="detail-header__so">{order?.so_number}</div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
@@ -147,7 +147,7 @@ export default function ShipmentDetail() {
         <div style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', gap: 'var(--space-m)', alignItems: 'flex-start' }}>
           <Warning size="1rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0, marginTop: 1 }} />
           <div>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Partial Shipment</div>
+            <div className="text-sm-bold">Partial Shipment</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 2, lineHeight: 1.5 }}>
               {order?.has_back_order && order?.has_drop_ship
                 ? 'Some items were back-ordered and others are being drop shipped from PLP. After confirming this shipment, the SO will remain open until all tracks are resolved.'
@@ -167,14 +167,14 @@ export default function ShipmentDetail() {
         </div>
         <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
           {['Part','Qty','Source'].map(h => (
-            <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--text-primary)' }}>{h}</div>
+            <div key={h} className="text-sm-bold">{h}</div>
           ))}
         </div>
         {lines.map((line, idx) => (
           <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,alignItems:'start',
             padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <div>
-              <div style={{ fontSize:'var(--text-sm)',fontWeight:600 }}>{line.description}</div>
+              <div className="text-sm-semi">{line.description}</div>
               {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
               <div style={{ fontSize:'var(--text-sm)',color:'var(--text-muted)',marginTop:1 }}>
                 {line.warehouses?.name || '—'}

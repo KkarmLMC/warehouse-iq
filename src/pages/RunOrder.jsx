@@ -424,7 +424,7 @@ export default function RunOrder() {
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {(order?.job_city || order?.customer_city) && (
-          <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:2 }}>
+          <div className="meta-text">
             Job location: {order?.job_city||order?.customer_city}, {order?.job_state||order?.customer_state}
           </div>
         )}
@@ -435,7 +435,7 @@ export default function RunOrder() {
         <div style={{ background:'var(--state-warning-soft)',borderRadius:'var(--radius-m)',padding:'var(--space-m) var(--space-l)',marginBottom:'var(--space-l)',display:'flex',gap:'var(--space-m)',alignItems:'flex-start' }}>
           <Warning size="1rem" weight="fill" style={{ color:'var(--state-warning)',flexShrink:0,marginTop:1 }} />
           <div>
-            <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--text-primary)' }}>Back-Order Fulfillment</div>
+            <div className="text-sm-bold">Back-Order Fulfillment</div>
             <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)',marginTop:2,lineHeight:1.5 }}>
               The first shipment for this SO has already been sent. You are now re-running fulfillment for the <strong>back-ordered items only</strong>. Once stock is available, run the order to allocate from current inventory, then confirm in Fulfillment to create a second shipment.
             </div>
@@ -548,7 +548,7 @@ export default function RunOrder() {
             {/* Column headers */}
             <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
               {['Part','Req','Avail','Short'].map(h => (
-                <div key={h} style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--text-primary)' }}>{h}</div>
+                <div key={h} className="text-sm-bold">{h}</div>
               ))}
             </div>
 
@@ -639,7 +639,7 @@ export default function RunOrder() {
                             <span style={{ fontSize:'var(--text-xs)',color:'#6d28d9',fontWeight:600 }}>
                               Drop shipping {line.drop_ship_qty || line._remainingShortage} units
                             </span>
-                            <span style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)' }}>
+                            <span className="meta-text">
                               via {line.drop_ship_supplier || dropShip[idx]?.supplier}
                             </span>
                             <button onClick={() => toggleDropShip(idx)}

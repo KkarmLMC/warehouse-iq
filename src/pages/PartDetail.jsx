@@ -60,12 +60,12 @@ function TransactionRow({ tx, warehouseName }) {
           : <Minus size="0.875rem" weight="bold" style={{ color: 'var(--state-error-text)' }} />
         }
       </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{typeLabel}</div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
+      <div className="content-body">
+        <div className="text-sm-semi">{typeLabel}</div>
+        <div className="meta-text">
           {warehouseName} · {new Date(tx.created_at).toLocaleDateString()}
         </div>
-        {tx.reason && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{tx.reason}</div>}
+        {tx.reason && <div className="meta-text">{tx.reason}</div>}
       </div>
       <div style={{
         fontSize: 'var(--text-md)', fontWeight: 800,
@@ -253,7 +253,7 @@ export default function PartDetail() {
 
   useEffect(() => { load() }, [id])
 
-  if (loading) return <div className="page-content fade-in" className="spinner-pad"><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in spinner-pad"><div className="spinner" /></div>
   if (!part) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Part not found</div></div></div>
 
   const totalQty = levels.reduce((s, l) => s + l.quantity_on_hand, 0)
@@ -270,7 +270,7 @@ export default function PartDetail() {
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginBottom: 4 }}>
               {part.part_categories?.name || 'Uncategorized'}
             </div>
-            <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>{part.name}</div>
+            <div className="page-heading">{part.name}</div>
             {part.sku && <div style={{ fontFamily: 'var(--mono)', fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 4 }}>{part.sku}</div>}
           </div>
           <button onClick={() => navigate(`/warehouse-hq/part/${id}/edit`)}
@@ -301,7 +301,7 @@ export default function PartDetail() {
       {/* Stock by warehouse */}
       <Card style={{ marginBottom: 'var(--space-l)' }}>
         <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Stock by Warehouse</div>
+          <div className="text-sm-bold">Stock by Warehouse</div>
         </div>
         {levels.length === 0 ? (
           <div style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>No stock recorded yet</div>
@@ -313,7 +313,7 @@ export default function PartDetail() {
       {/* Part details */}
       <Card style={{ marginBottom: 'var(--space-l)' }}>
         <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Part Details</div>
+          <div className="text-sm-bold">Part Details</div>
         </div>
         {[
           ['Manufacturer', part.manufacturer],
@@ -324,7 +324,7 @@ export default function PartDetail() {
         ].filter(([, v]) => v).map(([label, value]) => (
           <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
             <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>{label}</span>
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{value}</span>
+            <span className="text-sm-semi">{value}</span>
           </div>
         ))}
         {part.description && (
@@ -342,7 +342,7 @@ export default function PartDetail() {
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
             <ClipboardText size="1rem" style={{ color: 'var(--text-primary)' }} />
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Transaction History</span>
+            <span className="text-sm-bold">Transaction History</span>
             <span style={{ padding: '1px 8px', borderRadius: 'var(--radius-s)', background: 'var(--surface-hover)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>{transactions.length}</span>
           </div>
           <CaretDown size="0.875rem" style={{ color: 'var(--text-primary)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />

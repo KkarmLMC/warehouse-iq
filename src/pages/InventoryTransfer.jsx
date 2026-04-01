@@ -106,7 +106,7 @@ export default function InventoryTransfer() {
   return (
     <div className="page-content fade-in">
       <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
-        <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800 }}>Transfer Stock</div>
+        <div className="page-heading">Transfer Stock</div>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)', marginTop: 4 }}>Move parts between warehouses</div>
       </div>
 
@@ -142,13 +142,13 @@ export default function InventoryTransfer() {
       {/* Parts */}
       <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)' }}>
         <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Parts to Transfer</div>
+          <div className="text-sm-bold">Parts to Transfer</div>
           {errors.items && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 2 }}>{errors.items}</div>}
         </div>
 
         {/* Search */}
         <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)', position: 'relative' }}>
-          <div style={{ position: 'relative' }}>
+          <div className="position-relative">
             <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
             <input
               value={search}
@@ -163,7 +163,7 @@ export default function InventoryTransfer() {
                 <button key={p.id} onClick={() => addItem(p)}
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer', borderBottom: '1px solid var(--border-subtle)', textAlign: 'left' }}>
                   <div>
-                    <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>{p.name}</div>
+                    <div className="text-sm-semi">{p.name}</div>
                     {p.sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>{p.sku}</div>}
                   </div>
                   <Plus size="1rem" style={{ color: 'var(--brand-primary)' }} />
@@ -180,8 +180,8 @@ export default function InventoryTransfer() {
           </div>
         ) : items.map((item, idx) => (
           <div key={item.part_id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.part_name}</div>
+            <div className="content-body">
+              <div className="text-sm-truncate">{item.part_name}</div>
               {item.part_sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>{item.part_sku}</div>}
             </div>
             <input

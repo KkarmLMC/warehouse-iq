@@ -162,8 +162,8 @@ function StockRow({ level, onPress }) {
       padding: 'var(--space-m) var(--space-l)', background: 'none', width: '100%', textAlign: 'left',
       borderBottom: '1px solid var(--border-subtle)', cursor: 'pointer',
       WebkitTapHighlightColor: 'transparent' }}>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+      <div className="content-body">
+        <div className="text-sm-truncate">
           {level.parts?.name || '—'}
         </div>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 2, display: 'flex', gap: 'var(--space-s)' }}>
@@ -405,7 +405,7 @@ export default function WarehouseDetail() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
                 <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
-                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>Sales Orders</span>
+                <span className="text-sm-bold">Sales Orders</span>
                 <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', background: 'var(--surface-hover)', padding: '2px 8px', borderRadius: 'var(--radius-s)', fontWeight: 600 }}>
                   {warehousePOs.length}
                 </span>
@@ -423,8 +423,8 @@ export default function WarehouseDetail() {
                   <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, padding: '2px 6px', borderRadius: 4, flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : 'var(--state-info-soft)', color: po.division === 'Bolt' ? 'var(--red-shade-40)' : 'var(--state-info)' }}>
                     {po.division === 'Bolt' ? 'BOLT' : 'LM'}
                   </div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div className="content-body">
+                    <div className="text-sm-truncate">
                       {po.customer_name}
                     </div>
                     <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 1 }}>
@@ -456,7 +456,7 @@ export default function WarehouseDetail() {
           style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
             <ClipboardText size="1rem" style={{ color: 'var(--text-primary)' }} />
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>Transaction History</span>
+            <span className="text-sm-bold">Transaction History</span>
           </div>
           <CaretDown size="0.875rem" style={{ color: 'var(--text-primary)', transform: showTx ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
         </button>
@@ -474,11 +474,11 @@ export default function WarehouseDetail() {
                     {tx.quantity_delta > 0 ? '+' : ''}{tx.quantity_delta}
                   </span>
                 </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <div className="content-body">
+                  <div className="text-sm-truncate">
                     {tx.parts?.name || '—'}
                   </div>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
+                  <div className="meta-text">
                     {txTypeLabel[tx.transaction_type] || tx.transaction_type} · {new Date(tx.created_at).toLocaleDateString()}
                     {tx.reason && ` · ${tx.reason}`}
                   </div>
