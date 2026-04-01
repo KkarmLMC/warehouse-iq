@@ -2014,6 +2014,9 @@ textarea,
 /* --- Final singles --- */
 .pad-l { padding: var(--space-l); }
 
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
 .empty {
   display: flex;
   flex-direction: column;
