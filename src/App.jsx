@@ -140,9 +140,8 @@ export default function App() {
         <MobileHeader />
         <DesktopTopBar />
 
-        <div className="page-content-area">
-          <PageSubNav />
-          <Suspense fallback={<div className="page-content spinner-content"><div className="spinner" /></div>}>
+        <PageSubNav />
+        <Suspense fallback={<div className="page-content spinner-content"><div className="spinner" /></div>}>
             <Routes>
               <Route path="/"                                element={<Navigate to="/warehouse-hq" replace />} />
               <Route path="/warehouse-hq"                    element={<Inventory />} />
@@ -169,9 +168,8 @@ export default function App() {
               <Route path="/warehouse-hq/users"             element={<UserManagement />} />
               <Route path="*"                                element={<Navigate to="/warehouse-hq" replace />} />
             </Routes>
-          </Suspense>
-          <BottomNav />
-        </div>
+        </Suspense>
+        <BottomNav />
       </div>
     </div>
   )

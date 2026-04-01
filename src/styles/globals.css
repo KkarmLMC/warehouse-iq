@@ -881,14 +881,7 @@ textarea,
   gap: var(--space-l);
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-}
-
-
+/* .app removed — use .app-shell */
 /* =============================================================================
    6. SIDEBAR
    ============================================================================= */
@@ -4554,14 +4547,7 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
   min-width: 0;
 }
 
-.page-content-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  position: relative;
-}
-
+/* .page-content-area removed — unified to .main-area */
 /* Mobile header — hidden on desktop */
 .mobile-header {
   display: none;
