@@ -31,7 +31,7 @@ function SectionGroup({ label, items }) {
       <button onClick={() => setOpen(o => !o)} style={{
         width: '100%', display: 'grid', gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem',
         gap: 'var(--space-s)', padding: 'var(--space-m) var(--space-l)', background: 'var(--brand-primary)', cursor: 'pointer', alignItems: 'center' }}>
-        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--surface-base)', textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'left' }}>{label}</span>
+        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--surface-base)', textTransform: 'uppercase', letterSpacing: 'var(--tracking-normal)', textAlign: 'left' }}>{label}</span>
         <span />
         <span />
         <span className="p-o-detail-e8b8">
@@ -49,7 +49,7 @@ function SectionGroup({ label, items }) {
           background: 'var(--surface-base)' }}>
           <div className="p-o-detail-e25b">
             {item.sku && <div className="p-o-detail-cb4a">{item.sku}</div>}
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.4 }}>{item.description}</div>
+            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-medium)', color: 'var(--text-primary)', lineHeight: 'var(--leading-normal)' }}>{item.description}</div>
           </div>
           <div className="text-sm-right">{item.quantity}</div>
           <div className="text-sm-right">${item.unit_cost.toFixed(2)}</div>
@@ -127,13 +127,13 @@ export default function PODetail() {
             <div className="text-label">
               {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
             </div>
-            <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
+            <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--leading-tight)' }}>{po.customer_name}</div>
             {po.project_name && (
               <div className="meta-text--inverse">{po.project_name}</div>
             )}
           </div>
           <div style={{
-            display: 'flex', alignItems: 'center', gap: 4,
+            display: 'flex', alignItems: 'center', gap: 'var(--space-2xs)',
             padding: '4px 12px', borderRadius: 'var(--radius-s)',
             background: statusDisplay.bg,
             color: statusDisplay.color }}>
@@ -200,7 +200,7 @@ export default function PODetail() {
           {/* Column headers */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem', gap: 'var(--space-s)', padding: 'var(--space-l)', background: 'var(--surface-base)', borderBottom: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-m) var(--radius-m) 0 0' }}>
             {['Item / Description', 'Quantity', 'Unit', 'Amount'].map(h => (
-              <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', textAlign: h !== 'Item / Description' ? 'right' : 'left', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{h}</div>
+              <div key={h} style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', textAlign: h !== 'Item / Description' ? 'right' : 'left', textTransform: 'uppercase', letterSpacing: 'var(--tracking-normal)' }}>{h}</div>
             ))}
           </div>
           {sections.map(sec => (

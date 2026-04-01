@@ -201,7 +201,7 @@ export default function WarehouseIQ() {
       <div className="warehouse-i-q-4f2e">
         {/* Period badge */}
         <div className="flex-gap-s">
-          <div style={{ padding: 'var(--space-s) var(--space-l)', borderRadius:'var(--radius-l)', background: isClosed ? 'var(--surface-light)' : 'var(--brand-primary)', color: isClosed ? 'var(--text-secondary)' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
+          <div style={{ padding: 'var(--space-s) var(--space-l)', borderRadius:'var(--radius-l)', background: isClosed ? 'var(--surface-light)' : 'var(--brand-primary)', color: isClosed ? 'var(--text-secondary)' : '#fff', fontWeight: 'var(--fw-bold)', fontSize:'var(--text-sm)' }}>
             {periodLabel}
           </div>
           {isClosed
@@ -218,7 +218,7 @@ export default function WarehouseIQ() {
                 flexShrink:0, padding:'0.25rem 0.75rem', borderRadius:'var(--radius-l)',
                 background: activeWH === w.id ? 'var(--brand-primary)' : 'var(--surface-hover)',
                 color: activeWH === w.id ? '#fff' : 'var(--text-primary)',
-                fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+                fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', cursor:'pointer', whiteSpace:'nowrap' }}>
               {w.name.replace(' Warehouse','')}
             </button>
           ))}
@@ -252,13 +252,13 @@ export default function WarehouseIQ() {
           {pos.map((po, idx) => (
             <button key={idx} onClick={() => navigate(`/sales-orders/${po.id || ''}`)}
               style={{ width:'100%', display:'flex', alignItems:'center', gap:'var(--space-m)', padding: 'var(--space-s) var(--space-l)', background:'none', cursor:'pointer', textAlign:'left', borderBottom: idx < pos.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
-              <div style={{ fontSize:'var(--text-2xs)', fontWeight:800, padding:'2px 6px', borderRadius:4, flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--state-info-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--state-info)' }}>
+              <div style={{ fontSize:'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding:'2px 6px', borderRadius: 'var(--radius-xs)', flexShrink:0, background: po.division==='Bolt'?'#FFF1F2':'var(--state-info-soft)', color: po.division==='Bolt'?'var(--red-shade-40)':'var(--state-info)' }}>
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
               <div className="content-body">
                 <div className="text-sm-truncate">{po.customer_name}</div>
               </div>
-              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--radius-s)', background: po.status==='queued'?'var(--brand-soft)':po.status==='running'?'var(--state-warning-soft)':po.status==='fulfillment'?'var(--state-info-soft)':po.status==='shipment'?'var(--state-info-soft)':'var(--state-success-soft)', color: po.status==='queued'?'var(--brand-light)':po.status==='running'?'var(--state-warning)':po.status==='fulfillment'?'var(--state-info)':po.status==='shipment'?'var(--state-info)':'var(--state-success-text)', textTransform:'capitalize', flexShrink:0 }}>
+              <span style={{ fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', padding:'2px 8px', borderRadius:'var(--radius-s)', background: po.status==='queued'?'var(--brand-soft)':po.status==='running'?'var(--state-warning-soft)':po.status==='fulfillment'?'var(--state-info-soft)':po.status==='shipment'?'var(--state-info-soft)':'var(--state-success-soft)', color: po.status==='queued'?'var(--brand-light)':po.status==='running'?'var(--state-warning)':po.status==='fulfillment'?'var(--state-info)':po.status==='shipment'?'var(--state-info)':'var(--state-success-text)', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
               </span>
             </button>
@@ -275,14 +275,14 @@ export default function WarehouseIQ() {
           <div className="warehouse-i-q-986b">
             <MagnifyingGlass size="0.8125rem" className="warehouse-i-q-8528" />
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
-              style={{ width:'100%', paddingLeft:28, paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
+              style={{ width:'100%', paddingLeft: 'var(--search-input-offset)', paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
             {search && <button onClick={() => setSearch('')} className="warehouse-i-q-e287"><X size="0.75rem"/></button>}
           </div>
           {/* Filter pills */}
           <div className="flex-gap-s">
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding:'3px 10px', borderRadius:'var(--radius-s)', background:filter===val?'var(--brand-primary)':'var(--surface-hover)', color:filter===val?'#fff':'var(--text-primary)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>
+                style={{ padding:'3px 10px', borderRadius:'var(--radius-s)', background:filter===val?'var(--brand-primary)':'var(--surface-hover)', color:filter===val?'#fff':'var(--text-primary)', fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', cursor:'pointer', whiteSpace:'nowrap' }}>
                 {lbl}
               </button>
             ))}
@@ -293,7 +293,7 @@ export default function WarehouseIQ() {
         {/* Column headers */}
         <div className="warehouse-i-q-fca4">
           {['Part / SKU','Start','Added','Used','On Order','Stock','Value',''].map((h,i) => (
-            <div key={i} style={{ fontSize:'var(--text-md)', fontWeight:700, color: 'var(--surface-base)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
+            <div key={i} style={{ fontSize:'var(--text-md)', fontWeight: 'var(--fw-bold)', color: 'var(--surface-base)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
           ))}
         </div>
 
@@ -338,11 +338,11 @@ export default function WarehouseIQ() {
               </div>
               {/* Stock + trend */}
               <div className="warehouse-i-q-8c02">
-                <span style={{ fontSize:'var(--text-sm)', fontWeight:800, color: isOut ? 'var(--state-error-text)' : isLow ? 'var(--state-warning-text)' : 'var(--text-primary)' }}>
+                <span style={{ fontSize:'var(--text-sm)', fontWeight: 'var(--fw-black)', color: isOut ? 'var(--state-error-text)' : isLow ? 'var(--state-warning-text)' : 'var(--text-primary)' }}>
                   {r.stock.toLocaleString()}
                 </span>
                 {delta !== 0 && (
-                  <span style={{ fontSize:'var(--text-2xs)', fontWeight:700, color: delta > 0 ? 'var(--state-success-text)' : 'var(--state-error-text)' }}>
+                  <span style={{ fontSize:'var(--text-2xs)', fontWeight: 'var(--fw-bold)', color: delta > 0 ? 'var(--state-success-text)' : 'var(--state-error-text)' }}>
                     {delta > 0 ? `+${delta}` : delta}
                   </span>
                 )}

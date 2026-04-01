@@ -36,7 +36,7 @@ function DropShipForm({ qty, onConfirm, onCancel }) {
       <div className="run-order-ef7e">
         <Truck size="0.75rem" /> Drop Ship {qty} unit{qty !== 1 ? 's' : ''} from PLP
       </div>
-      <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginBottom: 8, lineHeight: 1.4 }}>
+      <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginBottom: 'var(--space-s)', lineHeight: 'var(--leading-normal)' }}>
         These items will be sent to the Drop Ship Queue. Once PLP provides tracking info, the warehouse manager will process the shipment from the queue.
       </div>
 
@@ -430,7 +430,7 @@ export default function RunOrder() {
           <Warning size="1rem" weight="fill" className="run-order-74ad" />
           <div>
             <div className="text-sm-bold">Back-Order Fulfillment</div>
-            <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)',marginTop:2,lineHeight:1.5 }}>
+            <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)',marginTop: 'var(--space-3xs)',lineHeight: 'var(--leading-relaxed)' }}>
               The first shipment for this SO has already been sent. You are now re-running fulfillment for the <strong>back-ordered items only</strong>. Once stock is available, run the order to allocate from current inventory, then confirm in Fulfillment to create a second shipment.
             </div>
           </div>
@@ -570,7 +570,7 @@ export default function RunOrder() {
                   {/* Main row */}
                   <div className="run-order-d8e4">
                     <div>
-                      <div style={{ fontSize:'var(--text-sm)',fontWeight:600,
+                      <div style={{ fontSize:'var(--text-sm)',fontWeight: 'var(--fw-semibold)',
                         color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isShortage ? 'var(--state-error-text)' : 'var(--text-primary)' }}>
                         {line.description}
                         {line.is_kit && <span className="run-order-5488">KIT</span>}
@@ -627,9 +627,9 @@ export default function RunOrder() {
 
                       {/* Drop ship active state */}
                       {isDS && (
-                        <div style={{ marginTop:6 }}>
+                        <div style={{ marginTop: 'var(--space-xs)' }}>
                           <div className="run-order-afb3">
-                            <Truck size="0.6875rem" style={{ color:'#6d28d9' }} />
+                            <Truck size="0.6875rem" style={{ color: 'var(--color-purple-400)' }} />
                             <span className="run-order-88ed">
                               Drop shipping {line.drop_ship_qty || line._remainingShortage} units
                             </span>
@@ -652,11 +652,11 @@ export default function RunOrder() {
                     </div>
 
                     <div className="run-order-4f6c">{line.qty_required}</div>
-                    <div style={{ fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--mono)',
+                    <div style={{ fontSize:'var(--text-sm)',fontWeight: 'var(--fw-bold)',fontFamily:'var(--mono)',
                       color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isShortage ? 'var(--state-error)' : 'var(--state-success-text)' }}>
                       {line.qty_available}
                     </div>
-                    <div style={{ fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--mono)',
+                    <div style={{ fontSize:'var(--text-sm)',fontWeight: 'var(--fw-bold)',fontFamily:'var(--mono)',
                       color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isShortage ? 'var(--state-error)' : 'var(--text-muted)' }}>
                       {line.qty_shortage > 0 ? line.qty_shortage : '—'}
                     </div>
@@ -666,7 +666,7 @@ export default function RunOrder() {
                   {splitOpen && isShortage && !isBO && !isDS && (
                     <div className="run-order-fc0c">
                       <div className="run-order-2d80">Split Fulfillment Plan</div>
-                      <div style={{ fontSize:'var(--text-xs)',color:'var(--state-warning-text)',lineHeight:1.6 }}>
+                      <div style={{ fontSize:'var(--text-xs)',color:'var(--state-warning-text)',lineHeight: 'var(--leading-loose)' }}>
                         <div>Primary: <strong>{line._primaryWhName||'—'}</strong> → pull {line.qty_available} of {line.qty_required}</div>
                         {line.split_warehouse_id
                           ? <div>Secondary: <strong>{line._splitWhName||line.split_warehouse_id}</strong> → pull {line.split_qty}</div>
@@ -697,9 +697,9 @@ export default function RunOrder() {
                 style={{ width:'100%',padding:'var(--space-m)',borderRadius:'var(--radius-l)',
                   background: pushed ? 'var(--state-success-text)' : !allKitsConfirmed ? 'var(--border-default)' : 'var(--brand-primary)',
                   color: !allKitsConfirmed ? 'var(--text-muted)' : '#fff',
-                  fontWeight:700,fontSize:'var(--text-sm)',
+                  fontWeight: 'var(--fw-bold)',fontSize:'var(--text-sm)',
                   cursor: allKitsConfirmed && !pushed ? 'pointer' : 'not-allowed',
-                  fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
+                  fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap: 'var(--space-s)' }}>
                 {pushed
                   ? <><CheckCircle size="1rem" weight="fill" /> Sent to Fulfillment{(computed.some(l => l.is_drop_ship) || computed.some(l => l.is_back_ordered)) ? ' (split order)' : ''}</>
                   : !allKitsConfirmed
@@ -727,7 +727,7 @@ export default function RunOrder() {
           <>
             <div onClick={() => setShowKitModal(false)}
               className="run-order-0f8f" />
-            <div style={{ position:'fixed',bottom: 'env(safe-area-inset-bottom, 0px)',left:0,right:0,zIndex:300,background:'var(--bg)',
+            <div style={{ position:'fixed',bottom: 'env(safe-area-inset-bottom, 0px)',left:0,right:0,zIndex: 'var(--z-sheet)',background:'var(--bg)',
               borderRadius:'var(--radius-l) var(--radius-l) 0 0',padding:'1.25rem',maxHeight:'80vh',overflowY:'auto' }}>
               <div className="run-order-6678">
                 <SealWarning size="1.25rem" weight="fill" style={{ color:'var(--state-warning)' }} />
@@ -742,7 +742,7 @@ export default function RunOrder() {
                 <div className="run-order-3078">
                   Description on this Sales Order:
                 </div>
-                <div style={{ padding: 'var(--space-m)',background:'var(--state-warning-soft)',borderRadius:'var(--radius-l)',fontSize:'var(--text-sm)',color:'var(--state-warning-text)',lineHeight:1.6 }}>
+                <div style={{ padding: 'var(--space-m)',background:'var(--state-warning-soft)',borderRadius:'var(--radius-l)',fontSize:'var(--text-sm)',color:'var(--state-warning-text)',lineHeight: 'var(--leading-loose)' }}>
                   {line.kit_original_description || line.description}
                 </div>
               </div>
@@ -751,12 +751,12 @@ export default function RunOrder() {
                 <div className="run-order-18cc">
                   Canonical description on file (QB default):
                 </div>
-                <div style={{ padding: 'var(--space-m)',background: 'var(--surface-base)',borderRadius:'var(--radius-l)',fontSize:'var(--text-sm)',color:'var(--text-primary)',lineHeight:1.6 }}>
+                <div style={{ padding: 'var(--space-m)',background: 'var(--surface-base)',borderRadius:'var(--radius-l)',fontSize:'var(--text-sm)',color:'var(--text-primary)',lineHeight: 'var(--leading-loose)' }}>
                   {line.kit_canonical_description}
                 </div>
               </div>
 
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginBottom:'var(--space-l)',lineHeight:1.5 }}>
+              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginBottom:'var(--space-l)',lineHeight: 'var(--leading-relaxed)' }}>
                 Sales may have customised this kit for the customer. Accept to use the modified description for fulfillment, or reject to revert to the canonical definition.
               </div>
 

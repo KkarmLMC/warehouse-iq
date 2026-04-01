@@ -33,9 +33,9 @@ function StatusBadge({ status }) {
   const Icon = meta.icon
   return (
     <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: 4,
+      display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2xs)',
       padding: '3px 10px', borderRadius: 'var(--radius-s)',
-      fontSize: 'var(--text-xs)', fontWeight: 700,
+      fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)',
       background: meta.bg, color: meta.color }}>
       <Icon size="0.6875rem" weight="fill" />
       {meta.label}
@@ -70,7 +70,7 @@ function POCard({ po, totals, onPress }) {
           </span>
           <StatusBadge status={po.status} />
           <span style={{
-            fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px',
+            fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', padding: '1px 6px',
             borderRadius: 'var(--radius-s)',
             background: po.division === 'Bolt' ? 'var(--state-warning-soft)' : 'var(--state-info-soft)',
             color: po.division === 'Bolt' ? 'var(--state-warning-text)' : 'var(--brand-primary)' }}>
@@ -195,7 +195,7 @@ export default function PurchaseOrders() {
           { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--state-success-text)' },
         ].map(s => (
           <div key={s.label} className="purchase-orders-080f">
-            <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--text-primary)' }}>{s.value}</div>
+            <div style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--fw-black)', color: s.color || 'var(--text-primary)' }}>{s.value}</div>
             <div className="meta-text">{s.label}</div>
           </div>
         ))}
@@ -214,7 +214,7 @@ export default function PurchaseOrders() {
               marginBottom: -2, whiteSpace: 'nowrap' }}>
             {tab.label}
             {counts[tab.key] > 0 && (
-              <span style={{ marginLeft: 6, fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--brand-primary)' : 'var(--surface-hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-muted)', borderRadius: 'var(--radius-l)', padding: '1px 6px', fontWeight: 700 }}>
+              <span style={{ marginLeft: 'var(--space-xs)', fontSize: 'var(--text-xs)', background: activeTab === tab.key ? 'var(--brand-primary)' : 'var(--surface-hover)', color: activeTab === tab.key ? '#fff' : 'var(--text-muted)', borderRadius: 'var(--radius-l)', padding: '1px 6px', fontWeight: 'var(--fw-bold)' }}>
                 {counts[tab.key]}
               </span>
             )}
@@ -228,7 +228,7 @@ export default function PurchaseOrders() {
           <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"
-            style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
+            style={{ width: '100%', paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 34 : 12 }} />
           {search && <button onClick={() => setSearch('')} className="search-overlay-clear"><X size="0.8125rem" /></button>}
         </div>
         {['all', 'LM', 'Bolt'].map(d => (

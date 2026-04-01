@@ -220,7 +220,7 @@ export default function FulfillmentDetail() {
             <div key={line.id}>
             <div
               onClick={() => !isDS && toggleLine(line.id)}
-              style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,alignItems:'center',
+              style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap: 'var(--space-s)',alignItems:'center',
                 padding: 'var(--space-l) var(--space-l)',cursor: isDS ? 'default' : 'pointer',minHeight:64,
                 borderBottom: !flags[line.id] && idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none',
                 background: isDS ? '#f5f3ff' : isBO ? 'var(--state-info-soft)' : isOut ? 'var(--state-error-soft)' : isPulled ? 'var(--state-success-soft)' : 'transparent',
@@ -235,7 +235,7 @@ export default function FulfillmentDetail() {
               {/* Part info */}
               <div>
                 <div className="fulfillment-detail-400f">
-                  <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isOut ? 'var(--state-error-text)' : isPulled ? 'var(--text-muted)' : 'var(--text-primary)',
+                  <span style={{ fontSize:'var(--text-sm)',fontWeight: 'var(--fw-semibold)',color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isOut ? 'var(--state-error-text)' : isPulled ? 'var(--text-muted)' : 'var(--text-primary)',
                     textDecoration: isPulled && !isBO && !isDS ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
@@ -261,12 +261,12 @@ export default function FulfillmentDetail() {
               </div>
               {/* Qty */}
               <div>
-                <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-md)',color: isOut ? 'var(--state-error)' : 'var(--text-primary)' }}>
+                <div style={{ fontWeight: 'var(--fw-bold)',fontFamily:'var(--mono)',fontSize:'var(--text-md)',color: isOut ? 'var(--state-error)' : 'var(--text-primary)' }}>
                   {line.qty_available}
                   {line.split_qty > 0 && <span className="fulfillment-detail-f97a">+{line.split_qty}</span>}
                 </div>
                 <button onClick={(e) => flags[line.id] ? clearFlag(e, line.id) : flagLine(e, line.id)}
-                  style={{ fontSize:'var(--text-xs)',padding:'2px 6px',borderRadius:4,cursor:'pointer',fontFamily:'var(--font)',marginTop:4,
+                  style={{ fontSize:'var(--text-xs)',padding:'2px 6px',borderRadius: 'var(--radius-xs)',cursor:'pointer',fontFamily:'var(--font)',marginTop: 'var(--space-2xs)',
                     background: flags[line.id] ? 'var(--state-error-soft)' : 'var(--surface-base)',
                     color: flags[line.id] ? 'var(--state-error)' : 'var(--text-muted)' }}>
                   {flags[line.id] ? '⚑ flagged' : '⚑ flag'}
@@ -293,8 +293,8 @@ export default function FulfillmentDetail() {
         style={{ width:'100%',padding:'var(--space-m)',borderRadius:'var(--radius-l)',
           background: done ? 'var(--state-success-text)' : !allChecked ? 'var(--border-default)' : 'var(--brand-primary)',
           color: !allChecked ? 'var(--text-muted)' : '#fff',
-          fontWeight:700,fontSize:'var(--text-sm)',cursor: allChecked && !pushing && !done ? 'pointer' : 'not-allowed',
-          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
+          fontWeight: 'var(--fw-bold)',fontSize:'var(--text-sm)',cursor: allChecked && !pushing && !done ? 'pointer' : 'not-allowed',
+          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap: 'var(--space-s)' }}>
         {done ? <><CheckCircle size="1rem" weight="fill" /> Pushed to Shipment</>
           : pushing ? <><div className="spinner spinner--xs" /> Processing…</>
           : !allChecked ? `Check off all ${lines.length - Object.values(checked).filter(Boolean).length} remaining parts first`

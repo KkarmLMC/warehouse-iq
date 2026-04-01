@@ -113,7 +113,7 @@ export default function InventoryTransfer() {
       {/* From / To */}
       <div className="card-section">
         <div className="mb-l">
-          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)', color: errors.from ? 'var(--state-error)' : 'var(--text-primary)' }}>From Warehouse</label>
+          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)', marginBottom: 'var(--space-xs)', color: errors.from ? 'var(--state-error)' : 'var(--text-primary)' }}>From Warehouse</label>
           <select value={fromId} onChange={e => setFromId(e.target.value)} style={{ width: '100%', borderColor: errors.from ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
@@ -121,7 +121,7 @@ export default function InventoryTransfer() {
         </div>
 
         <div className="mb-l">
-          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)', color: errors.to ? 'var(--state-error)' : 'var(--text-primary)' }}>To Warehouse</label>
+          <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)', marginBottom: 'var(--space-xs)', color: errors.to ? 'var(--state-error)' : 'var(--text-primary)' }}>To Warehouse</label>
           <select value={toId} onChange={e => setToId(e.target.value)} style={{ width: '100%', borderColor: errors.to ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
@@ -204,7 +204,7 @@ export default function InventoryTransfer() {
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving}
-          style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: saving ? 'var(--surface-hover)' : 'var(--state-error)', color: saving ? 'var(--text-muted)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
+          style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: saving ? 'var(--surface-hover)' : 'var(--state-error)', color: saving ? 'var(--text-muted)' : '#fff', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
           {saving ? <><SpinnerGap size="0.875rem" className="anim-spin" /> Processing…</> : <><CheckCircle size="0.875rem" /> Complete Transfer</>}
         </button>
       </div>

@@ -112,7 +112,7 @@ function PartSearch({ onSelect, warehouseId }) {
                   ${part.unit_cost?.toFixed(2) || '—'}
                 </div>
                 {part.stock !== null && (
-                  <div style={{ fontSize: 'var(--text-xs)', color: part.stock > 0 ? 'var(--state-success-text)' : 'var(--state-error-text)', fontWeight: 600 }}>
+                  <div style={{ fontSize: 'var(--text-xs)', color: part.stock > 0 ? 'var(--state-success-text)' : 'var(--state-error-text)', fontWeight: 'var(--fw-semibold)' }}>
                     {part.stock} in stock
                   </div>
                 )}
@@ -159,7 +159,7 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
         className="text-xs-right"
        
       />
-      <div className="text-xs-right" style={{ fontWeight: 700, color: lineTotal > 0 ? 'var(--text-primary)' : 'var(--text-muted)' }}>
+      <div className="text-xs-right" style={{ fontWeight: 'var(--fw-bold)', color: lineTotal > 0 ? 'var(--text-primary)' : 'var(--text-muted)' }}>
         ${lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </div>
       <button onClick={onRemove} className="icon-btn icon-btn--error">
@@ -305,7 +305,7 @@ function LaborSection({ items, onUpdate }) {
                 className="text-xs-right" />
               <input type="number" min="0" step="0.01" value={item.unit_cost} onChange={e => updateItem(item._key, { ...item, unit_cost: e.target.value })}
                 placeholder="0.00" className="text-xs-right" />
-              <div className="text-xs-right" style={{ fontWeight: 700 }}>
+              <div className="text-xs-right" style={{ fontWeight: 'var(--fw-bold)' }}>
                 ${((parseFloat(item.quantity)||0)*(parseFloat(item.unit_cost)||0)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
               </div>
               <button onClick={() => removeItem(item._key)} className="icon-btn icon-btn--error">

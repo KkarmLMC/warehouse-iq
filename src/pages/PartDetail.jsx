@@ -68,7 +68,7 @@ function TransactionRow({ tx, warehouseName }) {
         {tx.reason && <div className="meta-text">{tx.reason}</div>}
       </div>
       <div style={{
-        fontSize: 'var(--text-md)', fontWeight: 800,
+        fontSize: 'var(--text-md)', fontWeight: 'var(--fw-black)',
         color: isPositive ? 'var(--state-success-text)' : 'var(--state-error-text)' }}>
         {isPositive ? '+' : ''}{tx.quantity_delta}
       </div>
@@ -143,14 +143,14 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
 
   return (
     <>
-      <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 299, background: 'rgba(0,0,0,0.5)', animation: 'anim-fade-in 0.15s ease' }} />
+      <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-sheet-overlay)', background: 'var(--overlay-bg)', animation: 'anim-fade-in 0.15s ease' }} />
       <div style={{
-        position: 'fixed', left: 0, right: 0, bottom: 'env(safe-area-inset-bottom, 0px)', zIndex: 300,
+        position: 'fixed', left: 0, right: 0, bottom: 'env(safe-area-inset-bottom, 0px)', zIndex: 'var(--z-sheet)',
         background: 'var(--surface-base)', borderRadius: 'var(--radius-l) var(--radius-l) 0 0',
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>
         <div className="part-detail-43ec">
-          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-l)' }} />
+          <div style={{ width: 'var(--icon-size-lg)', height: 'var(--space-2xs)', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-l)' }} />
           <div className="part-detail-b4f9">Adjust Stock</div>
         </div>
 
@@ -215,7 +215,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
               width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-m)',
               background: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--surface-hover)' : 'var(--brand-primary)',
               color: (delta === 0 && onOrder === '' && minLevel === '') ? 'var(--text-muted)' : '#fff',
-              fontWeight: 700, fontSize: 'var(--text-sm)',
+              fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)',
               cursor: (delta === 0 && onOrder === '' && minLevel === '') ? 'default' : 'pointer' }}>
             {saving ? 'Saving…' : 'Save Changes'}
           </button>
@@ -274,14 +274,14 @@ export default function PartDetail() {
             {part.sku && <div className="part-detail-85ff">{part.sku}</div>}
           </div>
           <button onClick={() => navigate(`/warehouse-hq/part/${id}/edit`)}
-            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--radius-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            style={{ width: 'var(--icon-size-md)', height: 'var(--icon-size-md)', borderRadius: 'var(--radius-l)', background: 'transparent', color: 'var(--color-white)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
             <PencilSimple size="1rem" />
           </button>
         </div>
 
         {/* Total stock */}
         <div className="flex-gap-s">
-          <div style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1 }}>{totalQty}</div>
+          <div style={{ fontSize: '2.5rem', fontWeight: 'var(--fw-black)', lineHeight: 'var(--leading-none)' }}>{totalQty}</div>
           <div className="meta-text--inverse">{part.unit_of_measure} total</div>
         </div>
       </div>

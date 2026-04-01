@@ -52,7 +52,7 @@ function CategorySection({ category, parts, onPartPress }) {
         className="parts-catalog-74d8"
       >
         <div className="parts-catalog-4f47">
-          <Icon size="0.9375rem" style={{ color: '#fff' }} />
+          <Icon size="0.9375rem" style={{ color: 'var(--color-white)' }} />
         </div>
         <div className="content-body">
           <div className="text-sm-bold--inverse">{category.name}</div>
@@ -188,7 +188,7 @@ export default function PartsCatalog() {
         <MagnifyingGlass size="1rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)}
           placeholder={`Search ${activeTab === 'All' ? 'all parts' : activeTab === 'LM' ? 'Lightning Master parts' : 'Bolt Lightning parts'}…`}
-          style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
+          style={{ width: '100%', paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 36 : 12 }} />
         {search && (
           <button onClick={() => setSearch('')} className="search-overlay-clear">
             <X size="0.875rem" />

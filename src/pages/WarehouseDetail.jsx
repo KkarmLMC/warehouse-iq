@@ -58,15 +58,15 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
 
   return (
     <>
-      <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 299, background: 'rgba(0,0,0,0.5)', animation: 'anim-fade-in 0.15s ease' }} />
+      <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-sheet-overlay)', background: 'var(--overlay-bg)', animation: 'anim-fade-in 0.15s ease' }} />
       <div style={{
-        position: 'fixed', left: 0, right: 0, bottom: 'env(safe-area-inset-bottom, 0px)', zIndex: 300,
+        position: 'fixed', left: 0, right: 0, bottom: 'env(safe-area-inset-bottom, 0px)', zIndex: 'var(--z-sheet)',
         background: 'var(--surface-base)', borderRadius: 'var(--radius-l) var(--radius-l) 0 0',
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>
         {/* Sheet header */}
         <div className="warehouse-detail-43ec">
-          <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-m)' }} />
+          <div style={{ width: 'var(--icon-size-lg)', height: 'var(--space-2xs)', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-m)' }} />
           <div className="flex-between mb-l">
             <div className="warehouse-detail-860f">Edit Warehouse</div>
             <button onClick={onClose} className="flex-center" style={{ background: 'var(--surface-hover)', borderRadius: 'var(--radius-l)', width: '2rem', height: '2rem', cursor: 'pointer' }}>
@@ -138,7 +138,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         {/* Footer */}
         <div className="warehouse-detail-fa13">
           <button onClick={handleSave} disabled={saving || !form.name.trim()}
-            style={{ width: '100%', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: !form.name.trim() ? 'var(--surface-hover)' : 'var(--brand-primary)', color: !form.name.trim() ? 'var(--text-muted)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: !form.name.trim() ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
+            style={{ width: '100%', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: !form.name.trim() ? 'var(--surface-hover)' : 'var(--brand-primary)', color: !form.name.trim() ? 'var(--text-muted)' : '#fff', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: !form.name.trim() ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
             {saving ? 'Saving…' : <><Check size="0.9375rem" /> Save Changes</>}
           </button>
         </div>
@@ -272,7 +272,7 @@ export default function WarehouseDetail() {
         <div className="wh-header__top">
           <div className="flex-gap-m">
             <div className="wh-header__icon">
-              <Buildings size="1.375rem" style={{ color: '#fff' }} />
+              <Buildings size="1.375rem" style={{ color: 'var(--color-white)' }} />
             </div>
             <div>
               <div className="wh-header__name">{warehouse.name}</div>
@@ -285,7 +285,7 @@ export default function WarehouseDetail() {
             </div>
           </div>
           <button onClick={() => setShowEdit(true)}
-            style={{ width: '2.25rem', height: '2.25rem', borderRadius: 'var(--radius-l)', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+            style={{ width: 'var(--icon-size-md)', height: 'var(--icon-size-md)', borderRadius: 'var(--radius-l)', background: 'transparent', color: 'var(--color-white)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
             <PencilSimple size="0.9375rem" />
           </button>
         </div>
@@ -362,7 +362,7 @@ export default function WarehouseDetail() {
         <div className="position-relative mb-m">
           <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
-            style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
+            style={{ width: '100%', paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 34 : 12 }} />
           {search && (
             <button onClick={() => setSearch('')} className="search-overlay-clear">
               <X size="0.8125rem" />
@@ -406,7 +406,7 @@ export default function WarehouseDetail() {
               <div className="flex-gap-s">
                 <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
                 <span className="text-sm-bold">Sales Orders</span>
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', background: 'var(--surface-hover)', padding: '2px 8px', borderRadius: 'var(--radius-s)', fontWeight: 600 }}>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', background: 'var(--surface-hover)', padding: '2px 8px', borderRadius: 'var(--radius-s)', fontWeight: 'var(--fw-semibold)' }}>
                   {warehousePOs.length}
                 </span>
               </div>
@@ -420,7 +420,7 @@ export default function WarehouseDetail() {
               return (
                 <button key={po.id} onClick={() => navigate(`/sales-orders/${po.id}`)}
                   style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer', textAlign: 'left', borderBottom: idx < warehousePOs.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
-                  <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, padding: '2px 6px', borderRadius: 4, flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : 'var(--state-info-soft)', color: po.division === 'Bolt' ? 'var(--red-shade-40)' : 'var(--state-info)' }}>
+                  <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 'var(--fw-black)', padding: '2px 6px', borderRadius: 'var(--radius-xs)', flexShrink: 0, background: po.division === 'Bolt' ? '#FFF1F2' : 'var(--state-info-soft)', color: po.division === 'Bolt' ? 'var(--red-shade-40)' : 'var(--state-info)' }}>
                     {po.division === 'Bolt' ? 'BOLT' : 'LM'}
                   </div>
                   <div className="content-body">
@@ -470,7 +470,7 @@ export default function WarehouseDetail() {
                   width: '2rem', height: '2rem', borderRadius: 'var(--radius-l)', flexShrink: 0,
                   background: tx.quantity_delta > 0 ? 'var(--state-success-soft)' : 'var(--state-error-soft)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 'var(--text-sm)', fontWeight: 800, color: tx.quantity_delta > 0 ? 'var(--state-success-text)' : 'var(--state-error-text)' }}>
+                  <span style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-black)', color: tx.quantity_delta > 0 ? 'var(--state-success-text)' : 'var(--state-error-text)' }}>
                     {tx.quantity_delta > 0 ? '+' : ''}{tx.quantity_delta}
                   </span>
                 </div>

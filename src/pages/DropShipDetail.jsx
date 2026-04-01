@@ -175,7 +175,7 @@ export default function DropShipDetail() {
         <AirplaneTilt size="1rem" weight="fill" className="drop-ship-detail-5a44" />
         <div>
           <div className="text-sm-bold">Drop Ship from PLP</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 2, lineHeight: 1.5 }}>
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 'var(--space-3xs)', lineHeight: 'var(--leading-relaxed)' }}>
             These {lines.length} item{lines.length !== 1 ? 's' : ''} will ship directly from PLP to the job site.
             Enter the tracking information provided by PLP to process this drop shipment.
           </div>
@@ -198,7 +198,7 @@ export default function DropShipDetail() {
             No drop ship lines found for this order.
           </div>
         ) : lines.map((line, idx) => (
-          <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 70px',gap:8,alignItems:'start',
+          <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 70px',gap: 'var(--space-s)',alignItems:'start',
             padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <div>
               <div className="text-sm-semi">{line.description}</div>
@@ -250,8 +250,8 @@ export default function DropShipDetail() {
         style={{ width:'100%',padding:'var(--space-m)',borderRadius:'var(--radius-l)',
           background: done ? 'var(--state-success-text)' : (!carrier.trim() || !tracking.trim()) ? 'var(--border-default)' : 'var(--brand-primary)',
           color: (!carrier.trim() || !tracking.trim()) ? 'var(--text-muted)' : '#fff',
-          fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && tracking.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
-          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
+          fontWeight: 'var(--fw-bold)',fontSize:'var(--text-sm)',cursor: carrier.trim() && tracking.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
+          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap: 'var(--space-s)' }}>
         {done ? <><CheckCircle size="1rem" weight="fill" /> Drop Ship Processed</>
           : shipping ? <><div className="spinner spinner--xs" /> Processing…</>
           : (!carrier.trim() || !tracking.trim()) ? 'Enter carrier and tracking to continue'

@@ -41,7 +41,7 @@ function PartRow({ part, levels, onPress }) {
       width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-subtle)',
       cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
       <div style={{
-        width: '2.5rem', height: '2.5rem', borderRadius: 'var(--radius-l)',
+        width: 'var(--icon-size-lg)', height: 'var(--icon-size-lg)', borderRadius: 'var(--radius-l)',
         background: isLow ? 'var(--state-warning-soft)' : 'var(--surface-hover)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         {isLow
@@ -150,7 +150,7 @@ export default function InventoryStock() {
           { label: 'Out of Stock', value: outCount, color: 'var(--state-error-text)' },
         ].map(s => (
           <div key={s.label} className="inventory-stock-080f">
-            <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: s.color }}>{s.value}</div>
+            <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-black)', color: s.color }}>{s.value}</div>
             <div className="meta-text">{s.label}</div>
           </div>
         ))}
@@ -160,7 +160,7 @@ export default function InventoryStock() {
       <div className="position-relative mb-m">
         <MagnifyingGlass size="1rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts, SKU, manufacturer…"
-          style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
+          style={{ width: '100%', paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 36 : 12 }} />
         {search && (
           <button onClick={() => setSearch('')} className="search-overlay-clear">
             <X size="0.875rem" />

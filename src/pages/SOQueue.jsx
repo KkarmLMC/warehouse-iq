@@ -40,7 +40,7 @@ export default function SOQueue() {
       <div className="queue-search">
         <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search orders…"
-          style={{ paddingLeft: 36 }} />
+          style={{ paddingLeft: 'var(--search-input-offset)' }} />
       </div>
 
       <div className="card">

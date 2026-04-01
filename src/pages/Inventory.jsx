@@ -279,7 +279,7 @@ export default function Inventory() {
             <div className="content-body">
               <div className="inventory-faf9">
                 <span className="inventory-84cb">{so.so_number}</span>
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 5px', borderRadius: 'var(--radius-xs)', background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
+                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', padding: '1px 5px', borderRadius: 'var(--radius-xs)', background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
               </div>
               <div className="inventory-722e">
                 {so.customer_name} — {so.project_name || 'No project name'}
@@ -314,7 +314,7 @@ export default function Inventory() {
                   </div>
                   <div className="meta-text">{item.warehouses?.name}</div>
                 </div>
-                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: isOut ? 'var(--state-error)' : 'var(--state-warning)', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)', color: isOut ? 'var(--state-error)' : 'var(--state-warning)', whiteSpace: 'nowrap' }}>
                   {isOut ? 'Out of Stock' : `${item.quantity_on_hand} left`}
                 </span>
               </div>

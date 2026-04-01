@@ -148,7 +148,7 @@ export default function ShipmentDetail() {
           <Warning size="1rem" weight="fill" className="shipment-detail-5a44" />
           <div>
             <div className="text-sm-bold">Partial Shipment</div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 2, lineHeight: 1.5 }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 'var(--space-3xs)', lineHeight: 'var(--leading-relaxed)' }}>
               {order?.has_back_order && order?.has_drop_ship
                 ? 'Some items were back-ordered and others are being drop shipped from PLP. After confirming this shipment, the SO will remain open until all tracks are resolved.'
                 : order?.has_back_order
@@ -171,7 +171,7 @@ export default function ShipmentDetail() {
           ))}
         </div>
         {lines.map((line, idx) => (
-          <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,alignItems:'start',
+          <div key={line.id} style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap: 'var(--space-s)',alignItems:'start',
             padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <div>
               <div className="text-sm-semi">{line.description}</div>
@@ -228,8 +228,8 @@ export default function ShipmentDetail() {
         style={{ width:'100%',padding:'var(--space-m)',borderRadius:'var(--radius-l)',
           background: done ? 'var(--state-success-text)' : !carrier.trim() ? 'var(--border-default)' : 'var(--brand-primary)',
           color: !carrier.trim() ? 'var(--text-muted)' : '#fff',
-          fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
-          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
+          fontWeight: 'var(--fw-bold)',fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
+          fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap: 'var(--space-s)' }}>
         {done ? <><CheckCircle size="1rem" weight="fill" /> {(order?.has_back_order || order?.has_drop_ship) ? 'Partial Shipment Confirmed' : 'Shipment Complete'}</>
           : shipping ? <><div className="spinner spinner--xs" /> Processing…</>
           : !carrier.trim() ? 'Enter carrier to continue'
