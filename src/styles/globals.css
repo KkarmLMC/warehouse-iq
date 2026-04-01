@@ -1724,6 +1724,72 @@ textarea,
   color: var(--state-error-text);
   font-size: var(--text-sm);
 }
+.login-error--mb { margin-bottom: var(--space-l); }
+
+/* ─── Login Hero ─── */
+.login-hero { margin-bottom: var(--space-2xl); text-align: center; min-height: 148px; }
+.login-hero__icon {
+  width: 56px; height: 56px; border-radius: var(--radius-m);
+  background: var(--brand-primary);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto var(--space-l);
+  color: var(--surface-base);
+}
+.login-hero__title {
+  font-size: var(--text-xxl); font-weight: var(--fw-black);
+  line-height: var(--lh-xxl); letter-spacing: var(--ls-xxl);
+}
+.login-hero__subtitle {
+  font-size: var(--text-sm); color: var(--text-muted);
+  margin-top: var(--space-xs); max-width: 280px; margin-left: auto; margin-right: auto;
+}
+
+/* ─── Login Section Headers ─── */
+.login-header { text-align: center; margin-bottom: var(--space-xl); }
+.login-header--row { display: flex; align-items: center; gap: var(--space-s); margin-bottom: var(--space-xl); }
+.login-header__title { font-size: var(--text-lg); font-weight: var(--fw-bold); margin-bottom: var(--space-xs); }
+.login-header--row .login-header__title { margin-bottom: 0; }
+.login-header__subtitle { font-size: var(--text-sm); color: var(--text-muted); }
+.login-back { color: var(--text-muted); display: flex; background: none; cursor: pointer; padding: 0; }
+
+/* ─── Login Form Fields ─── */
+.form-field { margin-bottom: var(--space-m); }
+.form-field--lg { margin-bottom: var(--space-xl); }
+.form-field__label {
+  font-size: var(--text-xs); font-weight: var(--fw-bold);
+  color: var(--text-primary); display: block; margin-bottom: var(--space-xs);
+}
+.form-field__input-wrap { position: relative; }
+.form-field__eye {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; cursor: pointer; color: var(--text-muted); padding: 0;
+}
+
+/* ─── Login Footer ─── */
+.login-footer {
+  margin-top: var(--space-2xl); font-size: var(--text-xs);
+  color: var(--text-muted); text-align: center;
+}
+
+/* ─── Login Link Button spacing ─── */
+.login-link-btn--mt { margin-top: var(--space-l); }
+
+/* ─── PIN Pad ─── */
+.pin-pad { display: flex; flex-direction: column; align-items: center; gap: var(--space-l); }
+.pin-pad__dots { display: flex; gap: var(--space-m); height: 20px; align-items: center; }
+.pin-pad__dot {
+  border-radius: 50%;
+  transition: all 0.12s;
+}
+.pin-pad__dot--empty { width: 14px; height: 14px; }
+.pin-pad__dot--filled { width: 16px; height: 16px; }
+.pin-pad__hint {
+  font-size: var(--text-xs); font-weight: var(--fw-bold); text-align: center;
+}
+.pin-pad__grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-m); width: 100%; max-width: 260px;
+}
 
 .empty {
   display: flex;

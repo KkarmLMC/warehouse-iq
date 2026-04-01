@@ -16,12 +16,6 @@ async function hashPin(pin) {
 function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = false }) {
   const [digits, setDigits] = useState([])
 
-  // For confirm step: compare entered digits against confirmPin in real time
-  const getMatchState = (idx) => {
-    if (!confirmPin || idx >= digits.length) return 'empty'
-    return digits[idx] === confirmPin[idx] ? 'match' : 'mismatch'
-  }
-
   const press = (d) => {
     if (loading || digits.length >= 6) return
     setDigits(prev => [...prev, d])
@@ -41,7 +35,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
 
   const isFull = digits.length === 6
 
-  // Dot color: if confirmPin provided, show match/mismatch per digit position
+  // Dot color: data-driven based on match state (only inline style remaining)
   const dotColor = (i) => {
     if (i >= digits.length) return 'var(--border-subtle)'
     if (!confirmPin) return 'var(--brand-primary)'
@@ -49,25 +43,21 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-l)' }}>
+    <div className="pin-pad">
 
       {/* Dots — green/red when confirming */}
-      <div style={{ display: 'flex', gap: 'var(--space-m)', height: 20, alignItems: 'center' }}>
+      <div className="pin-pad__dots">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} style={{
-            width: i < digits.length ? 16 : 14,
-            height: i < digits.length ? 16 : 14,
-            borderRadius: '50%',
-            background: dotColor(i),
-            transition: 'all 0.12s' }} />
+          <div key={i}
+            className={`pin-pad__dot ${i < digits.length ? 'pin-pad__dot--filled' : 'pin-pad__dot--empty'}`}
+            style={{ background: dotColor(i) }} />
         ))}
       </div>
 
       {/* Match hint when confirming */}
       {confirmPin && isFull && (
-        <div style={{
-          fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', textAlign: 'center',
-          color: digits.join('') === confirmPin ? 'var(--state-success)' : 'var(--state-error)' }}>
+        <div className="pin-pad__hint"
+          style={{ color: digits.join('') === confirmPin ? 'var(--state-success)' : 'var(--state-error)' }}>
           {digits.join('') === confirmPin ? '✓ PINs match' : '✗ PINs do not match'}
         </div>
       )}
@@ -79,7 +69,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
       )}
 
       {/* Number grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-m)', width: '100%', maxWidth: 260 }}>
+      <div className="pin-pad__grid">
         {[1,2,3,4,5,6,7,8,9].map(n => (
           <button key={n} onClick={() => press(String(n))} disabled={loading}
             className="pin-btn">
@@ -96,7 +86,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
         </button>
       </div>
 
-      {/* Manual confirm button — shown when requireConfirm=true and 6 digits entered */}
+      {/* Manual confirm button */}
       {requireConfirm ? (
         <button
           onClick={submit}
@@ -108,7 +98,6 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
             : 'Confirm PIN ✓'}
         </button>
       ) : (
-        // Normal mode — auto-submits but shows confirm button at 6 digits for PIN entry step
         isFull && (
           <button
             onClick={submit}
@@ -127,23 +116,21 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
   const navigate = useNavigate()
   const location = useLocation()
   const { signIn, refreshProfile } = useAuth()
-  // Default route — explicit env var, or infer from app name
   const defaultRoute = import.meta.env.VITE_DEFAULT_ROUTE
     || ({ 'Mission Control': '/opportunities', 'Warehouse IQ': '/warehouse-hq', 'Field Ops': '/dashboard' }[import.meta.env.VITE_APP_NAME] || '/dashboard')
   const from = location.state?.from?.pathname || defaultRoute
 
-  const [mode, setMode] = useState('pin') // pin | password | setup-pin
+  const [mode, setMode] = useState('pin')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPw, setShowPw] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [pinStep, setPinStep] = useState('enter') // enter | confirm
+  const [pinStep, setPinStep] = useState('enter')
   const [firstPin, setFirstPin] = useState('')
   const [pendingSession, setPendingSession] = useState(null)
   const [pinSaved, setPinSaved] = useState(false)
 
-  // ── Force PIN setup when app-level guard redirects here ─────────────────
   useEffect(() => {
     if (forcePinSetup && forcedSession) {
       setPendingSession(forcedSession)
@@ -153,7 +140,6 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
     }
   }, [forcePinSetup])
 
-  // ── Password sign in ──────────────────────────────────────────────────────
   const handlePasswordLogin = async (e) => {
     e.preventDefault()
     if (!email || !password) { setError('Please enter your email and password.'); return }
@@ -164,12 +150,10 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
       setLoading(false)
       return
     }
-    // Check if user has a PIN set — block navigation until PIN is confirmed
     try {
       const { data: profile } = await db
         .from('profiles').select('pin_hash').eq('id', data.session.user.id).single()
       if (!profile?.pin_hash) {
-        // No PIN — mandatory setup before entering the app
         setPendingSession(data.session)
         setPinStep('enter')
         setFirstPin('')
@@ -178,7 +162,6 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         return
       }
     } catch (_) {
-      // Profile fetch failed — require PIN setup as a safe default
       setPendingSession(data.session)
       setPinStep('enter')
       setFirstPin('')
@@ -189,7 +172,6 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
     navigate(from, { replace: true })
   }
 
-  // ── PIN login ─────────────────────────────────────────────────────────────
   const handlePinLogin = async (pin) => {
     setLoading(true); setError('')
     const hashed = await hashPin(pin)
@@ -200,7 +182,6 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         body: JSON.stringify({ pin_hash: hashed }) })
       const data = await res.json()
       if (!res.ok) { setError('Incorrect PIN. Try again.'); setLoading(false); return }
-      // Set session manually
       await db.auth.setSession({ access_token: data.access_token, refresh_token: data.refresh_token })
       navigate(from, { replace: true })
     } catch {
@@ -209,14 +190,12 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
     }
   }
 
-  // ── PIN setup (after password login) ──────────────────────────────────────
   const handlePinSetup = async (pin) => {
     if (pinStep === 'enter') {
       setFirstPin(pin)
       setPinStep('confirm')
       return
     }
-    // Confirm step
     if (pin !== firstPin) {
       setError('PINs don\'t match. Try again.')
       setPinStep('enter')
@@ -226,8 +205,6 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
     setLoading(true); setError('')
     const hashed = await hashPin(pin)
 
-    // Always get the live authenticated user — don't rely on pendingSession
-    // which can be stale when arriving via the App-level forcePinSetup guard
     const { data: { user: liveUser }, error: userErr } = await db.auth.getUser()
     if (userErr || !liveUser) {
       setError('Session expired. Please sign in again.')
@@ -244,10 +221,8 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
       setLoading(false)
       return
     }
-    // Show success state immediately so user gets feedback
     setPinSaved(true)
     setLoading(false)
-    // Refresh profile then navigate — guard will now see pin_hash and let through
     await refreshProfile()
     navigate(from, { replace: true })
   }
@@ -255,14 +230,14 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
   return (
     <div className="login-page">
       {/* Logo */}
-      <div style={{ marginBottom: 'var(--space-2xl)', textAlign: 'center', minHeight: 148 }}>
-        <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--space-l)' }}>
-          <Lightning size="1.75rem" weight="fill" style={{ color: 'var(--surface-base)' }} />
+      <div className="login-hero">
+        <div className="login-hero__icon">
+          <Lightning size="1.75rem" weight="fill" />
         </div>
-        <div style={{ fontSize: 'var(--text-xxl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--lh-xxl)', letterSpacing: 'var(--ls-xxl)' }}>
+        <div className="login-hero__title">
           {import.meta.env.VITE_APP_NAME || 'LMC Platform'}
         </div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 'var(--space-xs)', maxWidth: 280, margin: 'var(--space-xs) auto 0' }}>
+        <div className="login-hero__subtitle">
           {import.meta.env.VITE_APP_SUBTITLE || 'Lightning Master Controls · Bolt Lightning Protection'}
         </div>
       </div>
@@ -272,31 +247,30 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         {/* ── PIN setup mode ── */}
         {mode === 'setup-pin' && (
           <>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-              <div style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--fw-bold)', marginBottom: 'var(--space-xs)' }}>
+            <div className="login-header">
+              <div className="login-header__title">
                 {pinStep === 'enter' ? 'Set Your PIN' : 'Confirm PIN'}
               </div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+              <div className="login-header__subtitle">
                 {pinStep === 'enter'
                   ? (forcePinSetup ? 'Create a PIN to continue' : 'A PIN is required to access this app')
                   : 'Enter your PIN again to confirm'}
               </div>
             </div>
             <PinPad onPin={handlePinSetup} loading={loading} error={error} requireConfirm={true} confirmPin={pinStep === 'confirm' ? firstPin : null} />
-
           </>
         )}
 
         {/* ── PIN login mode ── */}
         {mode === 'pin' && (
           <>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-              <div style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--fw-bold)', marginBottom: 'var(--space-xs)' }}>Enter PIN</div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>Enter your 6-digit PIN</div>
+            <div className="login-header">
+              <div className="login-header__title">Enter PIN</div>
+              <div className="login-header__subtitle">Enter your 6-digit PIN</div>
             </div>
             <PinPad onPin={handlePinLogin} loading={loading} error={error} requireConfirm={true} />
             <button onClick={() => { setMode('password'); setError('') }}
-              className="login-link-btn" style={{ marginTop: 'var(--space-l)' }}>
+              className="login-link-btn login-link-btn--mt">
               Sign in with email instead
             </button>
           </>
@@ -305,35 +279,32 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         {/* ── Password login mode ── */}
         {mode === 'password' && (
           <>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', marginBottom: 'var(--space-xl)' }}>
-              <button onClick={() => { setMode('pin'); setError('') }}
-                style={{ color: 'var(--text-muted)', display: 'flex' }}>
+            <div className="login-header--row">
+              <button onClick={() => { setMode('pin'); setError('') }} className="login-back">
                 <ArrowLeft size="1.125rem" />
               </button>
-              <div style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--fw-bold)' }}>Sign in</div>
+              <div className="login-header__title">Sign in</div>
             </div>
             <form onSubmit={handlePasswordLogin}>
-              <div style={{ marginBottom: 'var(--space-m)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', display: 'block', marginBottom: 'var(--space-xs)' }}>Email</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.com" autoComplete="email" style={{ width: '100%' }} autoFocus />
+              <div className="form-field">
+                <label className="form-field__label">Email</label>
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.com" autoComplete="email" autoFocus />
               </div>
-              <div style={{ marginBottom: 'var(--space-xl)' }}>
-                <label style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', display: 'block', marginBottom: 'var(--space-xs)' }}>Password</label>
-                <div style={{ position: 'relative' }}>
-                  <input type={showPw ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" autoComplete="current-password" style={{ width: '100%', paddingRight: 'var(--sp-10)' }} />
-                  <button type="button" onClick={() => setShowPw(s => !s)}
-                    style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: 0 }}>
+              <div className="form-field--lg">
+                <label className="form-field__label">Password</label>
+                <div className="form-field__input-wrap">
+                  <input type={showPw ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" autoComplete="current-password" />
+                  <button type="button" onClick={() => setShowPw(s => !s)} className="form-field__eye">
                     {showPw ? <EyeSlash size="1rem" /> : <Eye size="1rem" />}
                   </button>
                 </div>
               </div>
               {error && (
-                <div className="login-error" style={{ marginBottom: 'var(--space-l)' }}>
-                  <Warning size="0.875rem" style={{ flexShrink: 0 }} />{error}
+                <div className="login-error login-error--mb">
+                  <Warning size="0.875rem" />{error}
                 </div>
               )}
-              <button type="submit" disabled={loading}
-                className="login-submit">
+              <button type="submit" disabled={loading} className="login-submit">
                 {loading ? 'Signing in…' : 'Sign In'}
               </button>
             </form>
@@ -341,7 +312,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
         )}
       </div>
 
-      <div style={{ marginTop: 'var(--space-2xl)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center' }}>
+      <div className="login-footer">
         Contact your administrator to create an account.
       </div>
     </div>
