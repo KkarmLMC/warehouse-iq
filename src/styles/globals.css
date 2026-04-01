@@ -2176,6 +2176,101 @@ textarea,
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
+/* ─── Tier 2: Custom — Save/Submit Button (conditional enabled/disabled) ─── */
+.save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  width: 100%;
+  padding: var(--space-m);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  border-radius: var(--radius-m);
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard);
+}
+.save-btn:disabled {
+  opacity: var(--opacity-muted);
+  cursor: not-allowed;
+}
+
+/* ─── Tier 2: Custom — Filter Pill Button (active toggle) ─── */
+.filter-pill-btn {
+  padding: var(--space-2xs) var(--space-m);
+  border-radius: var(--radius-s);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard);
+}
+
+/* ─── Tier 2: Custom — Tab Button (tab switcher with active state) ─── */
+.tab-btn {
+  padding: var(--space-s) var(--space-l);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+.tab-btn--active {
+  color: var(--text-primary);
+  font-weight: var(--fw-bold);
+}
+
+/* ─── Tier 2: Custom — Expand/Collapse Chevron Button ─── */
+.expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+.expand-btn__icon {
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+.expand-btn__icon--collapsed {
+  transform: rotate(-90deg);
+}
+
+/* ─── Tier 2: Custom — Form Edit Button (mono uppercase) ─── */
+.form-edit-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-m);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  border-radius: var(--radius-s);
+  border: none;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+.form-edit-btn:hover { background: var(--surface-hover); }
+
 .empty {
   display: flex;
   flex-direction: column;

@@ -35,11 +35,7 @@ function PartRow({ part, levels, onPress }) {
   const isLow        = isFinite(minLevel) && totalQty <= minLevel && totalQty > 0
 
   return (
-    <button onClick={onPress} style={{
-      display: 'flex', alignItems: 'center', gap: '0.75rem',
-      padding: 'var(--space-m) var(--space-l)', background: 'none',
-      width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-subtle)',
-      cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
+    <button onClick={onPress} className="row-btn">
       <div style={{
         width: 'var(--icon-size-lg)', height: 'var(--icon-size-lg)', borderRadius: 'var(--radius-l)',
         background: isLow ? 'var(--state-warning-soft)' : 'var(--surface-hover)',

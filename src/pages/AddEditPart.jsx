@@ -177,7 +177,7 @@ export default function AddEditPart() {
         <button onClick={() => navigate(-1)} className="card-section text-sm-bold">
           Cancel
         </button>
-        <button onClick={handleSubmit} disabled={saving} style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: saving ? 'var(--surface-hover)' : 'var(--brand-primary)', color: saving ? 'var(--text-muted)' : '#fff', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
+        <button onClick={handleSubmit} disabled={saving} className="save-btn" style={{ background: saving ? 'var(--surface-hover)' : 'var(--brand-primary)', color: saving ? 'var(--text-muted)' : '#fff', cursor: saving ? 'default' : 'pointer', }}>
           {saving ? <><SpinnerGap size="0.875rem" className="anim-spin" /> Saving…</> : <><CheckCircle size="0.875rem" /> {isEdit ? 'Save Changes' : 'Add Part'}</>}
         </button>
       </div>

@@ -75,11 +75,7 @@ function CategorySection({ category, parts, onPartPress }) {
         <div >
           {parts.map((part, idx) => (
             <button key={part.id} onClick={() => onPartPress(part.id)}
-              style={{
-                display: 'flex', alignItems: 'center', gap: '0.75rem',
-                padding: 'var(--space-m) var(--space-l)', background: 'none', width: '100%', textAlign: 'left',
-                borderBottom: idx < parts.length - 1 ? '1px solid var(--border-subtle)' : 'none',
-                cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
+              className="row-btn">
               <div className="content-body">
                 <div className="flex-gap-s">
                   <div className="text-sm-truncate">

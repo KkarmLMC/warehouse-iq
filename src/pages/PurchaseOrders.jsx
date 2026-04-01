@@ -49,11 +49,7 @@ function POCard({ po, totals, onPress }) {
   const grandTotal = matTotal + laborTotal
 
   return (
-    <button onClick={onPress} style={{
-      display: 'flex', alignItems: 'center', gap: '0.75rem',
-      padding: 'var(--space-l)', background: 'none',
-      width: '100%', textAlign: 'left', borderBottom: '1px solid var(--border-subtle)',
-      cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
+    <button onClick={onPress} className="row-btn">
       {/* Icon */}
       <div style={{
         width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-l)',

@@ -282,7 +282,7 @@ export default function WarehouseIQ() {
           <div className="flex-gap-s">
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
-                style={{ padding: 'var(--space-2xs) var(--space-m)', borderRadius:'var(--radius-s)', background:filter===val?'var(--brand-primary)':'var(--surface-hover)', color:filter===val?'#fff':'var(--text-primary)', fontSize:'var(--text-xs)', fontWeight: 'var(--fw-bold)', cursor:'pointer', whiteSpace:'nowrap' }}>
+                className="filter-pill-btn" style={{ background:filter===val?'var(--brand-primary)':'var(--surface-hover)', color:filter===val?'#fff':'var(--text-primary)', }}>
                 {lbl}
               </button>
             ))}

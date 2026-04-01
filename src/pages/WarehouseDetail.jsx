@@ -138,7 +138,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         {/* Footer */}
         <div className="warehouse-detail-fa13">
           <button onClick={handleSave} disabled={saving || !form.name.trim()}
-            style={{ width: '100%', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: !form.name.trim() ? 'var(--surface-hover)' : 'var(--brand-primary)', color: !form.name.trim() ? 'var(--text-muted)' : '#fff', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: !form.name.trim() ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
+            className="save-btn" style={{ background: !form.name.trim() ? 'var(--surface-hover)' : 'var(--brand-primary)', color: !form.name.trim() ? 'var(--text-muted)' : '#fff', cursor: !form.name.trim() ? 'default' : 'pointer' }}>
             {saving ? 'Saving…' : <><Check size="0.9375rem" /> Save Changes</>}
           </button>
         </div>
@@ -157,11 +157,7 @@ function StockRow({ level, onPress }) {
   const bg    = isOut ? 'var(--state-error-soft)' : isLow ? 'var(--state-warning-soft)' : 'var(--state-success-soft)'
 
   return (
-    <button onClick={onPress} style={{
-      display: 'flex', alignItems: 'center', gap: '0.75rem',
-      padding: 'var(--space-m) var(--space-l)', background: 'none', width: '100%', textAlign: 'left',
-      borderBottom: '1px solid var(--border-subtle)', cursor: 'pointer',
-      WebkitTapHighlightColor: 'transparent' }}>
+    <button onClick={onPress} className="row-btn">
       <div className="content-body">
         <div className="text-sm-truncate">
           {level.parts?.name || '—'}
