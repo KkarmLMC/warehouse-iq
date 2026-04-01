@@ -1,52 +1,35 @@
 /**
  * ActionButton
- * Full-width contextual action button — token-driven, BEM, flat UI.
- * Used at the bottom of detail pages for primary workflow actions.
+ * Full-width contextual action button used at the bottom of detail pages.
  *
  * Props:
  *   label    — primary button text
  *   sub      — optional subtitle/description line
  *   onClick  — click handler
- *   variant  — 'navy' | 'primary' | 'success'  (default: 'navy')
+ *   color    — background color override (data-driven, rare)
  *   disabled — disables the button
- *   loading  — shows spinner
+ *   loading  — shows spinner instead of icon
  *   done     — shows checkmark, disables interaction
  *   icon     — optional Phosphor icon override (defaults to ArrowRight)
  */
 import { ArrowRight, CheckCircle, SpinnerGap } from '@phosphor-icons/react'
 
-const VARIANT_MAP = {
-  navy:    'action-btn--navy',
-  primary: 'action-btn--primary',
-  success: 'action-btn--success',
-}
-
-export default function ActionButton({
-  label,
-  sub,
-  onClick,
-  variant = 'navy',
-  disabled,
-  loading,
-  done,
-  icon: Icon,
-}) {
+export default function ActionButton({ label, sub, onClick, color, disabled, loading, done, icon: Icon }) {
   const isDisabled = disabled || loading || done
   const RightIcon = done ? CheckCircle : loading ? SpinnerGap : (Icon || ArrowRight)
 
-  const cls = [
-    'action-btn',
-    VARIANT_MAP[variant] || VARIANT_MAP.navy,
-    isDisabled && 'action-btn--disabled',
-    done && 'action-btn--done',
-    loading && 'action-btn--loading',
-  ].filter(Boolean).join(' ')
+  const cls = ['action-btn',
+    done ? 'action-btn--done action-btn--success'
+      : isDisabled ? 'action-btn--disabled action-btn--navy'
+      : 'action-btn--navy',
+  ].join(' ')
 
   return (
     <button
       className={cls}
       onClick={!isDisabled ? onClick : undefined}
       disabled={isDisabled}
+      style={color && !isDisabled ? { background: color } : undefined}
     >
       <div className="action-btn__text">
         <span className="action-btn__label">{label}</span>
@@ -55,7 +38,8 @@ export default function ActionButton({
       <RightIcon
         size="1.25rem"
         weight={done ? 'fill' : 'bold'}
-        className={loading ? 'anim-spin' : ''}
+        className={`action-btn__icon${loading ? ' anim-spin' : ''}`}
+        className="action-btn__icon"
       />
     </button>
   )

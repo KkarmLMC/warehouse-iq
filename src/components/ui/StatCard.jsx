@@ -5,26 +5,22 @@
  * Props:
  *   label     — metric label e.g. "Open Sales Orders"
  *   value     — metric value e.g. "87" or "$1,175,491"
- *   color     — optional CSS color for the value (defaults to --black)
+ *   color     — optional CSS color for the value (data-driven)
  *   onClick   — optional click handler
- *   sub       — optional small line below value e.g. "Across 87 leads"
+ *   sub       — optional small line below value
  */
 export default function StatCard({ label, value, color, onClick, sub }) {
   return (
     <div
       className="stat-card"
       onClick={onClick}
-      style={{ cursor: onClick ? 'pointer' : 'default' }}
+      role={onClick ? 'button' : undefined}
     >
       <div className="stat-card__label">{label}</div>
       <div className="stat-card__value" style={color ? { color } : undefined}>
         {value}
       </div>
-      {sub && (
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 'var(--space-xs)' }}>
-          {sub}
-        </div>
-      )}
+      {sub && <div className="stat-meta">{sub}</div>}
     </div>
   )
 }

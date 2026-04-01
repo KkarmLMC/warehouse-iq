@@ -4,19 +4,17 @@
  *
  * Props:
  *   icon     — Phosphor icon component
- *   title    — main empty message e.g. "No sales orders found"
+ *   title    — main empty message
  *   desc     — optional secondary line
- *   action   — optional JSX (e.g. a button to create the first item)
+ *   action   — optional JSX (e.g. a button)
  */
 export default function EmptyState({ icon: Icon, title, desc, action }) {
   return (
     <div className="empty">
-      {Icon && (
-        <Icon size="2.25rem" style={{ color: 'var(--text-muted)', marginBottom: 8 }} />
-      )}
+      {Icon && <Icon size="2.25rem" className="empty-icon" />}
       {title && <div className="empty-title">{title}</div>}
       {desc  && <div className="empty-desc">{desc}</div>}
-      {action && <div style={{ marginTop: 'var(--space-m)' }}>{action}</div>}
+      {action && <div className="empty__action">{action}</div>}
     </div>
   )
 }

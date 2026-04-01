@@ -1,7 +1,6 @@
 /**
  * FilterPills
  * Horizontal scrollable pill filter tabs.
- * Used on list pages to filter by status, stage, category etc.
  *
  * Props:
  *   options  — array of { key, label, count? } OR array of strings
@@ -14,30 +13,14 @@ export default function FilterPills({ options, active, onChange }) {
   )
 
   return (
-    <div style={{
-      display: 'flex',
-      gap: 'var(--space-s)',
-      overflowX: 'auto',
-      scrollbarWidth: 'none',
-      msOverflowStyle: 'none',
-      paddingBottom: 2 }}>
+    <div className="filter-pills">
       {items.map(({ key, label, count }) => {
         const isActive = active === key
         return (
           <button
             key={key}
             onClick={() => onChange(key)}
-            style={{
-              padding: '4px 12px',
-              borderRadius: 'var(--radius-s)',
-              background: isActive ? 'var(--brand-primary)' : 'var(--surface-base)',
-              color: isActive ? '#fff' : 'var(--text-primary)',
-              fontSize: 'var(--text-xs)',
-              fontWeight: 600,
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'all var(--ease-fast)',
-              flexShrink: 0 }}
+            className={`filter-pills__item${isActive ? ' filter-pills__item--active' : ''}`}
           >
             {label}{count != null ? ` (${count})` : ''}
           </button>

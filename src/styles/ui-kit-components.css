@@ -350,6 +350,10 @@
   margin-top: 2px;
 }
 
+.action-btn__icon {
+  flex-shrink: 0;
+}
+
 
 /* =============================================================================
    PAGE TITLE (upgraded PageHeader component)

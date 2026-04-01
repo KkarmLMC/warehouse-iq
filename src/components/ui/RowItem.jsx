@@ -4,9 +4,9 @@
  *
  * Props:
  *   icon       — Phosphor icon component e.g. Receipt
- *   iconColor  — icon color (defaults to --black)
- *   title      — primary text (--text-sm, weight 600)
- *   subtitle   — secondary text (--text-xs, text-3)
+ *   iconColor  — icon color override (data-driven)
+ *   title      — primary text
+ *   subtitle   — secondary text
  *   right      — JSX for the right side (value, badge, etc.)
  *   onClick    — click handler; adds cursor pointer + hover
  *   last       — if true, removes bottom border
@@ -15,47 +15,28 @@
 import { CaretRight } from '@phosphor-icons/react'
 
 export default function RowItem({ icon: Icon, iconColor, title, subtitle, right, onClick, last, noPad }) {
-  return (
-    <div
-      onClick={onClick}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 'var(--space-m)',
-        padding: noPad ? 'var(--space-m) 0' : 'var(--space-m) var(--space-l)',
-        borderBottom: last ? 'none' : '1px solid var(--border-subtle)',
-        cursor: onClick ? 'pointer' : 'default',
-        transition: 'background var(--ease-fast)' }}
-      onMouseEnter={e => { if (onClick) e.currentTarget.style.background = 'var(--surface-hover)' }}
-      onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
-    >
-      {Icon && (
-        <Icon size="1.125rem" style={{ color: iconColor || 'var(--text-primary)', flexShrink: 0 }} />
-      )}
+  const cls = ['row-item',
+    last && 'row-item--last',
+    noPad && 'row-item--no-pad',
+    onClick && 'row-item--clickable',
+  ].filter(Boolean).join(' ')
 
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{
-          fontSize: 'var(--text-sm)', fontWeight: 600,
-          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-          color: 'var(--text-primary)' }}>
-          {title}
-        </div>
+  return (
+    <div className={cls} onClick={onClick}>
+      {Icon && (
+        <Icon size="1.125rem" className="row-item__icon" style={iconColor ? { color: iconColor } : undefined} />
+      )}
+      <div className="row-item__body">
+        <div className="row-item__title">{title}</div>
         {subtitle && (
-          <div style={{
-            fontSize: 'var(--text-xs)', color: 'var(--text-muted)',
-            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-            marginTop: 1 }}>
-            {subtitle}
-          </div>
+          <div className="row-item__subtitle">{subtitle}</div>
         )}
       </div>
-
       {right && (
-        <div style={{ flexShrink: 0 }}>{right}</div>
+        <div className="row-item__right">{right}</div>
       )}
-
       {onClick && (
-        <CaretRight size="0.875rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />
+        <CaretRight size="0.875rem" className="row-item__caret" />
       )}
     </div>
   )

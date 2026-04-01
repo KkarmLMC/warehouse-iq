@@ -1,40 +1,19 @@
 /**
  * SearchInput
- * Standard search field with icon and clear button — token-driven, BEM.
+ * Standard search field with magnifying glass icon and optional clear button.
  *
  * Props:
- *   value       — controlled input value
+ *   value        — controlled input value
  *   onChange     — (value: string) => void
  *   placeholder  — input placeholder text
- *   autoFocus   — focus on mount
- *   isLoading   — shows spinner i(
- ead of search icon
- *   onClear     — optional explicit clear handler
- *   className   — additional class names
+ *   autoFocus    — focus on mount
  */
 import { MagnifyingGlass, X } from '@phosphor-icons/react'
 
-export default function SearchInput({
-  value,
-  onChange,
-  placeholder = 'Search\u2026',
-  autoFocus,
-  isLoading,
-  onClear,
-  className = '',
-}) {
-  const handleClear = () => {
-    if (onClear) onClear()
-    else onChange('')
-  }
-
+export default function SearchInput({ value, onChange, placeholder = 'Search…', autoFocus }) {
   return (
-    <div className={`search-wrap ${className}`}>
-      <span className="search-wrap__icon">
-        {isLoading
-          ? <span className="spinner spinner--sm" />
-          : <MagnifyingGlass size="0.9375rem" />}
-      </span>
+    <div className="search-wrap">
+      <MagnifyingGlass size="0.9375rem" className="search-wrap__icon" />
       <input
         className="search-input"
         value={value}
@@ -43,7 +22,7 @@ export default function SearchInput({
         autoFocus={autoFocus}
       />
       {value && (
-        <button className="search-wrap__clear" onClick={handleClear} aria-label="Clear search">
+        <button className="search-wrap__clear" onClick={() => onChange('')}>
           <X size="0.8125rem" />
         </button>
       )}

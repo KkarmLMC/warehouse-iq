@@ -1,7 +1,6 @@
 /**
  * FilterPills
- * Horizontal scrollable pill filter tabs — token-driven, BEM, flat UI.
- * Replaces all inline styles with CSS classes.
+ * Horizontal scrollable pill filter tabs.
  *
  * Props:
  *   options  — array of { key, label, count? } OR array of strings
@@ -20,8 +19,8 @@ export default function FilterPills({ options, active, onChange }) {
         return (
           <button
             key={key}
-            className={`filter-pills__item ${isActive ? 'filter-pills__item--active' : ''}`}
             onClick={() => onChange(key)}
+            className={`filter-pills__item${isActive ? ' filter-pills__item--active' : ''}`}
           >
             {label}{count != null ? ` (${count})` : ''}
           </button>

@@ -1398,6 +1398,8 @@ textarea,
   flex-shrink: 0;
   min-height: 2.5rem;
 }
+.list-card__header[role="button"] { cursor: pointer; }
+.list-card__header[role="button"]:hover { opacity: 0.85; }
 
 .list-card__title {
   display: flex;

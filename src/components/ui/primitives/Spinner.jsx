@@ -1,7 +1,6 @@
 /**
  * Spinner
- * Loading indicator — token-driven, flat UI, BEM.
- * Replaces the old inline-styled Spinner with CSS-class-driven rendering.
+ * Loading state. Centered by default, inline variant available.
  *
  * Props:
  *   inline  — renders inline (no centering wrapper)
@@ -9,20 +8,20 @@
  *   label   — optional text next to spinner
  */
 export default function Spinner({ inline, size, label }) {
-  const sizeClass = size === 'sm' ? 'spinner--sm' : size === 'lg' ? 'spinner--lg' : ''
+  const s = size === 'sm' ? 'spinner--sm' : size === 'lg' ? 'spinner--lg' : ''
 
-  const inner = (
+  const el = (
     <div className="spinner__inner">
-      <div className={`spinner ${sizeClass}`} />
+      <div className={`spinner ${s}`} />
       {label && <span className="spinner__label">{label}</span>}
     </div>
   )
 
-  if (inline) return inner
+  if (inline) return el
 
   return (
-    <div className="loading">
-      {inner}
+    <div className="spinner-content">
+      {el}
     </div>
   )
 }

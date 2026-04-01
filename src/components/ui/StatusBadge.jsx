@@ -15,8 +15,7 @@ function getTokens(status) {
   if (!status) return { color: 'var(--text-muted)', bg: 'var(--surface-hover)' }
   const key = status.toLowerCase().replace(/[\s_-]+/g, '-')
 
-  // Try each map in order
-  const SO_KEYS = ['draft','queued','running','submitted','fulfillment','published','shipment','back-ordered','back_ordered','complete','fulfilled','cancelled']
+  const SO_KEYS = ['draft','queued','running','submitted','fulfillment','partial-fulfillment','published','shipment','partial-shipment','back-ordered','back_ordered','complete','fulfilled','cancelled']
   const PROJ_KEYS = ['scheduled','in-progress','in progress','inspection','customer-signoff','postponed','failed']
   const APPR_KEYS = ['approved','rejected','pending-review','under-review']
   const STOCK_KEYS = ['ok','low','out','on-order','on_order']
@@ -28,7 +27,6 @@ function getTokens(status) {
   if (APPR_KEYS.some(k => k === normalized || k === key)) return approvalStatus(status)
   if (STOCK_KEYS.some(k => k === normalized || k === key)) return stockStatus(status)
 
-  // Extra aliases
   const ALIAS = {
     'active':    { color: 'var(--state-warning)',      bg: 'var(--state-warning-soft)' },
     'pending':   { color: 'var(--state-warning)',      bg: 'var(--state-warning-soft)' },
@@ -40,20 +38,13 @@ function getTokens(status) {
 }
 
 export default function StatusBadge({ status, custom, small }) {
-  const style = custom || getTokens(status)
+  const tokens = custom || getTokens(status)
   return (
-    <span style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      padding: small ? '1px 6px' : '2px 8px',
-      borderRadius: 'var(--radius-s)',
-      fontSize: 'var(--text-xs)',
-      fontWeight: 700,
-      background: style.bg,
-      color: style.color,
-      whiteSpace: 'nowrap',
-      textTransform: 'capitalize' }}>
-      {style.label || status}
+    <span
+      className={`badge${small ? ' badge--sm' : ''}`}
+      style={{ background: tokens.bg, color: tokens.color, textTransform: 'capitalize' }}
+    >
+      {tokens.label || status}
     </span>
   )
 }

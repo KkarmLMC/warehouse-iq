@@ -1,39 +1,26 @@
 /**
  * StatCard
- * Dashboard metric card — upgraded to token-only, zero inline styles.
+ * Dashboard metric card. Used in grids of 2–4 across all apps.
  *
  * Props:
- *   label   — metric label e.g. "Open Sales Orders"
- *   value   — metric value e.g. "87" or "$1,175,491"
- *   tone    — optional color tone: 'red' | 'blue' | 'green' | 'amber' | 'orange'
- *   delta   — optional delta text e.g. "+12%"
- *   meta    — optional small line below value
- *   onClick — optional click handler
+ *   label     — metric label e.g. "Open Sales Orders"
+ *   value     — metric value e.g. "87" or "$1,175,491"
+ *   color     — optional CSS color for the value (data-driven)
+ *   onClick   — optional click handler
+ *   sub       — optional small line below value
  */
-const TONE_MAP = {
-  red:    'stat-value--red',
-  blue:   'stat-value--blue',
-  green:  'stat-value--green',
-  amber:  'stat-value--amber',
-  orange: 'stat-value--orange',
-}
-
-export default function StatCard({ label, value, tone, delta, meta, onClick }) {
-  const valueCls = ['stat-value', TONE_MAP[tone] || ''].filter(Boolean).join(' ')
-
+export default function StatCard({ label, value, color, onClick, sub }) {
   return (
     <div
       className="stat-card"
       onClick={onClick}
       role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : undefined}
     >
-      <div className="stat-label">{label}</div>
-      <div className={valueCls}>
+      <div className="stat-card__label">{label}</div>
+      <div className="stat-card__value" style={color ? { color } : undefined}>
         {value}
-        {delta && <span className="stat-delta">{delta}</span>}
       </div>
-      {meta && <div className="stat-meta">{meta}</div>}
+      {sub && <div className="stat-meta">{sub}</div>}
     </div>
   )
 }

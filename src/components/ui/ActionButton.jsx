@@ -1,13 +1,12 @@
 /**
  * ActionButton
  * Full-width contextual action button used at the bottom of detail pages.
- * (SO detail → Run Order, Fulfillment, Shipment, etc.)
  *
  * Props:
  *   label    — primary button text
  *   sub      — optional subtitle/description line
  *   onClick  — click handler
- *   color    — background color (defaults to --navy)
+ *   color    — background color override (data-driven, rare)
  *   disabled — disables the button
  *   loading  — shows spinner instead of icon
  *   done     — shows checkmark, disables interaction
@@ -19,39 +18,28 @@ export default function ActionButton({ label, sub, onClick, color, disabled, loa
   const isDisabled = disabled || loading || done
   const RightIcon = done ? CheckCircle : loading ? SpinnerGap : (Icon || ArrowRight)
 
+  const cls = ['action-btn',
+    done ? 'action-btn--done action-btn--success'
+      : isDisabled ? 'action-btn--disabled action-btn--navy'
+      : 'action-btn--navy',
+  ].join(' ')
+
   return (
     <button
+      className={cls}
       onClick={!isDisabled ? onClick : undefined}
-      style={{
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 'var(--space-l) var(--space-xl)',
-        borderRadius: 'var(--radius-m)',
-        background: isDisabled ? 'var(--text-muted)' : (color || 'var(--brand-primary)'),
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-        marginBottom: 'var(--space-2xl)',
-        opacity: isDisabled && !done ? 0.7 : 1,
-        transition: 'opacity var(--ease-fast), background var(--ease-fast)' }}
+      disabled={isDisabled}
+      style={color && !isDisabled ? { background: color } : undefined}
     >
-      <div style={{ textAlign: 'left' }}>
-        <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: '#fff' }}>
-          {label}
-        </div>
-        {sub && (
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 2 }}>
-            {sub}
-          </div>
-        )}
+      <div className="action-btn__text">
+        <span className="action-btn__label">{label}</span>
+        {sub && <span className="action-btn__sub">{sub}</span>}
       </div>
       <RightIcon
         size="1.25rem"
         weight={done ? 'fill' : 'bold'}
-        style={{
-          color: '#fff',
-          flexShrink: 0,
-          animation: loading ? 'anim-spin 0.8s linear infinite' : 'none' }}
+        className={`action-btn__icon${loading ? ' anim-spin' : ''}`}
+        className="action-btn__icon"
       />
     </button>
   )

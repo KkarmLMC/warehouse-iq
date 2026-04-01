@@ -1,7 +1,6 @@
 /**
  * SearchInput
  * Standard search field with magnifying glass icon and optional clear button.
- * Used on 30+ pages across all three apps.
  *
  * Props:
  *   value        — controlled input value
@@ -13,32 +12,17 @@ import { MagnifyingGlass, X } from '@phosphor-icons/react'
 
 export default function SearchInput({ value, onChange, placeholder = 'Search…', autoFocus }) {
   return (
-    <div style={{ position: 'relative' }}>
-      <MagnifyingGlass
-        size="0.9375rem"
-        style={{
-          position: 'absolute', left: 12, top: '50%',
-          transform: 'translateY(-50%)',
-          color: 'var(--text-muted)', pointerEvents: 'none' }}
-      />
+    <div className="search-wrap">
+      <MagnifyingGlass size="0.9375rem" className="search-wrap__icon" />
       <input
         className="search-input"
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         autoFocus={autoFocus}
-        style={{ paddingLeft: 36, paddingRight: value ? 32 : 12 }}
       />
       {value && (
-        <button
-          onClick={() => onChange('')}
-          style={{
-            position: 'absolute', right: 8, top: '50%',
-            transform: 'translateY(-50%)',
-            background: 'none', cursor: 'pointer',
-            color: 'var(--text-muted)', display: 'flex', alignItems: 'center',
-            padding: 2 }}
-        >
+        <button className="search-wrap__clear" onClick={() => onChange('')}>
           <X size="0.8125rem" />
         </button>
       )}

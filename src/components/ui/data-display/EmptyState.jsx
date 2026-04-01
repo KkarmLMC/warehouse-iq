@@ -1,12 +1,12 @@
 /**
  * EmptyState
- * Zero-data placeholder — token-driven, BEM, flat UI.
+ * Zero-data placeholder used on 11+ pages across the platform.
  *
  * Props:
- *   icon    — Phosphor icon component
- *   title   — main empty message e.g. "No sales orders found"
- *   desc    — optional secondary line
- *   action  — optional JSX (e.g. a button to create the first item)
+ *   icon     — Phosphor icon component
+ *   title    — main empty message
+ *   desc     — optional secondary line
+ *   action   — optional JSX (e.g. a button)
  */
 export default function EmptyState({ icon: Icon, title, desc, action }) {
   return (

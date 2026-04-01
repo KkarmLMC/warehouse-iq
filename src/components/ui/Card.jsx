@@ -3,13 +3,13 @@
  * Standard content card with optional navy header.
  *
  * Props:
- *   title      — header title text (--text-md, 700, white)
- *   icon       — Phosphor icon component — size 16, white (no color override)
- *   meta       — right-side meta text (--text-sm, 55% white) e.g. counts, "3 items"
- *   action     — right-side action text/JSX (--text-sm, full white, 600) e.g. "View all →"
+ *   title      — header title text
+ *   icon       — Phosphor icon component
+ *   meta       — right-side meta text e.g. "3 items"
+ *   action     — right-side action text/JSX
  *   onAction   — click handler for the whole header row
  *   children   — card body content
- *   style      — additional style for the card container
+ *   style      — additional style for the card container (data-driven)
  */
 export default function Card({ title, icon: Icon, meta, action, onAction, children, style }) {
   return (
@@ -18,7 +18,7 @@ export default function Card({ title, icon: Icon, meta, action, onAction, childr
         <div
           className="list-card__header"
           onClick={onAction}
-          style={{ cursor: onAction ? 'pointer' : 'default' }}
+          role={onAction ? 'button' : undefined}
         >
           <span className="list-card__title">
             {Icon && <Icon size="1rem" />}

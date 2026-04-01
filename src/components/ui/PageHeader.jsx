@@ -10,24 +10,18 @@
  */
 export default function PageHeader({ eyebrow, title, subtitle, action }) {
   return (
-    <div style={{ marginBottom: 'var(--space-l)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-m)' }}>
-      <div>
+    <div className="page-title">
+      <div className="page-title__text">
         {eyebrow && (
-          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-muted)', letterSpacing: 'var(--ls-2xs)', textTransform: 'uppercase', marginBottom: 'var(--space-xs)' }}>
-            {eyebrow}
-          </div>
+          <div className="page-title__eyebrow">{eyebrow}</div>
         )}
-        <div style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--lh-xxl)', color: 'var(--text-primary)' }}>
-          {title}
-        </div>
+        <div className="page-title__heading">{title}</div>
         {subtitle && (
-          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 'var(--space-xs)' }}>
-            {subtitle}
-          </div>
+          <div className="page-title__subtitle">{subtitle}</div>
         )}
       </div>
       {action && (
-        <div style={{ flexShrink: 0 }}>{action}</div>
+        <div className="page-title__actions">{action}</div>
       )}
     </div>
   )
