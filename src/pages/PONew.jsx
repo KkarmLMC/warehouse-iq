@@ -162,7 +162,7 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
       <div className="text-xs-right" style={{ fontWeight: 'var(--fw-bold)', color: lineTotal > 0 ? 'var(--text-primary)' : 'var(--text-muted)' }}>
         ${lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </div>
-      <button onClick={onRemove} className="icon-btn icon-btn--error">
+      <button onClick={onRemove} className="icon-btn icon-btn--danger">
         <Trash size="0.8125rem" />
       </button>
     </div>
@@ -308,7 +308,7 @@ function LaborSection({ items, onUpdate }) {
               <div className="text-xs-right" style={{ fontWeight: 'var(--fw-bold)' }}>
                 ${((parseFloat(item.quantity)||0)*(parseFloat(item.unit_cost)||0)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
               </div>
-              <button onClick={() => removeItem(item._key)} className="icon-btn icon-btn--error">
+              <button onClick={() => removeItem(item._key)} className="icon-btn icon-btn--danger">
                 <Trash size="0.8125rem" />
               </button>
             </div>

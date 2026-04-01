@@ -91,7 +91,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
         <button
           onClick={submit}
           disabled={!isFull || loading || (confirmPin && digits.join('') !== confirmPin)}
-          className={`pin-submit${ (!isFull || loading) ? '' : confirmPin && digits.join('') !== confirmPin ? ' pin-submit--mismatch' : ''}`}>
+          className={`pin-submit${ (!isFull || loading) ? '' : confirmPin && digits.join('') !== confirmPin ? ' login-submit-btn--mismatch' : ''}`}>
           {loading ? 'Processing…'
             : !isFull ? 'Enter 6 digits'
             : confirmPin && digits.join('') !== confirmPin ? 'PINs do not match'
@@ -102,7 +102,7 @@ function PinPad({ onPin, loading, error, confirmPin = null, requireConfirm = fal
           <button
             onClick={submit}
             disabled={loading}
-            className={`pin-submit${ (!isFull || loading) ? '' : confirmPin && digits.join('') !== confirmPin ? ' pin-submit--mismatch' : ''}`}>
+            className={`pin-submit${ (!isFull || loading) ? '' : confirmPin && digits.join('') !== confirmPin ? ' login-submit-btn--mismatch' : ''}`}>
             {loading ? 'Processing…' : 'Continue →'}
           </button>
         )
@@ -304,7 +304,7 @@ export default function Login({ forcePinSetup = false, session: forcedSession = 
                   <Warning size="0.875rem" />{error}
                 </div>
               )}
-              <button type="submit" disabled={loading} className="login-submit">
+              <button type="submit" disabled={loading} className="login-submit-btn">
                 {loading ? 'Signing in…' : 'Sign In'}
               </button>
             </form>

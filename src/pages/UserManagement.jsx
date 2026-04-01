@@ -282,7 +282,7 @@ export default function UserManagement() {
                 </div>
               </div>
               <button onClick={inviteUser} disabled={!inviteEmail.trim() || inviting}
-                className="submit-btn"
+                className="btn btn-primary btn-l btn-full"
                 style={{
                   background: inviteEmail.trim() ? 'var(--brand-primary)' : 'var(--border-default)',
                   color: inviteEmail.trim() ? 'var(--surface-base)' : 'var(--text-muted)',
