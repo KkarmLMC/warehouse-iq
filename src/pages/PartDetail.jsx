@@ -253,7 +253,7 @@ export default function PartDetail() {
 
   useEffect(() => { load() }, [id])
 
-  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--space-2xl)' }}><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in" className="spinner-pad"><div className="spinner" /></div>
   if (!part) return <div className="page-content fade-in"><div className="empty"><div className="empty-title">Part not found</div></div></div>
 
   const totalQty = levels.reduce((s, l) => s + l.quantity_on_hand, 0)

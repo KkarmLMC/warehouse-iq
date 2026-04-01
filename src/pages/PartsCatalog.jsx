@@ -195,22 +195,22 @@ export default function PartsCatalog() {
 
       {/* Search */}
       <div style={{ position: 'relative', marginBottom: 'var(--space-l)' }}>
-        <MagnifyingGlass size="1rem" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+        <MagnifyingGlass size="1rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)}
           placeholder={`Search ${activeTab === 'All' ? 'all parts' : activeTab === 'LM' ? 'Lightning Master parts' : 'Bolt Lightning parts'}…`}
           style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />
         {search && (
-          <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+          <button onClick={() => setSearch('')} className="search-overlay-clear">
             <X size="0.875rem" />
           </button>
         )}
       </div>
 
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--space-2xl)' }}><div className="spinner" /></div>
+        <div className="spinner-pad"><div className="spinner" /></div>
       ) : grouped.length === 0 ? (
         <div className="empty">
-          <Package size="2.5rem" style={{ color: 'var(--text-muted)', marginBottom: 'var(--space-m)' }} />
+          <Package size="2.5rem" className="empty-icon" />
           <div className="empty-title">
             {search ? 'No parts found' : activeTab === 'Bolt' ? 'No Bolt parts yet' : 'No parts found'}
           </div>

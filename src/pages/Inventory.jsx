@@ -268,7 +268,7 @@ export default function Inventory() {
         </div>
         {recentSOs.length === 0 ? (
           <div className="empty" style={{ padding: 'var(--space-xl)' }}>
-            <Receipt size="1.75rem" style={{ color: 'var(--text-muted)', marginBottom: 8 }} />
+            <Receipt size="1.75rem" className="empty-icon" />
             <div className="empty-title">No active sales orders</div>
           </div>
         ) : recentSOs.map((so, idx) => (
@@ -333,7 +333,7 @@ export default function Inventory() {
         </div>
         {recentShips.length === 0 ? (
           <div className="empty" style={{ padding: 'var(--space-xl)' }}>
-            <Truck size="1.75rem" style={{ color: 'var(--text-muted)', marginBottom: 8 }} />
+            <Truck size="1.75rem" className="empty-icon" />
             <div className="empty-title">No transfers yet</div>
             <div className="empty-desc">Transfers between warehouses will appear here.</div>
           </div>

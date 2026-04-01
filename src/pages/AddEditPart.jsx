@@ -104,7 +104,7 @@ export default function AddEditPart() {
     setSaving(false)
   }
 
-  if (loading) return <div className="page-content fade-in" style={{ display: 'flex', justifyContent: 'center', padding: 'var(--space-2xl)' }}><div className="spinner" /></div>
+  if (loading) return <div className="page-content fade-in" className="spinner-pad"><div className="spinner" /></div>
 
   const Field = ({ label, error, required, children }) => (
     <div style={{ marginBottom: 'var(--space-l)' }}>

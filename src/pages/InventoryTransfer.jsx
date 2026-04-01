@@ -149,7 +149,7 @@ export default function InventoryTransfer() {
         {/* Search */}
         <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)', position: 'relative' }}>
           <div style={{ position: 'relative' }}>
-            <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+            <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}

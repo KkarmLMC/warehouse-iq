@@ -364,7 +364,7 @@ export default function WarehouseDetail() {
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
           {search && (
-            <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+            <button onClick={() => setSearch('')} className="search-overlay-clear">
               <X size="0.8125rem" />
             </button>
           )}

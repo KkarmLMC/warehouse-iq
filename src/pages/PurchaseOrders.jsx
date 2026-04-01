@@ -229,7 +229,7 @@ export default function PurchaseOrders() {
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
-          {search && <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}><X size="0.8125rem" /></button>}
+          {search && <button onClick={() => setSearch('')} className="search-overlay-clear"><X size="0.8125rem" /></button>}
         </div>
         {['all', 'LM', 'Bolt'].map(d => (
           <button key={d} onClick={() => setDivisionFilter(d)}
@@ -245,10 +245,10 @@ export default function PurchaseOrders() {
 
       {/* PO list */}
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--space-2xl)' }}><div className="spinner" /></div>
+        <div className="spinner-pad"><div className="spinner" /></div>
       ) : filtered.length === 0 ? (
         <div className="empty">
-          <Receipt size="2.5rem" style={{ color: 'var(--text-muted)', marginBottom: 'var(--space-m)' }} />
+          <Receipt size="2.5rem" className="empty-icon" />
           <div className="empty-title">{pos.length === 0 ? 'No sales orders yet' : 'No SOs match filters'}</div>
           <div className="empty-desc">{pos.length === 0 ? 'Create your first Sales Order to get started.' : 'Try adjusting your filters.'}</div>
           {pos.length === 0 && (

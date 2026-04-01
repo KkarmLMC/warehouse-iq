@@ -101,7 +101,7 @@ export default function ShipmentDetail() {
   if (!order) return (
     <div className="page-content fade-in">
       <div className="empty" style={{ minHeight: '60vh' }}>
-        <Warning size="2rem" style={{ color: 'var(--text-muted)', marginBottom: 'var(--space-s)' }} />
+        <Warning size="2rem" className="empty-icon" />
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/shipment')}
