@@ -70,8 +70,8 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
       {value ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderRadius: 'var(--radius-l)', background: 'var(--surface-base)' }}>
           <Briefcase size="1rem" style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <div className="u-min-w-0">
+            <div className="u-text-sm-semibold-truncate">
               {value.name}
             </div>
             <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>
