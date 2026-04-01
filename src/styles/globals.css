@@ -872,7 +872,6 @@ textarea,
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  width: 100%;
   min-height: 100%;
   background: var(--surface-page);
   padding: var(--content-pad) var(--content-pad) calc(var(--content-pad) + 4.5rem);
@@ -1674,7 +1673,6 @@ textarea,
 }
 
 .login-card {
-  width: 100%;
   max-width: 23.75rem;
   background: var(--login-card-bg);
   padding: var(--space-3xl);
@@ -2329,7 +2327,6 @@ textarea,
 }
 
 .sheet {
-  width: 100%;
   max-height: 92vh;
   overflow-y: auto;
   animation: anim-sheet-up 0.25s var(--ease-emphasized);
@@ -4665,7 +4662,7 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 .margin-bottom-l { margin-bottom: var(--mar-l); }
 
 /* ─── Input Field Styling ─── */
-.input-meta-label { font-size: var(--text-xs); margin-top: var(--space-2xs); padding: 2px 4px; border-radius: var(--radius-xs); background: var(--surface-base); color: var(--text-muted); width: 100%; }
+.input-meta-label { font-size: var(--text-xs); margin-top: var(--space-2xs); padding: 2px 4px; border-radius: var(--radius-xs); background: var(--surface-base); color: var(--text-muted); }
 .input-padding-x { padding-left: 30px; padding-right: 30px; }
 
 /* ─── Part Row Styling ─── */
@@ -4715,7 +4712,6 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 .add-edit-part-4952 {
-  width: 100%;
   font-family: var(--mono);
 }
 
@@ -5085,7 +5081,6 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 .inventory-transfer-2b4d {
-  width: 100%;
   padding-left: 32px;
 }
 
@@ -5239,7 +5234,6 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 .p-o-new-f2ca {
-  width: 100%;
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -5310,7 +5304,6 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 .p-o-new-d8b4 {
-  width: 100%;
   font-size: var(--text-xs);
 }
 
@@ -5673,7 +5666,6 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 .run-order-1dbe {
-  width: 100%;
   font-size: var(--text-xs);
   padding: 5px 8px;
   border-radius: var(--radius-xs);
@@ -6279,7 +6271,6 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 .shipment-detail-baf4 {
-  width: 100%;
   box-sizing: border-box;
   resize: vertical;
   min-height: 72px;
@@ -6763,7 +6754,6 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 .drop-ship-detail-baf4 {
-  width: 100%;
   box-sizing: border-box;
   resize: vertical;
   min-height: 72px;
