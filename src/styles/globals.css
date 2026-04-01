@@ -1756,35 +1756,30 @@ textarea,
 
 /* Old .login-submit/.pin-submit removed — now .login-submit-btn in button system */
 
+/* ─── Tier 2: Custom — PIN Pad Button ─── */
 .pin-btn {
-  height: 4rem;
+  height: var(--pin-btn-height);
   width: 100%;
   border-radius: var(--radius-m);
   background: var(--surface-page);
   font-size: var(--text-base);
   font-weight: var(--fw-bold);
   color: var(--text-primary);
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition:
     background-color var(--dur-fast) var(--ease-standard),
     color var(--dur-fast) var(--ease-standard),
     transform var(--dur-fast) var(--ease-standard);
+  -webkit-tap-highlight-color: transparent;
 }
-
-.pin-btn:hover {
-  background: var(--white);
-  color: var(--text-inverse);
-}
-
-.pin-btn:active {
-  background: var(--brand-primary-hover);
-  color: var(--text-inverse);
-  transform: scale(0.97);
-}
-
-.pin-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.pin-btn:hover { background: var(--color-white); color: var(--text-inverse); }
+.pin-btn:active { background: var(--brand-primary-hover); color: var(--text-inverse); transform: scale(0.97); }
+.pin-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 /* Old .login-link-btn removed — now in button system */
 
