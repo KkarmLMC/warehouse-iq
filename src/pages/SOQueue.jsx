@@ -1,117 +1,75 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Receipt, ClockCountdown, ArrowRight, MagnifyingGlass, CaretRight, CheckCircle, Truck } from '@phosphor-icons/react'
+import { Receipt, CaretRight, MagnifyingGlass } from '@phosphor-icons/react'
 import { db } from '../lib/supabase.js'
-import { soStatus } from '../lib/statusColors.js'
-
-const TABS = [
-  { key: 'queued',       label: 'Queue' },
-  { key: 'running',      label: 'Running' },
-  { key: 'fulfillment',  label: 'Fulfillment' },
-  { key: 'shipment',     label: 'Shipment' },
-  { key: 'back_ordered', label: 'Back Orders' },
-  { key: 'complete',     label: 'Complete' },
-  { key: 'cancelled',    label: 'Cancelled' },
-]
 
 export default function SOQueue() {
   const navigate = useNavigate()
-  const [tab, setTab]       = useState('queued')
-  const [orders, setOrders] = useState([])
-  const [counts, setCounts] = useState({})
-  const [search, setSearch] = useState('')
+  const [orders, setOrders]   = useState([])
+  const [search, setSearch]   = useState('')
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => { loadAll() }, [])
-
-  const loadAll = async () => {
-    const { data } = await db
-      .from('sales_orders')
-      .select('id, so_number, customer_name, project_name, job_city, job_state, status, grand_total, created_at, queued_at, run_at, division')
-      .in('status', ['queued','running','fulfillment','shipment','back_ordered','complete','cancelled'])
-      .order('created_at', { ascending: false })
-    const all = data || []
-    const c = {}
-    TABS.forEach(t => { c[t.key] = 0 })
-    all.forEach(o => { if (c[o.status] !== undefined) c[o.status]++ })
-    setCounts(c)
-    setOrders(all)
-    setLoading(false)
-  }
+  useEffect(() => {
+    db.from('sales_orders')
+      .select('id, so_number, customer_name, project_name, grand_total, queued_at, status')
+      .in('status', ['queued', 'running', 'back_ordered'])
+      .order('queued_at', { ascending: true })
+      .then(({ data }) => { setOrders(data || []); setLoading(false) })
+  }, [])
 
   const visible = orders.filter(o => {
-    if (o.status !== tab) return false
     if (!search) return true
     const q = search.toLowerCase()
-    return (o.so_number||'').toLowerCase().includes(q)
-        || (o.customer_name||'').toLowerCase().includes(q)
-        || (o.project_name||'').toLowerCase().includes(q)
+    return (o.so_number||'').toLowerCase().includes(q) || (o.customer_name||'').toLowerCase().includes(q)
   })
 
-  const fmtDate = (d) => d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '—'
-  const fmt     = (n) => `$${Number(n||0).toLocaleString('en-US', { maximumFractionDigits: 0 })}`
+  const fmtDate = d => d ? new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '—'
+  const fmt     = n => `$${Number(n||0).toLocaleString('en-US',{maximumFractionDigits:0})}`
+
+  const statusBadge = (s) => {
+    const cfg = {
+      queued:       { bg: 'var(--state-info-soft)',    color: 'var(--state-info)',         label: 'Queued' },
+      running:      { bg: 'var(--state-warning-soft)', color: 'var(--state-warning)',      label: 'Running' },
+      back_ordered: { bg: 'var(--state-error-soft)',   color: 'var(--state-error-text)',   label: 'Back Order' },
+    }[s] || { bg: 'var(--surface-base)', color: 'var(--text-muted)', label: s }
+    return <span className="badge" style={{ background: cfg.bg, color: cfg.color }}>{cfg.label}</span>
+  }
 
   return (
     <div className="page-content fade-in">
-
-      {/* Tabs */}
-      <div style={{ display: 'flex', gap: 'var(--space-xs)', marginBottom: 'var(--space-l)', overflowX: 'auto', paddingBottom: 2 }}>
-        {TABS.map(t => (
-          <button key={t.key} onClick={() => setTab(t.key)}
-            style={{ flexShrink: 0, padding: 'var(--space-xs) var(--space-m)', borderRadius: 'var(--radius-s)', cursor: 'pointer', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-xs)', fontFamily: 'var(--font)',
-              background: tab === t.key ? 'var(--brand-primary)' : 'var(--surface-base)',
-              color: tab === t.key ? 'var(--surface-base)' : 'var(--text-primary)' }}>
-            {t.label}{counts[t.key] > 0 ? ` (${counts[t.key]})` : ''}
-          </button>
-        ))}
+      <div className="queue-search">
+        <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
+        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search orders…"
+          style={{ paddingLeft: 36 }} />
       </div>
 
-      {/* Search */}
-      <div style={{ position: 'relative', marginBottom: 'var(--space-l)' }}>
-        <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search by SO number, customer, project…"
-          style={{ paddingLeft: 36, width: '100%', boxSizing: 'border-box' }} />
-      </div>
-
-      {/* Orders list */}
       <div className="card">
         {loading ? (
-          <div style={{ padding: 'var(--space-2xl)', textAlign: 'center' }}><div className="spinner" style={{ margin: '0 auto' }} /></div>
+          <div className="spinner-pad"><div className="spinner spinner-center" /></div>
         ) : visible.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--space-2xl)' }}>
-            <Receipt size="2rem" style={{ color: 'var(--text-muted)', marginBottom: 8 }} />
-            <div className="empty-title">No orders in {TABS.find(t=>t.key===tab)?.label}</div>
-            <div className="empty-desc">Orders will appear here as they move through the pipeline.</div>
+          <div className="empty">
+            <Receipt size="2rem" className="empty-icon" />
+            <div className="empty-title">No orders in queue</div>
+            <div className="empty-desc">Sales orders submitted from Mission Control will appear here.</div>
           </div>
-        ) : visible.map((o, idx) => {
-          const stage = soStatus(o.status)
-          return (
-            <div key={o.id}
-              onClick={() => {
-                if (o.status === 'queued' || o.status === 'running' || o.status === 'back_ordered') navigate(`/warehouse-hq/queue/${o.id}`)
-                else if (o.status === 'fulfillment') navigate(`/warehouse-hq/fulfillment/${o.id}`)
-                else if (o.status === 'shipment') navigate(`/warehouse-hq/shipment/${o.id}`)
-                else navigate(`/warehouse-hq/queue/${o.id}`)
-              }}
-              style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
-              <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-                  <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--brand-primary)' }}>{o.so_number}</span>
-                  <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: stage.bg, color: stage.color }}>{stage.label}</span>
-                </div>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}{o.job_city ? ` · ${o.job_city}, ${o.job_state}` : ''}
-                </div>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>Received {fmtDate(o.created_at)}</div>
+        ) : visible.map((o, idx) => (
+          <div key={o.id} onClick={() => navigate(`/warehouse-hq/queue/${o.id}`)}
+            className="queue-row" style={{ borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
+            <Receipt size="1rem" style={{ color:'var(--state-info)' }} />
+            <div className="queue-row__body">
+              <div className="so-number">{o.so_number}</div>
+              <div className="queue-row__title">
+                {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>
-              <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                <div style={{ fontWeight: 700, fontFamily: 'var(--mono)', fontSize: 'var(--text-sm)', color: 'var(--text-primary)' }}>{fmt(o.grand_total)}</div>
-              </div>
-              <CaretRight size="0.875rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />
+              <div className="queue-row__meta">Queued {fmtDate(o.queued_at)}</div>
             </div>
-          )
-        })}
+            <div className="queue-row__right">
+              <div className="amount-mono">{fmt(o.grand_total)}</div>
+              {o.status !== 'queued' && statusBadge(o.status)}
+            </div>
+            <CaretRight size="0.875rem" className="row-item__caret" />
+          </div>
+        ))}
       </div>
     </div>
   )

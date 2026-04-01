@@ -28,36 +28,34 @@ export default function FulfillmentQueue() {
 
   return (
     <div className="page-content fade-in">
-
-      <div style={{ position:'relative',marginBottom:'var(--space-l)' }}>
-        <MagnifyingGlass size="0.9375rem" style={{ position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text-muted)' }} />
+      <div className="queue-search">
+        <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search orders…"
-          style={{ paddingLeft:36,width:'100%',boxSizing:'border-box' }} />
+          style={{ paddingLeft: 36 }} />
       </div>
 
       <div className="card">
         {loading ? (
-          <div style={{ padding: 'var(--space-2xl)',textAlign:'center' }}><div className="spinner" style={{ margin:'0 auto' }} /></div>
+          <div className="spinner-pad"><div className="spinner spinner-center" /></div>
         ) : visible.length === 0 ? (
-          <div className="empty" style={{ padding: 'var(--space-2xl)' }}>
-            <ClipboardText size="2rem" style={{ color:'var(--text-muted)',marginBottom:8 }} />
+          <div className="empty">
+            <ClipboardText size="2rem" className="empty-icon" />
             <div className="empty-title">No orders in fulfillment</div>
             <div className="empty-desc">Orders pushed from the SO Queue will appear here.</div>
           </div>
         ) : visible.map((o, idx) => (
           <div key={o.id} onClick={() => navigate(`/warehouse-hq/fulfillment/${o.id}`)}
-            style={{ display:'flex',alignItems:'center',gap:'var(--space-m)',padding: 'var(--space-m) var(--space-l)',
-              borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none',cursor:'pointer' }}>
+            className="queue-row" style={{ borderBottom: idx < visible.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <ClipboardText size="1rem" style={{ color:'var(--state-info)' }} />
-            <div style={{ flex:1,minWidth:0 }}>
-              <div style={{ fontWeight:700,fontSize:'var(--text-sm)',fontFamily:'var(--mono)',color:'var(--brand-primary)' }}>{o.so_number}</div>
-              <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>
+            <div className="queue-row__body">
+              <div className="so-number">{o.so_number}</div>
+              <div className="queue-row__title">
                 {o.customer_name}{o.project_name ? ` — ${o.project_name}` : ''}
               </div>
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:2 }}>Received {fmtDate(o.fulfillment_at)}</div>
+              <div className="queue-row__meta">Received {fmtDate(o.fulfillment_at)}</div>
             </div>
-            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--text-primary)',flexShrink:0 }}>{fmt(o.grand_total)}</div>
-            <CaretRight size="0.875rem" style={{ color:'var(--text-primary)',flexShrink:0 }} />
+            <div className="amount-mono">{fmt(o.grand_total)}</div>
+            <CaretRight size="0.875rem" className="row-item__caret" />
           </div>
         ))}
       </div>

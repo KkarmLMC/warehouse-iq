@@ -117,7 +117,7 @@ export default function ShipmentDetail() {
   return (
     <div className="page-content fade-in">
       <button onClick={() => navigate('/warehouse-hq/shipment')}
-        style={{ display:'flex',alignItems:'center',gap:6,background:'none',color:'var(--text-muted)',fontSize:'var(--text-xs)',cursor:'pointer',padding:0,marginBottom:'var(--space-m)' }}>
+        className="back-link">
         <ArrowLeft size="0.875rem" /> Back to Shipment Queue
       </button>
 
