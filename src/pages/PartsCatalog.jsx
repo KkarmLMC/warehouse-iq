@@ -89,12 +89,12 @@ function CategorySection({ category, parts, onPartPress }) {
                 borderBottom: idx < parts.length - 1 ? '1px solid var(--border-subtle)' : 'none',
                 cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
               <div className="content-body">
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexWrap: 'wrap' }}>
+                <div className="flex-gap-s">
                   <div className="text-sm-truncate">
                     {part.name}
                   </div>
                   {part.tags?.includes('shared') && (
-                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 6px', borderRadius: 'var(--radius-s)', background: 'var(--state-success-soft)', color: 'var(--state-success-text)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    <span className="text-label">
                       LM + Bolt
                     </span>
                   )}

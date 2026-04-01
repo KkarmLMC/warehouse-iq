@@ -44,7 +44,7 @@ function PinPad({ onComplete }) {
           <div key={i} style={{ width: 14, height: 14, borderRadius: '50%', background: i < digits.length ? 'var(--brand-primary)' : 'var(--border-subtle)', transition: 'background 0.1s' }} />
         ))}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-m)', maxWidth: 260, margin: '0 auto' }}>
+      <div className="grid-3col">
         {[1,2,3,4,5,6,7,8,9].map(n => (
           <button key={n} onClick={() => press(String(n))} style={btnStyle}
             onMouseEnter={hoverOn} onMouseLeave={hoverOff} onMouseDown={pressOn} onMouseUp={pressOff}
@@ -67,7 +67,7 @@ function Section({ icon: Icon, title, children, action }) {
   return (
     <Card className="profile-section">
       <div className="profile-section__header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', color: 'var(--surface-base)', fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-bold)' }}>
+        <div className="flex-gap-s">
           {Icon && <Icon size="0.9375rem" />} {title}
         </div>
         {action}

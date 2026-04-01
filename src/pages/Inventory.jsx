@@ -146,7 +146,7 @@ export default function Inventory() {
           style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', cursor: 'pointer' }}>
           <Warning size="1.125rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0 }} />
           <div className="content-body">
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--state-warning-text)' }}>
+            <div className="text-sm-bold">
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-warning-text)' }}>Field crew part requests waiting for approval</div>
@@ -207,7 +207,7 @@ export default function Inventory() {
               { label: 'Parts Tracked',  value: warehouseHealth[master.id]?.parts ?? '—' },
               { label: 'Health',         value: <HealthBadge out={warehouseHealth[master.id]?.out || 0} low={warehouseHealth[master.id]?.low || 0} /> },
             ].map(f => (
-              <div key={f.label} style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', padding: 'var(--space-m)' }}>
+              <div key={f.label} className="card-section">
                 <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>{f.label}</div>
                 <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, fontFamily: 'var(--font)' }}>{f.value}</div>
               </div>

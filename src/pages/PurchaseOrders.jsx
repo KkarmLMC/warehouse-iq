@@ -64,7 +64,7 @@ function POCard({ po, totals, onPress }) {
 
       {/* Info */}
       <div className="content-body">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', marginBottom: 3, flexWrap: 'wrap' }}>
+        <div className="flex-gap-s">
           <span className="text-sm-bold">
             {po.so_number}
           </span>
@@ -176,7 +176,7 @@ export default function PurchaseOrders() {
           borderRadius: 'var(--radius-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
           <Warning size="1.125rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0 }} />
           <div className="content-body">
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--state-warning-text)' }}>
+            <div className="text-sm-bold">
               {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-warning-text)' }}>

@@ -68,7 +68,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
       {/* Selected project display */}
       {value ? (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderRadius: 'var(--radius-l)', background: 'var(--surface-base)' }}>
+        <div className="flex-gap-m">
           <Briefcase size="1rem" style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
           <div className="content-body">
             <div style={{ fontSize: "var(--text-sm)", fontWeight: 700, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>

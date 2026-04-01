@@ -124,7 +124,7 @@ export default function PODetail() {
       <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--space-m)' }}>
           <div>
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--surface-base)', marginBottom: 4 }}>
+            <div className="text-label">
               {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
             </div>
             <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
@@ -138,7 +138,7 @@ export default function PODetail() {
             background: statusDisplay.bg,
             color: statusDisplay.color }}>
             <StatusIcon size="0.75rem" weight="fill" />
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'capitalize' }}>{po.status}</span>
+            <span className="text-label">{po.status}</span>
           </div>
         </div>
 
@@ -181,12 +181,12 @@ export default function PODetail() {
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
           {Object.entries(warehouseImpact).map(([wName, impact]) => (
-            <div key={wName} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-s)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', fontSize: 'var(--text-sm)' }}>
+            <div key={wName} className="modal-header">
+              <div className="flex-gap-s">
                 <Buildings size="0.875rem" style={{ color: 'var(--text-primary)' }} />
                 {wName}
               </div>
-              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--state-error-text)', background: 'var(--state-error-soft)', padding: '2px 8px', borderRadius: 'var(--radius-s)' }}>
+              <span className="text-label">
                 -{impact.qty} units ({impact.parts} SKUs)
               </span>
             </div>
@@ -224,7 +224,7 @@ export default function PODetail() {
       {laborLines.length > 0 && (
         <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)', maxWidth: '100%' }}>
           <div style={{ padding: 'var(--space-m) var(--space-l)', background: 'var(--brand-primary)' }}>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#fff' }}>Installation / Labor</span>
+            <span className="text-label">Installation / Labor</span>
           </div>
           {laborLines.map((line, idx) => (
             <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-subtle)' : 'none', alignItems: 'center', background: 'var(--surface-base)' }}>
@@ -245,7 +245,7 @@ export default function PODetail() {
 
       {/* Grand total */}
       {grandTotal > 0 && (
-        <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l) var(--space-xl)', marginBottom: 'var(--space-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="modal-header">
           <span className="page-heading--inverse">Total</span>
           <span className="page-heading--inverse">
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}

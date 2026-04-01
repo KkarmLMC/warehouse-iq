@@ -131,7 +131,7 @@ export default function ShipmentDetail() {
             <MapPin size="0.875rem" style={{ color:'var(--brand-primary)',flexShrink:0 }} />
             <div>
               <div className="text-label">SHIP TO</div>
-              <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--brand-primary)' }}>
+              <div className="text-sm-bold">
                 {order?.customer_name}
               </div>
               <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)' }}>
@@ -144,7 +144,7 @@ export default function ShipmentDetail() {
 
       {/* Partial shipment warning */}
       {(order?.has_back_order || order?.has_drop_ship) && (
-        <div style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', gap: 'var(--space-m)', alignItems: 'flex-start' }}>
+        <div className="flex-gap-m">
           <Warning size="1rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0, marginTop: 1 }} />
           <div>
             <div className="text-sm-bold">Partial Shipment</div>
@@ -183,7 +183,7 @@ export default function ShipmentDetail() {
                 )}
               </div>
             </div>
-            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
+            <div className="text-sm-bold">
               {Number(line.qty_available) + Number(line.split_qty||0)}
             </div>
             <div>

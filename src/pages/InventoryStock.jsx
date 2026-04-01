@@ -7,22 +7,22 @@ import { db } from '../lib/supabase.js'
 
 function StockBadge({ qty, minLevel, onOrder }) {
   if (qty === 0 && onOrder > 0) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--radius-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--state-info-soft)', color: 'var(--state-info)' }}>
+    <span className="text-label">
       0 (+{onOrder} ordered)
     </span>
   )
   if (qty === 0) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--radius-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--state-error-soft)', color: 'var(--state-error-text)' }}>
+    <span className="text-label">
       Out of stock
     </span>
   )
   if (minLevel && qty <= minLevel) return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--radius-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--state-warning-soft)', color: 'var(--state-warning-text)' }}>
+    <span className="text-label">
       Low: {qty}
     </span>
   )
   return (
-    <span style={{ padding: '2px 8px', borderRadius: 'var(--radius-s)', fontSize: 'var(--text-xs)', fontWeight: 700, background: 'var(--state-success-soft)', color: 'var(--state-success-text)' }}>
+    <span className="text-label">
       {qty}
     </span>
   )
@@ -123,7 +123,7 @@ export default function InventoryStock() {
     <div className="page-content fade-in">
 
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-l)', flexWrap: 'wrap', gap: 'var(--space-m)' }}>
+      <div className="modal-header">
         <div>
           <div className="text-label">
             INVENTORY / {selectedWarehouseName.toUpperCase()}

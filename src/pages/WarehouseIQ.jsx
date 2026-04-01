@@ -22,10 +22,10 @@ function chip(bg, color) {
 // ─── Summary card ─────────────────────────────────────────────────────────────
 function SumCard({ label, value, sub, color = 'var(--text-primary)', Icon }) {
   return (
-    <div style={{ background: 'var(--surface-base)', borderRadius:'var(--radius-l)', padding:'var(--space-l)' }}>
+    <div className="card-section">
       <div style={{ display:'flex', alignItems:'center', gap:'var(--space-s)', marginBottom: 'var(--space-s)' }}>
         {Icon && <Icon size="0.875rem" style={{ color:'var(--text-muted)' }} />}
-        <span style={{ fontSize:'var(--text-xs)', fontWeight:700, color:'var(--text-primary)' }}>{label}</span>
+        <span className="text-label">{label}</span>
       </div>
       <div style={{ fontSize:'var(--text-md)', fontWeight:800, color, lineHeight:1 }}>{value}</div>
       {sub && <div style={{ fontSize:'var(--text-xs)', color:'var(--text-muted)', marginTop:4 }}>{sub}</div>}
@@ -241,8 +241,8 @@ export default function WarehouseIQ() {
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--space-m) var(--space-l)', borderBottom:'1px solid var(--border-subtle)' }}>
             <div className="flex-gap-s">
               <Receipt size="0.9375rem" style={{ color:'var(--brand-primary)' }} />
-              <span style={{ fontSize:'var(--text-sm)', fontWeight:700 }}>Active Sales Orders</span>
-              <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--radius-s)', background:'var(--surface-hover)', color:'var(--text-muted)' }}>{pos.length}</span>
+              <span className="text-sm-bold">Active Sales Orders</span>
+              <span className="text-label">{pos.length}</span>
             </div>
             <button onClick={() => navigate('/sales-orders')}
               style={{ fontSize:'var(--text-xs)', fontWeight:600, color:'var(--brand-primary)', background:'none', cursor:'pointer', padding:0 }}>
@@ -348,7 +348,7 @@ export default function WarehouseIQ() {
                 )}
               </div>
               {/* Value */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color:'var(--text-primary)', fontWeight:600 }}>
+              <div className="text-sm-semi">
                 {r.value > 0 ? `$${r.value.toLocaleString('en-US',{maximumFractionDigits:0})}` : '—'}
               </div>
               {/* Status chip */}

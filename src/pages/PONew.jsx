@@ -220,10 +220,10 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           value={section.title}
           onChange={e => onUpdate({ ...section, title: e.target.value })}
           placeholder="Section name (e.g. Green House Ground Ring)"
-          style={{ flex: 1, background: 'transparent', outline: 'none', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', fontFamily: 'var(--font)' }}
+          className="text-sm-bold"
         />
         {subtotal > 0 && (
-          <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--surface-base)', whiteSpace: 'nowrap' }}>
+          <span className="text-label">
             ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </span>
         )}
@@ -286,17 +286,17 @@ function LaborSection({ items, onUpdate }) {
 
   return (
     <div className="card-section">
-      <div style={{ background: 'var(--brand-primary)', padding: 'var(--space-m) var(--space-l)', display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+      <div className="flex-gap-s">
         <button onClick={() => setExpanded(e => !e)}
           style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'var(--surface-base)', display: 'flex' }}>
           <CaretDown size="0.875rem" style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
         </button>
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--space-s)' }}>
+        <div className="flex-gap-s">
           <Wrench size="0.875rem" style={{ color: 'var(--surface-base)' }} />
-          <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', color: '#fff' }}>Installation / Labor</span>
+          <span className="text-sm-bold">Installation / Labor</span>
         </div>
         {total > 0 && (
-          <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--surface-base)' }}>
+          <span className="text-label">
             ${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </span>
         )}
@@ -582,7 +582,7 @@ export default function PONew() {
         </div>
 
         {selectedProject && (
-          <div style={{ marginBottom: 'var(--space-m)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)' }}>
+          <div className="grid-2col mb-m">
             <div>
               <Label>Project Name</Label>
               <input value={projectName} onChange={e => setProjectName(e.target.value)} />
@@ -618,7 +618,7 @@ export default function PONew() {
       ))}
 
       <button onClick={addSection}
-        style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', width: '100%', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', border: '2px dashed var(--border-subtle)', background: 'transparent', color: 'var(--text-muted)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer', justifyContent: 'center', marginBottom: 'var(--space-l)' }}>
+        className="flex-gap-s">
         <Plus size="0.9375rem" /> Add Scope Section
       </button>
 
@@ -636,7 +636,7 @@ export default function PONew() {
 
       {/* Error */}
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', padding: 'var(--space-m)', background: 'var(--state-error-soft)', borderRadius: 'var(--radius-l)', marginBottom: 'var(--space-l)', color: 'var(--state-error-text)', fontSize: 'var(--text-sm)' }}>
+        <div className="flex-gap-s">
           <Warning size="0.9375rem" />
           {error}
         </div>

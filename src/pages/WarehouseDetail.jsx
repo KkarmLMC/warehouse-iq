@@ -433,7 +433,7 @@ export default function WarehouseDetail() {
                     </div>
                   </div>
                   <div className="flex-gap-s shrink-0">
-                    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--radius-s)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
+                    <span className="text-label">
                       {po.status}
                     </span>
                     {po.grand_total > 0 && (

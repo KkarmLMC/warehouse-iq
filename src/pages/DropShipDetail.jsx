@@ -163,7 +163,7 @@ export default function DropShipDetail() {
             <MapPin size="0.875rem" style={{ color:'var(--brand-primary)',flexShrink:0 }} />
             <div>
               <div className="text-label">SHIP TO (PLP DIRECT)</div>
-              <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--brand-primary)' }}>{order?.customer_name}</div>
+              <div className="text-sm-bold">{order?.customer_name}</div>
               <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)' }}>{[order?.customer_address, shipTo].filter(Boolean).join(' · ')}</div>
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function DropShipDetail() {
       </div>
 
       {/* Drop ship info banner */}
-      <div style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', gap: 'var(--space-m)', alignItems: 'flex-start' }}>
+      <div className="flex-gap-m">
         <AirplaneTilt size="1rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0, marginTop: 1 }} />
         <div>
           <div className="text-sm-bold">Drop Ship from PLP</div>
@@ -204,7 +204,7 @@ export default function DropShipDetail() {
               <div className="text-sm-semi">{line.description}</div>
               {line.sku && <div className="text-xs-mono">{line.sku}</div>}
             </div>
-            <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
+            <div className="text-sm-bold">
               {Number(line.drop_ship_qty || line.back_order_qty || line.qty_shortage || 0)}
             </div>
           </div>
