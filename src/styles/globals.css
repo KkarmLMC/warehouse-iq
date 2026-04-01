@@ -1215,78 +1215,6 @@ textarea,
   flex-shrink: 0;
 }
 
-.bottom-nav {
-  display: none;
-  padding-bottom: calc(var(--space-xs) + env(safe-area-inset-bottom, 0rem));
-}
-
-.bottom-nav__track {
-  display: flex;
-  align-items: stretch;
-  height: var(--bottom-nav-h);
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.bottom-nav__track::-webkit-scrollbar {
-  display: none;
-}
-
-.bottom-nav__tab {
-  position: relative;
-  flex: 0 0 auto;
-  min-width: 4.5rem;
-  height: var(--bottom-nav-h);
-  padding: var(--space-xs) var(--space-s);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.1875rem;
-  scroll-snap-align: center;
-  color: var(--text-muted);
-}
-
-.bottom-nav__tab--active {
-  color: var(--brand-primary);
-}
-
-.bottom-nav__icon {
-  font-size: var(--text-lg);
-  line-height: 1;
-}
-
-.bottom-nav__label {
-  font-size: var(--text-2xs);
-  font-weight: var(--fw-semibold);
-  font-family: var(--font-body);
-}
-
-.bottom-nav__indicator {
-  width: 0.3125rem;
-  height: 0.3125rem;
-  border-radius: var(--radius-round);
-  background: transparent;
-}
-
-.bottom-nav__tab--active .bottom-nav__indicator {
-  background: var(--brand-accent);
-}
-
-.tab-bar {
-  position: fixed;
-  inset: auto 0 0 0;
-  height: var(--tab-h);
-  background: var(--surface-base);
-  display: flex;
-  padding-bottom: env(safe-area-inset-bottom);
-  z-index: var(--z-sticky);
-}
-
 .tab-btn {
   flex: 1;
   display: flex;
@@ -1349,16 +1277,6 @@ textarea,
     display: flex;
   }
 
-  .bottom-nav {
-    display: block;
-    position: fixed;
-    inset: auto 0 0 0;
-    height: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom));
-    background: var(--surface-base);
-    border-top: var(--border-width-1) solid var(--border-subtle);
-    z-index: 150;
-    overflow: hidden;
-  }
 }
 
 @media (min-width: 768px) {
@@ -2363,6 +2281,91 @@ textarea,
   padding: var(--space-m) var(--space-l);
   border-top: var(--border-width-2) solid var(--border-subtle);
   background: var(--surface-hover);
+}
+
+/* =============================================================================
+   APP FOOTER — Mobile bottom navigation (hidden on desktop)
+   Unified across all 3 apps. Sidebar handles navigation on desktop.
+   ============================================================================= */
+
+.app-footer {
+  display: none;
+}
+
+.app-footer__track {
+  display: flex;
+  align-items: stretch;
+  height: var(--bottom-nav-h);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.app-footer__track::-webkit-scrollbar { display: none; }
+
+.app-footer__tab {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 4.5rem;
+  height: var(--bottom-nav-h);
+  padding: var(--space-xs) var(--space-s);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3xs);
+  scroll-snap-align: center;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.app-footer__tab--active {
+  color: var(--brand-primary);
+}
+
+.app-footer__icon {
+  font-size: var(--text-lg);
+  line-height: var(--leading-none);
+}
+
+.app-footer__label {
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-semibold);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.app-footer__indicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--space-xl);
+  height: var(--space-3xs);
+  border-radius: 0 0 var(--radius-xs) var(--radius-xs);
+  background: transparent;
+}
+
+.app-footer__tab--active .app-footer__indicator {
+  background: var(--brand-primary);
+}
+
+@media (max-width: 767px) {
+  .app-footer {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    background: var(--surface-base);
+    border-top: var(--border-width-1) solid var(--border-subtle);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }
 
 .empty {
@@ -4302,26 +4305,8 @@ textarea,
 
 /* ── Bar shell ───────────────────────────────────────────────────────────────── */
 
-.bottom-nav {
-  display: none; /* desktop: hidden */
-padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
-  }
-
 @media (max-width: 767px) {
-  .bottom-nav {
-    display: block;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom));
-    background: var(--surface-base);
-    border-top: var(--border-width-1) solid var(--border-subtle);
-    z-index: 150;
-    /* Contain the fade overlays */
-    overflow: hidden;
-  padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
-  }
-
-  /* Page content clears the bar */
+/* Page content clears the bar */
   .page,
   .page-content {
     padding: var(--space-l) var(--space-m) calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + var(--space-l));
@@ -4332,96 +4317,13 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 
 /* ── Scrollable track ────────────────────────────────────────────────────────── */
 
-.bottom-nav__track {
-  display: flex;
-  align-items: stretch;
-  height: var(--bottom-nav-h);
-  overflow-x: auto;
-  overflow-y: hidden;
-  /* Momentum scrolling on iOS */
-  -webkit-overflow-scrolling: touch;
-  /* Snap each tab into place */
-  scroll-snap-type: x mandatory;
-  /* Hide scrollbar — navigation is gestural */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.bottom-nav__track::-webkit-scrollbar { display: none; }
-
 /* ── Tab button ──────────────────────────────────────────────────────────────── */
-
-.bottom-nav__tab {
-  /* 4 full tabs + half of 5th visible = unmistakable scroll hint.
-     4.5 tabs × 22.2% ≈ 100%, so the 5th tab is cut cleanly in half. */
-  flex: 0 0 22%;
-  min-width: 4.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2xs);
-  border: none;
-  background: none;
-  cursor: pointer;
-  position: relative;
-  padding: 0.5rem var(--space-xs);
-  /* Each tab snaps to left edge of the track */
-  scroll-snap-align: start;
-  -webkit-tap-highlight-color: transparent;
-  transition: opacity var(--ease-fast);
-}
-
-.bottom-nav__tab:active { opacity: 0.65; }
 
 /* ── Active indicator — red pill at top ──────────────────────────────────────── */
 
-.bottom-nav__indicator {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0.1875rem;
-  background: var(--red);
-  border-radius: 0 0 var(--radius-xs) var(--radius-xs);
-  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.bottom-nav__tab--active .bottom-nav__indicator {
-  width: 1.75rem;
-}
-
 /* ── Icon ────────────────────────────────────────────────────────────────────── */
 
-.bottom-nav__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-primary);
-  transition: color var(--ease-fast), transform var(--ease-fast);
-}
-
-.bottom-nav__tab--active .bottom-nav__icon {
-  color: var(--red);
-  transform: translateY(-0.0625rem) scale(1.1);
-}
-
 /* ── Label ───────────────────────────────────────────────────────────────────── */
-
-.bottom-nav__label {
-  font-size: var(--text-xs);
-  font-weight: var(--fw-semibold);
-  color: var(--text-primary);
-  font-family: var(--font);
-  white-space: nowrap;
-  transition: color var(--ease-fast);
-}
-
-.bottom-nav__tab--active .bottom-nav__label {
-  color: var(--red);
-  font-weight: var(--fw-bold);
-}
 
 /* ── Edge fade — hints that more items exist off-screen ──────────────────────── */
 
@@ -4583,37 +4485,7 @@ padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
 }
 
 /* Bottom nav */
-.bottom-nav {
-  display: none;
-padding-bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0rem));
-  }
-
 @media (max-width: 768px) {
-  .bottom-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: 4rem;
-    background: var(--surface-base);
-    border-top: var(--border-width-1) solid var(--border-subtle);
-    z-index: 100;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .bottom-nav__tab {
-    flex: 0 0 22%;
-    min-width: 4.5rem;
-    gap: 0.1875rem;
-    padding: 8px 0.25rem;
-  }
-  .bottom-nav__label {
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    color: var(--text-primary);
-    font-family: var(--font);
-  }
-  .bottom-nav__tab--active .bottom-nav__label {
-    color: var(--red);
-  }
 }
 
 /* ─── Login page — scoped variables, no app interior bleed ──────────────────── */

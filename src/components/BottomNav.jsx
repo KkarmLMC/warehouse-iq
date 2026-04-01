@@ -13,15 +13,15 @@ export default function BottomNav() {
   const location  = useLocation()
 
   return (
-    <nav className="bottom-nav">
+    <nav className="app-footer">
       {TABS.map(({ path, Icon, label, prefix }) => {
         const active = location.pathname === path || (prefix !== path && location.pathname.startsWith(prefix + '/'))
         return (
-          <button key={path} className={`bottom-nav__tab ${active ? 'bottom-nav__tab--active' : ''}`}
+          <button key={path} className={`app-footer__tab ${active ? 'app-footer__tab--active' : ''}`}
             onClick={() => navigate(path)}>
             <Icon size="1.375rem" weight={active ? 'fill' : 'regular'}
               style={{ color: active ? 'var(--state-error)' : 'var(--text-primary)' }} />
-            <span className="bottom-nav__label">{label}</span>
+            <span className="app-footer__label">{label}</span>
           </button>
         )
       })}
