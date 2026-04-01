@@ -228,7 +228,7 @@ export default function PurchaseOrders() {
           <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"
-            style={{ width: '100%', paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 34 : 12 }} />
+            style={{ paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 34 : 12 }} />
           {search && <button onClick={() => setSearch('')} className="search-overlay-clear"><X size="0.8125rem" /></button>}
         </div>
         {['all', 'LM', 'Bolt'].map(d => (

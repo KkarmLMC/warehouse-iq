@@ -160,7 +160,7 @@ export default function InventoryStock() {
       <div className="position-relative mb-m">
         <MagnifyingGlass size="1rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts, SKU, manufacturer…"
-          style={{ width: '100%', paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 36 : 12 }} />
+          style={{ paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 36 : 12 }} />
         {search && (
           <button onClick={() => setSearch('')} className="search-overlay-clear">
             <X size="0.875rem" />

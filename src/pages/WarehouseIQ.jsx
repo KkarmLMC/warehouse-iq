@@ -275,7 +275,7 @@ export default function WarehouseIQ() {
           <div className="warehouse-i-q-986b">
             <MagnifyingGlass size="0.8125rem" className="warehouse-i-q-8528" />
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
-              style={{ width:'100%', paddingLeft: 'var(--search-input-offset)', paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
+              style={{ paddingLeft: 'var(--search-input-offset)', paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
             {search && <button onClick={() => setSearch('')} className="warehouse-i-q-e287"><X size="0.75rem"/></button>}
           </div>
           {/* Filter pills */}

@@ -127,7 +127,7 @@ export default function AddEditPart() {
 
       <div className="card-section">
         <Field label="Part Name" error={errors.name} required>
-          <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Franklin Rod Air Terminal 1/2&quot;" style={{ width: '100%', borderColor: errors.name ? 'var(--state-error)' : undefined }} />
+          <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Franklin Rod Air Terminal 1/2&quot;" style={{ borderColor: errors.name ? 'var(--state-error)' : undefined }} />
         </Field>
 
         <Field label="SKU / Part Number">
@@ -135,14 +135,14 @@ export default function AddEditPart() {
         </Field>
 
         <Field label="Category">
-          <select value={form.category_id} onChange={e => set('category_id', e.target.value)} style={{ width: '100%' }}>
+          <select value={form.category_id} onChange={e => set('category_id', e.target.value)}>
             <option value="">Select category…</option>
             {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </Field>
 
         <Field label="Manufacturer">
-          <input value={form.manufacturer} onChange={e => set('manufacturer', e.target.value)} placeholder="e.g. Lightning Master Corp" style={{ width: '100%' }} />
+          <input value={form.manufacturer} onChange={e => set('manufacturer', e.target.value)} placeholder="e.g. Lightning Master Corp" />
         </Field>
 
         <Field label="Manufacturer Part No.">
@@ -151,12 +151,12 @@ export default function AddEditPart() {
 
         <div className="grid-2col">
           <Field label="Unit of Measure">
-            <select value={form.unit_of_measure} onChange={e => set('unit_of_measure', e.target.value)} style={{ width: '100%' }}>
+            <select value={form.unit_of_measure} onChange={e => set('unit_of_measure', e.target.value)}>
               {['each', 'ft', 'roll', 'box', 'bag', 'set', 'pair', 'lb'].map(u => <option key={u} value={u}>{u}</option>)}
             </select>
           </Field>
           <Field label="Unit Cost ($)">
-            <input type="number" step="0.01" min="0" value={form.unit_cost} onChange={e => set('unit_cost', e.target.value)} placeholder="0.00" style={{ width: '100%' }} />
+            <input type="number" step="0.01" min="0" value={form.unit_cost} onChange={e => set('unit_cost', e.target.value)} placeholder="0.00" />
           </Field>
         </div>
 

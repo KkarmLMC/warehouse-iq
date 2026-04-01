@@ -362,7 +362,7 @@ export default function WarehouseDetail() {
         <div className="position-relative mb-m">
           <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
-            style={{ width: '100%', paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 34 : 12 }} />
+            style={{ paddingLeft: 'var(--search-input-offset)', paddingRight: search ? 34 : 12 }} />
           {search && (
             <button onClick={() => setSearch('')} className="search-overlay-clear">
               <X size="0.8125rem" />
