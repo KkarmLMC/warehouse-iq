@@ -66,7 +66,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>
         {/* Sheet header */}
         <div className="warehouse-detail-43ec">
-          <div style={{ width: 'var(--icon-size-lg)', height: 'var(--space-2xs)', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-m)' }} />
+          <div className="sheet-handle" />
           <div className="flex-between mb-l">
             <div className="warehouse-detail-860f">Edit Warehouse</div>
             <button onClick={onClose} className="flex-center" style={{ background: 'var(--surface-hover)', borderRadius: 'var(--radius-l)', width: 'var(--space-3xl)', height: 'var(--space-3xl)', cursor: 'pointer' }}>
@@ -281,7 +281,7 @@ export default function WarehouseDetail() {
             </div>
           </div>
           <button onClick={() => setShowEdit(true)}
-            style={{ width: 'var(--icon-size-md)', height: 'var(--icon-size-md)', borderRadius: 'var(--radius-l)', background: 'transparent', color: 'var(--color-white)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+            className="header-edit-btn">
             <PencilSimple size="0.9375rem" />
           </button>
         </div>

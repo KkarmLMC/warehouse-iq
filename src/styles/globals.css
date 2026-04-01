@@ -2271,6 +2271,90 @@ textarea,
 }
 .form-edit-btn:hover { background: var(--surface-hover); }
 
+/* ─── Tier 2: Custom — Header Edit Button (icon on dark banner) ─── */
+.header-edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-l);
+  background: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+.header-edit-btn:hover { background: var(--overlay-white-soft); }
+
+/* ─── Tier 2: Custom — Audio Control Button (record/stop/play) ─── */
+.audio-control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-l);
+  color: var(--color-white);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity var(--dur-fast) var(--ease-standard);
+}
+.audio-control-btn:hover { opacity: var(--opacity-soft); }
+.audio-control-btn--record { background: var(--state-error); }
+.audio-control-btn--record-active { background: var(--state-error); animation: pulse 1s ease-in-out infinite; }
+.audio-control-btn--play { background: var(--brand-primary); }
+
+/* ─── Tier 2: Custom — Floating Remove Badge (tiny X on fields) ─── */
+.floating-remove-btn {
+  position: absolute;
+  top: calc(-1 * var(--space-xs));
+  right: calc(-1 * var(--space-xs));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-l);
+  background: var(--state-error);
+  color: var(--color-white);
+  font-size: var(--text-2xs);
+  line-height: var(--leading-none);
+  cursor: pointer;
+}
+
+/* ─── Sheet Handle Pill (decorative, not a button) ─── */
+.sheet-handle {
+  width: var(--icon-size-lg);
+  height: var(--space-2xs);
+  background: var(--border-subtle);
+  border-radius: var(--radius-l);
+  margin: 0 auto var(--space-l);
+}
+
+/* ─── Sheet Close Button (round icon in sheet headers) ─── */
+.sheet-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-3xl);
+  height: var(--space-3xl);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-l);
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+.sheet-close-btn:hover { background: var(--surface-base); }
+
 .empty {
   display: flex;
   flex-direction: column;

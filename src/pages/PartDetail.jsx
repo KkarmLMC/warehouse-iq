@@ -150,7 +150,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>
         <div className="part-detail-43ec">
-          <div style={{ width: 'var(--icon-size-lg)', height: 'var(--space-2xs)', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-l)' }} />
+          <div className="sheet-handle" />
           <div className="part-detail-b4f9">Adjust Stock</div>
         </div>
 
@@ -274,7 +274,7 @@ export default function PartDetail() {
             {part.sku && <div className="part-detail-85ff">{part.sku}</div>}
           </div>
           <button onClick={() => navigate(`/warehouse-hq/part/${id}/edit`)}
-            style={{ width: 'var(--icon-size-md)', height: 'var(--icon-size-md)', borderRadius: 'var(--radius-l)', background: 'transparent', color: 'var(--color-white)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            className="header-edit-btn">
             <PencilSimple size="1rem" />
           </button>
         </div>
