@@ -183,7 +183,7 @@ export default function Inventory() {
           { label: 'Recent Shipments',      value: stats?.shipments ?? '—', color: 'var(--text-primary)', onClick: () => navigate('/warehouse-hq/transfer') },
         ].map(s => (
           <div key={s.label} className="stat-card" onClick={s.onClick}
-            style={{ cursor: 'pointer' }}>
+           >
             <div className="stat-card__label">{s.label}</div>
             <div className="stat-card__value" style={{ color: s.color }}>{s.value}</div>
           </div>
@@ -193,7 +193,7 @@ export default function Inventory() {
       {/* ── Master Warehouse ── */}
       {master && (
         <div className="card mb-l">
-          <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
+          <div className="list-card__header" onClick={() => navigate(`/warehouse-hq/warehouse/${master.id}`)}>
             <span className="list-card__title">
               <Lightning size="1rem" />
               {master.name}
@@ -260,7 +260,7 @@ export default function Inventory() {
 
       {/* ── Active Sales Orders ── */}
       <div className="card mb-l">
-        <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/sales-orders')}>
+        <div className="list-card__header" onClick={() => navigate('/sales-orders')}>
           <span className="list-card__title"><Receipt size="1rem"  />Active Sales Orders</span>
           <span className="list-card__meta">
             View all <ArrowRight size="0.75rem" />
@@ -296,7 +296,7 @@ export default function Inventory() {
       {/* ── Low / Out of Stock ── */}
       {lowStock.length > 0 && (
         <div className="card mb-l">
-          <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/inventory')}>
+          <div className="list-card__header" onClick={() => navigate('/warehouse-hq/inventory')}>
             <span className="list-card__title"><Warning size="1rem" />Low & Out of Stock</span>
             <span className="list-card__meta">
               View inventory <ArrowRight size="0.75rem" />
@@ -325,7 +325,7 @@ export default function Inventory() {
 
       {/* ── Recent Transfers / Shipments ── */}
       <div className="card" style={{ marginBottom: 'var(--space-2xl)' }}>
-        <div className="list-card__header" style={{ cursor: 'pointer' }} onClick={() => navigate('/warehouse-hq/transfer')}>
+        <div className="list-card__header" onClick={() => navigate('/warehouse-hq/transfer')}>
           <span className="list-card__title"><Truck size="1rem"  />Recent Transfers</span>
           <span className="list-card__meta">
             New transfer <ArrowRight size="0.75rem" />

@@ -58,7 +58,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
 
   return (
     <>
-      <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-sheet-overlay)', background: 'var(--overlay-bg)', animation: 'anim-fade-in 0.15s ease' }} />
+      <div onClick={onClose} className="modal-overlay" />
       <div style={{
         position: 'fixed', left: 0, right: 0, bottom: 'env(safe-area-inset-bottom, 0px)', zIndex: 'var(--z-sheet)',
         background: 'var(--surface-base)', borderRadius: 'var(--radius-l) var(--radius-l) 0 0',

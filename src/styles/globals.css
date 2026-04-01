@@ -2355,6 +2355,23 @@ textarea,
 }
 .sheet-close-btn:hover { background: var(--surface-base); }
 
+/* ─── Status Dot ─── */
+.status-dot {
+  width: var(--space-s);
+  height: var(--space-s);
+  border-radius: var(--radius-round);
+  flex-shrink: 0;
+}
+
+/* ─── Total Row (PO/SO summary footer) ─── */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-m) var(--space-l);
+  border-top: 2px solid var(--border-subtle);
+  background: var(--surface-hover);
+}
+
 .empty {
   display: flex;
   flex-direction: column;

@@ -211,7 +211,7 @@ export default function PODetail() {
             />
           ))}
           {/* Materials subtotal */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderTop: '2px solid var(--border-subtle)', background: 'var(--surface-hover)' }}>
+          <div className="total-row">
             <span className="text-sm-bold">Materials Subtotal</span>
             <span className="text-sm-bold">
               ${materialsTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
@@ -236,7 +236,7 @@ export default function PODetail() {
               <div className="text-sm-right">${(line.quantity * line.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
             </div>
           ))}
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderTop: '2px solid var(--border-subtle)', background: 'var(--surface-hover)' }}>
+          <div className="total-row">
             <span className="text-sm-bold">Labor Subtotal</span>
             <span className="text-sm-bold">${laborTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
           </div>
