@@ -63,7 +63,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
   return (
     <div>
       <label className="form-field__label">
-        {label}{required && <span style={{ color: 'var(--state-error)', marginLeft: 3 }}>*</span>}
+        {label}{required && <span className="text-error-marker">*</span>}
       </label>
 
       {/* Selected project display */}
@@ -92,7 +92,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
               onChange={e => setQuery(e.target.value)}
               onFocus={() => query && setOpen(true)}
               placeholder={placeholder}
-              style={{ paddingLeft: 30, width: '100%' }}
+              
             />
             {loading && (
               <div className="spinner" style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', width: 14, height: 14 }} />

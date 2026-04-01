@@ -296,7 +296,7 @@ export default function FulfillmentDetail() {
           fontWeight:700,fontSize:'var(--text-sm)',cursor: allChecked && !pushing && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
         {done ? <><CheckCircle size="1rem" weight="fill" /> Pushed to Shipment</>
-          : pushing ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
+          : pushing ? <><div className="spinner spinner--xs" /> Processing…</>
           : !allChecked ? `Check off all ${lines.length - Object.values(checked).filter(Boolean).length} remaining parts first`
           : <>{pullableLines.length < lines.length ? 'Push Available Items — Back Order Rest' : 'Push to Shipment — Deduct Inventory'} <ArrowRight size="1rem" /></>}
       </button>

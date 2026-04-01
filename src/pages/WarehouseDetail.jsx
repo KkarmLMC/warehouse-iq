@@ -360,7 +360,7 @@ export default function WarehouseDetail() {
 
         {/* Search + filters */}
         <div className="position-relative mb-m">
-          <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+          <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
           {search && (

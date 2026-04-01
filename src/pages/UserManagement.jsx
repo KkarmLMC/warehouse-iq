@@ -234,7 +234,7 @@ export default function UserManagement() {
                   <div className="um-actions">
                     <button onClick={cancelEdit} className="um-cancel">Cancel</button>
                     <button onClick={() => saveEdit(u.id)} disabled={saving} className="um-save">
-                      {saving ? <><div className="spinner" style={{ width:14,height:14,borderWidth:2 }} /> Saving…</> : <><CheckCircle size="0.9375rem" /> Save Changes</>}
+                      {saving ? <><div className="spinner spinner--xs" /> Saving…</> : <><CheckCircle size="0.9375rem" /> Save Changes</>}
                     </button>
                   </div>
                 </div>
@@ -288,7 +288,7 @@ export default function UserManagement() {
                   color: inviteEmail.trim() ? 'var(--surface-base)' : 'var(--text-muted)',
                   cursor: inviteEmail.trim() && !inviting ? 'pointer' : 'not-allowed',
                   marginTop: 'var(--space-s)' }}>
-                {inviting ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Inviting…</> : <><UserPlus size="1rem" /> Send Invite</>}
+                {inviting ? <><div className="spinner spinner--xs" /> Inviting…</> : <><UserPlus size="1rem" /> Send Invite</>}
               </button>
             </div>
           </div>

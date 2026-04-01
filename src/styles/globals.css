@@ -2006,6 +2006,11 @@ textarea,
 .grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-m); }
 .mb-l { margin-bottom: var(--space-l); }
 
+/* --- Round 6 --- */
+.spinner--xs { width: 16px; height: 16px; border-width: 2px; }
+.text-error-marker { color: var(--state-error); margin-left: 4px; }
+.badge--brand { background: var(--brand-soft); color: var(--brand-primary); }
+
 .empty {
   display: flex;
   flex-direction: column;

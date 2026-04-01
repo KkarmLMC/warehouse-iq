@@ -178,7 +178,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-m)' }}>
+          <div className="grid-2col mb-m">
             <div>
               <Label>Qty Change</Label>
               <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" />

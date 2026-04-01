@@ -77,7 +77,7 @@ function POCard({ po, totals, onPress }) {
             {po.division === 'Bolt' ? 'Bolt' : 'LM'}
           </span>
         </div>
-        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div className="text-sm-truncate">
           {po.customer_name}
         </div>
         <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2, display: 'flex', gap: 'var(--space-s)' }}>
@@ -225,7 +225,7 @@ export default function PurchaseOrders() {
       {/* Search + division filter */}
       <div style={{ display: 'flex', gap: 'var(--space-s)', marginBottom: 'var(--space-l)', flexWrap: 'wrap' }}>
         <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
-          <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+          <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />

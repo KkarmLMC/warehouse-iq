@@ -111,7 +111,7 @@ export default function InventoryTransfer() {
       </div>
 
       {/* From / To */}
-      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)' }}>
+      <div className="card-section">
         <div style={{ marginBottom: 'var(--space-l)' }}>
           <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 'var(--space-xs)', color: errors.from ? 'var(--state-error)' : 'var(--text-primary)' }}>From Warehouse</label>
           <select value={fromId} onChange={e => setFromId(e.target.value)} style={{ width: '100%', borderColor: errors.from ? 'var(--state-error)' : undefined }}>

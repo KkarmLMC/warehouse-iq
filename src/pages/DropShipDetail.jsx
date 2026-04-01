@@ -253,7 +253,7 @@ export default function DropShipDetail() {
           fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && tracking.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
         {done ? <><CheckCircle size="1rem" weight="fill" /> Drop Ship Processed</>
-          : shipping ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
+          : shipping ? <><div className="spinner spinner--xs" /> Processing…</>
           : (!carrier.trim() || !tracking.trim()) ? 'Enter carrier and tracking to continue'
           : <><AirplaneTilt size="1rem" weight="fill" /> Process Drop Ship — Mark as Shipped</>}
       </button>

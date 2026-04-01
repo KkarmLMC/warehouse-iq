@@ -231,7 +231,7 @@ export default function ShipmentDetail() {
           fontWeight:700,fontSize:'var(--text-sm)',cursor: carrier.trim() && !shipping && !done ? 'pointer' : 'not-allowed',
           fontFamily:'var(--font)',display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem' }}>
         {done ? <><CheckCircle size="1rem" weight="fill" /> {(order?.has_back_order || order?.has_drop_ship) ? 'Partial Shipment Confirmed' : 'Shipment Complete'}</>
-          : shipping ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Processing…</>
+          : shipping ? <><div className="spinner spinner--xs" /> Processing…</>
           : !carrier.trim() ? 'Enter carrier to continue'
           : <><Truck size="1rem" weight="fill" /> {(order?.has_back_order || order?.has_drop_ship) ? 'Ship Available Items — Pending Tracks Remain' : 'Mark as Shipped — Complete Order'}</>}
       </button>

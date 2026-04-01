@@ -467,7 +467,7 @@ export default function RunOrder() {
             <button onClick={runOrder} disabled={running}
               style={{ padding: 'var(--space-m) var(--space-2xl)',borderRadius:'var(--radius-l)',background:'var(--brand-primary)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',display:'inline-flex',alignItems:'center',gap:'var(--space-s)' }}>
               {running
-                ? <><div className="spinner" style={{ width:16,height:16,borderWidth:2 }} /> Calculating…</>
+                ? <><div className="spinner spinner--xs" /> Calculating…</>
                 : <><Lightning size="1rem" weight="fill" /> Run Order</>}
             </button>
           </div>

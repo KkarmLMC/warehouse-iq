@@ -279,7 +279,7 @@ export default function WarehouseIQ() {
             {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', background:'none', cursor:'pointer', color:'var(--text-muted)', padding:0 }}><X size="0.75rem"/></button>}
           </div>
           {/* Filter pills */}
-          <div style={{ display:'flex', gap:'var(--space-xs)' }}>
+          <div className="flex-gap-s">
             {[['all','All'],['active','Active'],['low','Low'],['out','Out']].map(([val,lbl]) => (
               <button key={val} onClick={() => setFilter(val)}
                 style={{ padding:'3px 10px', borderRadius:'var(--radius-s)', background:filter===val?'var(--brand-primary)':'var(--surface-hover)', color:filter===val?'#fff':'var(--text-primary)', fontSize:'var(--text-xs)', fontWeight:700, cursor:'pointer', whiteSpace:'nowrap' }}>

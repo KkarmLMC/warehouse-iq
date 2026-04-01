@@ -109,7 +109,7 @@ export default function AddEditPart() {
   const Field = ({ label, error, required, children }) => (
     <div style={{ marginBottom: 'var(--space-l)' }}>
       <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 600, color: error ? 'var(--state-error)' : 'var(--text-primary)', marginBottom: 'var(--space-xs)' }}>
-        {label}{required && <span style={{ color: 'var(--state-error)', marginLeft: 4 }}>*</span>}
+        {label}{required && <span className="text-error-marker">*</span>}
       </label>
       {children}
       {error && <div className="validation-error">{error}</div>}
@@ -125,7 +125,7 @@ export default function AddEditPart() {
         </div>
       </div>
 
-      <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)' }}>
+      <div className="card-section">
         <Field label="Part Name" error={errors.name} required>
           <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Franklin Rod Air Terminal 1/2&quot;" style={{ width: '100%', borderColor: errors.name ? 'var(--state-error)' : undefined }} />
         </Field>

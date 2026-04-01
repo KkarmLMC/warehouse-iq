@@ -15,7 +15,7 @@ import ProjectPicker from '../components/ProjectPicker.jsx'
 function Label({ children, required }) {
   return (
     <label className="text-label">
-      {children}{required && <span style={{ color: 'var(--state-error)', marginLeft: 3 }}>*</span>}
+      {children}{required && <span className="text-error-marker">*</span>}
     </label>
   )
 }
@@ -551,7 +551,7 @@ export default function PONew() {
           <div><Label>ZIP</Label><input value={customerZip} onChange={e => setCustomerZip(e.target.value)} placeholder="75001" /></div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-s)' }}>
+        <div className="grid-2col">
           <div><Label>Phone</Label><input value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} placeholder="(555) 000-0000" /></div>
           <div><Label>Email</Label><input value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} placeholder="name@company.com" /></div>
         </div>
