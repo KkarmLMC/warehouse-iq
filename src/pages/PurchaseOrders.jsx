@@ -80,8 +80,8 @@ function POCard({ po, totals, onPress }) {
         <div className="text-sm-truncate">
           {po.customer_name}
         </div>
-        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2, display: 'flex', gap: 'var(--space-s)' }}>
-          {po.project_name && <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{po.project_name}</span>}
+        <div className="purchase-orders-aab0">
+          {po.project_name && <span className="purchase-orders-5867">{po.project_name}</span>}
           {po.so_date && <span>· {new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
         </div>
       </div>
@@ -160,7 +160,7 @@ export default function PurchaseOrders() {
   return (
     <div className="page-content fade-in">
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--space-m)' }}>
+      <div className="purchase-orders-3bf5">
         <button onClick={() => navigate('/sales-orders/new')}
           className="btn btn-navy"
           className="flex-gap-s">
@@ -174,12 +174,12 @@ export default function PurchaseOrders() {
           display: 'flex', alignItems: 'center', gap: '0.75rem',
           padding: 'var(--space-m) var(--space-l)', background: 'var(--state-warning-soft)',
           borderRadius: 'var(--radius-l)', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => setActiveTab('queued')}>
-          <Warning size="1.125rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0 }} />
+          <Warning size="1.125rem" weight="fill" className="purchase-orders-e393" />
           <div className="content-body">
             <div className="text-sm-bold">
               {queuedCount} Sales Order{queuedCount !== 1 ? 's' : ''} in queue
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-warning-text)' }}>
+            <div className="purchase-orders-c677">
               Tap to review and publish
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function PurchaseOrders() {
           { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? 'var(--state-warning)' : undefined },
           { label: 'Published Value', value: '$' + (totalPublishedValue / 1000).toFixed(0) + 'k', color: 'var(--state-success-text)' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', padding: 'var(--space-m)', textAlign: 'center' }}>
+          <div key={s.label} className="purchase-orders-080f">
             <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: s.color || 'var(--text-primary)' }}>{s.value}</div>
             <div className="meta-text">{s.label}</div>
           </div>
@@ -202,7 +202,7 @@ export default function PurchaseOrders() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 2, marginBottom: 'var(--space-m)', overflowX: 'auto', scrollbarWidth: 'none', borderBottom: '2px solid var(--border-subtle)', paddingBottom: 0 }}>
+      <div className="purchase-orders-baa5">
         {TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             style={{
@@ -223,8 +223,8 @@ export default function PurchaseOrders() {
       </div>
 
       {/* Search + division filter */}
-      <div style={{ display: 'flex', gap: 'var(--space-s)', marginBottom: 'var(--space-l)', flexWrap: 'wrap' }}>
-        <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
+      <div className="purchase-orders-293c">
+        <div className="purchase-orders-f661">
           <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search SO#, customer, project…"

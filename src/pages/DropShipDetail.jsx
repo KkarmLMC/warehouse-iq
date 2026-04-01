@@ -136,7 +136,7 @@ export default function DropShipDetail() {
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/dropship')}
-          style={{ marginTop: 'var(--space-l)', padding: 'var(--space-s) var(--space-l)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: 'var(--surface-base)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="drop-ship-detail-326e">
           ← Back to Drop Ship Queue
         </button>
       </div>
@@ -159,12 +159,12 @@ export default function DropShipDetail() {
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {shipTo && (
-          <div style={{ marginTop: 8,padding:'var(--space-s) var(--space-m)',background:'var(--surface-base)',borderRadius:'var(--radius-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
-            <MapPin size="0.875rem" style={{ color:'var(--brand-primary)',flexShrink:0 }} />
+          <div className="drop-ship-detail-ae65">
+            <MapPin size="0.875rem" className="drop-ship-detail-f3a3" />
             <div>
               <div className="text-label">SHIP TO (PLP DIRECT)</div>
               <div className="text-sm-bold">{order?.customer_name}</div>
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)' }}>{[order?.customer_address, shipTo].filter(Boolean).join(' · ')}</div>
+              <div className="drop-ship-detail-60fc">{[order?.customer_address, shipTo].filter(Boolean).join(' · ')}</div>
             </div>
           </div>
         )}
@@ -172,7 +172,7 @@ export default function DropShipDetail() {
 
       {/* Drop ship info banner */}
       <div className="flex-gap-m">
-        <AirplaneTilt size="1rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0, marginTop: 1 }} />
+        <AirplaneTilt size="1rem" weight="fill" className="drop-ship-detail-5a44" />
         <div>
           <div className="text-sm-bold">Drop Ship from PLP</div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 2, lineHeight: 1.5 }}>
@@ -188,13 +188,13 @@ export default function DropShipDetail() {
           <span className="list-card__title"><Package size="1rem" />Drop Ship Items</span>
           <span className="list-card__meta">{lines.length} items</span>
         </div>
-        <div style={{ display:'grid',gridTemplateColumns:'1fr 70px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
+        <div className="drop-ship-detail-8db5">
           {['Part','Qty'].map(h => (
             <div key={h} className="text-sm-bold">{h}</div>
           ))}
         </div>
         {lines.length === 0 ? (
-          <div style={{ padding:'var(--space-xl)',textAlign:'center',color:'var(--text-muted)',fontSize:'var(--text-sm)' }}>
+          <div className="drop-ship-detail-ddc8">
             No drop ship lines found for this order.
           </div>
         ) : lines.map((line, idx) => (
@@ -216,7 +216,7 @@ export default function DropShipDetail() {
         <div className="list-card__header">
           <span className="list-card__title"><AirplaneTilt size="1rem" />PLP Shipping Info</span>
         </div>
-        <div style={{ padding: 'var(--space-l)',display:'flex',flexDirection:'column',gap:'var(--space-m)' }}>
+        <div className="drop-ship-detail-7edb">
           <div>
             <label className="form-field__label">
               Carrier <span style={{ color:'var(--state-error)' }}>*</span>
@@ -240,7 +240,7 @@ export default function DropShipDetail() {
               Notes
             </label>
             <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Delivery instructions, special notes…"
-              style={{ width:'100%',boxSizing:'border-box',resize:'vertical',minHeight:72 }} />
+              className="drop-ship-detail-baf4" />
           </div>
         </div>
       </div>

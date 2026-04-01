@@ -192,7 +192,7 @@ export default function UserManagement() {
                       {isSelf && <span className="um-self-badge">you</span>}
                       <span className="badge" style={{ background: rc.bg, color: rc.color, textTransform: 'capitalize' }}>{u.role}</span>
                       {u.pipeline_role && (
-                        <span className="badge" style={{ background: 'var(--state-info-soft)', color: 'var(--state-info)' }}>
+                        <span className="badge user-management-b0d0">
                           {PIPELINE_LABELS[u.pipeline_role] || u.pipeline_role}
                         </span>
                       )}
@@ -220,7 +220,7 @@ export default function UserManagement() {
                   </div>
                   <div className="mb-l">
                     <label className="form-field__label">
-                      Pipeline Role <span style={{ fontWeight: 400, color: 'var(--text-muted)', textTransform: 'none' }}>(controls what this user sees on their tablet)</span>
+                      Pipeline Role <span className="user-management-72b8">(controls what this user sees on their tablet)</span>
                     </label>
                     <div className="pr-grid">
                       {PIPELINE_ROLES.map(pr => (

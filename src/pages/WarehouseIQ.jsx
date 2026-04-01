@@ -23,12 +23,12 @@ function chip(bg, color) {
 function SumCard({ label, value, sub, color = 'var(--text-primary)', Icon }) {
   return (
     <div className="card-section">
-      <div style={{ display:'flex', alignItems:'center', gap:'var(--space-s)', marginBottom: 'var(--space-s)' }}>
+      <div className="warehouse-i-q-1b6e">
         {Icon && <Icon size="0.875rem" style={{ color:'var(--text-muted)' }} />}
         <span className="text-label">{label}</span>
       </div>
-      <div style={{ fontSize:'var(--text-md)', fontWeight:800, color, lineHeight:1 }}>{value}</div>
-      {sub && <div style={{ fontSize:'var(--text-xs)', color:'var(--text-muted)', marginTop:4 }}>{sub}</div>}
+      <div className="warehouse-i-q-8075">{value}</div>
+      {sub && <div className="warehouse-i-q-f902">{sub}</div>}
     </div>
   )
 }
@@ -184,7 +184,7 @@ export default function WarehouseIQ() {
   return (
     <div className="page-content fade-in">
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-s)', flexWrap: 'wrap', marginBottom: 'var(--space-m)' }}>
+      <div className="warehouse-i-q-535c">
         {!isClosed && period && (
           <button onClick={handleClosePeriod} disabled={closing}
             className="btn meta-text">
@@ -198,20 +198,20 @@ export default function WarehouseIQ() {
       </div>
 
       {/* Period + warehouse selector */}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'var(--space-l)', flexWrap:'wrap', gap:'var(--space-m)' }}>
+      <div className="warehouse-i-q-4f2e">
         {/* Period badge */}
         <div className="flex-gap-s">
           <div style={{ padding: 'var(--space-s) var(--space-l)', borderRadius:'var(--radius-l)', background: isClosed ? 'var(--surface-light)' : 'var(--brand-primary)', color: isClosed ? 'var(--text-secondary)' : '#fff', fontWeight:700, fontSize:'var(--text-sm)' }}>
             {periodLabel}
           </div>
           {isClosed
-            ? <span style={{ fontSize:'var(--text-xs)', color:'var(--text-secondary)', fontWeight:600 }}>Closed</span>
-            : <span style={{ fontSize:'var(--text-xs)', color:'var(--state-success-text)', fontWeight:600 }}>● Open</span>
+            ? <span className="warehouse-i-q-aca5">Closed</span>
+            : <span className="warehouse-i-q-7741">● Open</span>
           }
         </div>
 
         {/* Warehouse tabs */}
-        <div style={{ display:'flex', gap:'var(--space-s)', overflowX:'auto', scrollbarWidth:'none' }}>
+        <div className="warehouse-i-q-8a71">
           {warehouses.map(w => (
             <button key={w.id} onClick={() => setActiveWH(w.id)}
               style={{
@@ -237,15 +237,15 @@ export default function WarehouseIQ() {
 
       {/* Active POs section */}
       {pos.length > 0 && (
-        <div style={{ background: 'var(--surface-base)', borderRadius:'var(--radius-l)', overflow:'hidden', marginBottom:'var(--space-l)' }}>
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--space-m) var(--space-l)', borderBottom:'1px solid var(--border-subtle)' }}>
+        <div className="warehouse-i-q-7cb6">
+          <div className="warehouse-i-q-1b9f">
             <div className="flex-gap-s">
               <Receipt size="0.9375rem" style={{ color:'var(--brand-primary)' }} />
               <span className="text-sm-bold">Active Sales Orders</span>
               <span className="text-label">{pos.length}</span>
             </div>
             <button onClick={() => navigate('/sales-orders')}
-              style={{ fontSize:'var(--text-xs)', fontWeight:600, color:'var(--brand-primary)', background:'none', cursor:'pointer', padding:0 }}>
+              className="warehouse-i-q-4a48">
               View all
             </button>
           </div>
@@ -267,16 +267,16 @@ export default function WarehouseIQ() {
       )}
 
       {/* Cycle table */}
-      <div style={{ background: 'var(--surface-base)', borderRadius:'var(--radius-l)', overflow:'hidden' }}>
+      <div className="warehouse-i-q-63aa">
         
         {/* Table toolbar */}
-        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom:'1px solid var(--border-subtle)', display:'flex', gap:'var(--space-m)', alignItems:'center', flexWrap:'wrap' }}>
+        <div className="warehouse-i-q-cc46">
           {/* Search */}
-          <div style={{ position:'relative', flex:1, minWidth:160 }}>
-            <MagnifyingGlass size="0.8125rem" style={{ position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:'var(--text-muted)' }} />
+          <div className="warehouse-i-q-986b">
+            <MagnifyingGlass size="0.8125rem" className="warehouse-i-q-8528" />
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
               style={{ width:'100%', paddingLeft:28, paddingRight:search?28:8, fontSize:'var(--text-xs)' }} />
-            {search && <button onClick={() => setSearch('')} style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', background:'none', cursor:'pointer', color:'var(--text-muted)', padding:0 }}><X size="0.75rem"/></button>}
+            {search && <button onClick={() => setSearch('')} className="warehouse-i-q-e287"><X size="0.75rem"/></button>}
           </div>
           {/* Filter pills */}
           <div className="flex-gap-s">
@@ -287,11 +287,11 @@ export default function WarehouseIQ() {
               </button>
             ))}
           </div>
-          <span style={{ fontSize:'var(--text-xs)', color:'var(--text-muted)', whiteSpace:'nowrap' }}>{filtered.length} parts</span>
+          <span className="warehouse-i-q-665b">{filtered.length} parts</span>
         </div>
 
         {/* Column headers */}
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--space-s)', padding: 'var(--space-s) var(--space-l)', background:'var(--brand-primary)', position:'sticky', top:0, zIndex:10 }}>
+        <div className="warehouse-i-q-fca4">
           {['Part / SKU','Start','Added','Used','On Order','Stock','Value',''].map((h,i) => (
             <div key={i} style={{ fontSize:'var(--text-md)', fontWeight:700, color: 'var(--surface-base)', textAlign: i === 0 ? 'left' : 'right' }}>{h}</div>
           ))}
@@ -299,9 +299,9 @@ export default function WarehouseIQ() {
 
         {/* Rows */}
         {loading ? (
-          <div style={{ display:'flex', justifyContent:'center', padding:'var(--space-2xl)' }}><div className="spinner" /></div>
+          <div className="warehouse-i-q-ddda"><div className="spinner" /></div>
         ) : filtered.length === 0 ? (
-          <div style={{ padding: 'var(--space-2xl)', textAlign:'center', color:'var(--text-muted)', fontSize:'var(--text-sm)' }}>
+          <div className="warehouse-i-q-a7d6">
             {rows.length === 0 ? 'No inventory data for this warehouse.' : 'No parts match filters.'}
           </div>
         ) : filtered.map((r, idx) => {
@@ -320,10 +320,10 @@ export default function WarehouseIQ() {
               {/* Part name + SKU */}
               <div style={{ minWidth:0 }}>
                 <div className="text-sm-truncate">{r.part.name}</div>
-                {r.part.sku && <div style={{ fontSize:'var(--text-xs)', fontFamily:'var(--mono)', color:'var(--text-muted)' }}>{r.part.sku}</div>}
+                {r.part.sku && <div className="warehouse-i-q-1b43">{r.part.sku}</div>}
               </div>
               {/* Start */}
-              <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color:'var(--text-muted)' }}>{r.startQty.toLocaleString()}</div>
+              <div className="warehouse-i-q-636e">{r.startQty.toLocaleString()}</div>
               {/* Added */}
               <div style={{ textAlign:'right', fontSize:'var(--text-sm)', color: r.added > 0 ? 'var(--state-info)' : 'var(--text-muted)', fontWeight: r.added > 0 ? 700 : 400 }}>
                 {r.added > 0 ? `+${r.added.toLocaleString()}` : '—'}
@@ -337,7 +337,7 @@ export default function WarehouseIQ() {
                 {r.onOrder > 0 ? r.onOrder.toLocaleString() : '—'}
               </div>
               {/* Stock + trend */}
-              <div style={{ textAlign:'right', display:'flex', alignItems:'center', justifyContent:'flex-end', gap:4 }}>
+              <div className="warehouse-i-q-8c02">
                 <span style={{ fontSize:'var(--text-sm)', fontWeight:800, color: isOut ? 'var(--state-error-text)' : isLow ? 'var(--state-warning-text)' : 'var(--text-primary)' }}>
                   {r.stock.toLocaleString()}
                 </span>
@@ -352,7 +352,7 @@ export default function WarehouseIQ() {
                 {r.value > 0 ? `$${r.value.toLocaleString('en-US',{maximumFractionDigits:0})}` : '—'}
               </div>
               {/* Status chip */}
-              <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end' }}>
+              <div className="warehouse-i-q-044c">
                 <StockChip stock={r.stock} min={r.min} />
               </div>
             </div>
@@ -361,22 +361,22 @@ export default function WarehouseIQ() {
 
         {/* Totals footer */}
         {filtered.length > 0 && (
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 72px 72px 72px 80px 88px 90px 48px', gap:'var(--space-s)', padding: 'var(--space-m) var(--space-l)', background:'var(--brand-primary)', borderTop:'2px solid var(--border-subtle)' }}>
-            <div style={{ fontSize:'var(--text-md)', fontWeight:800, color:'#fff' }}>Period Totals</div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-md)', color: 'var(--surface-base)' }}>—</div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-sm)', fontWeight:800, color:'var(--blue-tint-60)' }}>
+          <div className="warehouse-i-q-e2a8">
+            <div className="warehouse-i-q-9960">Period Totals</div>
+            <div className="warehouse-i-q-d102">—</div>
+            <div className="warehouse-i-q-7463">
               {filtered.reduce((s,r)=>s+r.added,0) > 0 ? `+${filtered.reduce((s,r)=>s+r.added,0).toLocaleString()}` : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-sm)', fontWeight:800, color:'var(--brand-light)' }}>
+            <div className="warehouse-i-q-4f26">
               {filtered.reduce((s,r)=>s+r.used,0) > 0 ? filtered.reduce((s,r)=>s+r.used,0).toLocaleString() : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-sm)', fontWeight:800, color:'var(--blue-tint-40)' }}>
+            <div className="warehouse-i-q-d370">
               {filtered.reduce((s,r)=>s+r.onOrder,0) > 0 ? filtered.reduce((s,r)=>s+r.onOrder,0).toLocaleString() : '—'}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-md)', fontWeight:800, color:'#fff' }}>
+            <div className="warehouse-i-q-5f47">
               {filtered.reduce((s,r)=>s+r.stock,0).toLocaleString()}
             </div>
-            <div style={{ textAlign:'right', fontSize:'var(--text-xs)', fontWeight:800, color:'var(--state-success)' }}>
+            <div className="warehouse-i-q-552a">
               ${filtered.reduce((s,r)=>s+r.value,0).toLocaleString('en-US',{maximumFractionDigits:0})}
             </div>
             <div />

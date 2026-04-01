@@ -118,7 +118,7 @@ export default function AddEditPart() {
 
   return (
     <div className="page-content fade-in">
-      <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
+      <div className="add-edit-part-154a">
         <div className="page-heading">{isEdit ? 'Edit Part' : 'New Part'}</div>
         <div className="meta-text--inverse">
           {isEdit ? 'Update part details' : 'Add a part to the catalog'}
@@ -131,7 +131,7 @@ export default function AddEditPart() {
         </Field>
 
         <Field label="SKU / Part Number">
-          <input value={form.sku} onChange={e => set('sku', e.target.value)} placeholder="e.g. AT-FR-12-CU" style={{ width: '100%', fontFamily: 'var(--mono)' }} />
+          <input value={form.sku} onChange={e => set('sku', e.target.value)} placeholder="e.g. AT-FR-12-CU" className="add-edit-part-4952" />
         </Field>
 
         <Field label="Category">
@@ -146,7 +146,7 @@ export default function AddEditPart() {
         </Field>
 
         <Field label="Manufacturer Part No.">
-          <input value={form.manufacturer_part_no} onChange={e => set('manufacturer_part_no', e.target.value)} placeholder="e.g. LMC-1234-A" style={{ width: '100%', fontFamily: 'var(--mono)' }} />
+          <input value={form.manufacturer_part_no} onChange={e => set('manufacturer_part_no', e.target.value)} placeholder="e.g. LMC-1234-A" className="add-edit-part-4952" />
         </Field>
 
         <div className="grid-2col">
@@ -161,7 +161,7 @@ export default function AddEditPart() {
         </div>
 
         <Field label="Barcode (manufacturer)">
-          <input value={form.barcode} onChange={e => set('barcode', e.target.value)} placeholder="Scan or enter barcode" style={{ width: '100%', fontFamily: 'var(--mono)' }} />
+          <input value={form.barcode} onChange={e => set('barcode', e.target.value)} placeholder="Scan or enter barcode" className="add-edit-part-4952" />
         </Field>
 
         <Field label="Description">

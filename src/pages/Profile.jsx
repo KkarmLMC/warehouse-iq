@@ -39,7 +39,7 @@ function PinPad({ onComplete }) {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 'var(--space-xl)' }}>
+      <div className="profile-00b7">
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} style={{ width: 14, height: 14, borderRadius: '50%', background: i < digits.length ? 'var(--brand-primary)' : 'var(--border-subtle)', transition: 'background 0.1s' }} />
         ))}
@@ -350,7 +350,7 @@ export default function Profile() {
 
         {profile?.division && (
           <Row label="Division">
-            <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+            <span className="profile-461a">
               <Buildings size="0.8125rem" style={{ color: 'var(--text-primary)' }} />
               {profile.division}
             </span>
@@ -386,8 +386,8 @@ export default function Profile() {
 
         {profile?.app_access?.length > 0 && (
           <div className="mb-m">
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--text-primary)', marginBottom: 8 }}>App Access</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
+            <div className="profile-bc90">App Access</div>
+            <div className="profile-e460">
               {profile.app_access.map(app => (
                 <Badge key={app}>
                   <AppWindow size="0.75rem" />
@@ -415,7 +415,7 @@ export default function Profile() {
           <div>
             <div className="profile-row">
               <div>
-                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--fw-semibold)' }}>{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
+                <div className="profile-f468">{hasPin ? '6-digit PIN is set ✓' : 'No PIN set'}</div>
                 <div className="meta-text">
                   {hasPin
                     ? `Last set: ${profile?.pin_set_at ? new Date(profile.pin_set_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown'}`
@@ -435,10 +435,10 @@ export default function Profile() {
           </div>
         ) : (
           <div>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-l)' }}>
-              <div style={{ fontSize: 'var(--text-md)', fontWeight: 'var(--fw-bold)', marginBottom: 4 }}>{pinLabel[pinSection]}</div>
+            <div className="profile-765d">
+              <div className="profile-1594">{pinLabel[pinSection]}</div>
               {pinError && (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-xs)', color: 'var(--state-error)', fontSize: 'var(--text-sm)', marginTop: 8 }}>
+                <div className="profile-e0ab">
                   <Warning size="0.875rem" /> {pinError}
                 </div>
               )}
@@ -467,7 +467,7 @@ export default function Profile() {
               <div className="position-relative">
                 <input type={showPw ? 'text' : 'password'} value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Minimum 8 characters" style={{ paddingRight: 'var(--sp-10)' }} />
                 <button onClick={() => setShowPw(v => !v)}
-                  style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: 0, display: 'flex' }}>
+                  className="profile-761c">
                   {showPw ? <EyeSlash size="1rem" /> : <Eye size="1rem" />}
                 </button>
               </div>

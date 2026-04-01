@@ -24,17 +24,17 @@ const STAGE_COLOR = {
 // ─── Warehouse health badge ───────────────────────────────────────────────────
 function HealthBadge({ out, low }) {
   if (out > 0) return (
-    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--state-error-soft)', color: 'var(--state-error)' }}>
+    <span className="inventory-cdb2">
       {out} Out
     </span>
   )
   if (low > 0) return (
-    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--state-warning-soft)', color: 'var(--state-warning)' }}>
+    <span className="inventory-3f22">
       {low} Low
     </span>
   )
   return (
-    <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 7px', borderRadius: 4, background: 'var(--state-success-soft)', color: 'var(--state-success-text)' }}>
+    <span className="inventory-d827">
       OK
     </span>
   )
@@ -130,9 +130,9 @@ export default function Inventory() {
   const fmt = (n) => `$${Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
 
   if (loading) return (
-    <div className="page-content fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 'var(--space-m)' }}>
+    <div className="page-content fade-in inventory-cc79">
       <div className="spinner" />
-      <span style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>Loading Warehouse IQ…</span>
+      <span className="inventory-bf37">Loading Warehouse IQ…</span>
     </div>
   )
 
@@ -143,33 +143,33 @@ export default function Inventory() {
       {/* ── Pending CO alert ── */}
       {stats?.pendingCOs > 0 && (
         <div onClick={() => navigate('/warehouse-hq/change-orders')}
-          style={{ background: 'var(--state-warning-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', cursor: 'pointer' }}>
-          <Warning size="1.125rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0 }} />
+          className="inventory-c14e">
+          <Warning size="1.125rem" weight="fill" className="inventory-e393" />
           <div className="content-body">
             <div className="text-sm-bold">
               {stats.pendingCOs} Change Order{stats.pendingCOs !== 1 ? 's' : ''} Pending Review
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-warning-text)' }}>Field crew part requests waiting for approval</div>
+            <div className="inventory-c677">Field crew part requests waiting for approval</div>
           </div>
-          <CaretRight size="0.875rem" style={{ color: 'var(--state-warning-text)', flexShrink: 0 }} />
+          <CaretRight size="0.875rem" className="inventory-dc1a" />
         </div>
       )}
 
       {/* ── Back order alert ── */}
       {backOrders.length > 0 && (
         <div onClick={() => navigate('/warehouse-hq/queue')}
-          style={{ background: 'var(--state-info-soft)', borderRadius: 'var(--radius-m)', padding: 'var(--space-m) var(--space-l)', marginBottom: 'var(--space-l)', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', cursor: 'pointer' }}>
-          <ClockCountdown size="1.125rem" weight="fill" style={{ color: 'var(--state-info)', flexShrink: 0 }} />
+          className="inventory-bae0">
+          <ClockCountdown size="1.125rem" weight="fill" className="inventory-bfcc" />
           <div className="content-body">
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--state-info)' }}>
+            <div className="inventory-a176">
               {backOrders.length} Back Order{backOrders.length !== 1 ? 's' : ''} Awaiting Stock
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-info)' }}>
+            <div className="inventory-bb2a">
               {backOrders.slice(0, 2).map(o => o.so_number).join(', ')}
               {backOrders.length > 2 ? ` + ${backOrders.length - 2} more` : ''} — tap to view queue
             </div>
           </div>
-          <CaretRight size="0.875rem" style={{ color: 'var(--state-info)', flexShrink: 0 }} />
+          <CaretRight size="0.875rem" className="inventory-bfcc" />
         </div>
       )}
 
@@ -197,23 +197,23 @@ export default function Inventory() {
             <span className="list-card__title">
               <Lightning size="1rem" />
               {master.name}
-              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px', marginLeft: 8 }}>MASTER</span>
+              <span className="inventory-3999">MASTER</span>
             </span>
             <span className="list-card__meta">{master.city}, {master.state}</span>
           </div>
-          <div style={{ padding: 'var(--space-l)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-m)' }}>
+          <div className="inventory-9a7a">
             {[
               { label: 'Inventory Value', value: fmt(warehouseHealth[master.id]?.total) },
               { label: 'Parts Tracked',  value: warehouseHealth[master.id]?.parts ?? '—' },
               { label: 'Health',         value: <HealthBadge out={warehouseHealth[master.id]?.out || 0} low={warehouseHealth[master.id]?.low || 0} /> },
             ].map(f => (
               <div key={f.label} className="card-section">
-                <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>{f.label}</div>
-                <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, fontFamily: 'var(--font)' }}>{f.value}</div>
+                <div className="inventory-4758">{f.label}</div>
+                <div className="inventory-f4d3">{f.value}</div>
               </div>
             ))}
           </div>
-          <div style={{ padding: '0 var(--space-l) var(--space-l)', display: 'flex', gap: 'var(--space-s)', flexWrap: 'wrap' }}>
+          <div className="inventory-37ee">
             {[
               ['Sales Orders', '/sales-orders'],
               ['Inventory',    '/warehouse-hq/inventory'],
@@ -222,7 +222,7 @@ export default function Inventory() {
               ['IQ Dashboard', '/warehouse-hq/iq'],
             ].map(([label, path]) => (
               <button key={label} onClick={() => navigate(path)}
-                style={{ padding: '5px 12px', borderRadius: 'var(--radius-s)', background: 'transparent', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', color: 'var(--brand-primary)' }}>
+                className="inventory-1411">
                 {label}
               </button>
             ))}
@@ -246,7 +246,7 @@ export default function Inventory() {
               {/* Info */}
               <div className="content-body">
                 <div className="text-sm-truncate">{wh.name}</div>
-                <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 1 }}>
+                <div className="inventory-78ac">
                   {wh.city}, {wh.state} · {h.parts || 0} parts · {fmt(h.total)}
                 </div>
               </div>
@@ -277,15 +277,15 @@ export default function Inventory() {
             style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < recentSOs.length - 1 ? '1px solid var(--border-subtle)' : 'none', cursor: 'pointer' }}>
             <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
             <div className="content-body">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--brand-primary)' }}>{so.so_number}</span>
+              <div className="inventory-faf9">
+                <span className="inventory-84cb">{so.so_number}</span>
                 <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '1px 5px', borderRadius: 'var(--radius-xs)', background: STAGE_COLOR[so.status] + '20', color: STAGE_COLOR[so.status], textTransform: 'capitalize' }}>{so.status}</span>
               </div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div className="inventory-722e">
                 {so.customer_name} — {so.project_name || 'No project name'}
               </div>
             </div>
-            <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--text-primary)', flexShrink: 0 }}>
+            <div className="inventory-cea1">
               {fmt(so.grand_total)}
             </div>
             <CaretRight size="0.8125rem" className="row-item__caret" />
@@ -350,7 +350,7 @@ export default function Inventory() {
                 {t.reason ? ` · ${t.reason}` : ''}
               </div>
             </div>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 6px', borderRadius: 'var(--radius-xs)', background: 'var(--state-success-soft)', color: 'var(--state-success-text)', textTransform: 'capitalize' }}>
+            <span className="inventory-28d7">
               {t.status}
             </span>
           </div>

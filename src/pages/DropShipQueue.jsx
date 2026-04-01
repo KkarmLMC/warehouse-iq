@@ -60,7 +60,7 @@ export default function DropShipQueue() {
             </div>
             <div className="queue-row__right">
               <div className="amount-mono">{fmt(o.grand_total)}</div>
-              <span className="badge" style={{ background: 'var(--state-warning-soft)', color: 'var(--state-warning)' }}>Awaiting PLP</span>
+              <span className="badge drop-ship-queue-3182">Awaiting PLP</span>
             </div>
             <CaretRight size="0.875rem" className="row-item__caret" />
           </div>

@@ -151,7 +151,7 @@ export default function FulfillmentDetail() {
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/fulfillment')}
-          style={{ marginTop: 'var(--space-l)', padding: 'var(--space-s) var(--space-l)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: 'var(--surface-base)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="fulfillment-detail-326e">
           ← Back to Fulfillment
         </button>
       </div>
@@ -180,18 +180,18 @@ export default function FulfillmentDetail() {
       </div>
 
       {shortageLines.length > 0 && (
-        <div style={{ background:'var(--state-error-soft)',borderRadius:'var(--radius-l)',padding:'var(--space-m) var(--space-l)',marginBottom: 'var(--space-l)',display:'flex',alignItems:'center',gap:'var(--space-m)' }}>
-          <Warning size="1rem" weight="fill" style={{ color:'var(--state-error)',flexShrink:0 }} />
-          <div style={{ fontSize:'var(--text-xs)',color:'var(--state-error-text)' }}>
+        <div className="fulfillment-detail-e503">
+          <Warning size="1rem" weight="fill" className="fulfillment-detail-7e14" />
+          <div className="fulfillment-detail-fbc7">
             {shortageLines.length} part{shortageLines.length!==1?'s':''} had shortages — split fulfillment applied where possible. Review red items before confirming.
           </div>
         </div>
       )}
 
       {dropShipLines.length > 0 && (
-        <div style={{ background:'#f5f3ff',borderRadius:'var(--radius-l)',padding:'var(--space-m) var(--space-l)',marginBottom: 'var(--space-l)',display:'flex',alignItems:'center',gap:'var(--space-m)' }}>
-          <Truck size="1rem" weight="fill" style={{ color:'#6d28d9',flexShrink:0 }} />
-          <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9' }}>
+        <div className="fulfillment-detail-8742">
+          <Truck size="1rem" weight="fill" className="fulfillment-detail-1823" />
+          <div className="fulfillment-detail-588f">
             {dropShipLines.length} part{dropShipLines.length!==1?'s':''} marked for drop ship — these will be fulfilled directly by the supplier, not from warehouse stock.
           </div>
         </div>
@@ -205,7 +205,7 @@ export default function FulfillmentDetail() {
         </div>
 
         {/* Column headers */}
-        <div style={{ display:'grid',gridTemplateColumns:'44px 1fr 60px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
+        <div className="fulfillment-detail-738e">
           {['','Part / Warehouse','Qty'].map(h => (
             <div key={h} className="text-sm-bold">{h}</div>
           ))}
@@ -234,26 +234,26 @@ export default function FulfillmentDetail() {
               </div>
               {/* Part info */}
               <div>
-                <div style={{ display:'flex',alignItems:'center',gap:6 }}>
+                <div className="fulfillment-detail-400f">
                   <span style={{ fontSize:'var(--text-sm)',fontWeight:600,color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isOut ? 'var(--state-error-text)' : isPulled ? 'var(--text-muted)' : 'var(--text-primary)',
                     textDecoration: isPulled && !isBO && !isDS ? 'line-through' : 'none' }}>
                     {line.description}
                   </span>
-                  {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'var(--state-info-soft)',color:'var(--state-info)',flexShrink:0 }}>BACK ORDER</span>}
-                  {isDS && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'#ede9fe',color:'#6d28d9',flexShrink:0 }}>DROP SHIP</span>}
+                  {isBO && <span className="fulfillment-detail-21d2">BACK ORDER</span>}
+                  {isDS && <span className="fulfillment-detail-85ed">DROP SHIP</span>}
                 </div>
                 {line.sku && <div className="text-xs-mono">{line.sku}</div>}
                 {isDS && line.drop_ship_supplier && (
-                  <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9',marginTop:2 }}>
+                  <div className="fulfillment-detail-d596">
                     via {line.drop_ship_supplier}
                     {line.drop_ship_reference && <span> · Ref: {line.drop_ship_reference}</span>}
                     {line.drop_ship_eta && <span> · ETA: {line.drop_ship_eta}</span>}
                   </div>
                 )}
-                {!isDS && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:1 }}>
+                {!isDS && <div className="fulfillment-detail-9d29">
                   {line.warehouses?.name || '—'}
                   {line.split_warehouse_id && line.split_qty > 0 && (
-                    <span style={{ marginLeft:6,color:'var(--state-warning)' }}>
+                    <span className="fulfillment-detail-3e9c">
                       + {line.split_qty} from {line.split_warehouse?.name || 'split warehouse'}
                     </span>
                   )}
@@ -263,7 +263,7 @@ export default function FulfillmentDetail() {
               <div>
                 <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-md)',color: isOut ? 'var(--state-error)' : 'var(--text-primary)' }}>
                   {line.qty_available}
-                  {line.split_qty > 0 && <span style={{ color:'var(--state-warning)',fontSize:'var(--text-xs)' }}>+{line.split_qty}</span>}
+                  {line.split_qty > 0 && <span className="fulfillment-detail-f97a">+{line.split_qty}</span>}
                 </div>
                 <button onClick={(e) => flags[line.id] ? clearFlag(e, line.id) : flagLine(e, line.id)}
                   style={{ fontSize:'var(--text-xs)',padding:'2px 6px',borderRadius:4,cursor:'pointer',fontFamily:'var(--font)',marginTop:4,
@@ -284,7 +284,7 @@ export default function FulfillmentDetail() {
       </div>
 
       {/* Inventory note */}
-      <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginBottom:'var(--space-l)',padding: 'var(--space-m)',background:'var(--surface-base)',borderRadius:'var(--radius-l)' }}>
+      <div className="fulfillment-detail-8349">
         Inventory will be deducted from each warehouse when you push to shipment. Check off each part as you pull it from the shelves.
       </div>
 

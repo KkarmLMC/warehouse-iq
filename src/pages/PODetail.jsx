@@ -34,7 +34,7 @@ function SectionGroup({ label, items }) {
         <span style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--surface-base)', textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'left' }}>{label}</span>
         <span />
         <span />
-        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--fw-bold)', color: 'var(--surface-base)', textAlign: 'right' }}>
+        <span className="p-o-detail-e8b8">
           ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </span>
       </button>
@@ -47,8 +47,8 @@ function SectionGroup({ label, items }) {
           borderBottom: idx < items.length - 1 ? '1px solid var(--border-subtle)' : 'none',
           alignItems: 'center',
           background: 'var(--surface-base)' }}>
-          <div style={{ minWidth: 0, overflow: 'hidden' }}>
-            {item.sku && <div style={{ fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--text-muted)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
+          <div className="p-o-detail-e25b">
+            {item.sku && <div className="p-o-detail-cb4a">{item.sku}</div>}
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.4 }}>{item.description}</div>
           </div>
           <div className="text-sm-right">{item.quantity}</div>
@@ -121,8 +121,8 @@ export default function PODetail() {
     <div className="page-content fade-in">
 
       {/* SO Header card */}
-      <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--space-m)' }}>
+      <div className="p-o-detail-154a">
+        <div className="p-o-detail-c353">
           <div>
             <div className="text-label">
               {po.division === 'Bolt' ? 'Bolt Lightning' : 'Lightning Master'} · {po.so_number}
@@ -143,31 +143,31 @@ export default function PODetail() {
         </div>
 
         {/* Customer details */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-l)',  paddingTop: 'var(--space-m)' }}>
+        <div className="p-o-detail-4259">
           {(po.customer_city || po.customer_state) && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--surface-base)' }}>
+            <div className="p-o-detail-267d">
               <MapPin size="0.75rem" />
               {[po.customer_city, po.customer_state].filter(Boolean).join(', ')}
             </div>
           )}
           {po.customer_phone && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--surface-base)' }}>
+            <div className="p-o-detail-267d">
               <Phone size="0.75rem" /> {po.customer_phone}
             </div>
           )}
           {po.customer_email && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--surface-base)' }}>
+            <div className="p-o-detail-267d">
               <Envelope size="0.75rem" /> {po.customer_email}
             </div>
           )}
           {po.so_date && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-xs)', color: 'var(--surface-base)' }}>
+            <div className="p-o-detail-267d">
               <CalendarBlank size="0.75rem" />
               {new Date(po.so_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </div>
           )}
           {po.job_reference && (
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', fontFamily: 'var(--mono)' }}>
+            <div className="p-o-detail-eddd">
               Ref: {po.job_reference}
             </div>
           )}
@@ -196,7 +196,7 @@ export default function PODetail() {
 
       {/* Line items — materials by section */}
       {sections.length > 0 && (
-        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)', maxWidth: '100%' }}>
+        <div className="p-o-detail-1fac">
           {/* Column headers */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 4.5rem 5.5rem 7.5rem', gap: 'var(--space-s)', padding: 'var(--space-l)', background: 'var(--surface-base)', borderBottom: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-m) var(--radius-m) 0 0' }}>
             {['Item / Description', 'Quantity', 'Unit', 'Amount'].map(h => (
@@ -222,14 +222,14 @@ export default function PODetail() {
 
       {/* Labor lines */}
       {laborLines.length > 0 && (
-        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-l)', maxWidth: '100%' }}>
-          <div style={{ padding: 'var(--space-m) var(--space-l)', background: 'var(--brand-primary)' }}>
+        <div className="p-o-detail-1fac">
+          <div className="p-o-detail-1696">
             <span className="text-label">Installation / Labor</span>
           </div>
           {laborLines.map((line, idx) => (
             <div key={line.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: idx < laborLines.length - 1 ? '1px solid var(--border-subtle)' : 'none', alignItems: 'center', background: 'var(--surface-base)' }}>
               <div>
-                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>{line.description}</div>
+                <div className="p-o-detail-4e79">{line.description}</div>
               </div>
               <div className="text-sm-right">{line.quantity}</div>
               <div className="text-sm-right">${line.unit_cost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
@@ -256,7 +256,7 @@ export default function PODetail() {
       {/* Notes */}
       {po.notes && (
         <div className="card-section">
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-s)' }}>Notes</div>
+          <div className="p-o-detail-c350">Notes</div>
           <div className="text-sm">{po.notes}</div>
         </div>
       )}
@@ -275,9 +275,9 @@ export default function PODetail() {
           >
             <div style={{ textAlign: 'left' }}>
               <div className="page-heading--inverse">{cfg.label}</div>
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 2 }}>{cfg.sub}</div>
+              <div className="p-o-detail-b2b7">{cfg.sub}</div>
             </div>
-            <ArrowRight size="1.25rem" style={{ color: '#fff', flexShrink: 0 }} weight="bold" />
+            <ArrowRight size="1.25rem" className="p-o-detail-8289" weight="bold" />
           </button>
         )
       })()}

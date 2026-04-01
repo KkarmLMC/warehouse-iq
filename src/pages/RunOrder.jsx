@@ -32,32 +32,26 @@ function DropShipForm({ qty, onConfirm, onCancel }) {
   const [notes, setNotes] = useState('')
 
   return (
-    <div style={{ marginTop: 8, padding: 'var(--space-m)', background: '#f5f3ff',
-      borderRadius: 'var(--radius-l)', border: '1px solid #ddd6fe' }}>
-      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: '#6d28d9', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
+    <div className="run-order-7e21">
+      <div className="run-order-ef7e">
         <Truck size="0.75rem" /> Drop Ship {qty} unit{qty !== 1 ? 's' : ''} from PLP
       </div>
       <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginBottom: 8, lineHeight: 1.4 }}>
         These items will be sent to the Drop Ship Queue. Once PLP provides tracking info, the warehouse manager will process the shipment from the queue.
       </div>
 
-      <label style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#6d28d9', display: 'block', marginBottom: 2 }}>Notes (optional)</label>
+      <label className="run-order-d43c">Notes (optional)</label>
       <input value={notes} onChange={e => setNotes(e.target.value)}
         placeholder="Any notes for this drop ship"
-        style={{ width: '100%', fontSize: 'var(--text-xs)', padding: '5px 8px',
-          borderRadius: 4, border: '1px solid #d4d4d8', background: '#fff' }} />
+        className="run-order-1dbe" />
 
-      <div style={{ display: 'flex', gap: 'var(--space-s)', justifyContent: 'flex-end', marginTop: 8 }}>
+      <div className="run-order-1692">
         <button onClick={onCancel}
-          style={{ fontSize: 'var(--text-xs)', padding: '4px 12px', borderRadius: 4,
-            background: 'transparent', cursor: 'pointer', color: 'var(--text-muted)', fontFamily: 'var(--font)' }}>
+          className="run-order-2296">
           Cancel
         </button>
         <button onClick={() => onConfirm({ supplier: 'PLP', notes })}
-          style={{ fontSize: 'var(--text-xs)', padding: '4px 12px', borderRadius: 4,
-            background: '#6d28d9', color: '#fff', fontWeight: 700,
-            cursor: 'pointer', fontFamily: 'var(--font)',
-            display: 'flex', alignItems: 'center', gap: 3 }}>
+          className="run-order-63e6">
           <Truck size="0.625rem" /> Confirm Drop Ship
         </button>
       </div>
@@ -395,7 +389,7 @@ export default function RunOrder() {
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/queue')}
-          style={{ marginTop: 'var(--space-l)', padding: 'var(--space-s) var(--space-l)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: 'var(--surface-base)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="run-order-326e">
           ← Back to Queue
         </button>
       </div>
@@ -411,13 +405,13 @@ export default function RunOrder() {
 
       {/* Order header */}
       <div className="mb-xl">
-        <div style={{ display:'flex',alignItems:'center',gap:'var(--space-s)',marginBottom:4 }}>
-          <div style={{ fontSize:'var(--text-md)',fontWeight:800 }}>{order?.so_number}</div>
+        <div className="run-order-eaaa">
+          <div className="run-order-a2aa">{order?.so_number}</div>
           {order?.status === 'fulfillment' && (
-            <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius: 'var(--radius-s)',background:'var(--state-info-soft)',color:'var(--state-info)' }}>In Fulfillment</span>
+            <span className="run-order-b34c">In Fulfillment</span>
           )}
           {order?.status === 'back_ordered' && (
-            <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius: 'var(--radius-s)',background:'var(--state-warning-soft)',color:'var(--state-warning-text)' }}>Back-Order Re-Run</span>
+            <span className="run-order-f1f8">Back-Order Re-Run</span>
           )}
         </div>
         <div className="text-sm-bold">
@@ -432,8 +426,8 @@ export default function RunOrder() {
 
       {/* Back-order context banner */}
       {order?.status === 'back_ordered' && (
-        <div style={{ background:'var(--state-warning-soft)',borderRadius:'var(--radius-m)',padding:'var(--space-m) var(--space-l)',marginBottom:'var(--space-l)',display:'flex',gap:'var(--space-m)',alignItems:'flex-start' }}>
-          <Warning size="1rem" weight="fill" style={{ color:'var(--state-warning)',flexShrink:0,marginTop:1 }} />
+        <div className="run-order-b526">
+          <Warning size="1rem" weight="fill" className="run-order-74ad" />
           <div>
             <div className="text-sm-bold">Back-Order Fulfillment</div>
             <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)',marginTop:2,lineHeight:1.5 }}>
@@ -444,7 +438,7 @@ export default function RunOrder() {
       )}
 
       {/* Summary cards */}
-      <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'var(--space-m)',marginBottom: 'var(--space-l)' }}>
+      <div className="run-order-7091">
         {[
           { label:'ORDER VALUE', value: fmt(order?.grand_total) },
           { label:'LINE ITEMS',  value: lines.length },
@@ -460,12 +454,12 @@ export default function RunOrder() {
           <div className="list-card__header">
             <span className="list-card__title"><Lightning size="1rem"  />Run Order</span>
           </div>
-          <div style={{ padding: 'var(--space-xl)',textAlign:'center' }}>
-            <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)',marginBottom:'var(--space-l)',maxWidth:420,margin:'0 auto var(--space-l)' }}>
+          <div className="run-order-1f63">
+            <div className="run-order-9c92">
               Running calculates all parts needed, checks stock across warehouses, validates kit descriptions against canonical definitions, and generates the fulfillment sheet. No inventory is deducted at this stage.
             </div>
             <button onClick={runOrder} disabled={running}
-              style={{ padding: 'var(--space-m) var(--space-2xl)',borderRadius:'var(--radius-l)',background:'var(--brand-primary)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',display:'inline-flex',alignItems:'center',gap:'var(--space-s)' }}>
+              className="run-order-48c6">
               {running
                 ? <><div className="spinner spinner--xs" /> Calculating…</>
                 : <><Lightning size="1rem" weight="fill" /> Run Order</>}
@@ -479,28 +473,28 @@ export default function RunOrder() {
         <>
           {/* ── Kit change hard-stop banner ── */}
           {unconfirmedKits > 0 && (
-            <div style={{ background:'var(--state-warning-soft)',border:'2px solid #F59E0B',borderRadius:'var(--radius-l)',padding:'var(--space-l)',marginBottom: 'var(--space-l)' }}>
-              <div style={{ display:'flex',alignItems:'center',gap:'var(--space-m)',marginBottom: 'var(--space-m)' }}>
-                <SealWarning size="1.375rem" weight="fill" style={{ color:'var(--state-warning)',flexShrink:0 }} />
+            <div className="run-order-c81e">
+              <div className="run-order-acb6">
+                <SealWarning size="1.375rem" weight="fill" className="run-order-9d5a" />
                 <div>
-                  <div style={{ fontSize:'var(--text-sm)',fontWeight:800,color:'var(--state-warning-text)' }}>
+                  <div className="run-order-9e83">
                     Kit Description Change Detected — Review Required
                   </div>
-                  <div style={{ fontSize:'var(--text-xs)',color:'var(--state-warning-text)',marginTop:2 }}>
+                  <div className="run-order-2e98">
                     {unconfirmedKits} kit{unconfirmedKits!==1?'s':''} on this order have descriptions that differ from the canonical definition in the system. You must confirm or reject each change before pushing to fulfillment.
                   </div>
                 </div>
               </div>
-              <div style={{ display:'flex',flexDirection:'column',gap:'var(--space-s)' }}>
+              <div className="run-order-eafd">
                 {kitChanges.filter(l => kitConfirmations[l._idx] === null).map(line => (
-                  <div key={line._idx} style={{ padding: 'var(--space-m)',background:'rgba(255,255,255,0.7)',borderRadius:'var(--radius-l)' }}>
-                    <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between',gap:'var(--space-m)' }}>
+                  <div key={line._idx} className="run-order-0a38">
+                    <div className="run-order-cce6">
                       <div style={{ minWidth:0 }}>
-                        <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--state-warning-text)' }}>{line.description}</div>
-                        <div style={{ fontSize:'var(--text-xs)',color:'var(--state-warning-text)',fontFamily:'var(--mono)',marginTop:2 }}>{line.sku}</div>
+                        <div className="run-order-003e">{line.description}</div>
+                        <div className="run-order-e8bd">{line.sku}</div>
                       </div>
                       <button onClick={() => { setKitModalIdx(line._idx); setShowKitModal(true) }}
-                        style={{ flexShrink:0,padding:'var(--space-s) var(--space-m)',borderRadius:'var(--radius-l)',background:'var(--state-warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-xs)',cursor:'pointer',fontFamily:'var(--font)' }}>
+                        className="run-order-12c4">
                         Review
                       </button>
                     </div>
@@ -514,8 +508,8 @@ export default function RunOrder() {
           {kitChanges.filter(l => kitConfirmations[l._idx] !== null).map(line => (
             <div key={line._idx} style={{ display:'flex',alignItems:'center',gap:'var(--space-s)',padding: 'var(--space-s) var(--space-m)',background: kitConfirmations[line._idx]==='accept' ? 'var(--state-success-soft)' : 'var(--surface-light)',borderRadius:'var(--radius-l)',marginBottom:'var(--space-s)',fontSize:'var(--text-xs)' }}>
               {kitConfirmations[line._idx]==='accept'
-                ? <CheckCircle size="0.8125rem" weight="fill" style={{ color:'var(--state-success-text)',flexShrink:0 }} />
-                : <CheckCircle size="0.8125rem" weight="fill" style={{ color:'var(--text-muted)',flexShrink:0 }} />}
+                ? <CheckCircle size="0.8125rem" weight="fill" className="run-order-0ecf" />
+                : <CheckCircle size="0.8125rem" weight="fill" className="run-order-a650" />}
               <span style={{ color:'var(--text-primary)' }}>
                 <strong>{line.sku}</strong> — kit change {kitConfirmations[line._idx]==='accept' ? 'accepted (modified description will go to fulfillment)' : 'rejected (reverted to canonical description)'}
               </span>
@@ -524,17 +518,17 @@ export default function RunOrder() {
 
           {/* ── Stock summary ── */}
           {totalShortages > 0 ? (
-            <div style={{ background:'var(--state-error-soft)',borderRadius:'var(--radius-l)',padding:'var(--space-m) var(--space-l)',marginBottom: 'var(--space-l)',display:'flex',alignItems:'center',gap:'var(--space-m)' }}>
-              <Warning size="1.125rem" weight="fill" style={{ color:'var(--state-error)',flexShrink:0 }} />
+            <div className="run-order-e503">
+              <Warning size="1.125rem" weight="fill" className="run-order-7e14" />
               <div>
-                <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--state-error-text)' }}>{totalShortages} part{totalShortages!==1?'s':''} with stock shortage</div>
-                <div style={{ fontSize:'var(--text-xs)',color:'var(--state-error-text)' }}>Review red lines. Use split fulfillment or mark as back order.</div>
+                <div className="run-order-7321">{totalShortages} part{totalShortages!==1?'s':''} with stock shortage</div>
+                <div className="run-order-fbc7">Review red lines. Use split fulfillment or mark as back order.</div>
               </div>
             </div>
           ) : (
-            <div style={{ background:'var(--state-success-soft)',borderRadius:'var(--radius-l)',padding:'var(--space-m) var(--space-l)',marginBottom: 'var(--space-l)',display:'flex',alignItems:'center',gap:'var(--space-m)' }}>
-              <CheckCircle size="1.125rem" weight="fill" style={{ color:'var(--state-success-text)',flexShrink:0 }} />
-              <div style={{ fontSize:'var(--text-sm)',fontWeight:700,color:'var(--state-success-text)' }}>All {computed.length} parts are in stock</div>
+            <div className="run-order-da2d">
+              <CheckCircle size="1.125rem" weight="fill" className="run-order-0ecf" />
+              <div className="run-order-d9b4">All {computed.length} parts are in stock</div>
             </div>
           )}
 
@@ -546,7 +540,7 @@ export default function RunOrder() {
             </div>
 
             {/* Column headers */}
-            <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
+            <div className="run-order-5811">
               {['Part','Req','Avail','Short'].map(h => (
                 <div key={h} className="text-sm-bold">{h}</div>
               ))}
@@ -566,46 +560,46 @@ export default function RunOrder() {
 
                   {/* Kit change badge */}
                   {kitChanged && (
-                    <div style={{ padding: '4px var(--space-l)',background:'var(--state-warning-soft)',fontSize:'var(--text-sm)',fontWeight:700,color:'var(--state-warning-text)',display:'flex',alignItems:'center',gap:4 }}>
+                    <div className="run-order-c1b0">
                       <SealWarning size="0.6875rem" /> Kit description modified by sales
-                      {conf === 'accept' && <span style={{ color:'var(--state-success-text)',marginLeft:4 }}>✓ Accepted</span>}
-                      {conf === 'reject' && <span style={{ color:'var(--text-muted)',marginLeft:4 }}>✓ Reverted to canonical</span>}
+                      {conf === 'accept' && <span className="run-order-0b53">✓ Accepted</span>}
+                      {conf === 'reject' && <span className="run-order-8c6c">✓ Reverted to canonical</span>}
                     </div>
                   )}
 
                   {/* Main row */}
-                  <div style={{ display:'grid',gridTemplateColumns:'1fr 52px 52px 52px',gap:8,padding:'var(--space-m) var(--space-l)',alignItems:'start' }}>
+                  <div className="run-order-d8e4">
                     <div>
                       <div style={{ fontSize:'var(--text-sm)',fontWeight:600,
                         color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isShortage ? 'var(--state-error-text)' : 'var(--text-primary)' }}>
                         {line.description}
-                        {line.is_kit && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'var(--state-info-soft)',color:'var(--state-info)' }}>KIT</span>}
-                        {isBO && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'var(--state-info-soft)',color:'var(--state-info)' }}>B/O</span>}
-                        {isDS && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'#ede9fe',color:'#6d28d9' }}>DROP SHIP</span>}
+                        {line.is_kit && <span className="run-order-5488">KIT</span>}
+                        {isBO && <span className="run-order-5488">B/O</span>}
+                        {isDS && <span className="run-order-1871">DROP SHIP</span>}
                       </div>
                       {line.sku && <div className="text-xs-mono">{line.sku}</div>}
-                      <div style={{ fontSize:'var(--text-xs)',marginTop:2 }}>
-                        <span style={{ fontWeight:600,color:'var(--brand-primary)' }}>{line._primaryWhName || line.warehouse_id || '—'}</span>
+                      <div className="run-order-ca4e">
+                        <span className="run-order-47e6">{line._primaryWhName || line.warehouse_id || '—'}</span>
                         {line.split_warehouse_id && !isBO && !isDS && (
-                          <span style={{ marginLeft:4,color:'var(--state-warning)',fontWeight:600 }}>+ split ({line._splitWhName || 'other'})</span>
+                          <span className="run-order-1e8c">+ split ({line._splitWhName || 'other'})</span>
                         )}
                       </div>
 
                       {/* Shortage actions — show when shortage exists and neither B/O nor D/S active */}
                       {isShortage && !isBO && !isDS && !showDropForm[idx] && (
-                        <div style={{ display:'flex',gap:'var(--space-s)',marginTop:6,flexWrap:'wrap' }}>
+                        <div className="run-order-ff1f">
                           {line.split_warehouse_id && (
                             <button onClick={() => setExpandedSplit(p => ({ ...p, [idx]: !p[idx] }))}
-                              style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--state-warning)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
+                              className="run-order-1332">
                               {splitOpen ? <CaretUp size="0.5625rem"/> : <CaretDown size="0.5625rem"/>} Split details
                             </button>
                           )}
                           <button onClick={() => toggleBackOrder(idx)}
-                            style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--state-info)',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
+                            className="run-order-9ecd">
                             <ClockCountdown size="0.625rem" /> Mark back order
                           </button>
                           <button onClick={() => toggleDropShip(idx)}
-                            style={{ fontSize:'var(--text-xs)',padding:'2px 8px',borderRadius:4,background:'transparent',cursor:'pointer',color:'#6d28d9',fontFamily:'var(--font)',display:'flex',alignItems:'center',gap:3 }}>
+                            className="run-order-d1a3">
                             <Truck size="0.625rem" /> Drop ship
                           </button>
                         </div>
@@ -622,10 +616,10 @@ export default function RunOrder() {
 
                       {/* Back order active state */}
                       {isBO && (
-                        <div style={{ display:'flex',alignItems:'center',gap:'var(--space-s)',marginTop:6 }}>
-                          <span style={{ fontSize:'var(--text-xs)',color:'var(--state-info)' }}>Back ordering {line.back_order_qty || line._remainingShortage} units</span>
+                        <div className="run-order-cb68">
+                          <span className="run-order-3a06">Back ordering {line.back_order_qty || line._remainingShortage} units</span>
                           <button onClick={() => toggleBackOrder(idx)}
-                            style={{ fontSize:'var(--text-xs)',padding:'1px 6px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--text-muted)',fontFamily:'var(--font)' }}>
+                            className="run-order-fad8">
                             Cancel B/O
                           </button>
                         </div>
@@ -634,21 +628,21 @@ export default function RunOrder() {
                       {/* Drop ship active state */}
                       {isDS && (
                         <div style={{ marginTop:6 }}>
-                          <div style={{ display:'flex',alignItems:'center',gap:'var(--space-s)',flexWrap:'wrap' }}>
+                          <div className="run-order-afb3">
                             <Truck size="0.6875rem" style={{ color:'#6d28d9' }} />
-                            <span style={{ fontSize:'var(--text-xs)',color:'#6d28d9',fontWeight:600 }}>
+                            <span className="run-order-88ed">
                               Drop shipping {line.drop_ship_qty || line._remainingShortage} units
                             </span>
                             <span className="meta-text">
                               via {line.drop_ship_supplier || dropShip[idx]?.supplier}
                             </span>
                             <button onClick={() => toggleDropShip(idx)}
-                              style={{ fontSize:'var(--text-xs)',padding:'1px 6px',borderRadius:4,background:'transparent',cursor:'pointer',color:'var(--text-muted)',fontFamily:'var(--font)' }}>
+                              className="run-order-fad8">
                               Cancel D/S
                             </button>
                           </div>
                           {(line.drop_ship_reference || dropShip[idx]?.reference) && (
-                            <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',marginTop:2,marginLeft:17 }}>
+                            <div className="run-order-5eb9">
                               Ref: {line.drop_ship_reference || dropShip[idx]?.reference}
                               {(line.drop_ship_eta || dropShip[idx]?.eta) && <span> · ETA: {line.drop_ship_eta || dropShip[idx]?.eta}</span>}
                             </div>
@@ -657,7 +651,7 @@ export default function RunOrder() {
                       )}
                     </div>
 
-                    <div style={{ fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--mono)',color:'var(--text-primary)' }}>{line.qty_required}</div>
+                    <div className="run-order-4f6c">{line.qty_required}</div>
                     <div style={{ fontSize:'var(--text-sm)',fontWeight:700,fontFamily:'var(--mono)',
                       color: isDS ? '#6d28d9' : isBO ? 'var(--state-info)' : isShortage ? 'var(--state-error)' : 'var(--state-success-text)' }}>
                       {line.qty_available}
@@ -670,8 +664,8 @@ export default function RunOrder() {
 
                   {/* Split detail panel */}
                   {splitOpen && isShortage && !isBO && !isDS && (
-                    <div style={{ margin: '0 var(--space-l) var(--space-m)',padding: 'var(--space-m)',background:'var(--state-warning-soft)',borderRadius:'var(--radius-l)' }}>
-                      <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--state-warning-text)',marginBottom:8 }}>Split Fulfillment Plan</div>
+                    <div className="run-order-fc0c">
+                      <div className="run-order-2d80">Split Fulfillment Plan</div>
                       <div style={{ fontSize:'var(--text-xs)',color:'var(--state-warning-text)',lineHeight:1.6 }}>
                         <div>Primary: <strong>{line._primaryWhName||'—'}</strong> → pull {line.qty_available} of {line.qty_required}</div>
                         {line.split_warehouse_id
@@ -679,7 +673,7 @@ export default function RunOrder() {
                           : <div style={{ color:'var(--state-error)' }}>No secondary warehouse has stock.</div>
                         }
                         {(line._remainingShortage||0) > 0 && (
-                          <div style={{ color:'var(--state-error)',marginTop:4 }}>
+                          <div className="run-order-9407">
                             ⚠ Still {line._remainingShortage} units short — consider back order or drop ship.
                           </div>
                         )}
@@ -695,7 +689,7 @@ export default function RunOrder() {
           {order?.status !== 'fulfillment' && (
             <>
               {unconfirmedKits > 0 && (
-                <div style={{ fontSize:'var(--text-xs)',color:'var(--state-warning)',fontWeight:700,textAlign:'center',marginBottom:'var(--space-m)',padding: 'var(--space-s)',background:'var(--state-warning-soft)',borderRadius:'var(--radius-l)' }}>
+                <div className="run-order-4f11">
                   ⚠ Confirm all {unconfirmedKits} kit change{unconfirmedKits!==1?'s':''} above before pushing to fulfillment
                 </div>
               )}
@@ -718,7 +712,7 @@ export default function RunOrder() {
           )}
 
           {order?.status === 'fulfillment' && (
-            <div style={{ textAlign:'center',padding:'var(--space-l)',color:'var(--text-muted)',fontSize:'var(--text-sm)' }}>
+            <div className="run-order-0fdd">
               ✓ This order is with the fulfillment team
             </div>
           )}
@@ -732,20 +726,20 @@ export default function RunOrder() {
         return (
           <>
             <div onClick={() => setShowKitModal(false)}
-              style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:299 }} />
+              className="run-order-0f8f" />
             <div style={{ position:'fixed',bottom: 'env(safe-area-inset-bottom, 0px)',left:0,right:0,zIndex:300,background:'var(--bg)',
               borderRadius:'var(--radius-l) var(--radius-l) 0 0',padding:'1.25rem',maxHeight:'80vh',overflowY:'auto' }}>
-              <div style={{ display:'flex',alignItems:'center',gap:'var(--space-s)',marginBottom: 'var(--space-l)' }}>
+              <div className="run-order-6678">
                 <SealWarning size="1.25rem" weight="fill" style={{ color:'var(--state-warning)' }} />
-                <div style={{ fontSize:'var(--text-lg)',fontWeight:800 }}>Kit Description Changed</div>
+                <div className="run-order-a7a2">Kit Description Changed</div>
               </div>
 
-              <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--text-primary)',marginBottom:4 }}>
+              <div className="run-order-e096">
                 {line.sku} — {line._kitName}
               </div>
 
               <div className="mb-l">
-                <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--state-warning)',marginBottom:6 }}>
+                <div className="run-order-3078">
                   Description on this Sales Order:
                 </div>
                 <div style={{ padding: 'var(--space-m)',background:'var(--state-warning-soft)',borderRadius:'var(--radius-l)',fontSize:'var(--text-sm)',color:'var(--state-warning-text)',lineHeight:1.6 }}>
@@ -754,7 +748,7 @@ export default function RunOrder() {
               </div>
 
               <div className="mb-xl">
-                <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--brand-primary)',marginBottom:6 }}>
+                <div className="run-order-18cc">
                   Canonical description on file (QB default):
                 </div>
                 <div style={{ padding: 'var(--space-m)',background: 'var(--surface-base)',borderRadius:'var(--radius-l)',fontSize:'var(--text-sm)',color:'var(--text-primary)',lineHeight:1.6 }}>
@@ -766,13 +760,13 @@ export default function RunOrder() {
                 Sales may have customised this kit for the customer. Accept to use the modified description for fulfillment, or reject to revert to the canonical definition.
               </div>
 
-              <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'var(--space-m)' }}>
+              <div className="run-order-560b">
                 <button onClick={() => handleKitConfirm(kitModalIdx, 'reject')}
-                  style={{ padding: 'var(--space-m)',borderRadius:'var(--radius-l)',background: 'var(--surface-base)',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)',color:'var(--text-primary)' }}>
+                  className="run-order-e5b5">
                   Reject — Revert to canonical
                 </button>
                 <button onClick={() => handleKitConfirm(kitModalIdx, 'accept')}
-                  style={{ padding: 'var(--space-m)',borderRadius:'var(--radius-l)',background:'var(--state-warning)',color:'#fff',fontWeight:700,fontSize:'var(--text-sm)',cursor:'pointer',fontFamily:'var(--font)' }}>
+                  className="run-order-7f7a">
                   Accept — Use modified description
                 </button>
               </div>

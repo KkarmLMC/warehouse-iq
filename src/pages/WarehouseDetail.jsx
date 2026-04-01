@@ -65,10 +65,10 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         maxHeight: '92vh', display: 'flex', flexDirection: 'column',
         animation: 'anim-slide-up 0.22s cubic-bezier(0.32,0.72,0,1)' }}>
         {/* Sheet header */}
-        <div style={{ padding: 'var(--space-l) var(--space-xl) 0', flexShrink: 0 }}>
+        <div className="warehouse-detail-43ec">
           <div style={{ width: '2.5rem', height: '0.25rem', background: 'var(--border-subtle)', borderRadius: 'var(--radius-l)', margin: '0 auto var(--space-m)' }} />
           <div className="flex-between mb-l">
-            <div style={{ fontSize: 'var(--text-lg)', fontWeight: 700 }}>Edit Warehouse</div>
+            <div className="warehouse-detail-860f">Edit Warehouse</div>
             <button onClick={onClose} className="flex-center" style={{ background: 'var(--surface-hover)', borderRadius: 'var(--radius-l)', width: '2rem', height: '2rem', cursor: 'pointer' }}>
               <X size="0.875rem" style={{ color: 'var(--text-primary)' }} />
             </button>
@@ -76,7 +76,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
         </div>
 
         {/* Scrollable fields */}
-        <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--space-xl) var(--space-s)' }}>
+        <div className="warehouse-detail-9bc3">
 
           <div className="mb-m">
             <Label>Warehouse Name *</Label>
@@ -92,7 +92,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <input value={form.address} onChange={e => set('address', e.target.value)} placeholder="123 Main St" />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 90px', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
+          <div className="warehouse-detail-af03">
             <div>
               <Label>City</Label>
               <input value={form.city} onChange={e => set('city', e.target.value)} placeholder="Clearwater" />
@@ -132,11 +132,11 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <textarea value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Any relevant notes about this warehouse…" rows={3} />
           </div>
 
-          {error && <div style={{ color: 'var(--state-error-text)', fontSize: 'var(--text-sm)', marginBottom: 'var(--space-m)', padding: 'var(--space-s) var(--space-m)', background: 'var(--state-error-soft)', borderRadius: 'var(--radius-m)' }}>{error}</div>}
+          {error && <div className="warehouse-detail-f854">{error}</div>}
         </div>
 
         {/* Footer */}
-        <div style={{ padding: 'var(--space-l) var(--space-xl)', paddingBottom: 'calc(var(--space-l) + env(safe-area-inset-bottom))', flexShrink: 0 }}>
+        <div className="warehouse-detail-fa13">
           <button onClick={handleSave} disabled={saving || !form.name.trim()}
             style={{ width: '100%', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: !form.name.trim() ? 'var(--surface-hover)' : 'var(--brand-primary)', color: !form.name.trim() ? 'var(--text-muted)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: !form.name.trim() ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
             {saving ? 'Saving…' : <><Check size="0.9375rem" /> Save Changes</>}
@@ -166,13 +166,13 @@ function StockRow({ level, onPress }) {
         <div className="text-sm-truncate">
           {level.parts?.name || '—'}
         </div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 2, display: 'flex', gap: 'var(--space-s)' }}>
+        <div className="warehouse-detail-5e1f">
           {level.parts?.sku && <span style={{ fontFamily: 'var(--mono)' }}>{level.parts.sku}</span>}
-          {level.quantity_on_order > 0 && <span style={{ color: 'var(--state-info)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>}
+          {level.quantity_on_order > 0 && <span className="warehouse-detail-a9d4">+{level.quantity_on_order} on order</span>}
         </div>
       </div>
       <div className="flex-gap-s shrink-0">
-        <span style={{ padding: '3px 10px', borderRadius: 'var(--radius-s)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
+        <span className="warehouse-detail-ffc0">
           {level.quantity_on_hand}
         </span>
         <CaretRight size="0.8125rem" style={{ color: 'var(--text-primary)' }} />
@@ -300,7 +300,7 @@ export default function WarehouseDetail() {
               </div>
             )}
             {warehouse.contact_name && (
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)' }}>Contact: {warehouse.contact_name}</div>
+              <div className="warehouse-detail-e09a">Contact: {warehouse.contact_name}</div>
             )}
             {warehouse.contact_phone && (
               <div className="wh-header__contact-row">
@@ -313,14 +313,14 @@ export default function WarehouseDetail() {
               </div>
             )}
             {warehouse.notes && (
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', fontStyle: 'italic', marginTop: 2 }}>{warehouse.notes}</div>
+              <div className="warehouse-detail-766e">{warehouse.notes}</div>
             )}
           </div>
         )}
       </div>
 
       {/* Stats grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
+      <div className="warehouse-detail-1baa">
         <StatCard label="SKUs In Stock" value={totalSkus.toLocaleString()} />
         <StatCard label="Total Units" value={totalUnits.toLocaleString()} />
         <StatCard label="Low Stock" value={lowStock.length} />
@@ -341,13 +341,13 @@ export default function WarehouseDetail() {
       )}
 
       {/* Actions */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-xl)' }}>
+      <div className="warehouse-detail-675d">
         <button onClick={() => navigate(`/warehouse-hq/transfer?from=${id}`)}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="warehouse-detail-3dbd">
           <ArrowsLeftRight size="0.9375rem" /> Transfer
         </button>
         <button onClick={() => navigate('/warehouse-hq/add-part')}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="warehouse-detail-b4e7">
           <Plus size="0.9375rem" /> Add Part
         </button>
       </div>
@@ -370,7 +370,7 @@ export default function WarehouseDetail() {
           )}
         </div>
 
-        <div style={{ display: 'flex', gap: 'var(--space-s)', marginBottom: 'var(--space-m)', overflowX: 'auto', scrollbarWidth: 'none' }}>
+        <div className="warehouse-detail-52e8">
           {[['all', 'All'], ['in', 'In Stock'], ['low', `Low (${lowStock.length})`], ['out', `Out (${outOfStock.length})`]].map(([val, lbl]) => (
             <button key={val} onClick={() => setStockFilter(val)}
               style={{
@@ -383,9 +383,9 @@ export default function WarehouseDetail() {
         </div>
 
         {/* Stock list */}
-        <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', overflow: 'hidden', marginBottom: 'var(--space-xl)' }}>
+        <div className="warehouse-detail-32df">
           {filtered.length === 0 ? (
-            <div style={{ padding: 'var(--space-2xl)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>
+            <div className="warehouse-detail-6091">
               No parts match filters
             </div>
           ) : filtered.map(level => (
@@ -402,7 +402,7 @@ export default function WarehouseDetail() {
       {warehousePOs.length > 0 && (() => {
         return (
           <div className="card-section">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+            <div className="warehouse-detail-a0f0">
               <div className="flex-gap-s">
                 <Receipt size="1rem" style={{ color: 'var(--brand-primary)' }} />
                 <span className="text-sm-bold">Sales Orders</span>
@@ -411,7 +411,7 @@ export default function WarehouseDetail() {
                 </span>
               </div>
               <button onClick={() => navigate('/sales-orders')}
-                style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--brand-primary)', background: 'none', cursor: 'pointer', padding: 0 }}>
+                className="warehouse-detail-630a">
                 View all
               </button>
             </div>
@@ -453,7 +453,7 @@ export default function WarehouseDetail() {
       {/* Transaction history (collapsed by default) */}
       <div className="card-section">
         <button onClick={loadTransactions}
-          style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer' }}>
+          className="warehouse-detail-e521">
           <div className="flex-gap-s">
             <ClipboardText size="1rem" style={{ color: 'var(--text-primary)' }} />
             <span className="text-sm-bold">Transaction History</span>
@@ -465,7 +465,7 @@ export default function WarehouseDetail() {
             {transactions.length === 0 ? (
               <div className="empty-message">No transactions yet</div>
             ) : transactions.map(tx => (
-              <div key={tx.id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+              <div key={tx.id} className="warehouse-detail-e298">
                 <div style={{
                   width: '2rem', height: '2rem', borderRadius: 'var(--radius-l)', flexShrink: 0,
                   background: tx.quantity_delta > 0 ? 'var(--state-success-soft)' : 'var(--state-error-soft)',

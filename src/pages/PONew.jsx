@@ -86,7 +86,7 @@ function PartSearch({ onSelect, warehouseId }) {
           onChange={e => setQuery(e.target.value)}
           onFocus={() => query && setOpen(true)}
           placeholder="Search parts by name or SKU…"
-          style={{ width: "100%", paddingLeft: 30, paddingRight: 30 }}
+          className="p-o-new-f2ca"
         />
         {query && (
           <button onClick={() => { setQuery(''); setResults([]); setOpen(false) }}
@@ -96,24 +96,18 @@ function PartSearch({ onSelect, warehouseId }) {
         )}
       </div>
       {open && results.length > 0 && (
-        <div style={{
-          position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 200,
-          background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', marginTop: 4,
-          maxHeight: '16rem', overflowY: 'auto' }}>
+        <div className="p-o-new-4fbe">
           {loading ? (
             <div className="empty-message">Searching…</div>
           ) : results.map(part => (
             <button key={part.id} onMouseDown={() => handleSelect(part)}
-              style={{
-                width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: 'var(--space-s) var(--space-m)', background: 'none',
-                cursor: 'pointer', textAlign: 'left', borderBottom: '1px solid var(--border-subtle)' }}
+              className="p-o-new-2dba"
             >
               <div className="min-width-0">
                 <div className="text-sm-semi">{part.name}</div>
                 <div className="text-xs-mono">{part.sku}</div>
               </div>
-              <div style={{ flexShrink: 0, textAlign: 'right', marginLeft: 'var(--space-m)' }}>
+              <div className="p-o-new-b0fb">
                 <div className="text-label">
                   ${part.unit_cost?.toFixed(2) || '—'}
                 </div>
@@ -228,7 +222,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           </span>
         )}
         <button onClick={onRemove}
-          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'rgba(255,0,0,0.5)', display: 'flex' }}>
+          className="p-o-new-260b">
           <Trash size="0.8125rem" />
         </button>
       </div>
@@ -266,7 +260,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
             <PartSearch onSelect={addPart} warehouseId={defaultWarehouseId} />
           </div>
           <button onClick={addManual}
-            style={{ marginTop: 'var(--space-s)', display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-muted)', background: 'none', cursor: 'pointer', padding: 0 }}>
+            className="p-o-new-f027">
             <Plus size="0.75rem" /> Add custom line item
           </button>
         </div>
@@ -288,7 +282,7 @@ function LaborSection({ items, onUpdate }) {
     <div className="card-section">
       <div className="flex-gap-s">
         <button onClick={() => setExpanded(e => !e)}
-          style={{ background: 'none', cursor: 'pointer', padding: 0, color: 'var(--surface-base)', display: 'flex' }}>
+          className="p-o-new-c1be">
           <CaretDown size="0.875rem" style={{ transform: expanded ? 'none' : 'rotate(-90deg)', transition: 'transform 0.15s' }} />
         </button>
         <div className="flex-gap-s">
@@ -304,9 +298,9 @@ function LaborSection({ items, onUpdate }) {
       {expanded && (
         <div className="pad-row">
           {items.map(item => (
-            <div key={item._key} className="grid-parts-table" style={{ gridTemplateColumns: '1fr 70px 100px 80px 36px', marginBottom: 'var(--space-s)' }}>
+            <div key={item._key} className="grid-parts-table p-o-new-d9ab">
               <input value={item.description} onChange={e => updateItem(item._key, { ...item, description: e.target.value })}
-                placeholder="Description (e.g. Bolt Install Crew)" style={{ width: '100%', fontSize: 'var(--text-xs)' }} />
+                placeholder="Description (e.g. Bolt Install Crew)" className="p-o-new-d8b4" />
               <input type="number" min="0" value={item.quantity} onChange={e => updateItem(item._key, { ...item, quantity: e.target.value })}
                 className="text-xs-right" />
               <input type="number" min="0" step="0.01" value={item.unit_cost} onChange={e => updateItem(item._key, { ...item, unit_cost: e.target.value })}
@@ -319,7 +313,7 @@ function LaborSection({ items, onUpdate }) {
               </button>
             </div>
           ))}
-          <button onClick={addLine} className="flex-gap-s" style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-muted)', background: 'none', cursor: 'pointer', padding: 0, marginTop: 'var(--space-s)' }}>
+          <button onClick={addLine} className="flex-gap-s p-o-new-e7a0">
             <Plus size="0.75rem" /> Add labor line
           </button>
         </div>
@@ -338,7 +332,7 @@ function TotalsBar({ sections, laborItems }) {
   if (grandTotal === 0) return null
 
   return (
-    <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l) var(--space-xl)', marginBottom: 'var(--space-xl)', color: '#fff' }}>
+    <div className="p-o-new-d0ce">
       <div className="flex-gap-s">
         <span className="meta-text--inverse">Materials</span>
         <span className="text-sm-semi">${materialsTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
@@ -349,7 +343,7 @@ function TotalsBar({ sections, laborItems }) {
           <span className="text-sm-semi">${laborTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
         </div>
       )}
-      <div style={{ display: 'flex', justifyContent: 'space-between',  paddingTop: 'var(--space-s)', marginTop: 'var(--space-xs)' }}>
+      <div className="p-o-new-0c9c">
         <span className="page-heading">Total</span>
         <span className="page-heading">${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
       </div>
@@ -516,7 +510,7 @@ export default function PONew() {
 
 
       {/* Division selector */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-xl)' }}>
+      <div className="p-o-new-675d">
         {[['LM', 'Lightning Master'], ['Bolt', 'Bolt Lightning']].map(([val, lbl]) => (
           <button key={val} onClick={() => setDivision(val)}
             style={{
@@ -545,7 +539,7 @@ export default function PONew() {
           <input value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} placeholder="123 Main St" />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 64px 88px', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
+        <div className="p-o-new-abce">
           <div><Label>City</Label><input value={customerCity} onChange={e => setCustomerCity(e.target.value)} placeholder="Dallas" /></div>
           <div><Label>State</Label><input value={customerState} onChange={e => setCustomerState(e.target.value)} placeholder="TX" /></div>
           <div><Label>ZIP</Label><input value={customerZip} onChange={e => setCustomerZip(e.target.value)} placeholder="75001" /></div>
@@ -649,7 +643,7 @@ export default function PONew() {
           {saving ? 'Saving…' : 'Save as Draft'}
         </button>
         <button onClick={() => handleSave(true)} disabled={saving}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)', padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="p-o-new-b4e7">
           {saving ? 'Saving…' : <><ArrowRight size="0.9375rem" /> Save & Submit</>}
         </button>
       </div>

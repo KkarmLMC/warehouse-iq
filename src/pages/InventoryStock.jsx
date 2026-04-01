@@ -132,11 +132,11 @@ export default function InventoryStock() {
         </div>
         <div className="flex-gap-s">
           <button onClick={() => navigate('/warehouse-hq/transfer')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', padding: 'var(--space-s) var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontSize: 'var(--text-sm)', fontWeight: 600, cursor: 'pointer' }}>
+            className="inventory-stock-ff05">
             <ArrowsLeftRight size="0.875rem" /> Transfer
           </button>
           <button onClick={() => navigate('/warehouse-hq/add-part')}
-            style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', padding: 'var(--space-s) var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: '#fff', fontSize: 'var(--text-sm)', fontWeight: 700, cursor: 'pointer' }}>
+            className="inventory-stock-23e5">
             <Plus size="0.875rem" /> Add Part
           </button>
         </div>
@@ -149,7 +149,7 @@ export default function InventoryStock() {
           { label: 'Low Stock', value: lowCount, color: 'var(--state-warning-text)' },
           { label: 'Out of Stock', value: outCount, color: 'var(--state-error-text)' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', padding: 'var(--space-m)', textAlign: 'center' }}>
+          <div key={s.label} className="inventory-stock-080f">
             <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: s.color }}>{s.value}</div>
             <div className="meta-text">{s.label}</div>
           </div>
@@ -169,7 +169,7 @@ export default function InventoryStock() {
       </div>
 
       {/* Filters row */}
-      <div style={{ display: 'flex', gap: 'var(--space-s)', marginBottom: 'var(--space-l)', overflowX: 'auto', paddingBottom: 2, scrollbarWidth: 'none', flexWrap: 'wrap' }}>
+      <div className="inventory-stock-85c7">
         <button onClick={() => setSelectedWarehouse(null)}
           style={{ flexShrink: 0, padding: 'var(--space-xs) var(--space-m)', borderRadius: 'var(--radius-l)', border: `1px solid ${!selectedWarehouse ? 'var(--brand-primary)' : 'var(--border-subtle)'}`, background: !selectedWarehouse ? 'var(--brand-primary)' : 'transparent', color: !selectedWarehouse ? '#fff' : 'var(--text-primary)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
           All Warehouses
@@ -180,7 +180,7 @@ export default function InventoryStock() {
             {w.name.replace(' Warehouse', '')}
           </button>
         ))}
-        <div style={{ width: 1, background: 'var(--border-subtle)', margin: '0 var(--space-xs)' }} />
+        <div className="inventory-stock-e363" />
         {[['all', 'All'], ['low', 'Low Stock'], ['out', 'Out of Stock']].map(([val, lbl]) => (
           <button key={val} onClick={() => setStockFilter(val)}
             style={{ flexShrink: 0, padding: 'var(--space-xs) var(--space-m)', borderRadius: 'var(--radius-l)', border: `1px solid ${stockFilter === val ? 'var(--state-error)' : 'var(--border-subtle)'}`, background: stockFilter === val ? 'var(--state-error)' : 'transparent', color: stockFilter === val ? '#fff' : 'var(--text-primary)', fontSize: 'var(--text-xs)', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>

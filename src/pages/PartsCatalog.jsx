@@ -46,28 +46,20 @@ function CategorySection({ category, parts, onPartPress }) {
   const Icon = CATEGORY_ICONS[category.name] || Cube
 
   return (
-    <div style={{
-      background: 'var(--surface-base)', borderRadius: 'var(--radius-m)',
-      overflow: 'hidden',
-      marginBottom: 'var(--space-m)' }}>
+    <div className="parts-catalog-2cba">
       <button
         onClick={() => setExpanded(e => !e)}
-        style={{
-          width: '100%', display: 'flex', alignItems: 'center',
-          gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', background: 'var(--brand-primary)', cursor: 'pointer', textAlign: 'left' }}
+        className="parts-catalog-74d8"
       >
-        <div style={{
-          width: '2rem', height: '2rem', borderRadius: 'var(--radius-m)',
-          background: 'rgba(255,255,255,0.12)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+        <div className="parts-catalog-4f47">
           <Icon size="0.9375rem" style={{ color: '#fff' }} />
         </div>
         <div className="content-body">
           <div className="text-sm-bold--inverse">{category.name}</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 1 }}>
+          <div className="parts-catalog-5e29">
             {parts.length} {parts.length === 1 ? 'part' : 'parts'}
             {category.catalog === 'All' && (
-              <span style={{ marginLeft: 6, background: 'rgba(255,255,255,0.15)', borderRadius: 4, padding: '1px 6px' }}>
+              <span className="parts-catalog-c67f">
                 {category.originalCatalog}
               </span>
             )}
@@ -99,7 +91,7 @@ function CategorySection({ category, parts, onPartPress }) {
                     </span>
                   )}
                 </div>
-                <div style={{ display: 'flex', gap: 'var(--space-m)', marginTop: 2, flexWrap: 'wrap' }}>
+                <div className="parts-catalog-4c92">
                   {part.sku && <span className="text-xs-mono">{part.sku}</span>}
                   {part.unit_cost && <span className="meta-text">${part.unit_cost}</span>}
                 </div>
@@ -170,9 +162,7 @@ export default function PartsCatalog() {
     <div className="page-content fade-in">
 
       {/* Tabs */}
-      <div style={{
-        display: 'flex', background: 'var(--surface-base)', borderRadius: 'var(--radius-m)',
-        padding: 4, gap: 4, marginBottom: 'var(--space-l)' }}>
+      <div className="parts-catalog-3d2c">
         {TABS.map(tab => {
           const count = tab.key === 'LM' ? lmParts : tab.key === 'Bolt' ? boltParts : parts.length
           const active = activeTab === tab.key
@@ -221,7 +211,7 @@ export default function PartsCatalog() {
       ) : (
         <>
           {search && (
-            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginBottom: 'var(--space-m)' }}>
+            <div className="parts-catalog-30e7">
               {grouped.reduce((s, g) => s + g.parts.length, 0)} result{grouped.reduce((s, g) => s + g.parts.length, 0) !== 1 ? 's' : ''} for "{search}"
             </div>
           )}

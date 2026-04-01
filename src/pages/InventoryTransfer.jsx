@@ -105,7 +105,7 @@ export default function InventoryTransfer() {
 
   return (
     <div className="page-content fade-in">
-      <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
+      <div className="inventory-transfer-154a">
         <div className="page-heading">Transfer Stock</div>
         <div className="meta-text--inverse">Move parts between warehouses</div>
       </div>
@@ -147,24 +147,24 @@ export default function InventoryTransfer() {
         </div>
 
         {/* Search */}
-        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)', position: 'relative' }}>
+        <div className="inventory-transfer-f538">
           <div className="position-relative">
             <MagnifyingGlass size="0.9375rem" className="search-overlay-icon" />
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search and add parts…"
-              style={{ width: '100%', paddingLeft: 32 }}
+              className="inventory-transfer-2b4d"
             />
           </div>
           {searchResults.length > 0 && (
-            <div style={{ position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 50, background: 'var(--surface-base)', borderRadius: 'var(--radius-l)', overflow: 'hidden' }}>
+            <div className="inventory-transfer-90d3">
               {searchResults.map(p => (
                 <button key={p.id} onClick={() => addItem(p)}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: 'var(--space-m) var(--space-l)', background: 'none', cursor: 'pointer', borderBottom: '1px solid var(--border-subtle)', textAlign: 'left' }}>
+                  className="inventory-transfer-a65c">
                   <div>
                     <div className="text-sm-semi">{p.name}</div>
-                    {p.sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>{p.sku}</div>}
+                    {p.sku && <div className="inventory-transfer-21a0">{p.sku}</div>}
                   </div>
                   <Plus size="1rem" style={{ color: 'var(--brand-primary)' }} />
                 </button>
@@ -179,19 +179,19 @@ export default function InventoryTransfer() {
             Search for parts above to add them to the transfer
           </div>
         ) : items.map((item, idx) => (
-          <div key={item.part_id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div key={item.part_id} className="inventory-transfer-e298">
             <div className="content-body">
               <div className="text-sm-truncate">{item.part_name}</div>
-              {item.part_sku && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>{item.part_sku}</div>}
+              {item.part_sku && <div className="inventory-transfer-21a0">{item.part_sku}</div>}
             </div>
             <input
               type="number" min="1"
               value={item.quantity}
               onChange={e => updateQty(idx, parseInt(e.target.value) || 1)}
-              style={{ width: '4rem', textAlign: 'center' }}
+              className="inventory-transfer-ac86"
             />
             <button onClick={() => removeItem(idx)}
-              style={{ width: '2rem', height: '2rem', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--state-error)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+              className="inventory-transfer-9997">
               <Trash size="0.875rem" />
             </button>
           </div>

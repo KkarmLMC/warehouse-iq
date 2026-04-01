@@ -105,7 +105,7 @@ export default function ShipmentDetail() {
         <div className="empty-title">Order not found</div>
         <div className="empty-desc">This order may have been deleted or the link is invalid.</div>
         <button onClick={() => navigate('/warehouse-hq/shipment')}
-          style={{ marginTop: 'var(--space-l)', padding: 'var(--space-s) var(--space-l)', borderRadius: 'var(--radius-m)', background: 'var(--brand-primary)', color: 'var(--surface-base)', fontWeight: 'var(--fw-bold)', fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="shipment-detail-326e">
           ← Back to Shipments
         </button>
       </div>
@@ -127,14 +127,14 @@ export default function ShipmentDetail() {
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {shipTo && (
-          <div style={{ marginTop: 8,padding:'var(--space-s) var(--space-m)',background:'var(--surface-base)',borderRadius:'var(--radius-l)',display:'inline-flex',alignItems:'center',gap:6 }}>
-            <MapPin size="0.875rem" style={{ color:'var(--brand-primary)',flexShrink:0 }} />
+          <div className="shipment-detail-ae65">
+            <MapPin size="0.875rem" className="shipment-detail-f3a3" />
             <div>
               <div className="text-label">SHIP TO</div>
               <div className="text-sm-bold">
                 {order?.customer_name}
               </div>
-              <div style={{ fontSize:'var(--text-xs)',color:'var(--text-primary)' }}>
+              <div className="shipment-detail-60fc">
                 {[order?.customer_address, shipTo].filter(Boolean).join(' · ')}
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function ShipmentDetail() {
       {/* Partial shipment warning */}
       {(order?.has_back_order || order?.has_drop_ship) && (
         <div className="flex-gap-m">
-          <Warning size="1rem" weight="fill" style={{ color: 'var(--state-warning)', flexShrink: 0, marginTop: 1 }} />
+          <Warning size="1rem" weight="fill" className="shipment-detail-5a44" />
           <div>
             <div className="text-sm-bold">Partial Shipment</div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-primary)', marginTop: 2, lineHeight: 1.5 }}>
@@ -165,7 +165,7 @@ export default function ShipmentDetail() {
           <span className="list-card__title"><Package size="1rem"  />Packing List</span>
           <span className="list-card__meta">{lines.length} items</span>
         </div>
-        <div style={{ display:'grid',gridTemplateColumns:'1fr 50px 50px',gap:8,padding:'var(--space-s) var(--space-l)',background:'var(--surface-base)',borderBottom:'1px solid var(--border-subtle)' }}>
+        <div className="shipment-detail-5245">
           {['Part','Qty','Source'].map(h => (
             <div key={h} className="text-sm-bold">{h}</div>
           ))}
@@ -176,10 +176,10 @@ export default function ShipmentDetail() {
             <div>
               <div className="text-sm-semi">{line.description}</div>
               {line.sku && <div className="text-xs-mono">{line.sku}</div>}
-              <div style={{ fontSize:'var(--text-sm)',color:'var(--text-muted)',marginTop:1 }}>
+              <div className="shipment-detail-d26f">
                 {line.warehouses?.name || '—'}
                 {line.split_warehouse_id && line.split_qty > 0 && (
-                  <span style={{ marginLeft:6,color:'var(--state-warning)' }}>+ {line.split_qty} {line.split_warehouse?.name}</span>
+                  <span className="shipment-detail-3e9c">+ {line.split_qty} {line.split_warehouse?.name}</span>
                 )}
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function ShipmentDetail() {
             </div>
             <div>
               {line.is_shortage
-                ? <span style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--state-warning)',background:'var(--state-warning-soft)',padding:'1px 5px',borderRadius:4 }}>Split</span>
+                ? <span className="shipment-detail-7601">Split</span>
                 : <CheckCircle size="0.875rem" weight="fill" style={{ color:'var(--state-success-text)' }} />
               }
             </div>
@@ -201,7 +201,7 @@ export default function ShipmentDetail() {
         <div className="list-card__header">
           <span className="list-card__title"><Truck size="1rem"  />Process Shipment</span>
         </div>
-        <div style={{ padding: 'var(--space-l)',display:'flex',flexDirection:'column',gap:'var(--space-m)' }}>
+        <div className="shipment-detail-7edb">
           <div>
             <label className="form-field__label">
               Carrier <span style={{ color:'var(--state-error)' }}>*</span>
@@ -219,7 +219,7 @@ export default function ShipmentDetail() {
               Notes
             </label>
             <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Special instructions, partial shipment notes…"
-              style={{ width:'100%',boxSizing:'border-box',resize:'vertical',minHeight:72 }} />
+              className="shipment-detail-baf4" />
           </div>
         </div>
       </div>
