@@ -109,7 +109,7 @@ function PartSearch({ onSelect, warehouseId }) {
                 padding: 'var(--space-s) var(--space-m)', background: 'none',
                 cursor: 'pointer', textAlign: 'left', borderBottom: '1px solid var(--border-subtle)' }}
             >
-              <div style={{ minWidth: 0 }}>
+              <div className="min-width-0">
                 <div className="text-sm-semi">{part.name}</div>
                 <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>{part.sku}</div>
               </div>
@@ -234,10 +234,10 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
       </div>
 
       {expanded && (
-        <div style={{ padding: 'var(--space-m) var(--space-l)' }}>
+        <div className="pad-row">
           {/* Column headers */}
           {section.items.length > 0 && (
-            <div className="grid-parts-table" style={{ marginBottom: 'var(--space-s)' }}>
+            <div className="grid-parts-table mb-s">
               {['Item / SKU', 'Qty', 'Unit Cost', 'Amount', ''].map((h, i) => (
                 <div key={i} className="section-divider-label" style={{ textAlign: i > 0 && i < 4 ? 'right' : 'left' }}>{h}</div>
               ))}
@@ -262,7 +262,7 @@ function ScopeSection({ section, warehouses, defaultWarehouseId, onUpdate, onRem
           )}
 
           {/* Part search */}
-          <div style={{ marginTop: 'var(--space-m)' }}>
+          <div className="mt-m">
             <PartSearch onSelect={addPart} warehouseId={defaultWarehouseId} />
           </div>
           <button onClick={addManual}
@@ -302,7 +302,7 @@ function LaborSection({ items, onUpdate }) {
         )}
       </div>
       {expanded && (
-        <div style={{ padding: 'var(--space-m) var(--space-l)' }}>
+        <div className="pad-row">
           {items.map(item => (
             <div key={item._key} className="grid-parts-table" style={{ gridTemplateColumns: '1fr 70px 100px 80px 36px', marginBottom: 'var(--space-s)' }}>
               <input value={item.description} onChange={e => updateItem(item._key, { ...item, description: e.target.value })}

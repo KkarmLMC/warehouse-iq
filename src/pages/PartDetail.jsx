@@ -328,9 +328,9 @@ export default function PartDetail() {
           </div>
         ))}
         {part.description && (
-          <div style={{ padding: 'var(--space-m) var(--space-l)' }}>
+          <div className="pad-row">
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 4 }}>Description</div>
-            <div style={{ fontSize: 'var(--text-sm)' }}>{part.description}</div>
+            <div className="text-sm">{part.description}</div>
           </div>
         )}
       </Card>

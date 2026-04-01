@@ -252,7 +252,7 @@ export default function PurchaseOrders() {
           <div className="empty-title">{pos.length === 0 ? 'No sales orders yet' : 'No SOs match filters'}</div>
           <div className="empty-desc">{pos.length === 0 ? 'Create your first Sales Order to get started.' : 'Try adjusting your filters.'}</div>
           {pos.length === 0 && (
-            <button className="btn btn-primary" style={{ marginTop: 'var(--space-l)' }} onClick={() => navigate('/sales-orders/new')}>
+            <button className="btn btn-primary mt-l" onClick={() => navigate('/sales-orders/new')}>
               Create First Sales Order
             </button>
           )}

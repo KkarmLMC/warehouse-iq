@@ -410,7 +410,7 @@ export default function RunOrder() {
       </button>
 
       {/* Order header */}
-      <div style={{ marginBottom: 'var(--space-xl)' }}>
+      <div className="mb-xl">
         <div style={{ display:'flex',alignItems:'center',gap:'var(--space-s)',marginBottom:4 }}>
           <div style={{ fontSize:'var(--text-md)',fontWeight:800 }}>{order?.so_number}</div>
           {order?.status === 'fulfillment' && (
@@ -753,7 +753,7 @@ export default function RunOrder() {
                 </div>
               </div>
 
-              <div style={{ marginBottom: 'var(--space-xl)' }}>
+              <div className="mb-xl">
                 <div style={{ fontSize:'var(--text-xs)',fontWeight:700,color:'var(--brand-primary)',marginBottom:6 }}>
                   Canonical description on file (QB default):
                 </div>

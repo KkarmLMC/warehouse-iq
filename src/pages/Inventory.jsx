@@ -174,7 +174,7 @@ export default function Inventory() {
       )}
 
       {/* ── 5 Stat cards ── */}
-      <div className="wiq-stat-grid" style={{ marginBottom: 'var(--space-xl)' }}>
+      <div className="wiq-stat-grid mb-xl">
         {[
           { label: 'Total Inventory Value', value: fmt(stats?.totalValue), color: 'var(--brand-primary)', onClick: () => navigate('/warehouse-hq/inventory') },
           { label: 'Open Sales Orders',     value: stats?.openSOs ?? '—',  color: 'var(--state-info)', onClick: () => navigate('/sales-orders') },

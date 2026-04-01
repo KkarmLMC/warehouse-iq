@@ -108,7 +108,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-base)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}>
                   <Briefcase size="0.875rem" style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
-                  <div style={{ minWidth: 0 }}>
+                  <div className="min-width-0">
                     <div className="text-sm-truncate">
                       {p.name}
                     </div>

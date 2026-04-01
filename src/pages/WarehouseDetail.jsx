@@ -353,7 +353,7 @@ export default function WarehouseDetail() {
       </div>
 
       {/* Stock section */}
-      <div style={{ marginBottom: 'var(--space-s)' }}>
+      <div className="mb-s">
         <div className="stock-section__title">
           Stock ({levels.length} parts)
         </div>

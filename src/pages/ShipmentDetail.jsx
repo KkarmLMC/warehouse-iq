@@ -121,7 +121,7 @@ export default function ShipmentDetail() {
         <ArrowLeft size="0.875rem" /> Back to Shipment Queue
       </button>
 
-      <div style={{ marginBottom: 'var(--space-xl)' }}>
+      <div className="mb-xl">
         <div className="detail-header__so">{order?.so_number}</div>
         <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}

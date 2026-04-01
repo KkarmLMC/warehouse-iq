@@ -117,7 +117,7 @@ export default function InventoryTransfer() {
           <select value={fromId} onChange={e => setFromId(e.target.value)} style={{ width: '100%', borderColor: errors.from ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
-          {errors.from && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 4 }}>{errors.from}</div>}
+          {errors.from && <div className="validation-error">{errors.from}</div>}
         </div>
 
         <div style={{ marginBottom: 'var(--space-l)' }}>
@@ -125,7 +125,7 @@ export default function InventoryTransfer() {
           <select value={toId} onChange={e => setToId(e.target.value)} style={{ width: '100%', borderColor: errors.to ? 'var(--state-error)' : undefined }}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
-          {errors.to && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 4 }}>{errors.to}</div>}
+          {errors.to && <div className="validation-error">{errors.to}</div>}
         </div>
 
         <div style={{ marginBottom: 'var(--space-l)' }}>

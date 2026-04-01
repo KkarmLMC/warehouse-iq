@@ -112,7 +112,7 @@ export default function AddEditPart() {
         {label}{required && <span style={{ color: 'var(--state-error)', marginLeft: 4 }}>*</span>}
       </label>
       {children}
-      {error && <div style={{ fontSize: 'var(--text-xs)', color: 'var(--state-error)', marginTop: 4 }}>{error}</div>}
+      {error && <div className="validation-error">{error}</div>}
     </div>
   )
 
