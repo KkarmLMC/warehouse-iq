@@ -129,7 +129,7 @@ export default function PODetail() {
             </div>
             <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, lineHeight: 1.1 }}>{po.customer_name}</div>
             {po.project_name && (
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)', marginTop: 4 }}>{po.project_name}</div>
+              <div className="meta-text--inverse">{po.project_name}</div>
             )}
           </div>
           <div style={{
@@ -246,8 +246,8 @@ export default function PODetail() {
       {/* Grand total */}
       {grandTotal > 0 && (
         <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l) var(--space-xl)', marginBottom: 'var(--space-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: '#fff' }}>Total</span>
-          <span style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: '#fff' }}>
+          <span className="page-heading--inverse">Total</span>
+          <span className="page-heading--inverse">
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </span>
         </div>
@@ -274,7 +274,7 @@ export default function PODetail() {
               marginBottom: 'var(--space-2xl)' }}
           >
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: '#fff' }}>{cfg.label}</div>
+              <div className="page-heading--inverse">{cfg.label}</div>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 2 }}>{cfg.sub}</div>
             </div>
             <ArrowRight size="1.25rem" style={{ color: '#fff', flexShrink: 0 }} weight="bold" />

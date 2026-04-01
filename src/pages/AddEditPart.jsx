@@ -120,7 +120,7 @@ export default function AddEditPart() {
     <div className="page-content fade-in">
       <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-xl)', marginBottom: 'var(--space-l)', color: '#fff' }}>
         <div className="page-heading">{isEdit ? 'Edit Part' : 'New Part'}</div>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)', marginTop: 4 }}>
+        <div className="meta-text--inverse">
           {isEdit ? 'Update part details' : 'Add a part to the catalog'}
         </div>
       </div>
@@ -165,11 +165,11 @@ export default function AddEditPart() {
         </Field>
 
         <Field label="Description">
-          <textarea value={form.description} onChange={e => set('description', e.target.value)} rows={3} placeholder="Describe this part…" style={{ width: '100%', resize: 'vertical' }} />
+          <textarea value={form.description} onChange={e => set('description', e.target.value)} rows={3} placeholder="Describe this part…"  />
         </Field>
 
         <Field label="Notes">
-          <textarea value={form.notes} onChange={e => set('notes', e.target.value)} rows={2} placeholder="Internal notes…" style={{ width: '100%', resize: 'vertical' }} />
+          <textarea value={form.notes} onChange={e => set('notes', e.target.value)} rows={2} placeholder="Internal notes…"  />
         </Field>
       </div>
 

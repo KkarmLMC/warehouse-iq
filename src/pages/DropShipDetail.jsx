@@ -155,7 +155,7 @@ export default function DropShipDetail() {
       {/* SO header */}
       <div className="mb-xl">
         <div className="detail-header__so">{order?.so_number}</div>
-        <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
+        <div className="text-sm-bold">
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {shipTo && (
@@ -202,7 +202,7 @@ export default function DropShipDetail() {
             padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <div>
               <div className="text-sm-semi">{line.description}</div>
-              {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
+              {line.sku && <div className="text-xs-mono">{line.sku}</div>}
             </div>
             <div style={{ fontWeight:700,fontFamily:'var(--mono)',fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
               {Number(line.drop_ship_qty || line.back_order_qty || line.qty_shortage || 0)}

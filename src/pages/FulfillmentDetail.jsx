@@ -169,7 +169,7 @@ export default function FulfillmentDetail() {
 
       <div style={{ marginBottom: 'var(--space-l)' }}>
         <div className="detail-header__so">{order?.so_number}</div>
-        <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
+        <div className="text-sm-bold">
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {(order?.job_city || order?.customer_city) && (
@@ -242,7 +242,7 @@ export default function FulfillmentDetail() {
                   {isBO && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'var(--state-info-soft)',color:'var(--state-info)',flexShrink:0 }}>BACK ORDER</span>}
                   {isDS && <span style={{ fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'#ede9fe',color:'#6d28d9',flexShrink:0 }}>DROP SHIP</span>}
                 </div>
-                {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
+                {line.sku && <div className="text-xs-mono">{line.sku}</div>}
                 {isDS && line.drop_ship_supplier && (
                   <div style={{ fontSize:'var(--text-xs)',color:'#6d28d9',marginTop:2 }}>
                     via {line.drop_ship_supplier}

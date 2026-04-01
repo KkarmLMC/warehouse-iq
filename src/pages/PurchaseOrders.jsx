@@ -188,7 +188,7 @@ export default function PurchaseOrders() {
       )}
 
       {/* Stats strip */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
+      <div className="grid-3col mb-l">
         {[
           { label: 'Total Orders', value: pos.length },
           { label: 'In Queue', value: queuedCount, color: queuedCount > 0 ? 'var(--state-warning)' : undefined },

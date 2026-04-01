@@ -116,7 +116,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
             <input value={form.contact_name} onChange={e => set('contact_name', e.target.value)} placeholder="John Smith" />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
+          <div className="grid-2col mb-m">
             <div>
               <Label>Phone</Label>
               <input value={form.contact_phone} onChange={e => set('contact_phone', e.target.value)} placeholder="(555) 000-0000" />
@@ -427,7 +427,7 @@ export default function WarehouseDetail() {
                     <div className="text-sm-truncate">
                       {po.customer_name}
                     </div>
-                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 1 }}>
+                    <div className="meta-text">
                       {po.project_name || po.so_number}
                       {po.so_date ? ` · ${new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
                     </div>

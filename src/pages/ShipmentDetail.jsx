@@ -123,7 +123,7 @@ export default function ShipmentDetail() {
 
       <div className="mb-xl">
         <div className="detail-header__so">{order?.so_number}</div>
-        <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
+        <div className="text-sm-bold">
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {shipTo && (
@@ -175,7 +175,7 @@ export default function ShipmentDetail() {
             padding: 'var(--space-m) var(--space-l)',borderBottom: idx < lines.length-1 ? '1px solid var(--border-subtle)' : 'none' }}>
             <div>
               <div className="text-sm-semi">{line.description}</div>
-              {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
+              {line.sku && <div className="text-xs-mono">{line.sku}</div>}
               <div style={{ fontSize:'var(--text-sm)',color:'var(--text-muted)',marginTop:1 }}>
                 {line.warehouses?.name || '—'}
                 {line.split_warehouse_id && line.split_qty > 0 && (

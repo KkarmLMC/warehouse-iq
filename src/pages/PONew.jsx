@@ -340,18 +340,18 @@ function TotalsBar({ sections, laborItems }) {
   return (
     <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l) var(--space-xl)', marginBottom: 'var(--space-xl)', color: '#fff' }}>
       <div className="flex-gap-s">
-        <span style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>Materials</span>
+        <span className="meta-text--inverse">Materials</span>
         <span className="text-sm-semi">${materialsTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
       </div>
       {laborTotal > 0 && (
         <div className="flex-gap-s">
-          <span style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>Installation</span>
+          <span className="meta-text--inverse">Installation</span>
           <span className="text-sm-semi">${laborTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
         </div>
       )}
       <div style={{ display: 'flex', justifyContent: 'space-between',  paddingTop: 'var(--space-s)', marginTop: 'var(--space-xs)' }}>
-        <span style={{ fontSize: 'var(--text-lg)', fontWeight: 800 }}>Total</span>
-        <span style={{ fontSize: 'var(--text-lg)', fontWeight: 800 }}>${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+        <span className="page-heading">Total</span>
+        <span className="page-heading">${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
       </div>
     </div>
   )
@@ -561,7 +561,7 @@ export default function PONew() {
       <div className="card-section">
         <div className="section-title">Project Details</div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
+        <div className="grid-2col mb-m">
           <div>
             <Label>Quote Number</Label>
             <input value={quoteNumber} onChange={e => setQuoteNumber(e.target.value)} placeholder="W9-10-16699" />
@@ -599,7 +599,7 @@ export default function PONew() {
           <select value={defaultWarehouseId} onChange={e => setDefaultWarehouseId(e.target.value)}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 4 }}>New line items will default to this warehouse. You can change per line.</div>
+          <div className="meta-text meta-text--mt">New line items will default to this warehouse. You can change per line.</div>
         </div>
       </div>
 

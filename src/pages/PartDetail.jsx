@@ -182,7 +182,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div>
               <Label>Qty Change</Label>
               <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginTop: 3 }}>Negative to reduce</div>
+              <div className="meta-text meta-text--mt">Negative to reduce</div>
             </div>
             <div>
               <Label>Reason</Label>
@@ -195,7 +195,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div className="text-label mb-m">Thresholds</div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
+          <div className="grid-2col mb-l">
             <div>
               <Label>On Order</Label>
               <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" />
@@ -204,7 +204,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
             <div>
               <Label>Min Level</Label>
               <input type="number" min="0" value={minLevel} onChange={e => setMinLevel(e.target.value)} placeholder="e.g. 10" />
-              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginTop: 3 }}>Low stock alert</div>
+              <div className="meta-text meta-text--mt">Low stock alert</div>
             </div>
           </div>
         </div>
@@ -282,12 +282,12 @@ export default function PartDetail() {
         {/* Total stock */}
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--space-s)' }}>
           <div style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1 }}>{totalQty}</div>
-          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>{part.unit_of_measure} total</div>
+          <div className="meta-text--inverse">{part.unit_of_measure} total</div>
         </div>
       </div>
 
       {/* Action buttons */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
+      <div className="grid-2col mb-l">
         <button onClick={() => setShowAdjust(true)}
           style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-l)', background: 'var(--brand-primary)', color: '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
           Adjust Stock
@@ -300,7 +300,7 @@ export default function PartDetail() {
 
       {/* Stock by warehouse */}
       <Card style={{ marginBottom: 'var(--space-l)' }}>
-        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+        <div className="pad-row">
           <div className="text-sm-bold">Stock by Warehouse</div>
         </div>
         {levels.length === 0 ? (
@@ -312,7 +312,7 @@ export default function PartDetail() {
 
       {/* Part details */}
       <Card style={{ marginBottom: 'var(--space-l)' }}>
-        <div style={{ padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+        <div className="pad-row">
           <div className="text-sm-bold">Part Details</div>
         </div>
         {[
@@ -322,14 +322,14 @@ export default function PartDetail() {
           ['Unit Cost', part.unit_cost ? `$${part.unit_cost}` : null],
           ['Barcode', part.barcode],
         ].filter(([, v]) => v).map(([label, value]) => (
-          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div key={label} className="pad-row flex-gap-s">
             <span className="meta-text">{label}</span>
             <span className="text-sm-semi">{value}</span>
           </div>
         ))}
         {part.description && (
           <div className="pad-row">
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 4 }}>Description</div>
+            <div className="meta-text mb-s">Description</div>
             <div className="text-sm">{part.description}</div>
           </div>
         )}

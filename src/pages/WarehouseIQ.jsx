@@ -187,12 +187,12 @@ export default function WarehouseIQ() {
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-s)', flexWrap: 'wrap', marginBottom: 'var(--space-m)' }}>
         {!isClosed && period && (
           <button onClick={handleClosePeriod} disabled={closing}
-            className="btn" style={{ background: 'var(--surface-base)', color: 'var(--text-primary)', fontSize: 'var(--text-xs)' }}>
+            className="btn meta-text">
             <Lock size="0.8125rem" /> {closing ? 'Closing…' : `Close ${periodLabel}`}
           </button>
         )}
         <button onClick={loadPeriod}
-          className="btn" style={{ background: 'var(--surface-base)', color: 'var(--text-primary)', fontSize: 'var(--text-xs)' }}>
+          className="btn meta-text">
           <ArrowsClockwise size="0.8125rem" /> Refresh
         </button>
       </div>
@@ -256,7 +256,7 @@ export default function WarehouseIQ() {
                 {po.division==='Bolt'?'BOLT':'LM'}
               </div>
               <div className="content-body">
-                <div style={{ fontSize:'var(--text-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{po.customer_name}</div>
+                <div className="text-sm-truncate">{po.customer_name}</div>
               </div>
               <span style={{ fontSize:'var(--text-xs)', fontWeight:700, padding:'2px 8px', borderRadius:'var(--radius-s)', background: po.status==='queued'?'var(--brand-soft)':po.status==='running'?'var(--state-warning-soft)':po.status==='fulfillment'?'var(--state-info-soft)':po.status==='shipment'?'var(--state-info-soft)':'var(--state-success-soft)', color: po.status==='queued'?'var(--brand-light)':po.status==='running'?'var(--state-warning)':po.status==='fulfillment'?'var(--state-info)':po.status==='shipment'?'var(--state-info)':'var(--state-success-text)', textTransform:'capitalize', flexShrink:0 }}>
                 {po.status}
@@ -319,7 +319,7 @@ export default function WarehouseIQ() {
             >
               {/* Part name + SKU */}
               <div style={{ minWidth:0 }}>
-                <div style={{ fontSize:'var(--text-sm)', fontWeight:600, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{r.part.name}</div>
+                <div className="text-sm-truncate">{r.part.name}</div>
                 {r.part.sku && <div style={{ fontSize:'var(--text-xs)', fontFamily:'var(--mono)', color:'var(--text-muted)' }}>{r.part.sku}</div>}
               </div>
               {/* Start */}

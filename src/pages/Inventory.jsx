@@ -245,14 +245,14 @@ export default function Inventory() {
               <Package size="1rem" style={{ color: 'var(--brand-primary)' }} />
               {/* Info */}
               <div className="content-body">
-                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{wh.name}</div>
+                <div className="text-sm-truncate">{wh.name}</div>
                 <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 1 }}>
                   {wh.city}, {wh.state} · {h.parts || 0} parts · {fmt(h.total)}
                 </div>
               </div>
               {/* Health */}
               <HealthBadge out={h.out || 0} low={h.low || 0} />
-              <CaretRight size="0.875rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />
+              <CaretRight size="0.875rem" className="row-item__caret" />
             </div>
           )
         })}
@@ -288,7 +288,7 @@ export default function Inventory() {
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, fontFamily: 'var(--mono)', color: 'var(--text-primary)', flexShrink: 0 }}>
               {fmt(so.grand_total)}
             </div>
-            <CaretRight size="0.8125rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />
+            <CaretRight size="0.8125rem" className="row-item__caret" />
           </div>
         ))}
       </div>

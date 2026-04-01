@@ -63,7 +63,7 @@ function CategorySection({ category, parts, onPartPress }) {
           <Icon size="0.9375rem" style={{ color: '#fff' }} />
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: '#fff' }}>{category.name}</div>
+          <div className="text-sm-bold--inverse">{category.name}</div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--surface-base)', marginTop: 1 }}>
             {parts.length} {parts.length === 1 ? 'part' : 'parts'}
             {category.catalog === 'All' && (
@@ -104,7 +104,7 @@ function CategorySection({ category, parts, onPartPress }) {
                   {part.unit_cost && <span className="meta-text">${part.unit_cost}</span>}
                 </div>
               </div>
-              <CaretRight size="0.8125rem" style={{ color: 'var(--text-primary)', flexShrink: 0 }} />
+              <CaretRight size="0.8125rem" className="row-item__caret" />
             </button>
           ))}
         </div>

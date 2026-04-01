@@ -62,7 +62,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
 
   return (
     <div>
-      <label style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
+      <label className="form-field__label">
         {label}{required && <span style={{ color: 'var(--state-error)', marginLeft: 3 }}>*</span>}
       </label>
 
@@ -107,7 +107,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
                   style={{ width: '100%', background: 'none', padding: 'var(--space-m) var(--space-l)', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 'var(--space-m)', borderBottom: '1px solid var(--border-subtle)' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-base)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'none'}>
-                  <Briefcase size="0.875rem" style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+                  <Briefcase size="0.875rem" className="row-item__caret" />
                   <div className="min-width-0">
                     <div className="text-sm-truncate">
                       {p.name}

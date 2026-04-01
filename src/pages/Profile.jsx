@@ -457,7 +457,7 @@ export default function Profile() {
         )}>
 
         {showPwForm ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-m)' }}>
+          <div className="modal-body">
             <div>
               <label className="profile-label">New Email (optional)</label>
               <input type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="Leave blank to keep current" />

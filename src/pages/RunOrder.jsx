@@ -420,7 +420,7 @@ export default function RunOrder() {
             <span style={{ fontSize:'var(--text-xs)',fontWeight:700,padding:'3px 8px',borderRadius: 'var(--radius-s)',background:'var(--state-warning-soft)',color:'var(--state-warning-text)' }}>Back-Order Re-Run</span>
           )}
         </div>
-        <div style={{ fontSize:'var(--text-sm)',color:'var(--text-primary)' }}>
+        <div className="text-sm-bold">
           {order?.customer_name}{order?.project_name ? ` — ${order.project_name}` : ''}
         </div>
         {(order?.job_city || order?.customer_city) && (
@@ -583,7 +583,7 @@ export default function RunOrder() {
                         {isBO && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'var(--state-info-soft)',color:'var(--state-info)' }}>B/O</span>}
                         {isDS && <span style={{ marginLeft:6,fontSize:'var(--text-2xs)',fontWeight:700,padding:'1px 4px',borderRadius: 'var(--radius-xs)',background:'#ede9fe',color:'#6d28d9' }}>DROP SHIP</span>}
                       </div>
-                      {line.sku && <div style={{ fontSize:'var(--text-xs)',color:'var(--text-muted)',fontFamily:'var(--mono)' }}>{line.sku}</div>}
+                      {line.sku && <div className="text-xs-mono">{line.sku}</div>}
                       <div style={{ fontSize:'var(--text-xs)',marginTop:2 }}>
                         <span style={{ fontWeight:600,color:'var(--brand-primary)' }}>{line._primaryWhName || line.warehouse_id || '—'}</span>
                         {line.split_warehouse_id && !isBO && !isDS && (

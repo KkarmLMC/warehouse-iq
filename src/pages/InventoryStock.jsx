@@ -125,7 +125,7 @@ export default function InventoryStock() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-l)', flexWrap: 'wrap', gap: 'var(--space-m)' }}>
         <div>
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>
+          <div className="text-label">
             INVENTORY / {selectedWarehouseName.toUpperCase()}
           </div>
           <div className="page-heading">Inventory</div>
@@ -143,7 +143,7 @@ export default function InventoryStock() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
+      <div className="grid-3col mb-l">
         {[
           { label: 'Total Parts', value: totalParts, color: 'var(--brand-primary)' },
           { label: 'Low Stock', value: lowCount, color: 'var(--state-warning-text)' },

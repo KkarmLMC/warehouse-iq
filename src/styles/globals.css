@@ -1986,6 +1986,26 @@ textarea,
 .text-sm-right { font-size: var(--text-sm); font-weight: 500; color: var(--text-primary); text-align: right; }
 .mb-m { margin-bottom: var(--space-m); }
 
+/* --- Round 5 --- */
+.meta-text--inverse { font-size: var(--text-sm); color: var(--surface-base); margin-top: 4px; }
+.page-heading--inverse { font-size: var(--text-lg); font-weight: 800; color: #fff; }
+.text-sm-bold--inverse { font-size: var(--text-sm); font-weight: 700; color: #fff; }
+.inv-grid-row {
+  display: grid; grid-template-columns: 1fr 80px 80px 80px;
+  gap: var(--space-s); align-items: center;
+  padding: var(--space-s) var(--space-l);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.inv-grid-header {
+  display: grid; grid-template-columns: 1fr 80px 80px 80px;
+  gap: var(--space-s); align-items: center;
+  padding: var(--space-s) var(--space-l);
+  background: var(--surface-base);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-m); }
+.mb-l { margin-bottom: var(--space-l); }
+
 .empty {
   display: flex;
   flex-direction: column;
