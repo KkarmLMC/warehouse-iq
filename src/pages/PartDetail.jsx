@@ -157,7 +157,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
         <div style={{ overflowY: 'auto', flex: 1, padding: '0 var(--space-xl)', paddingBottom: 'calc(var(--space-s))' }}>
           <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Warehouse</Label>
-            <select value={warehouseId} onChange={e => handleWarehouseChange(e.target.value)} className="u-w-full">
+            <select value={warehouseId} onChange={e => handleWarehouseChange(e.target.value)}>
               {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
             </select>
           </div>
@@ -169,7 +169,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Transaction Type</Label>
-            <select value={type} onChange={e => setType(e.target.value)} className="u-w-full">
+            <select value={type} onChange={e => setType(e.target.value)}>
               <option value="adjustment">Manual Adjustment</option>
               <option value="receiving">Receiving / New Stock</option>
               <option value="count_correction">Count Correction</option>
@@ -181,12 +181,12 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-m)' }}>
             <div>
               <Label>Qty Change</Label>
-              <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" className="u-w-full" />
+              <input type="number" value={delta} onChange={e => setDelta(parseInt(e.target.value) || 0)} placeholder="0" />
               <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginTop: 3 }}>Negative to reduce</div>
             </div>
             <div>
               <Label>Reason</Label>
-              <input value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. SO-2026-0001" className="u-w-full" />
+              <input value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. SO-2026-0001" />
             </div>
           </div>
 
@@ -198,12 +198,12 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
             <div>
               <Label>On Order</Label>
-              <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" className="u-w-full" />
+              <input type="number" min="0" value={onOrder} onChange={e => setOnOrder(e.target.value)} placeholder="0" />
               <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--state-info)', marginTop: 3 }}>Incoming stock</div>
             </div>
             <div>
               <Label>Min Level</Label>
-              <input type="number" min="0" value={minLevel} onChange={e => setMinLevel(e.target.value)} placeholder="e.g. 10" className="u-w-full" />
+              <input type="number" min="0" value={minLevel} onChange={e => setMinLevel(e.target.value)} placeholder="e.g. 10" />
               <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--text-muted)', marginTop: 3 }}>Low stock alert</div>
             </div>
           </div>

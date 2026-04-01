@@ -86,7 +86,7 @@ function PartSearch({ onSelect, warehouseId }) {
           onChange={e => setQuery(e.target.value)}
           onFocus={() => query && setOpen(true)}
           placeholder="Search parts by name or SKU…"
-          className="u-input-search-pad"
+          style={{ width: "100%", paddingLeft: 30, paddingRight: 30 }}
         />
         {query && (
           <button onClick={() => { setQuery(''); setResults([]); setOpen(false) }}
@@ -156,14 +156,14 @@ function LineItemRow({ item, warehouses, onUpdate, onRemove }) {
         value={item.quantity}
         onChange={e => onUpdate({ ...item, quantity: e.target.value })}
         className="text-xs-right"
-        className="u-w-full"
+       
       />
       <input
         type="number" min="0" step="0.01"
         value={item.unit_cost}
         onChange={e => onUpdate({ ...item, unit_cost: e.target.value })}
         className="text-xs-right"
-        className="u-w-full"
+       
       />
       <div className="text-xs-right" style={{ fontWeight: 700, color: lineTotal > 0 ? 'var(--text-primary)' : 'var(--text-muted)' }}>
         ${lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -308,9 +308,9 @@ function LaborSection({ items, onUpdate }) {
               <input value={item.description} onChange={e => updateItem(item._key, { ...item, description: e.target.value })}
                 placeholder="Description (e.g. Bolt Install Crew)" style={{ width: '100%', fontSize: 'var(--text-xs)' }} />
               <input type="number" min="0" value={item.quantity} onChange={e => updateItem(item._key, { ...item, quantity: e.target.value })}
-                className="text-xs-right u-w-full" />
+                className="text-xs-right" />
               <input type="number" min="0" step="0.01" value={item.unit_cost} onChange={e => updateItem(item._key, { ...item, unit_cost: e.target.value })}
-                placeholder="0.00" className="text-xs-right u-w-full" />
+                placeholder="0.00" className="text-xs-right" />
               <div className="text-xs-right" style={{ fontWeight: 700 }}>
                 ${((parseFloat(item.quantity)||0)*(parseFloat(item.unit_cost)||0)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
               </div>
@@ -537,23 +537,23 @@ export default function PONew() {
 
         <div style={{ marginBottom: 'var(--space-m)' }}>
           <Label required>Customer Name</Label>
-          <input value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="e.g. GNS Electric Inc" className="u-w-full" />
+          <input value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="e.g. GNS Electric Inc" />
         </div>
 
         <div style={{ marginBottom: 'var(--space-m)' }}>
           <Label>Street Address</Label>
-          <input value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} placeholder="123 Main St" className="u-w-full" />
+          <input value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} placeholder="123 Main St" />
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 64px 88px', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
-          <div><Label>City</Label><input value={customerCity} onChange={e => setCustomerCity(e.target.value)} placeholder="Dallas" className="u-w-full" /></div>
-          <div><Label>State</Label><input value={customerState} onChange={e => setCustomerState(e.target.value)} placeholder="TX" className="u-w-full" /></div>
-          <div><Label>ZIP</Label><input value={customerZip} onChange={e => setCustomerZip(e.target.value)} placeholder="75001" className="u-w-full" /></div>
+          <div><Label>City</Label><input value={customerCity} onChange={e => setCustomerCity(e.target.value)} placeholder="Dallas" /></div>
+          <div><Label>State</Label><input value={customerState} onChange={e => setCustomerState(e.target.value)} placeholder="TX" /></div>
+          <div><Label>ZIP</Label><input value={customerZip} onChange={e => setCustomerZip(e.target.value)} placeholder="75001" /></div>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-s)' }}>
-          <div><Label>Phone</Label><input value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} placeholder="(555) 000-0000" className="u-w-full" /></div>
-          <div><Label>Email</Label><input value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} placeholder="name@company.com" className="u-w-full" /></div>
+          <div><Label>Phone</Label><input value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} placeholder="(555) 000-0000" /></div>
+          <div><Label>Email</Label><input value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} placeholder="name@company.com" /></div>
         </div>
       </div>
 
@@ -564,11 +564,11 @@ export default function PONew() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
           <div>
             <Label>Quote Number</Label>
-            <input value={quoteNumber} onChange={e => setQuoteNumber(e.target.value)} placeholder="W9-10-16699" className="u-w-full" />
+            <input value={quoteNumber} onChange={e => setQuoteNumber(e.target.value)} placeholder="W9-10-16699" />
           </div>
           <div>
             <Label>Date</Label>
-            <input type="date" value={poDate} onChange={e => setPoDate(e.target.value)} className="u-w-full" />
+            <input type="date" value={poDate} onChange={e => setPoDate(e.target.value)} />
           </div>
         </div>
 
@@ -585,18 +585,18 @@ export default function PONew() {
           <div style={{ marginBottom: 'var(--space-m)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)' }}>
             <div>
               <Label>Project Name</Label>
-              <input value={projectName} onChange={e => setProjectName(e.target.value)} className="u-w-full" />
+              <input value={projectName} onChange={e => setProjectName(e.target.value)} />
             </div>
             <div>
               <Label>Job #</Label>
-              <input value={projectRef} onChange={e => setProjectRef(e.target.value)} className="u-w-full" />
+              <input value={projectRef} onChange={e => setProjectRef(e.target.value)} />
             </div>
           </div>
         )}
 
         <div>
           <Label>Default Warehouse</Label>
-          <select value={defaultWarehouseId} onChange={e => setDefaultWarehouseId(e.target.value)} className="u-w-full">
+          <select value={defaultWarehouseId} onChange={e => setDefaultWarehouseId(e.target.value)}>
             {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
           </select>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 4 }}>New line items will default to this warehouse. You can change per line.</div>
@@ -628,7 +628,7 @@ export default function PONew() {
       {/* Notes */}
       <div style={{ background: 'var(--surface-base)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l)', marginBottom: 'var(--space-l)' }}>
         <Label>Notes</Label>
-        <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this Sales Order…" rows={3} className="u-w-full u-resize-vertical" />
+        <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any additional notes for this Sales Order…" rows={3} />
       </div>
 
       {/* Running total */}

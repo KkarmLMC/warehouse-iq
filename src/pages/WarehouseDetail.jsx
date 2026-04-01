@@ -80,7 +80,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Warehouse Name *</Label>
-            <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Lightning Master Warehouse" className="u-w-full" />
+            <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Lightning Master Warehouse" />
           </div>
 
           <div style={{ margin: 'var(--space-m) 0', paddingTop: 'var(--space-m)' }}>
@@ -89,21 +89,21 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Street Address</Label>
-            <input value={form.address} onChange={e => set('address', e.target.value)} placeholder="123 Main St" className="u-w-full" />
+            <input value={form.address} onChange={e => set('address', e.target.value)} placeholder="123 Main St" />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 90px', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
             <div>
               <Label>City</Label>
-              <input value={form.city} onChange={e => set('city', e.target.value)} placeholder="Clearwater" className="u-w-full" />
+              <input value={form.city} onChange={e => set('city', e.target.value)} placeholder="Clearwater" />
             </div>
             <div>
               <Label>State</Label>
-              <input value={form.state} onChange={e => set('state', e.target.value)} placeholder="FL" className="u-w-full" />
+              <input value={form.state} onChange={e => set('state', e.target.value)} placeholder="FL" />
             </div>
             <div>
               <Label>ZIP</Label>
-              <input value={form.zip} onChange={e => set('zip', e.target.value)} placeholder="33755" className="u-w-full" />
+              <input value={form.zip} onChange={e => set('zip', e.target.value)} placeholder="33755" />
             </div>
           </div>
 
@@ -113,23 +113,23 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Contact Name</Label>
-            <input value={form.contact_name} onChange={e => set('contact_name', e.target.value)} placeholder="John Smith" className="u-w-full" />
+            <input value={form.contact_name} onChange={e => set('contact_name', e.target.value)} placeholder="John Smith" />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-s)', marginBottom: 'var(--space-m)' }}>
             <div>
               <Label>Phone</Label>
-              <input value={form.contact_phone} onChange={e => set('contact_phone', e.target.value)} placeholder="(555) 000-0000" className="u-w-full" />
+              <input value={form.contact_phone} onChange={e => set('contact_phone', e.target.value)} placeholder="(555) 000-0000" />
             </div>
             <div>
               <Label>Email</Label>
-              <input value={form.contact_email} onChange={e => set('contact_email', e.target.value)} placeholder="john@example.com" className="u-w-full" />
+              <input value={form.contact_email} onChange={e => set('contact_email', e.target.value)} placeholder="john@example.com" />
             </div>
           </div>
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
             <Label>Notes</Label>
-            <textarea value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Any relevant notes about this warehouse…" rows={3} className="u-w-full u-resize-vertical" />
+            <textarea value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Any relevant notes about this warehouse…" rows={3} />
           </div>
 
           {error && <div style={{ color: 'var(--state-error-text)', fontSize: 'var(--text-sm)', marginBottom: 'var(--space-m)', padding: 'var(--space-s) var(--space-m)', background: 'var(--state-error-soft)', borderRadius: 'var(--radius-m)' }}>{error}</div>}
