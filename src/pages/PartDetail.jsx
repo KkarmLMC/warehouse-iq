@@ -281,7 +281,7 @@ export default function PartDetail() {
 
         {/* Total stock */}
         <div className="flex-gap-s">
-          <div style={{ fontSize: '2.5rem', fontWeight: 'var(--fw-black)', lineHeight: 'var(--leading-none)' }}>{totalQty}</div>
+          <div style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--fw-black)', lineHeight: 'var(--leading-none)' }}>{totalQty}</div>
           <div className="meta-text--inverse">{part.unit_of_measure} total</div>
         </div>
       </div>
