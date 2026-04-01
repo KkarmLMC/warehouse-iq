@@ -111,7 +111,7 @@ function PartSearch({ onSelect, warehouseId }) {
             >
               <div className="min-width-0">
                 <div className="text-sm-semi">{part.name}</div>
-                <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>{part.sku}</div>
+                <div className="text-xs-mono">{part.sku}</div>
               </div>
               <div style={{ flexShrink: 0, textAlign: 'right', marginLeft: 'var(--space-m)' }}>
                 <div className="text-label">
@@ -339,12 +339,12 @@ function TotalsBar({ sections, laborItems }) {
 
   return (
     <div style={{ background: 'var(--brand-primary)', borderRadius: 'var(--radius-m)', padding: 'var(--space-l) var(--space-xl)', marginBottom: 'var(--space-xl)', color: '#fff' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-s)' }}>
+      <div className="flex-gap-s">
         <span style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>Materials</span>
         <span className="text-sm-semi">${materialsTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
       </div>
       {laborTotal > 0 && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-s)' }}>
+        <div className="flex-gap-s">
           <span style={{ fontSize: 'var(--text-sm)', color: 'var(--surface-base)' }}>Installation</span>
           <span className="text-sm-semi">${laborTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
         </div>
@@ -645,7 +645,7 @@ export default function PONew() {
       {/* Save actions */}
       <div className="grid-2col margin-bottom-l">
         <button onClick={() => handleSave(false)} disabled={saving}
-          style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+          className="card-section text-sm-bold">
           {saving ? 'Saving…' : 'Save as Draft'}
         </button>
         <button onClick={() => handleSave(true)} disabled={saving}

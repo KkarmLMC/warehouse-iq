@@ -84,7 +84,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           </div>
 
           <div className="section-gap">
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Location</div>
+            <div className="text-label mb-m">Location</div>
           </div>
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
@@ -108,7 +108,7 @@ function EditWarehouseSheet({ warehouse, onClose, onSaved }) {
           </div>
 
           <div className="section-gap">
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Contact</div>
+            <div className="text-label mb-m">Contact</div>
           </div>
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
@@ -171,7 +171,7 @@ function StockRow({ level, onPress }) {
           {level.quantity_on_order > 0 && <span style={{ color: 'var(--state-info)', fontWeight: 600 }}>+{level.quantity_on_order} on order</span>}
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexShrink: 0 }}>
+      <div className="flex-gap-s shrink-0">
         <span style={{ padding: '3px 10px', borderRadius: 'var(--radius-s)', fontSize: 'var(--text-sm)', fontWeight: 700, background: bg, color }}>
           {level.quantity_on_hand}
         </span>
@@ -359,7 +359,7 @@ export default function WarehouseDetail() {
         </div>
 
         {/* Search + filters */}
-        <div style={{ position: 'relative', marginBottom: 'var(--space-m)' }}>
+        <div className="position-relative mb-m">
           <MagnifyingGlass size="0.9375rem" style={{ position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts…"
             style={{ width: '100%', paddingLeft: 34, paddingRight: search ? 34 : 12 }} />
@@ -432,7 +432,7 @@ export default function WarehouseDetail() {
                       {po.so_date ? ` · ${new Date(po.so_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
                     </div>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexShrink: 0 }}>
+                  <div className="flex-gap-s shrink-0">
                     <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, padding: '2px 8px', borderRadius: 'var(--radius-s)', background: sc.bg, color: sc.color, textTransform: 'capitalize' }}>
                       {po.status}
                     </span>
@@ -463,7 +463,7 @@ export default function WarehouseDetail() {
         {showTx && (
           <div >
             {transactions.length === 0 ? (
-              <div style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>No transactions yet</div>
+              <div className="empty-message">No transactions yet</div>
             ) : transactions.map(tx => (
               <div key={tx.id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-m)', padding: 'var(--space-m) var(--space-l)', borderBottom: '1px solid var(--border-subtle)' }}>
                 <div style={{

@@ -87,7 +87,7 @@ function POCard({ po, totals, onPress }) {
       </div>
 
       {/* Total + chevron */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexShrink: 0 }}>
+      <div className="flex-gap-s shrink-0">
         {grandTotal > 0 && (
           <span className="text-sm-bold">
             ${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}

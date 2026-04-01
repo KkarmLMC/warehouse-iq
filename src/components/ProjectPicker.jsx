@@ -74,7 +74,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
             <div style={{ fontSize: "var(--text-sm)", fontWeight: 700, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {value.name}
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>
+            <div className="text-xs-mono">
               {[value.job_number, value.city && `${value.city}, ${value.state}`].filter(Boolean).join(' · ')}
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function ProjectPicker({ value, onChange, placeholder = 'Search b
                     <div className="text-sm-truncate">
                       {p.name}
                     </div>
-                    <div style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>
+                    <div className="text-xs-mono">
                       {[p.job_number, p.customer_account, p.city && `${p.city}, ${p.state}`].filter(Boolean).join(' · ')}
                     </div>
                   </div>

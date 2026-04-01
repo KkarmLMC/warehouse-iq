@@ -58,7 +58,7 @@ function PartRow({ part, levels, onPress }) {
           {part.part_categories?.name || 'Uncategorized'}
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-s)', flexShrink: 0 }}>
+      <div className="flex-gap-s shrink-0">
         <StockBadge qty={totalQty} minLevel={minLevel} onOrder={totalOnOrder} />
         <CaretRight size="0.875rem" style={{ color: 'var(--text-primary)' }} />
       </div>
@@ -157,7 +157,7 @@ export default function InventoryStock() {
       </div>
 
       {/* Search */}
-      <div style={{ position: 'relative', marginBottom: 'var(--space-m)' }}>
+      <div className="position-relative mb-m">
         <MagnifyingGlass size="1rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search parts, SKU, manufacturer…"
           style={{ width: '100%', paddingLeft: 36, paddingRight: search ? 36 : 12 }} />

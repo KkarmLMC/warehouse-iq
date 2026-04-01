@@ -51,9 +51,9 @@ function SectionGroup({ label, items }) {
             {item.sku && <div style={{ fontSize: 'var(--text-sm)', fontFamily: 'var(--mono)', color: 'var(--text-muted)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.sku}</div>}
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.4 }}>{item.description}</div>
           </div>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', textAlign: 'right' }}>{item.quantity}</div>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', textAlign: 'right' }}>${item.unit_cost.toFixed(2)}</div>
-          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', textAlign: 'right' }}>
+          <div className="text-sm-right">{item.quantity}</div>
+          <div className="text-sm-right">${item.unit_cost.toFixed(2)}</div>
+          <div className="text-sm-right">
             ${(item.quantity * item.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
         </div>
@@ -177,7 +177,7 @@ export default function PODetail() {
       {/* Inventory impact (when not yet published) */}
       {!['complete','fulfilled','cancelled'].includes(po.status) && Object.keys(warehouseImpact).length > 0 && (
         <div className="card-section">
-          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>
+          <div className="text-label mb-m">
             Inventory Impact {['fulfillment','shipment','complete','fulfilled'].includes(po.status) ? '(Applied)' : '(On Fulfillment)'}
           </div>
           {Object.entries(warehouseImpact).map(([wName, impact]) => (
@@ -231,9 +231,9 @@ export default function PODetail() {
               <div>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>{line.description}</div>
               </div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', textAlign: 'right' }}>{line.quantity}</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', textAlign: 'right' }}>${line.unit_cost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--text-primary)', textAlign: 'right' }}>${(line.quantity * line.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+              <div className="text-sm-right">{line.quantity}</div>
+              <div className="text-sm-right">${line.unit_cost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+              <div className="text-sm-right">${(line.quantity * line.unit_cost).toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
             </div>
           ))}
           <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-m) var(--space-l)', borderTop: '2px solid var(--border-subtle)', background: 'var(--surface-hover)' }}>

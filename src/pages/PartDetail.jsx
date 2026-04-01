@@ -164,7 +164,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
 
           {/* Divider */}
           <div className="section-gap">
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Stock Adjustment</div>
+            <div className="text-label mb-m">Stock Adjustment</div>
           </div>
 
           <div style={{ marginBottom: 'var(--space-m)' }}>
@@ -192,7 +192,7 @@ function AdjustSheet({ part, warehouses, levels, onClose, onDone }) {
 
           {/* Divider */}
           <div className="section-gap">
-            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-m)' }}>Thresholds</div>
+            <div className="text-label mb-m">Thresholds</div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-m)', marginBottom: 'var(--space-l)' }}>
@@ -304,7 +304,7 @@ export default function PartDetail() {
           <div className="text-sm-bold">Stock by Warehouse</div>
         </div>
         {levels.length === 0 ? (
-          <div style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>No stock recorded yet</div>
+          <div className="empty-message">No stock recorded yet</div>
         ) : (
           levels.map(l => <WarehouseRow key={l.id} level={l} warehouseName={l.warehouses?.name || '—'} />)
         )}

@@ -175,7 +175,7 @@ export default function InventoryTransfer() {
 
         {/* Line items */}
         {items.length === 0 ? (
-          <div style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>
+          <div className="empty-message">
             Search for parts above to add them to the transfer
           </div>
         ) : items.map((item, idx) => (
@@ -200,12 +200,12 @@ export default function InventoryTransfer() {
 
       {/* Submit */}
       <div className="grid-2col margin-bottom-l">
-        <button onClick={() => navigate(-1)} style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+        <button onClick={() => navigate(-1)} className="card-section text-sm-bold">
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving}
           style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: saving ? 'var(--surface-hover)' : 'var(--state-error)', color: saving ? 'var(--text-muted)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
-          {saving ? <><SpinnerGap size="0.875rem" style={{ animation: 'spin 1s linear infinite' }} /> Processing…</> : <><CheckCircle size="0.875rem" /> Complete Transfer</>}
+          {saving ? <><SpinnerGap size="0.875rem" className="anim-spin" /> Processing…</> : <><CheckCircle size="0.875rem" /> Complete Transfer</>}
         </button>
       </div>
     </div>

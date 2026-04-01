@@ -174,11 +174,11 @@ export default function AddEditPart() {
       </div>
 
       <div className="grid-2col margin-bottom-l">
-        <button onClick={() => navigate(-1)} style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: 'var(--surface-base)', color: 'var(--text-primary)', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}>
+        <button onClick={() => navigate(-1)} className="card-section text-sm-bold">
           Cancel
         </button>
         <button onClick={handleSubmit} disabled={saving} style={{ padding: 'var(--space-m)', borderRadius: 'var(--radius-m)', background: saving ? 'var(--surface-hover)' : 'var(--brand-primary)', color: saving ? 'var(--text-muted)' : '#fff', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: saving ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-s)' }}>
-          {saving ? <><SpinnerGap size="0.875rem" style={{ animation: 'spin 1s linear infinite' }} /> Saving…</> : <><CheckCircle size="0.875rem" /> {isEdit ? 'Save Changes' : 'Add Part'}</>}
+          {saving ? <><SpinnerGap size="0.875rem" className="anim-spin" /> Saving…</> : <><CheckCircle size="0.875rem" /> {isEdit ? 'Save Changes' : 'Add Part'}</>}
         </button>
       </div>
     </div>

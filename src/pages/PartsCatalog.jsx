@@ -100,7 +100,7 @@ function CategorySection({ category, parts, onPartPress }) {
                   )}
                 </div>
                 <div style={{ display: 'flex', gap: 'var(--space-m)', marginTop: 2, flexWrap: 'wrap' }}>
-                  {part.sku && <span style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--mono)', color: 'var(--text-muted)' }}>{part.sku}</span>}
+                  {part.sku && <span className="text-xs-mono">{part.sku}</span>}
                   {part.unit_cost && <span className="meta-text">${part.unit_cost}</span>}
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function PartsCatalog() {
       </div>
 
       {/* Search */}
-      <div style={{ position: 'relative', marginBottom: 'var(--space-l)' }}>
+      <div className="queue-search">
         <MagnifyingGlass size="1rem" className="search-overlay-icon" />
         <input value={search} onChange={e => setSearch(e.target.value)}
           placeholder={`Search ${activeTab === 'All' ? 'all parts' : activeTab === 'LM' ? 'Lightning Master parts' : 'Bolt Lightning parts'}…`}
