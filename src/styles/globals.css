@@ -2107,7 +2107,7 @@ textarea,
 .card-form { padding: var(--space-l); display: flex; flex-direction: column; gap: var(--space-m); }
 
 /* --- Semantic Layout Helpers --- */
-.content-body { flex: 1; min-width: 0; }
+.content-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-3xs); }
 .card-section {
   background: var(--surface-base); border-radius: var(--radius-m);
   padding: var(--space-l); margin-bottom: var(--space-l);
