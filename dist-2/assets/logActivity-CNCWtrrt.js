@@ -1,0 +1,1 @@
+async function e(e,t,n,{category:r,action:i,label:a,entity_type:o,entity_id:s,meta:c={}}){if(t)try{await e.from(`user_activity_logs`).insert({user_id:t,app:n,category:r,action:i,label:a,entity_type:o||null,entity_id:s||null,meta:c})}catch{}}export{e as t};

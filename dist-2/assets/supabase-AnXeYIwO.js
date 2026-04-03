@@ -1,0 +1,1 @@
+import{t as e}from"./supabase-CMMoBDVK.js";var t=e(void 0,void 0,{auth:{persistSession:!0,storageKey:`warehouse-iq-auth`,autoRefreshToken:!0,detectSessionInUrl:!0}});export{t};
